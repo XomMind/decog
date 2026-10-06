@@ -1,0 +1,10 @@
+# op_r5a: CMap/CMapFine/CPay2Buy/CRpglike helpers 0x828000-0x879500
+opR5a_findFree,0x868020,0x85
+opR5a_machinePoints,0x83dae0,0xdf
+opR5a_conduitPath,0x83dbc0,0x3de
+CPay2BuyButton::input,0x876db0,0xa5
+CPay2Buy::render,0x876e60,0xf4
+CRpglikeUpgradeButton::mouseEnter,0x879220,0x39
+CRpglikeUpgradeButton::input,0x879260,0x94
+CRpglikeUpgradeButton::refresh,0x879300,0x84
+CRpglikeUpgradeCurrent::refresh,0x879390,0x169

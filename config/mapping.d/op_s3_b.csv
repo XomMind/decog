@@ -1,0 +1,6 @@
+# op_s3_b: Entity helpers and movement callbacks in 0x633000-0x653000
+OpS3b_f651590,0x651590,0x11a
+OpS3b_LineTracker::addPoint,0x64faa0,0x9c
+OpS3b_Item::removeEffectsA,0x639730,0xd0
+OpS3b_ItemOwner::unknown64e7e0,0x64e7e0,0x106
+Entity::unknown6335e0,0x6335e0,0x1aa

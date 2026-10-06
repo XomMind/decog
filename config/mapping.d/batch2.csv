@@ -1,0 +1,10 @@
+# batch2 (src/game/batch2.cpp). name,va,size
+REX::consoleAddToLayer,0x426950,0x108
+REX::consoleRemoveFromLayer,0x426a60,0x100
+REX::toggleFullscreen,0x424210,0x163
+CCommandsAdvancedPage::CCommandsAdvancedPage,0x4929b0,0x111
+XResourceMgr::addSearchPath,0x4150f0,0x1be
+XResourceMgr::addResourcePath,0x4152b0,0x257
+XResourceMgr::getSurfaceFromFile,0x4159a0,0x160
+XResourceMgr::getSoundFromFile,0x415b00,0x160
+XResourceMgr::getRWopsFromFile,0x415760,0x23a

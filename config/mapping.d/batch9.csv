@@ -1,0 +1,8 @@
+# BattleScape methods (src/game/batch9.cpp). name,va,size
+BS::displayFabricatorOverloadZap,0x7273e0,0x208
+BS::selectRandomItem,0x6c3bc0,0x518
+BS::selectRandomItemOfRating,0x6c40e0,0x512
+BS::placeEntity,0x6c58c0,0x4f2
+BS::thrownItemArrived,0x7499f0,0x4e4
+BS::displayHack,0x734ae0,0x277
+BS::spawnInfestiationFromTrap,0x736ad0,0x36a

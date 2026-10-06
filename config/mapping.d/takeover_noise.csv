@@ -1,0 +1,4 @@
+# auto-matched by tools/propagate.py (vtable seed + call-graph propagation)
+_TCOD_noise_delete,0x421470,0x12
+??_GTCODNoise@@UAEPAXI@Z,0x4214f0,0x2d
+??1TCODNoise@@UAE@XZ,0x4215c0,0x23

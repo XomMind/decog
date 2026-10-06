@@ -1,0 +1,23 @@
+# op_y2: assorted functions in [0x440000,0x490000)
+OpY2_WeightedList::rollIndex,0x4481f0,0x7a
+OpY2_Rec448270::load,0x448270,0x43
+OpY2_Rec4482c0::load,0x4482c0,0xc4
+OpY2_Rec448390::getA,0x448390,0x48
+OpY2_Rec448390::getB,0x4483e0,0x48
+OpY2_Rec448430::load,0x448430,0x163
+OpY2_Named::parseSuffix,0x4485a0,0x8c
+OpY2_Rec448630::load,0x448630,0x130
+OpY2_Variance::vary,0x4489a0,0x43
+OpY2_Rec449200::load,0x449200,0xa5
+?opY2_dirBetween@@YAHABUOpY2_Pos@@0@Z,0x4491a0,0x54
+OpY2_CaveSettings::OpY2_CaveSettings,0x449310,0xa4
+OpY2_Rec4482c0::~OpY2_Rec4482c0,0x448a40,0x59
+OpY2_CaveSettings::~OpY2_CaveSettings,0x449570,0x6b
+?opY2_startNetworkThread@@YAPAXPAX_NP6AH0@Z0@Z,0x449730,0x4c
+OpY2_StringPair::OpY2_StringPair,0x4499c0,0x6c
+?opY2_initPalette1@@YAXXZ,0x453c60,0xe6
+?opY2_initPalette2@@YAXXZ,0x453d50,0xff
+OpY2_Rec453e50::OpY2_Rec453e50,0x453e50,0x190
+OpY2_CurveRange::curveA,0x454020,0x56
+OpY2_CurveRange::curveB,0x454080,0x6d
+OpY2_CurveRange::curveC,0x4540f0,0x68

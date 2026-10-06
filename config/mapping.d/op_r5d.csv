@@ -1,0 +1,19 @@
+# op_r5d: item/entity spawn console helpers and neighbours in 0x8f9230-0x90c700 (src/op/op_r5d.cpp)
+OpR5d_getItemDescription8f9230,0x8f9230,0x469
+OpR5d_getItemName8f9830,0x8f9830,0x8d
+OpR5d_findItem8f96a0,0x8f96a0,0x189
+OpR5d_findItem8f98c0,0x8f98c0,0x158
+CMachineTarget::unknown8fba20,0x8fba20,0x79
+CMachineTarget::input8fbaa0,0x8fbaa0,0xcc
+CMachine::open,0x8fd120,0xb3
+CMachine::close,0x8fd550,0x7b
+CMachine::unknown8fd5d0,0x8fd5d0,0x36
+CMachine::unknown8fd610,0x8fd610,0xf2
+CMachine::unknown8fe630,0x8fe630,0xab
+CMachine::unknown8fe6e0,0x8fe6e0,0x7e
+CMachine::unknown8fe760,0x8fe760,0x8a
+CMachine::unknown8fe7f0,0x8fe7f0,0x128
+CMachine::input8fe920,0x8fe920,0x79
+CMachine::update8fd1e0,0x8fd1e0,0x368
+CMachineTarget::CMachineTarget,0x8fb410,0x5a8
+CMachine::CMachine,0x8fcf90,0x181

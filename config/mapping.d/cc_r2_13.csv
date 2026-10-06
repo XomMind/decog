@@ -1,0 +1,20 @@
+# cc_r2_13: CInfo / CInfoCompare / CInfoCompareData accessors, ctor, dtors (src/game/cc_r2_13.cpp)
+CInfo::~CInfo,0x4aeb50,0x62
+CInfo::getUnknown98,0x4aebc0,0x1e
+CInfo::getUnknown9c,0x4aebe0,0x1e
+CInfo::getUnknownB4,0x4aec00,0x13
+CInfo::getUnknownBC,0x4aec20,0x13
+CInfo::getUnknownC4,0x4aec40,0x13
+CInfo::getUnknownCC,0x4aec60,0x13
+CInfo::getUnknownD4,0x4aec80,0x13
+CInfo::getUnknownDC,0x4aeca0,0x14
+CInfo::unknown4aecc0,0x4aecc0,0xad
+CInfo::unknown4aed70,0x4aed70,0x43
+CInfo::unknown4aedc0,0x4aedc0,0x4a
+ItemUI::unknown4aee10,0x4aee10,0x68
+??_GCInfo@@UAEPAXI@Z,0x4aee80,0x2d
+CInfoCompare::~CInfoCompare,0x4aeeb0,0x1c
+CInfoCompare::getTarget,0x4aeed0,0x1b
+??_GCInfoCompare@@UAEPAXI@Z,0x4aeef0,0x2d
+CInfoCompareData::CInfoCompareData,0x4aef20,0xcb
+CInfoCompareData::unknown4aeff0,0x4aeff0,0x21

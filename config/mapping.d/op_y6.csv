@@ -1,0 +1,4 @@
+# op_y6: game UI consoles 0x7c0000-0x8a0000 (src/op/op_y6*.cpp)
+CCommandsAdvancedPageButton::mouseEnter,0x7c2c00,0x3c
+CGamemenuButton::mouseEnter,0x7c5e10,0x51
+CGamemenuSaveloadButton::mouseEnter,0x7c6320,0x53

@@ -1,0 +1,16 @@
+# op_t8e: matches in 0x9f6000-0x9fd000 (VS2010 std template instances), Beta 17.1
+??$replace@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@V?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@1@Z,0x9f6460,0x3c
+??$_Replace@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@V?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@1Uinput_iterator_tag@1@@Z,0x9fcff0,0x89
+??$_Distance@V?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@std@@H@std@@YAXV?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@0@0AAH@Z,0x9f64a0,0x30
+??$_Distance@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@I@std@@YAXV?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@0@0AAI@Z,0x9f64d0,0x30
+??$replace@V?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@V?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0V?$istreambuf_iterator@DU?$char_traits@D@std@@@1@1@Z,0x9f6500,0x43
+?blit@?$OpT8e_Array2D@H@@QAEXHHPAV1@@Z,0x9f66d0,0x85
+??0?$OpT8e_Array2D@H@@QAE@PAV0@@Z,0x9f6640,0x89
+??$AllocateInternal@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@OpT8e_Arena@@QAEPAX_N@Z,0x9f6770,0x56
+??$emplace@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@1@V?$_Vector_const_iterator@V?$_Vector_val@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@1@$$QAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z,0x9f6ba0,0xac
+??$_Random_shuffle@PAUOpT8e_T9f6c50@@P6AHH@ZH@std@@YAXPAUOpT8e_T9f6c50@@0AAP6AHH@ZPAH@Z,0x9f6c50,0x5a
+??$_Random_shuffle@PAUPoint@@P6AHH@ZH@std@@YAXPAUPoint@@0AAP6AHH@ZPAH@Z,0x9f71f0,0x5a
+??$_Random_shuffle@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P6AHH@ZH@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0AAP6AHH@ZPAH@Z,0x9f7be0,0x5a
+??$_Random_shuffle@PAUOpT8e_T9f7f20@@P6AHH@ZH@std@@YAXPAUOpT8e_T9f7f20@@0AAP6AHH@ZPAH@Z,0x9f7f20,0x5a
+??$_Random_shuffle@PAPAUOpT8e_T9f7250@@P6AHH@ZH@std@@YAXPAPAUOpT8e_T9f7250@@0AAP6AHH@ZPAH@Z,0x9f7250,0x5a
+??$?5DU?$char_traits@D@std@@V?$allocator@D@1@@std@@YAAAV?$basic_istream@DU?$char_traits@D@std@@@0@$$QAV10@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@@Z,0x9f6d90,0x297

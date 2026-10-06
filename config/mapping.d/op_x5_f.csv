@@ -1,0 +1,5 @@
+# op_x5_f: matched
+opx5f_openWorldMapIfHidden,0x997000,0x2a
+OpX5F_PointGrid::resizeAndFill,0x9d3470,0x35
+CWorldMapInfo::CWorldMapInfo,0x993100,0x3dd
+exitProgram,0x9ad420,0x854

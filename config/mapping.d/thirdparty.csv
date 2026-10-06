@@ -1,0 +1,59 @@
+# auto-matched by tools/propagate.py (vtable seed + call-graph propagation)
+??1bad_alloc@std@@UAE@XZ,0x4013a0,0x1d
+??_Gbad_alloc@std@@UAEPAXI@Z,0x4013c0,0x2d
+?to_char_type@?$char_traits@D@std@@SADABH@Z,0x401670,0xa
+?to_int_type@?$char_traits@D@std@@SAHABD@Z,0x401680,0xb
+?eq_int_type@?$char_traits@D@std@@SA_NABH0@Z,0x401690,0x14
+?not_eof@?$char_traits@D@std@@SAHABH@Z,0x4016b0,0x30
+?eof@?$char_traits@D@std@@SAHXZ,0x4016e0,0x8
+?is_open@gzfilebuf@@QBE_NXZ,0x401870,0x19
+??_Ggzfilebuf@@UAEPAXI@Z,0x401970,0x2d
+??1gzfilebuf@@UAE@XZ,0x4019a0,0x78
+?close@gzfilebuf@@QAEPAV1@XZ,0x401ae0,0x76
+?showmanyc@gzfilebuf@@MAE_JXZ,0x401cc0,0x75
+?underflow@gzfilebuf@@MAEHXZ,0x401d40,0xeb
+?overflow@gzfilebuf@@MAEHH@Z,0x401e30,0x1c5
+?setbuf@gzfilebuf@@MAEPAV?$basic_streambuf@DU?$char_traits@D@std@@@std@@PAD_J@Z,0x402000,0x97
+?sync@gzfilebuf@@MAEHXZ,0x4020a0,0x42
+?disable_buffer@gzfilebuf@@AAEXXZ,0x402230,0xd4
+??_Difstream@PhysFScpp@@QAEXXZ,0x4095b0,0x1f
+?underflow@fbuf@PhysFScpp@@EAEHXZ,0x411580,0x90
+?seekoff@fbuf@PhysFScpp@@EAE?AV?$fpos@H@std@@_JHH@Z,0x411610,0x12a
+?seekpos@fbuf@PhysFScpp@@EAE?AV?$fpos@H@std@@V34@H@Z,0x411740,0x92
+?overflow@fbuf@PhysFScpp@@EAEHH@Z,0x4117e0,0xc7
+?sync@fbuf@PhysFScpp@@EAEHXZ,0x4118b0,0x1e
+??1fbuf@PhysFScpp@@UAE@XZ,0x411990,0x75
+??_Efbuf@PhysFScpp@@UAEPAXI@Z,0x411a10,0x2d
+??_Ebase_fstream@PhysFScpp@@UAEPAXI@Z,0x411a70,0x2d
+??1base_fstream@PhysFScpp@@UAE@XZ,0x411aa0,0x24
+??_Gifstream@PhysFScpp@@UAEPAXI@Z,0x411c50,0x2d
+??1ifstream@PhysFScpp@@UAE@XZ,0x411c80,0xb9
+??0?$fpos@H@std@@QAE@_J@Z,0x9b2b90,0x3b
+??B?$fpos@H@std@@QBE_JXZ,0x9b2bd0,0x1a
+??0gzfilebuf@@QAE@XZ,0x4018d0,0x9d
+?open@gzfilebuf@@QAEPAV1@PBDH@Z,0x401a20,0xbd
+??0gzifstream@@QAE@XZ,0x402310,0xc6
+??_Dgzifstream@@QAEXXZ,0x402420,0x22
+??1gzifstream@@UAE@XZ,0x402450,0x5a
+??0gzifstream@@QAE@PBDH@Z,0x4024b0,0xd6
+?open@gzifstream@@QAEXPBDH@Z,0x402590,0x53
+?close@gzifstream@@QAEXXZ,0x4025f0,0x31
+??_Ggzifstream@@UAEPAXI@Z,0x4023e0,0x36
+??_Ggzofstream@@UAEPAXI@Z,0x402630,0x36
+??_Dgzofstream@@QAEXXZ,0x402670,0x22
+??1gzofstream@@UAE@XZ,0x4026a0,0x5a
+??0gzofstream@@QAE@PBDH@Z,0x402700,0xd6
+?open@gzofstream@@QAEXPBDH@Z,0x4027e0,0x53
+?close@gzofstream@@QAEXXZ,0x402840,0x31
+?is_open@gzifstream@@QAE_NXZ,0x401890,0x16
+?is_open@gzofstream@@QAE_NXZ,0x4018b0,0x16
+??0base_fstream@PhysFScpp@@QAE@PAUPHYSFS_File@@@Z,0x411a40,0x22
+?openWithMode@PhysFScpp@@YAPAUPHYSFS_File@@PBDW4mode@1@@Z,0x411ad0,0x62
+??0ifstream@PhysFScpp@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z,0x411b40,0x10c
+# Byte-identical, but only verify once tools/ltcg.py links msvcprt.lib before msvcrt.lib (the exe
+# resolves operator new[] to msvcprt.lib's static copy at 0xa0446a, not the msvcr100 import):
+?enable_buffer@gzfilebuf@@AAEXXZ,0x4020f0,0x137
+??0fbuf@PhysFScpp@@QAE@PAUPHYSFS_File@@I@Z,0x4118d0,0xc0
+# Byte-identical, but lverify's 8-byte fallback compare of unnamed string literals ("w", "b")
+# also compares the neighbouring bytes of the literal pool:
+?open_mode@gzfilebuf@@IBE_NHPAD@Z,0x401b60,0x160

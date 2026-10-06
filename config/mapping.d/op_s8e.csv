@@ -1,0 +1,9 @@
+# op_s8e: STL/protobuf/serialization template instances 0x9ebbe0-0x9ef460
+??$_Assign@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@0Uinput_iterator_tag@1@@Z,0x9ebbe0,0x49
+??$_Construct@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXV?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@0Uforward_iterator_tag@1@@Z,0x9ebc30,0xd1
+??$getline@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@YAAAV?$basic_istream@DU?$char_traits@D@std@@@0@$$QAV10@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@D@Z,0x9ebd10,0x1fc
+??$_Assign@V?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@V?$istreambuf_iterator@DU?$char_traits@D@std@@@1@0Uinput_iterator_tag@1@@Z,0x9ebff0,0x51
+??$_Append@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@0Uinput_iterator_tag@1@@Z,0x9ec760,0x49
+??$_Search@PADPADHHUOpY1_CharEqualNoCase@@@std@@YAPADPAD000UOpY1_CharEqualNoCase@@PAH2@Z,0x9ebf10,0xb1
+??0?$OpS8e_Array2D@UXCell@@@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9ec100,0x112
+?OpS8e_blit@?$Array2D@UXCell@@@@QAEXHHPAV1@@Z,0x9ec220,0x89

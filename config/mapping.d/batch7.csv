@@ -1,0 +1,5 @@
+# batch7: Entity core methods (src/game/batch7.cpp). name,va,size
+Entity::changeFaction,0x5dc780,0x4e9
+Entity::takeTurn,0x64e8f0,0x400
+Entity::changePos,0x5dccb0,0xbe6
+Entity::attemptTeleportitisTeleport,0x63b1c0,0x3d4

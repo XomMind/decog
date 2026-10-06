@@ -1,0 +1,6 @@
+# op_x5_d: consoles/effects in 0x966070-0x968000 (src/op/op_x5_d*.cpp)
+OpX5D_spawnBorderEffects,0x966070,0x660
+OpX5D_Obj_cec138::unknown9666d0,0x9666d0,0x53b
+OpX5D_Obj_cec138::unknown967c90,0x967c90,0x64c
+OpX5D_Obj_cec138::unknown966ed0,0x966ed0,0x716
+OpX5D_Obj_cec138::unknown9675f0,0x9675f0,0x69e

@@ -1,0 +1,25 @@
+# op_s7: matches in 0x8b5000-0x9d0000, Beta 17.1
+ops7_scrollRobot8feee0,0x8feee0,0x236
+OpS7_IntGrid::find_9cefa0,0x9cefa0,0x75
+OpS7_IntGrid::getRandom_9cf050,0x9cf050,0x61
+OpS7_IntGrid::getRandom_9cf0c0,0x9cf0c0,0x5e
+OpS7_IntGrid::getNeighbors_9ce500,0x9ce500,0xc4
+??0OpS7_CellGrid@@QAE@ABV0@@Z,0x9cdd40,0xf8
+??0OpS7_CellGrid@@QAE@HHUXCell@@@Z,0x9cde40,0xd5
+??4OpS7_CellGrid@@QAEAAV0@ABV0@@Z,0x9cdf50,0x71
+?fill@OpS7_CellGrid@@QAEXUXCell@@@Z,0x9cdfd0,0x49
+?resize@OpS7_CellGrid@@QAEXHH@Z,0x9ce020,0xee
+?resize@OpS7_CellGrid@@QAEXHHUXCell@@@Z,0x9ce110,0x35
+?copyFrom@OpS7_CellGrid@@QAEXHHAAV1@HHHH@Z,0x9ce150,0x87
+ops7_rotateGrid_9cf450,0x9cf450,0xc5
+OpS7_ByteGrid::read_9cec80,0x9cec80,0x8f
+OpS7_IntGrid2::contains_9ceef0,0x9ceef0,0x4b
+OpS7_IntGrid2::count_9cef40,0x9cef40,0x58
+OpS7_IntGrid2::replace_9cf630,0x9cf630,0x54
+ops7_indexOf_9cf120,0x9cf120,0x3d
+ops7_indexOf_9cf560,0x9cf560,0x3a
+ops7_between_9cdb90,0x9cdb90,0x39
+ops7_clamp_9cdc80,0x9cdc80,0x39
+??0OpS7_IntGrid2@@QAE@HHH@Z,0x9ced10,0x5b
+??4OpS7_IntGrid2@@QAEAAV0@ABV0@@Z,0x9cedd0,0x6f
+OpS7_IntGrid2::read_9cee40,0x9cee40,0xa2

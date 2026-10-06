@@ -1,0 +1,14 @@
+# op_s2: matches in 0x4b2000-0x5df000
+??1OpS2_A@@QAE@XZ,0x4bd140,0x86
+?describe@OpS2_Target@@QAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,0x5702b0,0xf2
+?namesJoined@OpS2_Target@@QAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,0x5703b0,0xff
+?initials@OpS2_Target2@@QAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,0x5704b0,0xfb
+?opS2_replaceIndexed@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HABV12@@Z,0x5105c0,0xc7
+?idList@OpS2_Ids@@QAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,0x570160,0x141
+?opS2_buildText@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV12@11VHEntity@@2@Z,0x510a50,0x150
+??0OpS2_PhraseTextC@@QAE@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV12@11VHEntity@@2@Z,0x511020,0x91
+??0OpS2_PhraseTextA@@QAE@HPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00VHEntity@@1@Z,0x510d20,0x9f
+??0OpS2_PhraseTextB@@QAE@HPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@00VHEntity@@1@Z,0x510f80,0x9f
+?opS2_fn510690@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@VHEntity@@H@Z,0x510690,0xde
+?opS2_fn510360@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x510360,0x259
+?opS2_fn510770@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x510770,0x2d2

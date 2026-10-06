@@ -1,0 +1,26 @@
+# op_c: functions in 0x470000-0x5e0000 (src/op/op_c*.cpp)
+OpC_findNodes_470050,0x470050,0x12c
+OpC_findNode_470180,0x470180,0xb4
+OpC_findNodes_470240,0x470240,0xd8
+OpC_findNodes_470320,0x470320,0xd8
+OpC_findNodes_470400,0x470400,0xa4
+OpC_initColors_4704b0,0x4704b0,0xb5
+??0OpC_Struct470570@@QAE@XZ,0x470570,0x3f
+OpC_Struct470570::apply_4705b0,0x4705b0,0x33
+OpC_Struct470570::check_4705f0,0x4705f0,0x3b
+OpC_Struct470570::check_470630,0x470630,0x3b
+OpC_Struct470570::reset_470bb0,0x470bb0,0x21
+OpC_Struct470570::add_470c00,0x470c00,0x1c
+GM::unknown470aa0,0x470aa0,0x86
+extractNewsContent,0x470c40,0x367
+OpC_newsThread_470fb0,0x470fb0,0x29a
+OpC_decode_4712a0,0x4712a0,0x2a8
+OpC_Struct471550::init_4715a0,0x4715a0,0x14b
+??0OpC_Struct471550@@QAE@XZ,0x471550,0x50
+OpC_formatDateTime_4716f0,0x4716f0,0x1d0
+??0OpC_Owner4718c0@@QAE@_N@Z,0x4718c0,0x22
+??1OpC_Owner4718c0@@QAE@XZ,0x4718f0,0x3b
+OpC_Record471b30::OpC_Record471b30,0x471b30,0x11d
+OpC_getRecordFileName_471c50,0x471c50,0x17b
+OpC_getFileName_471dd0,0x471dd0,0x16b
+UploadScoreData::UploadScoreData,0x471930,0x119

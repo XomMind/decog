@@ -1,0 +1,12 @@
+# op_u8b: game helpers in 0x9d8000-0x9ee000 (some defined in op_s8c.cpp / op_u8b.cpp)
+??$OpS8c_deleteObject@UOpS8c_Plain@@@@YAXAAV?$vector@PAUOpS8c_Plain@@V?$allocator@PAUOpS8c_Plain@@@std@@@std@@H@Z,0x9d8f20,0x58
+??$OpS8c_shuffle@H@@YAXAAV?$vector@HV?$allocator@H@std@@@std@@@Z,0x9d8f80,0x35
+?OpS8c_appendUnique@@YAXAAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@0@Z,0x9d80a0,0x6a
+?OpS8c_copyInts@@YAXPAH0I@Z,0x9d9460,0x38
+?OpS8c_indexOfMinInt@@YAHAAV?$vector@HV?$allocator@H@std@@@std@@@Z,0x9d9270,0x5d
+?OpS8c_popRandom@@YA?AUOpS8c_Handle@@AAV?$vector@UOpS8c_Handle@@V?$allocator@UOpS8c_Handle@@@std@@@std@@@Z,0x9d8030,0x65
+?OpS8c_randomArea@@YA?AUOpS8c_Area@@AAV?$vector@UOpS8c_Area@@V?$allocator@UOpS8c_Area@@@std@@@std@@@Z,0x9db460,0x4b
+?OpS8c_randomOf@@YAHPAHI@Z,0x9d9c10,0x37
+?OpS8c_readPoints@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@2@@Z,0x9d8600,0x51
+?OpS8c_writeOptionalInt@@YAXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@PAH@Z,0x9da000,0x3c
+?OpS8c_writePoints@@YAXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@AAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@2@@Z,0x9d8660,0x5c

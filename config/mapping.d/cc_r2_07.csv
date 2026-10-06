@@ -1,0 +1,26 @@
+# cc_r2_07: Cell placement/terrain/prop queries (src/game/cc_r2_07.cpp)
+?canPlaceProp@Cell@@QAE_NPAX@Z,0x45d600,0x9d
+?unknown45d6a0@Cell@@QAE_NXZ,0x45d6a0,0x5b
+?unknown45d700@Cell@@QAE_NXZ,0x45d700,0xae
+?hasBlockingObject@Cell@@QAE_NXZ,0x45d7b0,0xcd
+?getItem@Cell@@QAE?AVHItem@@XZ,0x45d8f0,0x4f
+?unknown45d940@Cell@@QAE_NXZ,0x45d940,0x41
+?unknown45d990@Cell@@QAE_NXZ,0x45d990,0xa0
+?unknown45da30@Cell@@QAE_NXZ,0x45da30,0x1d
+?unknown45da50@Cell@@QAE_NXZ,0x45da50,0x9d
+?unknown45daf0@Cell@@QAEX_N@Z,0x45daf0,0x16
+?unknown45db10@Cell@@QAEXXZ,0x45db10,0x12
+?unknown45db30@Cell@@QAEXXZ,0x45db30,0x12
+?unknown45db50@Cell@@QAE_NXZ,0x45db50,0x19
+?unknown45db70@Cell@@QAE_NXZ,0x45db70,0x17
+?unknown45db90@Cell@@QAE_NXZ,0x45db90,0x11
+?unknown45dbb0@Cell@@QAE_NXZ,0x45dbb0,0x3a
+?unknown45dbf0@Cell@@QAE_NXZ,0x45dbf0,0x3a
+?isEdge@Cell@@QAE_NXZ,0x45dc30,0x19
+?isShortcut@Cell@@QAE_NXZ,0x45dc50,0x19
+?unknown45dc70@Cell@@QAE_NXZ,0x45dc70,0x19
+?unknown45dc90@Cell@@QAE_NH@Z,0x45dc90,0x3e
+?isMachinePart@Cell@@QAE_NXZ,0x45dcd0,0x13
+?unknown45dcf0@Cell@@QAE_NXZ,0x45dcf0,0x4b
+?unknown45dd40@Cell@@QAE_NH@Z,0x45dd40,0x51
+?isDoor@Cell@@QAE_NXZ,0x45dda0,0x4b

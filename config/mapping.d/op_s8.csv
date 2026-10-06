@@ -1,0 +1,24 @@
+# op_s8: STL/serialization template instances in 0x9d0000-0x9d43b0
+?remove@?$OpS8a_Pool@UOpS8a_Rec24@@@@QAEXVHEntity@@_N@Z,0x9d05e0,0x8b
+?remove@?$OpS8a_Pool@UOpS8a_RecW45eff0@@@@QAEXVHEntity@@_N@Z,0x9d0b30,0x8b
+?remove@?$OpS8a_Pool@UOpS8a_Rec18@@@@QAEXVHEntity@@_N@Z,0x9d0fc0,0x8b
+?remove@?$OpS8a_Pool@UOpS8a_RecKcd@@@@QAEXVHEntity@@_N@Z,0x9d1bf0,0x8b
+?remove@?$OpS8a_Pool@UOpS8a_VRec1@@@@QAEXVHEntity@@_N@Z,0x9d3540,0x8f
+?clearAll@?$OpS8a_Pool@UOpS8a_VRec1@@@@QAEX_N@Z,0x9d34b0,0x8d
+?add@?$OpS8a_Pool@UOpS8a_Rec24@@@@QAE?AVHProp@@PAUOpS8a_Rec24@@@Z,0x9d1b20,0xc6
+?release@?$OpS8a_Pool@UOpS8a_Rec24@@@@QAEPAUOpS8a_Rec24@@VHEntity@@@Z,0x9d0bc0,0x64
+?getAll@?$OpS8a_Pool@UOpS8a_Rec24@@@@QAEIAAV?$vector@PAUOpS8a_Rec24@@V?$allocator@PAUOpS8a_Rec24@@@std@@@std@@@Z,0x9d0c30,0x61
+?fill@?$OpS8a_Array2D@_N@@QAEX_N@Z,0x9d28e0,0x43
+?writeRaw@?$OpS8a_Array2D@_N@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x9d27a0,0x6e
+?resize@?$OpS8a_Array2D@_N@@QAEXHHPAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9d2810,0x99
+?writeRaw@?$OpS8a_Array2D@H@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x9d26a0,0x71
+?read@?$OpS8a_Array2D@PAVCell@@@@QAEXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9d22b0,0x12e
+?cleanup@?$OpS8a_Array2D@PAVCell@@@@QAEXXZ,0x9d2410,0x96
+??0?$OpS8a_Array2D@_N@@QAE@HH_N@Z,0x9d2720,0x4c
+?write@?$OpS8a_Array2D@PAVCell@@@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x9d2210,0x97
+?write@?$OpS8a_Grid@UOpS8a_G20@@@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x9d2960,0x6c
+?write@?$OpS8a_Grid@UOpS8a_G34@@@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x9d2c60,0x6c
+?resize@?$OpS8a_Array2D@H@@QAEXHHPAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9d4090,0xac
+??$OpS8a_writeRawVector@H@@YAXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@AAV?$vector@HV?$allocator@H@std@@@1@@Z,0x9d2130,0x5c
+?OpS8a_readXColors@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@UXColor@@V?$allocator@UXColor@@@std@@@2@@Z,0x9d2560,0x53
+?OpS8a_readP8s@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@UOpS8a_P8@@V?$allocator@UOpS8a_P8@@@std@@@2@@Z,0x9d07e0,0x53

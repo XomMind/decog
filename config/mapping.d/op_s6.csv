@@ -1,0 +1,8 @@
+# op_s6: matches in 0x7ed000-0x8b5000
+CAchievementsCategoryToggleAllButton::unknown7ed4f0,0x7ed4f0,0x55
+CAchievementsStateButton::unknown7ed5e0,0x7ed5e0,0x6c
+OpS6_StatePanel::trigger,0x7ede10,0x171
+CAchievements::unknown7f1e00,0x7f1e00,0x15f
+CAchievements::unknown7f1f60,0x7f1f60,0x44
+CAchievements::unknown7f1fb0,0x7f1fb0,0x59
+CSupporters::unknown7f30e0,0x7f30e0,0x448

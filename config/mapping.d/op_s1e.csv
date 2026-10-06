@@ -1,0 +1,27 @@
+# op_s1e: misc functions 0x45e000-0x472000
+Group::unknown45e1c0,0x45e1c0,0x8a
+Group::unknown45e250,0x45e250,0x7b
+Group::unknown45e2d0,0x45e2d0,0x81
+Group::unknown45e3e0,0x45e3e0,0x5e
+??8OpS1e_Cfg@@QBE_NABU0@@Z,0x45e860,0xd4
+OpS1e_Cfg::randomize,0x45e940,0x108
+OpR1F_Target45e690::getProp1,0x45e610,0x35
+OpR1F_Target45e690::getProp2,0x45e650,0x35
+OpR1F_Target45e690::unknown45e690,0x45e690,0x21
+Group::unknown45e4c0,0x45e4c0,0x49
+??1Group@@QAE@XZ,0x45e140,0x59
+?OpS1e_isClockEarlier@@YA_NABVHTurnClock@@0@Z,0x45e6c0,0x30
+OpS1e_Slot::unknown45e7d0,0x45e7d0,0x44
+??0OpS1e_Record6f0@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x45e6f0,0x94
+OpS1e_Record6f0::write,0x45e790,0x3f
+OpS1e_EntryList::unknown45ed10,0x45ed10,0x3b
+OpS1e_EntryList::unknown45ed50,0x45ed50,0x76
+OpS1e_EntryList::unknown45edd0,0x45edd0,0x75
+??0OpS1e_HolderA@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x45ee70,0x8b
+OpS1e_HolderB::write,0x45ef00,0x43
+??1OpS1e_HolderC@@QAE@XZ,0x45ef50,0x94
+OpS1e_Range::read,0x45f040,0x30
+OpR3d_Expiry::unknown45f070,0x45f070,0x2a
+??0OpS1e_Lists@@QAE@ABU0@@Z,0x45f110,0xce
+??0OpS1e_Lists@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x45f1e0,0xd5
+OpS1e_Lists::write,0x45f2c0,0x56

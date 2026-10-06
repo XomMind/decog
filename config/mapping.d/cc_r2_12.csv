@@ -1,0 +1,25 @@
+# cc_r2_12: Item counter/effect helpers, effect lists and small serialization records (src/game/cc_r2_12.cpp)
+Item::unknown4584c0,0x4584c0,0x24
+Item::unknown4584f0,0x4584f0,0x40
+Item::unknown458530,0x458530,0x28
+Item::unknown458560,0x458560,0x15
+Item::unknown458580,0x458580,0x1a
+Item::addEffect,0x4585a0,0x1c
+Item::unknown4585c0,0x4585c0,0x62
+Item::unknown458630,0x458630,0x5e
+Item::unknown458690,0x458690,0x68
+??_GItemEffectList@@QAEPAXI@Z,0x458720,0x2d
+Region458750::Region458750,0x458750,0x42
+PropPairRecord::PropPairRecord,0x4587a0,0x81
+PropPairRecord::serialize,0x458830,0x5d
+ExplosiveGroup::ExplosiveGroup,0x458890,0x38
+EntityPart4588f0::~EntityPart4588f0,0x4588f0,0x57
+EntityPart4588f0::unknown458950,0x458950,0x57
+EntityPart4588f0::unknown4589b0,0x4589b0,0x5f
+EntityPart4588f0::unknown458a10,0x458a10,0x22
+EntityPart4588f0::unknown458a40,0x458a40,0x47
+EntityAI::unknown458a90,0x458a90,0x3e
+Triple458ad0::Triple458ad0,0x458ad0,0x34
+PropRecord458b10::PropRecord458b10,0x458b10,0x5d
+PropRecord458b10::serialize,0x458b70,0x52
+PropPoints458bd0::PropPoints458bd0,0x458bd0,0x94

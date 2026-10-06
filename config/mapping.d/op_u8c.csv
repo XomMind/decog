@@ -1,0 +1,14 @@
+# op_u8c: 0x9ee000-0x9fa000
+??0OpU8c_IntLists@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9f58d0,0x95
+??0OpU8c_Rec84@@QAE@ABU0@@Z,0x9f47e0,0x134
+??0OpU8c_RecAC@@QAE@ABU0@@Z,0x9f4660,0x17f
+??0OpU8c_RectList@@QAE@ABU0@@Z,0x9f4920,0x3a
+??0OpU8c_Rec30@@QAE@ABU0@@Z,0x9f4960,0x92
+??0OpU8c_Lists@@QAE@ABU0@@Z,0x9f4a00,0xd4
+??0OpU8c_ListPair@@QAE@ABU0@@Z,0x9f4ae0,0x66
+??0OpU8c_Rec24@@QAE@ABU0@@Z,0x9f4b50,0x52
+??0OpU8c_Rec35@@QAE@ABU0@@Z,0x9f4bb0,0xb2
+??4OpU8c_Rec60@@QAEAAU0@ABU0@@Z,0x9f4c70,0x9e
+??4OpU8c_RectInts@@QAEAAU0@ABU0@@Z,0x9f4d10,0x3a
+??4OpU8c_ImageRec@@QAEAAU0@ABU0@@Z,0x9f4d70,0x82
+??4OpU8c_ColorRec@@QAEAAU0@ABU0@@Z,0x9f4610,0x4e

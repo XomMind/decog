@@ -1,0 +1,19 @@
+# op_s1c: matches in 0x440000-0x45b000 (src/op/op_s1c*.cpp)
+HttpsConnection::~HttpsConnection,0x453390,0x48
+OpS1c_RecList::hasData,0x4563e0,0x4b
+OpS1c_RecList::countDef,0x456430,0x5a
+OpS1c_RecList::hasType,0x456490,0x4e
+OpS1c_RecList::getDataOfType,0x4564e0,0x5f
+OpS1c_RecList::hasTypeFlagA,0x456540,0x52
+OpS1c_RecList::hasTypeFlagB,0x4565a0,0x52
+OpS1c_RecList::hasActiveType39,0x456600,0x60
+??0OpQ5_T9d0160@@QAE@PAUOpS1c_Data@@@Z,0x456130,0x34
+OpS1c_RecList::removeData,0x4567f0,0x67
+OpS1c_RecList::removeExpired,0x456860,0x60
+OpS1c_RecList::removeActiveType39,0x4568c0,0x76
+OpQ5_T9d0160::isExpired,0x4561c0,0x3b
+??0OpS1c_RecList@@QAE@V?$vector@PAUOpS1c_Data@@V?$allocator@PAUOpS1c_Data@@@std@@@std@@@Z,0x456280,0x82
+??0OpS1c_RecList@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x456310,0x75
+OpS1c_Holder::hasData,0x4560d0,0x57
+?OpS1c_unknown4569a0@@YA_NHHHHHHHPAVOpS1c_Inventory@@HHHH@Z,0x4569a0,0xaa
+OpS1c_Stats::getTotal,0x457160,0x1c2

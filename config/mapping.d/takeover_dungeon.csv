@@ -1,0 +1,7 @@
+# auto-matched by tools/propagate.py (vtable seed + call-graph propagation)
+??1Builder@DF@@UAE@XZ,0x447ea0,0x14
+??_EBuilder@DF@@UAEPAXI@Z,0x447ec0,0x2d
+??1Tunneler@DF@@UAE@XZ,0x447fa0,0x1c
+??_GTunneler@DF@@UAEPAXI@Z,0x4480a0,0x2d
+??1Roomie@DF@@UAE@XZ,0x448110,0x1c
+??_GRoomie@DF@@UAEPAXI@Z,0x448130,0x2d

@@ -1,0 +1,12 @@
+# op_r5b: CRpglikeUpgrade*, CPlayer2, CVolley, CParts*, CPart* consoles
+CRpglikeUpgrade::refresh,0x879500,0x293
+CRpglikeUpgradesConfirmButton::input,0x8797a0,0x82
+CRpglikeUpgradesConfirmButton::render,0x879830,0x7b
+CRpglikeUpgrades::close,0x879f70,0xc7
+CRpglikeUpgrades::unknown87a220,0x87a220,0x33
+CRpglikeUpgrades::unknown87a040,0x87a040,0x1d4
+CRpglikeUpgrades::unknown87a260,0x87a260,0x17e
+CRpglikeUpgrades::input,0x87a3e0,0x188
+CRpglikeUpgrades::render,0x87a6f0,0x1f2
+CPlayer2Button::input,0x87a8f0,0x9c
+CPolymindButton::input,0x87af30,0x9c

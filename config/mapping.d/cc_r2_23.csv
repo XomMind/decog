@@ -1,0 +1,12 @@
+# cc_r2_23: manual/options UI consoles (src/game/cc_r2_23.cpp)
+CCommandsAdvanced::open,0x7c54f0,0x1b2
+CManualButton::unknown7c56b0,0x7c56b0,0x28
+CManualButton::unknown7c56e0,0x7c56e0,0xbd
+CManualButton::input,0x7c57a0,0x7e
+CManualPageButton::CManualPageButton,0x7c5820,0xff
+CManualPageButton::input,0x7c5920,0x85
+COptionButton::mouseEnter,0x7c5a50,0x3e
+COptionButton::mouseLeave,0x7c5a90,0x55
+COptionValue::input,0x7c5af0,0x32
+COptionValue::mouseEnter,0x7c5b30,0x2c
+COptionValue::mouseLeave,0x7c5b60,0x2c

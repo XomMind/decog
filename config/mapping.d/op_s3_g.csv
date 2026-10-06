@@ -1,0 +1,5 @@
+# op_s3_g: functions in 0x68a000-0x691000 (src/op/op_s3_g*.cpp)
+OpS3g_A::unknown68d920,0x68d920,0x59
+OpS3g_A::unknown68e1a0,0x68e1a0,0x46
+OpS3e_TurnSlot::save,0x672000,0x93
+OpS3e_TurnSlot::takeTurn,0x6721f0,0xb8

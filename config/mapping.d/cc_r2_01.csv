@@ -1,0 +1,8 @@
+# cc_r2_01: Map (world object at 0xcefc4c) header-inline accessors 0x4649e0-0x464b8d not covered by cc_r1_02, plus the vector<MapRecord*>::push_back ICF alias (src/game/cc_r2_01.cpp)
+Map::unknown4649e0,0x4649e0,0x1f
+Map::unknown464a80,0x464a80,0x23
+Map::unknown464ab0,0x464ab0,0x15
+Map::unknown464ad0,0x464ad0,0x15
+Map::unknown464af0,0x464af0,0x50
+Map::unknown464b40,0x464b40,0x4e
+?push_back@?$vector@PAUMapRecord@@V?$allocator@PAUMapRecord@@@std@@@std@@QAEXABQAUMapRecord@@@Z,0x9b9d30,0xfa

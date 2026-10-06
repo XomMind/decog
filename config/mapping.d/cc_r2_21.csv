@@ -1,0 +1,19 @@
+# cc_r2_21: CNotification/CParse/CTrailer/CRexpaint/CDifficultyButton/CDifficulty/CTitle/CTitleAnimated ctors, dtors, accessors (src/game/cc_r2_21.cpp)
+CNotification::CNotification,0x4b22b0,0x292
+CNotification::~CNotification,0x4b2550,0x26
+??_GCNotification@@UAEPAXI@Z,0x4b2580,0x2d
+CParse::~CParse,0x4b25b0,0x69
+??_GCParse@@UAEPAXI@Z,0x4b2620,0x2d
+CTrailer::~CTrailer,0x4b2650,0x1c
+??_GCTrailer@@UAEPAXI@Z,0x4b2670,0x2d
+CRexpaint::~CRexpaint,0x4b26a0,0x1c
+??_GCRexpaint@@UAEPAXI@Z,0x4b26c0,0x2d
+CDifficultyButton::CDifficultyButton,0x4b26f0,0xf3
+DifficultyOption::unknown4b27f0,0x4b27f0,0x15
+CDifficulty::~CDifficulty,0x4b2810,0x5f
+??_GCDifficulty@@UAEPAXI@Z,0x4b2870,0x2d
+CTitle::~CTitle,0x4b28a0,0x1c
+??_GCTitle@@UAEPAXI@Z,0x4b28c0,0x2d
+CTitleAnimated::unknown4b29b0,0x4b29b0,0x1d
+??_GCTitleAnimated@@UAEPAXI@Z,0x4b29d0,0x2d
+CTitleAnimated::~CTitleAnimated,0x4b2a00,0x13

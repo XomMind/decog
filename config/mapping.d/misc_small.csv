@@ -1,0 +1,10 @@
+# misc small game methods (src/game/misc_small.cpp). name,va,size
+Item::setActivateOkayTurn,0x4583b0,0xa1
+Prop::setSoundMute,0x65f320,0xb6
+CMap::endAudioLogs,0x8199a0,0xb6
+CMission::muteAudio,0x987920,0xd9
+CMission::unmuteAudio,0x987a00,0x10a
+Cell::removeItem,0x66c020,0xd4
+Network::init,0x4495e0,0x8e
+Network::deinit,0x449670,0xc0
+CLog::trigger,0x7b5e70,0xc5

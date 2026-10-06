@@ -1,0 +1,12 @@
+# op_x3: matched functions in 0x581000-0x69e000
+OpX3_Ai::unknown581a00,0x581a00,0xe1
+OpX3_AiB::unknown5813a0,0x5813a0,0x14d
+EntityAI::unknown581670,0x581670,0x191
+EntityAI::unknown5b5f40,0x5b5f40,0x1e3
+OpX3_Plan::OpX3_Plan,0x581af0,0x85
+OpX3_Plan::unknown582560,0x582560,0x14c
+OpX3_Plan::unknown582400,0x582400,0x154
+OpX3_Plan::unknown581b80,0x581b80,0x2e8
+OpX3_Mgr::unknown68cd80,0x68cd80,0x1e7
+OpX3_Spawner::unknown690470,0x690470,0x1d8
+OpX3_Spawner::unknown6901e0,0x6901e0,0x281

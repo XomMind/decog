@@ -1,0 +1,26 @@
+# cc_r2_17: CEffects/CMission/CMainUiButton/CFovEnemies(Button) members and helpers (src/game/cc_r2_17.cpp)
+CEffects::~CEffects,0x4b3030,0x121
+CEffects::unknown4b3160,0x4b3160,0x1c
+CEffects::unknown4b3180,0x4b3180,0x1c
+CEffects::unknown4b31a0,0x4b31a0,0x1c
+CEffects::unknown4b31c0,0x4b31c0,0x1a
+CEffects::unknown4b31e0,0x4b31e0,0x23
+CEffects::unknown4b3210,0x4b3210,0x19
+??_GCEffects@@UAEPAXI@Z,0x4b3230,0x2d
+CMission::~CMission,0x4b3260,0x1c
+CMission::unknown4b3280,0x4b3280,0x38
+CMission::unknown4b32c0,0x4b32c0,0x17
+CMission::unknown4b32e0,0x4b32e0,0x17
+??_GCMission@@UAEPAXI@Z,0x4b3300,0x2d
+unknown4b3330,0x4b3330,0x3e
+unknown4b3370,0x4b3370,0x36
+unknown4b33b0,0x4b33b0,0xfc
+unknown4b34b0,0x4b34b0,0x89
+unknown4b3540,0x4b3540,0xeb
+CMainUiButton::CMainUiButton,0x4b3630,0xe7
+CFovEnemiesButton::CFovEnemiesButton,0x4b3720,0x9f
+CFovEnemiesButton::mouseEnter,0x4b37c0,0x2c
+CFovEnemiesButton::mouseLeave,0x4b37f0,0x4a
+CFovEnemies::~CFovEnemies,0x4b3840,0x26
+??_GCFovEnemies@@UAEPAXI@Z,0x4b3870,0x2d
+Pair4b38a0::unknown4b38a0,0x4b38a0,0x46

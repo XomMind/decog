@@ -1,0 +1,1 @@
+# op_q6: range 0xa0d000-0xa45000 is libprotobuf (/O2, non-LTCG), unmatchable with /Od /GL toolchain; no matches

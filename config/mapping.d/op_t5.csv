@@ -1,0 +1,12 @@
+# op_t5: matches in 0x702000-0x7ed000
+OpT5_DataLoader::unknown792750,0x792750,0x13f
+OpT5_DataLoader::unknown792890,0x792890,0x13f
+OpT5_DataLoader::unknown7929d0,0x7929d0,0x13f
+OpT5_DataLoader::unknown792b10,0x792b10,0x13f
+OpT5_DataLoader::unknown792c50,0x792c50,0x165
+OpT5_SaveFiles::unknown792dc0,0x792dc0,0xc9
+OpT5_SaveFiles::unknown792e90,0x792e90,0x1fa
+OpT5_DataLoader::unknown792510,0x792510,0x234
+?opt5_loadThread@@YAHPAX@Z,0x790c00,0xeb
+?opt5_makeDerelictName@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,0x790cf0,0x155
+OpT5_GM::unknown78fa10,0x78fa10,0x6b

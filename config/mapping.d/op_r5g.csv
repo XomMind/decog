@@ -1,0 +1,13 @@
+# op_r5g: effect-object (0xcec138) methods and console helpers in 0x965c10-0x998590, src/op/op_r5g*.cpp
+OpR5g_Obj::unknown966dc0,0x966dc0,0x10c
+OpR5g_Obj::unknown969300,0x969300,0xed
+OpR5g_Obj::unknown9693f0,0x9693f0,0x104
+OpR5g_Obj::unknown969500,0x969500,0xad
+OpR5g_Obj::unknown96b930,0x96b930,0x95
+OpR5g_Obj::unknown96b9d0,0x96b9d0,0x1dc
+OpR5g_Obj::unknown969970,0x969970,0x1e5
+CEvolve::input,0x992de0,0x27c
+CEvolve::inputKey,0x993060,0x91
+CEvolve::close,0x992ba0,0x21a
+CCycleCounter::refresh,0x997030,0x10e
+CEvolve::unknown98c130,0x98c130,0x47

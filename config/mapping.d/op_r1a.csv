@@ -1,0 +1,26 @@
+# op_r1a: matched functions in 0x409000-0x41ae40
+OpR1a_createSurface,0x413e80,0x95
+?save@OpR1a_SurfaceSaver@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x413e00,0x73
+?OpR1a_savePngFile@@YAHPAXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z,0x414720,0xb4
+OpR1a_zoomSurfaceSize,0x414a80,0x79
+OpR1a_zoomSurfaceY,0x414b00,0x2d0
+OpR1a_zoomSurfaceRGBA,0x414dd0,0x113
+OpR1a_zoomSurface,0x4147e0,0x293
+initColorTables,0x413990,0x3bf
+??0OpR1a_Record@@QAE@HV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_NH111111@Z,0x415ce0,0xb1
+??0OpR1a_Record@@QAE@ABU0@@Z,0x415da0,0x8c
+?setValues@OpR1a_Record@@QAEXH_N00@Z,0x415f80,0x31
+OpR1a_sampleChangePitch,0x418f50,0x19f
+OpR1a_sampleGetLength,0x4190f0,0xfd
+??0OpR1a_SoundSample@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x4191f0,0x94
+??0OpR1a_SoundSample@@QAE@PAUMix_Chunk@@NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x419290,0x97
+OpR1a_AudioMixer::OpR1a_AudioMixer,0x419360,0x16a
+OpR1a_AudioMixer::clearFinished,0x4194d0,0x70
+OpR1a_AudioMixer::setVolume,0x419580,0x39
+OpR1a_AudioMixer::loadSound,0x4195c0,0xb2
+OpR1a_AudioMixer::playSound,0x419680,0x563
+OpR1a_AudioMixer::reserveChannels,0x419c70,0x1fe
+OpR1a_AudioMixer::groupChannels,0x419e70,0x376
+OpR1a_AudioMixer::setSoundVolume,0x419c10,0x3f
+OpR1a_Mouse::isOutsideMargin,0x41a780,0x74
+OpR1a_SystemClipboard::OpR1a_SystemClipboard,0x41ad60,0xd4

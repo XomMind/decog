@@ -1,0 +1,11 @@
+# op_u6: matched functions in 0x7ea000-0x88c000
+CAchievementsCategoryBar::CAchievementsCategoryBar,0x7ec840,0x112
+CAchievementsCategoryButton::CAchievementsCategoryButton,0x7ecdb0,0x118
+CAchievementsCategory::CAchievementsCategory,0x7ed020,0x487
+CAchievementsCategoryBar::render,0x7ec960,0x44b
+CMap::unknown807e60,0x807e60,0x47
+CMap::unknown807eb0,0x807eb0,0x83
+CMap::unknown807f70,0x807f70,0xa6
+CMap::unknown808290,0x808290,0x82
+CMap::unknown819d50,0x819d50,0xa4
+CMap::unknown8197f0,0x8197f0,0x4d

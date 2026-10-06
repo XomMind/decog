@@ -1,0 +1,14 @@
+# op_q4f: UI overrides + STL instantiations in 0x9934e0-0x9cf000
+??0?$basic_ofstream@DU?$char_traits@D@std@@@std@@QAE@XZ,0x9b1970,0xaf
+??0?$basic_ofstream@DU?$char_traits@D@std@@@std@@QAE@PBDHH@Z,0x9b1a20,0xe6
+??1?$basic_ofstream@DU?$char_traits@D@std@@@std@@UAE@XZ,0x9b1b10,0x6e
+?open@?$basic_ofstream@DU?$char_traits@D@std@@@std@@QAEXPBDHH@Z,0x9b1ba0,0x5b
+?close@?$basic_ofstream@DU?$char_traits@D@std@@@std@@QAEXXZ,0x9b1c30,0x31
+??0?$basic_ifstream@DU?$char_traits@D@std@@@std@@QAE@XZ,0x9b28c0,0xaf
+??0?$basic_ifstream@DU?$char_traits@D@std@@@std@@QAE@PBDHH@Z,0x9b2970,0xe6
+??1?$basic_ifstream@DU?$char_traits@D@std@@@std@@UAE@XZ,0x9b2a60,0x6e
+?is_open@?$basic_ifstream@DU?$char_traits@D@std@@@std@@QBE_NXZ,0x9b2ad0,0x16
+?open@?$basic_ifstream@DU?$char_traits@D@std@@@std@@QAEXPBDHH@Z,0x9b2af0,0x5b
+?close@?$basic_ifstream@DU?$char_traits@D@std@@@std@@QAEXXZ,0x9b2b50,0x31
+??0?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@1@@Z,0x9b2870,0x46
+??0?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@@Z,0x9b2840,0x27

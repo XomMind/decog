@@ -1,0 +1,16 @@
+# op_s8g: STL sort/heap/rotate/vector helper template instances (std::string and others), 0x9f9050-0xa00a60
+??$_Unguarded_partition@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P6A_NABV12@0@Z@std@@YA?AU?$pair@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV12@@0@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0P6A_NABV20@1@Z@Z,0x9f9050,0x2a2
+??$make_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0P6A_NABV10@1@Z@Z,0x9f9300,0x58
+??$distance@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YAHPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0@Z,0x9fd5f0,0x3c
+??$?0AAPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAPAV01@@?$pair@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV12@@std@@QAE@AAPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0@Z,0x9fddc0,0x32
+??$?0AAPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAH@?$pair@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@std@@QAE@AAPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@AAH@Z,0x9fddc0,0x32
+??$_Median@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00@Z,0x9fe030,0xde
+??$_Make_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0PAH0@Z,0x9fe110,0xc0
+??$_Sort_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0@Z,0x9fe1d0,0x35
+??$_Insertion_sort1@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00@Z,0x9fe210,0x143
+??$_Rotate@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00PAH0@Z,0x9fe4f0,0x120
+??$_Median@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00P6A_NABV10@1@Z@Z,0x9fedb0,0xf2
+??$_Make_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0P6A_NABV10@1@ZPAH0@Z,0x9feeb0,0xc4
+??$_Sort_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0P6A_NABV10@1@Z@Z,0x9fef80,0x39
+??$_Insertion_sort1@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P6A_NABV12@0@ZV12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0P6A_NABV10@1@Z0@Z,0x9fefc0,0x13f
+??$_Rotate@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00Urandom_access_iterator_tag@0@@Z,0xa007f0,0x33

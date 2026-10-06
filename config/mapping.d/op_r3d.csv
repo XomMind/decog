@@ -1,0 +1,7 @@
+# op_r3d: functions 0x690000-0x6a0000
+OpR3d_TargetList::unknown690650,0x690650,0x72
+OpR3d_TargetList::unknown6906d0,0x6906d0,0x78
+OpR3d_TargetList::unknown690750,0x690750,0xb9
+OpR3d_InventoryHold::OpR3d_InventoryHold,0x690810,0x121
+OpR3d_Expiry::set,0x690d40,0x5e
+OpR3d_Expiry::hasExpired,0x690da0,0x56

@@ -1,0 +1,7 @@
+Network::threadQuitting,0x449780,0xd0
+GM::endGame,0x78d4c0,0x1af
+GM::processSoundGroups,0x78dfe0,0x2fa
+CMap::updatePredictedExplosion,0x808320,0x1ee
+MessageLog::unserialize,0x511fb0,0x23e
+PlayerData::addPolymindSuspicion,0x77ee70,0x3bc
+GM::getSessionTimeTotal,0x470670,0x42b

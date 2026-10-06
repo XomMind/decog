@@ -1,0 +1,5 @@
+# op_x5_a: CRpglikeUpgrades::update etc. (0x879000-0x89d000), matched
+CRpglikeUpgrades::update,0x8798b0,0x6b2
+CScan::update,0x884460,0x851
+CPartWeaponHitChance::refresh,0x88e410,0x8dd
+?unknown8979b0@CParts@@QAEXVHItem@@_NH@Z,0x8979b0,0x925

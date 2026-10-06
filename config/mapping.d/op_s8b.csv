@@ -1,0 +1,15 @@
+# op_s8b: generic container/serialization helper instances 0x9d43b0-0x9d7980 (src/op/op_s8b*.cpp)
+?OpS8b_Fn9d43b0@@YA_NPAHIH@Z,0x9d43b0,0x38
+?OpS8b_Fn9d43f0@@YAHAAV?$vector@HV?$allocator@H@std@@@std@@HH@Z,0x9d43f0,0x43
+?OpS8b_Fn9d4500@@YAHAAV?$vector@HV?$allocator@H@std@@@std@@@Z,0x9d4500,0x5d
+?OpS8b_Fn9d4560@@YAXPAD0I@Z,0x9d4560,0x34
+?OpS8b_Fn9d4660@@YAHAAV?$vector@HV?$allocator@H@std@@@std@@H@Z,0x9d4660,0x44
+?OpS8b_Fn9d4f10@@YAHPAUXColor@@IU1@@Z,0x9d4f10,0x4f
+?OpS8b_Fn9d50c0@@YAHPAHI@Z,0x9d50c0,0x4c
+?OpS8b_Fn9d5080@@YA_NPAEI@Z,0x9d5080,0x37
+?OpS8b_Fn9d4d20@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@PAUOpY2_Rec4482c0@@@Z,0x9d4d20,0x49
+?OpS8b_Fn9d4ec0@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@PAH@Z,0x9d4ec0,0x4e
+?OpS8b_Fn9d4c70@@YAXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@PAHI@Z,0x9d4c70,0x4c
+?OpS8b_Fn9d4f60@@YAXAAV?$vector@PAUOpS8b_T9d4f60@@V?$allocator@PAUOpS8b_T9d4f60@@@std@@@std@@AAH@Z,0x9d4f60,0x82
+?OpS8b_Fn9d51d0@@YA_NAAV?$vector@HV?$allocator@H@std@@@std@@H@Z,0x9d51d0,0x74
+?OpS8b_Fn9d4cc0@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@UOpY2_Rec448270@@V?$allocator@UOpY2_Rec448270@@@std@@@2@@Z,0x9d4cc0,0x5f

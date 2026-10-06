@@ -1,0 +1,6 @@
+# op_v3d: functions in 0x78b8a0-0x7d6db0
+OpV3d_GM::unknown78c050,0x78c050,0x20c
+CGalleryInfoButton::input,0x7d6a90,0x191
+OpV3d_GM::unknown78d700,0x78d700,0x8d1
+?OpV3d_setLogMsgTimes@@YAXXZ,0x78f320,0x6ab
+?opU5_revealRandomMachine@@YAXAAV?$vector@PAUOpU5_MapRecord@@V?$allocator@PAUOpU5_MapRecord@@@std@@@std@@AAHAAV?$vector@HV?$allocator@H@std@@@2@AAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@2@@Z,0x794940,0xac

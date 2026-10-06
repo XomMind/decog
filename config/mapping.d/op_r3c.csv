@@ -1,0 +1,7 @@
+# op_r3c: 0x682000-0x690000 (Overmind-area helpers)
+OpR3c_Overmind::unknown6820b0,0x6820b0,0x51
+OpR3c_Overmind::unknown682110,0x682110,0xd5
+OpR3c_Overmind::unknown6821f0,0x6821f0,0x2d
+OpR3c_Overmind::unknown682220,0x682220,0x1ca
+OpR3c_Overmind::unknown6823f0,0x6823f0,0x2e
+OpR3c_Overmind::unknown682420,0x682420,0x34d

@@ -1,0 +1,20 @@
+# cc_r2_16: SoundMgr / EndObjB and small helper classes 0x454340-0x454a73 (src/game/cc_r2_16.cpp)
+SoundMgr::unknown454430,0x454430,0x85
+SoundMgr::unknown4544c0,0x4544c0,0x19
+SoundMgr::unknown4544e0,0x4544e0,0x13
+SoundMgr::unknown454500,0x454500,0x1c
+SoundMgr::updatePropMute,0x454520,0x1c
+SoundMgr::unknown454540,0x454540,0x15
+Unknown454560::unknown454560,0x454560,0x13
+Unknown454580::unknown454580,0x454580,0x1f
+LogColorEntry::LogColorEntry,0x4545a0,0x19
+LogColorEntry::read,0x4545c0,0x65
+Item454630::Item454630,0x454630,0xaf
+Item454630::~Item454630,0x4546e0,0x89
+EndObjB::unknown454770,0x454770,0x46
+EndObjB::~EndObjB,0x4548e0,0xa2
+EndObjB::unknown454990,0x454990,0x1d
+EndObjB::unknown4549b0,0x4549b0,0x11
+EndObjB::unknown4549d0,0x4549d0,0x39
+LogSizeEntry::LogSizeEntry,0x454a10,0x19
+LogSizeEntry::read,0x454a30,0x43

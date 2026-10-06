@@ -1,0 +1,8 @@
+# op_v3: matches in 0x6cb000-0x879000
+CSupporters::unknown7f3530,0x7f3530,0x252
+CSupporters::unknown7f37b0,0x7f37b0,0x32
+BS::unknown6e9480,0x6e9480,0xe1
+BS::unknown6ed450,0x6ed450,0xfb
+CSupporterCountButton::input,0x7f2130,0x70
+CDragDrop::close,0x7f3a70,0xd9
+CSupporterCountButton::mouseEnter,0x7f21a0,0x64

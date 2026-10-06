@@ -1,0 +1,6 @@
+# op_x5_c: CShellButton/CShell consoles etc, src/op/op_x5_c*.cpp
+CShellButton::unknown90b2e0,0x90b2e0,0x405
+CShellManual::unknown909c70,0x909c70,0x6e5
+OpX5C_Effect::unknown965c10,0x965c10,0x454
+CShell::open,0x90bc90,0x706
+CShell::unknown90f0a0,0x90f0a0,0x8e3

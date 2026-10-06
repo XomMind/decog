@@ -1,0 +1,20 @@
+# op_u8d: std template instances over XColor / game types in 0x9fa000-0xa044d0
+??$_Med3@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00@Z,0xa00ef0,0x7a
+??$_Adjust_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@HH$$QAV10@@Z,0xa00f70,0xdc
+??$_Adjust_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@HH$$QAV10@P6A_NABV10@2@Z@Z,0xa01530,0xde
+??$_Move_backward@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV12@@std@@YAPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@PAV10@00U_Nonscalar_ptr_iterator_tag@0@@Z,0xa02900,0x39
+??$_Pop_heap_0@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00@Z,0xa02850,0xa3
+??$_Pop_heap_0@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0P6A_NABV10@1@Z0@Z,0xa02bb0,0xa7
+??$_Push_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@HH$$QAV10@@Z,0xa027c0,0x8f
+??$_Push_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@HH$$QAV10@P6A_NABV10@2@Z@Z,0xa02b20,0x8d
+??$_Pop_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00$$QAV10@PAH@Z,0xa03500,0x44
+??$_Pop_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00$$QAV10@P6A_NABV10@2@ZPAH@Z,0xa03630,0x48
+??$_Median@PAUH4@@@std@@YAXPAUH4@@00@Z,0x9fdce0,0xd4
+??$_Adjust_heap@PAUH4@@HU1@@std@@YAXPAUH4@@HH$$QAU1@@Z,0xa00c70,0xcc
+??$_Pop_heap@PAUH4@@@std@@YAXPAUH4@@0@Z,0xa00d40,0x34
+??$_Med3@PAUH4@@@std@@YAXPAUH4@@00@Z,0xa00d80,0x74
+??$_Rotate@PAUH4@@@std@@YAXPAUH4@@00Urandom_access_iterator_tag@0@@Z,0xa010d0,0x33
+??$_Adjust_heap@PAHHHP6A_NHH@Z@std@@YAXPAHHH$$QAHP6A_NHH@Z@Z,0xa01110,0xd2
+??$_Pop_heap@PAUH4@@P6A_NU1@0@Z@std@@YAXPAUH4@@0P6A_NU1@1@Z@Z,0xa011f0,0x38
+??$_Med3@PAHP6A_NHH@Z@std@@YAXPAH00P6A_NHH@Z@Z,0xa01250,0x80
+??$_Med3@PAUH4@@P6A_NU1@0@Z@std@@YAXPAUH4@@00P6A_NU1@1@Z@Z,0xa012d0,0x80

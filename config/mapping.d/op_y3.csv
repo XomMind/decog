@@ -1,0 +1,10 @@
+# op_y3: matched functions in [0x4d0000,0x5c0000) (src/op/op_y3*.cpp)
+HttpsConnection::HttpsConnection,0x4f90d0,0xcb
+HttpsConnection::sendHttpsRequest,0x4f9710,0x3c9
+HttpsConnection::readResponse,0x4f9ae0,0x14c
+HttpsConnection::closeHandles,0x4f9c30,0x4b
+HttpsConnection::checkResponseHeader,0x4f9c80,0x2ce
+?fontSetChanged@@YAX_N@Z,0x4fd1d0,0x28e
+opY3_unknown4fd460,0x4fd460,0x19d
+opY3_getLocationName,0x4fd600,0x279
+opY3_makeFilename,0x4fd880,0x140

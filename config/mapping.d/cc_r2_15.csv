@@ -1,0 +1,25 @@
+# cc_r2_15: XCell/XConsole header-inline accessors (src/game/cc_r2_15.cpp, bodies in engine/xconsole.h)
+??9XCell@@QAE_NABU0@@Z,0x416eb0,0x8c
+?getFore@XCell@@QAEPAUXColor@@XZ,0x416f40,0x11
+?getBack@XCell@@QAEPAUXColor@@XZ,0x416f60,0x11
+?scale@XCell@@QAEXM@Z,0x416f80,0x31
+?desaturate@XCell@@QAEXM@Z,0x416fc0,0x47
+?colorize@XCell@@QAEXPAUXColor@@@Z,0x417010,0x13e
+?swapColors@XCell@@QAEXXZ,0x417150,0x4f
+?shiftHue@XCell@@QAEXH@Z,0x4171a0,0x2b
+?cycle@XCell@@QAEXH@Z,0x4171d0,0x2b
+?invert@XCell@@QAEXXZ,0x417200,0x21
+?applyFilters@XCell@@QAEXXZ,0x417230,0x12c
+?inBounds@XConsole@@QAE_NHH@Z,0x417360,0x64
+?inBounds@XConsole@@QAE_NABUPos@@@Z,0x4173d0,0x69
+?contains@XConsole@@QAE_NABUPos@@@Z,0x417440,0x32
+?getAbsPos@XConsole@@QAE?AUPos@@XZ,0x4174a0,0x1f
+?getMaxCoord@XConsole@@QAE?AUPos@@XZ,0x4174e0,0x36
+?isWide@XConsole@@QAE_NXZ,0x417520,0x19
+?getScaleX@XConsole@@QAEMXZ,0x417540,0x11
+?isUnscaled@XConsole@@QAE_NXZ,0x417560,0x42
+?hasSubconsoles@XConsole@@QAE_NXZ,0x4175b0,0x20
+?getSubconsoles@XConsole@@QAEPAV?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@std@@XZ,0x4175d0,0x11
+?isVisible@XConsole@@QAE_NXZ,0x417610,0x3f
+?getChar@XConsole@@QAEHHH@Z,0x417650,0x23
+?getFore@XConsole@@QAE?AUXColor@@HH@Z,0x417680,0x2f

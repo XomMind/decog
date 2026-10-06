@@ -1,0 +1,17 @@
+# cc_r2_19: small console/timer helper ctors and CScrapEngineContent (src/game/cc_r2_19.cpp)
+CScrapEngineContent::CScrapEngineContent,0x499a80,0x4e
+CScrapEngineContent::~CScrapEngineContent,0x499ad0,0x1c
+PanelChild::unknown499af0,0x499af0,0x2e
+??_GCScrapEngineContent@@UAEPAXI@Z,0x499b20,0x2d
+XBuffer::XBuffer,0x499b50,0x2e
+XTimer::XTimer,0x499b80,0x23
+XTimerC::XTimerC,0x499bf0,0x28
+XTimerD::XTimerD,0x499c20,0x31
+XTimerF::XTimerF,0x499ca0,0x41
+XBufferB::XBufferB,0x499cf0,0x31
+XTimerH::XTimerH,0x499d30,0x5b
+XTimer::unknown499d90,0x499d90,0x29
+XTimer::unknown499dc0,0x499dc0,0x37
+XTimerI::XTimerI,0x499e00,0x8f
+XTimerI::unknown499e90,0x499e90,0x2a
+XConsole::getLayer_44a7d0,0x44a7d0,0x11

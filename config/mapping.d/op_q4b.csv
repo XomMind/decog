@@ -1,0 +1,15 @@
+# op_q4b: CInfo/CInfoLine/CInfoCompare and neighbouring consoles in 0x8b3900-0x8fec50, Beta 17.1
+?input@CInfoLine@@UAE_NPAX@Z,0x8b3900,0x130
+?mouseEnter@CInfoLine@@UAE_NXZ,0x8b3a30,0x7a
+??0CInfo@@QAE@PAVXConsole@@_NH@Z,0x8b3ab0,0x2a0
+?unknown8b4010@CInfo@@QAEXXZ,0x8b4010,0x6c
+?unknown8b4990@CInfo@@QAEXVHProp@@0_N@Z,0x8b4990,0x1a7
+?update@CInfo@@UAEXXZ,0x8b4b40,0x3b4
+?close@CInfo@@UAEXXZ,0x8b4f00,0x17d
+?unknown8b5080@CInfo@@QAEXXZ,0x8b5080,0x16d
+??0CInfoCompare@@QAE@PAVXConsole@@@Z,0x8ec690,0x68
+?inputAscii@CInfoCompare@@UAEXHH@Z,0x8ec5e0,0xb0
+?unknown8ec700@CInfoCompare@@QAEX_NVHProp@@@Z,0x8ec700,0x175
+opq4b_hover8b4940,0x8b4940,0x48
+opq4b_click8b4080,0x8b4080,0x477
+opq4b_barWidth8b51f0,0x8b51f0,0x5f

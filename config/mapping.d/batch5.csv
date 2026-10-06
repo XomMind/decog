@@ -1,0 +1,5 @@
+# batch5 game methods (src/game/batch5.cpp). name,va,size
+EntityAI::setOperatorTerminal,0x5b3760,0x12d
+EntityAI::addEarlyExiter,0x5bd450,0x22c
+Entity::getAscii,0x5c7a10,0x207
+Item::setOverload,0x579940,0x334

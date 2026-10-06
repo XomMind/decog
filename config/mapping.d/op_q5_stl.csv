@@ -1,0 +1,26 @@
+# op_q5_stl: VS2010 std template instances over placeholder element types (OpQ5s_T<addr>)
+??$_Uninitialized_move@PAUOpQ5s_T9fb4b0@@PAU1@V?$allocator@UOpQ5s_T9fb4b0@@@std@@@std@@YAPAUOpQ5s_T9fb4b0@@PAU1@00AAV?$allocator@UOpQ5s_T9fb4b0@@@0@@Z,0x9f2470,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fb5a0@@PAU1@V?$allocator@UOpQ5s_T9fb5a0@@@std@@@std@@YAPAUOpQ5s_T9fb5a0@@PAU1@00AAV?$allocator@UOpQ5s_T9fb5a0@@@0@@Z,0x9f24f0,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fb690@@PAU1@V?$allocator@UOpQ5s_T9fb690@@@std@@@std@@YAPAUOpQ5s_T9fb690@@PAU1@00AAV?$allocator@UOpQ5s_T9fb690@@@0@@Z,0x9f25f0,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fb760@@PAU1@V?$allocator@UOpQ5s_T9fb760@@@std@@@std@@YAPAUOpQ5s_T9fb760@@PAU1@00AAV?$allocator@UOpQ5s_T9fb760@@@0@@Z,0x9f2670,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fb830@@PAU1@V?$allocator@UOpQ5s_T9fb830@@@std@@@std@@YAPAUOpQ5s_T9fb830@@PAU1@00AAV?$allocator@UOpQ5s_T9fb830@@@0@@Z,0x9f26c0,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fb900@@PAU1@V?$allocator@UOpQ5s_T9fb900@@@std@@@std@@YAPAUOpQ5s_T9fb900@@PAU1@00AAV?$allocator@UOpQ5s_T9fb900@@@0@@Z,0x9f2740,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fb9d0@@PAU1@V?$allocator@UOpQ5s_T9fb9d0@@@std@@@std@@YAPAUOpQ5s_T9fb9d0@@PAU1@00AAV?$allocator@UOpQ5s_T9fb9d0@@@0@@Z,0x9f2790,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fbaa0@@PAU1@V?$allocator@UOpQ5s_T9fbaa0@@@std@@@std@@YAPAUOpQ5s_T9fbaa0@@PAU1@00AAV?$allocator@UOpQ5s_T9fbaa0@@@0@@Z,0x9f27e0,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fbb90@@PAU1@V?$allocator@UOpQ5s_T9fbb90@@@std@@@std@@YAPAUOpQ5s_T9fbb90@@PAU1@00AAV?$allocator@UOpQ5s_T9fbb90@@@0@@Z,0x9f2830,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fbcc0@@PAU1@V?$allocator@UOpQ5s_T9fbcc0@@@std@@@std@@YAPAUOpQ5s_T9fbcc0@@PAU1@00AAV?$allocator@UOpQ5s_T9fbcc0@@@0@@Z,0x9f29d0,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fbd90@@PAU1@V?$allocator@UOpQ5s_T9fbd90@@@std@@@std@@YAPAUOpQ5s_T9fbd90@@PAU1@00AAV?$allocator@UOpQ5s_T9fbd90@@@0@@Z,0x9f2a80,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fbe60@@PAU1@V?$allocator@UOpQ5s_T9fbe60@@@std@@@std@@YAPAUOpQ5s_T9fbe60@@PAU1@00AAV?$allocator@UOpQ5s_T9fbe60@@@0@@Z,0x9f2bb0,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fbf30@@PAU1@V?$allocator@UOpQ5s_T9fbf30@@@std@@@std@@YAPAUOpQ5s_T9fbf30@@PAU1@00AAV?$allocator@UOpQ5s_T9fbf30@@@0@@Z,0x9f2d30,0x45
+??$_Uninitialized_move@PAUOpQ5s_T9fc000@@PAU1@V?$allocator@UOpQ5s_T9fc000@@@std@@@std@@YAPAUOpQ5s_T9fc000@@PAU1@00AAV?$allocator@UOpQ5s_T9fc000@@@0@@Z,0x9f2de0,0x45
+??$_Uninit_move@PAUOpQ5s_T9fb5a0@@PAU1@V?$allocator@UOpQ5s_T9fb5a0@@@std@@U1@@std@@YAPAUOpQ5s_T9fb5a0@@PAU1@00AAV?$allocator@UOpQ5s_T9fb5a0@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fb5a0,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fb690@@PAU1@V?$allocator@UOpQ5s_T9fb690@@@std@@U1@@std@@YAPAUOpQ5s_T9fb690@@PAU1@00AAV?$allocator@UOpQ5s_T9fb690@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fb690,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fb830@@PAU1@V?$allocator@UOpQ5s_T9fb830@@@std@@U1@@std@@YAPAUOpQ5s_T9fb830@@PAU1@00AAV?$allocator@UOpQ5s_T9fb830@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fb830,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fb900@@PAU1@V?$allocator@UOpQ5s_T9fb900@@@std@@U1@@std@@YAPAUOpQ5s_T9fb900@@PAU1@00AAV?$allocator@UOpQ5s_T9fb900@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fb900,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fb9d0@@PAU1@V?$allocator@UOpQ5s_T9fb9d0@@@std@@U1@@std@@YAPAUOpQ5s_T9fb9d0@@PAU1@00AAV?$allocator@UOpQ5s_T9fb9d0@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fb9d0,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fbaa0@@PAU1@V?$allocator@UOpQ5s_T9fbaa0@@@std@@U1@@std@@YAPAUOpQ5s_T9fbaa0@@PAU1@00AAV?$allocator@UOpQ5s_T9fbaa0@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fbaa0,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fbb90@@PAU1@V?$allocator@UOpQ5s_T9fbb90@@@std@@U1@@std@@YAPAUOpQ5s_T9fbb90@@PAU1@00AAV?$allocator@UOpQ5s_T9fbb90@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fbb90,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fbcc0@@PAU1@V?$allocator@UOpQ5s_T9fbcc0@@@std@@U1@@std@@YAPAUOpQ5s_T9fbcc0@@PAU1@00AAV?$allocator@UOpQ5s_T9fbcc0@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fbcc0,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fbe60@@PAU1@V?$allocator@UOpQ5s_T9fbe60@@@std@@U1@@std@@YAPAUOpQ5s_T9fbe60@@PAU1@00AAV?$allocator@UOpQ5s_T9fbe60@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fbe60,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fbf30@@PAU1@V?$allocator@UOpQ5s_T9fbf30@@@std@@U1@@std@@YAPAUOpQ5s_T9fbf30@@PAU1@00AAV?$allocator@UOpQ5s_T9fbf30@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fbf30,0xc2
+??$_Uninit_move@PAUOpQ5s_T9fc000@@PAU1@V?$allocator@UOpQ5s_T9fc000@@@std@@U1@@std@@YAPAUOpQ5s_T9fc000@@PAU1@00AAV?$allocator@UOpQ5s_T9fc000@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fc000,0xc2

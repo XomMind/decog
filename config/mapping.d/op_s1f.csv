@@ -1,0 +1,16 @@
+# op_s1f: 0x472000-0x4b2000
+??0OpR1h_StatSet@@QAE@XZ,0x472150,0x92
+??0OpR1h_StatSet@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x4721f0,0x82
+?get472440@OpR1h_StatSet@@QAEHI@Z,0x472440,0x96
+?write472280@OpR1h_StatSet@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x472280,0x30
+?reset4724e0@OpR1h_Stats@@QAEXXZ,0x4724e0,0x186
+??0OpR1h_Stats@@QAE@XZ,0x472670,0x8f
+??1OpR1h_Stats@@QAE@XZ,0x472700,0x77
+?write472780@OpR1h_Stats@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x472780,0xa2
+?load472830@OpR1h_Stats@@QAEXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x472830,0x19f
+??0OpR1h_EntityName@@QAE@VHEntity@@H@Z,0x48bcd0,0x3c
+??0OpR1h_PropName@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x48bd10,0x81
+?write@OpR1h_PropName@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x48bda0,0x45
+??0OpR1h_Lists@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x48bdf0,0xdc
+?take48bf50@OpR1h_EntityLists@@QAE_NVHEntity@@@Z,0x48bf50,0x7c
+?take48bfd0@OpR1h_EntityLists@@QAE_NVHEntity@@@Z,0x48bfd0,0x85

@@ -1,0 +1,11 @@
+# op_x4e: functions in 0x7f37f0-0x806d00
+CMap::unknown8062d0,0x8062d0,0x141
+??0CDragDrop@@QAE@ABUPos@@VHItem@@@Z,0x7f37f0,0x280
+?opX4e_createDragDrop_7f4560@@YAXVHItem@@@Z,0x7f4560,0x17b
+?unknown8069e0@CMap@@QAEXUPos@@_N@Z,0x8069e0,0x312
+?opX4e_toggleMapFont_7f46e0@@YAXXZ,0x7f46e0,0x1fd
+?trigger@CMap@@UAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z,0x8067f0,0x1e2
+?unknown806d00@CMap@@QAE_NAAV?$vector@UPos@@V?$allocator@UPos@@@std@@@std@@_N@Z,0x806d00,0x16e
+?unknown806420@CMap@@QAEHVHEntity@@PAVHItem@@PAH@Z,0x806420,0x3d0
+?unknown805de0@CMap@@QAE_NVHEntity@@_N@Z,0x805de0,0x4e5
+CMapModeLabel::unknown7f48e0,0x7f48e0,0x628

@@ -1,0 +1,18 @@
+# op_s4: functions in 0x691000-0x718000
+OpS4_A::unknown6997f0,0x6997f0,0xa8
+OpS4_Tally::unknown6998a0,0x6998a0,0xb5
+OpS4_Unit::unknown699e20,0x699e20,0x10b
+OpS4_Unit::unknown699960,0x699960,0xa0
+OpS4_Unit::unknown699c20,0x699c20,0x1fc
+OpS4_Unit::unknown69b8a0,0x69b8a0,0x101
+OpS4_Unit::unknown69b9b0,0x69b9b0,0xc2
+OpS4_Unit::unknown69ba80,0x69ba80,0x76
+OpS4_Xom::unknown69e450,0x69e450,0xd8
+OpS4_Xom::unknown69e530,0x69e530,0x14c
+OpS4_Xom::unknown69e680,0x69e680,0x7c
+OpS4_Xom::unknown69e900,0x69e900,0xa4
+OpS4_Xom::unknown69e9b0,0x69e9b0,0x67
+OpS4_Xom::unknown69ed90,0x69ed90,0x57
+OpS4_Xom::unknown69edf0,0x69edf0,0x3a
+OpS4_Xom::unknown69eba0,0x69eba0,0xe5
+OpS4_Xom::unknown69ecb0,0x69ecb0,0xdc

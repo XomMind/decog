@@ -1,0 +1,8 @@
+# op_x4a: functions in 0x69e700-0x6bf710 (OpS4_Xom ones live in src/op/op_s4_b.cpp)
+OpS4_Xom::unknown69ea20,0x69ea20,0x178
+OpY5_Builder::unknown69f580,0x69f580,0x283
+OpY5_Builder::unknown69f810,0x69f810,0x265
+OpY5_Builder::unknown69fa80,0x69fa80,0x1de
+OpY5_Builder::giveXomItems,0x6be2f0,0x32d
+OpY5_Builder::unknown69fc60,0x69fc60,0x480
+OpU4_Mode::unknown6beeb0,0x6beeb0,0x597

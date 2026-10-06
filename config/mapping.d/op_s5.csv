@@ -1,0 +1,10 @@
+# op_s5: matched functions in 0x718000-0x7ed000
+OpY5_World::findPlaceableNearWide,0x71c200,0xfd
+?opS5_addEntityAt@@YAXABUPoint@@PAV?$vector@VOpY5_HEntity@@V?$allocator@VOpY5_HEntity@@@std@@@std@@@Z,0x71c470,0x68
+?opS5_addPropAt@@YAXABUPoint@@PAV?$vector@VOpY5_HPropP@@V?$allocator@VOpY5_HPropP@@@std@@@std@@@Z,0x71c4e0,0x68
+OpY5_World::addEntitiesAround,0x71c550,0x171
+OpY5_World::addPropsAround,0x71c6d0,0x171
+OpY5_World::getMaxItemRange71c930,0x71c930,0xed
+OpY5_World::isEntityInRange71ca20,0x71ca20,0xe6
+OpY5_World::isEntityInGroupWithAI71cb10,0x71cb10,0xd5
+OpY5_World::pickRecordBelow71cbf0,0x71cbf0,0x75

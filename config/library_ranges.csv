@@ -1,0 +1,5 @@
+# lo,hi,name  -- address ranges of statically linked library code (excluded from game progress)
+# protobuf: functions referencing ..\protobuf-3.5.1\src\* __FILE__ strings span 0xA044D0-0xA9E900;
+# built as a separate /O2 libprotobuf.lib (not LTCG). Start boundary still approximate.
+0xa044d0,0xaa0000,protobuf-3.5.1
+0xaa0000,0xab0000,msvcrt static (CRT startup, _ftol2, thunks)

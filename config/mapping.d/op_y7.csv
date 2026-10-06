@@ -1,0 +1,21 @@
+# op_y7: consoles in 0x8a0000-0x9b0000, Beta 17.1
+OpY7_Parts::inputAscii8a0e50,0x8a0e50,0x20e
+OpY7_Parts::render8a1060,0x8a1060,0x538
+OpY7_InventoryItem::input8a1770,0x8a1770,0x1b8
+OpY7_Inventory::OpY7_Inventory,0x8a1930,0x20c
+OpY7_Inventory::update8a1be0,0x8a1be0,0x3a8
+opy7_sortItems8a2a40,0x8a2a40,0x292
+OpY7_Inventory::unknown8a4ec0,0x8a4ec0,0x4f3
+OpY7_Inventory::unknown8a54c0,0x8a54c0,0x1b1
+OpY7_Inventory::render8a6e10,0x8a6e10,0x4f3
+OpY7_SpecialCommand::input8b0150,0x8b0150,0x88
+OpY7_SpecialCommand::mouseEnter8b01e0,0x8b01e0,0x3e
+OpY7_SpecialCommand::mouseLeave8b0220,0x8b0220,0x57
+OpY7_SpecialCommands::update8b0280,0x8b0280,0x4f
+OpY7_SpecialCommands::open8b02d0,0x8b02d0,0x180
+OpY7_SpecialCommands::close8b0cc0,0x8b0cc0,0x1be
+OpY7_SpecialCommands::unknown8b0e80,0x8b0e80,0x147
+OpY7_SpecialCommands::input8b0fd0,0x8b0fd0,0xb3
+OpY7_SpecialCommands::inputAscii8b1090,0x8b1090,0x254
+OpY7_Analysis::input8b1cd0,0x8b1cd0,0xc3
+opy7_compareNames8b2b40,0x8b2b40,0xee

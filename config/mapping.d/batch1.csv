@@ -1,0 +1,7 @@
+# batch1 small game methods (src/game/batch1.cpp). name,va,size
+GameMetaData::getLoreCollectionPercent,0x46c830,0xf5
+GM::addItemAttachCount,0x778560,0x149
+BS::giveItem,0x6c52b0,0x148
+BS::placeItem,0x6c5480,0x17c
+UploadScoreData::serialize,0x471a50,0xd9
+GameMetaData::getGalleryCollectionPercent,0x46c700,0x130

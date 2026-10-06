@@ -1,0 +1,12 @@
+# name,va
+MTRand_int32::`vftable',0xc2ee04
+MTRand_open::`vftable',0xc2ee0c
+rng,0xd30908
+# Cave-in operands recovered from Cell eligibility and destabilization routines.
+originalTerrain,0xd378c0
+caveinEarthTerrain,0xcefb80
+TERRAIN_EARTH,0xcefb80
+caveinWallTerrain,0xcefba0
+TERRAIN_CAVE_WALL,0xcefba0
+caveinThirdTerrain,0xcefba4
+caveinInstabilityIncrease,0xb948d8

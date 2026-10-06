@@ -1,0 +1,15 @@
+# op_t4: 0x68e000-0x702000 (src/op/op_t4*.cpp)
+OpT4_Marker::OpT4_Marker,0x6c1440,0x18d
+OpT4_Marker::write,0x6c15d0,0xf1
+BS::unknown6c5400,0x6c5400,0x74
+OpQ3_Obj6c1a10::unknown6c1a10,0x6c1a10,0x76
+OpT4_Selector::unknown6c3a50,0x6c3a50,0x162
+OpT4_Selector::unknown6c4fd0,0x6c4fd0,0x1a2
+opt4_checkConditions,0x6c3240,0x473
+opt4_isAreaEmpty6c9f10,0x6c9f10,0x12e
+opt4_isAreaEmpty6ca040,0x6ca040,0x123
+opt4_isRingFree6cb8c0,0x6cb8c0,0x13a
+opt4_fillRing6cba00,0x6cba00,0x132
+opt4_setTerrain,0x6c9b40,0x112
+opt4_isEdgeClear6c9cb0,0x6c9cb0,0x258
+opt4_isLinePassable6cc1e0,0x6cc1e0,0xc8

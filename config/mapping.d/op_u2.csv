@@ -1,0 +1,14 @@
+# op_u2: assorted functions in 0x4c5000-0x5ba000
+OpU2_Player::unknown50d500,0x50d500,0x1c0
+OpU2_Player::unknown50d6c0,0x50d6c0,0x126
+OpU2_Engine::OpU2_Engine,0x50fa20,0x122
+OpU2_Engine::unknown50fc60,0x50fc60,0x123
+OpU2_Player2::unknown50d7f0,0x50d7f0,0x25c
+OpU2_Player3::unknown5036d0,0x5036d0,0x258
+OpU2_Player3::unknown503930,0x503930,0x1e4
+OpU2_Item::unknown5755f0,0x5755f0,0x260
+?opu2_fn51d5e0@@YAXVHProp@@V?$vector@HV?$allocator@H@std@@@std@@_N@Z,0x51d5e0,0x146
+?opu2_fn51d730@@YAXVHItem@@V?$vector@HV?$allocator@H@std@@@std@@_N@Z,0x51d730,0x146
+?opu2_fn51d880@@YAXVOpU2_HEnt@@VHProp@@VHItem@@PBUPos@@PAV?$vector@VHItem@@V?$allocator@VHItem@@@std@@@std@@@Z,0x51d880,0x1a4
+OpU2_Rule::unknown517290,0x517290,0xd6
+OpU2_Tracker::unknown5189b0,0x5189b0,0x174

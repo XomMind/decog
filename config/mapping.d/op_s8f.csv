@@ -1,0 +1,13 @@
+# op_s8f: STL/serialization template instances in 0x9ef460-0x9f9050
+??$_Construct@I@?$vector@IV?$allocator@I@std@@@std@@QAEXIIU_Int_iterator_tag@1@@Z,0x9ef460,0x34
+??$binary_search@V?$_Vector_iterator@V?$_Vector_val@UOpS8f_H4@@V?$allocator@UOpS8f_H4@@@std@@@std@@@std@@UOpS8f_H4@@@std@@YA_NV?$_Vector_iterator@V?$_Vector_val@UOpS8f_H4@@V?$allocator@UOpS8f_H4@@@std@@@std@@@0@0ABUOpS8f_H4@@@Z,0x9ef4a0,0x67
+??$lower_bound@V?$_Vector_iterator@V?$_Vector_val@UOpS8f_H4@@V?$allocator@UOpS8f_H4@@@std@@@std@@@std@@UOpS8f_H4@@@std@@YA?AV?$_Vector_iterator@V?$_Vector_val@UOpS8f_H4@@V?$allocator@UOpS8f_H4@@@std@@@std@@@0@V10@0ABUOpS8f_H4@@@Z,0x9ef510,0x4f
+??$_Lower_bound@PAUOpS8f_H4@@U1@H@std@@YAPAUOpS8f_H4@@PAU1@0ABU1@PAH@Z,0x9f8b40,0x8b
+??MOpS8f_H4@@QBE_NU0@@Z,0x9f5830,0x19
+??4OpS8f_S9f4e00@@QAEAAU0@ABU0@@Z,0x9f4e00,0x94
+??4OpS8f_S9f4ea0@@QAEAAU0@ABU0@@Z,0x9f4ea0,0x2e
+??4OpS8f_S9f4ed0@@QAEAAU0@ABU0@@Z,0x9f4ed0,0x7a
+??4OpS8f_S9f4f50@@QAEAAU0@ABU0@@Z,0x9f4f50,0x40
+??4OpS8f_S9f4f90@@QAEAAU0@ABU0@@Z,0x9f4f90,0x40
+??4OpS8f_S9f5000@@QAEAAU0@ABU0@@Z,0x9f5000,0x34
+??4OpS8f_S9f5040@@QAEAAU0@ABU0@@Z,0x9f5040,0x74

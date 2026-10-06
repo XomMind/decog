@@ -1,0 +1,6 @@
+# op_t8f: STL instances and helpers in 0x9fd000-0xa044d0
+??$_Replace@V?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@V?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0V?$istreambuf_iterator@DU?$char_traits@D@std@@@1@1Uinput_iterator_tag@1@@Z,0x9fd0c0,0x91
+??$?0V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@0@Z,0xa00a60,0x93
+??$?0V?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@V?$istreambuf_iterator@DU?$char_traits@D@std@@@1@0@Z,0xa00750,0x95
+??$_Construct@V?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXV?$istreambuf_iterator@DU?$char_traits@D@std@@@1@0Uinput_iterator_tag@1@@Z,0xa01e40,0xb6
+??$_Construct@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXV?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@0Uforward_iterator_tag@1@@Z,0xa02190,0xd1

@@ -1,0 +1,4 @@
+# cc_r1_04: window-proc hook + CRT/STL header inlines (time.inl, math.h float overloads, wmem*, char_traits<wchar_t>::length) (src/game/cc_r1_04.cpp)
+gameWndProc_401080,0x401080,0x40
+toggleWndProcHook_4010c0,0x4010c0,0x4e
+hookSdlWindow_401110,0x401110,0x33

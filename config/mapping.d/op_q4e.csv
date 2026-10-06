@@ -1,0 +1,27 @@
+# op_q4e: CMission/CEvolve/CMainUiButton/effects functions in 0x966070-0x9934e0 (src/op/op_q4e*.cpp)
+CMission::unknown987de0,0x987de0,0x48
+CMission::unknown987e30,0x987e30,0x70
+CMainUiButtonHolder::update,0x98a5c0,0x2c
+CFovEnemies::update,0x98ac00,0x2c
+CEvolveSlotButton::unknown98b210,0x98b210,0x89
+CEvolveSlotButton::mouseEnter,0x98b2a0,0x3f
+CEvolveSlotButton::input,0x98b2e0,0x54
+CMission::update,0x987190,0x784
+CMission::unknown987b10,0x987b10,0x2c4
+CMission::unknown987ea0,0x987ea0,0x121
+CMission::unknown987fd0,0x987fd0,0x293
+CMission::unknown988270,0x988270,0x7b5
+CMission::unknown988a30,0x988a30,0x9e
+CMission::unknown988ad0,0x988ad0,0x25f
+CMission::unknown988d30,0x988d30,0x44
+CMission::render,0x989c40,0xba
+CEvolveApply::update,0x98b3b0,0x119
+CEvolveConfirmButton::input,0x98b340,0x68
+CEvolve::unknown992dc0,0x992dc0,0x1d
+CEvolveMain::unknown98bda0,0x98bda0,0x1df
+CMainUiButton::input,0x98a120,0x15b
+??0CMainUiButtonHolder@@QAE@PAVXConsole@@HH@Z,0x98a280,0x11c
+CMainUiButtonHolder::unknown98a3a0,0x98a3a0,0x21c
+??0CFovEnemies@@QAE@PAVXConsole@@@Z,0x98ab50,0xa2
+CFovEnemies::unknown98ac30,0x98ac30,0x3c6
+CEvolveMain::render,0x98bf80,0x1af

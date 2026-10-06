@@ -1,0 +1,21 @@
+# op_s1d: 0x45b000-0x45e000
+?write@UnknownPart45c060@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x45bc00,0x1e8
+??0UnknownPart45c060@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x45bdf0,0x270
+??1UnknownPart45c060@@QAE@XZ,0x45c060,0xf8
+??1OpY1_ShuffleBag@@QAE@XZ,0x45c280,0x59
+?unknown45c160@UnknownPart45c060@@QAE_NHH@Z,0x45c160,0x5e
+?unknown45c1c0@UnknownPart45c060@@QAEPAUMapRecord@@H@Z,0x45c1c0,0x60
+?write@OpS1d_PropTriple@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x45c340,0x96
+??0OpS1d_PropTriple@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x45c3e0,0xb7
+?unknown45c650@Prop@@QAEHXZ,0x45c650,0xa6
+?unknown45c610@Prop@@QAE_NXZ,0x45c610,0x18
+?unknown45c700@Prop@@QAEHXZ,0x45c700,0x35
+?unknown45c740@Prop@@QAEHXZ,0x45c740,0x35
+?unknown45c780@Prop@@QAE?AUXColor@@XZ,0x45c780,0x1f
+?unknown45c7a0@Prop@@QAE_NXZ,0x45c7a0,0x3c
+?unknown45ddf0@Cell@@QAE_NXZ,0x45ddf0,0x4b
+?unknown45de40@Cell@@QAE_NXZ,0x45de40,0x24
+?unknown45dec0@Cell@@QAEX_N@Z,0x45dec0,0x33
+?unknown45df00@Cell@@QAEXVHEntity@@H@Z,0x45df00,0x43
+?unknown45df90@Cell@@QAEXPAUCellEffect@@@Z,0x45df90,0x1c
+?unknown45dfb0@Cell@@QAEXH@Z,0x45dfb0,0x62

@@ -1,0 +1,11 @@
+# op_b: functions in 0x440000-0x470000 (src/op/op_b*.cpp)
+OpB_Unk_4b98a0::unknown4455b0,0x4455b0,0xf7
+Config::colorFiltersToString,0x445e70,0x3e6
+OpB_updateFontScale_446320,0x446320,0x6b
+??0AsciiImage@@QAE@ABV0@@Z,0x446e50,0xca
+??4AsciiImage@@QAEAAV0@ABV0@@Z,0x446f20,0xc6
+AsciiImage::~AsciiImage,0x446ff0,0x1f
+OpB_translateRotated,0x446dd0,0x7c
+??0OpB_ImageRecord@@QAE@ABU0@@Z,0x448c40,0xbe
+??0OpB_ImageRecord@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x448d00,0xe0
+??4OpB_ImageRecord@@QAEXABU0@@Z,0x448de0,0x7f

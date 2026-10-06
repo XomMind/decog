@@ -1,0 +1,27 @@
+# op_v4c: 0x9c3000-0x9e0000 STL/misc instances
+?_Copy@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAEXII@Z,0x9c7fc0,0x186
+?_Inside@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAE_NPB_W@Z,0x9c8150,0x3e
+?OpV4c_Fn9d0690@@YAXPAHHH@Z,0x9d0690,0x3a
+?OpV4c_Fn9d06d0@@YAXPAHHH@Z,0x9d06d0,0x3a
+?OpV4c_Fn9d0ca0@@YAHPAHI@Z,0x9d0ca0,0x3f
+?OpV4c_Fn9d3f40@@YA_NPAHI@Z,0x9d3f40,0x36
+?OpV4c_Fn9d3b80@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@PAD@Z,0x9d3b80,0x4b
+?OpV4c_Fn9d3de0@@YAXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@PBDI@Z,0x9d3de0,0x49
+?OpV4c_getNeighbors@OpV4b_Dims@@QAEXPAUPoint@@PAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@@Z,0x9d24b0,0xa5
+?OpV4c_Fn9d0ce0@@YA_NAAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@UPoint@@@Z,0x9d0ce0,0x4d
+?OpV4c_Fn9d3020@@YA_NAAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@UPoint@@@Z,0x9d3020,0x3b
+?OpV4c_Fn9d5460@@YAXAAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@IUPoint@@@Z,0x9d5460,0x59
+?OpV4c_fillRect@OpV4c_IntGrid@@QAEXPBUPoint@@0H@Z,0x9cf6c0,0x84
+??0OpV4c_View@@QAE@HHHHHHH_N@Z,0x9cfc50,0xb6
+?get@OpV4c_View@@QAEPAHPAUPoint@@@Z,0x9cfd90,0x90
+?get@OpV4c_View@@QAEPAHHH@Z,0x9cfe20,0x86
+?getConst@OpV4c_View@@QAEPBHPAUPoint@@@Z,0x9cfeb0,0x84
+??4OpV4c_View@@QAEAAV0@ABV0@@Z,0x9cff40,0x74
+?resizeView@OpV4c_View@@QAEXHHHH_N@Z,0x9d0050,0x54
+?pad@OpV4c_View@@QAEXHHHH@Z,0x9d00b0,0x8b
+?OpV4c_expand@OpS7_CellGrid@@QAEXUXCell@@HHHH@Z,0x9ce1e0,0x25a
+??$OpV4c_shuffle@UPoint@@@@YAXAAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@@Z,0x9d7350,0x35
+??$OpV4c_shuffle@PAUOpV4c_T9d9fc0@@@@YAXAAV?$vector@PAUOpV4c_T9d9fc0@@V?$allocator@PAUOpV4c_T9d9fc0@@@std@@@std@@@Z,0x9d9fc0,0x35
+?OpV4c_Fn9d7670@@YA_NABV?$vector@_NV?$allocator@_N@std@@@std@@_N@Z,0x9d7670,0x46
+?OpV4c_Fn9da310@@YAXAAV?$vector@PAVMapRecord@@V?$allocator@PAVMapRecord@@@std@@@std@@PAVMapRecord@@AAV?$vector@HV?$allocator@H@std@@@2@@Z,0x9da310,0x48
+?OpV4c_Fn9da8f0@@YAXAAV?$vector@PAVMapRecord@@V?$allocator@PAVMapRecord@@@std@@@std@@AAV?$vector@HV?$allocator@H@std@@@2@@Z,0x9da8f0,0x41

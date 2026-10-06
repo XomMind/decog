@@ -1,0 +1,7 @@
+# batch8 (src/game/batch8.cpp). name,va,size
+EntityAI::willDie,0x5b5b60,0x3d7
+EntityAI::setFollowEntity,0x5b2f80,0x4a4
+EntityAI::findPathToGoal,0x5b8d20,0x4b6
+Prop::disableMachine,0x65ed00,0x461
+Item::setActive,0x5791a0,0x410
+Item::setBroken,0x5795b0,0x205

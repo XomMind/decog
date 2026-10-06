@@ -1,0 +1,11 @@
+# op_s3_d: matched functions in 0x667000-0x671000 (excluding op_s3 done range)
+Cell::unknown66ad90,0x66ad90,0xd3
+Cell::unknown66b170,0x66b170,0x4b
+Cell::unknown66b660,0x66b660,0x2d
+Cell::unknown66b690,0x66b690,0x64
+Cell::unknown66b700,0x66b700,0x3a
+Cell::unknown66b740,0x66b740,0x3d
+Cell::unknown670f50,0x670f50,0x3c
+Cell::unknown670f90,0x670f90,0x56
+OpS3d_Unk670ff0::OpS3d_Unk670ff0,0x670ff0,0xb9
+Cell::unknown66a050,0x66a050,0x5dc

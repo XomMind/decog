@@ -1,0 +1,21 @@
+# op_s8d: STL / serialization template instances 0x9dc8a0-0x9ebbe0
+??$OpS8d_readStructs@UOpS8d_Pair16@@@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@UOpS8d_Pair16@@V?$allocator@UOpS8d_Pair16@@@std@@@1@@Z,0x9dc8a0,0x53
+??$OpS8d_readPointers@UOpQ5_T9ee9a0@@@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@PAUOpQ5_T9ee9a0@@V?$allocator@PAUOpQ5_T9ee9a0@@@std@@@1@@Z,0x9dc900,0x48
+??$OpS8d_readPointers@UOpQ5_T9ef000@@@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@PAUOpQ5_T9ef000@@V?$allocator@PAUOpQ5_T9ef000@@@std@@@1@@Z,0x9e0e00,0x48
+?OpS8d_readFloats@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@MV?$allocator@M@std@@@2@@Z,0x9deb80,0x49
+?OpS8d_popRandom@@YAHAAV?$vector@HV?$allocator@H@std@@@std@@@Z,0x9de500,0x5d
+?OpS8d_maxValue@@YAHPAHI@Z,0x9de560,0x52
+?OpS8d_countNonNull@@YAHAAV?$vector@PAUOpS8d_Rec10@@V?$allocator@PAUOpS8d_Rec10@@@std@@@std@@@Z,0x9de8f0,0x4f
+?OpS8d_findName18@@YAHAAV?$vector@PAUOpS8d_Rec18@@V?$allocator@PAUOpS8d_Rec18@@@std@@@std@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,0x9e2020,0x56
+?OpS8d_findNameNoCase8@@YAHAAV?$vector@PAUOpS8d_Rec8@@V?$allocator@PAUOpS8d_Rec8@@@std@@@std@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,0x9e2830,0x56
+?OpS8d_findNameNoCase4@@YAHAAV?$vector@PAUOpS8d_Rec4@@V?$allocator@PAUOpS8d_Rec4@@@std@@@std@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,0x9e2890,0x56
+?OpS8d_containsInRange@@YA_NAAV?$vector@PAUOpS8d_Rec10@@V?$allocator@PAUOpS8d_Rec10@@@std@@@std@@PAUOpS8d_Rec10@@II@Z,0x9e28f0,0x3c
+?OpS8d_findNonZero@@YAHPAEI@Z,0x9e2930,0x39
+?OpS8d_average@@YAMAAV?$vector@MV?$allocator@M@std@@@std@@@Z,0x9e27b0,0x7f
+?OpS8d_reverseElements@@YAXAAV?$vector@UOpQ5_U9da1f0@@V?$allocator@UOpQ5_U9da1f0@@@std@@@std@@@Z,0x9de100,0x54
+?OpS8d_findName1ac@@YAHAAV?$vector@PAUOpS8d_Rec1ac@@V?$allocator@PAUOpS8d_Rec1ac@@@std@@@std@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,0x9e3200,0x58
+?OpS8d_appendColors@@YAXAAV?$vector@UOpS8d_Color3@@V?$allocator@UOpS8d_Color3@@@std@@@std@@PAUOpS8d_Color3@@I@Z,0x9e32a0,0x36
+?OpS8d_appendIndices@@YAXAAV?$vector@HV?$allocator@H@std@@@std@@0@Z,0x9e3380,0x35
+?OpS8d_appendInts@@YAXAAV?$vector@HV?$allocator@H@std@@@std@@PAHI@Z,0x9e33c0,0x36
+?OpS8d_anyNegative@@YA_NPAHI@Z,0x9e3450,0x36
+??$reverse@V?$_Vector_iterator@V?$_Vector_val@HV?$allocator@H@std@@@std@@@std@@@std@@YAXV?$_Vector_iterator@V?$_Vector_val@HV?$allocator@H@std@@@std@@@0@0@Z,0x9e3330,0x44

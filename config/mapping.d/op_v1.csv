@@ -1,0 +1,13 @@
+# op_v1: misc functions 0x409000-0x5b7000
+OpV1_Condition::compareInt,0x455e00,0x13c
+OpV1_Condition::compareString,0x455f40,0x188
+OpV1_Suspicion::getRequiredWidth,0x4a1840,0xdc
+OpV1_Location::getName,0x46ca80,0x10c
+OpV1_GameData::getEntryIterator,0x46f5b0,0x112
+OpV1_GameData::getEntryText,0x46f6d0,0x29
+OpV1_GameData::setEntryText,0x46f700,0xdb
+OpV1_GameData::addToEntry,0x46f7e0,0xaf
+OpV1_GameData::generateID,0x46f890,0x159
+OpV1_collectNodes,0x46ff70,0xd2
+opv1_initColorSlots_434440,0x434440,0x35a
+OpV1_Cell::blendBack,0x428120,0x1c0

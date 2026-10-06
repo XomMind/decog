@@ -1,0 +1,4 @@
+# name,va,size  -- runtime/library code we link against rather than reconstruct.
+# Used only to resolve call targets by name; never verified.
+time,0x401060,0x12
+_ftol2_sse,0xaa1510,0xab

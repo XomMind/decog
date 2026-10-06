@@ -1,0 +1,5 @@
+# op_r3b: Cell methods etc. in 0x670000-0x682000
+Cell::unknown670360,0x670360,0x98
+Cell::unknown670400,0x670400,0x28b
+Cell::unknown670690,0x670690,0x3b
+Cell::unknown6706d0,0x6706d0,0x450

@@ -1,0 +1,10 @@
+# op_q4d: console methods in 0x942c00-0x966070 (CRobotManual/CRobotTarget/CRobot/CType/CTitle/CIntro/...), src/op/op_q4d*.cpp
+CRobotManual::~CRobotManual,0x943ef0,0x7a
+opQ4d_recallHistory,0x943a90,0xd5
+CRobotManual::input,0x944240,0x12e
+??0XEvent@@QAE@ABU0@@Z,0x944370,0x2c
+CRobotManual::updateMatches_943f70,0x943f70,0x2c2
+CRobotTarget::input,0x945040,0xab
+CRobotManual::render,0x9443a0,0x50c
+CRobotTarget::trigger,0x9448b0,0x790
+OpQ4d_unknown942c00,0x942c00,0x134

@@ -1,0 +1,14 @@
+# op_t3: functions in 0x5dc000-0x68e000 (src/op/op_t3*.cpp)
+OpT3_Box::unknown665a70,0x665a70,0x98
+OpT3_Prop::unknown665d10,0x665d10,0x28
+OpT3_Prop::unknown665d40,0x665d40,0x2b
+?opT3_f6853a0@@YAHH@Z,0x6853a0,0x110
+?opT3_f6854b0@@YAXAAV?$vector@HV?$allocator@H@std@@@std@@H@Z,0x6854b0,0x2e
+OpT3_Rec65cf50::unknown65cf50,0x65cf50,0x2a
+OpS3e_TurnQueue::unknown672700,0x672700,0xb5
+OpS3e_TurnQueue::unknown6727c0,0x6727c0,0x3b
+OpS3e_TurnQueue::unknown672800,0x672800,0xbc
+OpS3e_TurnQueue::unknown672980,0x672980,0x9d
+OpS3e_TurnQueue::unknown672a20,0x672a20,0xa6
+OpS3e_TurnQueue::unknown672ad0,0x672ad0,0xa6
+OpS3e_TurnQueue::unknown672b80,0x672b80,0xb8

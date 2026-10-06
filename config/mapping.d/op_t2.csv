@@ -1,0 +1,19 @@
+# op_t2: matches in 0x4c7000-0x5dc000 (incl. adopted op_s2_ai.cpp)
+OpS2_AiA::getSpeed,0x581530,0x47
+OpS2_AiB::unknown5814f0,0x5814f0,0x3d
+OpS2_AiC::atTarget,0x581580,0x52
+OpS2_AiD::unknown5810e0,0x5810e0,0x53
+OpS2_AiE::unknown5823b0,0x5823b0,0x44
+OpS2_AiF::unknown580ba0,0x580ba0,0x6f
+OpS2_AiG::anyXomCandidate,0x580c10,0x61
+OpS2_AiG::anySmallGroup,0x580c80,0x71
+OpS2_AiG::anyHostileXom,0x580d00,0xc8
+OpS2_AiG::unknown580dd0,0x580dd0,0xec
+OpS2_Spotter::isSpotterOfThree,0x57ef20,0x73
+??1OpT2_Rec4ccdc0@@QAE@XZ,0x4ccdc0,0x74
+OpT2_Inventory::unknown51ca20,0x51ca20,0x71
+?opT2_unknown5714a0@@YA_NH@Z,0x5714a0,0x78
+?opT2_playEffectPath_55ca70@@YAXHAAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@PAUPoint@@@Z,0x55ca70,0x94
+OpT2_Item::unknown575850,0x575850,0x91
+opT2_playSoundNearest_55cc00,0x55cc00,0xef
+OpR2c_ItemRec::unknown55e9c0,0x55e9c0,0x154

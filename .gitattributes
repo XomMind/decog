@@ -1,0 +1,2 @@
+# Store every file byte-exact: no CRLF/LF normalization (matching build is byte-sensitive)
+* -text

@@ -1,0 +1,9 @@
+# op_s1a: functions in 0x409000-0x422000
+?OpS_traceSubcellLine@@YA_NHHHHAAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@AAV?$vector@HV?$allocator@H@std@@@2@H@Z,0x4104f0,0x1d8
+?addNode@OpS_Graph@@QAEIXZ,0x416250,0x8f
+?pushFrame@OpS_Graph@@QAEXXZ,0x416570,0xc7
+?pushFrame@OpS_Graph@@QAEXHHH_N@Z,0x416790,0x119
+?setMarked@OpS_Graph@@QAEXI_N@Z,0x4162e0,0x59
+?clearMarked@OpS_Graph@@QAEX_N@Z,0x416340,0x44
+??0OpS_Frame@@QAE@ABV?$vector@_NV?$allocator@_N@std@@@std@@_NHHHHHH@Z,0x416000,0x5b
+?popFrame@OpS_Graph@@QAEXXZ,0x416640,0xcf

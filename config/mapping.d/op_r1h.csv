@@ -1,0 +1,14 @@
+# op_r1h: 0x4729d0-0x490000
+?add4729d0@OpR1h_Stats@@QAE_NIHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z,0x4729d0,0x1b1
+?add472b90@OpR1h_Stats@@QAEXIH@Z,0x472b90,0xd1
+?sort472cc0@OpR1h_Sorter@@QAEXAAV?$vector@UOpQ5_U9e2ce0@@V?$allocator@UOpQ5_U9e2ce0@@@std@@@std@@@Z,0x472cc0,0xe7
+?update472db0@OpR1h_Stats@@QAEXXZ,0x472db0,0xd5
+??1OpR1h_Large@@QAE@XZ,0x4835b0,0x4e0
+??1OpR1h_Sub@@QAE@XZ,0x483be0,0xbb
+??1OpR1h_Small@@QAE@XZ,0x483ca0,0x86
+??0OpR1h_Large@@QAE@XZ,0x4831f0,0x3b7
+??0OpR1h_Sub@@QAE@XZ,0x483b40,0x9b
+??0OpR1h_Small@@QAE@XZ,0x483ac0,0x45
+??0OpR1h_TurnRecord@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x48b610,0xab
+?write@OpR1h_TurnRecord@@QAEXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@@Z,0x48b6c0,0x56
+??0OpR1h_TurnRecord@@QAE@XZ,0x48b510,0xf9

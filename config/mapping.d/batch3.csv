@@ -1,0 +1,6 @@
+# batch3 (src/game/batch3.cpp). name,va,size
+CTitle::trigger,0x95ccc0,0xdc
+CGalleryText::trigger,0x7d6c80,0x130
+CLogMsgs::renewLastMessage,0x48e5b0,0x137
+CEvolveSequencing::trigger,0x4b4480,0x26b
+CCommands::setAdvancedCommandsPage,0x7d1960,0x35c

@@ -1,0 +1,7 @@
+# op_v3g: CMap functions 0x80fa60-0x825e00
+?OpV3g_moveBySize@@YAXAAV?$vector@VHEntity@@V?$allocator@VHEntity@@@std@@@std@@0@Z,0x810180,0xeb
+CMap::unknown814540,0x814540,0xa7
+CMap::unknown819460,0x819460,0x92
+CMap::unknown819500,0x819500,0x92
+CMap::unknown8195a0,0x8195a0,0x32
+CMap::unknown819610,0x819610,0xad

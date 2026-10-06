@@ -1,0 +1,5 @@
+# Object order for the LTCG link (one glob per line, relative to repo root; files not listed
+# are appended in sorted order). Order matters under /LTCG: the back end compiles in link order
+# and infers "callee can't throw" from what it has already compiled, which changes EH state
+# numbering. Example: scoresheet.pb.cc must come first or 28 of its destructors stop matching.
+src/web.cpp

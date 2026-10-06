@@ -1,0 +1,12 @@
+# op_u4: matches in [0x68d000,0x700000)
+OpU4_Dialog::unknown6df000,0x6df000,0xa3
+OpU4_Mode::unknown6be920,0x6be920,0xaf
+OpU4_Mode::unknown6be810,0x6be810,0x107
+OpU4_Obj6bed40::unknown6bed40,0x6bed40,0x168
+OpU4_Spawn::OpU4_Spawn,0x6bec80,0xbf
+opu4_floodFill,0x6cccb0,0x140
+OpU4_Obj6ed550::unknown6ed550,0x6ed550,0x107
+opu4_unknown6ccdf0,0x6ccdf0,0x163
+opu4_unknown6ccf60,0x6ccf60,0x1a9
+BS::unknown6c6450,0x6c6450,0x142
+OpU4_Obj699f30::unknown699f30,0x699f30,0x170

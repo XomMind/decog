@@ -1,0 +1,15 @@
+# op_u1: misc functions 0x409000-0x4c5000
+OpU1_Unk416bf0::~OpU1_Unk416bf0,0x416bf0,0xa1
+OpU1_Unk418e60::~OpU1_Unk418e60,0x418e60,0xe5
+OpU1_Point::read,0x40a330,0x32
+OpU1_Point::write,0x40a370,0x32
+OpU1_Console::getPixelRect,0x4286b0,0x51
+OpU1_Cell::setFont,0x4280e0,0x3b
+OpU1_Unk426b90::clearGrid,0x426b90,0x47
+OpU1_FontInfo::~OpU1_FontInfo,0x425ae0,0x68
+?opU1_readAll@@YAXPAVifstream@PhysFScpp@@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x409600,0x4e
+?opU1_extractParens@@YA_NAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@0@Z,0x436d80,0xe1
+OpU1_Rect::read,0x434340,0x59
+?opU1_anyAreaContains@@YA_NAAV?$vector@VArea@@V?$allocator@VArea@@@std@@@std@@ABUPoint@@@Z,0x436d30,0x4d
+?opU1_checkFontSetFits@@YA_NHHHPA_N@Z,0x42f530,0xa2
+OpU1_Console::unknown429f10,0x429f10,0xcc

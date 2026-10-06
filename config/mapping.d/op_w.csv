@@ -1,0 +1,2 @@
+# op_w: inventory/partswap/search UI consoles 0x8a7370-0x8b0000 (src/op/op_w*.cpp)
+OpW_CPartswapListPart::input,0x8a7370,0x5a

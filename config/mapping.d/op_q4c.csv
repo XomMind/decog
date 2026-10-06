@@ -1,0 +1,14 @@
+# op_q4c: CCodes/CShell/CHack consoles in 0x8fec50-0x942c00, Beta 17.1
+opq4c_scrollShell8fec50,0x8fec50,0x288
+opq4c_scrollType8ff120,0x8ff120,0x178
+CCodesCode::CCodesCode,0x8ff2a0,0x211
+opq4c_createCodes8ff5e0,0x8ff5e0,0x2c0
+CCodes::CCodes,0x8ff8b0,0x108
+CCodes::open,0x8ff9c0,0x51
+CCodes::close,0x8ffa20,0x32
+CCodes::input8ffa60,0x8ffa60,0x6e
+CCodes::inputAscii8ffad0,0x8ffad0,0xbb
+CCodes::closeCodes900260,0x900260,0xdd
+CCodesCode::input8ff4c0,0x8ff4c0,0x112
+CCodes::trigger,0x8ffb90,0x550
+CCodes::unknown9000e0,0x9000e0,0x171
