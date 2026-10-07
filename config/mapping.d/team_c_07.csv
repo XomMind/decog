@@ -1,0 +1,23 @@
+# team_c_07: singleton pool accessors (unregister / getter / handle lookup) (src/game/team_c_07.cpp)
+OpC_RegBase::unregister224,0x9b7130,0x15
+OpC_RegBase::unregister228,0x9b7210,0x15
+OpC_RegBase::unregister22c,0x9b72d0,0x15
+OpC_RegBase::unregister230,0x9b7330,0x15
+OpC_RegBase::unregister234,0x9b7390,0x15
+OpC_RegBase::unregister238,0x9b8250,0x15
+OpC_RegBase::unregister23c,0x9b82b0,0x15
+OpC_RegBase::unregister240,0x9b8310,0x15
+OpC_getPool224,0x9bfdb0,0xa
+OpC_getPool22c,0x9bfe80,0xa
+OpC_getPool230,0x9bfe90,0xa
+OpC_getPool234,0x9bfea0,0xa
+OpC_getPool238,0x9c07d0,0xa
+OpC_getPool23c,0x9c07e0,0xa
+OpC_getPool240,0x9c07f0,0xa
+OpC_Handle::get224,0x9b65b0,0x1d
+OpC_Handle::get22c,0x9b64f0,0x1d
+OpC_Handle::get230,0x9b7250,0x1d
+OpC_Handle::get234,0x9b73b0,0x1d
+OpC_Handle::get238,0x9b64d0,0x1d
+OpC_Handle::get23c,0x9b7910,0x1d
+OpC_Handle::get240,0x9b7cd0,0x1d

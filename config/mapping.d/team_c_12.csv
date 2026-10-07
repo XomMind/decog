@@ -1,0 +1,14 @@
+# team_c_12: std::iter_swap / vector iterator difference / _Tidy / max_size instances, deleteVector (src/game/team_c_12.cpp)
+??$iter_swap@PAUOpC_Sw16@@PAU1@@std@@YAXPAUOpC_Sw16@@0@Z,0x9fd570,0x15
+??$iter_swap@PAUOpC_SwPt@@PAU1@@std@@YAXPAUOpC_SwPt@@0@Z,0x9fd9c0,0x15
+??$iter_swap@PAUOpC_Sw12@@PAU1@@std@@YAXPAUOpC_Sw12@@0@Z,0xa00b00,0x15
+??$iter_swap@PAUOpC_Sw16b@@PAU1@@std@@YAXPAUOpC_Sw16b@@0@Z,0xa034a0,0x15
+??$iter_swap@PAUOpC_Sw4@@PAU1@@std@@YAXPAUOpC_Sw4@@0@Z,0xa03550,0x15
+??$iter_swap@PAUOpC_SwV@@PAU1@@std@@YAXPAUOpC_SwV@@0@Z,0xa035c0,0x15
+??$iter_swap@PAV?$vector@DV?$allocator@D@std@@@std@@PAV12@@std@@YAXPAV?$vector@DV?$allocator@D@std@@@0@0@Z,0xa03680,0x15
+??G?$_Vector_iterator@V?$_Vector_val@UOpC_It8@@V?$allocator@UOpC_It8@@@std@@@std@@@std@@QBEHABV?$_Vector_const_iterator@V?$_Vector_val@UOpC_It8@@V?$allocator@UOpC_It8@@@std@@@std@@@1@@Z,0xa00110,0x19
+??G?$_Vector_iterator@V?$_Vector_val@UOpC_It4@@V?$allocator@UOpC_It4@@@std@@@std@@@std@@QBEHABV?$_Vector_const_iterator@V?$_Vector_val@UOpC_It4@@V?$allocator@UOpC_It4@@@std@@@std@@@1@@Z,0xa01dc0,0x19
+?_Tidy@?$vector@UOpC_B1@@V?$allocator@UOpC_B1@@@std@@@std@@IAEXXZ,0x9bd5d0,0x6b
+?_Tidy@?$vector@UOpC_B3@@V?$allocator@UOpC_B3@@@std@@@std@@IAEXXZ,0x9be310,0x75
+?max_size@?$basic_string@GU?$char_traits@G@std@@V?$allocator@G@2@@std@@QBEIXZ,0x9c7f80,0x36
+??$OpC_deleteVector@UOpC_VObj@@@@YAXAAV?$vector@PAUOpC_VObj@@V?$allocator@PAUOpC_VObj@@@std@@@std@@@Z,0x9cead0,0x19

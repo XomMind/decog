@@ -1,0 +1,6 @@
+# team_b_06: game-logic helpers, batch 4 (src/game/team_b_06.cpp)
+EntityAI::getFollowers580a90,0x580a90,0x10d
+TeamB_Squad673630::collectFollowers673630,0x673630,0x142
+TeamB_681a90::filter681a90,0x681a90,0xda
+?teamb_findFreeRun86f8a0@@YAHHHHAAV?$vector@HV?$allocator@H@std@@@std@@_N@Z,0x86f8a0,0x117
+TeamB_Message::getText514060,0x514060,0x142

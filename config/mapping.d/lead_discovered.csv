@@ -504,7 +504,6 @@
 ?destroy@?$allocator@H@std@@QAEXPAH@Z,0x9e7f20,0x19
 ?construct@?$allocator@UPos@@@std@@QAEXPAUPos@@ABU3@@Z,0x9be6c0,0x1d
 ??$_Construct@UPos@@ABU1@@std@@YAXPAUPos@@ABU1@@Z,0xa01b80,0x4e
-?ceil@@YAMM@Z,0x401250,0x14
 ??_EXConsole@@UAEPAXI@Z,0x9bad50,0x2d
 ??_GXConsole@@UAEPAXI@Z,0x9bad50,0x2d
 ??A?$vector@UFontSetInfo@REX@@V?$allocator@UFontSetInfo@REX@@@std@@@std@@QAEAAUFontSetInfo@REX@@I@Z,0x9b7040,0x18
@@ -1333,7 +1332,7 @@
 ??__Eenum_display_name@Protobuf@@YAXXZ,0xb5bca0,0x19
 ??__Eenum_display_abbreviation@Protobuf@@YAXXZ,0xb5bcf0,0x19
 ??__Eunknown_cfd44c@@YAXXZ,0xb53a90,0x1c
-??__EoriginalTerrain@@YAXXZ,0xb23d30,0x1c
+??__EoriginalTerrain@@YAXXZ,0xb53ab0,0x1c
 ??__Eunknown_cf3a00@@YAXXZ,0xb53ad0,0x1c
 ??__Eunknown_cfc1a4@@YAXXZ,0xb53af0,0x1c
 ??__Eunknown_cf0fa8@@YAXXZ,0xb53b30,0x1c

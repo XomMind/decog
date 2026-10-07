@@ -1,0 +1,7 @@
+# team_b_07: game-logic helpers, batch 5 (src/game/team_b_07.cpp)
+PlayerData::unknown77ed10,0x77ed10,0x15e
+?teamb_name8f8820@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z,0x8f8820,0x108
+Party::Party,0x673310,0x16a
+?teamb_findInventoryItem8f8d30@@YA?AVHItem@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x8f8d30,0x15c
+TeamB_7787b0::getName7787b0,0x7787b0,0x179
+CMap::unknown8212e0,0x8212e0,0x168

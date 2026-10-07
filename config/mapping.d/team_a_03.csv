@@ -1,0 +1,13 @@
+# team_a_03: tiny helpers, stream inlines and vbase dtors in 0x403000-0x406500 (src/game/team_a_03.cpp)
+??$_Fgetc@D@std@@YA_NAADPAU_iobuf@@@Z,0x4034b0,0x2e
+??$_Fputc@D@std@@YA_NDPAU_iobuf@@@Z,0x4034e0,0x21
+??$_Ungetc@D@std@@YA_NABDPAU_iobuf@@@Z,0x403510,0x23
+Handle404af0::isValid,0x404af0,0x15
+REX404b70::setUnknown58,0x404b70,0x16
+discardString_404be0,0x404be0,0x10
+??_D?$basic_istringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXXZ,0x4056a0,0x22
+charToDigit_405b40,0x405b40,0x15
+??_D?$basic_stringstream@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXXZ,0x406010,0x22
+isEven_406320,0x406320,0x1b
+isOdd_406340,0x406340,0x19
+halfProduct_406460,0x406460,0x14

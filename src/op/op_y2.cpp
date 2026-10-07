@@ -508,7 +508,7 @@ struct OpY2_CurveRange	// NOTE: placeholder name
 
 int OpY2_CurveRange::curveA(int value)
 {
-	return (int)(100.0 - log(1.0 + (float)((value - low) * 9.0f / (high - low))) * 100.0);
+	return (int)(100.0 - log10(1.0 + (float)((value - low) * 9.0f / (high - low))) * 100.0);
 }
 
 int OpY2_CurveRange::curveB(int value)
@@ -518,5 +518,5 @@ int OpY2_CurveRange::curveB(int value)
 
 int OpY2_CurveRange::curveC(int value)
 {
-	return (int)((float)(1.0 / log((double)(float)((value - low) * 8.5f / (high - low)) + 1.5) - 1.0) / 4.6789 * 100.0);
+	return (int)((float)(1.0 / log10((double)(float)((value - low) * 8.5f / (high - low)) + 1.5) - 1.0) / 4.6789 * 100.0);
 }

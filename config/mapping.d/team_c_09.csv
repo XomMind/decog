@@ -1,0 +1,12 @@
+# team_c_09: Array2D<int> helpers, Array2D getMaxX/Y, vector<int>::assign (src/game/team_c_09.cpp)
+?OpS8e_pad@?$OpC_Arr2D@H@@QAEXHHHHH@Z,0x9ec470,0x23e
+OpC_View::fillGrid,0x9d0030,0x1c
+OpC_View::addGrid,0x9d0140,0x1f
+OpC_View::clearGrid,0x9ed5b0,0x1d
+?getMaxX@?$OpC_Array2D@H@@QAEHXZ,0x9b4370,0x13
+?getMaxY@?$OpC_Array2D@H@@QAEHXZ,0x9b4390,0x14
+OpC_Area::getRight,0x9b6c10,0x1b
+OpC_Area::getBottom,0x9b6c30,0x1b
+??$assign@I@?$vector@HV?$allocator@H@std@@@std@@QAEXII@Z,0x9ceaf0,0x33
+??$_Assign@H@?$vector@HV?$allocator@H@std@@@std@@QAEXHHU_Int_iterator_tag@1@@Z,0x9ec3a0,0x1d
+OpC_View::init,0x9cffc0,0x6f

@@ -1,0 +1,17 @@
+# team_a_06: mapping-only rows: functions already compiled by other areas' sources that match uniquely (tools/discover.py on build/full); no source file of its own
+?length@?$char_traits@_W@std@@SAIPB_W@Z,0x401480,0x3c
+?setCells@OpS_Layout@@QAEXHHHH@Z,0x416a60,0x62
+??0XConsole@@QAE@PAV0@HHHHH_NH@Z,0x4282e0,0x194
+??_D?$basic_ifstream@DU?$char_traits@D@std@@@std@@QAEXXZ,0x439580,0x22
+?add_game_counts@Game@Protobuf@@QAEXH@Z,0x44ce80,0x1c
+?add_win_type_history@Game@Protobuf@@QAEXH@Z,0x44cec0,0x1c
+??1OpS1c_Explosives@@UAE@XZ,0x4558e0,0x5f
+?unknown45b540@OpS1d_Holder45b540@@QAEPAXXZ,0x45b540,0x29
+?unknown45b6b0@SEntityShoot@@QAEXVHEntity@@ABUPoint@@@Z,0x45b6b0,0x32
+??0OpS1d_IntRec45b720@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x45b720,0x20
+?unknown45bbe0@OpS1d_IntList45bbe0@@QAEXH@Z,0x45bbe0,0x1c
+??1OpR1h_TurnRecord@@QAE@XZ,0x48b950,0x59
+??0XTimerB@@QAE@ABUPos@@HH@Z,0x499bb0,0x39
+??0XTimerE@@QAE@HABUPos@@@Z,0x499c60,0x33
+??1?$OpY5_WeightedList@PAUOpY5_ItemType@@@@QAE@XZ,0x4c6aa0,0x56
+SEntityShoot::getType,0x45b6a0,0x10

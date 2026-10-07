@@ -1,0 +1,16 @@
+# team_c_10: member-wise destructors, allocator<T>::construct instances, wstring / string-from-iterator instances (src/game/team_c_10.cpp)
+OpC_Rec9e7780::~OpC_Rec9e7780,0x9e7780,0x68
+OpC_Rec9e7850::~OpC_Rec9e7850,0x9e7850,0x77
+OpC_Rec9e78f0::~OpC_Rec9e78f0,0x9e78f0,0x59
+?construct@?$allocator@UOpC_C16a@@@std@@QAEXPAUOpC_C16a@@$$QAU3@@Z,0x9e8190,0x4d
+?construct@?$allocator@UOpC_C12@@@std@@QAEXPAUOpC_C12@@$$QAU3@@Z,0x9e9570,0x4d
+?construct@?$allocator@UOpC_C16b@@@std@@QAEXPAUOpC_C16b@@$$QAU3@@Z,0x9e9630,0x4d
+?construct@?$allocator@UOpC_C16p@@@std@@QAEXPAUOpC_C16p@@$$QAU3@@Z,0x9e96f0,0x4d
+?construct@?$allocator@UOpC_C24@@@std@@QAEXPAUOpC_C24@@$$QAU3@@Z,0x9f0390,0x4d
+??0OpC_C16p@@QAE@ABU0@@Z,0x9e98e0,0x38
+??0?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAE@PB_W@Z,0x9b0040,0x75
+??1?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAE@XZ,0x9b00c0,0x1f
+??$?0V?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE@V?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0@Z,0x9ccda0,0x93
+??$?0V?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAE@V?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0@Z,0x9d5680,0x93
+??$_Construct@V?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXV?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0Uforward_iterator_tag@1@@Z,0x9ebc30,0xd1
+??$_Construct@V?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAEXV?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0Uforward_iterator_tag@1@@Z,0x9edea0,0xd5

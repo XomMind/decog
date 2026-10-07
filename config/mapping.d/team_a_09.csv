@@ -1,0 +1,19 @@
+# team_a_09: small helpers 0x408000-0x48c700 (src/game/team_a_09.cpp)
+replaceChar_4081c0,0x4081c0,0x51
+randomChar_4085b0,0x4085b0,0x41
+stripLeadingChar_408600,0x408600,0x51
+Timer_4168b0::Timer_4168b0,0x4168b0,0x46
+List_417dd0::removeOthers,0x417dd0,0x5c
+Notice_418e20::show,0x418e20,0x33
+Keys_439510::isDown,0x439510,0x6a
+Unknown_454340_4543b0::Unknown_454340_4543b0,0x454340,0x63
+Sounds_454c70::flush,0x454c70,0x2c
+Explosion_455880::init,0x455880,0x53
+Weapon_457580::unknown457580,0x457580,0x4f
+Item_457940::unknown457940,0x457940,0x2a
+Virtual_45b5e0::unknown45b5e0,0x45b5e0,0x3c
+List_45e020::remove,0x45e020,0x5e
+Rolls_460670::next,0x460670,0x56
+Console::countAll_48c5e0,0x48c5e0,0x63
+Console::stopAll_48c650,0x48c650,0x57
+Areas_4594f0::setBoth,0x4594f0,0x2e

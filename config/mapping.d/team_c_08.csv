@@ -1,0 +1,23 @@
+# team_c_08: small std template instances (XColor copy/fill, setfill, ...) and tiny helpers (src/game/team_c_08.cpp)
+??$_Move@PAUOpC_Color3@@PAU1@@std@@YAPAUOpC_Color3@@PAU1@00U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f17d0,0x42
+??$_Fill@PAUOpC_Color3@@U1@@std@@YAXPAUOpC_Color3@@0ABU1@@Z,0x9f2b30,0x31
+??$_Copy_backward@PAUOpC_Color3@@PAU1@@std@@YAPAUOpC_Color3@@PAU1@00U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f2b70,0x3b
+??$_Copy_impl@PAUOpC_Color3@@PAU1@@std@@YAPAUOpC_Color3@@PAU1@00U_Nonscalar_ptr_iterator_tag@0@@Z,0x9ff830,0x3d
+??$_Rechecked@PAHPAH@std@@YAAAPAHAAPAHPAH@Z,0x9f6760,0x10
+??$setfill@D@std@@YA?AU?$_Fillobj@D@0@D@Z,0x9ccf60,0x15
+??$?6DU?$char_traits@D@std@@@std@@YAAAV?$basic_ostream@DU?$char_traits@D@std@@@0@AAV10@ABU?$_Fillobj@D@0@@Z,0x9ccf80,0x20
+??0?$_Fillobj@D@std@@QAE@D@Z,0x9e7a40,0x18
+??D?$_Vector_iterator@V?$_Vector_val@UOpC_DrElem@@V?$allocator@UOpC_DrElem@@@std@@@std@@@std@@QBEAAUOpC_DrElem@@XZ,0x9b8da0,0x13
+OpC_D8P::~OpC_D8P,0x9e7720,0x16
+OpC_D4P::~OpC_D4P,0x9e7810,0x16
+OpC_D1cS::~OpC_D1cS,0x9e7740,0x16
+OpC_D10S::~OpC_D10S,0x9e77f0,0x16
+OpC_D4S::~OpC_D4S,0x9e78d0,0x16
+OpC_degToRad,0x9cd000,0x1d
+OpC_square,0x9ccff0,0xc
+OpC_clampMin,0x9cf5c0,0x17
+OpC_clampMax,0x9cf5a0,0x17
+OpC_IntBox::write,0x9cfa90,0x1d
+OpC_IntBox::read,0x9cfaf0,0x1d
+??$_Move@PAV?$vector@UOpC_MvElem@@V?$allocator@UOpC_MvElem@@@std@@@std@@PAV12@@std@@YAPAV?$vector@UOpC_MvElem@@V?$allocator@UOpC_MvElem@@@std@@@0@PAV10@00U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f0d10,0x3b
+??$_Uninit_fill_n@MIM@std@@YAXPAMIABMU_Scalar_ptr_iterator_tag@0@@Z,0x9f3590,0x19

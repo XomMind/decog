@@ -1,0 +1,12 @@
+# team_a_10: std::string helpers 0x407e00-0x408e00 (src/game/team_a_10.cpp)
+opr5c_replace407e00,0x407e00,0xff
+OpC_replaceAll_407f00,0x407f00,0x100
+countRun_408000,0x408000,0x83
+OpC_removeChar_408100,0x408100,0xb1
+opw6_truncate408220,0x408220,0x82
+OpC_stringFunc_4082b0,0x4082b0,0xeb
+OpR5f_toUpper_4083a0,0x4083a0,0xeb
+opW5_truncate_408490,0x408490,0x118
+OpC_stringFunc_408660,0x408660,0x96
+OpW7_trim_408ad0,0x408ad0,0x143
+parseLine_408d70,0x408d70,0xe8

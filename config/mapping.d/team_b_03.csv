@@ -1,0 +1,5 @@
+# team_b_03: Console-derived UI methods (src/game/team_b_03.cpp)
+CEvolveSlotButton::update98b1b0,0x98b1b0,0x54
+CGalleryInfoButton::CGalleryInfoButton,0x7d69b0,0x77
+CGalleryInfoButton::update,0x7d6a30,0x5f
+TeamB_Achievements::update7eead0,0x7eead0,0x76

@@ -1,0 +1,8 @@
+# team_d_07: mapping only (no own .cpp): functions already compiled identically by existing op_*/batch8 sources (found with tools/discover.py on a full build)
+?inputAscii8fe9a0@CMachine@@QAEXHH@Z,0x8fe9a0,0x2a6
+?unknown87a990@CPlayer2@@QAE_NXZ,0x87a990,0x597
+?opq4c_suggest909990@@YA_N_N@Z,0x909990,0x2d4
+??0CEnding@@QAE@XZ,0x998090,0x4f6
+?close@CEnding@@UAEXXZ,0x9ab000,0x5a9
+?init@PhysfsWrapper@@QAE?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HQAPADV23@1@Z,0x4039b0,0x7ee
+?open@CWorldMap@@UAEXXZ,0x993810,0x3a0

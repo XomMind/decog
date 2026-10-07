@@ -1,0 +1,9 @@
+# team_b_02: Cartographer2DMoveCost callback constructors (src/game/team_b_02.cpp)
+EntityMovementCallback::EntityMovementCallback,0x78b7a0,0x1f
+PathCheckCallback::PathCheckCallback,0x78b7c0,0x1f
+DesirePathCheckCallback::DesirePathCheckCallback,0x78b7e0,0x1f
+NearestDamagedMachineCallback::NearestDamagedMachineCallback,0x78b800,0x1f
+CaveForcePathCallback::CaveForcePathCallback,0x78b820,0x1f
+CaveinForcedPathCallback::CaveinForcedPathCallback,0x78b840,0x1f
+SubEntranceForcePathCallback::SubEntranceForcePathCallback,0x78b860,0x1f
+SoundPathCallback::SoundPathCallback,0x78b880,0x1f

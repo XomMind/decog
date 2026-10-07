@@ -1,0 +1,22 @@
+# team_b_disc: existing src definitions (other files) that already match in the full build but had no mapping row; found with tools/discover.py
+?unknown57f140@OpR2D_List57f140@@QAEPAUOpQ5_T9d0770@@PAU2@@Z,0x57f140,0x68
+?unknown637da0@Entity@@QAE_NHHPAUOpS3b_Actor@@PBUPoint@@@Z,0x637da0,0x15f
+?unknown6658d0@Prop@@QAE_NHHPAUOpS3c_Actor@@@Z,0x6658d0,0x195
+?unknown682770@OpR3c_Overmind@@QAEXHH@Z,0x682770,0x55
+?unknown683310@OpR3c_Overmind@@QAEPAUOpR3c_Squad@@VHEntity@@@Z,0x683310,0x6c
+?unknown683380@OpR3c_Overmind@@QAE_NVHEntity@@PAH@Z,0x683380,0x8e
+?unknown68d6d0@OpS3g_A@@QAEX_N@Z,0x68d6d0,0x247
+?opt5_replaceColors@@YAXXZ,0x78f210,0x102
+?findSlot@OpU5_SlotTable@@QAEHVHEntity@@@Z,0x7ac070,0x6f
+?OpR5d_findItem8f98c0@@YA?AVHItem@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x8f90d0,0x158
+?opq4c_stripText909840@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z,0x909840,0x14d
+?opt7_killGroupFore@@YAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x964f80,0x137
+?input@CWorldMapInfo@@UAE_NPAX@Z,0x9934e0,0x6f
+?update@CWorldMapPiece@@UAEXXZ,0x993550,0x231
+??0CWorldMap@@QAE@PAVXConsole@@@Z,0x993790,0x74
+?update@CWorldMap@@UAEXXZ,0x993bb0,0x17b
+?close@CWorldMap@@UAEXXZ,0x993d30,0x86
+?unknown9aaf70@CEnding@@QAEXXZ,0x9aaf70,0x54
+?unknown9aafd0@CEnding@@QAEXXZ,0x9aafd0,0x2b
+?render@CEndingFade@@UAEXXZ,0x9ad280,0x194
+?unknown71bcc0@BS@@QAE_NABUPoint@@AAU2@@Z,0x71bcc0,0x116

@@ -1,0 +1,95 @@
+// team_c_01: dynamic initializers of pointer globals bound to other globals (0xb23a40-0xb23cf0)
+// NOTE: all names are placeholders (carry the exe data address)
+
+struct Unknown3	// NOTE: placeholder name
+{
+	char pad[3];
+};
+
+extern Unknown3	unknown_d2d13f;
+extern Unknown3	unknown_d2d142;
+extern Unknown3	unknown_d2d145;
+extern Unknown3	unknown_d2d148;
+extern Unknown3	unknown_d2d14b;
+extern Unknown3	unknown_d2d14e;
+extern Unknown3	unknown_d2d151;
+extern Unknown3	unknown_d2d154;
+extern Unknown3	unknown_d2d157;
+extern Unknown3	unknown_d2d15a;
+extern Unknown3	unknown_d2d15d;
+extern Unknown3	unknown_d2d160;
+extern Unknown3	unknown_d2d163;
+extern Unknown3	unknown_d2d166;
+extern Unknown3	unknown_d2d169;
+extern Unknown3	unknown_d2d16c;
+extern Unknown3	unknown_d2d16f;
+extern Unknown3	unknown_d2d172;
+extern Unknown3	unknown_d2d175;
+extern Unknown3	unknown_d2d178;
+extern Unknown3	unknown_d2d17b;
+extern Unknown3	unknown_d2d17e;
+extern Unknown3	unknown_d2d181;
+extern Unknown3	unknown_d2d184;
+extern Unknown3	unknown_d2d187;
+extern Unknown3	unknown_d2d18a;
+extern Unknown3	unknown_d2d18d;
+extern Unknown3	unknown_d2d190;
+extern Unknown3	unknown_d2d193;
+extern Unknown3	unknown_d2d196;
+extern Unknown3	unknown_d2d199;
+extern Unknown3	unknown_d2d19c;
+extern Unknown3	unknown_d2d19f;
+extern Unknown3	unknown_d2d1a2;
+extern Unknown3	unknown_d2d1a5;
+extern Unknown3	unknown_d2d1a8;
+extern Unknown3	unknown_d2d1ab;
+extern Unknown3	unknown_d2d1ae;
+extern Unknown3	unknown_d2d1b1;
+extern Unknown3	unknown_d2d1b4;
+extern Unknown3	unknown_d2d1b7;
+extern Unknown3&	ptr_cfc180;	// defined in cc_r2_26
+
+Unknown3&	ptr_cf1b08	= unknown_d2d13f;
+Unknown3&	ptr_d29da0	= unknown_d2d142;
+Unknown3&	ptr_d378cc	= unknown_d2d145;
+Unknown3&	ptr_cf4478	= unknown_d2d148;
+Unknown3&	ptr_d2eec4	= unknown_d2d14b;
+Unknown3&	ptr_d2ac94	= unknown_d2d14e;
+Unknown3&	ptr_d292f0	= unknown_d2d151;
+Unknown3&	ptr_d387c0	= unknown_d2d154;
+Unknown3&	ptr_d22f9c	= unknown_d2d157;
+Unknown3&	ptr_d226ec	= unknown_d2d15a;
+Unknown3&	ptr_d22134	= unknown_d2d15d;
+Unknown3&	ptr_cf08f4	= unknown_d2d160;
+Unknown3&	ptr_d387c4	= unknown_d2d163;
+Unknown3&	ptr_d25e88	= unknown_d2d166;
+Unknown3&	ptr_cf7570	= unknown_d2d169;
+Unknown3&	ptr_d2c418	= unknown_d2d16c;
+Unknown3&	ptr_cf0d3c	= unknown_d2d16f;
+Unknown3&	ptr_d396ec	= unknown_d2d172;
+Unknown3&	ptr_cfcc74	= unknown_d2d175;
+Unknown3&	ptr_d02cb0	= unknown_d2d178;
+Unknown3&	ptr_d31344	= unknown_d2d17b;
+Unknown3&	ptr_d1df0c	= unknown_d2d17e;
+Unknown3&	ptr_d316f4	= unknown_d2d181;
+Unknown3&	ptr_d22fcc	= unknown_d2d184;
+Unknown3&	ptr_d29758	= unknown_d2d187;
+Unknown3&	ptr_cfc174	= unknown_d2d18a;
+Unknown3&	ptr_d1ecd4	= unknown_d2d18d;
+Unknown3&	ptr_d35bc4	= unknown_d2d190;
+Unknown3&	ptr_d20b70	= unknown_d2d193;
+Unknown3&	ptr_d35be0	= unknown_d2d196;
+Unknown3&	ptr_cf4540	= unknown_d2d199;
+Unknown3&	ptr_d1f3ac	= unknown_d2d19c;
+Unknown3&	ptr_d2f214	= unknown_d2d19f;
+Unknown3&	ptr_cefdcc	= unknown_d2d1a2;
+Unknown3&	ptr_d2ccec	= unknown_d2d1a5;
+Unknown3&	ptr_d35064	= unknown_d2d1a8;
+Unknown3&	ptr_d20a74	= unknown_d2d1ab;
+Unknown3&	ptr_d2ea1c	= unknown_d2d1ae;
+Unknown3&	ptr_d20618	= unknown_d2d1b1;
+Unknown3&	ptr_d2f33c	= unknown_d2d1b4;
+Unknown3&	ptr_cf14b0	= unknown_d2d1b7;
+Unknown3&	ptr_cfe674	= unknown_d2d17e;
+Unknown3&	ptr_cfabbc	= unknown_d2d199;
+Unknown3&	ptr_d20cfc	= ptr_cfc180;
