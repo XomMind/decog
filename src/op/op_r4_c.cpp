@@ -283,10 +283,10 @@ void CAchievements::unknown7f1bd0(int count, int start, bool flag)
 	int i = 0;
 	unsigned int index = start;
 	int row;
-	int col;
-	int x;
-	unsigned int j;
-	int y;
+	int c2;
+	int px;
+	unsigned int k;
+	int yy;
 	for (; i < count && index < unknown80.size(); index++, i++)
 	{
 		if (flag)
@@ -294,22 +294,22 @@ void CAchievements::unknown7f1bd0(int count, int start, bool flag)
 		else
 			unknown90.push_back(new CAchievementsEntry(this,0,0,unknown80[index],index));
 	}
-	j = 0;
-	col = 0;
+	k = 0;
+	c2 = 0;
 	row = 0;
-	x = 2;
-	y = opr4c_bcbe2c[unknown4328a0() != 0];
-	for (; j < unknown90.size(); j++)
+	px = 2;
+	yy = opr4c_bcbe2c[unknown4328a0() != 0];
+	for (; k < unknown90.size(); k++)
 	{
-		unknown90[j]->setPos(x,y);
-		col++;
-		x = 0x3a;
-		if (col == 2)
+		unknown90[k]->setPos(px,yy);
+		c2++;
+		px = 0x3a;
+		if (c2 == 2)
 		{
-			col = 0;
-			x = 2;
+			c2 = 0;
+			px = 2;
 			row++;
-			y += 6;
+			yy += 6;
 		}
 	}
 }

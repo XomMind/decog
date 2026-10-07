@@ -839,13 +839,13 @@ void Entity::polymindUnpossess(bool automatic)
 		logError("Entity::polymindUnpossess()","no attached parts, should've automatically happened earlier");
 		return;
 	}
-	Point ROLE_oldPos = getPosition();
-	Point ROLE_freePos;
-	bool ROLE_placed;
-	if (!unknown5d9340(&ROLE_placed,&ROLE_freePos))
+	Point old = getPosition();
+	Point destination;
+	bool valid;
+	if (!unknown5d9340(&valid,&destination))
 	{
 		logError("Entity::polymindUnpossess()","potentially insufficient room despite earlier confirmation?");
-		ROLE_placed = false;
+		valid = false;
 	}
 	unpossessing = true;
 	do
@@ -855,53 +855,53 @@ void Entity::polymindUnpossess(bool automatic)
 		uiRefresh->unknown7b4f10();
 	}
 	while (0);
-	EntityRecord *ROLE_entityRecord = (EntityRecord *)FoldedGetter::GetCachedSize();
+	EntityRecord *record = (EntityRecord *)FoldedGetter::GetCachedSize();
 	unknownCf496c = 0;
 	unknownCf4978 = 0;
-	unknownCf4960 = ROLE_entityRecord->unknown21C;
-	unknownCf49d8 = ROLE_entityRecord->unknown1E8;
-	unknownCf4970 = ROLE_entityRecord->unknown1E4;
+	unknownCf4960 = record->unknown21C;
+	unknownCf49d8 = record->unknown1E8;
+	unknownCf4970 = record->unknown1E4;
 	unknownCf4974 = 0;
-	unknownCf49dc = ROLE_entityRecord->unknown1F0;
+	unknownCf49dc = record->unknown1F0;
 	for (int i = 0; i < 7; i++)
 		unknownCf4984[i] = unknownBa64d8[i][unknownCf4718];
-	int ROLE_oldSize = ROLE_entityRecord->size;
-	ROLE_entityRecord->size = unknownCaf440;
-	ROLE_entityRecord->unknown98 = unknownCaf444;
-	ROLE_entityRecord->unknown94 = unknownCaf448;
-	ROLE_entityRecord->unknownA4 = unknownCaf44c;
-	ROLE_entityRecord->unknown78 = unknownCefb4c;
+	int height = record->size;
+	record->size = unknownCaf440;
+	record->unknown98 = unknownCaf444;
+	record->unknown94 = unknownCaf448;
+	record->unknownA4 = unknownCaf44c;
+	record->unknown78 = unknownCefb4c;
 	unknownCaf2b8 = 0x40;
 	for (unsigned int i = 0; i < footprint.size(); i++)
 		cells(footprint[i])->unknown66baf0();
 	footprint.clear();
-	HEntity ROLE_newEntity;
-	if (ROLE_placed)
+	HEntity robot;
+	if (valid)
 	{
-		ROLE_newEntity = world->placeEntity(unknownD25de0.at(possessed->unknown0),ROLE_oldPos,possessed->unknown24,0,0x22,0xe,0);
-		if (ROLE_newEntity.isValid())
+		robot = world->placeEntity(unknownD25de0.at(possessed->unknown0),old,possessed->unknown24,0,0x22,0xe,0);
+		if (robot.isValid())
 		{
-			ROLE_newEntity->unknown45b070(possessed->unknown8);
-			ROLE_newEntity->unknown5dea60(possessed->unknown28,0);
-			while (!ROLE_newEntity->items.isEmpty())
-				ROLE_newEntity->items.back()->unknown57dbe0(0,0,1,1);
+			robot->unknown45b070(possessed->unknown8);
+			robot->unknown5dea60(possessed->unknown28,0);
+			while (!robot->items.isEmpty())
+				robot->items.back()->unknown57dbe0(0,0,1,1);
 			while (!items.isEmpty())
-				items.back()->unknown57a190(ROLE_newEntity,items.back()->Protobuf::Stats_Actions::GetCachedSize(),1,1);
+				items.back()->unknown57a190(robot,items.back()->Protobuf::Stats_Actions::GetCachedSize(),1,1);
 			unknown98 = 0;
 			unknown90 = 0;
 			unknown94 = 0;
-			ROLE_newEntity->unknown5deb40(unknown94);
-			ROLE_newEntity->unknown5ded70(unknown90);
-			ROLE_newEntity->unknown45b210(unknown98);
-			ROLE_newEntity->unknown5fd900(1,unknownD1f3b0.unknown40c130());
+			robot->unknown5deb40(unknown94);
+			robot->unknown5ded70(unknown90);
+			robot->unknown45b210(unknown98);
+			robot->unknown5fd900(1,unknownD1f3b0.unknown40c130());
 		}
 	}
-	changePos(ROLE_freePos,false);
+	changePos(destination,false);
 	Protobuf::Stats_Combat_HighestCorruption_Effects::SetCachedSize(0);
 	unknown45b0b0();
 	world->unknown72e4c0(self,1);
 	if (unknownFlagD28e27)
-		mapView->unknown8069e0(ROLE_freePos,0);
+		mapView->unknown8069e0(destination,0);
 	while (!items.isEmpty())
 	{
 		if (items.back()->Protobuf::Stats_Actions::GetCachedSize() <= 3)
@@ -911,7 +911,7 @@ void Entity::polymindUnpossess(bool automatic)
 		else
 		{
 			Point dropPos;
-			if (world->unknown71bc10(ROLE_freePos,&dropPos))
+			if (world->unknown71bc10(destination,&dropPos))
 				items.back()->unknown57a0f0(&dropPos,1,1);
 			else
 				items.back()->unknown57dbe0(1,0,1,1);
@@ -920,9 +920,9 @@ void Entity::polymindUnpossess(bool automatic)
 	unknown94 = 0;
 	unknown90 = 10;
 	unknown98 = 0;
-	if (unknownBC != 0 && ROLE_newEntity.isValid())
+	if (unknownBC != 0 && robot.isValid())
 	{
-		ROLE_newEntity->unknownBC = unknownBC;
+		robot->unknownBC = unknownBC;
 		unknownBC = 0;
 	}
 	if (unknown45ac40(0x1d))
@@ -930,9 +930,9 @@ void Entity::polymindUnpossess(bool automatic)
 	if (!unknownCf45d8.unknown77ed10())
 		delete possessed;
 	possessed = NULL;
-	PanelItemList *ROLE_panelItems = panelB->unknown4a9ad0();
-	for (unsigned int i = 0; i < ROLE_panelItems->count(); i++)
-		ROLE_panelItems->at(i)->unknown4a9120();
+	PanelItemList *list = panelB->unknown4a9ad0();
+	for (unsigned int i = 0; i < list->count(); i++)
+		list->at(i)->unknown4a9120();
 	unknown4541b0(0x140,0,0);
 	someSystem2->unknown793690();
 	unknown789ac0();

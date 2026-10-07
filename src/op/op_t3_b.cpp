@@ -270,24 +270,24 @@ XColor Prop::unknown65dbb0()
 
 void Prop::unknown65e8a0(OpT3b_XCell *cell)
 {
-	bool flag = data->unknownF4 == 1;
+	float h;
+	float s;
+	float v;
+	bool state = data->unknownF4 == 1;
 	unknown14 = cell->getChar();
 	bool fore = true;
 	while (true)
 	{
 		if (fore ? cell->getFore()->nonzero() : cell->getBack()->nonzero())
 		{
-			float h;
-			float s;
-			float v;
 			if (fore)
 				cell->getFore()->getHSV(&h,&s,&v);
 			else
 				cell->getBack()->getHSV(&h,&s,&v);
-			v = v / opT3b_machineValueFactor * (flag ? opT3b_machineScale[data->unknownF8][0] : opT3b_flatScale[data->unknown120][0]);
+			v = v / opT3b_machineValueFactor * (state ? opT3b_machineScale[data->unknownF8][0] : opT3b_flatScale[data->unknown120][0]);
 			if (v >= 1.0)
 				v = 1.0f;
-			if (flag)
+			if (state)
 			{
 				XColor *target = fore ? &color1 : &color2;
 				target->setHSV(opT3b_machineHue[data->unknownF8][0],opT3b_machineSat[data->unknownF8][0],v);

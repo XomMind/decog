@@ -570,20 +570,20 @@ void EntityAI::unknown5b64d0()
 bool EntityAI::unknown5b66c0(Point &out)
 {
 	int radius = 10;
-	int minDistance = 20;
-	Point p;
+	int range = 20;
+	Point pos;
 	for (int i = 0; i < 100; i++)
 	{
-		cells.randomPos(p);
-		if (world->findPlaceableNear(p,p,1))
+		cells.randomPos(pos);
+		if (world->findPlaceableNear(pos,pos,1))
 		{
 			for (unsigned int j = 0; j < targets.size(); j++)
 			{
-				if (OpR2_distanceCeil(p,targets[j]->entity->getPosition()) <= minDistance)
+				if (OpR2_distanceCeil(pos,targets[j]->entity->getPosition()) <= range)
 					goto nextAttempt;
 			}
-			cells.getArea(p,radius,area);
-			out = p;
+			cells.getArea(pos,radius,area);
+			out = pos;
 			return true;
 		}
 		nextAttempt:;
