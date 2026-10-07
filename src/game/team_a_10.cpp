@@ -131,7 +131,7 @@ void OpW7_trim_408ad0(string &text)	// NOTE: placeholder name (strip comments an
 }
 
 void replaceChar_4081c0(string &s, char from, char to);	// NOTE: placeholder name
-void OpW7_split_408860(const string &text, char separator, char quote, vector<string> &out, bool flag);	// NOTE: placeholder name
+void OpW7_split_408860(string &text, char separator, char quote, vector<string> &out, bool flag);	// NOTE: placeholder name
 void parseLine_408d70(string &text, vector<string> &out)	// NOTE: placeholder name (same body as OpW7_parseLine)
 {
 	if (text.empty())

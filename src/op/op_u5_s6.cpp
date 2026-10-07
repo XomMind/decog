@@ -397,8 +397,8 @@ void CGallery::unknown7e83f0(int amount)
 			int spacing = (opR4b_rowSpacing_bcbdf4[opr1c_hasPtr_cebd5c() ? 1 : 0] + 0xd) * amount;
 			for (unsigned int j = 0; j < items.size(); j++)
 				items[j]->setPos(Point(items[j]->getPos(),0,-spacing));
-			start = items.size() + amount * 3 + start;
-			unknown7e8a50(amount,start,&Point(items.front()->getPos().x,opR4b_rowSpacing_bcbdf4[opr1c_hasPtr_cebd5c() ? 1 : 0] + items.back()->getPos().y + 0xd),false);
+			start += items.size() + amount * 3;
+			unknown7e8a50(amount,start,&Point(items.front()->getPos().x,items.back()->getPos().y + 0xd + opR4b_rowSpacing_bcbdf4[opr1c_hasPtr_cebd5c() ? 1 : 0]),false);
 		}
 	}
 }

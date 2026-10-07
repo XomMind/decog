@@ -498,25 +498,27 @@ bool OpY1_getEncodedLine(PhysFScpp::ifstream *file, string &line, int key)	// NO
 			line.erase(line.end() - 1);
 		if (!line.empty() && key != -1)
 		{
+			// local names chosen for /Od layout (name-hash buckets; GS buffer splits the scalars)
 			int table = key < 100 ? key : key % 100;
-			char first = line[0];
-			string countStr(line.begin() + 1,line.begin() + 1 + 4);
-			int count = stringToInt(countStr);
+			char d = line[0];
+			string message(line.begin() + 1,line.begin() + 1 + 4);
+			int val = stringToInt(message);
 			line.erase(line.begin(),line.begin() + 1 + 4);
-			int length = line[line.size() - 1] == '\n' ? line.size() - 1 : line.size();
-			for (int i = 0, j = 0; i < length; i++)
+			int len = line[line.size() - 1] == '\n' ? line.size() - 1 : line.size();
+			int c;
+			for (int i = 0, n = 0; i < len; i++)
 			{
-				int c = line[i] - OpY1_lineKeys[table][j];
+				c = line[i] - OpY1_lineKeys[table][n];
 				if (c < 32)
 					c += 95;
 				line[i] = c;
-				j++;
-				if (j == 300)
-					j = 0;
-				if (line[i] == first)
-					count--;
+				n++;
+				if (n == 300)
+					n = 0;
+				if (line[i] == d)
+					val--;
 			}
-			if (count != 0 && OpY1_tamperCallback != NULL)
+			if (val != 0 && OpY1_tamperCallback != NULL)
 				OpY1_tamperCallback();
 		}
 	}

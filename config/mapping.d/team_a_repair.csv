@@ -53,6 +53,7 @@ OpS1c_RecList::addAll,0x4566c0,0xbf
 ??0Pos@@QAE@H@Z,0x409990,0x21
 ??0Rect@@QAE@HHHH@Z,0x456940,0x33
 OpW6_Rex::getHighlighter,0x4ab670,0x11
+??0CPartswapPart@@QAE@PAVXConsole@@PAVConsole@@@Z,0x4aa830,0x79
 OpQ1_createDirectories,0x409240,0x25c
 opr1c_initColors_433f60,0x433f60,0x1d3
 ?opr1c_getScoreColor@@YA?AUXColor@@H@Z,0x4348a0,0x69

@@ -2672,7 +2672,7 @@ void OpW7_trim_408ad0(string &text);	// NOTE: placeholder name
 void OpW7_replaceChar_4081c0(string &text, char from, char to);	// NOTE: placeholder name
 void OpC_removeChar_408100(string &text, char c);	// NOTE: placeholder name
 void OpC_replaceAll_407f00(string &text, string from, string to);	// NOTE: placeholder name
-void OpW7_split_408860(const string &text, char separator, char quote, vector<string> &out, bool flag);	// NOTE: placeholder name
+void OpW7_split_408860(string &text, char separator, char quote, vector<string> &out, bool flag);	// NOTE: placeholder name
 float stringToFloat_405ab0(const string &text);	// NOTE: placeholder name
 
 void OpW7_parseLine(string &text, vector<string> &out)	// NOTE: placeholder name

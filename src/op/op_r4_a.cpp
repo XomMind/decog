@@ -449,14 +449,15 @@ int opr4a_unknown77e2b0(gzifstream &stream, bool chrono, bool manual)	// NOTE: p
 	if (ver != 0x5e)
 	{
 		stream.close();
-		string to = "_v" + intToString(ver);
-		int pos = path.find("_v", 0);
-		int end = path.find("_", pos + 2);
-		string fromStr(path.begin() + pos, path.begin() + end);
-		string newFile = path;
-		opW5_replace(newFile, to, fromStr);
-		rename(path.c_str(), newFile.c_str());
+		string suffix = "_v" + intToString(ver);
+		int loc = path.find("_v", 0);
+		int end = path.find("_", loc + 2);
+		string old(path.begin() + loc, path.begin() + end);
+		string copy = path;
+		opW5_replace(copy, old, suffix);
+		rename(path.c_str(), copy.c_str());
 		return 2;
 	}
-	return 0;
+	else
+		return 0;
 }

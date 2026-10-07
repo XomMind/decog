@@ -18,7 +18,7 @@ public:
 	virtual void render_1c();	// NOTE: placeholder name
 	int getHeight();
 	int getWidth_44b0d0();	// NOTE: placeholder name
-	void unknown429fe0(XConsole *console, const Pos &pos, const Rect &rect);	// NOTE: placeholder name
+	void unknown429fe0(XConsole *console, const Pos &pos, const Rect &rect) throw();	// NOTE: placeholder name
 };
 class Console : public XConsole { public: Console(XConsole *parent, int x, int y, int width, int height, int font, bool hidden, int layer); char pad[0x6c - 4]; };
 class XRoot : public XConsole { public: XRoot(int width, int height, bool flag); void composite(); void saveScreenshot(string filename); char pad[0x84 - 4]; };

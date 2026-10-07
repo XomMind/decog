@@ -238,29 +238,27 @@ bool EntityAI::setPatrolRandom(Point p)
 	{
 		cells.getBounds(p,patrolRadius[entity->record->index],&bounds);
 	}
-	int tries = 0;
+	int attempts = 0;
+	vector<Point> tiles;
+	do
 	{
-		vector<Point> scratch;
-		do
+		bounds.randomPoint(&goal);
+		attempts++;
+		if (attempts >= 100)
 		{
-			bounds.randomPoint(&goal);
-			tries++;
-			if (tries >= 100)
+			if (!suppressPatrolError)
 			{
-				if (!suppressPatrolError)
-				{
-					logError("EntityAI::setPatrolRandom()","Unable to path to a valid goal for AI_MOVE_PATROL (" + entity->record->name + ")");
-				}
-				state = 1;
-				path.push_back(entity->getPosition());
-				return false;
+				logError("EntityAI::setPatrolRandom()","Unable to path to a valid goal for AI_MOVE_PATROL (" + entity->record->name + ")");
 			}
+			state = 1;
+			path.push_back(entity->getPosition());
+			return false;
 		}
-		while (!(cells(goal)->isPassableFor(entity) && world->unknown7168e0(p,goal,entity.operator->(),&scratch)));
-		path.push_back(p);
-		path.push_back(goal);
-		return true;
 	}
+	while (!(cells(goal)->isPassableFor(entity) && world->unknown7168e0(p,goal,entity.operator->(),&tiles)));
+	path.push_back(p);
+	path.push_back(goal);
+	return true;
 }
 
 int Entity::getAscii(const Point &p)
