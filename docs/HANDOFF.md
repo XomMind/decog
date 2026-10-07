@@ -1,6 +1,8 @@
 # Handoff (2026-10-05)
 
 ## State
+- **2026-10-07 astra580:** `EntityAI::unknown580ec0` (0x580ec0, 0x213 bytes) MATCHes under `tools/try.sh src/op/op_astra580.cpp -- 'EntityAI::unknown580ec0=0x580ec0'`. New source/mapping: `src/op/op_astra580.cpp`, `config/mapping.d/op_astra580.csv`; claim: `build/claims_op_astra580.txt`. Partial record layout and semantic names remain placeholders. No full-link verification of this addition yet.
+- Immediately before astra580, commit `1faa70f` passed `tools/build.sh`: 32,026/32,026 mappings MATCH; 42.092% code, 12,512/13,009 functions. The previously reported `op_t3_g.cpp` compile failure was absent in that build.
 - **2026-10-06 evening: verified 30.826% code (10,966 / 13,009 funcs), 15.14% data.** op_x2..x5 and op_g1 (2 giants, 90 KB) integrated; 14 order-dependent/DIFF rows pruned. Open: op_r2_d.cpp declares 0x8979b0 as (HItem,int,int), exe takes bool (use (HItem,bool,int)); op_x5_b_c.cpp redeclares OpY7_SpecialCommands (check).
 - Giants: Ghidra 12.1.4 in 3rdparty/ghidra, project build/ghidra_cogmind (~2 GB; clones p2..p5 and scratch/ are deletable), decompiles in build/ghidra_cogmind/dec/<va>.c for 41 of 44 giants (missing 0x51da30, 0x8b5250, 0x83dfa0). Workers op_g2..g5 (GiantDie/Move/Damage/Projectile) write semantic code to native/giants/. Cleanup rule: scratch dirs must not end in `_tmp` (integration runs rm -rf build/*_tmp).
 - **Native (macOS) track: see docs/NATIVE.md** (tools/native_build.py, tools/callgraph.py). Data matching stat added to progress.py (tools/lverify.py `data_stats`).

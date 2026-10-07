@@ -38,40 +38,11 @@ public:
 	Item *operator->() const;	// 0x9b65b0
 };
 
-// NOTE: the exe folds these trivial getters with protobuf ones, so they need names from that set
-namespace Protobuf
-{
-	class PingRequest
-	{
-	public:
-		virtual int GetCachedSize() const;
-	};
-	class Stats_Combat_DamageInflicted
-	{
-	public:
-		virtual int GetCachedSize() const;
-	};
-	class Stats_Combat_ShotsHitRobots_CriticalStrikes
-	{
-	public:
-		virtual int GetCachedSize() const;
-	};
-	class Stats_Actions
-	{
-	public:
-		virtual int GetCachedSize() const;
-	};
-	class Stats_Hacking
-	{
-	public:
-		virtual int GetCachedSize() const;
-	};
-}
-
 class Group	// NOTE: placeholder name
 {
+public:
+	int getFaction();	// NOTE: placeholder name (0x9b4350: [this+8]); the exe prints it as "faction" (Entity::changeFaction diagnostic), BS::initilize's group ctor 0x670ff0 stores the group index in +4 and +8
 };
-#define GROUP_TYPE(g) (((Protobuf::PingRequest *)(g))->Protobuf::PingRequest::GetCachedSize())	// 0x9b4350
 
 class HGroup	// NOTE: placeholder name
 {
@@ -91,6 +62,7 @@ struct ItemTrait	// NOTE: placeholder name
 class Item
 {
 public:
+	int getCategory();	// NOTE: placeholder name (0x44aec0: [this+0xc]); op_u2.cpp uses the same getter as `getCategory() <= 3`
 	void setActive(bool active);
 	void setBroken(int turn, bool flag);	// NOTE: placeholder argument names
 	void unknown57c160(const Point &p);	// NOTE: placeholder name
@@ -173,9 +145,13 @@ struct XColor	// NOTE: placeholder layout
 	void setHSV(float h, float s, float v);
 };
 
+class Trap;
 class Prop
 {
 public:
+	MachineInfo *getMachine();	// NOTE: placeholder name (0x45cb30: [this+0x44])
+	int getState();	// NOTE: placeholder name (0x457b10: [this+0x3c])
+	Trap *getTrap();	// NOTE: placeholder name (0x44b020: [this+0x4c]; NULL for non-trap props, see Trap::escapeStasis's "non-Trap prop" diagnostic)
 	void disableMachine();
 	const Point &getPosition();	// NOTE: placeholder name (0x4184d0)
 
@@ -199,10 +175,6 @@ public:
 	char pad42[2];
 	MachineInfo *machine;	// NOTE: placeholder name
 };
-#define PROP_DATA(p) ((MachineInfo *)((Protobuf::Stats_Combat_DamageInflicted *)(p))->Protobuf::Stats_Combat_DamageInflicted::GetCachedSize())	// 0x45cb30
-#define PROP_HACKING(p) (((Protobuf::Stats_Hacking *)(p))->Protobuf::Stats_Hacking::GetCachedSize())	// NOTE: placeholder (trivial getter, ICF)
-#define ITEM_ACTIONS(p) (((Protobuf::Stats_Actions *)(p))->Protobuf::Stats_Actions::GetCachedSize())	// NOTE: placeholder (trivial getter, ICF)
-#define PROP_STATE(p) (((Protobuf::Stats_Combat_ShotsHitRobots_CriticalStrikes *)(p))->Protobuf::Stats_Combat_ShotsHitRobots_CriticalStrikes::GetCachedSize())	// 0x457b10
 
 class HProp
 {
@@ -344,10 +316,10 @@ void EntityAI::willDie(bool flag)
 		}
 		break;
 	case 9:
-		if (!flag && !path.empty() && isBetween(3,GROUP_TYPE(entity->getGroup().operator->()),4) &&
+		if (!flag && !path.empty() && isBetween(3,entity->getGroup()->getFaction(),4) &&
 			cells(path.front())->unknown66b1c0(0,false) &&
-			PROP_DATA(cells(path.front())->getProp().operator->())->unknown28 >= 0 &&
-			PROP_STATE(cells(path.front())->getProp().operator->()) == 0)
+			cells(path.front())->getProp()->getMachine()->unknown28 >= 0 &&
+			cells(path.front())->getProp()->getState() == 0)
 		{
 			Point p;
 			if (world->unknown71bc10(entity->getPosition(),&p))
@@ -511,7 +483,7 @@ bool Trap::escapeStasis(const Point &pos, HEntity entity)
 		logError("Trap::escapeStasis()","Passed a non-Prop pos: " + pointToString(pos));
 		return false;
 	}
-	if (PROP_HACKING(prop.operator->()) == 0)
+	if (prop->getTrap() == 0)
 	{
 		logError("Trap::escapeStasis()","Passed a non-Trap prop: " + prop->getName() + " at " + pointToString(pos));
 		return true;
@@ -755,7 +727,7 @@ void Item::setBroken(int turn, bool flag)
 	{
 		if (turn == -2)
 		{
-			if (ITEM_ACTIONS(this) == 4)
+			if (getCategory() == 4)
 				inventory->reopen(5,ID);
 			else
 				inventoryMgr->unknown896a80(ID);

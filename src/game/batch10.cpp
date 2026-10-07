@@ -188,21 +188,21 @@ public:
 	Entity *operator->() const;	// 0x9b6570
 };
 
-// NOTE: the exe folds this getter (0x9b4350, returns the field at +8) with the protobuf one, so it needs a name from that set
-namespace Protobuf
+// The explosive "handles" are item handles: operator-> is the item dereference 0x9b65b0 and the folded getter 0x9b4350
+// reads Item+8, the ItemType* (batch7/batch8 Item::type).  What batch10 used to call Explosive is the ItemType.
+struct ItemType;
+class Item
 {
-	class PingRequest
-	{
-	public:
-		virtual int GetCachedSize() const;
-	};
-}
+public:
+	ItemType *getType();	// NOTE: placeholder name (0x9b4350: [this+8])
+};
 
-class HExplosive	// NOTE: placeholder name
+class HItem	// NOTE: placeholder layout
 {
 	int ID;
 public:
-	Protobuf::PingRequest *operator->() const;	// 0x9b65b0
+	bool isValid() const;
+	Item *operator->() const;	// 0x9b65b0
 };
 
 struct ExplosionData	// NOTE: placeholder name
@@ -211,9 +211,8 @@ struct ExplosionData	// NOTE: placeholder name
 	int unknown30;	// NOTE: placeholder name
 };
 
-class Explosive	// NOTE: placeholder name
+struct ItemType	// NOTE: placeholder name (formerly Explosive)
 {
-public:
 	char pad[0x1a0];
 	ExplosionData *explosion;	// NOTE: placeholder name
 };
@@ -221,7 +220,7 @@ public:
 class Entity
 {
 public:
-	void getExplosives(vector<HExplosive> *out, const Point &p, int radius);	// NOTE: placeholder name (0x5d6a80)
+	void getExplosives(vector<HItem> *out, const Point &p, int radius);	// NOTE: placeholder name (0x5d6a80)
 	const Point &getPosition();	// 0x45a4a0
 };
 
@@ -277,11 +276,11 @@ void CMap::updatePredictedExplosion()
 			logError("CMap::updatePredictedExplosion()","Possible invalid target, aborting");
 			return;
 		}
-		vector<HExplosive> explosives;
+		vector<HItem> explosives;
 		world->player->getExplosives(&explosives,target,-1);
 		for (unsigned int i = 0; i < explosives.size(); i++)
 		{
-			ExplosionData *explosion = ((Explosive *)explosives[i]->Protobuf::PingRequest::GetCachedSize())->explosion;
+			ExplosionData *explosion = explosives[i]->getType()->explosion;
 			if (explosion)
 			{
 				if (predicted.data == NULL)
@@ -296,13 +295,6 @@ void CMap::updatePredictedExplosion()
 //==================================================================
 // PlayerData::addPolymindSuspicion
 //==================================================================
-class HItem	// NOTE: placeholder layout
-{
-	int ID;
-public:
-	bool isValid() const;
-};
-
 class EntityRecord	// NOTE: placeholder name
 {
 public:
@@ -458,18 +450,17 @@ void PlayerData::addPolymindSuspicion(float amount, int type, HItem item)
 //==================================================================
 string unsignedToString(unsigned int value);	// NOTE: placeholder name (0x405290)
 
-// NOTE: the exe folds this getter (0x48e040) with the protobuf one, so it needs a name from that set
-namespace Protobuf
+// The object behind the global at 0xcefa8c is the input/key-map controller (op_r4_c.cpp KeyMapX, op_u5_s5.cpp OpU5_KeyMap).
+// Its field +0x74 (folded getter 0x48e040) is compared against the tick count; time beyond 10000 ms without it advancing is
+// subtracted from the session time as idle excess, so it behaves as the tick of the last input [INFERENCE for the name].
+class KeyMap	// NOTE: placeholder name
 {
-	class Stats_Combat
-	{
-	public:
-		virtual int GetCachedSize() const;
-	};
-}
+public:
+	unsigned int getLastInputTick();	// NOTE: placeholder name (0x48e040: [this+0x74])
+};
 
 extern unsigned int tickCount;	// NOTE: placeholder name (0xcaed20)
-extern Protobuf::Stats_Combat *sessionTimeSource;	// NOTE: placeholder name (0xcefa8c)
+extern KeyMap *keyMap;	// NOTE: placeholder name (0xcefa8c)
 
 unsigned int GM::getSessionTimeTotal()
 {
@@ -483,9 +474,9 @@ unsigned int GM::getSessionTimeTotal()
 		logError("GM::getSessionTimeTotal()","sessionIdleTime (" + unsignedToString(sessionIdleTime) + ") greater than recorded elapsed time (" + unsignedToString(tickCount - sessionStartTime) + ")");
 		return 0;
 	}
-	if (tickCount - sessionTimeSource->Protobuf::Stats_Combat::GetCachedSize() > 10000)
+	if (tickCount - keyMap->getLastInputTick() > 10000)
 	{
-		unsigned int excess = tickCount - sessionTimeSource->Protobuf::Stats_Combat::GetCachedSize() + sessionIdleTime - 10000;
+		unsigned int excess = tickCount - keyMap->getLastInputTick() + sessionIdleTime - 10000;
 		return tickCount - sessionStartTime - excess;
 	}
 	else
