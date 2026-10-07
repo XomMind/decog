@@ -1,4 +1,4 @@
-# team_d_04: dynamic initializers (and atexit destructors) of colour, handle, protobuf and other class globals (src/game/team_d_04.cpp)
+# team_d_04: dynamic initializers (and atexit destructors) of colour, handle, protobuf and other class globals, plus members of the Overmind unit-state class at 0xcf6888 and its plan object (src/game/team_d_04.cpp)
 ??__Ecols_cfe5a8@@YAXXZ,0xb32490,0x18
 ??__Ecol_d31654@@YAXXZ,0xb32660,0x15
 ??__Eunks_d01618@@YAXXZ,0xb37640,0x18
@@ -88,3 +88,8 @@ Unknown_45f320_45f560::serialize,0x6919f0,0x5bf
 Unknown_45f320_45f560::unserialize,0x691240,0x7a1
 Unknown_45f320_45f560::unknown69a5b0,0x69a5b0,0x41d
 Unknown_45f320_45f560::unknown69ac10,0x69ac10,0x945
+Unknown_45f320_45f560::unknown691fb0,0x691fb0,0x82e
+Unknown_45f320_45f560::unknown69b560,0x69b560,0x336
+Unknown_45f320_45f560::unknown69a0a0,0x69a0a0,0x509
+Unknown_45f320_45f560::reset690e00,0x690e00,0x43a
+Owned_45f890::unknown672f20,0x672f20,0x3eb

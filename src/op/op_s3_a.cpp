@@ -1813,14 +1813,14 @@ bool opS3a_contains9db330(vector<int> *list, int value);	// NOTE: placeholder na
 
 int Entity::unknown6008b0()
 {
-	int result;
+	int score;
 	int value = unknown50;
 	opd_clamp(1, value, 3);
 	if (unknown5d2380(0x54).isValid() && !unknown45a780())
 		value++;
 	value += unknown5d2090(0x6b);
-	result = minInt(100, (int)(((unknown5c8cb0() + 10) / 5 + 1) * (unknown5d1d70() / 100.0) * value));
-	return result;
+	score = minInt(100, (int)(((unknown5c8cb0() + 10) / 5 + 1) * (unknown5d1d70() / 100.0) * value));
+	return score;
 }
 
 HItem Entity::unknown5e3cb0(bool skipCore, int bonus, vector<int> *excluded, bool skipBroken, bool skipFlagged)

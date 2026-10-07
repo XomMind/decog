@@ -266,7 +266,7 @@ public:
 extern OpQ4d_KeyMap *opq4d_keyMap;	// NOTE: placeholder name
 
 void OpW7_unknown4b1c30();	// NOTE: placeholder name (0x4b1c30)
-void OpQ4d_unknown8feee0();	// NOTE: placeholder name
+void ops7_scrollRobot8feee0(bool up);	// NOTE: placeholder name (0x8feee0, defined in src/op/op_s7.cpp)
 void OpQ4d_unknown942d40(bool flag);	// NOTE: placeholder name
 bool opQ4d_recallHistory();	// NOTE: placeholder name (0x943a90)
 extern bool opq4d_d28fa9;	// NOTE: placeholder name
@@ -352,7 +352,7 @@ CRobotManual::CRobotManual(XConsole *parent, const Rect &rect, const Rect &rect2
 	Console *border = new Console(this,unknownb0.width,unknownb0.height,unknownb0.x,unknownb0.y,0,false,opq4d_rex.getConsole_4ab670()->getLayer(this) - 1);
 	border->setTitle(new ConsoleTitle(border,name,0,type));
 	border->animate("CType_Border");
-	textInput = new CTextInput(this,0,0,getWidth(),0,false,false,(int)OpQ4d_unknown942d40,(int)OpQ4d_unknown8feee0,(int)OpW7_unknown4b1c30,0,NULL,(int)opQ4d_recallHistory);
+	textInput = new CTextInput(this,0,0,getWidth(),0,false,false,(int)OpQ4d_unknown942d40,(int)ops7_scrollRobot8feee0,(int)OpW7_unknown4b1c30,0,NULL,(int)opQ4d_recallHistory);
 	textInput->setMaxLength_4544c0(getWidth() - 2);
 	opq4d_keyMap->unknown416570();
 	opq4d_keyMap->unknown416340(true);

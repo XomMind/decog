@@ -1947,7 +1947,15 @@ bool opw1_compareResults(OpW1_Result *a, OpW1_Result *b)	// NOTE: placeholder na
 	return a->distance < b->distance;
 }
 
-void opw1_deleteAll(vector<OpW1_Result*> *list) throw();	// NOTE: placeholder name (0x9d0670)
+struct OpV4d_Trivial;
+void OpV4d_deleteMapRecords(vector<OpV4d_Trivial *> &records);	// NOTE: placeholder name (op_v4d.cpp)
+
+// Defined here (it was only a stub) so LTCG can prove ~CSearchResults nothrow, as in the exe; folded at 0x9d0670.
+void opw1_deleteAll(vector<OpW1_Result*> *list)	// NOTE: placeholder name (0x9d0670)
+{
+	OpV4d_deleteMapRecords(*(vector<OpV4d_Trivial *> *)list);
+	list->clear();
+}
 
 class CSearchResults : public Console
 {

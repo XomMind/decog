@@ -387,10 +387,10 @@ int *C065_Rec517130::getTarget()
 		c065_fn4351e0(&a->m58);
 	else if (b)
 		c065_fn4351e0(&b->m3c);
-	int *result;
+	int *ret;
 	int *target;
-	result = a ? &a->m58 : (target = b ? &b->m3c : &c->m18c);
-	return result;
+	ret = a ? &a->m58 : (target = b ? &b->m3c : &c->m18c);
+	return ret;
 }
 
 class C065_Rec5171d0	// NOTE: placeholder name

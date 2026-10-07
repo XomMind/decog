@@ -62,9 +62,16 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
   define it in your file with a trivial body; lverify pairs it by address. Use `throw()` only where the exe has
   neither EH states nor the extra slot. Probes: `scratch/delta/newtemp/`.
 - Register rotation (eax/ecx/edx) off by one after an `if`: an empty `if (0) {}` / `if (false) {}` right after it
-  shifts the allocator without emitting code. A trailing dead `jmp` after a switch dispatch: `break;` before the first `case`.
+  shifts the allocator without emitting code. Consecutive stores that rotate wrong (`a = f; b = f; c = f;`) may need
+  one comma statement (`a = f, b = f, c = f;`). A trailing dead `jmp` after a switch dispatch: `break;` before the first `case`.
 - A new TU can change LTCG nothrow inference for files linked after it (and break their EH states); files in
   `src/util/` sort last in the link, which is a workable home for such TUs (note why at the top of the file).
+- Stubbed externs are 16-byte slots: an access at `[sym + 0x30]` can land on the *start of an unrelated stub* and
+  pair wrongly (or "match" by luck when the exe bytes are zero). For table/column accesses at non-zero offsets,
+  declare one extern per column so each access is at offset 0 of its own symbol.
+- `fmul dword ptr [const]`: write the constant as an `extern const float` (a literal `0.1f` can become a qword).
+  `vector::assign(16u, 0)` (size_type) vs `assign(16, 0)` (iterator template). Vectors whose `clear()` are distinct
+  exe functions need distinct element types.
 - A template instance over a type that other files define differently (e.g. XColor) can silently use another
   file's copy; give such instances private element types.
 

@@ -142,25 +142,26 @@ void OpV3g_moveBySize(vector<HEntity> &from, vector<HEntity> &to)	// NOTE: place
 
 void CMap::unknown8142d0(unsigned int type, bool fade)
 {
+	// NOTE: the exe pushes through vector<int>::push_back (0x9b9d30)
 	vector<unsigned int> types;
 	if (type != 0x12)
 	{
-		types.push_back(type);
+		((vector<int>&)types).push_back((int &)type);
 		if (types.back() == 7)
-			types.push_back(8);
+			((vector<int>&)types).push_back((int)8);
 		else if (types.back() == 9)
-			types.push_back(0xa);
+			((vector<int>&)types).push_back((int)0xa);
 	}
 	else
 	{
 		for (int i = 4; i <= 7; i++)
-			types.push_back((unsigned int)i);
-		types.push_back(8);
-		types.push_back(9);
-		types.push_back(0xa);
-		types.push_back(0xb);
-		types.push_back(0x10);
-		types.push_back(0x11);
+			((vector<int>&)types).push_back((int)(unsigned int)i);
+		((vector<int>&)types).push_back((int)8);
+		((vector<int>&)types).push_back((int)9);
+		((vector<int>&)types).push_back((int)0xa);
+		((vector<int>&)types).push_back((int)0xb);
+		((vector<int>&)types).push_back((int)0x10);
+		((vector<int>&)types).push_back((int)0x11);
 	}
 	for (unsigned int i = 0; i < types.size(); i++)
 	{

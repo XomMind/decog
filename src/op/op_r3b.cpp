@@ -107,6 +107,7 @@ class BS	// NOTE: placeholder name (the object behind the global at 0xcefc4c)
 {
 public:
 	HEntity getPlayer();	// NOTE: placeholder name (0x4630f0)
+	HEntity getEntity_45d250();	// NOTE: placeholder name (folded HEntity getter, 0x45d250)
 	void unknown465840(const Point &p, HEntity e);	// NOTE: placeholder name
 	bool unknown71ec60(const Point &p, vector<Point> visited);	// NOTE: placeholder name
 	void addPoint6a8(const Point &p);	// NOTE: placeholder name (0x465320)
@@ -277,7 +278,7 @@ bool Cell::unknown6701c0(int a, int b, OpR3b_Actor *actor)
 				} while (0);
 			}
 			if (terrain->base->unknown4c && rng.chance(50) && unknown670360(12, 1) >= 3)
-				world->unknown465840(position, world->getPlayer());
+				world->unknown465840(position, world->getEntity_45d250());
 		}
 		return true;
 	}

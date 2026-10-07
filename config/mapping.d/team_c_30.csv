@@ -1,0 +1,2 @@
+# team_c_30: effect description switch (0x55f080, called by OpS2_Target::describe) (src/game/team_c_30.cpp)
+C30_Effect::describe,0x55f080,0x10334

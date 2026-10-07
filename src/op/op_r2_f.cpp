@@ -866,7 +866,7 @@ public:
 
 void OpR2_Named::unknown63c660()
 {
-	if (name[0] == '-')
+	if (name[1] == '-')
 		name = "Borg" + string(name.begin() + 4,name.end());
 	else
 		name.insert(0,"Borg ");
