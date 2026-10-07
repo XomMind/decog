@@ -60,3 +60,6 @@ CFovEnemiesButton::input,0x98a5f0,0x55b
 ?canUse@OpU5_SlotTable@@QAE_NVHEntity@@I@Z,0x7ac0e0,0xde
 ?getName@Prop@@QAEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,0x45c5b0,0x14
 ?addNewInventoryItemIndicator@CMapFine@@QAEXVHItem@@@Z,0x876860,0x33f
+??0CUfdArea@@QAE@PAVXConsole@@HABUPos@@H@Z,0x997140,0xd6
+??0CEvolveMain@@QAE@PAVXConsole@@ABURect@@H@Z,0x98b4d0,0x3d7
+?update@CMainUiButton@@UAEXXZ,0x989d00,0x420

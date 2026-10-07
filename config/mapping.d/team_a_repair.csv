@@ -53,7 +53,6 @@ OpS1c_RecList::addAll,0x4566c0,0xbf
 ??0Pos@@QAE@H@Z,0x409990,0x21
 ??0Rect@@QAE@HHHH@Z,0x456940,0x33
 OpW6_Rex::getHighlighter,0x4ab670,0x11
-??0CPartswapPart@@QAE@PAVXConsole@@PAVConsole@@@Z,0x4aa830,0x79
 OpQ1_createDirectories,0x409240,0x25c
 opr1c_initColors_433f60,0x433f60,0x1d3
 ?opr1c_getScoreColor@@YA?AUXColor@@H@Z,0x4348a0,0x69
@@ -63,3 +62,6 @@ CIntel::unknown48fa80,0x48fa80,0x1b5
 opU1_splitAfterChar,0x4090e0,0x92
 ?render@CType@@UAEXXZ,0x4b1ef0,0x385
 OpR1h_StatSet::add4722b0,0x4722b0,0x184
+CTitleAnimated::CTitleAnimated,0x4b28f0,0xb2
+??0CShellButton@@QAE@PAVXConsole@@ABURect@@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H_N3@Z,0x4b0840,0x11f
+??0CEffects@@QAE@PAVXConsole@@@Z,0x4b2dd0,0x25e
