@@ -84,8 +84,16 @@ struct OpR3e_Rec	// NOTE: placeholder name
 	int type;
 	int turn;
 
-	OpR3e_Rec(const Point &p, int type_, int turn_) throw();	// 0x460010
+	OpR3e_Rec(const Point &p, int type_, int turn_);	// 0x460010 (exe body folded with Calls_460010::delegate)
 };
+
+// NOTE: defined here without throw() so that LTCG proves it nothrow, as in the exe (keeps the extra slot in 0x6c0f10)
+OpR3e_Rec::OpR3e_Rec(const Point &p, int type_, int turn_)
+	: pos(p),
+	type(type_),
+	turn(turn_)
+{
+}
 
 extern vector<OpR3e_Rec *> opr3e_recs;	// NOTE: placeholder name (0xcf0fa8)
 extern vector<Area> opr3e_areas;	// NOTE: placeholder name (0xd204cc)
@@ -112,7 +120,7 @@ void OpR3e_unknown6c0f10(const Point &p, int type, int duration)	// NOTE: placeh
 			return;
 		}
 	}
-	opr3e_recs.push_back((OpR3e_Rec *)(new OpR3e_Rec(p, type, turn)));
+	opr3e_recs.push_back(new OpR3e_Rec(p, type, turn));
 }
 
 bool OpR3e_unknown6c1080(const Point &p)	// NOTE: placeholder name

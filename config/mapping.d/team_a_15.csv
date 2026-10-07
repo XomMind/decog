@@ -1,0 +1,4 @@
+# team_a_15: prop/entity record builders (src/game/team_a_15.cpp)
+PropRecords_460290::add,0x460290,0x89
+EntityRecords_460a00::add,0x460a00,0x95
+Snapshot_46e770::init,0x46e770,0x17b

@@ -17,6 +17,8 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - `tools/try.sh a.cpp [b.cpp] -- 'Name=0xVA' ...`: compile + LTCG link in a private temp dir and compare.
   Safe to run in parallel; about 20 s. `Name` is `Class::member` or mangled. Unknown callees and globals are
   stubbed automatically, so you only need declarations for them.
+- `tools/lvx.py <build dir> <extra.csv> [name-to-drop ...]`: lverify with candidate rows injected (or rows dropped)
+  without touching `config/`. Never put unproven rows in `config/mapping.d/`: main auto-commits only all-MATCH builds.
 - `tools/discover.py <ltcg dir> [filter]`: finds exe functions that code you already built matches by accident.
 - `tools/build.sh`: full build + verify + progress (about 3.5 min, writes `build/full`). Only one may run at a
   time. For a private full check: `.venv/bin/python tools/ltcg.py build/full_X $(.venv/bin/python tools/sources.py) && .venv/bin/python tools/lverify.py --dir build/full_X`.
@@ -37,9 +39,38 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 
 ## Matching tips (`/Od`)
 - Code gen is literal: the order of statements, temporaries, `for` vs `while`, `++i` vs `i++` on iterators,
-  pass-by-value vs reference, and `bool` vs `int` all show up. Locals' stack offsets follow declaration order.
+  pass-by-value vs reference, and `bool` vs `int` all show up. Locals' stack offsets depend on their names (below).
 - Exception-handling state numbers (`mov byte/dword ptr [ebp-4], N`) count objects with destructors, so
   temporaries (e.g. `string` built from `+`) must appear in the same order as in the exe.
 - `this` arrives in `ecx` (thiscall); member offsets come from `[reg+off]`: pad classes with `char pad[N]`.
 - `??__E` / `??__F` are a global's dynamic initializer / atexit destructor; they sit near the end of `.text`
   (0xb2xxxx-0xb6xxxx), one per global, ordered by translation unit.
+- Stack slots of locals are NOT in declaration order: within a scope, VS2010 `/Od` orders locals by a 16-bucket
+  hash of the *name* (lower bucket = higher address, closer to ebp; same bucket: later-declared sits higher;
+  outer scopes before inner). When only `[ebp-x]` offsets differ, rename locals. Measured buckets for ~450 common
+  names: `docs/local-name-buckets.txt` (probe: `tools/probe/`). Generating many name variants in one `try.sh`
+  file is quick.
+- LTCG adds an EH frame when *any* TU declares a callee without `throw()`. If the exe has no EH frame but the full
+  build does, declare the callees under names unique to your file with `throw()` (they stub and pair by address).
+- lverify pairs each of our symbols with one exe address. With identical code folded by ICF in the exe, a row can
+  pass in `try.sh` yet DIFF (or break older rows) in the full verify; prove mapping-only rows with a private full build.
+- Extra stack slot around `new` (memory slot, ctor result, *extra slot*, then the variable or argument) with no EH
+  states: VS2010 gives every `new` of a ctor that might throw a result temporary; when LTCG later proves the ctor
+  nothrow it deletes the EH state stores but keeps the slot. LTCG can prove it only if the ctor is declared WITHOUT
+  `throw()` and is defined in the link together with everything it calls (one stub in the chain = "may throw").
+  Recipe: for an unmapped/folded ctor, declare a placeholder class (your own name) whose ctor has no `throw()` and
+  define it in your file with a trivial body; lverify pairs it by address. Use `throw()` only where the exe has
+  neither EH states nor the extra slot. Probes: `scratch/delta/newtemp/`.
+- Register rotation (eax/ecx/edx) off by one after an `if`: an empty `if (0) {}` / `if (false) {}` right after it
+  shifts the allocator without emitting code. A trailing dead `jmp` after a switch dispatch: `break;` before the first `case`.
+- A new TU can change LTCG nothrow inference for files linked after it (and break their EH states); files in
+  `src/util/` sort last in the link, which is a workable home for such TUs (note why at the top of the file).
+- A template instance over a type that other files define differently (e.g. XColor) can silently use another
+  file's copy; give such instances private element types.
+
+## References
+- `XomMind/cogbench` `notes/b17.1-luigiai.md` (branch `retail-build-support`; local copy in `scratch/ref/`): runtime RE
+  notes for this exact build: LuigiAi struct/globals, the map object at 0xCFD44C, the Cell layout (+0x30 coord,
+  +0x3A doorOpen, +0x44 prop, +0x48 entity, +0x4C items), Scorekeeper functions (0x474b90 outputScoresheet,
+  0x47f450 scorehistory append, 0x480270 createProtobuf), cellAt 0x9cf7d0, updateLuigiAiMapTile 0x9f2ce0.
+  Useful for names and layouts; it is a research log, so later rounds supersede earlier ones.

@@ -33,3 +33,4 @@ CIntelLine::mouseEnter,0x48f7d0,0x2c
 CGamoverButton::mouseEnter,0x48ffb0,0x2c
 CInfoButton::mouseEnter,0x4ae770,0x2c
 playSound_4fd9c0,0x4fd9c0,0x13
+Progress_46c930::countInCategory,0x46c970,0x74

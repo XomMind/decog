@@ -17,3 +17,5 @@ Rolls_460670::next,0x460670,0x56
 Console::countAll_48c5e0,0x48c5e0,0x63
 Console::stopAll_48c650,0x48c650,0x57
 Areas_4594f0::setBoth,0x4594f0,0x2e
+Unknown_454340_4543b0::~Unknown_454340_4543b0,0x4543b0,0x71
+SoundQueue_456780::merge,0x456780,0x6c

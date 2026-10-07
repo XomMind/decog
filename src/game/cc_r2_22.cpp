@@ -205,10 +205,8 @@ public:
 	char pad188[0x1a0 - 0x188];
 };
 
-REX::REX()
-{
-	root = NULL;
-}
+// REX::REX() (0x418820) lives in team_a_repair.cpp: compiled this early in the link order, LTCG cannot yet prove
+// the member constructors nothrow and emits an EH frame the exe does not have.
 
 bool REX::unknown4188e0()
 {

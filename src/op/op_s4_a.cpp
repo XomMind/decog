@@ -252,6 +252,7 @@ void OpS4_Unit::unknown699720(OpS4_Brain *brain_, bool flag)
 		{
 			opS4_gm->unknown7929d0();
 		}
+		if (0) {}	// NOTE: no code; shifts MSVC's register rotation to match the exe
 		plan = new OpS4_Plan();
 	}
 }

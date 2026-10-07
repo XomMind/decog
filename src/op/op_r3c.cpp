@@ -171,8 +171,8 @@ public:
 	char pad38[0x4c - 0x38];
 	int unknown4c;				// NOTE: placeholder name
 	vector<OpR3c_Squad *> squads;	// NOTE: placeholder name
-	char pad5c[0x60 - 0x5c];
 	OpR3c_IntGrid unknown60;	// NOTE: placeholder name
+	char pad6c[0x70 - 0x6c];
 	int unknown70;				// NOTE: placeholder name
 	char pad74[0x88 - 0x74];
 	int unknown88;				// NOTE: placeholder name
@@ -390,12 +390,7 @@ int OpR3c_Overmind::unknown683410(HEntity e, vector<HEntity> &out)
 
 void OpR3c_Overmind::unknown684c40()
 {
-	int extra;
-	if (opr3c_mapObjects[9] != 0)
-		extra = opr3c_resistTable2[opr3c_mapObjects[9]];
-	else
-		extra = 0;
-	unknown70 = world->getTurn() + rng.rangeInt((float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][0],(float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][1]) + extra + world->unknown463ba0() * 75;
+	unknown70 = world->getTurn() + ((opr3c_mapObjects[9] ? opr3c_resistTable2[opr3c_mapObjects[9]] : 0) + rng.rangeInt((float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][0],(float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][1])) + world->unknown463ba0() * 75;
 	unknown60.fill(0);
 }
 

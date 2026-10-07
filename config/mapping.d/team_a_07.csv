@@ -31,3 +31,5 @@ Weapon_457490::unknown4575d0,0x4575d0,0x46
 Item_4578e0::unknown4578e0,0x4578e0,0x1a
 Named_4579d0::hasName,0x4579d0,0x20
 Unknown_4588d0_439630::Unknown_4588d0_439630,0x4588d0,0x16
+ObjList_4563c0::~ObjList_4563c0,0x4563c0,0x1f
+Unknown_4588d0_439630::~Unknown_4588d0_439630,0x439630,0x1f

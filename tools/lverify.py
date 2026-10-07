@@ -47,11 +47,14 @@ class Image:
             return {'??_C@_0_pooled_suffix'}
         return None
 
+MAP_ALL = []   # every (name, VA) in the last loaded map: TU-local statics (time.inl inlines, static helpers) recur
+
 def load_map():
-    out = {}
+    out = {}; del MAP_ALL[:]
     for line in open(MAP, encoding='latin1'):
         m = re.match(r'\s*[0-9a-f]{4}:[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s', line)
-        if m and int(m.group(2), 16): out[m.group(1)] = int(m.group(2), 16)
+        if m and int(m.group(2), 16):
+            out[m.group(1)] = int(m.group(2), 16); MAP_ALL.append((m.group(1), int(m.group(2), 16)))
     return out
 
 def const_len(name, img, va):
@@ -207,6 +210,12 @@ def _compare(name, theirs, tva, ours, ova, size, verbose):
                 else:   # Compare the complete memory operand; pointer arguments need eight bytes.
                     width = next((op.size for op in a.operands if op.type == capstone.x86.X86_OP_MEM), 8)
                     same = theirs.read(av, width) == ours.read(bv, width)
+                    if not same and not any(op.type == capstone.x86.X86_OP_MEM for op in a.operands):
+                        # Unnamed pointer operand into .rdata on both sides that reads as text: a C string
+                        # literal, which the linker pools next to unrelated data. Compare through its NUL.
+                        tn, on = rdata_text_len(theirs, av), rdata_text_len(ours, bv)
+                        if tn and tn == on and theirs.read(av, tn) == ours.read(bv, on):
+                            same = True; LIT_STAGE.append((av, tn))
             else:
                 same = av == bv
             if same:
@@ -221,6 +230,14 @@ def _compare(name, theirs, tva, ours, ova, size, verbose):
     if verbose or not ok:
         for p in problems[:40]: print("      " + p)
     return ok
+
+def rdata_text_len(img, va):
+    """Length including the NUL if va is inside .rdata and starts a printable C string (<= 512 bytes), else 0."""
+    if not any(s.Name.rstrip(b'\0') == b'.rdata' and img.base + s.VirtualAddress <= va < img.base + s.VirtualAddress + s.Misc_VirtualSize
+               for s in getattr(img.pe, "sections", ())): return 0
+    b = img.read(va, 512); end = b.find(b'\0')
+    if end < 0 or any(not (32 <= c < 127 or c in (9, 10, 13)) for c in b[:end]): return 0
+    return end + 1
 
 def is_stub(img, va):
     """A name that exists in our link only as a generated stub (zero-filled data), not as code."""
@@ -239,6 +256,8 @@ def map_names(mp):
     """VA -> {mangled, demangled} for our linked image"""
     out = {}
     for n, va in mp.items(): out.setdefault(va, set()).update((n, demangle(n)))
+    for n, va in MAP_ALL:
+        if mp.get(n) is not None and va not in out: out[va] = {n, demangle(n)}   # other copies of a TU-local static
     return out
 
 def exe_names():

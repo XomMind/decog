@@ -1,0 +1,24 @@
+# team_b_repair: existing definitions in other files repaired by bravo (see file comments)
+OpS3e_TurnQueue::add,0x672310,0x135
+OpS3e_TurnQueue::unknown672450,0x672450,0x12e
+OpS3e_TurnQueue::unknown672580,0x672580,0x17b
+OpS3e_TurnQueue::unknown6728c0,0x6728c0,0xbc
+OpS4_Unit::unknown699720,0x699720,0xcf
+?opt7_animateConsoles@@YAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x964cb0,0xa5
+OpT7_Hud::unknown9650c0,0x9650c0,0x160
+OpT7_Hud::unknown964d60,0x964d60,0x220
+Prop::unknown665860,0x665860,0x70
+Cell::unknown670150,0x670150,0x6d
+OpR3c_Overmind::unknown684c40,0x684c40,0xb2
+CMachine::~CMachine,0x4afbd0,0x69
+CCodes::~CCodes,0x4affd0,0x69
+Entity::unknown5ddf50,0x5ddf50,0x528
+OpV3h_Map::unknown8279c0,0x8279c0,0x330
+CInfo::unknown8b3d50,0x8b3d50,0x2b4
+??R?$Array2D@H@@QAEAAHHH@Z,0x9cfe20,0x86
+??R?$Array2D@H@@QAEAAHABUPoint@@@Z,0x9cfd90,0x90
+?front@?$vector@VHEntity@@V?$allocator@VHEntity@@@std@@@std@@QAEAAVHEntity@@XZ,0x9b7060,0x20
+?getType@Item@@QAEHXZ,0x44aec0,0x11
+EndObjB::unknown508610,0x508610,0xa7
+OpR2b_Engine::unknown50fb50,0x50fb50,0x96
+?OpR3e_unknown6c0f10@@YAXABUPoint@@HH@Z,0x6c0f10,0x16a

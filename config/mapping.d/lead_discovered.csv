@@ -1102,15 +1102,10 @@
 ?setCharRow@XConsole@@QAEXHHHHUXColor@@0@Z,0x4298a0,0x65
 ?absmod@@YAHHH@Z,0x420970,0x2e
 ?lattice@@YAMPAUperlin_data_t@@HMHMHMHM@Z,0x41b190,0xd7
-?TCOD_noise_turbulence_simplex@@YAMPAXPAMM@Z,0x420910,0x21
-?TCOD_noise_fbm_simplex@@YAMPAXPAMM@Z,0x420910,0x21
-?TCOD_noise_turbulence_perlin@@YAMPAXPAMM@Z,0x420910,0x21
 ?TCOD_noise_fbm_perlin@@YAMPAXPAMM@Z,0x420910,0x21
 ?normalize@@YAXPAUperlin_data_t@@PAM@Z,0x41b270,0x8e
-?TCOD_noise_turbulence_wavelet@@YAMPAXPAMM@Z,0x420910,0x21
 ??0TCODNoise@@QAE@HW4TCOD_noise_type_t@@@Z,0x421490,0x52
 ?get@TCODNoise@@QAEMPAMW4TCOD_noise_type_t@@@Z,0x421520,0x41
-?getTurbulence@TCODNoise@@QAEMPAMMW4TCOD_noise_type_t@@@Z,0x421570,0x4f
 ?getFbm@TCODNoise@@QAEMPAMMW4TCOD_noise_type_t@@@Z,0x421570,0x4f
 ?protobuf_RegisterTypes@protobuf_scoresheet_2eproto@@YAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x4dbd00,0x1c
 ?AddDescriptors@protobuf_scoresheet_2eproto@@YAXXZ,0x4dbd60,0x17

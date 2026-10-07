@@ -152,12 +152,20 @@ public:
 	Push_453b40() throw();
 };
 
-class Unknown_454340_4543b0	// NOTE: placeholder name (shared with team_d_04.cpp; destructor not defined here)
+struct OpV4d_Trivial;
+void deleteMapRecords_4543b0(vector<OpV4d_Trivial *> &v) throw();	// NOTE: placeholder name (OpV4d_deleteMapRecords, nothrow in the exe)
+
+class HExplosive	// NOTE: placeholder layout
+{
+	int	ID;
+};
+
+class Unknown_454340_4543b0	// NOTE: placeholder name (shared with team_d_04.cpp)
 {
 public:
-	vector<unsigned int> unknown0;
-	vector<unsigned int> unknown10;
-	vector<unsigned int> unknown20;
+	vector<OpV4d_Trivial *> unknown0;
+	vector<Point> unknown10;
+	vector<HExplosive> unknown20;
 	char pad30[0x90 - 0x30];
 	HProp unknown90;
 	int unknown94;
@@ -167,6 +175,11 @@ public:
 	Unknown_454340_4543b0();
 	~Unknown_454340_4543b0();
 };
+
+Unknown_454340_4543b0::~Unknown_454340_4543b0()
+{
+	deleteMapRecords_4543b0(unknown0);
+}
 
 Unknown_454340_4543b0::Unknown_454340_4543b0()
 {
@@ -341,4 +354,18 @@ void Console::stopAll_48c650()
 	vector<XConsole*> *subs = getSubconsoles();
 	for (unsigned int i = 0; i < subs->size(); i++)
 		((Console *)(*subs)[i])->stopAll_48c650();
+}
+
+struct SoundQueue_456780 : public vector<OpQ5_U9d0300>	// NOTE: placeholder name
+{
+	void merge(vector<OpQ5_U9d0300> &other, bool atFront);
+};
+
+void SoundQueue_456780::merge(vector<OpQ5_U9d0300> &other, bool atFront)
+{
+	if (atFront)
+		insert(begin(),other.begin(),other.end());
+	else
+		OpQ5_appendVector(*this,other);
+	other.clear();
 }

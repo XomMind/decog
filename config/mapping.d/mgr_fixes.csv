@@ -1,0 +1,7 @@
+# mgr_fixes: integration fixes to existing sources (CType::CType in src/op/op_w7.cpp, Entity::unknown5e3cb0 in src/op/op_s3_a.cpp; TCOD noise rows for src/thirdparty noise_c per alpha)
+CType::CType,0x4b1c50,0x261
+Entity::unknown5e3cb0,0x5e3cb0,0x306
+?TCOD_noise_fbm_simplex@@YAMPAXPAMM@Z,0x420940,0x21
+_TCOD_noise_new,0x41b300,0x17f
+_TCOD_noise_get,0x421360,0x74
+_TCOD_noise_get_ex,0x421170,0xd8

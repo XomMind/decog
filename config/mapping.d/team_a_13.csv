@@ -1,0 +1,4 @@
+# team_a_13: engine item ctor/dtor, Engine dtor (src/game/team_a_13.cpp)
+EngineItem_454a80::EngineItem_454a80,0x454a80,0xa2
+EngineItem_454a80::~EngineItem_454a80,0x454b30,0x80
+Engine::~Engine,0x454ca0,0x8a

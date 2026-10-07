@@ -1,5 +1,4 @@
 # team_b_05: game-logic helpers, batch 3 (src/game/team_b_05.cpp)
-TeamB_Overmind::scheduleNext684c40,0x684c40,0xb2
 TeamB_TargetMemory::setPos873ad0,0x873ad0,0xc4
 ?teamb_find8f8930@@YAHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x8f8930,0xbf
 ?teamb_find8f89f0@@YAHABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x8f89f0,0xbf

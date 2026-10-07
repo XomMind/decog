@@ -214,12 +214,7 @@ void Prop::unknown665cb0()
 
 void Prop::unknown665860(OpS3c_Attack *attack)
 {
-	int resist;
-	if (attack->type >= 7)
-		resist = 100;
-	else
-		resist = data->base->resists[attack->type];
-	unknown65f520(attack->damage * resist / 100, attack->type, 0, 0, 0, HProp(), 0, 0, 0);
+	unknown65f520(attack->damage * (attack->type >= 7 ? 100 : data->base->resists[attack->type]) / 100, attack->type, 0, 0, 0, HProp(), 0, 0, 0);
 }
 
 bool Prop::unknown6658d0(int a, int b, OpS3c_Actor *actor)

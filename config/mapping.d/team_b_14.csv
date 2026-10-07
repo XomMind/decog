@@ -1,0 +1,3 @@
+# team_b_14: CLore hotkey select, Overmind prop alert (src/game/team_b_14.cpp)
+CLore::selectKey7eb9b0,0x7eb9b0,0x1ea
+OpR3c_Overmind::propDestroyed681eb0,0x681eb0,0x1f7

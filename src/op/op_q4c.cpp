@@ -81,6 +81,7 @@ class Console : public XConsole
 public:
 	Console(XConsole *parent, int width, int height, int x, int y, int font, bool hidden, int layer);
 	Console(XConsole *parent, Rect rect, int font, bool hidden, int layer);
+	virtual ~Console();
 	virtual void open();
 	virtual void close();
 	virtual int getFrame();
@@ -370,6 +371,7 @@ class CCodes : public Console
 {
 public:
 	CCodes(XConsole *parent, const Rect &rect);
+	virtual ~CCodes();
 	virtual void open();
 	virtual void close();
 	virtual void trigger(const string &command, int value);
@@ -383,6 +385,11 @@ public:
 	Console *unknown7c;	// NOTE: placeholder name
 };
 extern CCodes *opq4c_cec104;	// NOTE: placeholder name
+
+CCodes::~CCodes()
+{
+	opq4c_cec104 = NULL;
+}
 
 bool opq4c_createCodes8ff5e0()	// NOTE: placeholder name
 {

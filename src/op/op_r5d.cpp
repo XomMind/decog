@@ -83,6 +83,7 @@ class Console : public XConsole
 public:
 	Console(XConsole *parent, int width, int height, int x, int y, int font, bool hidden, int layer);
 	Console(XConsole *parent, Rect rect, int font, bool hidden, int layer);
+	virtual ~Console();
 	virtual void open();
 	virtual void close();
 	virtual int getFrame();
@@ -372,6 +373,7 @@ class CMachine : public Console
 {
 public:
 	CMachine(XConsole *parent, HProp prop_);
+	virtual ~CMachine();
 	virtual void open();
 	virtual void close();
 	void unknown8fd5d0();	// NOTE: placeholder name
@@ -398,6 +400,11 @@ public:
 	int unknown90;	// NOTE: placeholder name
 	int unknown94;	// NOTE: placeholder name
 };
+
+CMachine::~CMachine()
+{
+	opR5d_cec0fc = NULL;
+}
 
 void CMachineTarget::unknown8fba20()
 {

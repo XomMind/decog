@@ -1650,8 +1650,16 @@ void OpW6_Inventory::setTimed(HItem item)
 class OpW6_Rex	// NOTE: placeholder name (0xd223f0)
 {
 public:
-	XConsole *getHighlighter() throw();	// NOTE: placeholder name (folded getter 0x4ab670)
+	XConsole *getHighlighter();	// NOTE: placeholder name (folded getter 0x4ab670)
+
+	char pad0[0x6c];
+	XConsole *highlighter;	// NOTE: placeholder name
 };
+
+XConsole *OpW6_Rex::getHighlighter()
+{
+	return highlighter;
+}
 extern OpW6_Rex opw6_rex;	// NOTE: placeholder name
 extern XColor *opw6_d1ecd4;	// NOTE: placeholder name
 extern XColor *opw6_d204ac;	// NOTE: placeholder name

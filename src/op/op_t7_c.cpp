@@ -68,24 +68,19 @@ void OpT7_Hud::unknown964d60(int type)
 {
 	if (!opt7_d28e4f)
 		return;
-	if ((opt7_cec078->isHidden() || opt7_cec078->getState_48c360() == 3)
+	if (!((opt7_cec078->isHidden() || opt7_cec078->getState_48c360() == 3)
 		&& (opt7_cec07c->isHidden() || opt7_cec07c->getState_48c360() == 3)
 		&& (opt7_cec084->isHidden() || opt7_cec084->getState_48c360() == 3)
 		&& (opt7_cec088->isHidden() || opt7_cec088->getState_48c360() == 3)
-		&& (opt7_cec08c->isHidden() || opt7_cec08c->getState_48c360() == 3))
-	{
-		unknown74 = type;
-		switch (type)
-		{
-			case 0x1d: opt7_animateConsoles("A_CEffect_StasisB"); break;
-			case 0x1e: opt7_animateConsoles("A_CEffect_StasisP"); break;
-			case 0x1f: opt7_animateConsoles("A_CEffect_Core"); break;
-			case 0x20: opt7_animateConsoles("A_CEffect_Heat"); break;
-		}
-	}
-	else
-	{
+		&& (opt7_cec08c->isHidden() || opt7_cec08c->getState_48c360() == 3)))
 		return;
+	unknown74 = type;
+	switch (type)
+	{
+		case 0x1d: opt7_animateConsoles("A_CEffect_StasisB"); break;
+		case 0x1e: opt7_animateConsoles("A_CEffect_StasisP"); break;
+		case 0x1f: opt7_animateConsoles("A_CEffect_Core"); break;
+		case 0x20: opt7_animateConsoles("A_CEffect_Heat"); break;
 	}
 }
 

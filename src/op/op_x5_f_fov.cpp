@@ -24,6 +24,15 @@ struct XEvent	// NOTE: placeholder name
 
 struct EntityData4563c0;
 
+// NOTE: the exe destroys `visible` with the vector destructor folded at 0x9b7e00 (vector<HExplosive>), so the local
+// is declared with that element type (same 4-byte handle layout as src/op/op_s1d.cpp) and cast at its uses.
+class HExplosive
+{
+	int	ID;
+public:
+	HExplosive();
+};
+
 class XConsole
 {
 public:
@@ -183,13 +192,13 @@ bool CFovEnemiesButton::input(void *event)
 				opx5f_cec054->unknown8069e0(opx5f_world->getPlayer()->getPosition(),false);
 			else
 			{
-				vector<EntityData4563c0*> visible;
+				vector<HExplosive> visible;
 				for (unsigned int i = 0; i < opx5f_world->unknown4636b0()->size(); i++)
 				{
 					if (region.contains_40b750((*opx5f_world->unknown4636b0())[i]->getPosition()))
-						OpX5_addUniqueEntityData(visible,*(EntityData4563c0**)&(*opx5f_world->unknown4636b0())[i]);
+						OpX5_addUniqueEntityData((vector<EntityData4563c0*>&)visible,*(EntityData4563c0**)&(*opx5f_world->unknown4636b0())[i]);
 				}
-				opx5f_cec054->unknown807f40(visible);
+				opx5f_cec054->unknown807f40((vector<EntityData4563c0*>&)visible);
 				opR1d_4541b0(0x39,0,0);
 			}
 		}

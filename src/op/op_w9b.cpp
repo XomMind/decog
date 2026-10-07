@@ -105,6 +105,7 @@ public:
 class Console : public XConsole
 {
 public:
+	virtual ~Console();	// 0x48c2b0
 	virtual void open();	// NOTE: placeholder name
 	virtual void close();	// NOTE: placeholder name
 	virtual int getFrame();	// NOTE: placeholder name
@@ -188,6 +189,7 @@ class CGameoverAchievements : public Console
 {
 public:
 	CGameoverAchievements(XConsole *parent, const Rect &rect);
+	virtual ~CGameoverAchievements() {}
 };
 
 CGameoverAchievements::CGameoverAchievements(XConsole *parent, const Rect &rect)

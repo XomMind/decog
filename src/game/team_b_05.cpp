@@ -4,36 +4,7 @@
 #include <vector>
 using namespace std;
 
-//==================================================================
-// Overmind: next assault turn
-//==================================================================
-
-class RNG { public: int rangeInt(float a, float b); };
-extern RNG rng;	// 0xd30908
-class OpR3c_GameData { public: int unknown46f4e0(); };	// NOTE: placeholder name
-extern OpR3c_GameData opr3c_gameData;	// NOTE: placeholder name (0xd1e860)
-class BS { public: int getTurn(); int unknown463ba0(); };	// NOTE: placeholder name
-extern BS *teamb_world;	// NOTE: placeholder name (0xcefc4c)
-extern const int opr3c_resistTable2[];	// NOTE: placeholder name (0xb989b4)
-extern const int opr3c_ranges[][5];	// NOTE: placeholder name (0xb93790)
-extern vector<int> opr3c_mapObjects;	// NOTE: placeholder name (0xcf4a04)
-class OpR3c_IntGrid { int width; int height; int *data; public: void fill(int value); };	// NOTE: placeholder name (0x9cf020)
-
-class TeamB_Overmind	// NOTE: placeholder name (OpR3c_Overmind in src/op/op_r3c.cpp)
-{
-public:
-	char pad[0x60];
-	OpR3c_IntGrid grid;
-	char pad6c[4];
-	int nextTurn;
-	void scheduleNext684c40();
-};
-
-void TeamB_Overmind::scheduleNext684c40()	// 0x684c40
-{
-	nextTurn = teamb_world->getTurn() + ((opr3c_mapObjects[9] ? opr3c_resistTable2[opr3c_mapObjects[9]] : 0) + rng.rangeInt((float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][0],(float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][1])) + teamb_world->unknown463ba0() * 75;
-	grid.fill(0);
-}
+// NOTE: 0x684c40 is OpR3c_Overmind::unknown684c40 in src/op/op_r3c.cpp.
 
 //==================================================================
 // remembered target position, name lookups, fine-map timers

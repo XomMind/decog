@@ -1,9 +1,6 @@
 # team_b_04: game-logic helpers, batch 2 (src/game/team_b_04.cpp)
-TeamB_Cell::applyAttack670150,0x670150,0x6d
-TeamB_Prop::applyAttack665860,0x665860,0x70
 TeamB_TargetMemory::getTarget872e40,0x872e40,0xaa
 TeamB_TargetMemory::init873a50,0x873a50,0x78
 ?teamb_create95a640@@YAXH@Z,0x95a640,0x7e
 TeamB_7abf80::check7abf80,0x7abf80,0x8d
-?teamb_animateHud964cb0@@YAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x964cb0,0xa5
 ?teamb_parenthesized900870@@YA_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@AAV12@@Z,0x900870,0xa6

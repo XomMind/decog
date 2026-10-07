@@ -140,6 +140,7 @@ extern RNG rng;
 class Console : public XConsole
 {
 public:
+	virtual ~Console();	// 0x48c2b0
 	virtual void open();	// NOTE: placeholder name
 	virtual void close();	// NOTE: placeholder name
 	virtual int getFrame();	// NOTE: placeholder name
@@ -700,6 +701,7 @@ class CLogMsgs : public Console	// NOTE: placeholder name
 {
 public:
 	CLogMsgs(XConsole *parent, int type_);
+	virtual ~CLogMsgs() { consoles.clear(); lines.clear(); }
 
 	virtual bool input(XEvent *event);
 	virtual void update();
@@ -747,6 +749,7 @@ class CLog : public Console
 {
 public:
 	CLog(XConsole *parent, int mode_);
+	virtual ~CLog() {}
 
 	virtual bool input(XEvent *event);
 	virtual void update();
@@ -1840,6 +1843,7 @@ class CAllies : public Console
 {
 public:
 	CAllies(XConsole *parent);
+	virtual ~CAllies() {}
 
 	virtual bool input(XEvent *event);
 	virtual void update();
@@ -2734,6 +2738,7 @@ class CIntel : public Console
 {
 public:
 	CIntel(XConsole *parent);
+	virtual ~CIntel() {}
 
 	virtual bool input(XEvent *event);
 	virtual void update();

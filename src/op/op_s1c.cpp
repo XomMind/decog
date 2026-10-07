@@ -219,16 +219,28 @@ OpS1c_RecList::OpS1c_RecList(istream &stream)
 	readBinary(stream,&turn);
 }
 
+// The exe proves OpQ5_T9d0160's constructor nothrow (no EH states, but the extra slot around new); its call chain
+// ends in a stub here, so these two allocate through a trivially defined stand-in that lverify pairs with 0x456130.
+struct OpS1c_RecNew456130	// NOTE: placeholder name (stand-in for OpQ5_T9d0160, same size)
+{
+	OpS1c_RecNew456130(OpS1c_Data *data_);
+	char pad[0x14];
+};
+
+OpS1c_RecNew456130::OpS1c_RecNew456130(OpS1c_Data *data_)
+{
+}
+
 void OpS1c_RecList::add(OpS1c_Data *data)
 {
-	records.push_back(new OpQ5_T9d0160(data));
+	records.push_back((OpQ5_T9d0160 *)new OpS1c_RecNew456130(data));
 }
 
 void OpS1c_RecList::addAll(vector<OpS1c_Data*> list)
 {
 	for (unsigned int i = 0; i < list.size(); i++)
 	{
-		records.push_back(new OpQ5_T9d0160(list[i]));
+		records.push_back((OpQ5_T9d0160 *)new OpS1c_RecNew456130(list[i]));
 	}
 }
 

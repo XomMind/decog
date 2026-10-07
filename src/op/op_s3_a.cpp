@@ -1823,17 +1823,16 @@ int Entity::unknown6008b0()
 	return result;
 }
 
-HItem Entity::unknown5e3cb0(bool skipFlag, int bonus, vector<int> *excluded, bool c, bool d)
+HItem Entity::unknown5e3cb0(bool skipCore, int bonus, vector<int> *excluded, bool skipBroken, bool skipFlagged)
 {
 	vector<HItem> candidates;
-	int total = (bonus == -1) ? 0 : unknown88;
+	int total = bonus == -1 ? 0 : unknown88;
 	for (unsigned int i = 0; i < parts.size(); i++)
 	{
-		if (parts[i]->unknown44aec0() != 4
-			&& !(skipFlag && parts[i]->unknown457880() == 0x12)
-			&& !(excluded && opS3a_contains9db330(excluded, parts[i]->unknown457f90()))
-			&& !(c && parts[i]->unknown577fb0())
-			&& !(d && parts[i]->unknown9b4350()->unknown23B))
+		if (parts[i]->unknown44aec0() != 4 && (!skipCore || parts[i]->unknown457880() != 0x12)
+			&& (!excluded || !opS3a_contains9db330(excluded,parts[i]->unknown457f90()))
+			&& (!skipBroken || !parts[i]->unknown577fb0())
+			&& (!skipFlagged || !parts[i]->unknown9b4350()->unknown23B))
 		{
 			total += parts[i]->unknown577790();
 			candidates.push_back(parts[i]);
@@ -1843,19 +1842,19 @@ HItem Entity::unknown5e3cb0(bool skipFlag, int bonus, vector<int> *excluded, boo
 	{
 		if (bonus > 0)
 		{
-			float f = unknown88 / (float)total;
-			f = bonus / 100.0 + f;
-			float g = (float)(total - unknown88);
-			int h = (int)(f * g / (f - 1.0f));
-			if (h > unknown88)
-				total = h - unknown88 + total;
+			float ratio = (float)unknown88 / total;
+			ratio += bonus / 100.0;
+			float other = total - unknown88;
+			int amount = (int)(ratio * other / (1 - ratio));
+			if (amount > unknown88)
+				total += amount - unknown88;
 		}
 		int roll = rng.rangeInt(0, (float)(total - 1));
-		int sum = 0;
+		int count = 0;
 		for (unsigned int j = 0; j < candidates.size(); j++)
 		{
-			sum += candidates[j]->unknown577790();
-			if (sum > roll)
+			count += candidates[j]->unknown577790();
+			if (count > roll)
 				return candidates[j];
 		}
 	}

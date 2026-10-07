@@ -68,7 +68,7 @@ struct Rect
 	int width;
 	int height;
 
-	Rect(int x_, int y_, int width_, int height_);
+	Rect(int x_, int y_, int width_, int height_) throw();	// 0x456940 (defined in team_a_repair.cpp)
 };
 
 // 2D array, column-major: data[x * height + y] (template instances at 0x9b4370-0x9d2930)
@@ -86,8 +86,8 @@ public:
 	int getHeight();
 	int getMaxX();
 	int getMaxY();
-	T *get(int x, int y);
-	T *get(const Pos &p);
+	T *get(int x, int y) throw();	// nothrow in the exe; no definition is linked yet
+	T *get(const Pos &p) throw();
 	void resize(int width_, int height_, T fill);
 	void fill(T value);
 };

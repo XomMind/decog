@@ -160,7 +160,7 @@ public:
 	void setHandle(HTurnClock h);	// NOTE: placeholder name
 };
 
-bool OpS3e_isClockEarlier(const HTurnClock &a, const HTurnClock &b);	// NOTE: placeholder name (0x45e6c0)
+bool OpS1e_isClockEarlier(const HTurnClock &a, const HTurnClock &b);	// 0x45e6c0 (defined in src/op/op_s1e.cpp)
 
 struct OpS3e_ClockPool	// NOTE: placeholder name (pool object at 0xd208d4)
 {
@@ -272,9 +272,9 @@ HTurnClock OpS3e_TurnQueue::add(OpS3e_TurnSlot *slot, int delay)
 	}
 	else
 	{
-		vector<HTurnClock>::iterator it = lower_bound(clocks.begin(),clocks.end(),clock,OpS3e_isClockEarlier);
+		vector<HTurnClock>::iterator it = lower_bound(clocks.begin(),clocks.end(),clock,OpS1e_isClockEarlier);
 		while ((*it)->time == clock->time)
-			it++;
+			++it;
 		clocks.insert(it,clock);
 	}
 	return clock;
@@ -292,9 +292,9 @@ void OpS3e_TurnQueue::unknown672450()
 		{
 			HTurnClock clock = clocks[0];
 			OpS3e_eraseAt(clocks,0);
-			vector<HTurnClock>::iterator it = lower_bound(clocks.begin(),clocks.end(),clock,OpS3e_isClockEarlier);
+			vector<HTurnClock>::iterator it = lower_bound(clocks.begin(),clocks.end(),clock,OpS1e_isClockEarlier);
 			while ((*it)->time == clock->time)
-				it++;
+				++it;
 			clocks.insert(it,clock);
 		}
 	}
@@ -312,9 +312,9 @@ void OpS3e_TurnQueue::unknown672580(int index)
 		{
 			HTurnClock clock = clocks[index];
 			OpS3e_eraseAt(clocks,index);
-			vector<HTurnClock>::iterator it = lower_bound(clocks.begin(),clocks.end(),clock,OpS3e_isClockEarlier);
+			vector<HTurnClock>::iterator it = lower_bound(clocks.begin(),clocks.end(),clock,OpS1e_isClockEarlier);
 			while ((*it)->time == clock->time)
-				it++;
+				++it;
 			clocks.insert(it,clock);
 		}
 	}
@@ -364,7 +364,7 @@ void OpS3e_TurnQueue::unknown672800(HEntity entity)
 
 void OpS3e_TurnQueue::unknown6728c0(HEntity entity)
 {
-	for (unsigned int i = 0; i < clocks.size(); i++)
+	for (int i = 0; i < clocks.size(); i++)
 	{
 		if (clocks[i]->type == 1 && *(HEntity *)clocks[i]->data == entity)
 		{

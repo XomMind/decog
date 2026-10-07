@@ -196,7 +196,6 @@ public:
 	OpR3c_Squad *unknown683310(HEntity e);			// NOTE: placeholder name
 	bool unknown683380(HEntity e, int *out);			// NOTE: placeholder name
 	int unknown683410(HEntity e, vector<HEntity> &out);	// NOTE: placeholder name
-	void unknown684c40();								// NOTE: placeholder name
 	void unknown68d920(int a);						// NOTE: placeholder name
 	bool unknown68e1a0();								// NOTE: placeholder name
 };
@@ -228,13 +227,4 @@ extern OpR3c_MessageLog opr3c_messageLog;	// NOTE: placeholder name (0xcf1080)
 extern bool opr3c_flag_d28fb0;			// NOTE: placeholder name
 int opr3c_maxInt(int a, int b);			// NOTE: placeholder name (0x9cdb60)
 
-void OpS3f_Overmind::unknown684c40()
-{
-	int XX;
-	if (opr3c_mapObjects[9] != 0)
-		XX = opr3c_resistTable2[opr3c_mapObjects[9]];
-	else
-		XX = 0;
-	unknown70 = world->getTurn() + rng.rangeInt((float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][0],(float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][1]) + XX + world->unknown463ba0() * 75;
-	unknown60.fill(0);
-}
+// NOTE: 0x684c40 is OpR3c_Overmind::unknown684c40 in src/op/op_r3c.cpp.

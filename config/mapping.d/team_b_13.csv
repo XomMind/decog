@@ -1,0 +1,3 @@
+# team_b_13: AI state name, slot row colours (src/game/team_b_13.cpp)
+TeamB_581850::getStateName581850,0x581850,0x1ab
+?teamb_drawSlotRow876f60@@YAXPAUTeamB_SlotRow@@@Z,0x876f60,0x1e5

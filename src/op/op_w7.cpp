@@ -544,6 +544,11 @@ bool CRobotTarget::mouseEnter()
 	return true;
 }
 
+class HExplosive	// NOTE: placeholder layout (stands in for the handle vectors whose destructor the exe folds as vector<HExplosive>)
+{
+	int	ID;
+};
+
 class CRobot : public Console
 {
 public:
@@ -552,8 +557,8 @@ public:
 	char pad6c[0x78 - 0x6c];
 	vector<int> unknown78;	// NOTE: placeholder name
 	vector<int> unknown88;	// NOTE: placeholder name
-	vector<int> unknown98;	// NOTE: placeholder name
-	vector<int> unknowna8;	// NOTE: placeholder name
+	vector<HExplosive> unknown98;	// NOTE: placeholder name
+	vector<HExplosive> unknowna8;	// NOTE: placeholder name
 };
 extern CRobot *opw7_cec108;	// NOTE: placeholder name
 
@@ -780,7 +785,7 @@ CShellManual::CShellManual(XConsole *parent, int y)
 }
 
 int maxInt(int a, int b);	// NOTE: placeholder name (0x9cdb60)
-void unknown954640();	// NOTE: placeholder name
+void opr5f_unknown954640(bool flag);	// NOTE: placeholder name (defined in op_r5f.cpp)
 
 extern XColor *opw7_cf1f2c;	// NOTE: placeholder name
 extern XColor *opw7_d20b70;	// NOTE: placeholder name
@@ -811,7 +816,7 @@ CType::CType(XConsole *parent, const Rect &rect, bool unknown, const string &tit
 	opw7_cec10c = this;
 	setTitle(new ConsoleTitle(this,title_,0,titleAlign));
 	animate("CType_Border");
-	input = new CTextInput(this,4,getHeight() - 2,rect.width - 6,0,false,unknown,(int)unknown954640,0,(int)OpW7_unknown4b1c30,0,NULL,0);
+	input = new CTextInput(this,4,getHeight() - 2,rect.width - 6,0,false,unknown,(int)opr5f_unknown954640,0,(int)OpW7_unknown4b1c30,0,NULL,0);
 	input->setMaxLength_4544c0(rect.width - 6);
 	opw7_keyMap->registerConsole(15,this,unknown2 ? -1 : 257,0);
 	opw7_keyMap->setTarget_44cea0(input);
@@ -1664,7 +1669,7 @@ public:
 	virtual ~CWorldMap();
 
 	char pad6c[0x70 - 0x6c];
-	vector<int> unknown70;	// NOTE: placeholder name
+	vector<HExplosive> unknown70;	// NOTE: placeholder name
 	vector<int> unknown80;	// NOTE: placeholder name
 	char pad90[0x98 - 0x90];
 	vector<int> unknown98;	// NOTE: placeholder name

@@ -21,41 +21,7 @@ public:
 class Map { public: int getTurn(); HEntity getPlayer(); };
 extern Map *endObjA;	// 0xcefc4c
 
-//==================================================================
-// attack damage scaled by terrain/prop resistances
-//==================================================================
-
-struct TeamB_Base { char pad[0x20]; int resists[7]; };	// NOTE: placeholder layout
-struct TeamB_Terrain { char pad[0x50]; TeamB_Base *base; };	// NOTE: placeholder layout
-struct TeamB_PropData { char pad[0x60]; TeamB_Base *base; };	// NOTE: placeholder layout
-struct TeamB_Attack { char pad[0x68]; int damage; int type; };	// NOTE: placeholder layout
-
-class TeamB_Cell	// NOTE: placeholder name (map cell)
-{
-public:
-	TeamB_Terrain *terrain;
-	void unknown66dae0(int amount, int type, bool a, int b, int c, int d, HEntity e, int f);	// NOTE: placeholder name
-	void applyAttack670150(TeamB_Attack *attack);
-};
-
-void TeamB_Cell::applyAttack670150(TeamB_Attack *attack)	// 0x670150
-{
-	unknown66dae0(attack->damage * (attack->type >= 7 ? 100 : terrain->base->resists[attack->type]) / 100, attack->type, false, 0, 0, 0, HEntity(), 0);
-}
-
-class TeamB_Prop	// NOTE: placeholder name (prop)
-{
-public:
-	int ID;
-	TeamB_PropData *data;
-	bool unknown65f520(int a, int b, int c, int d, int e, HProp f, int g, int h, int i);	// NOTE: placeholder name
-	void applyAttack665860(TeamB_Attack *attack);
-};
-
-void TeamB_Prop::applyAttack665860(TeamB_Attack *attack)	// 0x665860
-{
-	unknown65f520(attack->damage * (attack->type >= 7 ? 100 : data->base->resists[attack->type]) / 100, attack->type, 0, 0, 0, HProp(), 0, 0, 0);
-}
+// NOTE: 0x670150 / 0x665860 are Cell::unknown670150 (src/op/op_r3b.cpp) and Prop::unknown665860 (src/op/op_s3_c.cpp).
 
 //==================================================================
 // remembered target (entity / position) record
@@ -130,21 +96,7 @@ bool TeamB_7abf80::check7abf80()	// 0x7abf80
 	return ptr0 && !value10 && item.operator->() && item->getType() == 3 && item->getOwner() == endObjA->getPlayer();
 }
 
-class XConsole { public: virtual ~XConsole(); };
-class Console : public XConsole { public: void animate(string name); };
-extern Console *opx5e_cec078;	// NOTE: placeholder name
-extern Console *opx5e_cec07c;	// NOTE: placeholder name
-extern Console *opx5e_cec084;	// NOTE: placeholder name
-extern Console *opx5e_cec088;	// NOTE: placeholder name
-extern Console *opx5e_cec08c;	// NOTE: placeholder name
-void teamb_animateHud964cb0(const string &name)	// NOTE: placeholder name (0x964cb0)
-{
-	opx5e_cec078->animate(name);
-	opx5e_cec07c->animate(name);
-	opx5e_cec084->animate(name);
-	opx5e_cec088->animate(name);
-	opx5e_cec08c->animate(name);
-}
+// NOTE: 0x964cb0 is opt7_animateConsoles in src/op/op_t7_c.cpp.
 
 // NOTE: local names matter here: MSVC's stack layout follows them ("start"/"end" match the exe)
 bool teamb_parenthesized900870(const string &text, string &inner)	// NOTE: placeholder name (0x900870)

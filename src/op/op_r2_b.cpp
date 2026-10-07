@@ -760,16 +760,18 @@ OpR2b_Rec508b10::OpR2b_Rec508b10(istream &stream)
 	opr2b_readLogSizeEntries(stream,&unknownf0);
 }
 
-class OpR2b_EngineAnim454a80 : public OpR2b_EngineAnim	// NOTE: placeholder name
+// NOTE: the two pooled-element ctors below are declared without throw() and are defined elsewhere in the link
+// (src/game/team_a_13.cpp, src/game/cc_r2_16.cpp): LTCG proves them nothrow and keeps the exe's extra slot.
+class EngineItem_454a80 : public OpR2b_EngineAnim	// NOTE: placeholder name (same name as team_a_13.cpp)
 {
 public:
-	OpR2b_EngineAnim454a80() throw();	// 0x454a80
+	EngineItem_454a80();	// 0x454a80
 };
 
 class Item454630 : public HAnim	// NOTE: placeholder name
 {
 public:
-	Item454630() throw();	// 0x454630
+	Item454630();	// 0x454630
 };
 extern unsigned int tickCount;	// NOTE: placeholder name (0xcaed20)
 
@@ -777,8 +779,7 @@ HAnim *EndObjB::unknown508610()
 {
 	if (pool.empty())
 	{
-		Item454630 *item = new Item454630();
-		anims.push_back(item);
+		anims.push_back(new Item454630());
 	}
 	else
 	{
@@ -794,8 +795,7 @@ OpR2b_EngineAnim *OpR2b_Engine::unknown50fb50()
 {
 	if (dead.empty())
 	{
-		OpR2b_EngineAnim454a80 *anim = new OpR2b_EngineAnim454a80();
-		anims.push_back(anim);
+		anims.push_back(new EngineItem_454a80());
 	}
 	else
 	{

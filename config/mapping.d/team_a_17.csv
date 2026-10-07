@@ -1,0 +1,4 @@
+# team_a_17: DF generator settings constructors and the room record constructor (src/game/team_a_17.cpp)
+OpY2_Rec4482c0::OpY2_Rec4482c0,0x448a10,0x2f
+??0GenSettings_448760@@QAE@XZ,0x448760,0x104
+??0GenSettings_448760@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x448870,0x126

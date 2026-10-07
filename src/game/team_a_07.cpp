@@ -139,9 +139,7 @@ int pointsFn_4374c0(const Point &a, const Point &b)	// NOTE: placeholder name
 }
 
 template <class T> void OpQ5_readObjects(istream &stream, vector<T*> &v, int skip);	// NOTE: placeholder name
-template <class T> void OpQ5_deleteObjects(vector<T*> &v) throw();	// NOTE: placeholder name
 template <class T> void OpQ5_writeObjects(ostream &stream, vector<T*> &v);	// NOTE: placeholder name
-template <class T> void OpQ5_clearObjects(vector<T*> &v) throw();	// NOTE: placeholder name
 template <class T> void readBinary(istream &stream, T *value);	// NOTE: placeholder name
 template <class T> void writeBinary(ostream &stream, T *value);	// NOTE: placeholder name
 void OpT8a_readInts(istream &in, vector<int> &v);	// NOTE: placeholder name
@@ -318,9 +316,11 @@ struct ObjList_4563c0	// NOTE: placeholder name
 	~ObjList_4563c0();
 };
 
+void clearObjects_4563c0(vector<OpQ5_T9e2c40 *> &v) throw();	// NOTE: placeholder name (OpQ5_clearObjects<OpQ5_T9e2c40>, nothrow in the exe)
+
 ObjList_4563c0::~ObjList_4563c0()
 {
-	OpQ5_clearObjects(objects);
+	clearObjects_4563c0(objects);
 }
 
 class Weapon_457490	// NOTE: placeholder name
@@ -389,7 +389,9 @@ Unknown_4588d0_439630::Unknown_4588d0_439630()
 {
 }
 
+void deleteObjects_439630(vector<OpQ5_T9d8e70 *> &v) throw();	// NOTE: placeholder name (OpQ5_deleteObjects<OpQ5_T9d8e70>, nothrow in the exe)
+
 Unknown_4588d0_439630::~Unknown_4588d0_439630()
 {
-	OpQ5_deleteObjects(objects);
+	deleteObjects_439630(objects);
 }

@@ -250,12 +250,7 @@ public:
 
 void Cell::unknown670150(OpR3b_Attack *attack)
 {
-	int resist;
-	if (attack->type >= 7)
-		resist = 100;
-	else
-		resist = terrain->base->resists[attack->type];
-	unknown66dae0(attack->damage * resist / 100, attack->type, false, 0, 0, 0, HEntity(), 0);
+	unknown66dae0(attack->damage * (attack->type >= 7 ? 100 : terrain->base->resists[attack->type]) / 100, attack->type, false, 0, 0, 0, HEntity(), 0);
 }
 
 bool Cell::unknown6701c0(int a, int b, OpR3b_Actor *actor)

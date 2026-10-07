@@ -190,7 +190,7 @@ string opR1d_436e70(bool dateOnly, time_t t)	// NOTE: placeholder name
 
 	string result;
 	string yearStr = intToString(timeinfo->tm_year);
-	result.assign(yearStr.end() - 2, yearStr.end());
+	result.assign<string::const_iterator>(((const string &)yearStr).end() - 2, ((const string &)yearStr).end());
 	result += opR1d_padLeft(intToString(timeinfo->tm_mon + 1), 2, '0');
 	result += opR1d_padLeft(intToString(timeinfo->tm_mday), 2, '0');
 

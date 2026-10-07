@@ -1,0 +1,10 @@
+# team_a_12: singleton constructors/destructors (src/game/team_a_12.cpp)
+Unknown_4493c0_449420::~Unknown_4493c0_449420,0x449420,0xe0
+Unknown_45fe00_45fe80::~Unknown_45fe00_45fe80,0x45fe80,0xe3
+Unknown467710::~Unknown467710,0x467710,0x12a
+Unknown_45fae0_45fbd0::~Unknown_45fae0_45fbd0,0x45fbd0,0x10b
+Unknown_45eab0_45ebd0::~Unknown_45eab0_45ebd0,0x45ebd0,0x134
+Unknown_448e60_448ed0::~Unknown_448e60_448ed0,0x448ed0,0x10d
+Unknown_45fae0_45fbd0::Unknown_45fae0_45fbd0,0x45fae0,0xe7
+Unknown_45eab0_45ebd0::Unknown_45eab0_45ebd0,0x45eab0,0x11a
+Unknown467710::reset,0x467840,0x1f6

@@ -281,11 +281,23 @@ public:
 	char pad[0x188];
 	vector<MapRecord *> unknown188;
 	unsigned int percent();
+	int countInCategory(int category);
 };
 
 unsigned int Progress_46c930::percent()
 {
 	return unknown188.size() * 100 / records_cf09a8.size();
+}
+
+int Progress_46c930::countInCategory(int category)	// NOTE: placeholder name; MapRecord layout unknown, so fields are read by offset
+{
+	int count = 0;
+	for (unsigned int i = 0; i < unknown188.size(); i++)
+	{
+		if (((int *)records_cf09a8[*(int *)unknown188[i]])[0x40 / 4] == category)
+			count++;
+	}
+	return count;
 }
 
 class Location_46ecb0	// NOTE: placeholder name

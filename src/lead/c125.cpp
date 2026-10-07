@@ -254,7 +254,6 @@ class CGalleryPiece : public Console	// NOTE: placeholder name
 {
 public:
 	bool unknown7d6c30();	// NOTE: placeholder name
-	void unknown7d6a30();	// NOTE: placeholder name
 };
 
 struct GalleryPiece	// NOTE: placeholder name
@@ -271,15 +270,7 @@ bool CGalleryPiece::unknown7d6c30()
 	return true;
 }
 
-void CGalleryPiece::unknown7d6a30()
-{
-	engine->stopAll();
-	if (unknown_d28c8a)
-	{
-		setChar_417f50(0,2,unknown_cec040->unknown497740(getParent()));
-		setFore_417f80(0,2,*unknown_d2175c);
-	}
-}
+// NOTE: 0x7d6a30 (CGalleryInfoButton::update) is defined in src/game/team_b_03.cpp.
 
 class CGalleryFrame : public Console	// NOTE: placeholder name
 {

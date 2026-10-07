@@ -1,0 +1,18 @@
+# MSVC /Od local layout: within one scope, a local with a LOWER rank sits at a HIGHER address (closer to ebp);
+# same rank: the later-declared one sits higher. Ranks are bucket indices of a 16-bucket name hash.
+0: center col cols current distanceSq distances enemies facing first found hits id it kind level old p point ranks score shooter sy title updated w wall
+1: adj behaviour clean count desc dy element entityID h h2 heuristic maxScore multiplier newValue ny open player ratio res tag tags text top2 total2 v value vec visible walls
+2: a allies begin bottom branch chance changed closest color disabled e2 edges elem entityCount flags frontier g2 health2 iter last nearestDist ox parts pick sx x x2 y y0 y2
+3: a1 attempt ay command cx direction i line mode n ok r1 room to ty vec2 xx
+4: base bonus child cur events failed hidden invalid min num oldValue oy prefix prev pt retval s speed traps type u v1 weight
+5: amount areas arr bestValue chosen cnt dest door energy entity f group groupID idx2 index itemID links location log machines mask n1 output points2 positions rows slots steps y1
+6: active added avg ax b2 best bestPos c1 choices costs elements factions idx input key m1 neighbor options orders p2 rec ret2 row seen step t2 temp time timer tmp valueSum visited
+7: ally c2 closed d2 defender dirty ex factor inactive kk leaf num2 option other parent pathLength record root self success tail tmp2 v2 vis
+8: adjacent attempts bestScore bits bx candidates commands cost costSoFar counter distance entities ey feature finished hit left len list maxDistance msg msgs name neighbors next offset px q q2 r2 random robot size units valid zones
+9: action angle b back caption centre closestDist description destination end f2 faction follower g ii label minDist p1 penalty queue radius removed roll start suffix table total
+10: bestDistance bestIndex buf enemy found2 h3 height itemCount len2 m2 map part partID ret right robots selection squad tables temp2 val width
+11: armor behavior dist doors health hp k leader link loc mapID nx out2 owner percent picks py range rank rv s1 s2 slot stack sum target top z
+12: bestDist bestPoint cy data done e1 edge enabled entries event head heat l locID maxRange message order2 origin squadID status str2 t1 trap turn typeID x1
+13: answer area bestEntity c cells clone copy d dead delta dir duration entry flag front items layer limit machine members memory minScore miss obj object partCount points propID r result rooms tile victim
+14: a2 array bit brain buffer by closestEntity delay e from in2 integrity item list2 members2 n2 nearest order path q1 selected t tmpValue tx unit w2 x0
+15: actions ai alive attacker b1 cell choice d1 damage depth dx features j jj m matter max minDistance node o pool pos prop props score2 shift source state str targets terrain tiles tries turns weightSum yy zone

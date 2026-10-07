@@ -84,3 +84,7 @@
 ??__Eunk_cf672c@@YAXXZ,0xb5bbc0,0xf
 ??__Eunk_cefcaa@@YAXXZ,0xb5bbd0,0xf
 ??1Unknown_45f320_45f560@@QAE@XZ,0x45f560,0x2ce
+Unknown_45f320_45f560::serialize,0x6919f0,0x5bf
+Unknown_45f320_45f560::unserialize,0x691240,0x7a1
+Unknown_45f320_45f560::unknown69a5b0,0x69a5b0,0x41d
+Unknown_45f320_45f560::unknown69ac10,0x69ac10,0x945
