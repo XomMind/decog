@@ -29,7 +29,8 @@ public class G1Decompile extends GhidraScript {
 			if (f == null) f = createFunction(a, null);
 			if (f == null) { println("no function at " + a); continue; }
 			long t0 = System.currentTimeMillis();
-			DecompileResults res = di.decompileFunction(f, 7200, monitor);
+			String tenv = System.getenv("G1_TIMEOUT");   // seconds; the largest giants need more than the 7200 default
+			DecompileResults res = di.decompileFunction(f, tenv != null ? Integer.parseInt(tenv) : 7200, monitor);
 			File out = new File(outdir, args[i].replace("0x", "") + ".c");
 			try (PrintWriter w = new PrintWriter(new FileWriter(out))) {
 				if (res.decompileCompleted()) w.print(res.getDecompiledFunction().getC());
