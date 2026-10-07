@@ -2,6 +2,7 @@
 // NOTE: placeholder names
 #include <vector>
 #include <string>
+#include <cstddef>
 using namespace std;
 
 struct OpR2c_PropInfo
@@ -764,19 +765,21 @@ public:
 };
 extern OpR2c_Array2D5<OpR2c_Cell5 *> opr2c_cells5;	// NOTE: placeholder name (0xcfd44c)
 
-struct OpR2c_Rule5	// NOTE: placeholder name
+struct OpR2c_MapEventRule	// NOTE: recovered event-bridge input; broader record semantics remain incomplete
 {
 	char pad00[0x3c];
-	int unknown3c;
+	int eventType;
 	char pad40[0x50];
 	int unknown90;
 	int unknown94;
 };
+static_assert(offsetof(OpR2c_MapEventRule, eventType) == 0x3c, "eventType offset");
+static_assert(sizeof(OpR2c_MapEventRule) == 0x98, "event-rule size");
 
-struct OpR2c_TurnRecord;
-bool opr2c_turnUpdate_51da30(vector<OpR2c_TurnRecord *> *records, int type, OpR2c_HEnt5 a, OpR2c_HP b, OpR2c_HI c, const Point *pos, int flag);	// NOTE: placeholder name (BS::turnUpdate_51da30)
+struct OpR2c_MapRecord;
+bool opr2c_turnUpdate_51da30(vector<OpR2c_MapRecord *> *records, int eventType, OpR2c_HEnt5 entity, OpR2c_HP prop, OpR2c_HI item, const Point *directPosition, int flag);	// NOTE: placeholder name (BS::turnUpdate_51da30)
 
-void opr2c_applyRule_55d2b0(OpR2c_Rule5 *rule, OpR2c_HEnt5 e, vector<OpR2c_TurnRecord *> *records, const Point &pos, int flag, OpR2c_HI item)	// NOTE: placeholder name
+void opr2c_applyRule_55d2b0(OpR2c_MapEventRule *rule, OpR2c_HEnt5 e, vector<OpR2c_MapRecord *> *records, const Point &pos, int flag, OpR2c_HI item)	// NOTE: placeholder name
 {
 	if (flag == 0)
 	{
@@ -789,21 +792,21 @@ void opr2c_applyRule_55d2b0(OpR2c_Rule5 *rule, OpR2c_HEnt5 e, vector<OpR2c_TurnR
 			e->unknown45b1b0(rule->unknown94);
 		}
 	}
-	switch (rule->unknown3c)
+	switch (rule->eventType)
 	{
 		case 0x3e:
 		case 0x42:
 		case 0x4e:
 		case 0x53:
 		case 0x58:
-			opr2c_turnUpdate_51da30(records,rule->unknown3c,opr2c_cells5(pos)->getEntity(),OpR2c_HP(),OpR2c_HI(),0,flag);
+			opr2c_turnUpdate_51da30(records,rule->eventType,opr2c_cells5(pos)->getEntity(),OpR2c_HP(),OpR2c_HI(),0,flag);
 			break;
 		case 0x3f:
 		case 0x43:
 		case 0x4f:
 		case 0x54:
 		case 0x59:
-			opr2c_turnUpdate_51da30(records,rule->unknown3c,OpR2c_HEnt5(),opr2c_cells5(pos)->getProp(),OpR2c_HI(),0,flag);
+			opr2c_turnUpdate_51da30(records,rule->eventType,OpR2c_HEnt5(),opr2c_cells5(pos)->getProp(),OpR2c_HI(),0,flag);
 			break;
 		case 0x40:
 		case 0x44:
@@ -811,7 +814,7 @@ void opr2c_applyRule_55d2b0(OpR2c_Rule5 *rule, OpR2c_HEnt5 e, vector<OpR2c_TurnR
 		case 0x55:
 		case 0x5a:
 		{
-			opr2c_turnUpdate_51da30(records,rule->unknown3c,OpR2c_HEnt5(),OpR2c_HP(),item.isValid() ? item : opr2c_cells5(pos)->unknown463950()->front(),0,flag);
+			opr2c_turnUpdate_51da30(records,rule->eventType,OpR2c_HEnt5(),OpR2c_HP(),item.isValid() ? item : opr2c_cells5(pos)->unknown463950()->front(),0,flag);
 			break;
 		}
 		case 0x41:
@@ -819,7 +822,7 @@ void opr2c_applyRule_55d2b0(OpR2c_Rule5 *rule, OpR2c_HEnt5 e, vector<OpR2c_TurnR
 		case 0x51:
 		case 0x56:
 		case 0x5b:
-			opr2c_turnUpdate_51da30(records,rule->unknown3c,OpR2c_HEnt5(),OpR2c_HP(),OpR2c_HI(),&pos,flag);
+			opr2c_turnUpdate_51da30(records,rule->eventType,OpR2c_HEnt5(),OpR2c_HP(),OpR2c_HI(),&pos,flag);
 			break;
 	}
 }
