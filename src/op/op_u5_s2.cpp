@@ -506,38 +506,40 @@ void OpU5s2_splitLine(string *line, vector<string> *tokens);	// NOTE: placeholde
 bool GM::unknown7913f0(const string &path, vector<string> *list, vector<string> *list2)
 {
 	int counter = 0;
-	string line;
-	vector<string> tokens;
-	vector<string> extraTokens;
-	string extra;
+	int len;
+	string name;
+	vector<string> elements;
+	vector<string> other;
+	string msg;
 	logMessage("Loading " + string("Battle Royale Names") + "...");
-	PhysFScpp::ifstream file(path.c_str(),1);
-	if (!file.isOpen_404af0())
+	PhysFScpp::ifstream input(path.c_str(),1);
+	if (!input.isOpen_404af0())
 	{
 		opU5s2_jlog->end(2);
 		return false;
 	}
 	else
-	{
 		logMessage("[File: " + path + "] ");
-		vector<string> *target = list;
-		while (OpY1_getEncodedLine(&file,line,opr1c_getValueIfFlag(counter)))
+	vector<string> *tail = list;
+	while (OpY1_getEncodedLine(&input,name,opr1c_getValueIfFlag(counter)))
+	{
+		counter++;
+		elements.clear();
+		OpU5s2_splitLine(&name,&elements);
+		if (!elements.empty())
 		{
-			counter++;
-			tokens.clear();
-			OpU5s2_splitLine(&line,&tokens);
-			if (!tokens.empty() && tokens.size() == 1)
+			if (elements.size() != 1)
 			{
-				if (tokens[0][0] == '?')
-				{
-					if (tokens[0].find("COMPOUND_2",0) != string::npos)
-						target = list2;
-				}
-				else
-					target->push_back(tokens[0]);
 			}
+			else if (elements[0][0] == '?')
+			{
+				if (elements[0].find("COMPOUND_2",0) != string::npos)
+					tail = list2;
+			}
+			else
+				tail->push_back(elements[0]);
 		}
-		file.close_9c05e0();
-		return true;
 	}
+	input.close_9c05e0();
+	return true;
 }

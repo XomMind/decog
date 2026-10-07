@@ -84,6 +84,9 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
   Locals that look "out of scope order" are often declared uninitialized at the top of their block.
 - `""` (and other short) literals in `cond ? "x" : ""` are tail-merged at different exe addresses per site; use a
   named `extern const char empty_<addr>[]` per site.
+- Constant-index reads of string arrays (`mov eax, imm`) hit the stub-offset issue too: reference the real array
+  (`configOptionNames[195]`, global_string_arrays.cpp). Constants that print as `(double)3.14159265f` are double
+  literals in source (`1.0 - x`, not `1 - x`). A struct holding `int[2]` triggers /GS; spell the fields out.
 - A template instance over a type that other files define differently (e.g. XColor) can silently use another
   file's copy; give such instances private element types.
 

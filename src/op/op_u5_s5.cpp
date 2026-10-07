@@ -327,7 +327,7 @@ public:
 class CCommands : public Console
 {
 public:
-	virtual bool input(XEvent *event);
+	virtual bool input(void *event);	// 0x7d0aa0 (defined in src/game/team_d_58.cpp)
 	virtual void inputAscii(int key, int mode);
 	virtual void update();
 	virtual void close();
@@ -609,61 +609,6 @@ void CCommands::inputAscii(int key, int mode)
 		}
 		break;
 	}
-}
-
-bool CCommands::input(XEvent *event)
-{
-	if (tickCount < unknown144)
-		return false;
-	if (isHidden() || opU5_consoleInputBlocked)
-		return false;
-	if (inputBase429d00(event))
-		return true;
-	switch (event->type)
-	{
-	case 0x15:
-	case 0x16:
-	case 0x17:
-	case 0x18:
-	case 0x19:
-	case 0x1a:
-	case 0x1b:
-		unknown7d1050(event->type - 0x15);
-		return true;
-	case 0x1c:
-		new OpU5_Win7d8d60();
-		return true;
-	case 0x1d:
-		new OpU5_Win7f2610(0);
-		return true;
-	case 0x1e:
-		new OpU5_Win7f2610(1);
-		return true;
-	case 0x1f:
-		if (ID == 0 && !lista0.empty())
-			lista0[0]->input(&XEvent(0x14));
-		return true;
-	case 0x20:
-		if (ID == 0 && !lista0.empty())
-			lista0[1]->input(&XEvent(0x14));
-		return true;
-	case 0x21:
-		unknown7d1740();
-		return true;
-	case 0x22:
-		unknown7d17d0();
-		return true;
-	case 0x23:
-		unknown7d1840();
-		return true;
-	case 0x24:
-		unknown7d18d0();
-		return true;
-	case 0x25:
-		close();
-		return true;
-	}
-	return false;
 }
 
 void CCommands::update()

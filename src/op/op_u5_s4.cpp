@@ -660,35 +660,35 @@ extern int opU5s4_anim_cef8bc;	// NOTE: placeholder name
 
 void Console::drawBorder_7c6510(Console *source, const Pos *pos, int width, int height)
 {
-	const Pos &start = pos ? *pos : source->getPos();
+	const Pos &base = pos ? *pos : source->getPos();
 	int w = width ? width : source->getWidth();
 	int h = height ? height : source->getHeight();
-	setChar_417f50(start.x,start.y,0x88);
-	setChar_417f50(start.x,start.y + h - 1,0x87);
+	setChar_417f50(base.x,base.y,0x88);
+	setChar_417f50(base.x,base.y + h - 1,0x87);
 	for (int i = 1; i < w - 1; i++)
 	{
-		setChar_417f50(start.x + i,start.y,0x81);
-		setChar_417f50(start.x + i,start.y + h - 1,0x81);
+		setChar_417f50(base.x + i,base.y,0x81);
+		setChar_417f50(base.x + i,base.y + h - 1,0x81);
 	}
-	setChar_417f50(start.x + w - 1,start.y,0x89);
-	setChar_417f50(start.x + w - 1,start.y + h - 1,0x8a);
+	setChar_417f50(base.x + w - 1,base.y,0x89);
+	setChar_417f50(base.x + w - 1,base.y + h - 1,0x8a);
 	for (int j = 1; j < h - 1; j++)
 	{
-		setChar_417f50(start.x,start.y + j,0x80);
-		setChar_417f50(start.x + w - 1,start.y + j,0x80);
+		setChar_417f50(base.x,base.y + j,0x80);
+		setChar_417f50(base.x + w - 1,base.y + j,0x80);
 	}
 	Pos titlePos = source->title->getPos();
-	titlePos += start;
+	titlePos += base;
 	for (int k = 0; k < source->title->getWidth(); k++)
 		setChar_417f50(titlePos.x + k,titlePos.y,source->title->getChar(k,0));
 	for (int m = 0; m < w; m++)
 	{
-		unknown48c460(opU5s4_anim_cef8bc,Pos(start.x + m,start.y));
-		unknown48c460(opU5s4_anim_cef8bc,Pos(start.x + m,start.y + h - 1));
+		unknown48c460(opU5s4_anim_cef8bc,Pos(base.x + m,base.y));
+		unknown48c460(opU5s4_anim_cef8bc,Pos(base.x + m,base.y + h - 1));
 	}
 	for (int n = 1; n < h - 1; n++)
 	{
-		unknown48c460(opU5s4_anim_cef8bc,Pos(start.x,start.y + n));
-		unknown48c460(opU5s4_anim_cef8bc,Pos(start.x + w - 1,start.y + n));
+		unknown48c460(opU5s4_anim_cef8bc,Pos(base.x,base.y + n));
+		unknown48c460(opU5s4_anim_cef8bc,Pos(base.x + w - 1,base.y + n));
 	}
 }

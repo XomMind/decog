@@ -157,7 +157,7 @@ public:
 class Cell
 {
 public:
-	bool unknown45d480() throw();	// NOTE: placeholder name
+	bool unknown45d480Nothrow() throw();	// NOTE: placeholder name (Cell::unknown45d480; private alias keeps the throw() declaration under LTCG)
 	bool isOpen();					// NOTE: placeholder name (0x4550b0)
 	HProp getProp() throw();		// 0x45d550
 	HEntity getEntity() throw();	// 0x45d250
@@ -247,7 +247,7 @@ bool BS::unknown7178d0(HEntity e, const Point &from, const Point &fromSub, const
 			check = 0;
 			if (visible && ((useSeen && seen(here) == 0) || (!useSeen && (*visible)(here) != stamp)))
 				type = 0;
-			else if (cells(here)->unknown45d480())
+			else if (cells(here)->unknown45d480Nothrow())
 			{
 				type = 0;
 				return false;
@@ -299,7 +299,7 @@ float BS::unknown718430(HEntity e, const Point &p, vector<float> *breakdown, int
 					chance.x = -1;
 					break;
 				}
-				if (cells(chance)->getEntity().isValid() || cells(chance)->unknown45d480())
+				if (cells(chance)->getEntity().isValid() || cells(chance)->unknown45d480Nothrow())
 				{
 					size = chance;
 					break;

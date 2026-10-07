@@ -529,63 +529,67 @@ void PlayerData::unknown783540()
 
 void PlayerData::unknown77f2f0(vector<Item*> &list, int *counts)
 {
-	Item *item = list[0];
+	Item *cur = list[0];
 	removeVectorElement(list,0);
-	vector<OpR1g_PropPair*> &slots = v178[item->unknown4578a0()];
+	vector<OpR1g_PropPair*> &vec = v178[cur->unknown4578a0()];
 	unsigned int i;
-	for (i = 0; i < slots.size(); i++)
+	int idx;
+	unsigned int kk;
+	int q;
+	unsigned int ii;
+	for (i = 0; i < vec.size(); i++)
 	{
-		if (slots[i]->item == item)
+		if (vec[i]->item == cur)
 			break;
 	}
-	int amount = slots[i]->a;
-	for (int j = i - 1; j >= 0; j--)
+	int amount = vec[i]->a;
+	for (idx = i - 1; idx >= 0; idx--)
 	{
-		if (slots[j]->item == item)
+		if (vec[idx]->item == cur)
 			amount--;
 	}
-	removeVectorElement(slots,i);
-	counts[item->unknown4578a0()]++;
-	for (unsigned int k = 0; k < slots.size(); k++)
+	removeVectorElement(vec,i);
+	counts[cur->unknown4578a0()]++;
+	for (kk = 0; kk < vec.size(); kk++)
 	{
-		if (slots[k]->item == item)
+		if (vec[kk]->item == cur)
 		{
-			if (slots[k]->item2)
-			{
-				OpU5_eraseAt(slots,k);
-				continue;
-			}
-			removeVectorElement(slots,k);
-			if (counts[item->unknown4578a0()] >= 0)
-			{
-				OpR1g_PropPair *slot = new OpR1g_PropPair(amount,0,HProp(),0,HProp());
-				OpU5_insertAt(slots,k,slot);
-			}
+			if (vec[kk]->item2)
+				OpU5_eraseAt(vec,kk);
 			else
-				counts[item->unknown4578a0()]++;
+			{
+				removeVectorElement(vec,kk);
+				if (counts[cur->unknown4578a0()] >= 0)
+				{
+					OpR1g_PropPair *slot = new OpR1g_PropPair(amount,0,HProp(),0,HProp());
+					OpU5_insertAt(vec,kk,slot);
+				}
+				else
+					counts[cur->unknown4578a0()]++;
+			}
 		}
 	}
-	if (item->unknown457f90() == 0xd4)
+	if (cur->unknown457f90() == 0xd4)
 	{
-		for (int a = 0; a < 4; a++)
+		for (q = 0; q < 4; q++)
 		{
-			for (unsigned int b = 0; b < v178[a].size(); b++)
+			for (ii = 0; ii < v178[q].size(); ii++)
 			{
-				if (v178[a][b]->item2 == item)
+				if (v178[q][ii]->item2 == cur)
 				{
-					if (v178[a][b]->item == NULL)
+					if (v178[q][ii]->item == NULL)
 					{
-						removeVectorElement(v178[a],b);
-						b--;
+						removeVectorElement(v178[q],ii);
+						ii--;
 					}
 					else
-						OpU5_fn9db000(list,v178[a][b]->item);
+						OpU5_fn9db000(list,v178[q][ii]->item);
 				}
 			}
 		}
 	}
-	item->unknown457b50()->unknown5dfbd0(item->unknown45a260());
-	item->unknown44eb00(HEntity());
-	item->unknown44fc40(10);
-	opu5_d3391c.push_back(opu5_itemPool.unknown9d0bc0(item->unknown45a260()));
+	cur->unknown457b50()->unknown5dfbd0(cur->unknown45a260());
+	cur->unknown44eb00(HEntity());
+	cur->unknown44fc40(10);
+	opu5_d3391c.push_back(opu5_itemPool.unknown9d0bc0(cur->unknown45a260()));
 }

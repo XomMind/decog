@@ -65,10 +65,10 @@ public:
 };
 extern OpX4c_HLocation opx4c_location;	// 0xd1e888
 
-class OpR1F_Lists460090	// NOTE: placeholder name
+class OpX4c_Lists460090	// NOTE: placeholder name (OpR1F_Lists460090; private name keeps the throw() ctor declaration)
 {
 public:
-	OpR1F_Lists460090(int value0_, int value8_) throw();	// 0x460090
+	OpX4c_Lists460090(int value0_, int value8_) throw();	// 0x460090
 	void unknown460290(HProp prop);	// NOTE: placeholder name
 
 	char pad00[0x4c];
@@ -81,7 +81,7 @@ struct OpD_PropRegistry	// NOTE: placeholder name (object at 0xd1e720)
 extern OpD_PropRegistry opd_propRegistry;	// NOTE: placeholder name (0xd1e720)
 
 extern vector<vector<HProp> > opx4c_machines;	// NOTE: placeholder name (0xd31640)
-extern vector<OpR1F_Lists460090 *> opx4c_listsCf44b0;	// NOTE: placeholder name
+extern vector<OpX4c_Lists460090 *> opx4c_listsCf44b0;	// NOTE: placeholder name
 extern int opx4c_countCefbb4;	// NOTE: placeholder name
 extern int opx4c_chanceA[][3];	// NOTE: placeholder name (0xb9f950)
 extern int opx4c_chanceB[][3];	// NOTE: placeholder name (0xb9fb18)
@@ -104,7 +104,7 @@ void BS::unknown6c98c0(int level, vector<int> &ids)
 			if (!opx4c_machines[id][0]->unknown45cb10() && opx4c_machines[id][0]->getData()->unknown8c == 0 && opx4c_machines[id][0]->unknown45c9b0() == 0 && rng.chance(chance))
 			{
 				vector<HProp> &list = opx4c_machines[id];
-				OpR1F_Lists460090 *lists = new OpR1F_Lists460090(list[0]->getNestedField(),id);
+				OpX4c_Lists460090 *lists = new OpX4c_Lists460090(list[0]->getNestedField(),id);
 				for (unsigned int j = 0; j < list.size(); j++)
 				{
 					lists->unknown460290(list[j]);
