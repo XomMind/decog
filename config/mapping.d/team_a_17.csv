@@ -2,3 +2,4 @@
 OpY2_Rec4482c0::OpY2_Rec4482c0,0x448a10,0x2f
 ??0GenSettings_448760@@QAE@XZ,0x448760,0x104
 ??0GenSettings_448760@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x448870,0x126
+GenSettings_448760::~GenSettings_448760,0x4490a0,0xfe

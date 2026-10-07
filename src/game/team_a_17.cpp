@@ -2,6 +2,7 @@
 // its layout) and the OpY2_Rec4482c0 room record constructor that the eh vector constructor iterator calls.
 // NOTE: layouts are partial; callees declared throw() are nothrow in the exe.
 #include <vector>
+#include <string>
 #include <istream>
 using namespace std;
 
@@ -59,6 +60,10 @@ OpY2_Rec4482c0::OpY2_Rec4482c0()
 {
 }
 
+struct TeamA_E0c_448760 { char pad[0x0c]; };	// NOTE: placeholder element types (sizes from the exe's vector destructors)
+struct TeamA_Eac_448760 { char pad[0xac]; };
+struct TeamA_E84_448760 { char pad[0x84]; };
+
 struct GenSettings_448760	// NOTE: placeholder name (OpW7_GenSettings in op_w7_df.cpp)
 {
 	int unknown00;
@@ -72,7 +77,7 @@ struct GenSettings_448760	// NOTE: placeholder name (OpW7_GenSettings in op_w7_d
 	int unknown50;
 	int unknown54;
 	DF::Tunneler tunneler;
-	vector<unsigned int> unknownA0;
+	vector<TeamA_E0c_448760> unknownA0;
 	int unknownB0;
 	vector<unsigned int> unknownB4;
 	OpY2_Rec4482c0 rooms[3];
@@ -83,14 +88,15 @@ struct GenSettings_448760	// NOTE: placeholder name (OpW7_GenSettings in op_w7_d
 	int unknown1a0;
 	int unknown1a4;
 	int unknown1a8;
-	vector<unsigned int> unknown1ac;
-	vector<unsigned int> unknown1bc;
+	vector<TeamA_Eac_448760> unknown1ac;
+	vector<TeamA_E84_448760> unknown1bc;
 	Settings_448aa0 unknown1cc;
-	vector<unsigned int> unknown250;
+	vector<std::string> unknown250;
 	Pair_40bef0 unknown260;
 	char pad268[0x280 - 0x268];
 	GenSettings_448760();
 	GenSettings_448760(istream &in);
+	~GenSettings_448760();
 	void load(istream &in);
 };
 
@@ -101,4 +107,8 @@ GenSettings_448760::GenSettings_448760()
 GenSettings_448760::GenSettings_448760(istream &in)
 {
 	load(in);
+}
+
+GenSettings_448760::~GenSettings_448760()
+{
 }

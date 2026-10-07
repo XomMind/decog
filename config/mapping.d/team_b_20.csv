@@ -1,3 +1,4 @@
 # team_b_20: see src/game/team_b_20.cpp
 TeamB_Polymind::refresh87afd0,0x87afd0,0x298
 TeamB_CMapLabels::showHitBonus817390,0x817390,0x308
+TeamB_CMapLabels::addLabel812b60,0x812b60,0x4e2

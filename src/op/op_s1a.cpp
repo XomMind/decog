@@ -208,7 +208,6 @@ public:
 	int height;
 	int unknownc;
 	vector<int> cells;
-	vector<int> unknown1c;
 	vector< vector<XColor> > colors;
 	vector< vector<bool> > flags;
 
@@ -219,10 +218,10 @@ public:
 
 void OpS_Layout::resetAttributes()
 {
-	XColor color;
-	vector<XColor> row(OpS_sizes_b8cef8[type],color);
+	vector<XColor> row(OpS_sizes_b8cef8[type],XColor());
 	colors.assign(width * height,row);
-	flags.assign(width * height,vector<bool>(OpS_sizes_b8cef8[type],true));
+	vector<bool> marked(OpS_sizes_b8cef8[type],true);
+	flags.assign(width * height,marked);
 }
 
 void OpS_Layout::setCell(int index, int x, int y)

@@ -490,9 +490,13 @@ void logError(string location, string message);	// NOTE: placeholder name
 extern vector<int> opR5a_cf4830;	// NOTE: placeholder name
 extern int opR5a_caf128;	// NOTE: placeholder name
 
-struct OpR5a_FineTimer	// NOTE: placeholder name (OpW5_FineTimer)
+// NOTE: same name as src/op/op_w5.cpp, whose constructor definition lets LTCG prove the new-expression nothrow
+struct OpW5_FineTimer	// NOTE: placeholder name
 {
-	OpR5a_FineTimer(int a, int b);	// 0x49c750
+	OpW5_FineTimer(int a, int b);	// 0x49bfa0
+	int unknown0;
+	int unknown4;
+	unsigned int time;
 };
 
 class CMapFine : public Console
@@ -503,10 +507,11 @@ public:
 	void addNewInventoryItemIndicator(HItem item);
 
 	char pad6c[0xb8 - 0x6c];
-	vector<OpR5a_FineTimer*> timers;	// NOTE: placeholder name
+	vector<OpW5_FineTimer*> timers;	// NOTE: placeholder name
 };
 extern CMapFine *opR5a_mapFine;	// NOTE: placeholder name (0xcec058)
 
+// NOTE: local names follow docs/local-name-buckets.txt (stack layout)
 void CMapFine::addNewInventoryItemIndicator(HItem item)
 {
 	if (!item.operator->())
@@ -514,18 +519,18 @@ void CMapFine::addNewInventoryItemIndicator(HItem item)
 		logError("CMapFine::addNewInventoryItemIndicator()","item no longer exists!");
 		return;
 	}
-	string text = " " + item->getName(0,1) + " >> ";
-	Console *console = new Console(opR5a_mapFine,text.size(),1,opR5a_mapView->getWidth() * opR5a_caf128 - text.size(),-1,0,false,0x19);
-	console->print(0,0,text);
-	string animation;
+	string label = " " + item->getName(0,1) + " >> ";
+	Console *pool = new Console(opR5a_mapFine,label.size(),1,opR5a_mapView->getWidth() * opR5a_caf128 - label.size(),-1,0,false,0x19);
+	pool->print(0,0,label);
+	string title;
 	if (item->getField4578a0() == 5)
-		animation = "A_CInvItem_Item_Instant";
+		title = "A_CInvItem_Item_Instant";
 	else if (opR5a_cf4830[item->getField457820()] != 0 && !item->unknown457d70())
-		animation = "A_CInvItem_Broken_Instant";
+		title = "A_CInvItem_Broken_Instant";
 	else if (item->unknown457db0())
-		animation = "A_CInvItem_Corrupted_Instant";
+		title = "A_CInvItem_Corrupted_Instant";
 	else
-		animation = "A_CInvItem_Part_Instant";
-	console->animate(animation);
-	timers.push_back(new OpR5a_FineTimer((int)console,item.ID));
+		title = "A_CInvItem_Part_Instant";
+	pool->animate(title);
+	timers.push_back(new OpW5_FineTimer((int)pool,item.ID));
 }

@@ -20,8 +20,8 @@ struct OpR1h_Record	// NOTE: placeholder name (MapRecord)
 };
 extern vector<OpR1h_Record*> opR1h_records;	// NOTE: placeholder name (0xd389c4)
 
-int minInt(int a, int b) throw();	// 0x9cdb30
-int opw2_maxInt(int a, int b) throw();	// NOTE: placeholder name (0x9cdb60)
+int OpX5_minInt(int a, int b);	// 0x9cdb30 (defined in op_x5.cpp, so LTCG can prove it nothrow)
+int OpX5_maxInt(int a, int b);	// 0x9cdb60
 
 class OpR1h_StatSet	// NOTE: placeholder name
 {
@@ -46,10 +46,10 @@ void OpR1h_StatSet::add4722b0(unsigned int id, int value, string text)
 			a[id] += value;
 			break;
 		case 2:
-			a[id] = opw2_maxInt(a[id], value);
+			a[id] = OpX5_maxInt(a[id], value);
 			break;
 		case 3:
-			a[id] = (a[id] == 0) ? value : minInt(a[id], value);
+			a[id] = (a[id] == 0) ? value : OpX5_minInt(a[id], value);
 			break;
 		case 6:
 			a[id] += value;

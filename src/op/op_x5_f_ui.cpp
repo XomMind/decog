@@ -46,8 +46,8 @@ public:
 
 	int getWidth();	// 0x44b0d0
 	void setHidden(bool hidden) throw();	// NOTE: placeholder name
-	void setFgColor(XColor color) throw();	// NOTE: placeholder name (0x4183d0)
-	void resetBack_418450() throw();	// NOTE: placeholder name
+	void setForeAllNothrow_4183d0(XColor color) throw();	// NOTE: 0x4183d0 (setFgColor) under a nothrow alias name, see resetBackNothrow_418450
+	void resetBackNothrow_418450() throw();	// NOTE: 0x418450 under a nothrow alias name (LTCG must see it as nothrow: the exe ctor has no EH frame)
 
 	char pad04[0x60 - 0x04];
 };
@@ -106,7 +106,7 @@ public:
 class RNG
 {
 public:
-	int rangeInt(float a, float b) throw();	// 0x406d70
+	int rangeIntNothrow_406d70(float a, float b) throw();	// NOTE: 0x406d70 (RNG::rangeInt) under a nothrow alias name, see resetBackNothrow_418450
 };
 extern RNG rng;	// 0xd30908
 
@@ -138,10 +138,10 @@ CUfdArea::CUfdArea(XConsole *parent, int value_, const Pos &size, int layer)
 {
 	value = value_;
 	unknown78 = false;
-	setFgColor(*opx5f_cfe674);
-	resetBack_418450();
+	setForeAllNothrow_4183d0(*opx5f_cfe674);
+	resetBackNothrow_418450();
 	unknown70 = opx5f_tickCount + opx5f_bce9a0;
-	unknown74 = rng.rangeInt(0,(float)opx5f_bce9a0) + opx5f_tickCount;
+	unknown74 = rng.rangeIntNothrow_406d70(0,(float)opx5f_bce9a0) + opx5f_tickCount;
 	unknown7c = opx5f_cf670c[value].front();
 }
 

@@ -47,15 +47,29 @@ class Image:
             return {'??_C@_0_pooled_suffix'}
         return None
 
+STUBS = []     # (VA, name) of every generated stub (stubs.obj, see stubobj.py), sorted
 MAP_ALL = []   # every (name, VA) in the last loaded map: TU-local statics (time.inl inlines, static helpers) recur
 
 def load_map():
-    out = {}; del MAP_ALL[:]
+    out = {}; del MAP_ALL[:]; del STUBS[:]
     for line in open(MAP, encoding='latin1'):
         m = re.match(r'\s*[0-9a-f]{4}:[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s', line)
         if m and int(m.group(2), 16):
             out[m.group(1)] = int(m.group(2), 16); MAP_ALL.append((m.group(1), int(m.group(2), 16)))
+            if line.rstrip().endswith('stubs.obj'): STUBS.append((int(m.group(2), 16), m.group(1)))
+    STUBS.sort()
+    STUB_SLOT[0] = min([b[0] - a[0] for a, b in zip(STUBS, STUBS[1:])] or [16])
     return out
+
+def stub_interior(va):
+    """(stub name, offset) if va is inside a generated stub slot at a non-zero offset (an access like
+    [sym+0x30] to a stubbed extern), else None. The slot size is the spacing of the stubs (stubobj.SLOT)."""
+    if STUB_SLOT[0] <= 16: return None   # legacy 16-byte slots: [sym+k] may alias another stub; keep old behavior
+    if len(STUBS) < 2 or not (STUBS[0][0] < va < STUBS[-1][0] + STUB_SLOT[0]): return None
+    i = bisect.bisect_right(STUBS, (va, '\xff')) - 1
+    k = va - STUBS[i][0]
+    return (STUBS[i][1], k) if 0 < k < STUB_SLOT[0] else None
+STUB_SLOT = [16]
 
 def const_len(name, img, va):
     """Byte length to compare for compiler-generated constants (floats, string literals)."""
@@ -195,6 +209,11 @@ def _compare(name, theirs, tva, ours, ova, size, verbose):
                     # body under another name (Array2D::getHeight). When the names don't overlap, fall
                     # back to the same consistent-pairing rule used for unnamed targets.
                     if not same and rt and ro: same = learn(ro, av)
+            elif in_t and in_o and stub_interior(bv):
+                # [stub+k]: pair the stub with the exe address k bytes earlier, consistently with every other
+                # use of that stub. Comparing the stub's zero bytes with exe data would pass by luck.
+                sname, k = stub_interior(bv)
+                same = learn({sname}, av - k)
             elif in_t and in_o:
                 rt, ro = theirs.resolve(av), ours.resolve(bv)
                 n = max([const_len(x, ours, bv) for x in (ro or ())] or [0])

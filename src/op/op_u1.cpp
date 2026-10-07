@@ -252,7 +252,7 @@ bool opU1_splitAfterChar(string &text, char separator, string &rest)	// NOTE: pl
 	if (index == string::npos || index == text.size() - 1)
 		return false;
 
-	rest.assign(text.begin() + index + 1,text.end());
+	rest.assign((const string::const_iterator &)(text.begin() + index + 1),(const string::const_iterator &)text.end());	// the non-template assign(const_iterator, const_iterator)
 	return true;
 }
 

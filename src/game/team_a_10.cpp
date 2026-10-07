@@ -144,3 +144,46 @@ void parseLine_408d70(string &text, vector<string> &out)	// NOTE: placeholder na
 		return;
 	OpW7_split_408860(text,' ','"',out,true);
 }
+
+
+void opw1_split(string &text, char separator, vector<string> &out)	// NOTE: placeholder name
+{
+	if (text.empty())
+		return;
+	size_t start = text.find_first_of(separator);
+	size_t end = text.find(separator,start + 1);
+	if (end == string::npos)
+		end = text.size();
+	do
+	{
+		out.push_back(string(text.begin() + start,text.begin() + end));
+		start = text.find_first_of(separator,end + 1);
+		if (start == string::npos)
+			return;
+		end = text.find(separator,start);
+		if (end == string::npos)
+			end = text.size();
+	} while (start != string::npos);
+}
+
+int splitBetween_408c20(string &text, const string &open, const string &close, vector<string> &out)	// NOTE: placeholder name
+{
+	if (text.empty())
+		return 0;
+	int result = 0;
+	size_t index = -1;
+	size_t p;
+	while (true)
+	{
+		index = text.find(open,index + 1);
+		if (index == string::npos)
+			return result;
+		index += open.size();
+		p = text.find(close,index);
+		if (p == string::npos)
+			return result;
+		out.push_back(string(text.begin() + index,text.begin() + p));
+		result++;
+	}
+	return result;
+}

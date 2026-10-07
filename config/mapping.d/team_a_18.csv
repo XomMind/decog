@@ -1,0 +1,10 @@
+# team_a_18: savepng callback, record copy, result wrapper (src/game/team_a_18.cpp)
+pngWriteData_413f20,0x413f20,0x31
+Triple_454300::Triple_454300,0x454300,0x32
+makeResult_4326e0,0x4326e0,0x3a
+ObjList_4374f0::ObjList_4374f0,0x4374f0,0x62
+dumpStack_421d20,0x421d20,0x1e2
+Input_416060::Input_416060,0x416060,0x195
+CMachineTarget::unknown4afab0,0x4afab0,0xbf
+InfoButton_4ae610::animateFrame,0x4ae610,0x15b
+CGameoverUpload::render,0x48fd20,0x11a

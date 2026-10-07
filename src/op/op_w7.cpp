@@ -142,6 +142,7 @@ public:
 };
 
 int unknown405b40(unsigned char c) throw();	// NOTE: placeholder name
+int charToDigit_405b40(char c);	// 0x405b40 (team_a_03.cpp; defined, so LTCG proves it nothrow)
 
 class OpW7_Unk4afe50	// NOTE: placeholder name (object at 0xcec0fc)
 {
@@ -309,7 +310,7 @@ CShellButton::CShellButton(XConsole *parent, const Rect &rect, string &text, int
 		string marker(2,'>');
 		unsigned int index = text.rfind(marker);
 		if (index != string::npos)
-			key = unknown405b40(text[index + 2]);
+			key = charToDigit_405b40((unsigned char)text[index + 2]);
 	}
 	print(0,0,text);
 }
@@ -850,7 +851,7 @@ void CType::render()
 			scroll = input->getCursor_45ab90();
 		else if (input->getCursor_45ab90() >= scroll + width || (full->size() >= width && scroll > input->getCursor_45ab90() - width))
 			scroll = maxInt(0,input->getCursor_45ab90() - width);
-		text.assign(full->begin() + scroll,full->size() <= scroll + width ? full->end() : full->begin() + scroll + width);
+		text.assign((const string::const_iterator &)(full->begin() + scroll),full->size() <= scroll + width ? (const string::const_iterator &)full->end() : (const string::const_iterator &)(full->begin() + scroll + width));	// non-template assign
 	}
 	else
 		scroll = 0;

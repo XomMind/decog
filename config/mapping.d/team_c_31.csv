@@ -1,0 +1,2 @@
+# team_c_31: CGallery export to user/gallery_export_*.txt/.html/.csv (0x7da370, CGallery vtable slot 5) (src/game/team_c_31.cpp)
+C31_Gallery::exportKnown,0x7da370,0xe080

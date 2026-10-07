@@ -3713,3 +3713,36 @@ void CTemp::update()
 	else
 		XConsole::update();
 }
+
+void CIntel::unknown48fa80()	// NOTE: placeholder name (toggle all intel categories)
+{
+	vector<vector<HEntity> > *categories = opW9_world->unknown463ec0();
+	bool anyHidden = false;
+	for (unsigned int i = 0; i < categories->size(); i++)
+	{
+		if (!(*categories)[i].empty() && filters[i] != 1)
+		{
+			anyHidden = true;
+			break;
+		}
+	}
+	if (anyHidden)
+	{
+		for (unsigned int i = 0; i < lines.size(); i++)
+		{
+			if (lines[i]->type == 1 && filters[lines[i]->category] != 1)
+				unknown48f9e0(lines[i]->category);
+		}
+		opW9_fillInt(filters,20,1);
+		opW9_fillBool(unknownE1,20,true);
+	}
+	else
+	{
+		for (unsigned int i = 0; i < lines.size(); i++)
+		{
+			if (lines[i]->type == 1 && filters[lines[i]->category] == 1)
+				unknown48f9e0(lines[i]->category);
+		}
+		opW9_fillInt(filters,20,0);
+	}
+}

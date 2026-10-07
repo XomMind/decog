@@ -1,0 +1,2 @@
+# team_c_33: CMap reset / map layout tables (0x7f5fd0) (src/game/team_c_33.cpp)
+C33_Map::reset,0x7f5fd0,0x87cb

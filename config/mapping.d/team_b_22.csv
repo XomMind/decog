@@ -1,0 +1,3 @@
+# team_b_22: CMapFine reset/clear (src/game/team_b_22.cpp)
+TeamB_MapFine::reset873fd0,0x873fd0,0x36a
+TeamB_MapFine::clear874340,0x874340,0x24e

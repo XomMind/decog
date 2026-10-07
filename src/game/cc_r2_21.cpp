@@ -205,6 +205,8 @@ public:
 	void setFgColor(int x, int y, XColor color) throw();	// NOTE: placeholder name
 	void setArtFgColor(XColor color) throw();	// NOTE: placeholder name
 	void setArtBgColor(XColor color) throw();	// NOTE: placeholder name
+	void setForeAll_4183d0(XColor color);	// NOTE: placeholder name (cc_r1_07.cpp)
+	void resetBack_418450();	// NOTE: placeholder name (cc_r1_07.cpp)
 
 	XConsole *parent;
 	XBuffer buffer;
@@ -403,8 +405,8 @@ CTitleAnimated::CTitleAnimated(XConsole *parent, AsciiImage *art, int unknown84_
 	: ConsoleArt(parent,art,centerOffset(art->layers.front()->getWidth(),parent->getWidth()),centerOffset(art->layers.front()->getHeight(),parent->getHeight()),false,-1,frame,Pos(-1),0,0)
 {
 	unknown84 = unknown84_;
-	setArtFgColor(consoleDefaultColor);
-	clear();
+	setForeAll_4183d0(consoleDefaultColor);	// defined in the link, so LTCG proves this constructor nothrow as in the exe
+	resetBack_418450();
 };
 
 void CTitleAnimated::unknown4b29b0()

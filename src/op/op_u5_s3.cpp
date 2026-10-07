@@ -383,12 +383,12 @@ int OpU5_SlotTable::findSlot(HEntity e)
 
 bool OpU5_SlotTable::canUse(HEntity e, unsigned int record)
 {
-	int slot = findSlot(e);
-	if (slot == 0x20)
+	int id = findSlot(e);
+	if (id == 0x20)
 		return false;
 	OpU5_SlotRecord *rec = opU5_slotRecords[record];
-	if (lastUsed(record,slot) != 0 && (rec->gaps[slot] == 0 || opU5_map->getTurn() - lastUsed(record,slot) < rec->gaps[slot])
-		|| rec->chances[slot] != 0 && !rng.chance(rec->chances[slot]))
+	if (lastUsed(record,id) != 0 && (rec->gaps[id] == 0 || opU5_map->getTurn() - lastUsed(record,id) < rec->gaps[id])
+		|| rec->chances[id] != 0 && !rng.chance(rec->chances[id]))
 		return false;
 	return true;
 }

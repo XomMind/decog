@@ -19,6 +19,8 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
   stubbed automatically, so you only need declarations for them.
 - `tools/lvx.py <build dir> <extra.csv> [name-to-drop ...]`: lverify with candidate rows injected (or rows dropped)
   without touching `config/`. Never put unproven rows in `config/mapping.d/`: main auto-commits only all-MATCH builds.
+- `tools/stubaudit.py <build dir>`: rows whose operands sit inside a stub at a non-zero offset. Stubs are 4 KiB `.bss`
+  slots (`STUB_SLOT` env; 16 = old layout, which disables lverify's interior-pairing check).
 - `tools/discover.py <ltcg dir> [filter]`: finds exe functions that code you already built matches by accident.
 - `tools/build.sh`: full build + verify + progress (about 3.5 min, writes `build/full`). Only one may run at a
   time. For a private full check: `.venv/bin/python tools/ltcg.py build/full_X $(.venv/bin/python tools/sources.py) && .venv/bin/python tools/lverify.py --dir build/full_X`.
@@ -72,6 +74,16 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - `fmul dword ptr [const]`: write the constant as an `extern const float` (a literal `0.1f` can become a qword).
   `vector::assign(16u, 0)` (size_type) vs `assign(16, 0)` (iterator template). Vectors whose `clear()` are distinct
   exe functions need distinct element types.
+- Pass-by-value `Point` built in place in the outgoing arg slot needs a declared `Point(const Point&) throw()`;
+  without it you get a temporary plus a copy. A returned handle copied with `mov` must have no user copy ctor.
+- One shared `return false;` at the end (`if (a && b) { ... } return false;`) vs early returns; `for (;;)` and
+  `while (true)` differ.
+- Tooling: macOS `sed` has no `\b`; use `perl -pe` for word-boundary renames (sed silently does nothing).
+- Temporaries: class temps > 8 bytes go in the early pool (top of frame), a 12-byte one can land in the late pool
+  after ternary-result slots and a 16-byte one in the early pool: get struct sizes right before chasing offsets.
+  Locals that look "out of scope order" are often declared uninitialized at the top of their block.
+- `""` (and other short) literals in `cond ? "x" : ""` are tail-merged at different exe addresses per site; use a
+  named `extern const char empty_<addr>[]` per site.
 - A template instance over a type that other files define differently (e.g. XColor) can silently use another
   file's copy; give such instances private element types.
 

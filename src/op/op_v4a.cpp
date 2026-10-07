@@ -92,7 +92,7 @@ public:
 	void putChar_418110(int x, int y, int ch, XColor fore);	// NOTE: placeholder name
 	void resetBack_418450() throw();	// NOTE: placeholder name
 	void setForeAll_4183d0(XColor color);	// NOTE: placeholder name
-	void unknown429fe0(XConsole *console, const Pos &pos, const Rect &rect);	// NOTE: placeholder name
+	void unknown429fe0(XConsole *console, const Pos &pos, const Rect &rect) throw();	// NOTE: placeholder name (nothrow in the exe)
 	void clearInterior();
 	void deleteSubconsoles();
 	void unknown429f10(vector<unsigned int> *colors, bool flag);	// NOTE: placeholder name

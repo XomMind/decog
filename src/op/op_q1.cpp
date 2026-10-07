@@ -47,7 +47,7 @@ void OpQ1_createDirectories(string path)	// NOTE: placeholder name
 	unsigned int pos = -1;
 	OpQ1_findNextSlash(path,&pos);
 	int count = 0;
-	for (;;)
+	while (true)
 	{
 		string sub(path.begin(),path.begin() + pos + 1);
 		CreateDirectoryA(sub.c_str(),NULL);

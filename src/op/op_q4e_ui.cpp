@@ -1536,9 +1536,9 @@ CEvolveMain::CEvolveMain(XConsole *parent, const Rect &rect, int circuits)
 	putChar(25,5,0x80,*opq4e_cfe674);
 	putChar(26,5,0x80,*opq4e_cfe674);
 	int anim;
+	if (!opq4e_findAnimation_9d45a0("CEvolveMain_Trace_E",&anim)) {}	// NOTE: empty if reproduces the exe's stored-but-unused test
 	do
 	{
-		bool result = !opq4e_findAnimation_9d45a0("CEvolveMain_Trace_E",&anim);
 		engine->unknown50fb50(engine,anim,&Pos(21,4),&opq4e_cfbec0,&Pos(26,4),&opq4e_cfbec0,9)->unknown50de10();
 	} while (0);
 }

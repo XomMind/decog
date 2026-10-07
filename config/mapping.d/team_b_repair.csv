@@ -54,3 +54,9 @@ CFovEnemiesButton::input,0x98a5f0,0x55b
 ?unknown45b590@ManualUI@@QAEIXZ,0x45b590,0x14
 ?setBgColor@XConsole@@QAEXUXColor@@@Z,0x418410,0x3f
 ?setFgColor@XConsole@@QAEXUXColor@@@Z,0x4183d0,0x3f
+??0CRobotManual@@QAE@PAVXConsole@@ABURect@@1@Z,0x943b70,0x34c
+?opU5_writeQuotedText@@YAXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,0x79a0a0,0xde
+?opX4e_getPropNameUpper_7ffe10@@YAIVHProp@@IAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x7ffe10,0xc3
+?canUse@OpU5_SlotTable@@QAE_NVHEntity@@I@Z,0x7ac0e0,0xde
+?getName@Prop@@QAEABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@XZ,0x45c5b0,0x14
+?addNewInventoryItemIndicator@CMapFine@@QAEXVHItem@@@Z,0x876860,0x33f
