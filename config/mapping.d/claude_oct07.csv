@@ -52,3 +52,4 @@ D40Map::draw86f9c0,0x86f9c0,0x32b4
 GameData122::unknown784410,0x784410,0x3300
 Entity::init,0x5c4640,0x2744
 ?blit@XConsole@@QAEXPAUSDL_Surface@@PAV?$Array2D@UXCell@@@@@Z,0x42a5b0,0x2d10
+CMap::unknown8680b0,0x8680b0,0x6258
