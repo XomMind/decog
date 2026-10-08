@@ -26,3 +26,4 @@
 0x6927e0    0x6f38  Unchained/X0-1V1 turnUpdate callee claude  2026-10-08
 0x65f520    0x51c2  Prop destroy/garrison/hub handler alex-golf 2026-10-08
 0x9471d0    0xca98  0x9471d0 (51 KB)                  alex-delta 2026-10-08
+0x6cd110    0x752a  large function 0x6cd110           alex-golf 2026-10-08
