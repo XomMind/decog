@@ -3,6 +3,25 @@
 // NOTE: placeholder names and partial layouts.
 #include <vector>
 #include <stdlib.h>
+#include <string>
+struct XColor
+{
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+	XColor(const XColor &c) throw();	// 0x411e30
+};
+
+struct OpVL_FxAnim	// NOTE: placeholder name
+{
+	void unknown50de10();	// NOTE: placeholder name
+};
+class Engine
+{
+public:
+	OpVL_FxAnim *unknown50fb50(Engine *engine, int type, const void *a, const void *b, const void *c, const void *d, int value);	// NOTE: placeholder name
+	void stopAll();	// NOTE: placeholder name (OpR2b_Engine::stopAll)
+};
 using namespace std;
 
 struct Pos
@@ -22,18 +41,36 @@ public:
 	Pos localToAbs(Pos pos);	// 0x428650
 	void removeSubconsole(XConsole *console);	// 0x428b20
 	int height_44b0d0();	// NOTE: placeholder name (getter at 0x44b0d0)
+	void clear();	// 0x417bc0
+	void clearInterior();	// 0x417c70
+	Pos getMaxCoord();	// 0x4174e0
+	int getHeight();	// 0x4174c0
+	void setFore(XColor color);	// 0x417b00
+	void print(int x, int y, const std::string &text);	// 0x4181d0
+	std::string getString(const Pos &pos, unsigned int length);	// 0x4177a0
+	int printWrapped_418260(int x, int y, int width, int height, const std::string &text);	// NOTE: placeholder name
+	char padx[0x64];
+	Engine *engine;	// +0x64
+};
+
+class OpVL_Console : public XConsole	// NOTE: placeholder name (Console)
+{
+public:
+	OpVL_Console(XConsole *parent, int width, int height, int x, int y, int font, bool hidden, int layer);	// 0x48c060
+	char pad68[0x6c - 0x68];
 };
 
 struct OpVL_LoreInfo	// NOTE: placeholder name
 {
 	int index;
 	bool known;	// NOTE: placeholder name
+	const std::string &getText();	// NOTE: placeholder name (0x517130 getter)
 };
 
 class OpVL_LoreLine : public XConsole	// NOTE: placeholder name (a list row console)
 {
 public:
-	char pad00[0x6c];
+	char pad68[0x6c - 0x68];
 	OpVL_LoreInfo *info;	// +0x6c
 };
 
@@ -41,6 +78,7 @@ struct OpVL_LoreRecord	// NOTE: placeholder name
 {
 	int pad00;
 	bool known;	// NOTE: placeholder name
+	const std::string &getText();	// NOTE: placeholder name (0x517130 getter)
 };
 extern vector<OpVL_LoreRecord *> opVL_loreRecords;	// NOTE: placeholder name (0xd02cb4)
 
@@ -51,6 +89,10 @@ public:
 };
 extern OpVL_Mouse *opVL_mouse;	// NOTE: placeholder name (0xcefa94)
 
+extern XColor *opVL_textColor_d2981c;	// NOTE: placeholder name
+extern XColor *opVL_otherColor_cfe674;	// NOTE: placeholder name
+extern XColor opVL_fxColor_cfbec0;	// NOTE: placeholder name
+void OpU8a_lookup1(const std::string &name, int *out);	// NOTE: placeholder name
 extern int opV3e_rows_bcbe04[2];	// NOTE: placeholder name
 extern int opV3e_unknown_caf16c;	// NOTE: placeholder name ("none" index)
 extern bool opVL_keyboardMode_d28c8a;	// NOTE: placeholder name
@@ -68,9 +110,10 @@ public:
 	void unknown7eafe0(int delta, int key);	// NOTE: placeholder name
 	void unknown7ebd60(int index);	// NOTE: placeholder name
 
-	char pad00[0x70];
+	char pad00[0x70 - 0x68];
 	vector<OpVL_LoreLine *> lines;	// +0x70
 	int selected;	// +0x80, NOTE: placeholder name
+	XConsole *details;	// +0x84, NOTE: placeholder name
 };
 
 void CLore::unknown7eafe0(int delta, int key)
@@ -253,4 +296,121 @@ select:
 			}
 		}
 	}
+}
+
+// CLore::select (0x7ebd60): shows the selected entry's text in the details console, followed (below) and
+// preceded (above) by as many neighbouring entries as fit, with "???" for unknown ones.
+void CLore::unknown7ebd60(int index)
+{
+	if (selected == index)
+		return;
+	selected = index;
+	OpVL_LoreLine *other = NULL;
+	for (unsigned int num = 0; num < lines.size(); num++)
+	{
+		if (lines[num]->info->index == selected)
+		{
+			other = lines[num];
+			break;
+		}
+	}
+	details->clearInterior();
+	details->engine->stopAll();
+	XConsole *title = new OpVL_Console(details,0x5e,0x19,2,1,0,false,-1);
+	int size = title->printWrapped_418260(0,0,0x5e,0x19,other->info->getText());
+	int temp = other->getPos().y;
+	if (temp + size >= details->getMaxCoord().y)
+		temp -= temp + size - details->getHeight() + 1;
+	details->setFore(*opVL_textColor_d2981c);
+	for (int j = 0, y = temp; j < size; j++, y++)
+	{
+		string s = title->getString(Pos(0,j),0x5e);
+		details->print(2,y,s);
+	}
+	int log;
+	OpU8a_lookup1("CLore_Text_Discovered",&log);
+	int mask;
+	OpU8a_lookup1("CLore_Text_Unknown",&mask);
+	details->setFore(*opVL_otherColor_cfe674);
+	int open = 1;
+	int ty = temp + size + 1;
+	int num;
+	num = other->info->index + 1;
+	while (num < opVL_loreRecords.size() && ty < details->getMaxCoord().y)
+	{
+		if (!opVL_loreRecords[num]->known)
+		{
+			size = 1;
+			details->print(2,ty,"???");
+			do
+			{
+				for (int x = Pos(2,ty).x; x < Pos(2,ty).x + 3; x++)
+					details->engine->unknown50fb50(details->engine,mask,&Pos(x,Pos(2,ty).y),&opVL_fxColor_cfbec0,0,0,9)->unknown50de10();
+			}
+			while (0);
+		}
+		else
+		{
+			title->clear();
+			size = title->printWrapped_418260(0,0,0x5e,0x19,opVL_loreRecords[num]->getText());
+			for (int j = 0, y = ty; j < size && y < details->getMaxCoord().y; j++, y++)
+			{
+				string s = title->getString(Pos(0,j),0x5e);
+				details->print(2,y,s);
+				do
+				{
+					for (unsigned int x = Pos(2,y).x; x < Pos(2,y).x + s.size(); x++)
+						details->engine->unknown50fb50(details->engine,log,&Pos(x,Pos(2,y).y),&opVL_fxColor_cfbec0,0,0,9)->unknown50de10();
+				}
+				while (0);
+			}
+		}
+		num++;
+		ty = ty + size + 1;
+	}
+	ty = temp;
+	num = other->info->index - 1;
+	while (num >= 0)
+	{
+		if (!opVL_loreRecords[num]->known)
+		{
+			size = 1;
+			ty -= size + 1;
+			if (ty > 1)
+			{
+				details->print(2,ty,"???");
+				do
+				{
+					for (int x = Pos(2,ty).x; x < Pos(2,ty).x + 3; x++)
+						details->engine->unknown50fb50(details->engine,mask,&Pos(x,Pos(2,ty).y),&opVL_fxColor_cfbec0,0,0,9)->unknown50de10();
+				}
+				while (0);
+			}
+			else
+				break;
+		}
+		else
+		{
+			title->clear();
+			size = title->printWrapped_418260(0,0,0x5e,0x19,opVL_loreRecords[num]->getText());
+			ty -= 2;
+			for (int j = size - 1; j >= 0; j--, ty--)
+			{
+				if (ty < 1)
+					goto done;
+				string s = title->getString(Pos(0,j),0x5e);
+				details->print(2,ty,s);
+				do
+				{
+					for (unsigned int x = Pos(2,ty).x; x < Pos(2,ty).x + s.size(); x++)
+						details->engine->unknown50fb50(details->engine,log,&Pos(x,Pos(2,ty).y),&opVL_fxColor_cfbec0,0,0,9)->unknown50de10();
+				}
+				while (0);
+			}
+			ty++;
+		}
+		num--;
+	}
+done:
+	details->removeSubconsole(title);
 }
