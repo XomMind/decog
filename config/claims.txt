@@ -28,3 +28,4 @@
 0x9471d0    0xca98  0x9471d0 (51 KB)                  alex-delta 2026-10-08
 0x6cd110    0x752a  large function 0x6cd110           alex-golf 2026-10-08
 0x6d4c00    0x84e0  large function 0x6d4c00           alex-golf 2026-10-08
+0x9c2140    0x2d    vector iterator operator-(int) used by back() 0x9b4b20 alex-foxtrot 2026-10-08
