@@ -129,6 +129,10 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - `""` string temporaries in the LATE temp pool with a per-site literal: the source left off a default argument
   (`f(..., const string& name = "")`); passing `""` explicitly puts the temp in the early pool.
 - Scope-ordering/rename tooling with clang-AST scopes: `scratch/juliet/` (iter.sh, scope.py, chk.py, bkm.py, solve.py, renvar.py).
+- Globals that `config/globals.csv` names must use those names (`rng`, `caveinWallTerrain`...): a placeholder extern pairs
+  with the address but can DIFF in the full build. Placeholder vector/struct layouts must use int fields, not `char pad[N]`
+  (a char array is a /GS buffer and moves temporaries into the early pool).
+- A `continue;` jumps to the loop increment; if the exe jumps to the end of the body instead, use `goto next;` there.
 - Checking whether a VA is already matched: grep mapping rows only (`git grep -h ",<va>," origin/main -- config/mapping.d`);
   `config/names.csv` lists named-but-unmatched functions and gives false positives.
 - A template instance over a type that other files define differently (e.g. XColor) can silently use another
