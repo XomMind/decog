@@ -126,6 +126,9 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
   compare offsets; placed 689 locals of a 119 KB function). Older: `scratch/echo/`, `scratch/india/names.py`.
 - ebp-insensitive diffs hide real bugs (swapped receiver/argument) and EH-state differences: also check EH sequences.
 - Giants with long regular sections (command tables): generate that source from the disassembly (`scratch/hotel/gen.py`).
+- `""` string temporaries in the LATE temp pool with a per-site literal: the source left off a default argument
+  (`f(..., const string& name = "")`); passing `""` explicitly puts the temp in the early pool.
+- Scope-ordering/rename tooling with clang-AST scopes: `scratch/juliet/` (iter.sh, scope.py, chk.py, bkm.py, solve.py, renvar.py).
 - Checking whether a VA is already matched: grep mapping rows only (`git grep -h ",<va>," origin/main -- config/mapping.d`);
   `config/names.csv` lists named-but-unmatched functions and gives false positives.
 - A template instance over a type that other files define differently (e.g. XColor) can silently use another
