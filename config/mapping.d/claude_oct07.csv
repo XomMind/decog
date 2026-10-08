@@ -32,3 +32,4 @@ opCS_openCogshop_8779a0,0x8779a0,0xa37
 CSigixExoskeleton::render,0x8932a0,0x9cf
 CSearchItem::CSearchItem,0x4ab780,0xacf
 CMap::showCommArraySquad,0x818a00,0xa53
+OpMD_Dialogs::push_874d80,0x874d80,0xb14
