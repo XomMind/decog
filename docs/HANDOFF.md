@@ -1,6 +1,15 @@
 # Handoff (2026-10-08)
 
-## Latest verified loop checkpoint (2026-10-08, sixteenth combined loop source batch)
+## Latest verified loop checkpoint (2026-10-08, seventeenth combined loop source batch)
+
+- **12,875 / 13,016 game functions; 52.198% code matched.** Inventory input adds 4,535 bytes over `72deedc`; 141 functions remain. Code totals: 3,427,728 / 6,566,759 bytes.
+- **32,206 / 32,206 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_17.log`; candidate gate: `build/manager_loop_source_lvx_17.log`; registered proof: `build/manager_loop_source_registered_17.log`. Exact installed source hash checked before commit. Raw and code-aware audits both report zero interior-stub operands: `build/manager_loop_source_audit_17.log`, `build/manager_loop_source_code_audit_17.log`.
+- Inventory input preserves actual event dispatch, six native Item-vector sorting scopes, borrowed player inventory and true local owners. The observed unused vector has a real constructor/destructor lifetime. Native96B XConsole/108B Console expose actual Buffer/children ownership; the112B ModeReport allocation uses its real external lifecycle. Optional Point pointers and two Entity handles in the Info API are distinguished from Item handles. Allocating operations retain ordinary exception contracts.
+- Reverse sorting uses the actual unsigned byte field/local, rather than bool normalization inferred from initialization. Canonical erase-step helper takes int&, with four signed partition indices and ordinary unsigned container-size conversion. Independent review corrected the earlier unsigned-reference draft, preserved it in scratch, and re-proved the exact installation copy. Genuine jump/index tables stay within the verified function extent. No padded temporary, fabricated helper body or exception waiver.
+- Independent exact-source evidence: `scratch/loop_bravo_31/inventory_review.md`, `scratch/loop_charlie_25/INPUT_READY.md`; manager `scratch/manager_loop/inventory_review_17.md`. Standard isolated proof4535B/43stubs, native helpers37/37, raw/code audits clean. Static verification does not establish game-runtime behavior.
+- The authorized loop continues with mission input, item labels, item descriptions and genuine color-helper probes. Manager serializes source freezes, full-context gates, registration and commits.
+
+## Previous verified loop checkpoint (2026-10-08, sixteenth combined loop source batch)
 
 - **12,874 / 13,016 game functions; 52.129% code matched.** Four unique matches add 17,226 bytes over `ac8e39a`; 142 functions remain. Code totals: 3,423,193 / 6,566,759 bytes.
 - **32,205 / 32,205 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_16.log`; candidate gate: `build/manager_loop_source_lvx_16.log`; registered proof: `build/manager_loop_source_registered_16.log`. Four frozen source hashes checked before commit. Raw and code-aware audits both report zero interior-stub operands: `build/manager_loop_source_audit_16.log`, `build/manager_loop_source_code_audit_16.log`.
