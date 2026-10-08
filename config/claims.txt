@@ -1,0 +1,21 @@
+# Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
+# remove the line in the commit that maps the function (or when abandoning it).
+# va        size    name / what                       owner   date
+0x4243e0    0x16d0  REX::loadFonts                    claude  2026-10-08
+0x42f5e0    0x22e6  XFontSet::init                    alex-alpha 2026-10-08
+0x665fd0    0x3904  STrapTrigger effect switch        alex-bravo 2026-10-08
+0x794da0    0x30ba  prelearn counterpart (18-way switch) alex-charlie 2026-10-08
+0x8ec880    0x75cf  CInfoCompare::trigger             alex-delta 2026-10-08
+0x6f1e90    0xadc4  BS::placeRandomEncounter          alex-echo 2026-10-08
+0x6c70a0    0x2816  BS::placeMachine (matched in try.sh) alex-bravo 2026-10-08
+0x7ad6a0    0x2b58  charlie2 round 2                  alex-charlie 2026-10-08
+0x884f60    0x25d8  CScan::load                       claude  2026-10-08
+0x5c4640    0x2744  Entity::init                      claude  2026-10-08
+0x42a5b0    0x2d10  XConsole::blit                    claude  2026-10-08
+0x86f9c0    0x32b4  D40Map::collect86e310 callee      claude  2026-10-08
+0x784410    0x3300  GM::readyGame seeds/world setup   claude  2026-10-08
+0xb5c730    0x8a    string-assign thunk (no callers)  claude  2026-10-08
+0xb5c7c0    0x8a    string-assign thunk (no callers)  claude  2026-10-08
+0x900920    0x8f18  CShell command handler            alex-delta 2026-10-08
+0x89d970    0x3398  CParts::input                     alex-foxtrot 2026-10-08
+0x7d2030    0x3c40  charlie2 round 2                  alex-charlie 2026-10-08
