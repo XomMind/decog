@@ -1,0 +1,6 @@
+# Existing-source helpers verified together against the committed full artifact.
+teamb_readTriples_9df3f0,0x9df3f0,0x93
+teamb_moveBlock_9e2e40,0x9e2e40,0x177
+??0TeamB_Pt453b40@@QAE@XZ,0x453b40,0x21
+?readRaw@?$TeamB_Array2D@UTeamB_Pt453b40@@@@QAEXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9d3360,0x10f
+OpX5F_PointGrid::resize,0x9ed730,0xee

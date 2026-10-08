@@ -1,6 +1,12 @@
 # Handoff (2026-10-07)
 
-## Current verified checkpoint (2026-10-07, second four-worker batch)
+## Latest verified loop checkpoint (2026-10-07, existing-source helpers)
+
+- **12,749 / 13,014 game functions; 47.626% code matched.** Four newly registered existing-source helpers add 1,031 bytes over `9ea69ef`; 265 game functions remain. The fifth row is a Point-constructor callback alias at an already-mapped address.
+- **32,271 / 32,271 comparisons MATCH, zero DIFF**, using the prior verified full artifact. Candidate gate: `build/manager_loop_mapping_only_01.log`; registered proof: `build/manager_loop_mapping_only_01_registered.log`; audit: `build/manager_loop_mapping_only_01_audit.log` (4 KiB slots, zero interior-stub operands).
+- This checkpoint changes mapping metadata and progress only. The user authorized an ongoing matching/verification/commit loop. Worker drafts for the next combined source batch remain separate from this commit; manager coordinates source freezes before serialized integration builds.
+
+## Previous verified checkpoint (2026-10-07, second four-worker batch)
 
 - **12,745 / 13,014 game functions; 47.611% code bytes matched.** This batch adds **30 unique game-function matches and 4,107 matched bytes** over `29dec04`. **269 game functions remain unmatched.** Counts exclude library functions and do not count mapping aliases twice.
 - **32,266 / 32,266 registered comparisons MATCH, zero DIFF.** Two serialized full builds checked the combined sources, then the retained source after a failing draft was returned to scratch. Candidate gate: `build/manager_oct08_final_lvx.log`; registered verification: `build/manager_oct08_registered.log`; final compile/link: `build/manager_oct08_final_full.log`. These artifacts are local and gitignored.
