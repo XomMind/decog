@@ -12,3 +12,4 @@
 0x794da0    0x30ba  prelearn counterpart (18-way switch) alex-charlie 2026-10-08
 0x8ec880    0x75cf  CInfoCompare::trigger             alex-delta 2026-10-08
 0x6f1e90    0xadc4  BS::placeRandomEncounter          alex-echo 2026-10-08
+0x6c70a0    0x2816  BS::placeMachine (matched in try.sh) alex-bravo 2026-10-08
