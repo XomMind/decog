@@ -38,3 +38,8 @@ OpUE_CMap::useExit_825e00,0x825e00,0xb16
 XInput::handleEvent_427320,0x427320,0xb54
 Overmind::unknown6827d0,0x6827d0,0xb3a
 Overmind::unknown684250,0x684250,0x9e6
+Overmind::unknown687520,0x687520,0x9c4
+Overmind::unknown685a10,0x685a10,0xa71
+Overmind::spawnCargoDispatch_68aec0,0x68aec0,0xadf
+BS::unknown6efb90,0x6efb90,0x1107
+Item::takeDamage_57ab10,0x57ab10,0x1392
