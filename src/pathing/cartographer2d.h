@@ -69,6 +69,9 @@ class Cartographer2D
 public:
 	bool findPath(int startX, int startY, int goalX, int goalY, Cartographer2DMoveCost *moveCost, void *data, vector<Point> &path);	// NOTE: placeholder name
 	bool findPath(const Point &from, const Point &to, Cartographer2DMoveCost *moveCost, void *data, vector<Point> &path);	// NOTE: placeholder name
+	void dijkstra(int startX, int startY, int range, Cartographer2DDijkstraCost *cost, void *data);	// NOTE: placeholder name (0x40e990)
+	bool findNearest(int startX, int startY, int range, Cartographer2DMoveCost *cost, void *data, vector<Point> &path, Cartographer2DDijkstraCheck *check);	// NOTE: placeholder name (0x40f310)
+	bool findPathToAny(int startX, int startY, vector<Point> &goals, Cartographer2DMoveCost *cost, void *data, vector<Point> &path);	// NOTE: placeholder name (0x40dd50)
 };
 
 #endif // CARTOGRAPHER2D_H

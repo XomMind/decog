@@ -19,3 +19,5 @@ opS2_logPhrase_5141b0,0x5141b0,0x4d1
 ?checkScoreReupload@@YAHPAX@Z,0x489c20,0x7c3
 opC_uploadRunData_48ae20,0x48ae20,0x6e9
 AsciiImage::load,0x437580,0x802
+Cartographer2D::dijkstra,0x40e990,0x972
+Cartographer2D::findNearest,0x40f310,0xaa5
