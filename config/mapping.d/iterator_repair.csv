@@ -1,0 +1,3 @@
+# Genuine non-const std::string begin/end at the VAs the const rows wrongly held (scratch/loop_charlie_43/MAPPING_REPAIR.md)
+?begin@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE?AV?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@2@XZ,0x9afb40,0x25
+?end@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAE?AV?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@2@XZ,0x9afba0,0x2b

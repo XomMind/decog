@@ -1,7 +1,7 @@
 # team_a_repair: rows for existing definitions in shared files that alpha repaired (see report)
 CLog::~CLog,0x48e720,0x1c
 CGameoverAchievements::~CGameoverAchievements,0x48fc70,0x1c
-??H?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBE?AV01@H@Z,0x9b09b0,0x2d
+??H?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBE?AV01@H@Z,0x9b0950,0x2d
 ?unknown458700@Item@@QAEXPBD@Z,0x458700,0x1c
 ?unknown45b070@Entity@@QAEXPBD@Z,0x45b070,0x1c
 ??0CTextInput@@QAE@PAVXConsole@@HHHH_N1HHHHPBDH@Z,0x48d130,0x160
