@@ -1,7 +1,3 @@
-LA24Entity::LA24Entity,0x5c3590,0x10a3
-??0LA24Effect@@QAE@PAULA24EffectType@@H@Z,0x46ca20,0x21
-??0LA24Effect@@QAE@ABU0@@Z,0x46ca50,0x26
-LA24EC::LA24EC,0x456260,0x1e
 LB24Map::init6e9570,0x6e9570,0x10e3
 LB24EffectPair::LB24EffectPair,0x46ca20,0x21
 D27Gallery::D27Gallery,0x7d8d60,0xdf5

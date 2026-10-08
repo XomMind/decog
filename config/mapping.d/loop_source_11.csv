@@ -5,7 +5,6 @@ LB20EffectPair::LB20EffectPair,0x46ca20,0x21
 newsThread79ba00,0x79ba00,0xd74
 NewsRecord::NewsRecord,0x471250,0x41
 ??_GNewsRecord@@QAEPAXI@Z,0x79c780,0x2d
-LC12Row::LC12Row,0x4ab780,0xacf
 LA20Cell::blast66eff0,0x66eff0,0x1160
 ??_GLA20Effects@@QAEPAXI@Z,0x458720,0x2d
 LPMap::label813050,0x813050,0xc22

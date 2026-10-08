@@ -714,8 +714,8 @@ bool OpW7_isAvailable_9004e0(int topic, bool flag);	// NOTE: placeholder name
 bool OpW7_contains_9d3fe0(vector<string> *list, string text);	// NOTE: placeholder name
 bool OpW7_contains_9db330(vector<int> &values, int value);	// NOTE: placeholder name
 void OpW7_unknown900920();	// NOTE: placeholder name
-void OpW7_unknown8fec50();	// NOTE: placeholder name
-void OpW7_unknown909990();	// NOTE: placeholder name
+void opq4c_scrollShell8fec50(bool up);	// 0x8fec50 (defined in op_q4c.cpp)
+bool opq4c_suggest909990(bool flag);	// 0x909990 (defined in op_q4c.cpp)
 void OpW7_unknown4b1c30();	// NOTE: placeholder name
 
 CShellManual::CShellManual(XConsole *parent, int y)
@@ -778,7 +778,7 @@ CShellManual::CShellManual(XConsole *parent, int y)
 			}
 		}
 	}
-	input = new CTextInput(this,0,0,44,0,false,false,(int)OpW7_unknown900920,(int)OpW7_unknown8fec50,(int)OpW7_unknown4b1c30,0,NULL,(int)OpW7_unknown909990);
+	input = new CTextInput(this,0,0,44,0,false,false,(int)OpW7_unknown900920,(int)opq4c_scrollShell8fec50,(int)OpW7_unknown4b1c30,0,NULL,(int)opq4c_suggest909990);
 	input->setMaxLength_4544c0(44);
 	input->setUnknownAa();
 	opw7_keyMap->unknown416570();

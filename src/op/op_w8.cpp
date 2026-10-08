@@ -32,6 +32,7 @@ int opw8_pointDistance(const Point &a, const Point &b);	// NOTE: placeholder nam
 bool unknown4373c0(const Point &a, const Point &b);	// NOTE: placeholder name
 int minInt(int a, int b);	// 0x9cdb30
 template <class T> T sumArray(const T *values, unsigned int count) throw();	// NOTE: placeholder name (0x9d0ca0)
+int opw8_sumInts_9d0ca0(const int *values, unsigned int count) throw();	// NOTE: private name for sumArray<int> (0x9d0ca0), see Entity::Entity(record)
 bool opw8_contains(const vector<bool> &values, bool value) throw();	// NOTE: placeholder name (0x9d7670)
 int opw2_clampInt(int low, int value, int high);	// NOTE: placeholder name (0x9cdc80)
 void opw8_atLeast(int *value, int minimum);	// NOTE: placeholder name (0x9cf5c0)
@@ -5745,6 +5746,7 @@ public:
 	void remove(int value);	// NOTE: placeholder name (0x9bab80)
 	unsigned int size();	// NOTE: placeholder name (0x9b81d0)
 	int &pick() throw();	// NOTE: placeholder name (0x9ba470)
+	int &pick_9ba470() throw();	// NOTE: private name for pick, used by Entity::Entity(record): keeps it nothrow in the full link
 
 	vector<int> values;
 	vector<int> weights;
@@ -5792,7 +5794,7 @@ Entity::Entity(OpW8_EntityRecord *record_)
 		}
 		else if (record->unknown28 == 0x2e || record->unknown28 == 0x2f)
 		{
-			name += opw8_padLeft(intToString(opw8_d1e888->depth),2,'0');
+			name = opw8_padLeft(intToString(opw8_d1e888->depth),2,'0');
 			name += opw8_d38e40[opw8_d1e888->unknown04];
 			int &counter = record->unknown28 == 0x2e ? opw8_d1eb58 : opw8_d1eb5c;
 			counter++;
@@ -5886,8 +5888,8 @@ Entity::Entity(OpW8_EntityRecord *record_)
 	if (opw8_cf471c != 0)
 	{
 		OpW8_WeightedTable table(opw8_b95a1c,4);
-		for (int i = 20 - sumArray(slots,4); i > 0; i--)
-			slots[table.pick()]++;
+		for (int i = 20 - opw8_sumInts_9d0ca0(slots,4); i > 0; i--)
+			slots[table.pick_9ba470()]++;
 	}
 	unknown88 = record->unknownA4;
 	unknown8C = record->unknown28 == 0 ? opw8_cf4954 : record->unknown1DC;
@@ -6287,8 +6289,8 @@ extern int opw8_b96178[];	// NOTE: placeholder name
 
 void Entity::unknown5cede0(int *type, int *subtype)
 {
-	bool player = isPlayer();
-	bool upgraded = player && opw8_cf462c == 5;
+	bool first = isPlayer();
+	bool zone = first && opw8_cf462c == 5;
 	*type = 0x10;
 	if (opw8_cf4a00)
 		*type = 0;
@@ -6299,13 +6301,13 @@ void Entity::unknown5cede0(int *type, int *subtype)
 		vector<OpW8_ItemRecord *> types;
 		for (unsigned int i = 0; i < golem->unknown160.size(); i++)
 			types.push_back(opw8_itemTypes[golem->unknown160[i][0]->type]);
-		int amount = 0;
+		int sum = 0;
 		for (unsigned int i = 0; i < parts.size(); i++)
 		{
 			if (opw8_contains9db330(&types,parts[i]->unknown9b4350()))
-				amount += parts[i]->unknown4578c0();
+				sum += parts[i]->unknown4578c0();
 		}
-		if (amount >= sumArray(slots,4) / 2)
+		if (sum >= sumArray(slots,4) / 2)
 			*type = 1;
 	}
 	else if (unknown5d26e0(0xd3))
@@ -6334,13 +6336,13 @@ void Entity::unknown5cede0(int *type, int *subtype)
 	{
 		bool fast = unknown5d1390() >= 3 && !unknown45a780();
 		int score = 0;
-		if (player && opw8_gameData.unknown46fb60())
+		if (first && opw8_gameData.unknown46fb60())
 			score += 3;
-		if (unknown5d26e0(10) || (upgraded && *opW5_getUpgradeValue(0xb) >= 0x12))
+		if (unknown5d26e0(10) || (zone && *opW5_getUpgradeValue(0xb) >= 0x12))
 			score += opw8_ba21d0[10].unknown00;
 		if (unknown5d26e0(0xd))
 			score += opw8_ba21d0[0xd].unknown00;
-		else if (unknown5d26e0(0xb) || (upgraded && *opW5_getUpgradeValue(0xc) >= 10))
+		else if (unknown5d26e0(0xb) || (zone && *opW5_getUpgradeValue(0xc) >= 10))
 		{
 			score += opw8_ba21d0[0xb].unknown00;
 			if (unknown5d26e0(0xc))
@@ -6353,7 +6355,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 		if (unknown5d26e0(0x10))
 		{
 			score += opw8_ba21d0[0x10].unknown00;
-			if (unknown5d26e0(0x11) || (upgraded && *opW5_getUpgradeValue(0xd) >= 0x32))
+			if (unknown5d26e0(0x11) || (zone && *opW5_getUpgradeValue(0xd) >= 0x32))
 				score += opw8_ba21d0[0x11].unknown00;
 		}
 		if (unknown5d26e0(0x16))
@@ -6376,10 +6378,10 @@ void Entity::unknown5cede0(int *type, int *subtype)
 		else
 		{
 			bool armed = unknown5d5c30().isValid();
-			bool special = unknown5d26e0(0x13) || unknown5d26e0(0x14) || unknown5d26e0(0x1c) || unknown5d26e0(0x1e) || unknown5d26e0(0x1f);
+			bool found = unknown5d26e0(0x13) || unknown5d26e0(0x14) || unknown5d26e0(0x1c) || unknown5d26e0(0x1e) || unknown5d26e0(0x1f);
 			if (fast && strong)
 			{
-				if (armed && special)
+				if (armed && found)
 					*type = 6;
 				else
 					*type = 5;
@@ -6388,7 +6390,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 			{
 				if (armed)
 				{
-					if (unknown5d6240() >= 2 && (unknown5d26e0(0x51) || unknown5d26e0(0x5a) || (upgraded && *opW5_getUpgradeValue(0xf) >= 5) || unknown5d26e0(0x6c) || unknown5d26e0(0x6a) || unknown5d26e0(0x5b) || unknown5d2000(3)))
+					if (unknown5d6240() >= 2 && (unknown5d26e0(0x51) || unknown5d26e0(0x5a) || (zone && *opW5_getUpgradeValue(0xf) >= 5) || unknown5d26e0(0x6c) || unknown5d26e0(0x6a) || unknown5d26e0(0x5b) || unknown5d2000(3)))
 						*type = 8;
 					else if (strong)
 						*type = 7;
@@ -6412,7 +6414,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 								defense += opw8_ba21d0[parts[i]->unknown457f90()].unknown08;
 							}
 						}
-						if (upgraded)
+						if (zone)
 						{
 							for (int i = 0; i < 0x18; i++)
 							{
@@ -6433,7 +6435,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 								*type = 0xa;
 							else
 								*type = 0xd;
-							if (player && unknown5c8ec0(0x18,false) != 0)
+							if (first && unknown5c8ec0(0x18,false) != 0)
 							{
 								int best = opw8_caf164;
 								for (unsigned int i = 0; i < opw8_itemTypes.size(); i++)
@@ -6458,27 +6460,26 @@ void Entity::unknown5cede0(int *type, int *subtype)
 						}
 					}
 				}
+				if (*type == 0x10)
+					*type = 0xf;
 			}
 		}
-		if (*type == 0x10)
-			*type = 0xf;
 	}
 
 	*subtype = OPW8_NUM_ROLES;
-	vector<int> scores(OPW8_NUM_ROLES,0);
+	vector<int> points(OPW8_NUM_ROLES,0);
 	int value = unknown5c7f10() + unknown5c7f40();
 	if (unknown5d26e0(0xb9))
 		value += 5;
 	if (value >= 0x14)
-		scores[0] = value;
-	bool rif = player && stringToInt(opw8_gameData.unknown46f6d0("installedRif_g")) && unknown5d2a00(0x77);
-	if (rif)
+		points[0] = value;
+	if (first && stringToInt(opw8_gameData.unknown46f6d0("installedRif_g")) && unknown5d2a00(0x77))
 	{
 		value = unknown5d2990(0x7c) * 6;
 		if (value >= 0x14)
 		{
 			value += (opw8_playerData.unknown46e150() - 1) * 5;
-			scores[2] = value;
+			points[2] = value;
 		}
 	}
 	if (unknown5d2990(0xa6) != 0 || unknown5d2990(0xba) != 0 || unknown5d2990(0xc5) != 0)
@@ -6494,19 +6495,19 @@ void Entity::unknown5cede0(int *type, int *subtype)
 		if (value >= 0x14)
 		{
 			value += unknown5d2770(0x19) * 4;
-			scores[4] = value;
+			points[4] = value;
 		}
 	}
 	value = unknown5ca210();
-	if (upgraded)
+	if (zone)
 		value *= 3;
 	if (value >= 0x1a)
-		scores[5] = value;
+		points[5] = value;
 	if (slots[0] >= 4)
 	{
 		value = unknown5d1070() / 2.2;
 		if (value >= 0x14)
-			scores[6] = value;
+			points[6] = value;
 	}
 	value = 0;
 	vector<HItem> launchers;
@@ -6520,7 +6521,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 		}
 	}
 	if (value >= 0x14)
-		scores[7] = value;
+		points[7] = value;
 	value = 0;
 	if (unknown5d26e0(0x13))
 		value += 10;
@@ -6535,7 +6536,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 	if (unknown5d26e0(0x1f))
 		value += 10;
 	if (value >= 0xf)
-		scores[8] = value;
+		points[8] = value;
 	value = 0;
 	for (unsigned int i = 0; i < parts.size(); i++)
 	{
@@ -6543,7 +6544,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 			value += 5;
 	}
 	if (value >= 0x14)
-		scores[9] = value;
+		points[9] = value;
 	value = 0;
 	for (unsigned int i = 0; i < parts.size(); i++)
 	{
@@ -6551,7 +6552,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 			value += 5;
 	}
 	if (value >= 0x14)
-		scores[10] = value;
+		points[10] = value;
 	if (opw8_cf48dc != 0)
 	{
 		vector<int> seen;
@@ -6568,11 +6569,11 @@ void Entity::unknown5cede0(int *type, int *subtype)
 		if (unknown5d26e0(0x96))
 			value += 5;
 		if (value >= 0x14)
-			scores[0xc] = value;
+			points[0xc] = value;
 	}
 	value = world->unknown463890(1)->getMembers()->size() * 5;
 	if (value >= 0x14)
-		scores[0xd] = value;
+		points[0xd] = value;
 	value = 0;
 	for (unsigned int i = 0; i < parts.size(); i++)
 	{
@@ -6580,7 +6581,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 			value += 5;
 	}
 	if (value >= 0x14)
-		scores[0xe] = value;
+		points[0xe] = value;
 	value = 0;
 	bool core = false;
 	for (unsigned int i = 0; i < parts.size(); i++)
@@ -6597,9 +6598,8 @@ void Entity::unknown5cede0(int *type, int *subtype)
 		}
 	}
 	if (value >= 0x14 && core)
-		scores[0x10] = value;
-	bool zio = player && stringToInt(opw8_gameData.unknown46f6d0("zioWasImprinted_g")) && !stringToInt(opw8_gameData.unknown46f6d0("zioAttackedLocals_g"));
-	if (zio)
+		points[0x10] = value;
+	if (first && stringToInt(opw8_gameData.unknown46f6d0("zioWasImprinted_g")) && !stringToInt(opw8_gameData.unknown46f6d0("zioAttackedLocals_g")))
 	{
 		value = 10;
 		for (unsigned int i = 0; i < parts.size(); i++)
@@ -6608,10 +6608,9 @@ void Entity::unknown5cede0(int *type, int *subtype)
 				value += 5;
 		}
 		if (value >= 0x14)
-			scores[0x11] = value;
+			points[0x11] = value;
 	}
-	bool reset = player && stringToInt(opw8_gameData.unknown46f6d0("usedCoreResetMatrix_g"));
-	if (reset)
+	if (first && stringToInt(opw8_gameData.unknown46f6d0("usedCoreResetMatrix_g")))
 	{
 		value = 10;
 		value += opw8_cf47c0 * 5;
@@ -6621,7 +6620,7 @@ void Entity::unknown5cede0(int *type, int *subtype)
 				value += 7;
 		}
 		if (value >= 0x14)
-			scores[0x12] = value;
+			points[0x12] = value;
 	}
 	value = 0;
 	for (unsigned int i = 0; i < parts.size(); i++)
@@ -6630,50 +6629,50 @@ void Entity::unknown5cede0(int *type, int *subtype)
 			value += 10;
 	}
 	if (value >= 0x14)
-		scores[0x13] = value;
-	if (opw8_anyNonZero(scores))
+		points[0x13] = value;
+	if (opw8_anyNonZero(points))
 	{
-		*subtype = opw8_maxIndex(&scores);
+		*subtype = opw8_maxIndex(&points);
 		switch (*subtype)
 		{
 			case 0:
-				if (scores[*subtype] >= 0x3c)
+				if (points[*subtype] >= 0x3c)
 					*subtype = 1;
 				break;
 			case 2:
-				if (player && scores[*subtype] >= 0x3c && opw8_playerData.unknown46e150() - 1 >= 3)
+				if (first && points[*subtype] >= 0x3c && opw8_playerData.unknown46e150() - 1 >= 3)
 					*subtype = 3;
 				break;
 			case 9:
-				if (scores[0x10] != 0)
+				if (points[0x10] != 0)
 					*subtype = 0x10;
-				else if (scores[0x11] != 0)
+				else if (points[0x11] != 0)
 					*subtype = 0x11;
 				break;
 			case 10:
 			{
-				int count = 0;
+				value = 0;
 				for (unsigned int i = 0; i < parts.size(); i++)
 				{
 					if (parts[i]->unknown457f90() == 0x7b && parts[i]->unknown457d70())
-						count++;
+						value++;
 				}
-				if (count >= 3)
+				if (value >= 3)
 					*subtype = 0xb;
 			}
 				break;
 			case 14:
 			case 16:
 			{
-				int count = 0;
+				value = 0;
 				for (unsigned int i = 0; i < parts.size(); i++)
 				{
 					if (parts[i]->unknown44aec0() <= 3 && parts[i]->getEffectValue(0x69) != 0)
-						count++;
+						value++;
 				}
-				if (count >= 4)
+				if (value >= 4)
 					*subtype = 0xf;
-				else if (scores[0x10] != 0)
+				else if (points[0x10] != 0)
 					*subtype = 0x10;
 			}
 				break;

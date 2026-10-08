@@ -3589,7 +3589,7 @@ void CTextInput::inputAscii(int key, int type)
 								}
 							}
 						}
-						text += clip;
+						text = clip;
 						cursor = text.size();
 					}
 				}

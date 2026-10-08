@@ -424,7 +424,7 @@ public:
 		, moreOption	(NULL)
 	{
 		activeList = this;
-
+		if (0) {}	// NOTE: emits nothing; shifts register rotation to match
 		maxLength = 0;
 		for (unsigned int i = 0; i < options.size(); i++)
 		{
@@ -445,7 +445,7 @@ public:
 		}
 		if (options.size() > numVisible)
 		{
-			moreOption = new CListOption(this,7,getHeight() - 2,optionWidth,options[numVisible],font,false,1,1,0,0,-1);
+			moreOption = new CListOption(this,7,getHeight() - 2,optionWidth,options[numVisible],font,false,0,1,1,0,-1);
 			moreOption->draw();
 		}
 

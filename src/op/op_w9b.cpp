@@ -925,7 +925,7 @@ map:
 				{
 					index = opW9b_randomIndex(opW9b_robotData);
 				} while (opW9b_robotData[index]->unknown24 != 1);
-				name += opW9b_robotData[index]->name;
+				name = opW9b_robotData[index]->name;
 				name += " ";
 				for (int i = 0; i < 6; i++)
 					name += opW9b_randomChar(opW9b_d33e1c);
@@ -937,7 +937,7 @@ map:
 				{
 					index = opW9b_randomIndex(opW9b_itemData);
 				} while (opW9b_itemData[index]->unknown54 != 1 && opW9b_itemData[index]->unknown54 != 2);
-				name += opW9b_itemData[index]->name;
+				name = opW9b_itemData[index]->name;
 				int number = rng.rangeInt(-10,10);
 				if (number > 1)
 					name += " x" + intToString(number);

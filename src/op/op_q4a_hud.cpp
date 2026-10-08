@@ -923,44 +923,44 @@ void CEvasionFull::trigger(const string &command, int value)
 	{
 		CText *title = new CText(this,Pos(2,2),"Theoretical Avoidance Rate 40%",0,0,-1);
 		title->animate("A_BlockAppear_GR3");
-		Rect count(2,9,30,1);
-		Console *x = new Console(this,count,0,false,-1);
-		x->animate("A_CEvasionFull_Bar");
+		Rect rect(2,9,30,1);
+		Console *bar = new Console(this,rect,0,false,-1);
+		bar->animate("A_CEvasionFull_Bar");
 	}
 	else if (command == "movement")
 	{
-		string count, a;
-		opq4a_cec07c->unknown887b70(0,count,a);
-		CText *i = new CText(this,Pos(opq4a_cfd2c4,-count.size(),0),count,0,0,-1);
-		i->animate("A_BlockAppear_" + a);
+		string current, desc;
+		opq4a_cec07c->unknown887b70(0,current,desc);
+		CText *label = new CText(this,Pos(opq4a_cfd2c4,-current.size(),0),current,0,0,-1);
+		label->animate("A_BlockAppear_" + desc);
 	}
 	else if (command == "heat")
 	{
-		string count, a;
-		opq4a_cec07c->unknown887b70(1,count,a);
-		CText *i = new CText(this,Pos(opq4a_cfd2c4,-count.size(),1),count,0,0,-1);
-		i->animate("A_BlockAppear_" + a);
+		string current, desc;
+		opq4a_cec07c->unknown887b70(1,current,desc);
+		CText *label = new CText(this,Pos(opq4a_cfd2c4,-current.size(),1),current,0,0,-1);
+		label->animate("A_BlockAppear_" + desc);
 	}
 	else if (command == "speed")
 	{
-		string count, a;
-		opq4a_cec07c->unknown887b70(2,count,a);
-		CText *i = new CText(this,Pos(opq4a_cfd2c4,-count.size(),2),count,0,0,-1);
-		i->animate("A_BlockAppear_" + a);
+		string current, desc;
+		opq4a_cec07c->unknown887b70(2,current,desc);
+		CText *label = new CText(this,Pos(opq4a_cfd2c4,-current.size(),2),current,0,0,-1);
+		label->animate("A_BlockAppear_" + desc);
 	}
 	else if (command == "evasion")
 	{
-		string count, a;
-		opq4a_cec07c->unknown887b70(3,count,a);
-		CText *i = new CText(this,Pos(opq4a_cfd2c4,-count.size(),3),count,0,0,-1);
-		i->animate("A_BlockAppear_" + a);
+		string current, desc;
+		opq4a_cec07c->unknown887b70(3,current,desc);
+		CText *label = new CText(this,Pos(opq4a_cfd2c4,-current.size(),3),current,0,0,-1);
+		label->animate("A_BlockAppear_" + desc);
 	}
 	else if (command == "phasing")
 	{
-		string count, a;
-		opq4a_cec07c->unknown887b70(4,count,a);
-		CText *i = new CText(this,Pos(opq4a_cfd2c4,-count.size(),4),count,0,0,-1);
-		i->animate("A_BlockAppear_" + a);
+		string current, desc;
+		opq4a_cec07c->unknown887b70(4,current,desc);
+		CText *label = new CText(this,Pos(opq4a_cfd2c4,-current.size(),4),current,0,0,-1);
+		label->animate("A_BlockAppear_" + desc);
 	}
 	else if (command == "total")
 	{
