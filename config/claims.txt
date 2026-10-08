@@ -14,3 +14,4 @@
 0x6a0150    0x1d04a giant 0x6a0150 (effect expiry turn, 119 KB) alex-golf 2026-10-08
 0x91ca50    0x1cd64 giant 0x91ca50 (118 KB)           alex-hotel 2026-10-08
 0x83dfa0    0x2a078 giant 0x83dfa0 (172 KB)           alex-kilo 2026-10-08
+0x610430    0x215e4 Entity::turnUpdate (137 KB)       alex-november 2026-10-08
