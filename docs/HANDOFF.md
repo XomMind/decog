@@ -1,6 +1,14 @@
 # Handoff (2026-10-07)
 
-## Latest verified loop checkpoint (2026-10-07, combined source batch)
+## Latest verified loop checkpoint (2026-10-07, descriptor metadata correction)
+
+- **12,768 / 13,016 game functions; 47.698% code matched.** Two existing protobuf descriptor helpers add 206 matched bytes over `31141cc`; 248 functions remain.
+- **32,084 / 32,084 comparisons MATCH, zero DIFF.** Candidate gate and registration-order proof: `build/manager_loop_descriptor_gate_01.log`, `build/manager_loop_descriptor_registered_01.log`. The candidate audit reports zero interior-stub operands with 4 KiB slots (`build/manager_loop_descriptor_audit_01.log`). Uses the already verified combined artifact; no source changes.
+- Removed 209 inherited false descriptor aliases from `lead_discovered.csv`, retaining the real MapType getter at `0x4dbda0`. The comparison count falls because aliases are removed; matched function counts retain one address per function. Retail serialized schema order, table bases, getter bytes, and MAP_ caller lookups establish this identity. Zero-initialized table entries had allowed shifted getter loads to appear equal. See `docs/descriptor-alias-audit.md` and local detailed proofs in `scratch/loop_alpha_02/`.
+- Registered `protobuf_AssignDescriptors` at `0x4dbc40` and `AddDescriptorsImpl` at `0x4dbd20` after the cleanup gate proved the actual enum table (`0xceca80`) and message metadata table (`0xcecab0`) pairings. No schema or verifier changes.
+- The next frozen source batch is being prepared from worker scratch proofs. Static matching and metadata audits do not claim game-runtime acceptance.
+
+## Previous verified loop checkpoint (2026-10-07, combined source batch)
 
 - **12,766 / 13,016 game functions; 47.695% code matched.** This checkpoint adds 17 unique matches and 4,497 matched bytes over `91ac2fd`; 250 functions remain. Three additional rows are genuine constructor/destructor aliases at previously mapped addresses.
 - **32,291 / 32,291 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_01.log`; retained candidate gate: `build/manager_loop_source_lvx_01_retained.log`; registered proof: `build/manager_loop_source_registered_01.log`. Candidate audit reports 4 KiB slots and zero matching rows with interior-stub operands (`build/manager_loop_source_audit_01_retained.log`). The four verifier regression checks passed.
