@@ -44,3 +44,6 @@ Overmind::spawnCargoDispatch_68aec0,0x68aec0,0xadf
 BS::unknown6efb90,0x6efb90,0x1107
 Item::takeDamage_57ab10,0x57ab10,0x1392
 BS::initialize,0x701390,0x1270
+Zionmind::newTurn,0x6bf880,0x1685
+BS::unknown6fdcb0,0x6fdcb0,0x15b5
+OpBSD_Effect::OpBSD_Effect,0x46ca20,0x21
