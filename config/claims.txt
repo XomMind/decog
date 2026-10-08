@@ -1,13 +1,7 @@
 # Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
 # remove the line in the commit that maps the function (or when abandoning it).
 # va        size    name / what                       owner   date
-0x633790    0x42bc  Entity::die                       claude  2026-10-08
-0x6516b0    0x7380  SEntityShoot::update              claude  2026-10-08
-0x6430b0    0xa5ac  Entity::equipPart                 claude  2026-10-08
 0x5826b0    0x305f0 EntityAI::takeTurn (198 KB)       alex-sierra 2026-10-08
 0xa04d10    0x12    protobuf repeated-field accessor IsEmpty codex-hash-oct08 2026-10-08
 0x8b5250    0x36a72 CInfo::trigger (224 KB)           alex-tango 2026-10-08
 0x51da30    0x3eed0 BS::turnUpdate_51da30 (258 KB)    alex-uniform 2026-10-08
-0x605040    0xb3e2  BS::checkEffectScrapEngine        claude  2026-10-08
-0x5e5520    0xbaec  Entity::takeDamage                claude  2026-10-08
-0x5f1010    0xc534  Entity::projectileImpact          claude  2026-10-08
