@@ -10,7 +10,6 @@
 0x6516b0    0x7380  SEntityShoot::update              claude  2026-10-08
 0x7c6d30    0x94a8  CCommands::open                   claude  2026-10-08
 0x6430b0    0xa5ac  Entity::equipPart                 claude  2026-10-08
-0x91ca50    0x1cd64 giant 0x91ca50 (118 KB)           alex-hotel 2026-10-08
 0x83dfa0    0x2a078 giant 0x83dfa0 (172 KB)           alex-kilo 2026-10-08
 0x610430    0x215e4 Entity::turnUpdate (137 KB)       alex-november 2026-10-08
 0x74e750    0x24b2c BS::turnUpdate_74e750 (150 KB)    alex-quebec 2026-10-08
