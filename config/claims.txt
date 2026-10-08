@@ -15,3 +15,4 @@
 0x83dfa0    0x2a078 giant 0x83dfa0 (172 KB)           alex-kilo 2026-10-08
 0x610430    0x215e4 Entity::turnUpdate (137 KB)       alex-november 2026-10-08
 0x74e750    0x24b2c BS::turnUpdate_74e750 (150 KB)    alex-quebec 2026-10-08
+0x5826b0    0x305f0 EntityAI::takeTurn (198 KB)       alex-sierra 2026-10-08
