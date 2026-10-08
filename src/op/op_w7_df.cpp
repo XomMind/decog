@@ -3488,96 +3488,98 @@ bool OpW7_CaveGen::step(bool singleStep)
 {
 	if (finished)
 		return true;
-	int failure = 9;
+	int result = 9;
 	switch (unknown54)
 	{
-		case 0:
-			unknown54++;
-			seed();
+	case 0:
+		unknown54++;
+		seed();
+		if (singleStep)
+			break;
+	case 1:
+		unknown54++;
+		if (opw7_doFill)
+		{
+			fillPass();
 			if (singleStep)
 				break;
-		case 1:
-			unknown54++;
-			if (opw7_doFill)
-			{
-				fillPass();
-				if (singleStep)
-					break;
-			}
-		case 2:
-			unknown54++;
-			if (opw7_doClear)
-			{
-				clearPass();
-				if (singleStep)
-					break;
-			}
-		case 3:
-			unknown54++;
-			if (findAreas() == 0)
-			{
-				failure = 1;
-				goto end;
-			}
+		}
+	case 2:
+		unknown54++;
+		if (opw7_doClear)
+		{
+			clearPass();
 			if (singleStep)
 				break;
-		case 4:
-			if (connectTries == 0 || !opw7_doConnect)
-				unknown54++;
-			else
+		}
+	case 3:
+		unknown54++;
+		if (!findAreas())
+		{
+			result = 1;
+			goto done;
+		}
+		if (singleStep)
+			break;
+	case 4:
+		if (connectTries == 0 || !opw7_doConnect)
+			unknown54++;
+		else
+		{
+			while (connectTries != 0)
 			{
-				while (connectTries != 0)
+				connectTries--;
+				if (!connectAreas(opw7_caveSettings->unknown1C - connectTries) && connectTries == opw7_caveSettings->unknown1C - 1)
 				{
-					connectTries--;
-					if (!connectAreas(opw7_caveSettings->unknown1C - connectTries) && connectTries == opw7_caveSettings->unknown1C - 1)
-					{
-						failure = 2;
-						goto end;
-					}
-					if (singleStep)
-						return false;
+					result = 2;
+					goto done;
 				}
-				unknown54++;
-			}
-		case 5:
-			unknown54++;
-			if (opw7_doBox)
-			{
-				boxCaves();
 				if (singleStep)
-					break;
+					return false;
 			}
-		case 6:
 			unknown54++;
-			if (!placeBridges())
-			{
-				bridgeFailures++;
-				failure = 3;
-				goto end;
-			}
-			else
-				bridgeFailures = 0;
+		}
+	case 5:
+		unknown54++;
+		if (opw7_doBox)
+		{
+			boxCaves();
 			if (singleStep)
 				break;
-		case 7:
-			unknown54++;
-			if (opw7_caveSettings->unknown44 != 0 && opw7_doBox)
-				sprout();
+		}
+	case 6:
+		unknown54++;
+		if (!placeBridges())
+		{
+			bridgeFailures++;
+			result = 3;
+			goto done;
+			if (0) {}	// NOTE: emits nothing; shifts register rotation to match
+		}
+		else
+			bridgeFailures = 0;
+		if (singleStep)
+			break;
+	case 7:
+		unknown54++;
+		if (opw7_caveSettings->unknown44 && opw7_doBox)
+			sprout();
+		if (0) {}	// NOTE: emits nothing; shifts register rotation to match
 	}
 	if (unknown54 == 8)
 	{
 		opw7_ced22c = 0;
-		for (int i = 0; i < opw7_cf126c.size(); i++)
+		for (unsigned int i = 0; i < opw7_cf126c.size(); i++)
 		{
 			if (opw7_cf126c[i].unknown44)
 				opw7_ced22c++;
 		}
 		opw7_ced224 = 0;
 		computeLinks();
-		for (int i = 0; i < opw7_cf126c.size(); i++)
+		for (unsigned int j = 0; j < opw7_cf126c.size(); j++)
 		{
-			if (opw7_cf126c[i].unknown40 > opw7_ced224)
-				opw7_ced224 = opw7_cf126c[i].unknown40;
+			if (opw7_cf126c[j].unknown40 > opw7_ced224)
+				opw7_ced224 = opw7_cf126c[j].unknown40;
 		}
 		OpW7_fill_9e2be0(opw7_ced1c8,21,0);
 		OpW7_fill_9e2be0(opw7_ced170,21,0);
@@ -3588,34 +3590,34 @@ bool OpW7_CaveGen::step(bool singleStep)
 				opw7_ced1c8[opw7_grid.at(x,y)]++;
 		}
 		int total = opw7_grid.getWidth() * opw7_grid.getHeight();
-		int solid = 0;
-		for (int t = 4; t < 21; t++)
-			solid += opw7_ced1c8[t];
-		opw7_ced1c4 = solid * 100 / total;
-		for (int t = 0; t < 21; t++)
+		int open = 0;
+		for (int k = 4; k < 21; k++)
+			open += opw7_ced1c8[k];
+		opw7_ced1c4 = open * 100 / total;
+		for (int n = 0; n < 21; n++)
 		{
-			opw7_ced170[t] = opw7_ced1c8[t] * 100 / total;
-			opw7_ced230[t] = opw7_ced1c8[t] * 100 / solid;
+			opw7_ced170[n] = opw7_ced1c8[n] * 100 / total;
+			opw7_ced230[n] = opw7_ced1c8[n] * 100 / open;
 		}
 		if (!opw7_caveSettings->unknown90.contains_40c190(opw7_ced1c4))
 		{
-			failure = (opw7_ced1c4 < opw7_caveSettings->unknown90.min ? 0 : 1) + 4;
-			goto end;
+			result = (opw7_ced1c4 >= opw7_caveSettings->unknown90.min) + 4;
+			goto done;
 		}
-		else if (opw7_cf126c.size() < opw7_caveSettings->unknown98)
+		if (opw7_cf126c.size() < opw7_caveSettings->unknown98)
 		{
-			failure = 6;
-			goto end;
+			result = 6;
+			goto done;
 		}
-		else if (opw7_caveSettings->unknown9C != 0 && opw7_ced16c > opw7_caveSettings->unknown9C)
+		if (opw7_caveSettings->unknown9C && opw7_ced16c > opw7_caveSettings->unknown9C)
 		{
-			failure = 7;
-			goto end;
+			result = 7;
+			goto done;
 		}
-		else if (opw7_ced22c < opw7_caveSettings->unknownA0)
-			failure = 8;
-end:
-		if (failure != 9)
+		if (opw7_ced22c < opw7_caveSettings->unknownA0)
+			result = 8;
+done:
+		if (result != 9)
 		{
 			failed = true;
 			return true;
