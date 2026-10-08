@@ -173,7 +173,7 @@
 ?find_first_not_of@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIPBDII@Z,0x9bb9d0,0x7c
 ?find_last_not_of@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIPBDII@Z,0x9bba50,0x91
 ??Bsentry@?$basic_istream@DU?$char_traits@D@std@@@std@@QBEPQ_Bool_struct@2@HXZ,0x9c20c0,0x1b
-??G?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBE?AV01@H@Z,0x9c2140,0x2d
+??G?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBE?AV01@H@Z,0x9b09e0,0x2d
 ??0?$reverse_iterator@V?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@QAE@V?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@@Z,0x9cbfa0,0x1c
 ??0sentry@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@AAV12@@Z,0x9c1f90,0xb5
 ??1sentry@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@XZ,0x9c2050,0x63

@@ -656,8 +656,7 @@ XColor Prop::unknown65e040()
 	}
 	else if (unknown4C != NULL && unknown4C->unknown65cf80())
 	{
-		XColor *baseColor = data->unknown140 == 0xb ? opr3_colorD32968 : opr3_colorCEFDCC;
-		XColor base(*baseColor);
+		XColor base = data->unknown140 == 0xb ? *opr3_colorD32968 : *opr3_colorCEFDCC;
 		return XColor::scale(base,opr3_pulse(0.0f,0.5f,2000,0) + 0.5);
 	}
 	return color2;
