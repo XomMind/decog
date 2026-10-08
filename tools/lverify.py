@@ -51,11 +51,18 @@ STUBS = []     # (VA, name) of every generated stub (stubs.obj, see stubobj.py),
 MAP_ALL = []   # every (name, VA) in the last loaded map: TU-local statics (time.inl inlines, static helpers) recur
 
 def load_map():
-    out = {}; del MAP_ALL[:]; del STUBS[:]
+    # Static helpers can share an external decorated name. Prefer PUBLIC code,
+    # while allowing STATIC code to replace a PUBLIC unresolved data stub.
+    out = {}; public_functions = set(); in_static = False; del MAP_ALL[:]; del STUBS[:]
     for line in open(MAP, encoding='latin1'):
+        if line.strip() == "Static symbols": in_static = True
+        elif "Publics by Value" in line: in_static = False
         m = re.match(r'\s*[0-9a-f]{4}:[0-9a-f]{8}\s+(\S+)\s+([0-9a-f]{8})\s', line)
         if m and int(m.group(2), 16):
-            out[m.group(1)] = int(m.group(2), 16); MAP_ALL.append((m.group(1), int(m.group(2), 16)))
+            name, va = m.group(1), int(m.group(2), 16)
+            if not in_static or name not in public_functions: out[name] = va
+            if not in_static and re.match(r"\s*f(?:\s|$)", line[m.end():]): public_functions.add(name)
+            MAP_ALL.append((name, va))
             if line.rstrip().endswith('stubs.obj'): STUBS.append((int(m.group(2), 16), m.group(1)))
     STUBS.sort()
     STUB_SLOT[0] = min([b[0] - a[0] for a, b in zip(STUBS, STUBS[1:])] or [16])

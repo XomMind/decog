@@ -9,7 +9,7 @@ template <class T> void OpY9_writeBinary(ostream &stream, T *value);	// NOTE: pl
 template <class T> void OpY9_readBinary(istream &stream, T *value);	// NOTE: placeholder name
 template <class T> void OpY9_writeVector(ostream &stream, vector<T> &v);	// NOTE: placeholder name
 template <class T> void OpY9_readVector(istream &stream, vector<T> &v);	// NOTE: placeholder name
-extern int opY9_unknown_cefa6c;	// NOTE: placeholder name
+extern int opY9_handleGeneration_cefa6c;	// NOTE: placeholder name
 
 struct OpY9_Rec7	// NOTE: placeholder name
 {
@@ -58,7 +58,7 @@ void OpY9_Pool7::serialize(ostream &stream)
 	}
 	OpY9_writeVector(stream,list1);
 	OpY9_writeVector(stream,list2);
-	OpY9_writeBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_writeBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 void OpY9_Pool7::unserialize(istream &stream)
@@ -76,7 +76,7 @@ void OpY9_Pool7::unserialize(istream &stream)
 	}
 	OpY9_readVector(stream,list1);
 	OpY9_readVector(stream,list2);
-	OpY9_readBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_readBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 struct OpY9_Rec5	// NOTE: placeholder name
@@ -124,7 +124,7 @@ void OpY9_Pool5::serialize(ostream &stream)
 	}
 	OpY9_writeVector(stream,list1);
 	OpY9_writeVector(stream,list2);
-	OpY9_writeBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_writeBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 void OpY9_Pool5::unserialize(istream &stream)
@@ -142,7 +142,7 @@ void OpY9_Pool5::unserialize(istream &stream)
 	}
 	OpY9_readVector(stream,list1);
 	OpY9_readVector(stream,list2);
-	OpY9_readBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_readBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 struct OpY9_Rec6	// NOTE: placeholder name
@@ -190,7 +190,7 @@ void OpY9_Pool6::serialize(ostream &stream)
 	}
 	OpY9_writeVector(stream,list1);
 	OpY9_writeVector(stream,list2);
-	OpY9_writeBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_writeBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 void OpY9_Pool6::unserialize(istream &stream)
@@ -208,7 +208,7 @@ void OpY9_Pool6::unserialize(istream &stream)
 	}
 	OpY9_readVector(stream,list1);
 	OpY9_readVector(stream,list2);
-	OpY9_readBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_readBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 struct OpY9_Rec8	// NOTE: placeholder name
@@ -256,7 +256,7 @@ void OpY9_Pool8::serialize(ostream &stream)
 	}
 	OpY9_writeVector(stream,list1);
 	OpY9_writeVector(stream,list2);
-	OpY9_writeBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_writeBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 void OpY9_Pool8::unserialize(istream &stream)
@@ -274,7 +274,7 @@ void OpY9_Pool8::unserialize(istream &stream)
 	}
 	OpY9_readVector(stream,list1);
 	OpY9_readVector(stream,list2);
-	OpY9_readBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_readBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 struct OpY9_Rec4	// NOTE: placeholder name
@@ -322,7 +322,7 @@ void OpY9_Pool4::serialize(ostream &stream)
 	}
 	OpY9_writeVector(stream,list1);
 	OpY9_writeVector(stream,list2);
-	OpY9_writeBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_writeBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 void OpY9_Pool4::unserialize(istream &stream)
@@ -340,7 +340,7 @@ void OpY9_Pool4::unserialize(istream &stream)
 	}
 	OpY9_readVector(stream,list1);
 	OpY9_readVector(stream,list2);
-	OpY9_readBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_readBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 struct OpY9_Rec9	// NOTE: placeholder name
@@ -388,7 +388,7 @@ void OpY9_Pool9::serialize(ostream &stream)
 	}
 	OpY9_writeVector(stream,list1);
 	OpY9_writeVector(stream,list2);
-	OpY9_writeBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_writeBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 void OpY9_Pool9::unserialize(istream &stream)
@@ -406,7 +406,7 @@ void OpY9_Pool9::unserialize(istream &stream)
 	}
 	OpY9_readVector(stream,list1);
 	OpY9_readVector(stream,list2);
-	OpY9_readBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_readBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 struct OpY9_Rec10	// NOTE: placeholder name
@@ -454,7 +454,7 @@ void OpY9_Pool10::serialize(ostream &stream)
 	}
 	OpY9_writeVector(stream,list1);
 	OpY9_writeVector(stream,list2);
-	OpY9_writeBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_writeBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 
 void OpY9_Pool10::unserialize(istream &stream)
@@ -472,6 +472,6 @@ void OpY9_Pool10::unserialize(istream &stream)
 	}
 	OpY9_readVector(stream,list1);
 	OpY9_readVector(stream,list2);
-	OpY9_readBinary(stream,&opY9_unknown_cefa6c);
+	OpY9_readBinary(stream,&opY9_handleGeneration_cefa6c);
 }
 

@@ -36,7 +36,7 @@ _floorf,0x4011d0,0x1f
 ??1LuigiTile@@QAE@XZ,0x434c80,0x4f
 ??_ELuigiTile@@QAEPAXI@Z,0x434de0,0x6c
 ?capacity@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIXZ,0x44a630,0x11
-?getGroup@HAnim@@QAEHXZ,0x454bb0,0x13
+?getGroup@EngineAnim@@QAEHXZ,0x454bb0,0x13
 ?getPos@Particle@@QAEPAUPos@@XZ,0x462e10,0x11
 ??_G?$vector@_NV?$allocator@_N@std@@@std@@QAEPAXI@Z,0x48e170,0x2d
 ??_G?$vector@HV?$allocator@H@std@@@std@@QAEPAXI@Z,0x48e1a0,0x2d

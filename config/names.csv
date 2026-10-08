@@ -54,7 +54,7 @@
 0x4f9c80,HttpsConnection::checkResponseHeader,0x2ce,string
 0x4f9f50,DiscordWebhook::addComment,0x16a,string (also: DiscordWebhook::postComment)
 0x4ff710,AmbientSoundSystem::updateAmbient,0x8f3,string
-0x508710,Engine::update,0x1c1,string
+0x508710,EndObjB::update,0x1c1,string
 0x50fd90,Engine::killGroup,0x198,string
 0x511fb0,MessageLog::unserialize,0x23e,string
 0x5121f0,MessageLog::push,0xdfd,string

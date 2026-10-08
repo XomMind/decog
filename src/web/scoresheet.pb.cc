@@ -8359,7 +8359,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-    '\n', '\024', 'w', 'e', 'b', '/', 's', 'c', 'o', 'r', 'e', 's', 'h', 'e', 'e', 't', '.', 'p', 'r', 'o', 't', 'o', '\022', '\010', 'P', 'r', 'o', 't', 'o', 
+    '\n', '\024', 'w', 'e', 'b', '/', 's', 'c', 'o', 'r', 'e', 's', 'h', 'e', 'e', 't', '.', 'p', 'r', 'o', 't', 'o', '\022', '\010', 'P', 'r', 'o', 't', 'o',
     'b', 'u', 'f', '\032', ' ', 'g', 'o', 'o', 'g', 'l', 'e', '/', 'p', 'r', 'o', 't', 'o', 'b', 'u', 'f', '/', 'd', 'e', 's', 'c', 
     'r', 'i', 'p', 't', 'o', 'r', '.', 'p', 'r', 'o', 't', 'o', '\"', '\r', '\n', '\013', 'P', 'i', 'n', 'g', 'R', 'e', 'q', 'u', 'e', 
     's', 't', '\"', 'D', '\n', '\014', 'P', 'i', 'n', 'g', 'R', 'e', 's', 'p', 'o', 'n', 's', 'e', '\022', '\030', '\n', '\020', 's', 'e', 'r', 

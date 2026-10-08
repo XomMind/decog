@@ -64,8 +64,8 @@ int OpS8b_Fn9d4660(vector<int> &v, int value)	// NOTE: placeholder name
 
 int OpS8b_Fn9d4b30(unsigned char *data, unsigned int count, unsigned char value)	// NOTE: placeholder name
 {
-	vector<unsigned int> matches;
-	for (unsigned int i = 0; i < count; i++)
+	vector<int> matches;
+	for (int i = 0; i < count; i++)
 	{
 		if (data[i] == value)
 			matches.push_back(i);

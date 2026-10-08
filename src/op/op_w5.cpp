@@ -2794,16 +2794,18 @@ void OpW5_MapView2::setPath(const Pos &pos, int value, const vector<OpW5_Point> 
 
 template <class T> bool opW5_contains_9d31e0(vector<T> &v, T value);	// NOTE: placeholder name
 
+struct OpW5_Obj49b830;	// NOTE: placeholder name (private pointee: vector<void*>::push_back pairs with another exe copy)
+
 class OpW5_Unk49b830	// NOTE: placeholder name
 {
 public:
-	bool addUnique(void *value);	// NOTE: placeholder name
+	bool addUnique(OpW5_Obj49b830 *value);	// NOTE: placeholder name
 
 	char pad0[0xc];
-	vector<void*> values;	// NOTE: placeholder name
+	vector<OpW5_Obj49b830*> values;	// NOTE: placeholder name
 };
 
-bool OpW5_Unk49b830::addUnique(void *value)
+bool OpW5_Unk49b830::addUnique(OpW5_Obj49b830 *value)
 {
 	if (opW5_contains_9d31e0(values,value))
 		return false;

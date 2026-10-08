@@ -50,7 +50,7 @@ template <class T> struct C28_Array2D	// NOTE: placeholder (ctor folded with OpX
 	void resize(int width, int height, istream *stream);
 	void zero();
 };
-struct C28_G20 { char pad[0x20]; }; struct C28_G34 { char pad[0x34]; };
+struct C28_G20 { char pad[0x14]; }; struct C28_G34 { char pad[0x34]; };
 struct OpV4b_Ints3 { vector<int> list0; vector<int> list10; int value20; OpV4b_Ints3(); void OpV4b_read(istream &stream); };	// NOTE: ctor folded with OpR5h_WL<int>
 struct C28_Obj3;
 struct OpV4b_Objs3 { vector<C28_Obj3 *> objects; vector<int> list10; int value20; OpV4b_Objs3(); void OpV4b_read(istream &stream); };

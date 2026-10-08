@@ -129,23 +129,25 @@ void OpV4d_Handle::OpV4d_assign(unsigned int index_)
 	generation = OpV4d_handleCounter;
 }
 
-class HProp
+// Private handle type: vector<HProp>::const_iterator::operator== is paired with another exe copy (via the mapped
+// operator!= 0x9b8e00), but this function calls the one at 0x9f6380.
+class OpV4d_HProp	// NOTE: placeholder name (HProp)
 {
 public:
 	int ID;
-	bool operator<(HProp o) const;	// 0x9f5830
-	bool operator!=(HProp o) const;	// 0x9b6510
+	bool operator<(OpV4d_HProp o) const;	// 0x9f5830
+	bool operator!=(OpV4d_HProp o) const;	// 0x9b6510
 };
 
 class OpU5_Map	// NOTE: placeholder name
 {
 public:
-	void unknown9e29b0(vector<HProp> *list, HProp prop);	// NOTE: placeholder name
+	void unknown9e29b0(vector<OpV4d_HProp> *list, OpV4d_HProp prop);	// NOTE: placeholder name
 };
 
-void OpU5_Map::unknown9e29b0(vector<HProp> *list, HProp prop)
+void OpU5_Map::unknown9e29b0(vector<OpV4d_HProp> *list, OpV4d_HProp prop)
 {
-	vector<HProp>::iterator it = lower_bound(list->begin(),list->end(),prop);
+	vector<OpV4d_HProp>::iterator it = lower_bound(list->begin(),list->end(),prop);
 	if (it == list->end() || *it != prop)
 		list->insert(it,prop);
 }

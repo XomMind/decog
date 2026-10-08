@@ -36,7 +36,7 @@ struct Area	// NOTE: placeholder name
 
 struct Group	// NOTE: placeholder name
 {
-	int getFoo();	// NOTE: placeholder name (0x9b8f00)
+	int getFactionIndex();	// NOTE: placeholder name (0x9b8f00: [this+4]); the ctor 0x670ff0 stores the group's faction index in +4 and +8
 };
 
 class HGroup	// NOTE: placeholder name
@@ -54,32 +54,32 @@ class HEntity	// NOTE: placeholder layout
 	int ID;
 public:
 	HEntity();
-	int getID() const;	// 0x9fcd80 (really returns a pointer; see addEarlyExiter)
+	int getID() const;	// 0x9fcd80 (folded getter [this+0]; only used as a cast on cells to read the grid width)
 	bool isValid() const;
 	bool operator!=(HEntity other) const;	// 0x9b6510
 	Entity *operator->() const;	// 0x9b6570
 };
 
-// NOTE: the exe folds this identity accessor (0x9c0790) with the protobuf one, so it needs a name from that set
-namespace Protobuf
+// Entity+0xec (Entity::getTriggers, mapped as getInventory) is NOT the carried-item inventory (that is the HItem list at +0x134,
+// Entity::getInventoryList 0x45ab00).  It has the OpS1c_RecList layout (src/op/op_s1c.cpp): a vector of record pointers at +0, then a
+// turn counter.  Each record starts with a pointer to a definition whose first word is its ID.  The accessors below are folded in the exe:
+// 0x9c0790 returns this (the vector is member 0), 0x9fcd80 returns [this+0].  Names are semantic labels [INFERENCE].
+struct TriggerData	// NOTE: placeholder name (OpS1c_Data)
 {
-	class Cogmind	// NOTE: placeholder, stands in for the exit list
-	{
-	public:
-		bool isEmpty();	// NOTE: placeholder name (0x9b86e0)
-		unsigned int count();	// NOTE: placeholder name (0x9b9260)
-		HEntity *&at(unsigned int i);	// NOTE: placeholder name (0x9b81f0)
-	};
-}
-namespace google { namespace protobuf { namespace internal
+	int ID;
+};
+
+class TriggerRecord	// NOTE: placeholder name (OpQ5_T9d0160)
 {
-	template <class T> class ExplicitlyConstructed
-	{
-	public:
-		T *get_mutable();
-	};
-}}}
-typedef google::protobuf::internal::ExplicitlyConstructed<Protobuf::Cogmind> ExitHolder;	// NOTE: placeholder name
+public:
+	TriggerData *getData();	// NOTE: placeholder name (0x9fcd80)
+};
+
+class TriggerRecordList	// NOTE: placeholder name (OpS1c_RecList)
+{
+public:
+	vector<TriggerRecord *> &getRecords();	// NOTE: placeholder name (0x9c0790)
+};
 
 struct EntityRecord	// NOTE: placeholder
 {
@@ -102,24 +102,24 @@ public:
 	string name;	// NOTE: placeholder name
 	char pad28[0x30 - 0x28];
 	vector<Point> positions;	// NOTE: placeholder name
-	int getFoo();	// NOTE: placeholder name (0x457820)
-	const string &getNameAt0c();	// NOTE: placeholder name (0x416f40: returns this+0xc; not Entity::getName 0x45a280)
+	int getDefID();	// NOTE: placeholder name (0x457820: [this+8]->[0])
+	const string &getInstanceName();	// NOTE: placeholder name (0x416f40: returns this+0xc, the Entity::name member; not Entity::getName 0x45a280)
 	bool isPlayer();	// NOTE: placeholder name (0x5c7600)
 	int unknown5cb220();	// NOTE: placeholder name
 	int getAsciiDefault();	// NOTE: placeholder name (0x5c79d0)
 	int getAscii(const Point &p);
 	HGroup getGroup();	// 0x45a3f0
 	const Point &getPosition();	// 0x45a4a0
-	ExitHolder *getExitHolder();	// NOTE: placeholder name (0x45ad90)
+	TriggerRecordList *getTriggers();	// NOTE: placeholder name (0x45ad90: [this+0xec]); mapped as getInventory but it is not the item list
 };
 
-struct LevelAccess	// NOTE: placeholder name
+struct LevelAccess	// NOTE: the exe's own diagnostic spelling; an exit zone (same object as MapZone in cc_r2_06.cpp), written by OpT4_Marker::write 0x6c15d0
 {
 	char pad[0x20];
-	vector<int> a;
-	vector<int> b;
-	vector<string> c;
-	vector<vector<int> > d;
+	vector<int> entityDefIDs;	// NOTE: placeholder name (+0x20)
+	vector<int> factions;	// NOTE: placeholder name (+0x30)
+	vector<string> names;	// NOTE: placeholder name (+0x40)
+	vector<vector<int> > triggerIDs;	// NOTE: placeholder name (+0x50)
 };
 
 class Cell
@@ -196,16 +196,16 @@ void EntityAI::addEarlyExiter(const Point &p)
 	LevelAccess *access = world->getZone(p);
 	if (access)
 	{
-		access->a.push_back(entity->getFoo());
-		access->b.push_back(entity->getGroup()->getFoo());
-		access->c.push_back(entity->getNameAt0c());
-		access->d.push_back(vector<int>());
-		if (entity->getExitHolder() && !entity->getExitHolder()->get_mutable()->isEmpty())
+		access->entityDefIDs.push_back(entity->getDefID());
+		access->factions.push_back(entity->getGroup()->getFactionIndex());
+		access->names.push_back(entity->getInstanceName());
+		access->triggerIDs.push_back(vector<int>());
+		if (entity->getTriggers() && !entity->getTriggers()->getRecords().empty())
 		{
 			unsigned int i;
-			for (i = 0; i < entity->getExitHolder()->get_mutable()->count(); i++)
+			for (i = 0; i < entity->getTriggers()->getRecords().size(); i++)
 			{
-				access->d.back().push_back(*(const int *)entity->getExitHolder()->get_mutable()->at(i)->getID());
+				access->triggerIDs.back().push_back(entity->getTriggers()->getRecords()[i]->getData()->ID);
 			}
 		}
 	}
@@ -281,7 +281,7 @@ int Entity::getAscii(const Point &p)
 			}
 			if (true)
 			{
-				logError("Entity::getAscii()","Entity (" + getNameAt0c() + ") not found at specificPos " + pointToString(p));
+				logError("Entity::getAscii()","Entity (" + getInstanceName() + ") not found at specificPos " + pointToString(p));
 				return '*';
 			}
 		}

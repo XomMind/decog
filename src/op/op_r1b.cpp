@@ -74,6 +74,7 @@ float OpR1b_acoeffs[32] = {
 		0.019120f,  0.002172f,-0.008233f,-0.000938f,  0.003546f,  0.000410f,-0.001528f, 0.000334f,
 };
 float *OpR1b_a = &OpR1b_acoeffs[16];
+extern float *delta_wavelet_cea810; // NOTE: private placeholder alias of filter-pointer global 0xcea810.
 
 void TCOD_noise_wavelet_downsample(float *from, float *to, int stride)
 {
@@ -82,13 +83,14 @@ void TCOD_noise_wavelet_downsample(float *from, float *to, int stride)
 		int k;
 		to[i*stride]=0;
 		for (k=2*i-16; k <2*i+16; k++) {
-			to[i*stride] += OpR1b_a[k-2*i]* from[ absmod(k,32) * stride ];
+			to[i*stride] += delta_wavelet_cea810[k-2*i]* from[ absmod(k,32) * stride ];
 		}
 	}
 }
 
 float OpR1b_pcoeffs[4] = { 0.25f, 0.75f, 0.75f, 0.25f };
 float *OpR1b_p = &OpR1b_pcoeffs[2];
+extern float *delta_wavelet_cea824; // NOTE: private placeholder alias of filter-pointer global 0xcea824.
 
 void TCOD_noise_wavelet_upsample(float *from, float *to, int stride)
 {
@@ -97,7 +99,7 @@ void TCOD_noise_wavelet_upsample(float *from, float *to, int stride)
 		int k;
 		to[i*stride]=0;
 		for (k=i/2; k <i/2+1; k++) {
-			to[i*stride] += OpR1b_p[i-2*k]* from[ absmod(k,32/2) * stride ];
+			to[i*stride] += delta_wavelet_cea824[i-2*k]* from[ absmod(k,32/2) * stride ];
 		}
 	}
 }

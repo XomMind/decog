@@ -1515,19 +1515,7 @@ bool Entity::unknown5c9aa0(int percent)
 	return usedSlots * 100 / total < percent;
 }
 
-bool Entity::unknown5c9b10()
-{
-	vector<bool> filled(4,false);
-	for (int i = 0; i < 4; i++)
-		filled[i] = slots[i] == 0;
-	filled[2] = true;
-	for (unsigned int j = 0; j < parts.size(); j++)
-	{
-		if (parts[j].get_9b65b0()->unknown44aec0Nothrow() <= 3)
-			filled[parts[j].get_9b65b0()->unknown4578a0Nothrow()] = true;
-	}
-	return opw8_contains(filled,false);
-}
+// Entity::unknown5c9b10 (0x5c9b10) is defined in src/util/claude_a_5c9b10.cpp (needs nothrow-declared callees).
 
 void Entity::unknown5c94e0(int slot, int value)
 {
@@ -5496,7 +5484,7 @@ public:
 };
 
 void clearDijkstraResults();
-unsigned int opw8_takeRandom9de500(vector<unsigned int> &values);	// NOTE: placeholder name
+int opw8_takeRandom9de500(vector<int> &values);	// NOTE: placeholder name
 void opw8_eraseMarkerStepBack(vector<HMarker> &v, unsigned int &i);	// NOTE: placeholder name (0x9d6440)
 extern OpW8_Dijkstra opw8_cfe568;	// NOTE: placeholder name
 extern int opw8_d297a8[];	// NOTE: placeholder name
@@ -5606,11 +5594,11 @@ void Entity::unknown5da0a0()
 				searchType = 4;
 				stat = 0x27;
 				int location = opw8_d1e888->unknown46ed20();
-				vector<unsigned int> candidates;
-				for (unsigned int i = 0; i < opw8_d25de0.size(); i++)
+				vector<int> candidates;
+				for (int i = 0; i < opw8_d25de0.size(); i++)
 				{
 					if (!opw8_d25de0[i]->unknown170.empty() && opw8_d25de0[i]->unknown24 == 1 && opw8_inRange(location - 2,opw8_d25de0[i]->unknown68,location + 2) && opw8_cf4910[i] == 0)
-						((vector<int> &)candidates).push_back((int &)i);	// NOTE: the exe calls vector<int>::push_back here
+						candidates.push_back(i);
 				}
 				vector<unsigned int> chosen;
 				int count = rng.rangeInt(3.0f,5.0f);

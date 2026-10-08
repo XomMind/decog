@@ -1,6 +1,6 @@
 # batch4 (src/game/batch4.cpp). name,va,size
 Engine::killGroup,0x50fd90,0x198
-Engine::update,0x508710,0x1c1
+EndObjB::update,0x508710,0x1c1
 XFontData::generateAutoscaled,0x42ee10,0x18b
 Config::breakConfigVar,0x445380,0x20f
 XConsole::removeSubconsole,0x428b20,0x356

@@ -1,5 +1,11 @@
 // Batch 4: assorted engine/game methods matched against COGMIND.exe (Beta 17.1).
 // NOTE: class layouts are partial; padding members and names are placeholders.
+//
+// Two different animation/particle engines live here (both own HAnim-style animation lists and a noise field):
+//  * Engine (RTTI-less; dtor 0x454ca0, scalar dtor 0x48c6e0, ctor 0x50fa20): the per-console UI engine, anims at +0x14,
+//    dead at +0x24, noise field at +0x34. killGroup (0x50fd90) belongs to it.
+//  * EndObjB (global 0xcefc50, dtor 0x4548e0, pool of 20000 items): the gameplay-effects engine, anims at +0,
+//    pool/dead at +0x10, lastTick at +0x20, noise field at +0x44. update (0x508710) and stopAll (0x5086c0) belong to it.
 #include <string>
 #include <vector>
 #include <algorithm>
@@ -10,64 +16,83 @@ void logError(string location, string message);	// NOTE: placeholder name (0x404
 void logNotice(string location, string message);	// NOTE: placeholder name (0x404d20)
 void logFatal(string location, string message);	// NOTE: placeholder name (0x404fd0)
 string intToString(int value);	// NOTE: placeholder name
-template <class T> void removeVectorElement(vector<T> &v, int index);	// NOTE: placeholder name
+class EngineAnim;
+class HAnim;
+void removeVectorElement_9de6f0(vector<EngineAnim *> &v, int index);	// NOTE: placeholder name (0x9de6f0, same body as the mapped removeVectorElement<int>)
+void removeVectorElement_9de6f0(vector<HAnim *> &v, int index);	// NOTE: placeholder name (0x9de6f0)
 
-class Anim	// NOTE: placeholder name
+struct AnimInfo	// NOTE: placeholder name (the info record at the start of every animation object)
 {
-public:
 	char pad[0x24];
 	int group;	// NOTE: placeholder name
 };
 
+// animation object of the console (UI) engine; see OpR2b_EngineAnim in op_r2_b.cpp (0xb4 bytes, ctor 0x454a80)
+class EngineAnim	// NOTE: placeholder name
+{
+public:
+	int getGroup() { return info->group; };
+	void kill();	// 0x50e830
+
+	AnimInfo *info;
+};
+
+// animation object of the gameplay-effects engine (0xb8 bytes, HAnim::stop 0x504550)
 class HAnim	// NOTE: placeholder name
 {
 public:
-	int getGroup() { return anim->group; };
-	void kill();	// 0x50e830
 	bool update();	// 0x5045f0
 	void stop();	// 0x504550
-	Anim *anim;
 };
 
-class XTimer	// NOTE: placeholder name
+// noise field (TCODNoise wrapper): layout and methods as in op_r1b.cpp (0x4218e0 shifts the field's offset every `seed` ms)
+class OpR1b_NoiseField	// NOTE: placeholder name
 {
 public:
 	void update();	// 0x4218e0
+
+	int				dimensions;
+	void			*noise;
+	float			offset;
+	float			scale;
+	int				seed;
+	unsigned int	startTick;
+	float			*coords;
+	int				octaves;
 };
 
 extern vector<string> animGroups;	// NOTE: placeholder name (0xcfcc5c)
 extern unsigned int tickCount;	// NOTE: placeholder name (0xcaed20)
 extern bool noEngineTimeout;	// NOTE: placeholder name (0xcefbc6)
 
-class Engine;
-extern Engine *activeEngine;	// NOTE: placeholder name (0xcefc50)
-
-// the animation list the engine's update code works on (the exe has it at two different offsets)
-class AnimList	// NOTE: placeholder name
-{
-public:
-	void stopAll();	// 0x5086c0
-
-	vector<int> anims;	// NOTE: elements are HAnim pointers
-	vector<int> dead;	// NOTE: placeholder name
-	int pad20;
-	int padc;
-};
-
+// the console (UI) engine
 class Engine
 {
 public:
-	bool update();
 	void killGroup(string group);
 
-	int pad0;
-	int pad4;
-	int pad8;
-	int padc;
-	int pad10;
-	vector<int> anims;	// NOTE: elements are HAnim pointers
-	vector<int> deadGroups;	// NOTE: placeholder name
+	XConsole *console;	// NOTE: placeholder name
+	Pos size;	// NOTE: placeholder name
+	Pos offset;	// NOTE: placeholder name
+	vector<EngineAnim *> anims;
+	vector<EngineAnim *> deadGroups;	// NOTE: placeholder name
+	OpR1b_NoiseField noise;
 };
+
+// the gameplay-effects engine, global 0xcefc50 (class defined elsewhere as EndObjB)
+class EndObjB
+{
+public:
+	bool update();	// 0x508710
+	void stopAll();	// 0x5086c0
+
+	vector<HAnim *> anims;
+	vector<HAnim *> pool;
+	unsigned int lastTick;	// NOTE: placeholder name
+	char pad24[0x44 - 0x24];
+	OpR1b_NoiseField noise;
+};
+extern EndObjB *endObjB;	// NOTE: placeholder name (0xcefc50)
 
 void Engine::killGroup(string group)
 {
@@ -80,41 +105,35 @@ void Engine::killGroup(string group)
 	int groupID = it - animGroups.begin();
 	for (int i = anims.size() - 1; i >= 0; i--)
 	{
-		if (((HAnim *)anims[i])->getGroup() == groupID)
+		if (anims[i]->getGroup() == groupID)
 		{
-			((HAnim *)anims[i])->kill();
+			anims[i]->kill();
 			deadGroups.push_back(anims[i]);
-			removeVectorElement(anims,i);
+			removeVectorElement_9de6f0(anims,i);
 		}
 	}
 }
 
-// NOTE: the cast below stands in for the real class (this function's `this` is an AnimList)
-#define ANIMS (((AnimList *)this)->anims)
-#define DEAD (((AnimList *)this)->dead)
-#define LASTTICK (*(unsigned int *)((char *)this + 0x20))
-#define TIMER (*(XTimer *)((char *)this + 0x44))
-
-bool Engine::update()
+bool EndObjB::update()
 {
-	if (!ANIMS.empty())
+	if (!anims.empty())
 	{
-		TIMER.update();
-		if ((Engine *)this == activeEngine && tickCount - LASTTICK > 8000 && !noEngineTimeout)
+		noise.update();
+		if (this == endObjB && tickCount - lastTick > 8000 && !noEngineTimeout)
 		{
 			logNotice("Engine::update()","Forcing engine timeout (" + intToString(8000) + "ms)");
-			((AnimList *)this)->stopAll();
+			stopAll();
 			return false;
 		}
-		for (int i = ANIMS.size() - 1; i >= 0; i--)
+		for (int i = anims.size() - 1; i >= 0; i--)
 		{
-			if (((HAnim *)ANIMS[i])->update())
+			if (anims[i]->update())
 			{
-				DEAD.push_back(ANIMS[i]);
-				removeVectorElement(ANIMS,i);
+				pool.push_back(anims[i]);
+				removeVectorElement_9de6f0(anims,i);
 			}
 		}
-		return !ANIMS.empty();
+		return !anims.empty();
 	}
 	return false;
 }

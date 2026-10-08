@@ -2526,10 +2526,10 @@ bool Http::upload(const string &name, const string &content)
 		sendString(socket,"\r\n\r\n");
 		sendString(socket,request.c_str());
 		logMessage("Waiting for ACK...");
-		char buffer[5000];
-		int received = SDLNet_TCP_Recv(socket,buffer,5000);
-		buffer[received] = 0;
-		string response = buffer;
+		char text[5000];
+		int received = SDLNet_TCP_Recv(socket,text,5000);
+		text[received] = 0;
+		string response = text;
 		OpW7_replace_4081c0(response,'\n',' ');
 		logMessage("Got " + intToString(received) + " bytes: " + response);
 		if (received < 10)
@@ -2537,12 +2537,12 @@ bool Http::upload(const string &name, const string &content)
 			logError("Http::upload()","Too few bytes received");
 			return false;
 		}
-		else if (memcmp(buffer,"HTTP/1.",7) != 0)
+		else if (memcmp(text,"HTTP/1.",7) != 0)
 		{
 			logError("Http::upload()","Wrong HTTP version");
 			return false;
 		}
-		else if (memcmp(buffer + 8," 2",2) != 0)
+		else if (memcmp(text + 8," 2",2) != 0)
 		{
 			logError("Http::upload()","POST failed");
 			return false;
