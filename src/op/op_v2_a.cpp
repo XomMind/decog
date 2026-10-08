@@ -62,11 +62,11 @@ public:
 	Point unknown18;					// NOTE: placeholder name
 	HEntity target;						// +0x20, NOTE: placeholder name
 
-	int unknown5b76c0(int arg);			// NOTE: placeholder name
-	bool unknown5b7400(int arg);		// NOTE: placeholder name
+	int unknown5b76c0(int *arg);			// NOTE: placeholder name
+	bool unknown5b7400(int *arg);		// NOTE: placeholder name
 };
 
-bool EntityAI::unknown5b7400(int arg)
+bool EntityAI::unknown5b7400(int *arg)
 {
 	if (self->getSize() > 1)
 	{
