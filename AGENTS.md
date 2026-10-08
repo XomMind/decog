@@ -121,7 +121,10 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
   overload with no extra code; unreferenced gaps in a scope's locals need dummy `int x[1]` / `char x[4]` declarations.
 - `vector<T>` members already pinned to another address by another TU (e.g. `src/lead/stl_a`) pass in try.sh but DIFF in
   the full build: use private element types (`struct E6Hit : vector<int> {}`).
-- Frame layout solver for big functions (scope parser + name-bucket solver): `scratch/echo/scopes.py`, `lay2.py`, `solve2.py`.
+- Frame layout for big functions: `scratch/lima/` (best: scopes.py parses scopes, bk.py measures name buckets with a
+  probe compile and caches ~6900 names in buckets_extra.json, solve.py picks the fewest renames per scope, om.py/loc.py
+  compare offsets; placed 689 locals of a 119 KB function). Older: `scratch/echo/`, `scratch/india/names.py`.
+- ebp-insensitive diffs hide real bugs (swapped receiver/argument) and EH-state differences: also check EH sequences.
 - Giants with long regular sections (command tables): generate that source from the disassembly (`scratch/hotel/gen.py`).
 - Checking whether a VA is already matched: grep mapping rows only (`git grep -h ",<va>," origin/main -- config/mapping.d`);
   `config/names.csv` lists named-but-unmatched functions and gives false positives.
