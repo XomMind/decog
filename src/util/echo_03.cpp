@@ -533,7 +533,7 @@ public:
 	char padb50[0x30];
 	int fb80;
 	char padb84[0x10];
-	vector<unsigned int> fb94;
+	vector<int> fb94;
 	int fba4;
 	G8HE fba8;
 	int fbac;
@@ -545,7 +545,7 @@ public:
 	char padbec[0x28];
 	int fc14;
 	vector<int> fc18;
-	vector<int> fc28;
+	vector<struct G8Fc28 *> fc28;
 	char padc38[0x20];
 	vector<int> fc58;
 	bool initilize();
@@ -637,7 +637,7 @@ G8Point g8_popRandomPoint(vector<G8Point> &v);	// 0x9dbc70
 bool g8_terrainFlagB(const G8Point &p) throw();	// 0x448b80
 bool g8_terrainFlagA(const G8Point &p);	// 0x448b60
 G8Point g8_randomPoint(vector<G8Point> &v);	// 0x9d5350
-int g8_randomRec(vector<unsigned int> &v);	// 0x9d5d00
+int g8_randomRec(vector<int> &v);	// 0x9d5d00
 int g8_randomIndex(vector<G8Point> &v);	// 0x9d9230
 void g8_eraseAtS(vector<string> &v, int index);	// 0x9cfab0
 bool g8_containsEntity(vector<G8HLocation> &v, G8HLocation h);	// 0x9d31e0
@@ -1346,8 +1346,8 @@ checkKind:
 								int k24 = -1;
 								if (h59[j] == 0x14)
 								{
-									vector<unsigned int> matches;
-									for (unsigned int i = 0; i < g8_exitNames_d21768.size(); i++)
+									vector<int> matches;
+									for (int i = 0; i < g8_exitNames_d21768.size(); i++)
 									{
 										if (g8_exitNames_d21768[i] == g8_zoneNames_cfe140[g8_location_d1e888->links[k]->depth])
 											matches.push_back(i);
@@ -1356,8 +1356,8 @@ checkKind:
 										k24 = g8_randomRec(matches);
 									else
 									{
-										vector<unsigned int> blanks;
-										for (unsigned int i = 0; i < g8_exitNames_d21768.size(); i++)
+										vector<int> blanks;
+										for (int i = 0; i < g8_exitNames_d21768.size(); i++)
 										{
 											if (g8_exitNames_d21768[i].empty())
 												blanks.push_back(i);
@@ -1800,7 +1800,7 @@ checkKind:
 		if (g8_cf462c == 9)
 		{
 			int rating = g8_gameData_d1e860.unknown46f4e0();
-			for (unsigned int k = 0; k < g8_defs_cfd2cc.size(); k++)
+			for (int k = 0; k < g8_defs_cfd2cc.size(); k++)
 			{
 				if (g8_defs_cfd2cc[k]->f28 >= 0 && g8_defs_cfd2cc[k]->f28 <= rating)
 					fb94.push_back(k);

@@ -7,6 +7,11 @@
 #include "rng.h"
 using std::string; using std::vector;
 extern RNG rng;
+// vector<int>::size call sites pair with two different exe copies (0x9b9260, 0x9b5100); call them through
+// private views so std::vector<int>::size keeps its own pairing.
+struct GrSizeA{unsigned size9b9260()const;};struct GrSizeB{unsigned size9b5100()const;};
+#define GR_SZ(v) (((const GrSizeA*)&(v))->size9b9260())
+#define GR_SZB(v) (((const GrSizeB*)&(v))->size9b5100())
 
 struct GrPoint{int x,y;GrPoint();GrPoint(int);GrPoint(int,int);GrPoint(const GrPoint&)throw();GrPoint&operator=(const GrPoint&);
  int random40c130()throw();bool contains40c190(int);void set40a010(int,int);void set409ff0(int);bool contains409d70(int,int,int,int);};
@@ -184,14 +189,14 @@ void GrBS::populate6d4c00(vector<int>&out){
   for(int i=1;i<gr_d222f0.size();i++){
    hits=gr_d222f0[i].area40ad00();
    if(hits<=gr_d222f0[cur.back()].area40ad00())cur.push_back(i);
-   else for(unsigned j=0;j<cur.size();j++)if(hits>gr_d222f0[cur[j]].area40ad00()){gr_insertAt9dbdc0(cur,j,i);break;}
+   else for(unsigned j=0;j<GR_SZ(cur);j++)if(hits>gr_d222f0[cur[j]].area40ad00()){gr_insertAt9dbdc0(cur,j,i);break;}
   }
  int element;
   GrWL<int> dy;
   for(int i=0;i<6;i++)if(gr_b91278[c2].v[i]!=0)dy.add(i,(int)gr_b91278[c2].v[i]);
  int facing;
  int enemies;
-  for(unsigned i=0;i<cur.size();i++){
+  for(unsigned i=0;i<GR_SZ(cur);i++){
    v574.push_back(gr_d222f0[cur[i]].center40ad40());
    GrRect&r=gr_d222f0[cur[i]];
    
@@ -319,7 +324,7 @@ void GrBS::populate6d4c00(vector<int>&out){
  int ranks;
  int point;
  int old;
-  for(unsigned i=0;i<caption.size();i++){
+  for(unsigned i=0;i<GR_SZ(caption);i++){
    GrRect*r=&gr_cf13e8[caption[i]].rect;
    if(r->x==-1)continue;
    
@@ -534,7 +539,7 @@ void GrBS::populate6d4c00(vector<int>&out){
  placeRandomEncounter6f1e90(enemy,bestDistance,candidates,action);
  out=enemy;
  if(c2==0xd||c2==0xb){
-  for(unsigned i=0;i<enemy.size();i++){
+  for(unsigned i=0;i<GR_SZ(enemy);i++){
  GrRoom* tags;
    tags=&gr_cf13e8[enemy[i]];
    GrArea changed(tags->rect);
@@ -626,7 +631,7 @@ void GrBS::populate6d4c00(vector<int>&out){
   GrWL<int> closest;
   for(int i=0;i<5;i++)if(gr_b96a88[disabled].v[i])closest.add(i,gr_b96a88[disabled].v[i]);
   if(closest.size9b81d0()==0)continue;
-  for(int tries=0,before=gr_d20248.size();tries<20;tries++){
+  for(int tries=0,before=GR_SZB(gr_d20248);tries<20;tries++){
  int visible;
  int vec;
    vec=closest.pick();
@@ -643,7 +648,7 @@ void GrBS::populate6d4c00(vector<int>&out){
      edges=gr_randomRec9d5d00(amount);
      if(gr_cf13e8[edges].v28.empty()&&gr_cf13e8[edges].v48.empty())continue;
  int e2;
-     e2=rng.rangeInt(0,gr_cf13e8[edges].v28.size()+gr_cf13e8[edges].v48.size()-1);
+     e2=rng.rangeInt(0,gr_cf13e8[edges].v28.size()+GR_SZ(gr_cf13e8[edges].v48)-1);
      GrPoint direction;
      if(e2<gr_cf13e8[edges].v28.size())direction=gr_cf13e8[edges].v28[e2];
      else{
@@ -676,7 +681,7 @@ void GrBS::populate6d4c00(vector<int>&out){
        for(int j=0;j<20;j++){
         a.randomPoint40be30(&adj);
         if(gr_grid_cfd44c.contains9b43b0(adj)&&(*gr_grid_cfd44c.atPoint(adj))->f45d6a0()){
-         if(placeProp6c67b0(color,adj,status!=0?gr_d20248.size()-1:-1,bonus,-1)){status++;a1[disabled]++;if(status==1)adjacent[disabled]++;}
+         if(placeProp6c67b0(color,adj,status!=0?GR_SZB(gr_d20248)-1:-1,bonus,-1)){status++;a1[disabled]++;if(status==1)adjacent[disabled]++;}
          break;
         }
        }
@@ -702,7 +707,7 @@ void GrBS::populate6d4c00(vector<int>&out){
       for(int j=0;j<20;j++){
        a.randomPoint40be30(&adj);
        if((!current||gr_distance40a3f0(p8,adj)>15)&&(*gr_grid_cfd44c.atPoint(adj))->f45d6a0()){
-        if(placeProp6c67b0(color,adj,status!=0?gr_d20248.size()-1:-1,bonus,-1)){status++;a1[disabled]++;if(status==1)adjacent[disabled]++;}
+        if(placeProp6c67b0(color,adj,status!=0?GR_SZB(gr_d20248)-1:-1,bonus,-1)){status++;a1[disabled]++;if(status==1)adjacent[disabled]++;}
         break;
        }
       }
@@ -711,7 +716,7 @@ void GrBS::populate6d4c00(vector<int>&out){
     }
    }break;
    }
-   if(before<gr_d20248.size())break;
+   if(before<GR_SZB(gr_d20248))break;
   }
  }
  for(int i=0;i<15;i++)a1[i];
@@ -719,7 +724,7 @@ void GrBS::populate6d4c00(vector<int>&out){
   int width=i==0?7:i==1?6:4;
   int placed=0;
   if(!closestDist[i].empty()){
-   for(unsigned j=0;j<closestDist[i].size();j++){
+   for(unsigned j=0;j<GR_SZ(closestDist[i]);j++){
  int entityCount;
     entityCount=closestDist[i][j];
  int r1;
@@ -750,7 +755,7 @@ void GrBS::populate6d4c00(vector<int>&out){
    GrPos iter;
    GrPos health2;
  int g2;
-   for(unsigned j=0;j<flags.size();j++){
+   for(unsigned j=0;j<GR_SZ(flags);j++){
     
     if(gr_findWallStrip6cbb40(2,1,flags[j],iter,health2,g2,0,0,1)){
      gr_fillRing6cba00(health2,iter,5,caveinThirdTerrain,1);
@@ -839,13 +844,13 @@ void GrBS::populate6d4c00(vector<int>&out){
  doors=0;
  if(ay!=0){
   caption.clear();
-  for(int i=0;i<active.size();i++){
+  for(int i=0;i<GR_SZ(active);i++){
    if(gr_cf13e8[i].rect.x==-1||gr_flagB448b80(gr_cf13e8[i].rect.topLeft40a970()))continue;
    if(caption.empty()||(gr_b91258[active[i]]<=gr_b91258[active[caption.back()]]&&gr_cf13e8[i].rect.area40ad00()<=gr_cf13e8[caption.back()].rect.area40ad00()))caption.push_back(i);
-   else for(unsigned j=0;j<caption.size();j++)
+   else for(unsigned j=0;j<GR_SZ(caption);j++)
     if(gr_b91258[active[i]]>gr_b91258[active[caption[j]]]||(gr_b91258[active[i]]==gr_b91258[active[caption[j]]]&&gr_cf13e8[i].rect.area40ad00()>gr_cf13e8[caption[j]].rect.area40ad00())){gr_insertAt9dbdc0(caption,j,i);break;}
   }
-  for(unsigned i=0;i<caption.size();i++){
+  for(unsigned i=0;i<GR_SZ(caption);i++){
    GrRoom*room=&gr_cf13e8[caption[i]];
    int t=0;
    do{
@@ -887,16 +892,16 @@ void GrBS::populate6d4c00(vector<int>&out){
  cur.clear();
  if(bits!=0){
   cur.clear();
-  for(int i=0;i<cost.size();i++){
+  for(int i=0;i<GR_SZ(cost);i++){
    if(gr_d222f0[i].x==-1)continue;
    if(current&&(gr_flagB448b80(GrPoint(gr_d222f0[i].x,gr_d222f0[i].y))||gr_flagB448b80(GrPoint(gr_d222f0[i].x+gr_d222f0[i].w-1,gr_d222f0[i].y))
     ||gr_flagB448b80(GrPoint(gr_d222f0[i].x,gr_d222f0[i].y+gr_d222f0[i].h-1))||gr_flagB448b80(GrPoint(gr_d222f0[i].x+gr_d222f0[i].w-1,gr_d222f0[i].y+gr_d222f0[i].h-1))
     ||gr_flagB448b80(gr_d222f0[i].center40ad40())))continue;
    if(cur.empty()||(gr_b91258[cost[i]]<=gr_b91258[cost[cur.back()]]&&gr_d222f0[i].area40ad00()<=gr_d222f0[cur.back()].area40ad00()))cur.push_back(i);
-   else for(unsigned j=0;j<cur.size();j++)
+   else for(unsigned j=0;j<GR_SZ(cur);j++)
     if(gr_b91258[cost[i]]>gr_b91258[cost[cur[j]]]||(gr_b91258[cost[i]]==gr_b91258[cost[cur[j]]]&&gr_d222f0[i].area40ad00()>gr_d222f0[cur[j]].area40ad00())){gr_insertAt9dbdc0(cur,j,i);break;}
   }
-  for(unsigned i=0;i<cur.size();i++){
+  for(unsigned i=0;i<GR_SZ(cur);i++){
    GrRect&r=gr_d222f0[cur[i]];
    int tile=0;
    do{
@@ -1105,7 +1110,7 @@ void GrBS::populate6d4c00(vector<int>&out){
  if(!gr_d39f1c.empty()){
   gr_shuffle9d8f80(gr_d39f1c);
   for(int i=0;i<gr_d39f1c.size();i++){
-   for(unsigned j=0;j<gr_d39f1c[i]->list.size();j++)
+   for(unsigned j=0;j<GR_SZ(gr_d39f1c[i]->list);j++)
     for(unsigned k=0;k<gr_d31640[gr_d39f1c[i]->list[j]].size();k++)gr_d31640[gr_d39f1c[i]->list[j]][k]->setField448080(i);
  int groupID;
    GrHP group=gr_d31640[gr_d39f1c[i]->list.front()][0];
@@ -1151,7 +1156,7 @@ void GrBS::populate6d4c00(vector<int>&out){
    linkDone:;
   }
   for(unsigned i=0;i<gr_d39f1c.size();i++)
-   for(unsigned j=0;j<gr_d39f1c[j]->v10.size();j++)gr_d39f1c[i]->v20.push_back(rng.chance(50)?1:0);
+   for(unsigned j=0;j<GR_SZ(gr_d39f1c[j]->v10);j++)gr_d39f1c[i]->v20.push_back(rng.chance(50)?1:0);
  }
 }
 GrRoomRec::GrRoomRec(const GrE24&,int){}
