@@ -1,6 +1,16 @@
 # Handoff (2026-10-07)
 
-## Latest verified loop checkpoint (2026-10-07, fourth combined loop source batch)
+## Latest verified loop checkpoint (2026-10-07, fifth combined loop source batch)
+
+- **12,802 / 13,016 game functions; 48.493% code matched.** Eleven unique matches add 24,269 bytes over `ad8b02d`; 214 functions remain. Code totals: 3,184,445 / 6,566,759 bytes.
+- **32,118 / 32,118 comparisons MATCH, zero DIFF.** Repaired full compile/link: `build/manager_loop_source_full_05_repaired.log`; candidate gate: `build/manager_loop_source_lvx_05_repaired.log`; registered proof: `build/manager_loop_source_registered_05.log`. Frozen source hashes verified before commit.
+- Ten new TUs reconstruct score upload/re-upload, Discord queue processing, effect expansion/placement/dispatch, exoskeleton rendering, drag/drop input, lore selection and Cogshop refresh. An unchanged existing iterator forwarding body contributes the eleventh registration. Genuine gzip-stream and shared RNG declarations preserve known ABI; private layouts and aliases remain identified in source.
+- Coordinated `team_a_23.cpp` and `team_c_32.cpp` callback references now take the actual Discord/upload implementation addresses. The initial candidate gate caught two placeholder callback operands (`build/manager_loop_source_lvx_05.log`); both repaired callers and all prior registrations pass. Discord preserves the existing thread helper prototype with a pointer-width callback cast.
+- Raw 4 KiB-slot audit flags one apparent operand at effect-placement +0xae7 inside its trailing switch table (`build/manager_loop_source_audit_05_repaired.log`). The verifier independently validates all eleven table entries; its identified table starts at +0xad4. A supplementary scratch audit using those verified code/table boundaries finds **zero executable-code interior-stub operands** (`build/manager_loop_source_code_audit_05_repaired.log`). No repository verifier or boundary overrides.
+- Delta reviewed all initial seven sources; Bravo reviewed re-upload; Charlie reviewed placement/shop and callback repairs. No actionable ABI/layout concerns found; evidence under `scratch/loop_delta_08/`, `scratch/loop_bravo_08/` and `scratch/loop_charlie_05/`. Static reconstruction proofs do not establish full class semantics or game-runtime behavior.
+- The authorized matching/verification/commit loop continues with frozen effect initialization, service dispatch and AsciiImage loading candidates. Worker experiments remain scratch-only until the next source freeze and combined gate. No upload, webhook or game-network behavior has been executed.
+
+## Previous verified loop checkpoint (2026-10-07, fourth combined loop source batch)
 
 - **12,791 / 13,016 game functions; 48.124% code matched.** Five unique matches add 11,262 bytes over `3665981`; 225 functions remain. Code totals: 3,160,176 / 6,566,759 bytes.
 - **32,107 / 32,107 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_04.log`; candidate gate: `build/manager_loop_source_lvx_04.log`; registered proof: `build/manager_loop_source_registered_04.log`. Candidate audit reports zero interior-stub operands with 4 KiB slots (`build/manager_loop_source_audit_04.log`). Frozen five-file hashes checked before commit.

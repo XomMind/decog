@@ -113,7 +113,7 @@ extern string teamA23_playerName_d28ccc;	// NOTE: placeholder name
 extern string teamA23_defaultName_d2f184;	// NOTE: placeholder name
 extern string teamA23_discordUser_d28fdc;	// NOTE: placeholder name
 void *opY2_startNetworkThread(void *id, bool force, int (*fn)(void*), void *data);	// NOTE: placeholder name
-int teamA23_discordThread_4fa0c0(void *data);	// NOTE: placeholder name
+int la8_discord4fa0c0(string *data);	// NOTE: placeholder name
 bool OpY1_getEncodedLine(PhysFScpp::ifstream *file, string &line, int key);	// NOTE: placeholder name (0x4074b0)
 void OpC_removeChar_408100(string &text, char c);	// NOTE: placeholder name
 
@@ -128,7 +128,7 @@ string teamA23_initDiscord_4534b0()	// NOTE: placeholder name
 	if (!file.isOpen_404af0())
 		return "Unable to open " + (string() + "discord.txt");
 	teamA23_discord_cefb5c = new C026_Rec453470(teamA23_discordUser_d28fdc);
-	teamA23_discord_cefb5c->thread = opY2_startNetworkThread((void *)7,true,teamA23_discordThread_4fa0c0,NULL);
+	teamA23_discord_cefb5c->thread = opY2_startNetworkThread((void *)7,true,reinterpret_cast<int (*)(void*)>(la8_discord4fa0c0),NULL);
 	if (teamA23_discord_cefb5c->thread == NULL)
 	{
 		delete teamA23_discord_cefb5c;
