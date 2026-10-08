@@ -1,3 +1,4 @@
 # golf: large functions (src/util/golf_*.cpp). name,va,size
 GolfGProp::damage65f520,0x65f520,0x51c2
 GqBS::place6cd110,0x6cd110,0x752a
+GrBS::populate6d4c00,0x6d4c00,0x84e0

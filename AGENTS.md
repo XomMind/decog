@@ -114,6 +114,15 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - `new` whose result is pushed via an extra copy slot with no EH state: `v.push_back(static_cast<T*&&>(new X(...)))`.
   A global string array element passed by value gets the pre-loaded address only at a non-zero index (`arr[1]`).
   Frame-offset-insensitive diffing and offset->local-name helpers: `scratch/delta2/tools/` (sdiff.py, offmap.py, chk.sh).
+- `new` with the temp-copy pattern but no EH state write: the ctor body is empty and LTCG proved it nothrow; give the
+  private type an inline `T() {}` (declaring it `throw()` removes the temp). A stray EH state inside a `new` region usually
+  comes from a stub called while building the arguments: mark that stub `throw()`.
+- `if (!f(string("x"), out)) ;` gives the "store !result to a temp, never read" pattern; `push_back(+i)` picks the `&&`
+  overload with no extra code; unreferenced gaps in a scope's locals need dummy `int x[1]` / `char x[4]` declarations.
+- `vector<T>` members already pinned to another address by another TU (e.g. `src/lead/stl_a`) pass in try.sh but DIFF in
+  the full build: use private element types (`struct E6Hit : vector<int> {}`).
+- Frame layout solver for big functions (scope parser + name-bucket solver): `scratch/echo/scopes.py`, `lay2.py`, `solve2.py`.
+- Giants with long regular sections (command tables): generate that source from the disassembly (`scratch/hotel/gen.py`).
 - Checking whether a VA is already matched: grep mapping rows only (`git grep -h ",<va>," origin/main -- config/mapping.d`);
   `config/names.csv` lists named-but-unmatched functions and gives false positives.
 - A template instance over a type that other files define differently (e.g. XColor) can silently use another
