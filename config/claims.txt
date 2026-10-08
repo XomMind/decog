@@ -3,7 +3,6 @@
 # va        size    name / what                       owner   date
 0x633790    0x42bc  Entity::die                       claude  2026-10-08
 0x6516b0    0x7380  SEntityShoot::update              claude  2026-10-08
-0x7c6d30    0x94a8  CCommands::open                   claude  2026-10-08
 0x6430b0    0xa5ac  Entity::equipPart                 claude  2026-10-08
 0x5826b0    0x305f0 EntityAI::takeTurn (198 KB)       alex-sierra 2026-10-08
 0xa04d10    0x12    protobuf repeated-field accessor IsEmpty codex-hash-oct08 2026-10-08
