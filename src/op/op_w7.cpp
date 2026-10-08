@@ -713,7 +713,7 @@ void OpW7_insertAt_9dbdc0(vector<int> &v, int index, int value);	// NOTE: placeh
 bool OpW7_isAvailable_9004e0(int topic, bool flag);	// NOTE: placeholder name
 bool OpW7_contains_9d3fe0(vector<string> *list, string text);	// NOTE: placeholder name
 bool OpW7_contains_9db330(vector<int> &values, int value);	// NOTE: placeholder name
-void OpW7_unknown900920();	// NOTE: placeholder name
+void delta2_shellCommand_900920(bool cancelled);	// 0x900920 (defined in src/util/delta2_16.cpp)
 void opq4c_scrollShell8fec50(bool up);	// 0x8fec50 (defined in op_q4c.cpp)
 bool opq4c_suggest909990(bool flag);	// 0x909990 (defined in op_q4c.cpp)
 void OpW7_unknown4b1c30();	// NOTE: placeholder name
@@ -778,7 +778,7 @@ CShellManual::CShellManual(XConsole *parent, int y)
 			}
 		}
 	}
-	input = new CTextInput(this,0,0,44,0,false,false,(int)OpW7_unknown900920,(int)opq4c_scrollShell8fec50,(int)OpW7_unknown4b1c30,0,NULL,(int)opq4c_suggest909990);
+	input = new CTextInput(this,0,0,44,0,false,false,(int)delta2_shellCommand_900920,(int)opq4c_scrollShell8fec50,(int)OpW7_unknown4b1c30,0,NULL,(int)opq4c_suggest909990);
 	input->setMaxLength_4544c0(44);
 	input->setUnknownAa();
 	opw7_keyMap->unknown416570();
