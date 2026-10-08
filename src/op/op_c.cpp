@@ -358,7 +358,7 @@ string &OpC_decode_4712a0(string &text)	// NOTE: placeholder name
 
 struct SDL_Thread;
 SDL_Thread *OpC_createThread_449730(int threadType, bool force, int (*fn)(void *), void *data);	// NOTE: placeholder name
-int OpC_thread_79ba00(void *data);	// NOTE: placeholder name
+int newsThread79ba00(void *data);	// NOTE: placeholder name
 extern string OpC_key_d25664;	// NOTE: placeholder name
 
 struct OpC_Struct471550	// NOTE: placeholder name
@@ -400,7 +400,7 @@ void OpC_Struct471550::init_4715a0()
 	flag3d = false;
 	if (valid)
 	{
-		thread = OpC_createThread_449730(6,true,OpC_thread_79ba00,NULL);
+		thread = OpC_createThread_449730(6,true,newsThread79ba00,NULL);
 		if (thread == NULL)
 			valid = false;
 	}
