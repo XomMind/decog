@@ -1,5 +1,4 @@
 # op_h: recovered exact STL matches, freshly rebuilt and jointly verified; excludes already mapped exe addresses
-??_Gbad_alloc@std@@UAEPAXI@Z,0x9e7060,0x2d
 ??_GOpH_CDA10_1@@QAEPAXI@Z,0x9e7090,0x2d
 ??_GOpH_CDA10_2@@QAEPAXI@Z,0x9e70c0,0x2d
 ??_GOpH_CDA20_0@@QAEPAXI@Z,0x9e70f0,0x2d

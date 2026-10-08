@@ -1,0 +1,18 @@
+# Sixteen unique reviewed bodies plus one genuine iterator alias; combined candidate gate32138/32138 MATCH.
+LA11Config::init,0x4456b0,0x7bf
+??_GLMSound@@QAEPAXI@Z,0x9e7060,0x2d
+LB9Input::update_7b0b00,0x7b0b00,0xb60
+DeltaCommMap::show,0x818a00,0xa53
+LB10Effect::init_50de10,0x50de10,0xa20
+??G?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBE?AV01@H@Z,0x9b0980,0x2d
+LC6Manual::LC6Manual,0x4b0070,0x704
+LA12AI::chase,0x5b4710,0xa9e
+DeltaPartsSwap::swap,0x89c350,0xa41
+DeltaPartsRemove::remove,0x898910,0xac7
+LB11Item::select_57c3f0,0x57c3f0,0x9d3
+LC7AI::reinforce_5b3a30,0x5b3a30,0xaf4
+lb12_layout_6cadf0,0x6cadf0,0xac5
+DeltaDialog::show,0x874d80,0xb14
+LC8Ambient::update4ff710,0x4ff710,0x8f3
+DeltaAccess::enter,0x825e00,0xb16
+LB13Effect::update_50e890,0x50e890,0xc9c
