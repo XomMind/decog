@@ -111,23 +111,25 @@ void BS::unknown6eab60()
 	}
 }
 
-struct Rect
+// Rect under a private name: other TUs declare Rect::operator= without throw(), which would give
+// 0x6ed660 an EH frame in the full link that the exe does not have.
+struct OpV3a_Rect	// NOTE: placeholder name (Rect)
 {
 	int x;
 	int y;
 	int width;
 	int height;
 
-	Rect() throw();	// 0x40a6e0
-	Rect(const Rect &rect) throw();	// 0x40a720
-	Rect &operator=(const Rect &rect) throw();	// NOTE: folded with the copy ctor (0x40a720)
+	OpV3a_Rect() throw();	// 0x40a6e0
+	OpV3a_Rect(const OpV3a_Rect &rect) throw();	// 0x40a720
+	OpV3a_Rect &operator=(const OpV3a_Rect &rect) throw();	// NOTE: folded with the copy ctor (0x40a720)
 	Point randomPos_40b080() throw();	// NOTE: placeholder name
 };
 
 struct OpV3a_Room	// NOTE: placeholder name (DF::Room)
 {
 	int type;
-	Rect rect;
+	OpV3a_Rect rect;
 	vector<int> unknown14;
 	int unknown24;
 	vector<Point> doors;
@@ -142,9 +144,9 @@ OpV3a_Room opV3a_randomRoom_9db4b0(vector<OpV3a_Room> &rooms) throw();	// NOTE: 
 
 bool opR4_isEntrance(const Point &p) throw();	// NOTE: placeholder name (0x448b80)
 
-Point opV3a_randomPlaceable_6ed660(vector<Rect> &first, vector<Rect> &second)	// NOTE: placeholder name
+Point opV3a_randomPlaceable_6ed660(vector<OpV3a_Rect> &first, vector<OpV3a_Rect> &second)	// NOTE: placeholder name
 {
-	Rect area;
+	OpV3a_Rect area;
 	if (!first.empty())
 	{
 		area = first.back();
