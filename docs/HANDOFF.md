@@ -1,6 +1,14 @@
 # Handoff (2026-10-07)
 
-## Latest verified loop checkpoint (2026-10-07, fifth combined loop source batch)
+## Latest verified loop checkpoint (2026-10-07, sixth combined loop source batch)
+
+- **12,805 / 13,016 game functions; 48.606% code matched.** Three unique matches add 7,374 bytes over `a03e9d2`; 211 functions remain. Code totals: 3,191,819 / 6,566,759 bytes.
+- **32,121 / 32,121 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_06.log`; candidate gate: `build/manager_loop_source_lvx_06.log`; registered proof: `build/manager_loop_source_registered_06.log`. Frozen three-file hashes verified before commit. Raw 4 KiB-slot and code-aware candidate audits report zero interior-stub operands (`build/manager_loop_source_audit_06.log`, `build/manager_loop_source_code_audit_06.log`).
+- Three new TUs reconstruct the protected AsciiImage loader, effect initialization and service dispatch. The image loader uses the genuine gzip-stream and MT headers; a const-reference pointer binding preserves the actual temporary before insertion into a private opaque view of the canonical `vector<XBuffer*>` layers. No inheritance or volatile storage was invented. The effect initializer preserves all three switch tables; service dispatch retains actual float data operands, handle ABI and EH lifetimes.
+- Delta's independent source/ABI/ownership review found no actionable concerns (`scratch/loop_delta_09/review.md`, `ascii_review.md`); Bravo also reviewed service dispatch (`scratch/loop_bravo_09/service_review.md`). Static reconstruction proofs do not establish game-runtime behavior or full external-leaf semantics.
+- The authorized loop continues with five reviewed frozen candidates: configuration color filters, the genuine generated Sound deleting helper, text input, squad-map overlay and another effect initializer. Workers continue separate scratch probes while manager serializes source freezes, combined gates and commits.
+
+## Previous verified loop checkpoint (2026-10-07, fifth combined loop source batch)
 
 - **12,802 / 13,016 game functions; 48.493% code matched.** Eleven unique matches add 24,269 bytes over `ad8b02d`; 214 functions remain. Code totals: 3,184,445 / 6,566,759 bytes.
 - **32,118 / 32,118 comparisons MATCH, zero DIFF.** Repaired full compile/link: `build/manager_loop_source_full_05_repaired.log`; candidate gate: `build/manager_loop_source_lvx_05_repaired.log`; registered proof: `build/manager_loop_source_registered_05.log`. Frozen source hashes verified before commit.

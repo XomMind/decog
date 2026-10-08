@@ -1,0 +1,4 @@
+# Three unique reviewed bodies; all32121 combined comparisons MATCH.
+LA10Image::load,0x437580,0x802
+LB8Effect::init_503b20,0x503b20,0xa2c
+LC5AI::service_5bac50,0x5bac50,0xaa0
