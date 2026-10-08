@@ -9,3 +9,4 @@
 0x5fdd30    0x19d0  Entity trap/scan (takeDamage)     claude  2026-10-08
 0x42f5e0    0x22e6  XFontSet::init                    alex-alpha 2026-10-08
 0x665fd0    0x3904  STrapTrigger effect switch        alex-bravo 2026-10-08
+0x794da0    0x30ba  prelearn counterpart (18-way switch) alex-charlie 2026-10-08
