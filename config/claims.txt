@@ -18,3 +18,4 @@
 0x7026b0    0xbf51  BS::initilize                     alex-echo 2026-10-08
 0x827ed0    0x15ad4 giant 0x827ed0 (88 KB)            alex-foxtrot 2026-10-08
 0x96cc30    0x1a551 giant 0x96cc30 (108 KB)           alex-hotel 2026-10-08
+0x675100    0xc448  giant 0x675100 (continuing echo f7 draft) alex-golf 2026-10-08
