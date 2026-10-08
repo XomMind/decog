@@ -1,28 +1,34 @@
 #include <string>
+#include <memory>
+// NOTE: coordinated legacy repair draft; actual native owners, no guessed allocated extent.
 using std::string;
-struct LA16Point{int x,y;LA16Point();LA16Point(int) throw();LA16Point(int,int) throw();LA16Point(const LA16Point&) throw();void assign46ca50(const LA16Point&) throw();};
+struct LA16Point{int x,y;LA16Point();LA16Point(int) throw();LA16Point(int,int) throw();LA16Point(const LA16Point&) throw();LA16Point& assign46ca50(const LA16Point&) throw();};
 struct LA16Area{int left,top,right,bottom;LA16Area() throw();void random40be30(LA16Point*) throw();};
 struct LA16Entity;struct LA16Item;struct LA16RecordH{int id;};
 struct LA16H{int id;LA16H();LA16Entity*get9b6570()const throw();bool valid9b7230()const throw();bool different9b6510(LA16H)const throw();};
 struct LA16HI{int id;LA16HI();LA16Item*get9b65b0()const throw();bool valid9b7230()const throw();bool null9b65d0()const throw();bool different9b6510(LA16HI)const throw();};
 struct LA16HP{int id;LA16HP();};
 struct LA16ItemDefInfo{char pad[0x2c];int category;};struct LA16ItemDef{char pad[0x1a0];LA16ItemDefInfo *info;};
-struct LA16Item{bool ready5790e0() throw();bool active457cf0() throw();bool disabled457d10() throw();bool blocked415ee0() throw();int turn44ab90() throw();int special457f90() throw();int effect457be0(int) throw();string name571db0(bool,bool);int category457880() throw();int kind4578a0() throw();int energy5788e0() throw();int matter5789c0() throw();int range4580a0() throw();LA16ItemDef*def9b4350() throw();void active5791a0(bool) throw();};
-struct LA16Items{int a,b,c,d;LA16Items();~LA16Items();unsigned size9b9260()const throw();LA16HI&at9b81f0(unsigned) throw();bool empty9b86e0()const throw();void push9b80b0(const LA16HI&);};
+struct LA16Item{bool ready5790e0();bool active457cf0() throw();bool disabled457d10();bool blocked415ee0();int turn44ab90() throw();int special457f90() throw();int effect457be0(int);string name571db0(bool,bool);int category457880() throw();int kind4578a0() throw();int energy5788e0();int matter5789c0();int range4580a0();LA16ItemDef*def9b4350() throw();void active5791a0(bool);};
+struct LA16Items{LA16HI*first,*last,*end;std::allocator<LA16HI>allocator;LA16Items();~LA16Items();unsigned size9b9260()const throw();LA16HI&at9b81f0(unsigned) throw();bool empty9b86e0()const throw();void push9b80b0(const LA16HI&);};
 LA16HI la16_random9dafb0(LA16Items&);
-struct LA16Entity{char pad0[4];LA16H self;char pad8[0x88];int energy,matter;char pad98[0x9c];LA16Items items;LA16HI item5d2380(int) throw();const LA16Point&position45a4a0() throw();LA16Point position45a4c0() throw();bool disallowed5c7f70() throw();bool friendly45aaa0(LA16H) throw();void refresh45b0b0() throw();bool fire63a3e0(bool,LA16HI);};
-struct LA16Weighted{char data[0x24];LA16Weighted();~LA16Weighted();bool contains9ba520(const LA16H*) throw();void add9ba0d0(LA16H,int);int size9b81d0() throw();LA16H&pick9ba470() throw();};
+struct LA16Entity{char pad0[4];LA16H self;char pad8[0x88];int energy,matter;char pad98[0x9c];LA16Items items;LA16HI item5d2380(int);const LA16Point&position45a4a0() throw();LA16Point position45a4c0() throw();bool disallowed5c7f70();bool friendly45aaa0(LA16H);void refresh45b0b0();bool fire63a3e0(bool,LA16HI);};
+struct LA16Weighted{LA16H*first,*last,*end;std::allocator<LA16H>allocator;int*weightFirst,*weightLast,*weightEnd;std::allocator<int>weightAllocator;int total;LA16Weighted();~LA16Weighted();bool contains9ba520(const LA16H*) throw();void add9ba0d0(LA16H,int);unsigned size9b81d0() throw();LA16H&pick9ba470() throw();};
 struct LA16Cell{LA16H entity45d250() throw();};struct LA16Grid{LA16Cell**at9ceda0(int,int) throw();void rect9b4430(const LA16Point&,int,LA16Area*) throw();};extern LA16Grid la16_cfd44c;
-struct LA16Part{void refresh890710(bool) throw();};struct LA16Parts{LA16Part*find894e70(LA16HI) throw();void activate8993e0(LA16Part*,bool) throw();};extern LA16Parts*la16_cec088;
-struct LA16Map{int turn464270() throw();bool visible463380(int,int) throw();bool visible4633c0(const LA16Point&) throw();LA16RecordH add777a20(LA16RecordH);};extern LA16Map*la16_cefc4c;
+struct LA16Part{void refresh890710(bool);};struct LA16Parts{LA16Part*find894e70(LA16HI) throw();void activate8993e0(LA16Part*,bool);};extern LA16Parts*la16_cec088;
+struct LA16Map{int turn464270() throw();bool visible463380(int,int);bool visible4633c0(const LA16Point&);LA16RecordH add777a20(LA16RecordH);};extern LA16Map*la16_cefc4c;
 struct LA16View{void bounds8051f0(LA16Point*,LA16Point*) throw();};extern LA16View*la16_cec054;
-int la16_distance40a3f0(const LA16Point&,const LA16Point&) throw();bool la16_between9daf80(int,int,int) throw();bool la16_invalid63a2b0(const LA16Point&,const LA16Point&) throw();
-struct LA16Children{int a,b,c,d;LA16Children();~LA16Children();};
-struct LA16Shoot{char data[0x7c];LA16Shoot(LA16H,int,const LA16Point&,const LA16Point&,int*,LA16Children&,bool,LA16HI);};struct LA16Factory{LA16RecordH create7930e0(LA16Shoot*);};extern LA16Factory*la16_cefaa8;extern LA16Point la16_d2e20c;
-struct LA16UI{void update8758d0(bool) throw();};extern LA16UI*la16_cec058;struct LA16Log{void end7b4f10() throw();};extern LA16Log*la16_cec0b4;
-bool la16_route5111e0(int,const string*,const string*,const string*,LA16H,LA16HP,const LA16Point*,bool);
-struct LA16Stats{bool add4729d0(unsigned,int,string,int);};extern LA16Stats la16_d2c658;struct LA16Player{void event77fbc0(int) throw();};extern LA16Player la16_cf45d8;extern bool la16_cefaef;extern int la16_cefaf4;
-#define LA16_ROUTE(ID,TEXT) do{if(la16_route5111e0(ID,TEXT,0,0,self,LA16HP(),0,false))la16_cec058->update8758d0(true);la16_cec0b4->end7b4f10();}while(false)
+int la16_distance40a3f0(const LA16Point&,const LA16Point&) throw();bool la16_between9daf80(int,int,int) throw();bool la16_invalid63a2b0(const LA16Point&,const LA16Point&);
+struct LA16Line{LA16Point from,to;};
+struct LA16Children{LA16Line*first,*last,*end;std::allocator<LA16Line>allocator;LA16Children();~LA16Children();};
+struct LA16BattleState{virtual~LA16BattleState();virtual int kind();virtual bool update();virtual void finish();LA16RecordH record;int state,time;LA16BattleState();};
+struct LA16PointList{LA16Point*first,*last,*end;std::allocator<LA16Point>allocator;LA16PointList();~LA16PointList();};
+struct LA16Shoot:LA16BattleState{LA16H entity;int mode;LA16Point target,origin;LA16H targetEntity;LA16Children children;bool misfire,autonomous,flag;LA16H targeting;LA16Items items;int fired,active,counter5c,counter60,counter64,counter68;LA16PointList points;virtual~LA16Shoot();LA16Shoot(LA16H,int,const LA16Point&,const LA16Point&,int*,LA16Children&,bool,LA16HI);};struct LA16Factory{LA16RecordH create7930e0(LA16Shoot*);};extern LA16Factory*la16_cefaa8;extern LA16Point la16_d2e20c;
+struct LA16UI{void update8758d0(bool);};extern LA16UI*la16_cec058;struct LA16Log{void end7b4f10();};extern LA16Log*la16_cec0b4;
+bool la16_route5111e0(int,const string*,const string*,const string*,LA16H,LA16H,const LA16Point*,bool);
+struct LA16Stats{bool add4729d0(unsigned,int,string,int);};extern LA16Stats la16_d2c658;struct LA16Player{bool event77fbc0(int);};extern LA16Player la16_cf45d8;extern bool la16_cefaef;extern int la16_cefaf4;
+static_assert(sizeof(LA16Items)==16&&sizeof(LA16Children)==16&&sizeof(LA16Weighted)==36&&sizeof(LA16Line)==16&&sizeof(LA16BattleState)==16&&sizeof(LA16Shoot)==124,"positive native ownership extents");
+#define LA16_ROUTE(ID,TEXT) do{if(la16_route5111e0(ID,TEXT,0,0,self,LA16H(),0,false))la16_cec058->update8758d0(true);la16_cec0b4->end7b4f10();}while(false)
 bool LA16Entity::fire63a3e0(bool quiet,LA16HI selected){
  if(la16_cefaef&&la16_cefaf4)return false;
  LA16HI x;LA16Items right;

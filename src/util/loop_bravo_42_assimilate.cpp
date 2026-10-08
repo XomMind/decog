@@ -15,8 +15,8 @@ struct LB42World{vector<vector<LB42HP> >&props463be0()throw();bool reachable4652
 int lb42_distance40a3f0(const LB42P&,const LB42P&)throw();bool lb42_remove9d51d0(vector<int>&,int);void lb42_remove9d2f00(vector<LB42HP>&,LB42HP);
 struct LB42Target{LB42HE entity;int unknown4,score;};struct LB42AI{LB42HE entity;char omitted4[0xec];vector<LB42Target*>targets;bool can5bd240(LB42HE);int assimilate5bbf70(int,LB42HE);};
 struct LB42UI{void bubble8758d0(bool);};struct LB42Log{void end7b4f10();};extern LB42UI*lb42_cec058;extern LB42Log*lb42_cec0b4,*lb42_cec0c4;
-bool lb42_route5111e0(int,const string*,const string*,const string*,LB42HE,LB42HE,const LB42P*,bool);bool lb42_phrase5141b0(int,const string*,const string*,const string*,LB42HE,int);
-struct LB42Stats{bool add4729d0(unsigned,int,string,int);};extern LB42Stats lb42_d2c658;struct LB42Player{void achieve77fbc0(int);};extern LB42Player lb42_cf45d8;
+bool lb42_route5111e0(int,const string*,const string*,const string*,LB42HE,LB42HE,const LB42P*,bool);bool lb42_phrase5141b0(int,const string*,const string*,const string*,LB42HE,const LB42P*);
+struct LB42Stats{bool add4729d0(unsigned,int,string,int);};extern LB42Stats lb42_d2c658;struct LB42Player{bool achieve77fbc0(int);};extern LB42Player lb42_cf45d8;
 struct LB42Xom{bool active;int action69e700(int,int,float);};extern LB42Xom lb42_d25450;
 extern int lb42_b985e0[][11],lb42_b98480[][11],lb42_bba058[],lb42_d28d18;extern vector<int>lb42_cf4a04;
 bool lb42_effect4569a0(int,LB42HE,LB42HE,LB42HP,LB42HI,const LB42P*,const string*,LB42Effects*,LB42HE,LB42HP,LB42HI,const LB42P*);

@@ -15,7 +15,7 @@ struct LB41IntWeights{vector<int>values,sum;int total;LB41IntWeights(vector<int>
 struct LB41StringWeights{vector<string>values;vector<int>sum;int total;LB41StringWeights();~LB41StringWeights();void add9b9f50(string,int);string&pick9b9fd0()throw();};
 struct LB41Def{char omitted0[0x9c];int size;};extern vector<LB41Def*>lb41_d25de0;bool lb41_find9d7530(vector<LB41Def*>&,const string&,LB41Def*&);
 int lb41_min9cdb30(int,int)throw();void lb41_shuffle9d7350(vector<LB41P>&);LB41Area lb41_random9d7d20(vector<LB41Area>&)throw();
-struct LB41Squad;struct LB41Dispatch{LB41Squad*launch687520(LB41HE,int,bool);};extern LB41Dispatch lb41_cf6428;
+struct LB41Squad;struct LB41Dispatch{LB41Squad*launch687520(LB41HE,const LB41P*,bool);};extern LB41Dispatch lb41_cf6428;
 struct LB41World{char omitted0[0x4c];vector<LB41HG>groups;char omitted5c[0x858];vector<LB41Area>areas;int faction;bool reinforce73d320(bool,bool,bool,const LB41P*);LB41HE spawn6c5dc0(const string&,const LB41P&,int,bool,int,int,bool);bool dialogue6c65a0(LB41HE,const string&,bool);bool place71c300(const LB41P&,int,int,LB41P&,bool);};
 bool LB41World::reinforce73d320(bool local,bool existing,bool limited,const LB41P*at){
  bool result=false;
