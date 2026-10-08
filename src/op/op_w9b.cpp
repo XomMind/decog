@@ -3,14 +3,14 @@
 //	(RTTI class names are real).
 #include <string>
 #include <vector>
-#include "thirdparty/zfstream.h"
+#include "../thirdparty/zfstream.h"
+#include "../util/rng.h"
 using namespace std;
 
 //==================================================================
 // shared declarations
 //==================================================================
 
-struct OpW9b_Offset;
 struct Pos
 {
 	int x;
@@ -19,7 +19,6 @@ struct Pos
 	Pos(int x_, int y_);
 	Pos(const Pos &pos) throw();
 	explicit Pos(int value);	// NOTE: placeholder name (0x409990)
-	Pos(const OpW9b_Offset &offset);	// NOTE: placeholder name (0x46ca50)
 };
 
 struct XColor
@@ -52,15 +51,16 @@ struct XEvent	// NOTE: placeholder name
 	Pos mouse;
 };
 
+struct D39XCell{int font,glyph,value;XColor fore,back;};struct D39Buffer{int width,height;D39XCell*data;D39Buffer();~D39Buffer();};
 class XConsole
 {
 public:
 	virtual ~XConsole();
 	virtual void resize(int width, int height);
-	virtual bool isActive();
-	virtual void refresh();
-	virtual bool input(void *event);
-	virtual void inputAscii(int key, int modifier);	// NOTE: placeholder name
+	virtual bool mouseEnter();
+	virtual void mouseLeave();
+	virtual bool input(XEvent *event);
+	virtual void mouseMoved(int key, int modifier);	// NOTE: placeholder name
 	virtual void update();
 	virtual void render();
 
@@ -80,25 +80,22 @@ public:
 	void clear();
 	void print(int x, int y, const string &text);
 
-	char pad04[0x60 - 0x04];
+	XConsole*parent;D39Buffer buffer;int font,fontType;Pos position,absolute;XColor fore,back;int backFlag,alignment;float scaleX,scaleY;vector<XConsole*>children;bool hidden;int layer;bool passThrough,ignoreMouse;
 };
 
-struct OpW9b_Offset	// NOTE: placeholder name
-{
-	int x;
-	int y;
-};
+typedef Pos OpW9b_Offset; // actual same Point8 coordinate type; private global spelling
 
+struct D39EffectDef;class Engine;
 class OpW9b_EngineItem	// NOTE: placeholder name
 {
 public:
-	void unknown50de10();	// NOTE: placeholder name
+	bool init50de10(Engine*,D39EffectDef*,const Pos&,const OpW9b_Offset&,const Pos*,const Pos*,int);	// NOTE: placeholder name
 };
 
 class Engine
 {
 public:
-	OpW9b_EngineItem *unknown50fb50(Engine *engine, int type, Pos *a, OpW9b_Offset *b, Pos *c, Pos *d, int value);	// NOTE: placeholder name
+	OpW9b_EngineItem *create50fb50();	// NOTE: placeholder name
 	bool isRunning();	// NOTE: placeholder name (0x50fff0)
 	void stopAll();	// NOTE: placeholder name (0x50ff30)
 };
@@ -117,8 +114,8 @@ public:
 
 	void setTitle(class ConsoleTitle *title_);	// NOTE: placeholder name (0x7ad4e0)
 	void animate(string name);	// NOTE: placeholder name
-	void unknown48c3c0(int value);	// NOTE: placeholder name
-	void unknown48c460(int anim, const Pos &pos);	// NOTE: placeholder name
+	void unknown48c3c0(D39EffectDef *value);	// NOTE: placeholder name
+	void unknown48c460(D39EffectDef *anim, const Pos &pos);	// NOTE: placeholder name
 
 	int unknown60;
 	Engine *engine;
@@ -129,6 +126,7 @@ class ConsoleTitle : public Console
 {
 public:
 	ConsoleTitle(XConsole *parent, string title_, int font, int align_);
+	virtual ~ConsoleTitle();
 
 	string title;
 	int align;
@@ -138,25 +136,43 @@ class CText : public Console
 {
 public:
 	CText(XConsole *parent, const Pos &pos, const string &text_, int font, int maxWidth, int layer);
+	virtual ~CText();
 
 	string text;
 };
 
-class AsciiImage;
-
-class CArtAnimated : public Console
+class AsciiImage
 {
 public:
-	CArtAnimated(XConsole *parent, AsciiImage *image, int x, int y, bool flag, int animation, int a, int b, const Pos &pos, int c, int d);
+	AsciiImage();
+	~AsciiImage();
+	vector<D39Buffer*> layers;
+};
+class ConsoleArt : public Console
+{
+public:
+	ConsoleArt(XConsole*,AsciiImage*,int,int,bool,int,int,const Pos&,int,int);
+	virtual ~ConsoleArt();
+	virtual int getFrame();
+	virtual void trigger(const string&,int);
+	AsciiImage image;
+	Pos offset;
+};
+
+class CArtAnimated : public ConsoleArt
+{
+public:
+	CArtAnimated(XConsole *parent, AsciiImage *image, int x, int y, bool flag, D39EffectDef *animation, int a, int b, const Pos &pos, int c, int d);
 	void unknown4b29b0();	// NOTE: placeholder name
 
-	char pad6c[0x88 - 0x6c];
+	virtual ~CArtAnimated();
+	D39EffectDef *animation;
 };
 
 string intToString(int value);
 int minInt(int a, int b);
 int opW9b_center(int size, int width);	// NOTE: placeholder name (0x437190)
-bool opW9b_findAnimation(const string &name, int *index);	// NOTE: placeholder name (0x9d45a0)
+bool opW9b_findAnimation(const string &name, D39EffectDef **index);	// NOTE: placeholder name (0x9d45a0)
 
 extern bool opW9b_consoleInputBlocked;	// NOTE: placeholder name (0xcefa5f)
 extern unsigned int opW9b_tickCount;	// NOTE: placeholder name (0xcaed20)
@@ -168,7 +184,7 @@ struct OpW9b_Achievement	// NOTE: placeholder name
 	char pad3c[0x40 - 0x3c];
 	int category;	// NOTE: placeholder name
 	char pad44[0x6c - 0x44];
-	char image[0x10];	// NOTE: placeholder layout (AsciiImage)
+	AsciiImage image;
 };
 extern vector<OpW9b_Achievement*> opW9b_achievementData;	// NOTE: placeholder name (0xcf09a8)
 extern vector<int> opW9b_achievementsEarned;	// NOTE: placeholder name (0xcf47ec)
@@ -177,7 +193,7 @@ extern string opW9b_achievementCategoryNames[];	// NOTE: placeholder name (0xd15
 class OpW9b_GameData	// NOTE: placeholder name (0xcefaa8)
 {
 public:
-	int getNewAchievementCount();	// NOTE: placeholder name (0x470b50)
+	unsigned int getNewAchievementCount();	// NOTE: placeholder name (0x470b50)
 	vector<int> *getNewAchievements();	// NOTE: placeholder name (0x470b70)
 };
 extern OpW9b_GameData *opW9b_gameData;	// NOTE: placeholder name
@@ -206,9 +222,9 @@ CGameoverAchievements::CGameoverAchievements(XConsole *parent, const Rect &rect)
 	for (int i = 0, y = 2; i < total; i++, y += 6)
 	{
 		OpW9b_Achievement *achievement = opW9b_achievementData[(*achievements)[i]];
-		int animation;
+		D39EffectDef *animation;
 		opW9b_findAnimation("A_CMap_Achieve_Icon_" + opW9b_achievementCategoryNames[achievement->category],&animation);
-		art = new CArtAnimated(this,(AsciiImage*)achievement->image,2,y,false,animation,-1,-1,Pos(-1),0,0);
+		art = new CArtAnimated(this,&achievement->image,2,y,false,animation,-1,-1,Pos(-1),0,0);
 		art->resetBack_418450();
 		art->unknown4b29b0();
 		label = new CText(this,Pos(art->getPos().x + art->getWidth_44b0d0() * 2 + 1,y + 2),achievement->name,0,0,-1);
@@ -232,13 +248,13 @@ class CGamoverButton : public Console
 public:
 	CGamoverButton(XConsole *parent, int x, int y, int command_);	// 0x48fe40
 
-	virtual bool input(void *event);
+	virtual bool input(XEvent *event);
 
 	int command;	// NOTE: placeholder name
 };
 extern Console *opW9b_gameover;	// NOTE: placeholder name (0xcec144)
 
-bool CGamoverButton::input(void *event)
+bool CGamoverButton::input(XEvent *event)
 {
 	if (isHidden() || opW9b_consoleInputBlocked)
 		return false;
@@ -271,7 +287,7 @@ extern vector<OpW9b_StatRecord*> opW9b_statRecords;	// NOTE: placeholder name (0
 class OpW9b_Stats	// NOTE: placeholder name (0xd2c658)
 {
 public:
-	int get(int id);	// NOTE: placeholder name (0x472c70)
+	int get(unsigned int id);	// NOTE: placeholder name (0x472c70)
 };
 extern OpW9b_Stats opW9b_stats;	// NOTE: placeholder name
 extern const int opW9b_scoreMultipliers[];	// NOTE: placeholder name (0xbbc218)
@@ -364,12 +380,12 @@ int CGameoverMain::printSection(int y, bool performance)
 		cursor.y++;
 	}
 
-	int index;
+	D39EffectDef *index;
 	opW9b_findAnimation("SilentType_GR3_Vert_E",&index);
 	if (index)
 	{
 		for (int x = 7; x <= valueX; x++)
-			engine->unknown50fb50(engine,index,&Pos(x,y),&opW9b_d2e20c,&Pos(x,cursor.y - 1),&Pos(opW9b_d2e20c),9)->unknown50de10();
+			engine->create50fb50()->init50de10(engine,index,Pos(x,y),opW9b_d2e20c,&Pos(x,cursor.y - 1),&Pos(opW9b_d2e20c),9);
 	}
 
 	if (performance)
@@ -401,7 +417,7 @@ extern OpW9b_Rex opW9b_rex;	// NOTE: placeholder name
 class OpW9b_KeyMap	// NOTE: placeholder name (0xcefa8c)
 {
 public:
-	void unknown4162e0(int command, int value);	// NOTE: placeholder name
+	void unknown4162e0(unsigned int command, bool value);	// NOTE: placeholder name
 };
 extern OpW9b_KeyMap *opW9b_keyMap;	// NOTE: placeholder name
 
@@ -436,17 +452,19 @@ bool OpW9b_Unknown_cf45d8::unknown77e7c0()
 class OpW9b_Scorekeeper	// NOTE: placeholder name (0xd2c658)
 {
 public:
-	string totalScore_474a20(int flags);	// NOTE: placeholder name
+	string totalScore_474a20(bool isDump);	// NOTE: placeholder name
 };
 
 extern int opW9b_gameoverType;	// NOTE: placeholder name (0xcf4b38)
 extern XColor opW9b_d29804;	// NOTE: placeholder name
-void opW9b_playSound(int sound, int a, int b);	// NOTE: placeholder name (0x4541b0)
+int opW9b_playSound(unsigned int sound, int a, int b);	// NOTE: placeholder name (0x4541b0)
 
 struct Point
 {
 	int x;
 	int y;
+	Point(const Point&) throw();
+	Point& operator=(const Point&) throw();
 };
 
 class OpW9b_Grid	// NOTE: placeholder name (Array2D<int>)
@@ -457,7 +475,7 @@ public:
 	int getWidth();	// NOTE: placeholder name (folded getter)
 	int getHeight();	// NOTE: placeholder name (folded getter)
 
-	int data[3];
+	int width,height;int*data;OpW9b_Grid();~OpW9b_Grid();
 };
 
 class CGameoverOverlay : public Console
@@ -480,9 +498,9 @@ public:
 	int mapHeight;	// NOTE: placeholder name
 	OpW9b_Grid shown;	// NOTE: placeholder name
 	Point offset;	// NOTE: placeholder name
-	vector<int> mapAnimations;	// NOTE: placeholder name
-	int eraseAnimation;	// NOTE: placeholder name
-	int closeAnimation;	// NOTE: placeholder name
+	vector<D39EffectDef*> mapAnimations;	// NOTE: placeholder name
+	D39EffectDef *eraseAnimation;	// NOTE: placeholder name
+	D39EffectDef *closeAnimation;	// NOTE: placeholder name
 	unsigned int unknownb4;	// NOTE: placeholder name
 	unsigned int unknownb8;	// NOTE: placeholder name
 	Point martyrPos;	// NOTE: placeholder name
@@ -495,7 +513,7 @@ public:
 	CGameover();
 	virtual ~CGameover();
 
-	virtual bool input(void *event);
+	virtual bool input(XEvent *event);
 	virtual void update();
 	virtual void trigger(const string &command, int value);
 
@@ -520,9 +538,9 @@ CGameover::CGameover()
 	unknown98 = 0;
 	unknown9c = false;
 	opW9b_gameover = this;
-	opW9b_keyMap->unknown4162e0(0x23,1);
+	opW9b_keyMap->unknown4162e0(0x23,true);
 	unknown6c = opW9b_unknown_cf45d8.unknown77e7c0();
-	score = ((OpW9b_Scorekeeper*)&opW9b_stats)->totalScore_474a20(0);
+	score = ((OpW9b_Scorekeeper*)&opW9b_stats)->totalScore_474a20(false);
 	if (opW9b_gameoverType == 4 || opW9b_gameoverType == 5 || opW9b_gameoverType == 12 || opW9b_gameoverType == 13)
 		unknown7bfe60();
 	else if (opW9b_gameoverType == 6 || opW9b_gameoverType == 7 || opW9b_gameoverType == 8 || opW9b_gameoverType == 9)
@@ -552,7 +570,7 @@ void CGameover::unknown7bfe60()
 			overlay->animate("A_Gameover_Win");
 		else
 		{
-			int animation;
+			D39EffectDef *animation;
 			opW9b_findAnimation("Gameover_Loss_E",&animation);
 			if (animation)
 			{
@@ -560,8 +578,8 @@ void CGameover::unknown7bfe60()
 				int below = middle + 1;
 				for (int x = 0; x < getWidth_44b0d0(); x++)
 				{
-					overlay->engine->unknown50fb50(overlay->engine,animation,&Pos(x,0),&opW9b_d2e20c,&Pos(x,middle),&Pos(opW9b_d2e20c),9)->unknown50de10();
-					overlay->engine->unknown50fb50(overlay->engine,animation,&Pos(x,getHeight() - 1),&opW9b_d2e20c,&Pos(x,below),&Pos(opW9b_d2e20c),9)->unknown50de10();
+					overlay->engine->create50fb50()->init50de10(overlay->engine,animation,Pos(x,0),opW9b_d2e20c,&Pos(x,middle),&Pos(opW9b_d2e20c),9);
+					overlay->engine->create50fb50()->init50de10(overlay->engine,animation,Pos(x,getHeight() - 1),opW9b_d2e20c,&Pos(x,below),&Pos(opW9b_d2e20c),9);
 				}
 			}
 		}
@@ -718,12 +736,6 @@ struct Area	// NOTE: placeholder name
 	int y2;
 };
 
-class RNG
-{
-public:
-	bool chance(int percent);
-	int rangeInt(float min, float max);
-};
 extern RNG rng;
 
 class CEnding
@@ -737,6 +749,8 @@ class CGameoverEndingText : public Console
 {
 public:
 	CGameoverEndingText(XConsole *parent, int x, int y, const string &text, const string &animation, int layer);
+	virtual ~CGameoverEndingText();
+	virtual void update();
 };
 
 struct OpW9b_MapSeed	// NOTE: placeholder name
@@ -751,7 +765,7 @@ extern vector<OpW9b_MapSeed*> opW9b_mapSeeds;	// NOTE: placeholder name (0xcf1a0
 class OpW9b_Generator	// NOTE: placeholder name (0xd31580)
 {
 public:
-	void unknown4bf610(int seed, const string &a, const string &b, int c, int d, int e, int f);	// NOTE: placeholder name
+	void unknown4bf610(int seed, const string &a, const string &b, bool c, bool d, bool e, int f);	// NOTE: placeholder name
 	void placeTunnelers();	// NOTE: placeholder name
 	bool unknown4c1880(bool flag);	// NOTE: placeholder name
 	int getUnknown_45ab90();	// NOTE: placeholder name (folded getter)
@@ -802,7 +816,7 @@ extern OpW9b_Grid opW9b_mapGrid;	// NOTE: placeholder name (0xcf1964)
 extern const bool opW9b_mapLayers[];	// NOTE: placeholder name (0xbbcad8)
 extern string opW9b_d33e1c;	// NOTE: placeholder name
 template <class T> int opW9b_randomIndex(vector<T> &v);	// NOTE: placeholder name (0x9d9b20)
-char opW9b_randomChar(const string &chars);	// NOTE: placeholder name (0x4085b0)
+char opW9b_randomChar(string &chars);	// NOTE: placeholder name (0x4085b0)
 string opW9b_toUpper(const string &text);	// NOTE: placeholder name (0x4083a0)
 string opW5_getEndingType();	// NOTE: placeholder name
 template <class T> void removeVectorElement(vector<T> &v, int index);
@@ -969,7 +983,7 @@ map:
 			string name = unknown7bdfd0();
 			martyrs.push_back(new Console(this,name.size(),1,martyrPos.x,martyrPos.y,4,false,-1));
 			martyrs.back()->print(0,0,name);
-			int animation;
+			D39EffectDef *animation;
 			opW9b_findAnimation("Warlord_Martyr_Name",&animation);
 			for (int i = 0; i <= 7; i++)
 				martyrs.back()->unknown48c460(animation,Pos(i,0));
@@ -1263,3 +1277,9 @@ done:
 	}
 	return name;
 }
+
+static_assert(sizeof(D39XCell)==20&&sizeof(D39Buffer)==12&&sizeof(XConsole)==96&&sizeof(Console)==108&&sizeof(CGameoverEndingText)==108,"actual allocated Console and ending-text owners");
+
+typedef char D39ImageSize[(sizeof(AsciiImage)==16)?1:-1];
+typedef char D39ArtSize[(sizeof(ConsoleArt)==132)?1:-1];
+typedef char D39AnimatedSize[(sizeof(CArtAnimated)==136)?1:-1];
