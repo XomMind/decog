@@ -96,12 +96,12 @@ public:
 	void unknown45cd10(bool v);	// NOTE: placeholder name
 	void unknown45cd30(bool v);	// NOTE: placeholder name
 	void unknown45cd50();	// NOTE: placeholder name
-	void unknown45cd70(int a, int b, XColor c, bool d);	// NOTE: placeholder name
+	void unknown45cd70(int a, int b, int c, bool d);	// NOTE: placeholder name
 	void unknown45cdb0(int a, int value);	// NOTE: placeholder name
 	void unknown45ce10(bool a, int b, bool c, int d);	// NOTE: placeholder name
 	void unknown45ce50(int a, bool b);	// NOTE: placeholder name
 
-	void unknown664840(int a, int b, int c, int d, float e, bool f, int g, const XColor *h);	// NOTE: placeholder name
+	void unknown664840(int a, int b, int c, int d, float e, bool f, int g, int *h);	// NOTE: placeholder name
 	void unknown65f520(int a1, int a2, int a3, bool a4, int a5, int a6, bool a7, bool a8, int a9);	// NOTE: placeholder name
 
 	int ID;
@@ -251,7 +251,8 @@ void Prop::unknown45cd50()
 	flag48 = true;
 }
 
-void Prop::unknown45cd70(int a, int b, XColor c, bool d)
+// c is integer damage; the callee borrows its address during this call.
+void Prop::unknown45cd70(int a, int b, int c, bool d)
 {
 	unknown664840(a,2,0,0,1.0f,d,b,&c);
 }
