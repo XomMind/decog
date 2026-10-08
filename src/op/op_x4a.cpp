@@ -31,15 +31,17 @@ public:
 	OpY5_Item *operator->() const;	// 0x9b65b0
 };
 
-class OpY5_WeightedStrings	// NOTE: placeholder name
+class LC33WeightedStrings	// NOTE: placeholder name
 {
 public:
-	OpY5_WeightedStrings();	// 0x9b9ee0
-	~OpY5_WeightedStrings();	// 0x55c900
+	LC33WeightedStrings();	// 0x9b9ee0
+	~LC33WeightedStrings();	// 0x55c900
 	void add(string value, int weight);	// NOTE: placeholder name (0x9b9f50)
-	const string &pick();	// NOTE: placeholder name (0x9b9fd0)
+	string &pick();	// NOTE: placeholder name (0x9b9fd0)
 
-	int pad0, pad4, pad8, padc, pad10, pad14, pad18, pad1c, pad20;
+	vector<string> values;
+	vector<int> weights;
+	int total;
 };
 
 struct Point
@@ -103,7 +105,7 @@ public:
 	void unknown64da50(OpY5_HItem item);	// NOTE: placeholder name
 	int unknown5c92e0(int slot);	// NOTE: placeholder name
 	unsigned int unknown5cb8b0(vector<OpY5_HItem> *out);	// NOTE: placeholder name
-	void unknown642940(OpY5_HItem item, int a, int b, int c, int d);	// NOTE: placeholder name
+	int lc33_unequip642940(OpY5_HItem item, bool a, bool b, bool c, int d);	// NOTE: placeholder name
 };
 
 class OpY5_HProp	// NOTE: placeholder name
@@ -233,7 +235,7 @@ public:
 };
 extern OpY5_World *opY5_world;	// NOTE: placeholder name
 
-bool opY5_logMessage(int id, const string &text, const string *b, int c, OpY5_HProp d, OpY5_HProp e, const Point *at, int flag);	// NOTE: placeholder name (0x5111e0)
+bool lc33_log5111e0(int id, const string *text, const string *b, const string *c, OpY5_HEntity d, OpY5_HEntity e, const Point *at, bool flag);	// NOTE: placeholder name (0x5111e0)
 
 class OpY5_MsgConsole	// NOTE: placeholder name (object at 0xcec058)
 {
@@ -249,15 +251,16 @@ public:
 };
 extern OpY5_LogMsgs *opY5_logMsgs;	// NOTE: placeholder name (0xcec0b4)
 
-#define OPY5_LOG_AT(id,text,at) do { if (opY5_logMessage(id,text,0,0,OpY5_HProp(),OpY5_HProp(),at,0)) opY5_cec058->unknown8758d0(true); opY5_logMsgs->scrollToEnd(); } while (0)	// NOTE: placeholder macro
-#define OPY5_LOG(id,text) do { if (opY5_logMessage(id,text,0,0,OpY5_HProp(),OpY5_HProp(),0,0)) opY5_cec058->unknown8758d0(true); opY5_logMsgs->scrollToEnd(); } while (0)	// NOTE: placeholder macro
+#define OPY5_LOG_AT(id,text,at) do { if (lc33_log5111e0(id,&static_cast<const string &>(text),0,0,OpY5_HEntity(),OpY5_HEntity(),at,false)) opY5_cec058->unknown8758d0(true); opY5_logMsgs->scrollToEnd(); } while (0)	// NOTE: placeholder macro
+#define OPY5_LOG(id,text) do { if (lc33_log5111e0(id,&static_cast<const string &>(text),0,0,OpY5_HEntity(),OpY5_HEntity(),0,false)) opY5_cec058->unknown8758d0(true); opY5_logMsgs->scrollToEnd(); } while (0)	// NOTE: placeholder macro
 
 bool findEffectID(const string &name, int *id);	// NOTE: placeholder name (0x9d7980)
 
+struct LC33FxDef; struct LC33FxOwned; class OpY5_EffectMgr;
 class OpY5_Effect	// NOTE: placeholder name
 {
 public:
-	void init(void *owner, int type, const Point &from, const Point &to, Point *p1, Point *p2, void *data, int a, int b);	// NOTE: placeholder name (0x503b20)
+	void init(OpY5_EffectMgr *owner, LC33FxDef *type, const Point &from, const Point &to, const Point *p1, const Point *p2, LC33FxOwned *data, int a, OpY5_Effect *parent);	// NOTE: placeholder name (0x503b20)
 };
 
 class OpY5_EffectMgr	// NOTE: placeholder name
@@ -280,13 +283,13 @@ void opY5_insertAt(vector<int> &v, int index, int value);	// NOTE: placeholder n
 void opY5_moveTo(vector<OpY5_HEntity> &v, int from, int to);	// NOTE: placeholder name (0x9da1f0)
 void opY5_moveTo(vector<int> &v, int from, int to);	// NOTE: placeholder name (0x9e2ce0)
 
-void opY5_unknown5141b0(int id, int a, int b, int c, OpY5_HProp e, int d);	// NOTE: placeholder name (0x5141b0)
+bool lc33_phrase5141b0(int id, const string *a, const string *b, const string *c, OpY5_HEntity e, const Point *d);	// NOTE: placeholder name (0x5141b0)
 
 class OpY5_MapConsole	// NOTE: placeholder name (object at 0xcec054)
 {
 public:
 	void unknown49adc0(int time);	// NOTE: placeholder name
-	void unknown8119c0(OpY5_HItem item, int a, int b, int c);	// NOTE: placeholder name
+	int lc33_items8119c0(OpY5_HItem item, bool a, bool b, bool c);	// NOTE: placeholder name
 };
 extern OpY5_MapConsole *opY5_mapConsole;	// NOTE: placeholder name
 
@@ -309,14 +312,13 @@ public:
 extern OpY5_HGameState opY5_gameState;	// NOTE: placeholder name (0xd1e888)
 
 
-bool opY5_logMessage(int id, const string &text, const string *b, int c, OpY5_HEntity d, OpY5_HProp e, const Point *at, int flag);	// NOTE: placeholder name (0x5111e0)
-
+struct LC35Part;
 class OpX4a_Parts	// NOTE: placeholder name (object at 0xcec088)
 {
 public:
 	bool isLinked4a9b10(OpY5_HItem item);	// NOTE: placeholder name
-	void *unknown894e70(OpY5_HItem item);	// NOTE: placeholder name
-	void unknown8993e0(void *part, int a);	// NOTE: placeholder name
+	LC35Part *lc35_part894e70(OpY5_HItem item);	// NOTE: placeholder name
+	void lc35_update8993e0(LC35Part *part, bool a);	// NOTE: placeholder name
 };
 extern OpX4a_Parts *opx4a_parts;	// NOTE: placeholder name (0xcec088)
 
@@ -329,9 +331,9 @@ extern OpX4a_GM opx4a_gm;	// NOTE: placeholder name (0xd25628)
 extern vector<int> opx4a_cf47cc;	// NOTE: placeholder name
 
 template <class T> bool opx4a_findByName(vector<T*> &v, const string &name, T *&result);	// NOTE: placeholder name (0x9d7a40)
-void opx4a_eraseStep(vector<OpY5_HItem> &v, unsigned int &index);	// NOTE: placeholder name (0x9d6440)
+void lc33_erase9d6440(vector<OpY5_HItem> &v, int &index);	// NOTE: placeholder name (0x9d6440)
 void opx4a_shuffle(vector<OpY5_HItem> &v);	// NOTE: placeholder name (0x9d9fc0)
-void opx4a_moveElement(vector<OpY5_HItem> &v, unsigned int from, unsigned int to);	// NOTE: placeholder name (0x9da1f0)
+void lc33_move9da1f0(vector<OpY5_HItem> &v, unsigned int from, unsigned int to);	// NOTE: placeholder name (0x9da1f0)
 
 class OpY5_Builder	// NOTE: placeholder name (map generation)
 {
@@ -501,10 +503,10 @@ bool OpY5_Builder::unknown69fc60(bool flag, string *outName)
 	{
 		vector<OpY5_HItem> items;
 		player->unknown5cb8b0(&items);
-		for (unsigned int i = 0; i < items.size(); i++)
+		for (int i = 0; i < items.size(); i++)
 		{
 			if (items[i]->unknown4578a0() != 2 || items[i]->getEffect(0x6c) != NULL || (items[i]->unknown457f90() == 7 && !flag) || items[i]->unknown457f90() == 0xb7 || items[i]->unknown457f90() == 0xd6 || opx4a_parts->isLinked4a9b10(items[i]))
-				opx4a_eraseStep(items,i);
+				lc33_erase9d6440(items,i);
 		}
 		if (items.empty())
 			return false;
@@ -512,32 +514,32 @@ bool OpY5_Builder::unknown69fc60(bool flag, string *outName)
 		for (int j = items.size() - 2; j >= 0; j--)
 		{
 			if (items[j]->unknown4578c0() > 1 || items[j]->unknown457f90() == 7)
-				opx4a_moveElement(items,j,items[j]->unknown4578c0() - 1);
+				lc33_move9da1f0(items,j,items[j]->unknown4578c0() - 1);
 		}
-		opY5_mapConsole->unknown8119c0(items.front(),1,0,1);
+		opY5_mapConsole->lc33_items8119c0(items.front(),true,false,true);
 		if (!flag)
 		{
 			do
 			{
-				if (opY5_logMessage(0x2bb,items.front()->unknown571db0(false,false),0,0,player,OpY5_HProp(),0,0))
+				if (lc33_log5111e0(0x2bb,&items.front()->unknown571db0(false,false),0,0,player,OpY5_HEntity(),0,false))
 					opY5_cec058->unknown8758d0(true);
 				opY5_logMsgs->scrollToEnd();
 			} while (false);
 		}
 		renameJunkItem(items.front());
-		player->unknown642940(items.front(),1,1,0,0);
+		player->lc33_unequip642940(items.front(),true,true,false,0);
 	}
 	OpY5_HItem item = opY5_world->unknown6c51d0(type,player,true,false);
 	if (item.isValid())
 	{
 		opx4a_cf47cc.push_back(item->unknown9fcd80());
 		opx4a_gm.addItemAttachCount(item->unknown457820(),1,false);
-		void *part = opx4a_parts->unknown894e70(item);
+		LC35Part *part = opx4a_parts->lc35_part894e70(item);
 		if (part != NULL)
-			opx4a_parts->unknown8993e0(part,0);
+			opx4a_parts->lc35_update8993e0(part,false);
 		if (outName != NULL)
 			*outName = "X0-1V1: \"Let's take things to the next level.\"";
-		do { opY5_unknown5141b0(0x9d,0,0,0,OpY5_HProp(),0); } while (0);
+		do { lc33_phrase5141b0(0x9d,0,0,0,OpY5_HEntity(),0); } while (0);
 		unknown158 = true;
 		return true;
 	}
