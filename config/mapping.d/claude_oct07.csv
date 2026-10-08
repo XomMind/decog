@@ -7,3 +7,4 @@ OpW7_CaveGen::step,0x4cbcd0,0x570
 ?TCOD_noise_simplex@@YAMPAXPAM@Z,0x41e0a0,0x2710
 CList::CList,0x48d9a0,0x58a
 CShellManual::CShellManual,0x4b0070,0x704
+CEvasionFull::trigger,0x888e90,0xab4
