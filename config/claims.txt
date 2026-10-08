@@ -3,20 +3,11 @@
 # va        size    name / what                       owner   date
 0x8ec880    0x75cf  CInfoCompare::trigger             alex-delta 2026-10-08
 0x6f1e90    0xadc4  BS::placeRandomEncounter          alex-echo 2026-10-08
-0x884f60    0x25d8  CScan::load                       claude  2026-10-08
-0x5c4640    0x2744  Entity::init                      claude  2026-10-08
-0x42a5b0    0x2d10  XConsole::blit                    claude  2026-10-08
-0x86f9c0    0x32b4  D40Map::collect86e310 callee      claude  2026-10-08
-0x784410    0x3300  GM::readyGame seeds/world setup   claude  2026-10-08
 0x900920    0x8f18  CShell command handler            alex-delta 2026-10-08
 0x89d970    0x3398  CParts::input                     alex-foxtrot 2026-10-08
-0x7d2030    0x3c40  charlie2 round 2                  alex-charlie 2026-10-08
 0x63d8a0    0x4900  Entity::move                      claude  2026-10-08
 0x7ffee0    0x513c  CMap::update                      claude  2026-10-08
 0x808de0    0x52f4  CMap anim (activateItem callee)   claude  2026-10-08
-0x954b10    0x5a7e  teamb_create95a640 callee (bosses) claude  2026-10-08
-0x93ad00    0x5dcd  CHack window build                claude  2026-10-08
-0x8680b0    0x6258  CMap intel markers (0x83dfa0 callee) claude  2026-10-08
 0x81a8e0    0x64d2  debug command parser (GOTO/EVOLVE) claude  2026-10-08
 0x6927e0    0x6f38  Unchained/X0-1V1 turnUpdate callee claude  2026-10-08
 0x65f520    0x51c2  Prop destroy/garrison/hub handler alex-golf 2026-10-08
@@ -25,3 +16,7 @@
 0x6d4c00    0x84e0  large function 0x6d4c00           alex-golf 2026-10-08
 0x9c2140    0x2d    vector iterator operator-(int) used by back() 0x9b4b20 alex-foxtrot 2026-10-08
 0x675100    0xc448  next giant                        alex-echo 2026-10-08
+0x633790    0x42bc  Entity::die                       claude  2026-10-08
+0x6516b0    0x7380  SEntityShoot::update              claude  2026-10-08
+0x7c6d30    0x94a8  CCommands::open                   claude  2026-10-08
+0x6430b0    0xa5ac  Entity::equipPart                 claude  2026-10-08
