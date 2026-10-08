@@ -17,3 +17,4 @@
 0xb5c730    0x8a    string-assign thunk (no callers)  claude  2026-10-08
 0xb5c7c0    0x8a    string-assign thunk (no callers)  claude  2026-10-08
 0x900920    0x8f18  CShell command handler            alex-delta 2026-10-08
+0x89d970    0x3398  CParts::input                     alex-foxtrot 2026-10-08
