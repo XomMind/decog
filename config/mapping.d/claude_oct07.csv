@@ -43,3 +43,4 @@ Overmind::unknown685a10,0x685a10,0xa71
 Overmind::spawnCargoDispatch_68aec0,0x68aec0,0xadf
 BS::unknown6efb90,0x6efb90,0x1107
 Item::takeDamage_57ab10,0x57ab10,0x1392
+BS::initialize,0x701390,0x1270
