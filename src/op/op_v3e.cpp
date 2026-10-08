@@ -433,9 +433,11 @@ void CAchievements::unknown7f1120()
 	}
 	unknown90.clear();
 	vector<int> filtered;
+	OpV3e_AchievementDef *rec;
 	for (int i = 0; i < unknown70.size(); i++)
 	{
-		if (opV3e_achievementCategories[opV3e_achievementRecs[i]->category])
+		rec = opV3e_achievementRecs[i];
+		if (opV3e_achievementCategories[rec->category])
 		{
 			if (opV3e_achievementState_d28d84 == 2 || (opV3e_achievementState_d28d84 == 0 && unknown70[i] != NULL) || (opV3e_achievementState_d28d84 == 1 && unknown70[i] == NULL))
 				filtered.push_back(i);

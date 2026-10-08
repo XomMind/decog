@@ -12,3 +12,6 @@ CEvasionFull::trigger,0x888e90,0xab4
 CGameoverOverlay::update,0x7bc900,0x136c
 CTextInput::inputAscii,0x7b0b00,0xb60
 BS::unknown718430,0x718430,0x165c
+Entity::unknown5cede0,0x5cede0,0x217d
+??0Entity@@QAE@PAUOpW8_EntityRecord@@@Z,0x5c3590,0x10a3
+CAchievements::unknown7f1120,0x7f1120,0xaac
