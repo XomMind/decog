@@ -1,6 +1,15 @@
 # Handoff (2026-10-07)
 
-## Latest verified loop checkpoint (2026-10-07, third combined loop source batch)
+## Latest verified loop checkpoint (2026-10-07, fourth combined loop source batch)
+
+- **12,791 / 13,016 game functions; 48.124% code matched.** Five unique matches add 11,262 bytes over `3665981`; 225 functions remain. Code totals: 3,160,176 / 6,566,759 bytes.
+- **32,107 / 32,107 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_04.log`; candidate gate: `build/manager_loop_source_lvx_04.log`; registered proof: `build/manager_loop_source_registered_04.log`. Candidate audit reports zero interior-stub operands with 4 KiB slots (`build/manager_loop_source_audit_04.log`). Frozen five-file hashes checked before commit.
+- Four new TUs reconstruct two inventory replacement selectors, phrase routing and EntityAI construction. Private typed aliases retain actual comparison directions, fallback nesting, hidden handle-return ABI, object fields and member cleanup. The AI constructor uses the shared RNG declaration to pair named operands correctly.
+- Coordinated `op_q4a_hud.cpp` change renames locals only in six CEvasionFull trigger branches to restore MSVC stack-slot ordering. Calls, arguments, strings, condition order and the total branch are unchanged; all other registered functions pass.
+- Charlie's read-only source/offset review found no actionable concerns (`scratch/loop_charlie_04/batch04_review.md`). Static reconstruction proofs do not establish full class semantics or game-runtime behavior.
+- The authorized loop continues with frozen next-batch proofs for score-uploading, exoskeleton rendering, drag/drop input and effect dispatch. Worker experiments stay in scratch until manager source freezes and combined gates. No uploads, webhooks or game-network code have been executed by this matching work.
+
+## Previous verified loop checkpoint (2026-10-07, third combined loop source batch)
 
 - **12,786 / 13,016 game functions; 47.952% code matched.** Eight unique matches add 10,419 bytes over `347479e`; 230 functions remain. Code totals: 3,148,914 / 6,566,759 bytes.
 - **32,102 / 32,102 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_03.log`; candidate gate: `build/manager_loop_source_lvx_03.log`; registered proof: `build/manager_loop_source_registered_03.log`. Candidate audit reports zero interior-stub operands with 4 KiB slots (`build/manager_loop_source_audit_03.log`). Frozen eight-file hashes checked before commit.
