@@ -1,23 +1,20 @@
 # Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
 # remove the line in the commit that maps the function (or when abandoning it).
 # va        size    name / what                       owner   date
-0x8ec880    0x75cf  CInfoCompare::trigger             alex-delta 2026-10-08
-0x6f1e90    0xadc4  BS::placeRandomEncounter          alex-echo 2026-10-08
 0x900920    0x8f18  CShell command handler            alex-delta 2026-10-08
-0x89d970    0x3398  CParts::input                     alex-foxtrot 2026-10-08
 0x63d8a0    0x4900  Entity::move                      claude  2026-10-08
 0x7ffee0    0x513c  CMap::update                      claude  2026-10-08
 0x808de0    0x52f4  CMap anim (activateItem callee)   claude  2026-10-08
 0x81a8e0    0x64d2  debug command parser (GOTO/EVOLVE) claude  2026-10-08
 0x6927e0    0x6f38  Unchained/X0-1V1 turnUpdate callee claude  2026-10-08
-0x65f520    0x51c2  Prop destroy/garrison/hub handler alex-golf 2026-10-08
 0x9471d0    0xca98  0x9471d0 (51 KB)                  alex-delta 2026-10-08
 0x6cd110    0x752a  large function 0x6cd110           alex-golf 2026-10-08
 0x6d4c00    0x84e0  large function 0x6d4c00           alex-golf 2026-10-08
 0x9c2140    0x2d    vector iterator operator-(int) used by back() 0x9b4b20 alex-foxtrot 2026-10-08
-0x675100    0xc448  next giant                        alex-echo 2026-10-08
 0x633790    0x42bc  Entity::die                       claude  2026-10-08
 0x6516b0    0x7380  SEntityShoot::update              claude  2026-10-08
 0x7c6d30    0x94a8  CCommands::open                   claude  2026-10-08
 0x6430b0    0xa5ac  Entity::equipPart                 claude  2026-10-08
 0x7026b0    0xbf51  BS::initilize                     alex-echo 2026-10-08
+0x827ed0    0x15ad4 giant 0x827ed0 (88 KB)            alex-foxtrot 2026-10-08
+0x96cc30    0x1a551 giant 0x96cc30 (108 KB)           alex-hotel 2026-10-08
