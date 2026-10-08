@@ -1,16 +1,13 @@
 # Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
 # remove the line in the commit that maps the function (or when abandoning it).
 # va        size    name / what                       owner   date
-0x8ec880    0x75cf  CInfoCompare::trigger             alex-delta 2026-10-08
 0x6f1e90    0xadc4  BS::placeRandomEncounter          alex-echo 2026-10-08
 0x900920    0x8f18  CShell command handler            alex-delta 2026-10-08
-0x89d970    0x3398  CParts::input                     alex-foxtrot 2026-10-08
 0x63d8a0    0x4900  Entity::move                      claude  2026-10-08
 0x7ffee0    0x513c  CMap::update                      claude  2026-10-08
 0x808de0    0x52f4  CMap anim (activateItem callee)   claude  2026-10-08
 0x81a8e0    0x64d2  debug command parser (GOTO/EVOLVE) claude  2026-10-08
 0x6927e0    0x6f38  Unchained/X0-1V1 turnUpdate callee claude  2026-10-08
-0x65f520    0x51c2  Prop destroy/garrison/hub handler alex-golf 2026-10-08
 0x9471d0    0xca98  0x9471d0 (51 KB)                  alex-delta 2026-10-08
 0x6cd110    0x752a  large function 0x6cd110           alex-golf 2026-10-08
 0x6d4c00    0x84e0  large function 0x6d4c00           alex-golf 2026-10-08
