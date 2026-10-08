@@ -6,14 +6,12 @@
 0x808de0    0x52f4  CMap anim (activateItem callee)   claude  2026-10-08
 0x81a8e0    0x64d2  debug command parser (GOTO/EVOLVE) claude  2026-10-08
 0x6927e0    0x6f38  Unchained/X0-1V1 turnUpdate callee claude  2026-10-08
-0x6cd110    0x752a  large function 0x6cd110           alex-golf 2026-10-08
 0x6d4c00    0x84e0  large function 0x6d4c00           alex-golf 2026-10-08
 0x633790    0x42bc  Entity::die                       claude  2026-10-08
 0x6516b0    0x7380  SEntityShoot::update              claude  2026-10-08
 0x7c6d30    0x94a8  CCommands::open                   claude  2026-10-08
 0x6430b0    0xa5ac  Entity::equipPart                 claude  2026-10-08
 0x827ed0    0x15ad4 giant 0x827ed0 (88 KB)            alex-foxtrot 2026-10-08
-0x96cc30    0x1a551 giant 0x96cc30 (108 KB)           alex-hotel 2026-10-08
 0x6a0150    0x1d04a giant 0x6a0150 (effect expiry turn, 119 KB) alex-golf 2026-10-08
 0x91ca50    0x1cd64 giant 0x91ca50 (118 KB)           alex-hotel 2026-10-08
 0x83dfa0    0x2a078 giant 0x83dfa0 (172 KB)           alex-kilo 2026-10-08
