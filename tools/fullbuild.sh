@@ -1,9 +1,11 @@
 #!/bin/sh
+# Run at utility QoS + nice 10 so builds yield to the user's apps (-b background starved builds: 4 min -> 70+ min).
+[ -n "$CM_BG" ] || exec env CM_BG=1 taskpolicy -c utility nice -n 10 "$0" "$@"
 # Machine-wide serialized full build: only ONE full LTCG build runs at a time (each one is many wine cl.exe
 # processes plus a whole-program link; several at once exhausted 48 GB). Waits for the lock and for free memory.
 #   tools/fullbuild.sh <outdir> [lverify args...]     build all sources into <outdir>, then lverify --dir <outdir>
 #   tools/fullbuild.sh --run <cmd...>                 run any command under the same lock (used by the integration loop)
-# Env: JOBS (default 6) compile parallelism; FULLBUILD_MIN_FREE_GB (default 12) memory needed before starting.
+# Env: JOBS (default 4) compile parallelism; FULLBUILD_MIN_FREE_GB (default 12) memory needed before starting.
 REPO=$(cd "$(dirname "$0")/.." && pwd); cd "$REPO" || exit 1
 LOCK=$REPO/build/.fullbuild.lock
 mkdir -p "$REPO/build"
@@ -23,7 +25,7 @@ echo $$ > "$LOCK/pid"; echo "${FULLBUILD_WHO:-$1} $(date +%H:%M)" > "$LOCK/who"
 trap 'rm -rf "$LOCK"' EXIT INT TERM
 need=${FULLBUILD_MIN_FREE_GB:-12}
 while [ "$(free_gb)" -lt "$need" ]; do echo "fullbuild: waiting for ${need} GB free (now $(free_gb) GB)" >&2; sleep 30; done
-export JOBS=${JOBS:-6}
+export JOBS=${JOBS:-4}
 if [ "$1" = "--run" ]; then shift; "$@"; exit $?; fi
 out=$1; shift
 .venv/bin/python tools/ltcg.py "$out" $(.venv/bin/python tools/sources.py) || exit 1

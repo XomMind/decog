@@ -1,4 +1,5 @@
 #!/bin/sh
+[ -n "$CM_BG" ] || exec env CM_BG=1 taskpolicy -c utility nice -n 10 "$0" "$@"
 # Run a VS2010 SP1 tool (cl.exe, link.exe, dumpbin.exe...) under native macOS wine (Rosetta).
 # One-time setup: tools/setup-wine.sh. The repo appears where Kyzrati's tree lived,
 # C:\_\_RL\COGMIND\_cogmind (__FILE__ strings embedded in the exe must match), and vendored
