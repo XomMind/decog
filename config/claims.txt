@@ -15,3 +15,4 @@
 0x827ed0    0x15ad4 giant 0x827ed0 (88 KB)            alex-foxtrot 2026-10-08
 0x96cc30    0x1a551 giant 0x96cc30 (108 KB)           alex-hotel 2026-10-08
 0x6a0150    0x1d04a giant 0x6a0150 (effect expiry turn, 119 KB) alex-golf 2026-10-08
+0x91ca50    0x1cd64 giant 0x91ca50 (118 KB, UI text builder) alex-echo 2026-10-08
