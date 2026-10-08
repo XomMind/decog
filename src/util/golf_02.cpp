@@ -64,7 +64,7 @@ extern GqPoint gq_cf4538,gq_d2ecf8,gq_d21948[];extern int gq_cf462c,gq_cf4718;ex
 extern GqWL<GqItemDef*>gq_d2ae08,gq_d31700,gq_cf0c04,gq_cfe5ec;
 int gq_stringToInt(const string&);string gq_intToString(int);
 int gq_findColor9d4f10(GqColor*,int,GqColor);void gq_setTerrain6c9c90(const GqPoint&,GqTerrain*);void gq_appendIndices9e3380(vector<GqObj*>&,vector<unsigned>&);void gq_decode4351e0(string&);
-bool gq_checkConditions6c3240(vector<string>&);void gq_eraseAt9ce6d0(vector<unsigned>&,unsigned&);bool gq_contains9db650(vector<char>&,char);void gq_split408700(const string&,char,vector<string>&);
+bool gq_checkConditions6c3240(vector<string>&);void gq_eraseAt9ce6d0(vector<unsigned>&,unsigned&);bool gq_contains9db650(vector<signed char>&,char);void gq_split408700(const string&,char,vector<string>&);
 string gq_randomString9d3280(vector<string>&);bool gq_findTerrain9db6a0(vector<GqTerrain*>&,const string&,GqTerrain*&);bool gq_findProp9d7710(vector<GqPropDef*>&,const string&,GqPropDef*&);
 bool gq_checkSpawn6c36c0(string&);void gq_ccdf0(string&,GqObj*,unsigned,vector<int*>&,vector<int>&);void gq_ccf60(string&,GqObj*,unsigned,vector<int>&,int);bool gq_paren900870(string&,string&);
 int gq_indexOfName4_9d7b80(vector<GqEntityDef*>&,const string&);int gq_f6c4600(string&);int gq_indexOfName9d74d0(vector<GqItemDef*>&,const string&);int gq_f6c4ac0(string&);int gq_findString9cda80(const string*,int,string);
@@ -124,8 +124,8 @@ void GqBS::place6cd110(GqPrefab&prefab,int id,bool flag,float chance){
   if(attempt){gq_eraseAt9ce6d0(orders,i);continue;}
   if(entity->chance!=0&&!entity->chanceEach&&!rng.chance(entity->chance)){gq_eraseAt9ce6d0(orders,i);continue;}
  }
- vector<char> line;
- char mode;
+ vector<signed char> line;
+ signed char mode;
  while(1){
   mode='-';
   for(unsigned i=0;i<orders.size();i++){

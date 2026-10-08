@@ -47,7 +47,8 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 6. Claim before you start: `.venv/bin/python tools/claim.py claim <va> <owner> "<what>"` pushes a line to the shared
    `config/claims.txt` on origin (other people work on this repo too). If it says the VA is claimed or already mapped,
    pick something else. Release a claim you abandon with `tools/claim.py release <va>`; claims of matched functions are
-   released automatically after the integration push. `tools/claim.py list` shows all claims.
+   released automatically after the integration push. `tools/claim.py list` shows all claims. Hold ONE active claim at
+   a time (plus any that only wait for their lvx check); claiming a queue of functions blocks other people.
 
 ## Matching tips (`/Od`)
 - Code gen is literal: the order of statements, temporaries, `for` vs `while`, `++i` vs `i++` on iterators,
