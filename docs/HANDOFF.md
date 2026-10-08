@@ -1,6 +1,25 @@
-# Handoff (2026-10-05)
+# Handoff (2026-10-07)
 
-## Current verified checkpoint (2026-10-07, resumed four-agent team)
+## Current verified checkpoint (2026-10-07, second four-worker batch)
+
+- **12,745 / 13,014 game functions; 47.611% code bytes matched.** This batch adds **30 unique game-function matches and 4,107 matched bytes** over `29dec04`. **269 game functions remain unmatched.** Counts exclude library functions and do not count mapping aliases twice.
+- **32,266 / 32,266 registered comparisons MATCH, zero DIFF.** Two serialized full builds checked the combined sources, then the retained source after a failing draft was returned to scratch. Candidate gate: `build/manager_oct08_final_lvx.log`; registered verification: `build/manager_oct08_registered.log`; final compile/link: `build/manager_oct08_final_full.log`. These artifacts are local and gitignored.
+- Six new translation units reconstruct gameover constructors, entity regeneration, upgrade keyboard input, grid clear, string operators, and a private 16-byte vector instance. Four older files received coordinated lifecycle repairs: Point/string global vector types, the Point-vector assignment, Array2D construction/cleanup, and the integer-vector Dice wrapper. Existing array/protobuf/container implementations contributed additional registrations.
+- Registered 32 proven rows in `config/mapping.d/codex_team_oct08.csv`: 28 previously unmapped addresses plus four aliases for already-mapped lifecycle callbacks. Two existing constructor rows now have real matched bodies. Actual generated global destructors are registered; synthetic destructor wrappers are not.
+- Candidate audit uses 4 KiB stub slots and reports **zero matching rows with interior-stub operands** (`build/manager_oct08_final_stubaudit.log`). Verifier regression checks `check_map_symbols.py`, `check_literals.py`, `check_switch_tables.py`, and `check_ltcg.py` passed. Alpha performed a read-only source/layout review. These are static binary-matching checks; no game-runtime acceptance is claimed.
+- All four worker roles are stopped. The concurrency limit was respected with three workers plus manager, staggered roles, and a later read-only review. Manager inventory/proofs are in `scratch/manager_oct08/`; worker probes are in `scratch/team_oct08_{alpha,bravo,charlie,delta}/`.
+
+### Deferred from this batch
+
+- `0x4ff4c0` (`AmbientSoundSystem::collectSources`): MATCH alone, but full-link exception handling adds 176 instruction differences. Existing source retained; no mapping registered.
+- `0x9c35b0` (`vector<bool>::_Insert_x`): MATCH alone, but its full-link call at +0x6d conflicts with the established callee pairing (`0x9c8a00`). Draft returned to `scratch/team_oct08_charlie/deferred_boolvector.cpp`; no mapping registered.
+- `0x65e040`: two stack-slot differences; `0x6ed660`: hidden returned-object pointer spill versus full-link exception handling. Scratch probes remain in the Bravo area. Previous unresolved constructor/descriptor candidates below remain deferred.
+
+### Resume safely
+
+Continue with `AGENTS.md`, distinct scratch areas, isolated `try.sh` proofs, and a serialized combined build using `tools/fullbuild.sh --run tools/build.sh`. Register candidates only after `lvx.py` passes against the combined artifact; reverify the registered set. Use the existing private kit/toolchain and `scratch/ref/b17.1-luigiai.md` (later research rounds supersede earlier ones). Do not restart the old auto-commit loop against an unverified tree.
+
+## Previous verified checkpoint (2026-10-07, resumed four-agent team)
 
 - **12,715 / 13,014 game functions; 47.548% code bytes matched.** The paused GitHub checkpoint was `5142a7c` (12,480 functions); this integrates 235 additional unique game-function matches, the pending local batch, and upstream semantic fixes through `d9b2cba`. Counts exclude library functions and count unique game addresses, not mapping aliases.
 - Registered 45 previously unmapped targets in `config/mapping.d/codex_team_oct07.csv` only after combined-link verification. Four worker roles were run in staggered shifts under the three-worker-plus-manager limit. The workers and build loop are stopped at this checkpoint.
@@ -14,11 +33,11 @@ Use `tools/fullbuild.sh --run tools/build.sh` for the serialized integration bui
 
 ### Deferred candidates and useful next work
 
-- `0xb5ccb0`, `0xb5ccc0`, `0xb5ccd0`: quick wrapper checks pass, but registering wrappers poisons existing initializer callback pairings. Actual generated destructors expose incorrect older global types in `src/game/team_c_02.cpp`: `vec_d2d4f4` / `vec_d2ed08` require the Point/Pos-vector destructor at `0x9b94b0`; `vec_d2d4c8` requires the string-vector destructor at `0x9b0460`. Reconcile declarations and verify both initializers and actual destructors together; do not register the independent wrapper aliases to hide the mismatch.
+- **Resolved in the current checkpoint:** `0xb5ccb0`, `0xb5ccc0`, `0xb5ccd0`. Corrected the actual global vector types and registered their generated destructors together with the existing initializers; the independent wrapper aliases remain unregistered.
 - `0x46ef00`: `Unknown46f1e0` constructor passes alone but has 69 EH-related differences in the full link.
 - `0x6ed660`: region-selection helper passes alone but acquires an EH frame in the full link. Private alias prototypes remove the frame but also lose the `randomRoom` result-pointer spill. Scratch experiments are retained in `scratch/codex_charlie_oct07/`; source unchanged.
 - `0x4dbc40`, `0x4dbd20`: registering descriptor helpers breaks the existing DifficultyType getter's global pairing. Resolve the enum descriptor array/order mismatch before registration (`0xceca80` table base versus getter load at `0xceca88`).
-- `0x87a570`: two dead branch-target differences. `0x65e040`: two stack-slot differences. Both original sources remain unchanged.
+- **Resolved in the current checkpoint:** `0x87a570`, via a new input-handler implementation with the retail dead branch targets. `0x65e040` still has two stack-slot differences; its original source remains unchanged.
 - Current candidate inventory and deferred rows: `scratch/manager_oct07/`; individual proofs: `scratch/codex_alpha_oct07/`, `scratch/codex_bravo_oct07/`, `scratch/codex_charlie_oct07/`, `scratch/codex_delta_oct07/`. 299 game functions remain unmatched; most remaining code bytes are in large bodies.
 
 The sections below retain historical snapshots and may contain superseded workflow advice. Follow current `AGENTS.md` and the checkpoint above.

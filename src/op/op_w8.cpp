@@ -4265,10 +4265,10 @@ void Entity::unknown5d5eb0(vector<HItem> *out, HProp target)
 	}
 }
 
-struct OpW8_Dice	// NOTE: placeholder name
+struct OpW8_Dice	// NOTE: placeholder name (integer-list wrapper)
 {
 	int roll();	// NOTE: placeholder name (0x40c820)
-	char pad00[0x10];
+	vector<int> values;	// +0; retail constructor 0x4588d0, destructor 0x40c960
 };
 OpW8_Dice opw8_cfcd20[10];	// NOTE: placeholder name (defined here so constant-index offsets resolve)
 

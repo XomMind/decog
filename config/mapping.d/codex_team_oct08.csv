@@ -1,0 +1,34 @@
+# Four worker roles, integrated 2026-10-07. Only combined-link MATCH rows.
+# Four lifecycle callback aliases share already-mapped addresses and do not inflate unique-function progress.
+?append_9af460@TeamB_Str@@QAEAAU1@PBD@Z,0x9af460,0x26
+??DTeamB_It9c7ed0@@QBEABDXZ,0x9c7ed0,0x14
+?read@?$TeamB_Array2D@VOpR1F_ColorProp461b70@@@@QAEXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9d29d0,0x10a
+?resize@?$TeamB_Array2D@VOpR1F_ColorProp461b70@@@@QAEXHHPAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9d2ae0,0x119
+?read@?$TeamB_Array2D@VOpR1F_Style460e50@@@@QAEXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9d2cd0,0x10a
+?resize@?$TeamB_Array2D@VOpR1F_Style460e50@@@@QAEXHHPAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x9d2de0,0x119
+?contains_9e2970@TeamB_World9e2970@@QAE_NPAV?$vector@UTeamB_H9e2970@@V?$allocator@UTeamB_H9e2970@@@std@@@std@@UTeamB_H9e2970@@@Z,0x9e2970,0x39
+??0TeamB_Room9e7420@@QAE@ABU0@@Z,0x9e7420,0xe2
+?Reserve@?$TeamB_RepeatedField@H@@QAEXH@Z,0x9ecac0,0x209
+?fill@OpX5F_PointGrid@@QAEXUPoint@@@Z,0x9ed6e0,0x49
+??$TeamB_MergeFrom_9f67d0@VTypeHandler@?$RepeatedPtrField@VRoute_Entry@Protobuf@@@protobuf@google@@@RepeatedPtrFieldBase@internal@protobuf@google@@QAEXABV0123@@Z,0x9f67d0,0xdc
+??GTeamB_ItA04300@@QBEHABUTeamB_CItA04300@@@Z,0xa04300,0x23
+??__Evec_d1d45c@@YAXXZ,0xb23d30,0x1c
+??__Fvec_d1d45c@@YAXXZ,0xb5cb50,0xf
+TB8Entity::regenerate_63d700,0x63d700,0x191
+TeamOct08Charlie_Upgrades::inputAscii87a570,0x87a570,0x17d
+TeamOct08CharlieGrid::clear9cf020,0x9cf020,0x30
+?push_back@?$vector@UTeamOct08CharlieE16@@V?$allocator@UTeamOct08CharlieE16@@@std@@@std@@QAEXABUTeamOct08CharlieE16@@@Z,0x9b5120,0xfa
+TeamOct08CharlieString::append9af410,0x9af410,0x1c
+TeamOct08CharlieString::assign9af390,0x9af390,0x19
+TeamOct08CharlieString::append9af3d0,0x9af3d0,0x19
+??__Fvec_d2d4f4@@YAXXZ,0xb5ccb0,0xf
+??__Fvec_d2d4c8@@YAXXZ,0xb5ccc0,0xf
+??__Fvec_d2ed08@@YAXXZ,0xb5ccd0,0xf
+??0?$Array2D@UXCell@@@@QAE@XZ,0x9d2670,0x2b
+??1?$Array2D@UXCell@@@@QAE@XZ,0x9cec20,0x23
+??0OpW8_Dice@@QAE@XZ,0x4588d0,0x16
+??1OpW8_Dice@@QAE@XZ,0x40c960,0x13
+??__Earr_d201c8@@YAXXZ,0xb54700,0x2a
+??__Farr_d201c8@@YAXXZ,0xb5f390,0x18
+??__Eopw8_cfcd20@@YAXXZ,0xb2cd80,0x2a
+??__Fopw8_cfcd20@@YAXXZ,0xb5d370,0x18

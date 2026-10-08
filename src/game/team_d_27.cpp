@@ -72,7 +72,7 @@ struct DijkstraCost27 { int unknown00; };	// NOTE: placeholder name
 extern DijkstraCost27 dijkstraCost_cefd1c;	// NOTE: placeholder name
 extern DijkstraCost27 dijkstraCost_d1e1dc;	// NOTE: placeholder name
 extern vector<Point> dijkstraCells_d15e58;	// NOTE: placeholder name
-extern vector<unsigned int> vec_d2d4f4;	// NOTE: placeholder type (a copy of the Dijkstra cells)
+extern vector<Point> vec_d2d4f4;	// NOTE: placeholder name (a copy of the Dijkstra cells)
 extern bool flag_cefb15;	// NOTE: placeholder name
 extern Cartographer2DMoveCost *moveCost_cefc30;	// NOTE: placeholder name
 
@@ -120,7 +120,7 @@ bool EntityAI::unknown5b9860()
 		{
 			cartographer_cfe568.unknown40ca20(loc,(unknown60 ? 3 : 3) * 2 + 2,&dijkstraCost_cefd1c,&maxRange);
 			if (flag_cefb15)
-				(vector<Point> &)vec_d2d4f4 = dijkstraCells_d15e58;
+				vec_d2d4f4 = dijkstraCells_d15e58;
 		}
 		else
 			cartographer_cfe568.unknown40ca20(loc,(unknown60 ? 3 : 3) * 2 + 2,&dijkstraCost_d1e1dc,&maxRange);

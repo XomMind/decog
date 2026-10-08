@@ -10,10 +10,12 @@ struct XCell;	// NOTE: placeholder layout
 template <class T>
 class Array2D	// NOTE: placeholder name
 {
-	int	pad[3];
+	int width;
+	int height;
+	T *cells;
 public:
-	Array2D();
-	~Array2D();
+	Array2D() { height = 0; width = 0; cells = 0; }
+	~Array2D() { delete[] cells; }
 };
 
 struct RNG
