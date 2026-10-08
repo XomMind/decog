@@ -1,5 +1,30 @@
 # Handoff (2026-10-08)
 
+## Isolated protobuf bulk matching (2026-10-08)
+
+User authorized a separate protobuf rebuild/discovery pass, not resumption of the game integration loop. New tools: `tools/protobuf_build.py` and `tools/protobuf_discover.py`. The builder compiles all 80 runtime sources from the upstream CMake lists with VS2010 SP1 16.00.40219.01, `/MD /EHsc /GS /DNDEBUG /DWIN32 /D_WINDOWS`, without `/GL` or LTCG. Retail source spelling `..\protobuf-3.5.1\src\...` and the absolute header include root are preserved. It archives real objects into `protobuf.lib` and links an inspection-only `/NOENTRY` DLL; there are no dependency stubs.
+
+| Profile | Verified distinct retail bodies | Bytes |
+| --- | ---: | ---: |
+| `/O2` | 111 | 7,208 |
+| `/O2 /Oy-` | 1,185 | 248,812 |
+
+Retained builds: `build/protobuf_o2_v2/` and `build/protobuf_o2_fp_v2/`. Candidate rows: `scratch/protobuf_bulk/o2.csv` and `scratch/protobuf_bulk/o2_fp.csv`; adjacent `.report.json` and `.verification.json` preserve discovery evidence and shared-context verification. Both sets reverified with zero errors/conflicts. The original string hash at `0xa04ca0` is included under its real `stdext::hash_compare<const char *, google::protobuf::CstringLess>` specialization.
+
+Reproduce the winning configuration:
+
+```sh
+.venv/bin/python tools/protobuf_build.py build/protobuf_o2_fp --profile o2-fp --jobs 2
+.venv/bin/python tools/protobuf_discover.py build/protobuf_o2_fp --out scratch/protobuf_bulk/o2_fp.csv
+.venv/bin/python tools/protobuf_discover.py build/protobuf_o2_fp --verify scratch/protobuf_bulk/o2_fp.csv
+```
+
+Discovery compares complete instruction bytes with the existing verifier's address-relocation semantics, adds optimized starts from direct calls/padding/non-code pointers, rolls back trial pairings, and excludes ambiguity and all conflicting candidates. These are byte-equivalence candidates, not proof of unique original overload identity or recursive correctness of every referenced target/data object. The winning pass excludes 1,095 ambiguous source symbols and 2,469 otherwise unique but conflicting source candidates, including possible ICF aliases; do not count these as matches.
+
+Actual Windows runtime smoke linked against the winning static archive passed DescriptorProto serialization/parsing, descriptor reflection, and repeated-field clearing (31 serialized bytes); executable retained as `build/protobuf_o2_fp_v2/smoke.exe`. A deliberately truncated candidate was rejected. The builder also rejected `build/full` and a shell-metacharacter output path before building.
+
+No bulk rows were installed in `config/mapping.d`, and no game full build was run: the existing game pipeline compiles `/Od /GL` sources and does not consume this separate optimized library. Keep these rows tied to their private DLL/map until an explicitly coordinated library-integration gate proves old game mappings plus the new library mappings. Bulk research claim `0xa044d0` was released. Earlier failed quoting/platform-define builds are diagnostic artifacts, not accepted builds.
+
 ## Paused for Claude takeover (2026-10-08)
 
 The user explicitly paused the matching loop. Workers have stopped; do not resume automatically. Latest code commit is `22b1b74`, preceded by `8486655`. Batch29 finished completely: **32,252/32,252 MATCH, zero DIFF; 12,909/13,016 functions, 54.79552394%, 3,598,290/6,566,759 bytes; 107 functions remain**. The full DLL/map, registered gate, source hashes and actual progress delta are verified. No full build is active. No pending candidate has been installed into src/config. This section is a documentation-only handoff; the following checkpoint remains the verified source baseline.
