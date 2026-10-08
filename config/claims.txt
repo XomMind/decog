@@ -1,7 +1,6 @@
 # Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
 # remove the line in the commit that maps the function (or when abandoning it).
 # va        size    name / what                       owner   date
-0x4243e0    0x16d0  REX::loadFonts                    claude  2026-10-08
 0x42f5e0    0x22e6  XFontSet::init                    alex-alpha 2026-10-08
 0x665fd0    0x3904  STrapTrigger effect switch        alex-bravo 2026-10-08
 0x794da0    0x30ba  prelearn counterpart (18-way switch) alex-charlie 2026-10-08
