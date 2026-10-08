@@ -6,3 +6,5 @@ BV13Operation::complete_65a260,0x65a260,0x1ea3
 BS::factory_6ead20,0x6ead20,0x2388
 ??1?$OpR5h_WL@H@@QAE@XZ,0x700dd0,0x56
 BS::dsf_6e68d0,0x6e68d0,0x29a0
+STrapTrigger::unknown665fd0,0x665fd0,0x3904
+BS::placeMachine,0x6c70a0,0x2816

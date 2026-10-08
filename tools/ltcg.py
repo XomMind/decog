@@ -41,6 +41,12 @@ def main(outdir, srcs):
             shown = [l for l in out.splitlines() if l.strip() and not NOISE.match(l.strip())]
             if shown: print('\n'.join(shown), flush=True)
             if rc != 0 or not os.path.exists(obj): failed.append(source)
+    # A source deleted while the build ran (an agent removed its draft) is skipped, not fatal.
+    vanished = [s for s in failed if not os.path.exists(s)]
+    if vanished:
+        print('Skipping sources deleted during the build: ' + ' '.join(vanished), flush=True)
+        failed = [s for s in failed if s not in vanished]
+        objs = [o for s, o in zip(srcs, objs) if s not in vanished]
     if failed:
         print('Build failed; no partial link: ' + ' '.join(failed)); return 1
     stub = os.path.join(outdir, 'stubs.obj')
