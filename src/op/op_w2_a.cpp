@@ -16,6 +16,11 @@ struct Point
 	Point &operator=(const Point &p) throw();
 	bool operator==(const Point &p) const throw();		// 0x409b90
 	bool operator!=(const Point &p) const throw();		// 0x409bd0
+	// Private names for the operators above, used by unknown718430: the real operators are undefined
+	// (stubbed) in the full link and declared without throw() elsewhere, which would give it EH states.
+	Point &assign_w2a(const Point &p) throw();			// NOTE: = operator= (0x46ca50)
+	bool equals_w2a(const Point &p) const throw();		// NOTE: = operator== (0x409b90)
+	bool differs_w2a(const Point &p) const throw();		// NOTE: = operator!= (0x409bd0)
 };
 
 class Bresenham2DStepperSubcell
@@ -23,7 +28,7 @@ class Bresenham2DStepperSubcell
 public:
 	Bresenham2DStepperSubcell(const Point &fromCell, const Point &fromSubcell, const Point &toCell, const Point &toSubcell, int subcells_) throw();
 	virtual ~Bresenham2DStepperSubcell() throw();
-	bool next(Point &cell, Point &subcell) throw();		// NOTE: placeholder name
+	bool next_w2a(Point &cell, Point &subcell) throw();		// NOTE: placeholder name (0x410420 Bresenham2DStepperSubcell::next; private name: the real inline next calls Point::set, which is not provably nothrow in the full link)
 
 	int		p04, p08, p0c, p10, p14, p18, p1c, p20, p24, p28, p2c;
 };
@@ -37,7 +42,9 @@ class Array2D	// NOTE: placeholder name
 
 public:
 	T &operator()(const Point &p) throw();
+	T &at_w2a(const Point &p) throw();	// NOTE: private name for operator() (see Point::assign_w2a)
 	bool contains(const Point &p) throw();	// NOTE: placeholder name (0x9b43b0)
+	bool contains_w2a(const Point &p) throw();	// NOTE: private name for contains (see Point::assign_w2a)
 };
 
 class OpW2B_Grid	// NOTE: placeholder name
@@ -63,8 +70,10 @@ public:
 	bool isNull() const;
 	void reset();					// NOTE: placeholder name (0x9b7270)
 	bool isValid() const throw();
+	bool isValid_w2a() const throw();	// NOTE: private name for HEntity::isValid (see unknown718430)
 	bool operator==(HEntity other) const throw();
 	Entity *operator->() const throw();		// 0x9b6570
+	Entity *get_w2a() const throw();		// NOTE: private name for operator-> (0x9b6570), see unknown718430
 };
 
 class HProp
@@ -121,6 +130,7 @@ class Entity
 public:
 	int unknown45a320() throw();		// NOTE: placeholder name
 	const Point &getPosition() throw();	// 0x45a4a0
+	const Point &getPosition_w2a() throw();	// NOTE: private name for getPosition (0x45a4a0); the real one is not provably nothrow in the full link
 	Point unknown5c80f0(const Point &p);	// NOTE: placeholder name
 	bool unknown45a510(const Point &p);	// NOTE: placeholder name
 	bool isPlayer();
@@ -157,10 +167,11 @@ public:
 class Cell
 {
 public:
-	bool unknown45d480() throw();	// NOTE: placeholder name
+	bool unknown45d480_w2a() throw();	// NOTE: placeholder name (0x45d480; private name: the real Cell::unknown45d480 is not provably nothrow in the full link)
 	bool isOpen();					// NOTE: placeholder name (0x4550b0)
 	HProp getProp() throw();		// 0x45d550
 	HEntity getEntity() throw();	// 0x45d250
+	HEntity getEntity_w2a() throw();	// NOTE: private name for getEntity (0x45d250), see unknown718430
 };
 
 extern Array2D<Cell *>	cells;				// NOTE: placeholder name (0xcfd44c)
@@ -185,6 +196,7 @@ extern const float		opw2_b96370;		// NOTE: placeholder name
 extern const float		opw2_b95a3c;		// NOTE: placeholder name
 extern const double		opw2_c36f08;		// NOTE: placeholder name (120.0)
 int opw2_distance(const Point &a, const Point &b) throw();	// NOTE: placeholder name (0x40a3f0)
+int opw2_distance_w2a(const Point &a, const Point &b) throw();	// NOTE: private name for opw2_distance (see Point::assign_w2a)
 int opw2_maxInt(int a, int b);		// NOTE: placeholder name (0x9cdb60)
 float maxf(float a, float b);
 void opw2_eraseAt(vector<HEntity> *v, int *i);	// NOTE: placeholder name (0x9d6440)
@@ -225,9 +237,9 @@ bool BS::unknown7178d0(HEntity e, const Point &from, const Point &fromSub, const
 	Point subPoint;
 	Bresenham2DStepperSubcell line(from, fromSub, to, toSub, 9);
 	Point lastPos = from;
-	line.next(here, subPoint);
+	line.next_w2a(here, subPoint);
 	while (here == from)
-		line.next(here, subPoint);
+		line.next_w2a(here, subPoint);
 	OpW2B_Grid *visible = 0;
 	int stamp;
 	if (e == target)
@@ -239,7 +251,7 @@ bool BS::unknown7178d0(HEntity e, const Point &from, const Point &fromSub, const
 	int check;
 	do
 	{
-		line.next(here, subPoint);
+		line.next_w2a(here, subPoint);
 		if (lastPos != here)
 		{
 			if (here == to)
@@ -247,7 +259,7 @@ bool BS::unknown7178d0(HEntity e, const Point &from, const Point &fromSub, const
 			check = 0;
 			if (visible && ((useSeen && seen(here) == 0) || (!useSeen && (*visible)(here) != stamp)))
 				type = 0;
-			else if (cells(here)->unknown45d480())
+			else if (cells(here)->unknown45d480_w2a())
 			{
 				type = 0;
 				return false;
@@ -286,27 +298,27 @@ float BS::unknown718430(HEntity e, const Point &p, vector<float> *breakdown, int
 		Point time;
 		Point chance;
 		Bresenham2DStepperSubcell bot(entries, effectOrigin, size, effectOrigin, 9);
-		time = entries;
-		bot.next(chance, ret);
-		while (chance == entries)
-			bot.next(chance, ret);
-		while (!bot.next(chance, ret))
+		time.assign_w2a(entries);
+		bot.next_w2a(chance, ret);
+		while (chance.equals_w2a(entries))
+			bot.next_w2a(chance, ret);
+		while (!bot.next_w2a(chance, ret))
 		{
-			if (time != chance)
+			if (time.differs_w2a(chance))
 			{
-				if (!cells.contains(chance))
+				if (!cells.contains_w2a(chance))
 				{
 					chance.x = -1;
 					break;
 				}
-				if (cells(chance)->getEntity().isValid() || cells(chance)->unknown45d480())
+				if (cells.at_w2a(chance)->getEntity_w2a().isValid_w2a() || cells.at_w2a(chance)->unknown45d480_w2a())
 				{
-					size = chance;
+					size.assign_w2a(chance);
 					break;
 				}
-				if (range && opw2_distance(e->getPosition(), chance) >= range)
+				if (range && opw2_distance_w2a(e.get_w2a()->getPosition_w2a(), chance) >= range)
 					break;
-				time = chance;
+				time.assign_w2a(chance);
 			}
 		}
 	}

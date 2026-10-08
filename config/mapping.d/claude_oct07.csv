@@ -11,3 +11,4 @@ CEvasionFull::trigger,0x888e90,0xab4
 ??4?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@ABV01@@Z,0x9af370,0x19
 CGameoverOverlay::update,0x7bc900,0x136c
 CTextInput::inputAscii,0x7b0b00,0xb60
+BS::unknown718430,0x718430,0x165c
