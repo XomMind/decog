@@ -1,0 +1,11 @@
+# charlie2: verified with tools/lvx.py on build/full (32292/32292 match); sources src/util/charlie2_01..10.cpp
+D44Lore::input7e93b0,0x7e93b0,0x1c29
+C2PlayerData::reset779af0,0x779af0,0x19a2
+CAchievements::inputAscii,0x7eed40,0x1fce
+C2BS::spawnSquads73e5c0,0x73e5c0,0x1d3b
+C2WBS::warStaging73acc0,0x73acc0,0x1a8a
+GM::initialize,0x789c30,0x1b69
+prelearnData,0x797e60,0x21ea
+C2IPartInfo::draw88bab0,0x88bab0,0x25bc
+C2XBS::update774b70,0x774b70,0x261c
+CScan::load,0x884f60,0x25d8

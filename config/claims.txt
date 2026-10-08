@@ -19,3 +19,5 @@
 0x8680b0    0x6258  CMap intel markers (0x83dfa0 callee) claude  2026-10-08
 0x81a8e0    0x64d2  debug command parser (GOTO/EVOLVE) claude  2026-10-08
 0x6927e0    0x6f38  Unchained/X0-1V1 turnUpdate callee claude  2026-10-08
+0x65f520    0x51c2  Prop destroy/garrison/hub handler alex-golf 2026-10-08
+0x9471d0    0xca98  0x9471d0 (51 KB)                  alex-delta 2026-10-08

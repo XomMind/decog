@@ -44,6 +44,10 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
    which keeps names unique and lets `lverify` pair placeholder globals with their exe address.
 4. Mark guesses: `// NOTE: placeholder name` / `// NOTE: placeholder layout`.
 5. Never commit `resources/*.exe` or anything from `dls/`.
+6. Claim before you start: `.venv/bin/python tools/claim.py claim <va> <owner> "<what>"` pushes a line to the shared
+   `config/claims.txt` on origin (other people work on this repo too). If it says the VA is claimed or already mapped,
+   pick something else. Release a claim you abandon with `tools/claim.py release <va>`; claims of matched functions are
+   released automatically after the integration push. `tools/claim.py list` shows all claims.
 
 ## Matching tips (`/Od`)
 - Code gen is literal: the order of statements, temporaries, `for` vs `while`, `++i` vs `i++` on iterators,
@@ -106,6 +110,11 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - In a scope holding a /GS buffer (any std::string), scalars are split around it by name bucket: buckets lower than
   the buffer's sit above the cookie, higher ones below the string.
 - Never create symlinks under `src/` (sources.py follows them recursively).
+- `new` whose result is pushed via an extra copy slot with no EH state: `v.push_back(static_cast<T*&&>(new X(...)))`.
+  A global string array element passed by value gets the pre-loaded address only at a non-zero index (`arr[1]`).
+  Frame-offset-insensitive diffing and offset->local-name helpers: `scratch/delta2/tools/` (sdiff.py, offmap.py, chk.sh).
+- Checking whether a VA is already matched: grep mapping rows only (`git grep -h ",<va>," origin/main -- config/mapping.d`);
+  `config/names.csv` lists named-but-unmatched functions and gives false positives.
 - A template instance over a type that other files define differently (e.g. XColor) can silently use another
   file's copy; give such instances private element types.
 
