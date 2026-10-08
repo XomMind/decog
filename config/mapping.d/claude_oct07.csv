@@ -37,3 +37,4 @@ OpMS_View::shift_872ef0,0x872ef0,0xb5f
 OpUE_CMap::useExit_825e00,0x825e00,0xb16
 XInput::handleEvent_427320,0x427320,0xb54
 Overmind::unknown6827d0,0x6827d0,0xb3a
+Overmind::unknown684250,0x684250,0x9e6
