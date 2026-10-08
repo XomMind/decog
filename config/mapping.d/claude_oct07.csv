@@ -29,3 +29,4 @@ EntityAI::EntityAI,0x57f6a0,0x90a
 CLore::unknown7eafe0,0x7eafe0,0x9c7
 CLore::unknown7ebd60,0x7ebd60,0xad4
 opCS_openCogshop_8779a0,0x8779a0,0xa37
+CSigixExoskeleton::render,0x8932a0,0x9cf
