@@ -1,0 +1,9 @@
+# Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
+# remove the line in the commit that maps the function (or when abandoning it).
+# va        size    name / what                       owner   date
+0x4243e0    0x16d0  REX::loadFonts                    claude  2026-10-08
+0x4884c0    0x1760  uploadScore (Scorekeeper)         claude  2026-10-08
+0x6ff590    0x1840  BS garrison setup (BS::initilize) claude  2026-10-08
+0x64fb40    0x18b0  SEntityShoot volley               claude  2026-10-08
+0x779af0    0x19b0  GM::readyGame difficulty setup    claude  2026-10-08
+0x5fdd30    0x19d0  Entity trap/scan (takeDamage)     claude  2026-10-08
