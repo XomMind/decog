@@ -1,6 +1,15 @@
 # Handoff (2026-10-08)
 
-## Latest verified loop checkpoint (2026-10-08, ninth combined loop source batch)
+## Latest verified loop checkpoint (2026-10-08, tenth combined loop source batch)
+
+- **12,840 / 13,016 game functions; 50.126% code matched.** Four unique matches add 13,124 bytes over `2de1bfa`; 176 functions remain. Code totals: 3,291,632 / 6,566,759 bytes. Verified code coverage has passed fifty percent.
+- **32,157 / 32,157 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_10.log`; candidate gate: `build/manager_loop_source_lvx_10.log`; registered proof: `build/manager_loop_source_registered_10.log`. Four frozen source hashes verified before commit. Raw 4 KiB-slot and code-aware audits report zero interior-stub operands (`build/manager_loop_source_audit_10.log`, `build/manager_loop_source_code_audit_10.log`).
+- Four new TUs reconstruct Exiles incidents, core-damage aftermath, multi-goal pathfinding and obliterator response. Corrected installation copies use the actual chase record-pointer return/int/bool-pointer arguments and canonical RNG declaration. Path callback cost output is an integer reference; its mutable goal/output vectors and bool return are established by all five wrapper callers. Existing raw wrapper source remains untouched and its direct relative-call binding passes the full gate.
+- Independent exact-source reviews include `scratch/loop_charlie_11/review.md`, `scratch/loop_bravo_19/CORE_REVIEW_CORRECTION.md` and `scratch/loop_delta_22/reviews.md`. Actual handle/vector buffer ownership, twelve-state string cleanup, nullable Point destinations, Item damage return/arguments and copied AI route are preserved. Static binary proofs do not establish full class semantics or game-runtime behavior.
+- A subsequent Prop audit identifies the obliterator damage helper's first/third slots as bool rather than the current opaque int annotations. This caller passes literal zero in both slots, so emitted argument bits and the verified callee ABI already agree; a type-only installation correction is queued for fresh isolated proof and the next full build. Current commit preserves the exact frozen source of this all-MATCH artifact.
+- The authorized loop continues with Prop damage, item turn effects and a news/score response parser. Genuine news constructor/deleting-helper bodies contribute covered aliases only, not new byte counts. Manager continues serialized freezes, full-context gates, registered verification and commits; near-miss Manual90a360 and destination path40f310 remain scratch-only.
+
+## Previous verified loop checkpoint (2026-10-08, ninth combined loop source batch)
 
 - **12,836 / 13,016 game functions; 49.926% code matched.** Nine unique matches add 29,020 bytes over `633d885`; 180 functions remain. Code totals: 3,278,508 / 6,566,759 bytes.
 - **32,153 / 32,153 comparisons MATCH, zero DIFF.** Repaired full compile/link: `build/manager_loop_source_full_09_repaired.log`; candidate gate: `build/manager_loop_source_lvx_09_repaired.log`; registered proof: `build/manager_loop_source_registered_09.log`. Nine frozen source hashes verified before commit. Raw 4 KiB-slot and code-aware audits report zero interior-stub operands (`build/manager_loop_source_audit_09_repaired.log`, `build/manager_loop_source_code_audit_09_repaired.log`).
