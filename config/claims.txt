@@ -6,3 +6,4 @@
 0x8b5250    0x36a72 CInfo::trigger (224 KB)           alex-tango 2026-10-08
 0x51da30    0x3eed0 BS::turnUpdate_51da30 (258 KB)    alex-uniform 2026-10-08
 0x6516b0    0x7380  SEntityShoot::update (from Heni's draft) alex-xray 2026-10-08
+0x6430b0    0xa5ac  Entity::equipPart (from Heni's draft) alex-yankee 2026-10-08
