@@ -1,13 +1,8 @@
 # Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
 # remove the line in the commit that maps the function (or when abandoning it).
 # va        size    name / what                       owner   date
-0x42f5e0    0x22e6  XFontSet::init                    alex-alpha 2026-10-08
-0x665fd0    0x3904  STrapTrigger effect switch        alex-bravo 2026-10-08
-0x794da0    0x30ba  prelearn counterpart (18-way switch) alex-charlie 2026-10-08
 0x8ec880    0x75cf  CInfoCompare::trigger             alex-delta 2026-10-08
 0x6f1e90    0xadc4  BS::placeRandomEncounter          alex-echo 2026-10-08
-0x6c70a0    0x2816  BS::placeMachine (matched in try.sh) alex-bravo 2026-10-08
-0x7ad6a0    0x2b58  charlie2 round 2                  alex-charlie 2026-10-08
 0x884f60    0x25d8  CScan::load                       claude  2026-10-08
 0x5c4640    0x2744  Entity::init                      claude  2026-10-08
 0x42a5b0    0x2d10  XConsole::blit                    claude  2026-10-08
