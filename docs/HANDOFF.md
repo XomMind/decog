@@ -1,6 +1,15 @@
 # Handoff (2026-10-07)
 
-## Latest verified loop checkpoint (2026-10-07, existing-source helpers)
+## Latest verified loop checkpoint (2026-10-07, combined source batch)
+
+- **12,766 / 13,016 game functions; 47.695% code matched.** This checkpoint adds 17 unique matches and 4,497 matched bytes over `91ac2fd`; 250 functions remain. Three additional rows are genuine constructor/destructor aliases at previously mapped addresses.
+- **32,291 / 32,291 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_01.log`; retained candidate gate: `build/manager_loop_source_lvx_01_retained.log`; registered proof: `build/manager_loop_source_registered_01.log`. Candidate audit reports 4 KiB slots and zero matching rows with interior-stub operands (`build/manager_loop_source_audit_01_retained.log`). The four verifier regression checks passed.
+- Eleven new translation units reconstruct record construction with real private unsigned-vector array callbacks, ambient source collection, line obstruction, item destruction, AI reset, bit-vector insertion, sort/insertion wrappers, and protobuf once/static helpers. The existing Point range formatter is registered through its actual demangled symbol. Private aliases resolve the previously deferred `0x46ef00`, `0x4ff4c0`, and `0x9c35b0` full-link mismatches without editing earlier sources.
+- Two proven non-prologue successor helpers (`0xb5c720`, `0xb5c8d0`) add genuine indexed starts and separate two once initializers. The function denominator increases by two and 26 bytes of inter-function padding leave the code denominator. No verifier/index overrides were introduced. Optimized retail protobuf helper bodies use scoped optimize pragmas, reset at each new TU's end.
+- Deferred registrations: existing `OpS4_Xom::unknown69e700` and `BS::opw3_unknown729bc0` gain EH frames in the combined link; existing `gameString_d34d1c` cleanup compiles as a direct destructor instead of the retail array cleanup helper. Their rows were excluded and the entire retained gate rerun; original sources remain intact. Initial diagnostic gate: `build/manager_loop_source_lvx_01.log`.
+- Matching work continues in scratch-only worker loops while manager verifies and commits frozen source batches. The next separate metadata gate will audit 209 inherited descriptor aliases incorrectly pointing to the MapType getter at `0x4dbda0`; evidence and exact proposed exclusions are in `scratch/loop_alpha_02/descriptor_audit.md`. These static checks do not claim game-runtime acceptance.
+
+## Previous verified loop checkpoint (2026-10-07, existing-source helpers)
 
 - **12,749 / 13,014 game functions; 47.626% code matched.** Four newly registered existing-source helpers add 1,031 bytes over `9ea69ef`; 265 game functions remain. The fifth row is a Point-constructor callback alias at an already-mapped address.
 - **32,271 / 32,271 comparisons MATCH, zero DIFF**, using the prior verified full artifact. Candidate gate: `build/manager_loop_mapping_only_01.log`; registered proof: `build/manager_loop_mapping_only_01_registered.log`; audit: `build/manager_loop_mapping_only_01_audit.log` (4 KiB slots, zero interior-stub operands).
