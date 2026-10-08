@@ -16,3 +16,4 @@
 0x5826b0    0x305f0 EntityAI::takeTurn (198 KB)       alex-sierra 2026-10-08
 0xa04d10    0x12    protobuf repeated-field accessor IsEmpty codex-hash-oct08 2026-10-08
 0x8b5250    0x36a72 CInfo::trigger (224 KB)           alex-tango 2026-10-08
+0xb5c730    0x8a    Status msg dynamic inits b5c730/b5c7c0 claude  2026-10-08
