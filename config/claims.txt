@@ -1,7 +1,6 @@
 # Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
 # remove the line in the commit that maps the function (or when abandoning it).
 # va        size    name / what                       owner   date
-0x4243e0    0x16d0  REX::loadFonts                    claude  2026-10-08
 0x42f5e0    0x22e6  XFontSet::init                    alex-alpha 2026-10-08
 0x665fd0    0x3904  STrapTrigger effect switch        alex-bravo 2026-10-08
 0x794da0    0x30ba  prelearn counterpart (18-way switch) alex-charlie 2026-10-08
@@ -14,8 +13,14 @@
 0x42a5b0    0x2d10  XConsole::blit                    claude  2026-10-08
 0x86f9c0    0x32b4  D40Map::collect86e310 callee      claude  2026-10-08
 0x784410    0x3300  GM::readyGame seeds/world setup   claude  2026-10-08
-0xb5c730    0x8a    string-assign thunk (no callers)  claude  2026-10-08
-0xb5c7c0    0x8a    string-assign thunk (no callers)  claude  2026-10-08
 0x900920    0x8f18  CShell command handler            alex-delta 2026-10-08
 0x89d970    0x3398  CParts::input                     alex-foxtrot 2026-10-08
 0x7d2030    0x3c40  charlie2 round 2                  alex-charlie 2026-10-08
+0x63d8a0    0x4900  Entity::move                      claude  2026-10-08
+0x7ffee0    0x513c  CMap::update                      claude  2026-10-08
+0x808de0    0x52f4  CMap anim (activateItem callee)   claude  2026-10-08
+0x954b10    0x5a7e  teamb_create95a640 callee (bosses) claude  2026-10-08
+0x93ad00    0x5dcd  CHack window build                claude  2026-10-08
+0x8680b0    0x6258  CMap intel markers (0x83dfa0 callee) claude  2026-10-08
+0x81a8e0    0x64d2  debug command parser (GOTO/EVOLVE) claude  2026-10-08
+0x6927e0    0x6f38  Unchained/X0-1V1 turnUpdate callee claude  2026-10-08
