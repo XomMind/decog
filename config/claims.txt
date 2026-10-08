@@ -18,3 +18,4 @@
 0x675100    0xc448  next giant                        alex-echo 2026-10-08
 0x633790    0x42bc  Entity::die                       claude  2026-10-08
 0x6516b0    0x7380  SEntityShoot::update              claude  2026-10-08
+0x7c6d30    0x94a8  CCommands::open                   claude  2026-10-08
