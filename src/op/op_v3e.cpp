@@ -425,6 +425,7 @@ CAchievements::CAchievements()
 
 void CAchievements::unknown7f1120()
 {
+	OpV3e_AchievementDef *p;
 	unknown80.clear();
 	for (unsigned int i = 0; i < unknown90.size(); i++)
 	{
@@ -435,7 +436,8 @@ void CAchievements::unknown7f1120()
 	vector<int> filtered;
 	for (int i = 0; i < unknown70.size(); i++)
 	{
-		if (opV3e_achievementCategories[opV3e_achievementRecs[i]->category])
+		p = opV3e_achievementRecs[i];
+		if (opV3e_achievementCategories[p->category])
 		{
 			if (opV3e_achievementState_d28d84 == 2 || (opV3e_achievementState_d28d84 == 0 && unknown70[i] != NULL) || (opV3e_achievementState_d28d84 == 1 && unknown70[i] == NULL))
 				filtered.push_back(i);

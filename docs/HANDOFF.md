@@ -1,6 +1,15 @@
 # Handoff (2026-10-07)
 
-## Latest verified loop checkpoint (2026-10-07, second combined loop source batch)
+## Latest verified loop checkpoint (2026-10-07, third combined loop source batch)
+
+- **12,786 / 13,016 game functions; 47.952% code matched.** Eight unique matches add 10,419 bytes over `347479e`; 230 functions remain. Code totals: 3,148,914 / 6,566,759 bytes.
+- **32,102 / 32,102 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_03.log`; candidate gate: `build/manager_loop_source_lvx_03.log`; registered proof: `build/manager_loop_source_registered_03.log`. Candidate audit reports zero interior-stub operands with 4 KiB slots (`build/manager_loop_source_audit_03.log`). Frozen eight-file hashes checked before commit.
+- Seven new TUs reconstruct cave generation, CList construction, sensor detection, text marker replacement, group removal, message routing, and lore-list scrolling. The group-removal body only calls the reserved Overmind helper; it does not implement or alter reserved code.
+- Coordinated `op_v3e.cpp` change restores the actual local AchievementDef pointer in the achievement sorter at `0x7f1120`. Its existing body and all other registered functions pass the combined gate. Original callback/type declarations remain intact.
+- Charlie's read-only review found no actionable source issues; evidence/limits: `scratch/loop_charlie_03/cycle3_review.md`. Private callee aliases, partial layouts and semantic inference remain documented in source and worker notes. These are static binary reconstruction proofs, not game-runtime acceptance.
+- The authorized loop continues. Isolated next-batch proofs include item replacement selection, phrase routing and EntityAI construction. Color `0x65e040` and region `0x6ed660` still do not pass fresh probes; their experiments remain scratch-only. Wine compiler pipe stalls were handled only within individual scratch probes, without restarting shared Wine or changing repository build tools.
+
+## Previous verified loop checkpoint (2026-10-07, second combined loop source batch)
 
 - **12,778 / 13,016 game functions; 47.794% code matched.** Ten new unique matches add 6,277 bytes over `71d1e5f`; 238 functions remain. Code totals: 3,138,495 / 6,566,759 bytes.
 - **32,094 / 32,094 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_02.log`; candidate gate: `build/manager_loop_source_lvx_02.log`; registered proof: `build/manager_loop_source_registered_02.log`. Candidate audit reports zero interior-stub operands with 4 KiB slots (`build/manager_loop_source_audit_02.log`). Manager checked the ten-file frozen snapshot hashes before commit.
