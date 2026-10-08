@@ -1,7 +1,6 @@
 # Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
 # remove the line in the commit that maps the function (or when abandoning it).
 # va        size    name / what                       owner   date
-0x6927e0    0x6f38  Unchained/X0-1V1 turnUpdate callee claude  2026-10-08
 0x633790    0x42bc  Entity::die                       claude  2026-10-08
 0x6516b0    0x7380  SEntityShoot::update              claude  2026-10-08
 0x7c6d30    0x94a8  CCommands::open                   claude  2026-10-08
