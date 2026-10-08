@@ -138,6 +138,7 @@ class HProp	// NOTE: placeholder layout
 public:
 	HProp();	// 0x9b6590
 	Prop *operator->() const throw();	// 0x9b64f0
+	Prop *get_9b64f0() const throw();	// NOTE: placeholder name (operator-> under a private name, so LTCG keeps this TU's throw())
 	bool operator!=(HProp other) const;	// 0x9b6510
 	bool isValid() const;	// 0x9b7230
 	bool isNull() const;	// 0x9b65d0
@@ -2049,7 +2050,7 @@ void BS::unknown742270(bool flag)
 		return;
 	if (flag)
 	{
-		OpW4_Obj462030 *obj = new OpW4_Obj462030(gate->opW4_unknown44ab40(),opW4_machines[gate->opW4_unknown44ab40()].size(),500);
+		OpW4_Obj462030 *obj = new OpW4_Obj462030(gate.get_9b64f0()->opW4_unknown44ab40(),opW4_machines[gate.get_9b64f0()->opW4_unknown44ab40()].size(),500);
 		obj->unknown8.assign(10u,4);
 		obj->unknown18 = 0x84;
 		obj->unknown1c.set(0x4a,0x36);

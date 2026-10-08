@@ -229,7 +229,10 @@ def _compare(name, theirs, tva, ours, ova, size, verbose):
                 else:   # Compare the complete memory operand; pointer arguments need eight bytes.
                     width = next((op.size for op in a.operands if op.type == capstone.x86.X86_OP_MEM), 8)
                     same = theirs.read(av, width) == ours.read(bv, width)
-                    if not same and not any(op.type == capstone.x86.X86_OP_MEM for op in a.operands):
+                    # The immediate of `mov [mem], imm` counts as a pointer operand too (only the memory
+                    # operand's own displacement keeps the raw-width comparison above).
+                    is_imm = a.imm_size == 4 and off == a.imm_offset
+                    if not same and (is_imm or not any(op.type == capstone.x86.X86_OP_MEM for op in a.operands)):
                         # Unnamed pointer operand into .rdata on both sides that reads as text: a C string
                         # literal, which the linker pools next to unrelated data. Compare through its NUL.
                         tn, on = rdata_text_len(theirs, av), rdata_text_len(ours, bv)

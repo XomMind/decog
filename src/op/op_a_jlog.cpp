@@ -150,6 +150,17 @@ void JLog::init()
 	*file << header << "\n";
 }
 
+// stand-in for LogMsg's constructor (0x410d90): the exe proves it nothrow but keeps the extra result temp of new
+struct LogMsgNew_410d90	// NOTE: placeholder name
+{
+	char pad[0x2c];
+	LogMsgNew_410d90();
+};
+
+LogMsgNew_410d90::LogMsgNew_410d90()
+{
+}
+
 int JLog::log(int level, int type, int indentChange, string message)
 {
 	if (minLevel > level)
@@ -160,7 +171,7 @@ int JLog::log(int level, int type, int indentChange, string message)
 	{
 		case WAIT_OBJECT_0:
 		{
-			LogMsg *msg = new LogMsg();
+			LogMsg *msg = (LogMsg *)new LogMsgNew_410d90();
 			msg->text = message;
 			msg->time = SDL_GetTicks();
 			msg->type = type;
@@ -179,17 +190,9 @@ int JLog::log(int level, int type, int indentChange, string message)
 			}
 
 			if (type < 0)
-			{
-				string time = intToString(msg->time);
-				string thread = intToString(GetCurrentThreadId());
-				*file << "\n[" << padLeft(thread,6,' ') << "] " << gameStrings_d2ad60[msg->level] << padLeft(time,7,'0') << " " << prefix << msg->text;
-			}
+				*file << "\n[" << padLeft(intToString(GetCurrentThreadId()),6,' ') << "] " << gameStrings_d2ad60[msg->level] << padLeft(intToString(msg->time),7,'0') << " " << prefix << msg->text;
 			else
-			{
-				string time = intToString(msg->time);
-				string thread = intToString(GetCurrentThreadId());
-				*file << "\n[" << padLeft(thread,6,' ') << "] " << gameStrings_d2ad60[msg->level] << padLeft(time,7,'0') << " " << prefix << gameStrings_cf6ed8[msg->type];
-			}
+				*file << "\n[" << padLeft(intToString(GetCurrentThreadId()),6,' ') << "] " << gameStrings_d2ad60[msg->level] << padLeft(intToString(msg->time),7,'0') << " " << prefix << gameStrings_cf6ed8[msg->type];
 
 			indent += indentChange;
 			messages.push_back(msg);
@@ -198,10 +201,7 @@ int JLog::log(int level, int type, int indentChange, string message)
 				callback(level);
 
 			if (!ReleaseMutex(mutex))
-			{
-				string thread = intToString(GetCurrentThreadId());
-				*file << "\n[" << padLeft(thread,6,' ') << "] HANDLE ERROR";
-			}
+				*file << "\n[" << padLeft(intToString(GetCurrentThreadId()),6,' ') << "] HANDLE ERROR";
 			return messages.size() - 1;
 		}
 		default: return 0;

@@ -56,3 +56,12 @@ void harness_consoles3()
 	l->cancel();
 	delete l;
 }
+
+// Direct calls keep this TU's IL for these std::string members reading npos from memory (as in the exe):
+// when they are only instantiated through operator+(const char *, string &&) above, npos gets folded to -1.
+void harness_consoles_npos(string &s)
+{
+	s.insert(0,s);
+	s.insert(0,s,0,1);
+	s.insert(0,"",1);
+}

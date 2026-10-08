@@ -8,6 +8,7 @@
 // `throw()` on a declaration stands in for LTCG's nothrow inference (as in consoles/xconsole.h).
 // NOTE: class layouts are partial; names are placeholders unless stated otherwise.
 #include <string>
+#include <ctype.h>
 #include <vector>
 #include "engine/xcolor.h"
 #include "util/rng.h"
@@ -35,6 +36,7 @@ public:
 	int getWidth();
 	int getHeight();
 	T *get(int x, int y);
+	bool inBounds(int x, int y);	// NOTE: placeholder name
 	void deleteContents_9ce5d0() throw();	// NOTE: placeholder name (deletes every element, then the array)
 };
 
@@ -173,6 +175,171 @@ void XConsole::putChar_418150(int x, int y, int ch, XColor fore_, XColor back_, 
 void XConsole::putCell_4181a0(int x, int y, const XCell &cell)
 {
 	*buffer.get(x,y) = cell;
+}
+
+int OpR1b_countVisible(string &text, int pos, int end);	// NOTE: placeholder name (0x4092e0)
+int OpR1b_advanceVisible(string &text, int pos, int count);	// NOTE: placeholder name
+int OpX5_minInt(int a, int b);	// 0x9cdb30
+int OpX5_maxInt(int a, int b);	// 0x9cdb60
+int stringToInt(const string &str);	// NOTE: placeholder name (0x405610)
+extern vector<XColor> cc07_colors_d2b4bc;	// NOTE: placeholder name (` colour codes)
+
+// prints text with `fN` / `bN` / `x colour codes, optionally wrapped at spaces; returns the number of lines
+int XConsole::print_428fb0(string text, int x, int y, int width, int height, int align, bool wrap, bool countOnly)
+{
+	int pos = 0;
+	int sx = 0;
+	int cy = y;
+	XColor old = fore;
+	XColor tmp = back;
+	int tag = backFlag;
+	if (x >= buffer.getWidth() || y >= buffer.getHeight())
+		return 0;
+	if (height == 0)
+		height = buffer.getHeight() - y;
+	if (width == 0)
+	{
+		switch (align)
+		{
+			case 0: width = buffer.getWidth() - x; break;
+			case 2: width = x + 1; break;
+			case 1: width = buffer.getWidth(); break;
+		}
+	}
+	int ty = y;
+	int ey = buffer.getHeight() - 1;
+	if (height > 0)
+		ey = OpX5_minInt(ey,y + height - 1);
+	int left;
+	int u;
+	switch (align)
+	{
+		case 0:
+			left = OpX5_maxInt(0,x);
+			u = OpX5_minInt(buffer.getWidth() - 1,x + width - 1);
+			break;
+		case 2:
+			left = OpX5_maxInt(0,x - width + 1);
+			u = OpX5_minInt(buffer.getWidth() - 1,x);
+			break;
+		case 1:
+			left = OpX5_maxInt(0,x - width / 2);
+			u = OpX5_minInt(buffer.getWidth() - 1,x + width / 2);
+			break;
+	}
+	do
+	{
+		int end = text.find('\n',pos);
+		char first = 0;
+		int part = -1;
+		int range = OpR1b_countVisible(text,pos,end == string::npos ? text.size() : end);
+		switch (align)
+		{
+			case 0: sx = x; break;
+			case 2: sx = x - range + 1; break;
+			case 1: sx = x - range / 2; break;
+		}
+		if (cy >= ty && cy <= ey && sx <= u && sx + range - 1 >= left)
+		{
+			if (wrap && cy < ey)
+			{
+				if (sx < left)
+					part = OpR1b_advanceVisible(text,pos,align == 1 ? range - (left - sx) * 2 : range - (left - sx));
+				else if (align == 1)
+				{
+					if (range / 2 + sx > u + 1)
+						part = OpR1b_advanceVisible(text,pos,u + 1 - sx);
+				}
+				else if (sx + range > u + 1)
+					part = OpR1b_advanceVisible(text,pos,u + 1 - sx);
+			}
+			if (part != -1)
+			{
+				int orig = part;
+				while (!isspace(text[part]) && part > pos)
+					part--;
+				if (end != string::npos)
+					text[end] = '\n';
+				if (!isspace(text[part]))
+					part = orig;
+				end = part;
+				first = text[part];
+				part = 0;
+				range = OpR1b_countVisible(text,pos,end);
+				switch (align)
+				{
+					case 0: sx = x; break;
+					case 2: sx = x - range + 1; break;
+					case 1: sx = x - range / 2; break;
+				}
+			}
+			if (sx < left)
+			{
+				pos += left - sx;
+				range -= left - sx;
+				sx = left;
+			}
+			if (sx + range > u + 1)
+			{
+				part = OpR1b_advanceVisible(text,pos,u + 1 - sx);
+				part = -1;
+			}
+			if (cy >= 0 && cy < buffer.getHeight())
+			while (pos < text.size() && pos != end)
+			{
+				if (text[pos] == '`')
+				{
+					pos++;
+					if (text[pos] == 'x')
+					{
+						fore = old;
+						back = tmp;
+						backFlag = tag;
+						pos++;
+					}
+					else
+					{
+						bool isFore = text[pos] == 'f';
+						pos++;
+						string code;
+						while (text[pos] != '`')
+						{
+							code += text[pos];
+							pos++;
+						}
+						if (isFore)
+							fore = cc07_colors_d2b4bc[stringToInt(code)];
+						else
+						{
+							back = cc07_colors_d2b4bc[stringToInt(code)];
+							backFlag = 1;
+						}
+					}
+				}
+				else if (!countOnly)
+				{
+					if (buffer.inBounds(sx,cy))
+						putChar_4180b0(sx,cy,text[pos]);
+					sx++;
+				}
+				pos++;
+			}
+		}
+		if (end != -1)
+		{
+			if (part != -1 && !isspace(first))
+			{
+				text[end] = first;
+				pos = end;
+			}
+			else
+				pos = end + 1;
+			cy++;
+		}
+		else
+			pos = string::npos;
+	} while (pos != string::npos && cy < buffer.getHeight() && (height == 0 || cy < y + height));
+	return cy - y + 1;
 }
 
 void XConsole::print(int x, int y, const string &text)

@@ -22,8 +22,14 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - `tools/stubaudit.py <build dir>`: rows whose operands sit inside a stub at a non-zero offset. Stubs are 4 KiB `.bss`
   slots (`STUB_SLOT` env; 16 = old layout, which disables lverify's interior-pairing check).
 - `tools/discover.py <ltcg dir> [filter]`: finds exe functions that code you already built matches by accident.
+- `tools/fullbuild.sh <build/full_X> [lverify args]`: THE way to run a private full build. A machine-wide lock allows
+  only one full build at a time (several at once ran a 48 GB machine out of memory) and waits for 12 GB free.
+  Never call `tools/ltcg.py` on all sources directly. Normally don't run private full builds at all: the
+  integration loop rebuilds ALL of `src/` into `build/full` every cycle, so put try.sh-verified code in `src/`, keep
+  candidate rows in `scratch/`, and install them once `tools/lvx.py build/full <cand.csv>` passes on a build that
+  includes your files. Private full builds only for tool changes that need a before/after comparison.
 - `tools/build.sh`: full build + verify + progress (about 3.5 min, writes `build/full`). Only one may run at a
-  time. For a private full check: `.venv/bin/python tools/ltcg.py build/full_X $(.venv/bin/python tools/sources.py) && .venv/bin/python tools/lverify.py --dir build/full_X`.
+  time. For a private full check use `tools/fullbuild.sh build/full_X`.
 - `build/rtti.csv` (vtables -> class + slots), `build/namestrings.csv` ("Class::method()" strings -> function),
   `build/callgraph.json`. Regenerate with `tools/rtti.py`, `tools/namestrings.py`, `tools/callgraph.py`.
 
@@ -47,6 +53,8 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - `this` arrives in `ecx` (thiscall); member offsets come from `[reg+off]`: pad classes with `char pad[N]`.
 - `??__E` / `??__F` are a global's dynamic initializer / atexit destructor; they sit near the end of `.text`
   (0xb2xxxx-0xb6xxxx), one per global, ordered by translation unit.
+- See every local's frame offset directly: `tools/cl.sh cl /c /Od /EHsc /GS /FAs <file.cpp>` writes a `.asm` listing
+  with `_name$ = -N` per local. Much faster than guessing from diffs.
 - Stack slots of locals are NOT in declaration order: within a scope, VS2010 `/Od` orders locals by a 16-bucket
   hash of the *name* (lower bucket = higher address, closer to ebp; same bucket: later-declared sits higher;
   outer scopes before inner). When only `[ebp-x]` offsets differ, rename locals. Measured buckets for ~450 common
@@ -71,6 +79,8 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - Stubbed externs are 16-byte slots: an access at `[sym + 0x30]` can land on the *start of an unrelated stub* and
   pair wrongly (or "match" by luck when the exe bytes are zero). For table/column accesses at non-zero offsets,
   declare one extern per column so each access is at offset 0 of its own symbol.
+- Negative offsets into a stub (`table[i - 1]` -> `[i*4 + sym-4]`) land in the PREVIOUS stub's slot and poison its
+  learned pairing (later calls DIFF). Declare a separate extern for the `sym-4` base.
 - `fmul dword ptr [const]`: write the constant as an `extern const float` (a literal `0.1f` can become a qword).
   `vector::assign(16u, 0)` (size_type) vs `assign(16, 0)` (iterator template). Vectors whose `clear()` are distinct
   exe functions need distinct element types.
@@ -87,6 +97,15 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - Constant-index reads of string arrays (`mov eax, imm`) hit the stub-offset issue too: reference the real array
   (`configOptionNames[195]`, global_string_arrays.cpp). Constants that print as `(double)3.14159265f` are double
   literals in source (`1.0 - x`, not `1 - x`). A struct holding `int[2]` triggers /GS; spell the fields out.
+- An int literal in x87 math (`a - 100 / b * c`) gives `fsubr mem`; `100.0` doesn't. Implicit conversion
+  (`f = Pos(-1)` into a member) vs an explicit ctor call temp differ in register use.
+- throw() specs merge across the whole link: if ANY TU declares a callee without `throw()` (or LTCG sees a real
+  definition it can't prove nothrow), callers get EH frames. try.sh can pass while the full build fails. Fixes: a
+  private alias declared `throw()` used only at that call site (`HProp::get_9b64f0()` instead of `operator->`), or
+  file-unique placeholder callee names that stay stubs in the full build.
+- In a scope holding a /GS buffer (any std::string), scalars are split around it by name bucket: buckets lower than
+  the buffer's sit above the cookie, higher ones below the string.
+- Never create symlinks under `src/` (sources.py follows them recursively).
 - A template instance over a type that other files define differently (e.g. XColor) can silently use another
   file's copy; give such instances private element types.
 

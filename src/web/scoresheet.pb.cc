@@ -8135,7 +8135,7 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] GOOGLE_PROT
   { 2511, -1, sizeof(::Protobuf::Stats)},
 };
 
-static ::google::protobuf::Message const * const file_default_instances[] = {
+extern ::google::protobuf::Message const * const file_default_instances[] = {	// NOTE: extern (not static) so the verifier can pair it by name
   reinterpret_cast<const ::google::protobuf::Message*>(&::Protobuf::_PingRequest_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::Protobuf::_PingResponse_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&::Protobuf::_PostScoresheetRequest_default_instance_),
@@ -8341,7 +8341,7 @@ void protobuf_AssignDescriptors() {
   AddDescriptors();
   ::google::protobuf::MessageFactory* factory = NULL;
   AssignDescriptors(
-      "scoresheet.proto", schemas, file_default_instances, TableStruct::offsets, factory,
+      "web/scoresheet.proto", schemas, file_default_instances, TableStruct::offsets, factory,
       file_level_metadata, file_level_enum_descriptors, NULL);
 }
 
@@ -8359,7 +8359,7 @@ void protobuf_RegisterTypes(const ::std::string&) {
 void AddDescriptorsImpl() {
   InitDefaults();
   static const char descriptor[] GOOGLE_PROTOBUF_ATTRIBUTE_SECTION_VARIABLE(protodesc_cold) = {
-    '\n', '\020', 's', 'c', 'o', 'r', 'e', 's', 'h', 'e', 'e', 't', '.', 'p', 'r', 'o', 't', 'o', '\022', '\010', 'P', 'r', 'o', 't', 'o', 
+    '\n', '\024', 'w', 'e', 'b', '/', 's', 'c', 'o', 'r', 'e', 's', 'h', 'e', 'e', 't', '.', 'p', 'r', 'o', 't', 'o', '\022', '\010', 'P', 'r', 'o', 't', 'o', 
     'b', 'u', 'f', '\032', ' ', 'g', 'o', 'o', 'g', 'l', 'e', '/', 'p', 'r', 'o', 't', 'o', 'b', 'u', 'f', '/', 'd', 'e', 's', 'c', 
     'r', 'i', 'p', 't', 'o', 'r', '.', 'p', 'r', 'o', 't', 'o', '\"', '\r', '\n', '\013', 'P', 'i', 'n', 'g', 'R', 'e', 'q', 'u', 'e', 
     's', 't', '\"', 'D', '\n', '\014', 'P', 'i', 'n', 'g', 'R', 'e', 's', 'p', 'o', 'n', 's', 'e', '\022', '\030', '\n', '\020', 's', 'e', 'r', 
@@ -11454,9 +11454,9 @@ void AddDescriptorsImpl() {
     'b', 'u', 'f', 'b', '\006', 'p', 'r', 'o', 't', 'o', '3', 
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 77311);
+      descriptor, 77315);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "scoresheet.proto", &protobuf_RegisterTypes);
+    "web/scoresheet.proto", &protobuf_RegisterTypes);
   ::protobuf_google_2fprotobuf_2fdescriptor_2eproto::AddDescriptors();
 }
 

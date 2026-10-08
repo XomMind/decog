@@ -270,36 +270,36 @@ XColor Prop::unknown65dbb0()
 
 void Prop::unknown65e8a0(OpT3b_XCell *cell)
 {
+	float ratio;
+	float h;
+	float v;
 	bool flag = data->unknownF4 == 1;
 	unknown14 = cell->getChar();
-	bool fore = true;
+	bool front = true;
 	while (true)
 	{
-		if (fore ? cell->getFore()->nonzero() : cell->getBack()->nonzero())
+		if (front ? cell->getFore()->nonzero() : cell->getBack()->nonzero())
 		{
-			float h;
-			float s;
-			float v;
-			if (fore)
-				cell->getFore()->getHSV(&h,&s,&v);
+			if (front)
+				cell->getFore()->getHSV(&h,&ratio,&v);
 			else
-				cell->getBack()->getHSV(&h,&s,&v);
+				cell->getBack()->getHSV(&h,&ratio,&v);
 			v = v / opT3b_machineValueFactor * (flag ? opT3b_machineScale[data->unknownF8][0] : opT3b_flatScale[data->unknown120][0]);
 			if (v >= 1.0)
 				v = 1.0f;
 			if (flag)
 			{
-				XColor *target = fore ? &color1 : &color2;
+				XColor *target = front ? &color1 : &color2;
 				target->setHSV(opT3b_machineHue[data->unknownF8][0],opT3b_machineSat[data->unknownF8][0],v);
 			}
 			else
 			{
-				XColor *target = fore ? &color1 : &color2;
+				XColor *target = front ? &color1 : &color2;
 				target->setHSV(opT3b_flatHue[data->unknown120][0],opT3b_flatSat[data->unknown120][0],v);
 			}
 		}
-		if (fore)
-			fore = false;
+		if (front)
+			front = false;
 		else
 			break;
 	}

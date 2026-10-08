@@ -2,6 +2,7 @@
 // NOTE: layout reconstructed from the constructor; names are placeholders.
 #include <string>
 #include <vector>
+#include "engine/xcolor.h"
 using namespace std;
 
 class HProp
@@ -106,6 +107,8 @@ public:
 	void setMinLevel_4ed0d0(int level);	// NOTE: placeholder name (folded setter)
 	void setCallback_44ed80(void (*callback)(int level));	// NOTE: placeholder name (folded setter)
 	void setUnknown58_404b70(bool value);	// NOTE: placeholder name (0x404b70)
+	string get(int index);	// 0x411110
+	void closeFile_410db0();	// NOTE: placeholder name (closes the run.log stream)
 };
 extern JLog *jlog;	// NOTE: placeholder name (0xcefa64)
 
@@ -123,11 +126,87 @@ JLogNew_4225c0::JLogNew_4225c0()
 
 void defaultLogCallback_421f10(int level);	// NOTE: placeholder name (0x421f10)
 
+class XConsole
+{
+public:
+	void setAlignment_448080(int value);	// NOTE: placeholder name (folded setter)
+	int countLines_418300(int x, int y, int width, int height, const string &text);	// NOTE: placeholder name
+	void setFore(XColor color);
+	void setBack(XColor color);
+	void clear(int x, int y, int width, int height);
+	void setBack(int x, int y, int width, int height, XColor color);
+	int printWrapped_418260(int x, int y, int width, int height, const string &text);	// NOTE: placeholder name
+};
+
 class REX
 {
 public:
 	void initJLog(int minLevel, string *header, void (*callback)(int level), bool flag);
+	void showNotice_418e20(const string &text);	// NOTE: placeholder name
+	XConsole *getRoot_4ab670();	// NOTE: placeholder name (folded getter)
+	int getWidth_418980();	// NOTE: placeholder name
+	int getHeight_4189a0();	// NOTE: placeholder name
+	void renderRootOnly();	// NOTE: placeholder name (0x426ca0)
 };
+extern REX rex_d223f0;	// NOTE: placeholder name (0xd223f0)
+extern XColor &teamA19_color_d35bbc;	// NOTE: placeholder name
+extern XColor &COLOR_BLACK;	// 0xcfe674, NOTE: placeholder name
+
+struct SDL_Event	// NOTE: SDL 1.2 event union (only the type byte is read)
+{
+	unsigned char type;
+	char pad[0x13];
+};
+extern "C" __declspec(dllimport) int SDL_PollEvent(SDL_Event *event);
+
+// default log callback: notices go to the on-screen notice line, errors show a fatal-error screen and exit
+void defaultLogCallback_421f10(int level)	// NOTE: placeholder name
+{
+	if (level <= 1)
+		return;
+	else if (level <= 4)
+		rex_d223f0.showNotice_418e20(jlog->get(-1));
+	else
+	{
+		string message;
+		message = "ERROR :(\n\"" + jlog->get(-1) + "\"\n(" + "crash.log" + " text file in program directory may have more information)";
+		message += "\n\nIf you have error reporting enabled in options, this information will be uploaded for debugging";
+		message += "\n\nPress any key to exit";
+		jlog->closeFile_410db0();
+		rename("run.log","crash.log");
+		XConsole *root = rex_d223f0.getRoot_4ab670();
+		if (root == NULL)
+			exit(1);
+		int w = rex_d223f0.getWidth_418980();
+		int h = rex_d223f0.getHeight_4189a0();
+		root->setAlignment_448080(1);
+		int len = root->countLines_418300(w / 2,h / 2,w,h,message);
+		root->setFore(teamA19_color_d35bbc);
+		root->setBack(COLOR_BLACK);
+		root->clear(0,h / 2 - len / 2 - 1,w,len + 2);
+		root->setBack(0,h / 2 - len / 2 - 1,w,len + 2,COLOR_BLACK);
+		root->printWrapped_418260(w / 2,h / 2 - len / 2,w,len,message);
+		while (true)
+		{
+			rex_d223f0.renderRootOnly();
+			SDL_Event event;
+			while (SDL_PollEvent(&event))
+			{
+				switch (event.type)
+				{
+					case 2:
+					case 3:
+					case 5:
+					case 6:
+					case 12:
+						goto quit;
+				}
+			}
+		}
+quit:
+		exit(1);
+	}
+}
 
 void REX::initJLog(int minLevel, string *header, void (*callback)(int level), bool flag)
 {

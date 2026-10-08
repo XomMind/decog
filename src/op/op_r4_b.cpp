@@ -104,6 +104,7 @@ struct Pos
 	int y;
 
 	Pos(int x_, int y_);
+	Pos(int v);
 	Pos(const Pos &pos) throw();
 };
 
@@ -132,6 +133,8 @@ public:
 	Pos getPos();
 	void setHidden(bool hidden_);	// NOTE: placeholder name
 	void removeSubconsole(XConsole *console);
+	void print(int x, int y, const string &text);
+	int width_44b0d0();	// NOTE: placeholder name (a getter at 0x44b0d0, distinct from getWidth 0x9b6bd0)
 	bool input429d00(void *event);	// NOTE: placeholder name (XConsole::input body)
 	void updateBase429e30();	// NOTE: placeholder name (0x429e30, XConsole::update body)
 
@@ -423,10 +426,20 @@ bool OpR4b_matchesKey(const string &text, char key)	// NOTE: placeholder name (0
 	return (text.size() >= 5 && text[3] == '.' && text[4] == ' ' ? text[5] : text[0]) == key;
 }
 
+class OpR4b_Art	// NOTE: placeholder name (AsciiImage)
+{
+public:
+	bool isEmptyFolded();	// NOTE: placeholder name (a folded bool getter; true when there is no art)
+	char pad[0x10];
+};
+
 struct OpR4b_ItemType	// NOTE: placeholder name; element of the vector at 0xd2d1c4
 {
 	int pad0, pad4;
 	string name;
+	string unknown24;	// NOTE: placeholder name
+	char pad40[0x7c - 0x40];
+	OpR4b_Art art;	// NOTE: placeholder name
 };
 extern vector<OpR4b_ItemType *> opR4b_itemTypes;	// NOTE: placeholder name (0xd2d1c4)
 
@@ -439,8 +452,120 @@ public:
 
 	int unknown6c;	// NOTE: placeholder name
 	int pos;	// NOTE: placeholder name
-	char pad74[0x7c - 0x74];
+	int unknown74;	// NOTE: placeholder name
+	Console *infoButton;	// NOTE: placeholder name
 };
+
+class Unknown_c34c68 : public Console
+{
+public:
+	Unknown_c34c68(XConsole *parent, int x, int y, int width, int height, int color);
+	void setColor();
+
+	int unknown6c;	// NOTE: placeholder name
+};
+
+class ConsoleArt : public Console
+{
+public:
+	ConsoleArt(XConsole *parent, OpR4b_Art *image, int x, int y, bool hidden, int anim, int unknown, const Pos &offset, int width, int height);	// NOTE: the image type is AsciiImage
+	char pad6c[0x84 - 0x6c];
+};
+
+class CGalleryInfoButton : public Console
+{
+public:
+	CGalleryInfoButton(XConsole *parent);
+};
+
+class OpR4b_Gallery48f0e0	// NOTE: placeholder name (object pointer at 0xcec040)
+{
+public:
+	vector<int> &getList_48f0e0();	// NOTE: placeholder name
+};
+extern OpR4b_Gallery48f0e0 *opR4b_cec040;	// NOTE: placeholder name
+
+struct OpR4b_Claim	// NOTE: placeholder name; 0x38-byte element of the array at 0xd035d8
+{
+	string name;	// NOTE: placeholder name
+	string item;	// NOTE: placeholder name
+};
+extern OpR4b_Claim opR4b_claims_d035d8[];	// NOTE: placeholder name
+extern vector<int> opR4b_counts_d25790;	// NOTE: placeholder name
+bool OpX5_containsRecord(vector<int> &v, int value);	// NOTE: placeholder name
+string intToString(int value);	// 0x4051f0
+void logError(string location, string message);	// NOTE: placeholder name
+
+// 0x7d6db0. The claimed path jumps over the "<unclaimed>" block (goto). Local names are chosen for the frame layout.
+CGalleryItem::CGalleryItem(XConsole *parent, int x, int y, int value, int index)
+	: Console(parent,0x30,0xd,x,y,0,false,-1)
+{
+	unknown6c = value;
+	pos = index;
+	unknown74 = -1;
+	Unknown_c34c68 *title;
+	if (OpX5_containsRecord(opR4b_cec040->getList_48f0e0(),unknown6c) && opR4b_counts_d25790[unknown6c] != 0)
+	{
+		string label(" THANK YOU FOR YOUR SUPPORT! ");
+		title = new Unknown_c34c68(this,1,0,label.size(),1,2);
+		title->print(0,0,label);
+		title->setColor();
+	}
+	for (int i = 0; i < 0x548; i++)
+	{
+		if (opR4b_claims_d035d8[i].item == opR4b_itemTypes[unknown6c]->unknown24)
+		{
+			if (opR4b_claims_d035d8[i].name.empty())
+				break;
+			unknown74 = i;
+			title = new Unknown_c34c68(this,0,1,opR4b_claims_d035d8[unknown74].name.size() + 2,1,3);
+			title->setColor();
+			goto claimed;
+		}
+	}
+	{
+		string label("<unclaimed>");
+		title = new Unknown_c34c68(this,0,1,label.size(),1,5);
+		title->print(0,0,label);
+		title->setColor();
+	}
+claimed:
+	string label(opR4b_counts_d25790[unknown6c] != 0 ? opR4b_itemTypes[unknown6c]->unknown24 : string("???"));
+	int px = 1;
+	title = new Unknown_c34c68(this,px,2,label.size(),1,6);
+	title->print(0,0,label);
+	title->setColor();
+	px += label.size() + 1;
+	if (opR4b_counts_d25790[unknown6c] != 0)
+	{
+		string amount = "x" + intToString(opR4b_counts_d25790[unknown6c] == -1 ? 0 : opR4b_counts_d25790[unknown6c]);
+		title = new Unknown_c34c68(this,px,2,amount.size(),1,7);
+		title->print(0,0,amount);
+		title->setColor();
+		px += amount.size() + 1;
+	}
+	int count = width_44b0d0() - 1 - px;
+	if (count >= 2)
+	{
+		title = new Unknown_c34c68(this,px,2,count,1,8);
+		title->setColor();
+	}
+	if (opR4b_itemTypes[unknown6c]->art.isEmptyFolded())
+	{
+		logError("CGalleryItem()","no art for " + opR4b_itemTypes[unknown6c]->name);
+		return;
+	}
+	if (opR4b_counts_d25790[unknown6c] == 0)
+	{
+		string label(" UNDISCOVERED COMPONENT ");
+		title = new Unknown_c34c68(this,0xc,7,label.size(),1,9);
+		title->print(0,0,label);
+		title->setColor();
+	}
+	else
+		new ConsoleArt(this,&opR4b_itemTypes[unknown6c]->art,0,3,false,-1,0,Pos(-1),0,0);
+	infoButton = new CGalleryInfoButton(this);
+}
 
 bool opr1c_hasPtr_cebd5c();	// NOTE: placeholder name (0x4328a0)
 extern int opR4b_rowSpacing_bcbdf4[2];	// NOTE: placeholder name

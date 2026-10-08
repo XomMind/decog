@@ -228,6 +228,12 @@ struct OpQ5_T9ef340;
 struct OpQ5_T9ef3a0;
 template <class T> void OpQ5_clearObjects(vector<T*> &v);	// NOTE: placeholder name (0x9e2c40)
 
+struct OpV3f_PathStep	// NOTE: placeholder name (16-byte path element: position + direction)
+{
+	Point pos;
+	Point dir;
+};
+
 class CMap : public Console	// NOTE: partial layout
 {
 public:
@@ -238,7 +244,7 @@ public:
 	bool unknown805190(Pos *out);	// NOTE: placeholder name
 	void unknown8051f0(Pos *min, Pos *max);	// NOTE: placeholder name
 	bool unknown8052f0(Pos *pos);	// NOTE: placeholder name
-	int unknown805360(HEntity entity, vector<Point> *path, Point *target);	// NOTE: placeholder name
+	int unknown805360(HEntity entity, vector<OpV3f_PathStep> *path, Point *target);	// NOTE: placeholder name
 	int unknown8054b0(bool flag);	// NOTE: placeholder name
 
 	// BEGIN CMAP FIELDS
@@ -268,7 +274,7 @@ public:
 	char pad470[0x4C8 - 0x470];
 	Point unknown4c8;	// NOTE: placeholder name
 	char pad4D0[0x50C - 0x4D0];
-	vector<Point> unknown50c;	// NOTE: placeholder name
+	vector<OpV3f_PathStep> unknown50c;	// NOTE: placeholder name (16-byte path steps)
 	char pad51C[0x558 - 0x51C];
 	XConsole* unknown558;	// NOTE: placeholder name
 	char pad55C[0x798 - 0x55C];

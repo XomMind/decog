@@ -326,7 +326,7 @@ class GM
 {
 public:
 	void unknown7908d0();	// NOTE: placeholder name (wraps manual lines)
-	void loadManual(const string &path);	// 0x78fb80
+	bool loadManual(string &path);	// 0x78fb80 (team_c_54.cpp)
 	void loadDataset();	// 0x790e50
 	bool unknown7913f0(const string &path, vector<string> *list, vector<string> *list2);	// NOTE: placeholder name
 };

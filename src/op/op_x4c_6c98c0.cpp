@@ -20,6 +20,7 @@ public:
 	bool unknown45cb10();	// NOTE: placeholder name
 	int unknown45c9b0();	// NOTE: placeholder name
 	int getNestedField() throw();	// NOTE: placeholder name (0x45c570)
+	int getNestedField_45c570() throw();	// NOTE: placeholder name (same function under a private name, see HProp::get_9b64f0)
 	const Point &getPosition();	// 0x4184d0
 	struct OpX4c_PropData *getData();	// NOTE: placeholder name (ICF'd trivial getter, 0x9b8f00)
 };
@@ -29,6 +30,7 @@ class HProp
 public:
 	int ID;
 	Prop *operator->() const throw();	// 0x9b64f0
+	Prop *get_9b64f0() const throw();	// NOTE: placeholder name (operator-> under a private name, so LTCG keeps this TU's throw())
 };
 
 class Cell
@@ -104,7 +106,7 @@ void BS::unknown6c98c0(int level, vector<int> &ids)
 			if (!opx4c_machines[id][0]->unknown45cb10() && opx4c_machines[id][0]->getData()->unknown8c == 0 && opx4c_machines[id][0]->unknown45c9b0() == 0 && rng.chance(chance))
 			{
 				vector<HProp> &list = opx4c_machines[id];
-				OpX4c_Lists460090 *lists = new OpX4c_Lists460090(list[0]->getNestedField(),id);
+				OpX4c_Lists460090 *lists = new OpX4c_Lists460090(list[0].get_9b64f0()->getNestedField_45c570(),id);
 				for (unsigned int j = 0; j < list.size(); j++)
 				{
 					lists->unknown460290(list[j]);

@@ -29,6 +29,7 @@ public:
 extern OpU5_Level *opU5_level;	// NOTE: placeholder name (0xcefc4c)
 
 class OpU5_HEntity;
+class OpU5_HPlayer;
 
 class OpU5_Map	// NOTE: placeholder name (object at 0xcefc4c)
 {
@@ -39,7 +40,7 @@ public:
 	vector<HProp> propList;	// NOTE: placeholder name
 	int getTurn();	// NOTE: placeholder name (0x464270)
 	HEntity getPlayer();	// NOTE: placeholder name (0x4630f0)
-	OpU5_HEntity getPlayerHandle();	// NOTE: placeholder name (0x4630f0)
+	OpU5_HPlayer getPlayerHandle();	// NOTE: placeholder name (0x4630f0)
 	bool isVisible(const Point &p);	// NOTE: placeholder name (0x4631c0)
 	void unknown9e29b0(vector<HProp> *list, HProp prop);	// NOTE: placeholder name
 };
@@ -196,6 +197,13 @@ public:
 	OpU5_EntityData *operator->() const;	// 0x9b7910
 };
 extern OpU5_HEntity opU5_playerHandle;	// NOTE: placeholder name (0xd1e888)
+
+class OpU5_HPlayer	// NOTE: placeholder name; a separate handle type so its operator-> (0x9b6570) pairs apart from OpU5_HEntity's (0x9b7910)
+{
+public:
+	int ID;
+	OpU5_EntityData *operator->() const;	// 0x9b6570
+};
 
 class OpU5_ItemData	// NOTE: placeholder name
 {

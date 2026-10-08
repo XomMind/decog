@@ -9,6 +9,14 @@ using namespace std;
 // engine-side declarations
 //==================================================================
 
+struct OpQ4b_PosArg	// NOTE: placeholder name (Pos passed by value)
+{
+	int x;
+	int y;
+	OpQ4b_PosArg(int x_, int y_);	// NOTE: placeholder name (Pos::Pos 0x46ca20)
+	OpQ4b_PosArg(const OpQ4b_PosArg &p);	// NOTE: placeholder name
+};
+
 struct Pos
 {
 	int x;
@@ -73,6 +81,7 @@ public:
 	void deleteSubconsolesExcept(XConsole *a, XConsole *b);
 	bool contains(const Pos &pos);
 	Pos localToAbs(Pos pos);
+	Pos localToAbs(struct OpQ4b_PosArg pos);	// NOTE: same function (0x428650); argument type with a copy constructor so the temporary is built in place
 	void setScaleX(float scale);	// NOTE: placeholder name (0x417b60)
 	void setScaleY(float scale);	// NOTE: placeholder name (0x417b80)
 	void setChar_417f50(int x, int y, int ch);	// NOTE: placeholder name
@@ -1014,10 +1023,10 @@ bool CInfo::input(void *event)
 		{
 			if (opq4b_cec11c == this)
 			{
-				HProp ITEMV = unknown9c;
-				HProp TARGETV = unknownEC->getTarget();
-				unknown8b4500(HEntity(),TARGETV,HEntity(),&Pos(-1),0,false);
-				unknown8b4990(TARGETV,ITEMV,false);
+				HProp cur = unknown9c;
+				HProp target = unknownEC->getTarget();
+				unknown8b4500(HEntity(),target,HEntity(),&Pos(-1),0,false);
+				unknown8b4990(target,cur,false);
 			}
 			else if (opq4b_cec124 == this)
 			{
@@ -1069,11 +1078,11 @@ bool CInfo::input(void *event)
 			return false;
 		if (opq4b_mouse->getField41a6e0())
 		{
-			if (unknown94 > 0)
-				unknown94 = unknown94 - 1;
-			else
+			if (unknown94 <= 0)
 				unknown94 = entries.size() - 1;
-			opq4b_mouse->setPos(entries[unknown94]->localToAbs(Pos(4,0)));
+			else
+				unknown94 = unknown94 - 1;
+			opq4b_mouse->setPos(entries[unknown94]->localToAbs(OpQ4b_PosArg(4,0)));
 		}
 		return true;
 	case 0xf2:
@@ -1087,7 +1096,7 @@ bool CInfo::input(void *event)
 				unknown94 = 0;
 			else
 				unknown94 = unknown94 + 1;
-			opq4b_mouse->setPos(entries[unknown94]->localToAbs(Pos(4,0)));
+			opq4b_mouse->setPos(entries[unknown94]->localToAbs(OpQ4b_PosArg(4,0)));
 		}
 		return true;
 	case 0xf3:

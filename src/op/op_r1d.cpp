@@ -190,7 +190,7 @@ string opR1d_436e70(bool dateOnly, time_t t)	// NOTE: placeholder name
 
 	string result;
 	string yearStr = intToString(timeinfo->tm_year);
-	result.assign<string::const_iterator>(((const string &)yearStr).end() - 2, ((const string &)yearStr).end());
+	result.assign<string::const_iterator>((const string::const_iterator &)(yearStr.end() - 2), (const string::const_iterator &)yearStr.end());	// iterator arithmetic, const_iterator template instance
 	result += opR1d_padLeft(intToString(timeinfo->tm_mon + 1), 2, '0');
 	result += opR1d_padLeft(intToString(timeinfo->tm_mday), 2, '0');
 
@@ -344,14 +344,69 @@ extern string gameStrings_d230f8[];	// key names
 void logError(string location, string message);	// NOTE: placeholder name
 string &opR1d_padRight(string &s, unsigned int width, char c);	// NOTE: placeholder name (0x4080d0)
 
+void logWarning(string location, string message);	// NOTE: placeholder name (0x404e50)
+void logMessage(string message);	// NOTE: placeholder name (0x404cb0)
+int stringToInt(const string &str);	// NOTE: placeholder name (0x405610)
+void parseLine_408d70(string &text, vector<string> &out);	// NOTE: placeholder name
+int OpT8a_findStringIndex(const string *list, unsigned int count, string s);	// NOTE: placeholder name
+extern int OpS_indices_cec458[323];	// NOTE: placeholder name (0xcec458, active key mapping)
+
 class Keyboard
 {
 public:
+	void init();	// 0x438ad0
 	void save();	// 0x439120
 
-	int unknown0;
+	bool modified;	// NOTE: placeholder name
 	vector<int> keys;
 };
+
+void Keyboard::init()
+{
+	for (int i = 0; i < 0x143; i++)
+		keys.push_back(i);
+	ifstream file((gameString_cfd42c + "user/" + "keyboard.cfg").c_str());
+	if (!file.is_open())
+	{
+		logWarning("Keyboard::init()","Unable to open " + (gameString_cfd42c + "user/" + "keyboard.cfg") + ", creating default keyboard settings");
+		save();
+	}
+	else
+	{
+		string data;
+		vector<string> rows;
+		int j = 0;
+		int total = 0;
+		int val;
+		int key;
+		while (getline(file,data))
+		{
+			j++;
+			rows.clear();
+			parseLine_408d70(data,rows);
+			if (rows.size() == 3)
+			{
+				val = stringToInt(rows[0]);
+				key = OpT8a_findStringIndex(gameStrings_d230f8,0x143,rows[2]);
+				if (key == -1)
+					logError("Keyboard::init()","No key name found matching \"" + rows[2] + "\", ignoring key " + intToString(val));
+				else
+				{
+					keys[val] = key;
+					total++;
+				}
+			}
+		}
+		file.close();
+		logMessage("...overwrote " + intToString(total) + " keys");
+	}
+	for (unsigned int i = 0; i < keys.size(); i++)
+	{
+		if (!modified && OpS_indices_cec458[i] != keys[i])
+			modified = true;
+		OpS_indices_cec458[i] = keys[i];
+	}
+}
 
 void Keyboard::save()
 {
@@ -378,6 +433,67 @@ void Keyboard::save()
 			file << str;
 		}
 		file << "\n";
+	}
+	file.close();
+}
+
+struct OpR1d_KeyBinding	// NOTE: placeholder name (KeyBinding_4395b0 in team_a_11.cpp)
+{
+	int category;	// NOTE: placeholder name
+	int command;	// NOTE: placeholder name
+	string name;	// NOTE: placeholder name
+	bool ctrl;	// NOTE: placeholder name
+	bool shift;	// NOTE: placeholder name
+	bool alt;	// NOTE: placeholder name
+	int key;	// NOTE: placeholder name
+};
+extern string gameStrings_cfcdc0[];	// NOTE: placeholder name (command category names)
+extern string gameStrings_cfe718[];	// NOTE: placeholder name (command names)
+
+class Keybinds
+{
+public:
+	void save();	// 0x43a840
+
+	vector<OpR1d_KeyBinding*> bindings;	// NOTE: placeholder name
+};
+
+void Keybinds::save()
+{
+	ofstream file((gameString_cfd42c + "user/" + "commands.cfg").c_str());
+	if (!file.is_open())
+	{
+		logError("Keybinds::save()","Unable to open " + (gameString_cfd42c + "user/" + "commands.cfg") + " for writing, keybinds not saved");
+		return;
+	}
+	file << "// Command                              Name                            Ctrl    Shift   Alt     Key\n";
+	int state = -1;
+	string text;
+	for (unsigned int i = 0; i < bindings.size(); i++)
+	{
+		if (state == -1 || bindings[i]->category != state)
+		{
+			state = bindings[i]->category;
+			text = "[" + gameStrings_cfcdc0[state] + "]";
+			opR1d_padRight(text,0x6e,'-');
+			file << text << "\n";
+		}
+		text = gameStrings_cfe718[bindings[i]->command];
+		opR1d_padRight(text,0x28,' ');
+		file << text;
+		text = "\"" + bindings[i]->name + "\"";
+		opR1d_padRight(text,0x20,' ');
+		file << text;
+		text = bindings[i]->ctrl ? "Ctrl" : "-";
+		opR1d_padRight(text,8,' ');
+		file << text;
+		text = bindings[i]->shift ? "Shift" : "-";
+		opR1d_padRight(text,8,' ');
+		file << text;
+		text = bindings[i]->alt ? "Alt" : "-";
+		opR1d_padRight(text,8,' ');
+		file << text;
+		file << gameStrings_d230f8[bindings[i]->key] << "\n";
 	}
 	file.close();
 }

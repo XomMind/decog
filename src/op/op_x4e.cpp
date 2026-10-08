@@ -397,6 +397,37 @@ extern bool opX4e_d28d15;	// NOTE: placeholder name
 extern int opX4e_screenWidth;	// NOTE: placeholder name (0xcf27f4)
 extern int opX4e_screenHeight;	// NOTE: placeholder name (0xcf27f8)
 
+struct OpX4e_CMapPos : public Pos	// NOTE: placeholder name; CMap's Pos members, with a file-unique nothrow default ctor (0x453b40)
+{
+	OpX4e_CMapPos() throw();
+};
+
+class OpX4e_CMapHEntity : public HEntity	// NOTE: placeholder name; CMap's handle members, with a file-unique nothrow default ctor (folded with HProp())
+{
+public:
+	OpX4e_CMapHEntity() throw();
+};
+
+struct OpX4e_CMapBuffer	// NOTE: placeholder name (0x20 bytes, ctor 0x421650)
+{
+	OpX4e_CMapBuffer();
+	~OpX4e_CMapBuffer();
+	char pad[0x20];
+};
+
+struct OpX4e_CMapCursor	// NOTE: placeholder name (ctor 0x4557d0)
+{
+	OpX4e_CMapCursor();
+	char pad[0x4c];
+};
+
+struct OpX4e_CMapGrid	// NOTE: placeholder name (Array2D, 0xc bytes)
+{
+	OpX4e_CMapGrid() throw();
+	~OpX4e_CMapGrid();
+	char pad[0xc];
+};
+
 class CMap : public Console	// NOTE: partial layout
 {
 public:
@@ -415,21 +446,270 @@ public:
 	virtual void trigger(const string &command, int value);
 	void unknown8069e0(Point p, bool flag);	// NOTE: placeholder name
 
-	Pos scroll;	// NOTE: placeholder name
-	HEntity unknown74;	// NOTE: placeholder name
-	char pad78[0x5f0 - 0x78];
+	OpX4e_CMapPos scroll;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown74;	// NOTE: placeholder name
+	int unknown78;	// NOTE: placeholder name
+	vector<int> unknown7c;	// NOTE: placeholder name
+	int unknown8c;	// NOTE: placeholder name
+	int unknown90;	// NOTE: placeholder name
+	int unknown94;	// NOTE: placeholder name
+	vector<int> unknown98;	// NOTE: placeholder name
+	vector<int> unknowna8;	// NOTE: placeholder name
+	vector<int> unknownb8;	// NOTE: placeholder name
+	int unknownc8;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknowncc;	// NOTE: placeholder name
+	int unknownd0;	// NOTE: placeholder name
+	int unknownd4;	// NOTE: placeholder name
+	int unknownd8;	// NOTE: placeholder name
+	int unknowndc;	// NOTE: placeholder name
+	int unknowne0;	// NOTE: placeholder name
+	OpX4e_CMapPos unknowne4;	// NOTE: placeholder name
+	int unknownec;	// NOTE: placeholder name
+	int unknownf0;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknownf4;	// NOTE: placeholder name
+	int unknownf8;	// NOTE: placeholder name
+	int unknownfc;	// NOTE: placeholder name
+	vector<int> unknown100;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown110;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown118;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown11c;	// NOTE: placeholder name
+	vector<int> unknown124;	// NOTE: placeholder name
+	int unknown134;	// NOTE: placeholder name
+	vector<int> unknown138;	// NOTE: placeholder name
+	int unknown148;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown14c;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown154;	// NOTE: placeholder name
+	int unknown15c;	// NOTE: placeholder name
+	int unknown160;	// NOTE: placeholder name
+	int unknown164;	// NOTE: placeholder name
+	vector<int> unknown168;	// NOTE: placeholder name
+	vector<int> unknown178;	// NOTE: placeholder name
+	vector<int> unknown188;	// NOTE: placeholder name
+	vector<int> unknown198;	// NOTE: placeholder name
+	vector<int> unknown1a8;	// NOTE: placeholder name
+	int unknown1b8;	// NOTE: placeholder name
+	int unknown1bc;	// NOTE: placeholder name
+	int unknown1c0;	// NOTE: placeholder name
+	int unknown1c4;	// NOTE: placeholder name
+	vector<int> unknown1c8;	// NOTE: placeholder name
+	vector<int> unknown1d8;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown1e8;	// NOTE: placeholder name
+	int unknown1f0;	// NOTE: placeholder name
+	int unknown1f4;	// NOTE: placeholder name
+	int unknown1f8;	// NOTE: placeholder name
+	int unknown1fc;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown200;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown208;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown210;	// NOTE: placeholder name
+	int unknown214;	// NOTE: placeholder name
+	vector<int> unknown218;	// NOTE: placeholder name
+	int unknown228;	// NOTE: placeholder name
+	vector<int> unknown22c;	// NOTE: placeholder name
+	vector<int> unknown23c;	// NOTE: placeholder name
+	vector<int> unknown24c;	// NOTE: placeholder name
+	vector<int> unknown25c;	// NOTE: placeholder name
+	vector<int> unknown26c;	// NOTE: placeholder name
+	vector<int> unknown27c;	// NOTE: placeholder name
+	vector<int> unknown28c;	// NOTE: placeholder name
+	vector<int> unknown29c;	// NOTE: placeholder name
+	vector<int> unknown2ac;	// NOTE: placeholder name
+	vector<int> unknown2bc;	// NOTE: placeholder name
+	vector<int> unknown2cc;	// NOTE: placeholder name
+	vector<int> unknown2dc;	// NOTE: placeholder name
+	vector<int> unknown2ec;	// NOTE: placeholder name
+	vector<int> unknown2fc;	// NOTE: placeholder name
+	vector<int> unknown30c;	// NOTE: placeholder name
+	vector<int> unknown31c;	// NOTE: placeholder name
+	vector<int> unknown32c;	// NOTE: placeholder name
+	vector<int> unknown33c;	// NOTE: placeholder name
+	vector<int> unknown34c;	// NOTE: placeholder name
+	vector<int> unknown35c;	// NOTE: placeholder name
+	int unknown36c;	// NOTE: placeholder name
+	int unknown370;	// NOTE: placeholder name
+	int unknown374;	// NOTE: placeholder name
+	int unknown378;	// NOTE: placeholder name
+	int unknown37c;	// NOTE: placeholder name
+	int unknown380;	// NOTE: placeholder name
+	int unknown384;	// NOTE: placeholder name
+	int unknown388;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown38c;	// NOTE: placeholder name
+	int unknown394;	// NOTE: placeholder name
+	int unknown398;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown39c;	// NOTE: placeholder name
+	int unknown3a4;	// NOTE: placeholder name
+	vector<int> unknown3a8;	// NOTE: placeholder name
+	vector<int> unknown3b8;	// NOTE: placeholder name
+	vector<int> unknown3c8;	// NOTE: placeholder name
+	int unknown3d8;	// NOTE: placeholder name
+	int unknown3dc;	// NOTE: placeholder name
+	int unknown3e0;	// NOTE: placeholder name
+	vector<int> unknown3e4;	// NOTE: placeholder name
+	vector<int> unknown3f4;	// NOTE: placeholder name
+	vector<int> unknown404;	// NOTE: placeholder name
+	int unknown414;	// NOTE: placeholder name
+	int unknown418;	// NOTE: placeholder name
+	int unknown41c;	// NOTE: placeholder name
+	vector<int> unknown420;	// NOTE: placeholder name
+	vector<int> unknown430;	// NOTE: placeholder name
+	vector<int> unknown440;	// NOTE: placeholder name
+	int unknown450;	// NOTE: placeholder name
+	int unknown454;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown458;	// NOTE: placeholder name
+	int unknown45c;	// NOTE: placeholder name
+	vector<int> unknown460;	// NOTE: placeholder name
+	OpX4e_CMapBuffer unknown470;	// NOTE: placeholder name
+	vector<int> unknown490;	// NOTE: placeholder name
+	vector<int> unknown4a0;	// NOTE: placeholder name
+	int unknown4b0;	// NOTE: placeholder name
+	vector<int> unknown4b4;	// NOTE: placeholder name
+	int unknown4c4;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown4c8;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown4d0;	// NOTE: placeholder name
+	int unknown4d8;	// NOTE: placeholder name
+	vector<int> unknown4dc;	// NOTE: placeholder name
+	vector<int> unknown4ec;	// NOTE: placeholder name
+	vector<int> unknown4fc;	// NOTE: placeholder name
+	vector<int> unknown50c;	// NOTE: placeholder name
+	int unknown51c;	// NOTE: placeholder name
+	vector<int> unknown520;	// NOTE: placeholder name
+	vector<int> unknown530;	// NOTE: placeholder name
+	int unknown540;	// NOTE: placeholder name
+	vector<int> unknown544;	// NOTE: placeholder name
+	int unknown554;	// NOTE: placeholder name
+	int unknown558;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown55c;	// NOTE: placeholder name
+	int unknown560;	// NOTE: placeholder name
+	int unknown564;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown568;	// NOTE: placeholder name
+	int unknown570;	// NOTE: placeholder name
+	int unknown574;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown578;	// NOTE: placeholder name
+	int unknown580;	// NOTE: placeholder name
+	int unknown584;	// NOTE: placeholder name
+	int unknown588;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown58c;	// NOTE: placeholder name
+	int unknown594;	// NOTE: placeholder name
+	int unknown598;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown59c;	// NOTE: placeholder name
+	int unknown5a4;	// NOTE: placeholder name
+	int unknown5a8;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown5ac;	// NOTE: placeholder name
+	int unknown5b0;	// NOTE: placeholder name
+	int unknown5b4;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown5b8;	// NOTE: placeholder name
+	int unknown5bc;	// NOTE: placeholder name
+	int unknown5c0;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown5c4;	// NOTE: placeholder name
+	int unknown5c8;	// NOTE: placeholder name
+	int unknown5cc;	// NOTE: placeholder name
+	int unknown5d0;	// NOTE: placeholder name
+	int unknown5d4;	// NOTE: placeholder name
+	int unknown5d8;	// NOTE: placeholder name
+	int unknown5dc;	// NOTE: placeholder name
+	int unknown5e0;	// NOTE: placeholder name
+	int unknown5e4;	// NOTE: placeholder name
+	int unknown5e8;	// NOTE: placeholder name
+	int unknown5ec;	// NOTE: placeholder name
 	unsigned int unknown5f0;	// NOTE: placeholder name
 	unsigned int unknown5f4;	// NOTE: placeholder name
-	Point unknown5f8;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown5f8;	// NOTE: placeholder name
 	vector<HEntity> unknown600;	// NOTE: placeholder name
 	unsigned int unknown610;	// NOTE: placeholder name
 	unsigned int unknown614;	// NOTE: placeholder name
-	char pad618[0x7f4 - 0x618];
-	HEntity unknown7f4;	// NOTE: placeholder name
-	char pad7f8[0x8c4 - 0x7f8];
+	int unknown618;	// NOTE: placeholder name
+	int unknown61c;	// NOTE: placeholder name
+	int unknown620;	// NOTE: placeholder name
+	int unknown624;	// NOTE: placeholder name
+	int unknown628;	// NOTE: placeholder name
+	int unknown62c;	// NOTE: placeholder name
+	int unknown630;	// NOTE: placeholder name
+	int unknown634;	// NOTE: placeholder name
+	int unknown638;	// NOTE: placeholder name
+	int unknown63c;	// NOTE: placeholder name
+	int unknown640;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown644;	// NOTE: placeholder name
+	int unknown64c;	// NOTE: placeholder name
+	int unknown650;	// NOTE: placeholder name
+	int unknown654;	// NOTE: placeholder name
+	int unknown658;	// NOTE: placeholder name
+	int unknown65c;	// NOTE: placeholder name
+	int unknown660;	// NOTE: placeholder name
+	int unknown664;	// NOTE: placeholder name
+	int unknown668;	// NOTE: placeholder name
+	vector<int> unknown66c;	// NOTE: placeholder name
+	int unknown67c;	// NOTE: placeholder name
+	int unknown680;	// NOTE: placeholder name
+	int unknown684;	// NOTE: placeholder name
+	vector<int> unknown688;	// NOTE: placeholder name
+	int unknown698;	// NOTE: placeholder name
+	vector<int> unknown69c;	// NOTE: placeholder name
+	int unknown6ac;	// NOTE: placeholder name
+	OpX4e_CMapCursor unknown6b0;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown6fc;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown704;	// NOTE: placeholder name
+	vector<int> unknown708;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown718;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown720;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown728;	// NOTE: placeholder name
+	vector<int> unknown730;	// NOTE: placeholder name
+	vector<int> unknown740;	// NOTE: placeholder name
+	int unknown750;	// NOTE: placeholder name
+	int unknown754;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown758;	// NOTE: placeholder name
+	int unknown760;	// NOTE: placeholder name
+	int unknown764;	// NOTE: placeholder name
+	int unknown768;	// NOTE: placeholder name
+	int unknown76c;	// NOTE: placeholder name
+	int unknown770;	// NOTE: placeholder name
+	vector<int> unknown774;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown784;	// NOTE: placeholder name
+	OpX4e_CMapPos unknown78c;	// NOTE: placeholder name
+	int unknown794;	// NOTE: placeholder name
+	vector<int> unknown798;	// NOTE: placeholder name
+	int unknown7a8;	// NOTE: placeholder name
+	int unknown7ac;	// NOTE: placeholder name
+	vector<int> unknown7b0;	// NOTE: placeholder name
+	vector<int> unknown7c0;	// NOTE: placeholder name
+	vector<int> unknown7d0;	// NOTE: placeholder name
+	vector<int> unknown7e0;	// NOTE: placeholder name
+	int unknown7f0;	// NOTE: placeholder name
+	OpX4e_CMapHEntity unknown7f4;	// NOTE: placeholder name
+	int unknown7f8;	// NOTE: placeholder name
+	OpX4e_CMapGrid unknown7fc;	// NOTE: placeholder name
+	OpX4e_CMapGrid unknown808;	// NOTE: placeholder name
+	OpX4e_CMapGrid unknown814;	// NOTE: placeholder name
+	OpX4e_CMapGrid unknown820;	// NOTE: placeholder name
+	OpX4e_CMapGrid unknown82c;	// NOTE: placeholder name
+	int unknown838;	// NOTE: placeholder name
+	int unknown83c;	// NOTE: placeholder name
+	vector<int> unknown840;	// NOTE: placeholder name
+	int unknown850;	// NOTE: placeholder name
+	vector<int> unknown854;	// NOTE: placeholder name
+	int unknown864;	// NOTE: placeholder name
+	int unknown868;	// NOTE: placeholder name
+	int unknown86c;	// NOTE: placeholder name
+	int unknown870;	// NOTE: placeholder name
+	vector<int> unknown874;	// NOTE: placeholder name
+	int unknown884;	// NOTE: placeholder name
+	vector<int> unknown888;	// NOTE: placeholder name
+	int unknown898;	// NOTE: placeholder name
+	vector<int> unknown89c;	// NOTE: placeholder name
+	int unknown8ac;	// NOTE: placeholder name
+	int unknown8b0;	// NOTE: placeholder name
+	int unknown8b4;	// NOTE: placeholder name
+	int unknown8b8;	// NOTE: placeholder name
+	int unknown8bc;	// NOTE: placeholder name
+	int unknown8c0;	// NOTE: placeholder name
 };
 
 extern CMap *opX4e_mapView;	// NOTE: placeholder name (0xcec054)
+
+// 0x7f57e0. Every member after the 0x4557d0 object is built without EH state updates (nothing later can
+// throw), so their constructors are declared throw() under file-unique types (OpX4e_CMap*).
+CMap::CMap(XConsole *parent)
+	: Console(parent,opX4e_screenRect,opX4e_d28d15 ? 3 : 2,false,-1)
+{
+}
 
 //==================================================================
 // functions

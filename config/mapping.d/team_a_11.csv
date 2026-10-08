@@ -1,6 +1,7 @@
-# team_a_11: key binding, Console helpers, CTransmission dtor (src/game/team_a_11.cpp)
+# team_a_11: key binding, Console helpers, CGamoverButton::mouseLeave, CTransmission ctor/dtor (src/game/team_a_11.cpp)
 KeyBinding_4395b0::KeyBinding_4395b0,0x4395b0,0x72
 Console::addEffect_48c460,0x48c460,0x39
 Console::addEffect_48c4a0,0x48c4a0,0x3e
 CGamoverButton::mouseLeave,0x48ffe0,0x4a
 CTransmission::~CTransmission,0x4af340,0x69
+CTransmission::CTransmission,0x4af020,0x315

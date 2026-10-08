@@ -1,0 +1,3 @@
+# team_b_51: damage/shot flash effects (0x965250, 0x965430) (src/game/team_b_51.cpp)
+TeamB_FlashLayer::damageFlash965250,0x965250,0x1d7
+TeamB_FlashLayer::shotFlash965430,0x965430,0x19d

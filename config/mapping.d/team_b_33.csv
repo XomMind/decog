@@ -1,0 +1,3 @@
+# team_b_33: CMap item labels (0x811350, 0x812950) (src/game/team_b_33.cpp)
+TeamB_CMapItemLabels::addItemLabel811350,0x811350,0x668
+TeamB_CMapItemLabels::addMemoryLabel812950,0x812950,0x208

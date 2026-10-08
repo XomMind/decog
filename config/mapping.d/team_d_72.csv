@@ -1,0 +1,4 @@
+# team_d_72: CompanionData::upgrade, per-turn update and summon (src/game/team_d_72.cpp)
+CompanionData::upgrade,0x7aba60,0x51d
+CompanionData::unknown7ab2b0,0x7ab2b0,0x7ad
+CompanionData::unknown7aa680,0x7aa680,0x85a

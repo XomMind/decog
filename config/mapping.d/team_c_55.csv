@@ -1,0 +1,2 @@
+# team_c_55: Cartographer2D::findPath (int overload) (src/pathing/cartographer2d.cpp)
+?findPath@Cartographer2D@@QAE_NHHHHPAVCartographer2DMoveCost@@PAXAAV?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@@Z,0x40d280,0xad0

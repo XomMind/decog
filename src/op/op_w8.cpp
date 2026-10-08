@@ -388,9 +388,11 @@ class Item
 {
 public:
 	int unknown44aec0() throw();	// NOTE: placeholder name (ICF'd trivial getter)
+	int unknown44aec0Nothrow() throw();	// NOTE: placeholder name (same function; private name keeps the throw() declaration under LTCG)
 	int unknown457b30();	// NOTE: placeholder name
 	int unknown4578c0();	// NOTE: placeholder name
 	int unknown4578a0() throw();	// NOTE: placeholder name
+	int unknown4578a0Nothrow() throw();	// NOTE: placeholder name (same function; private name keeps the throw() declaration under LTCG)
 	int unknown457880();	// NOTE: placeholder name
 	bool unknown457d70();	// NOTE: placeholder name
 	int unknown457f90();	// NOTE: placeholder name
@@ -468,8 +470,10 @@ public:
 	bool isValid() const;
 	bool isNull() const;
 	bool operator!=(HItem other) const throw();
+	bool notEqual_9b6510(HItem other) const throw();	// NOTE: placeholder name (operator!= under a private name, so LTCG keeps this TU's throw())
 	bool operator==(HItem other) const;
 	Item *operator->() const throw();	// 0x9b65b0
+	Item *get_9b65b0() const throw();	// NOTE: placeholder name (operator-> under a private name, so LTCG keeps this TU's throw())
 };
 
 struct XColor
@@ -1519,8 +1523,8 @@ bool Entity::unknown5c9b10()
 	filled[2] = true;
 	for (unsigned int j = 0; j < parts.size(); j++)
 	{
-		if (parts[j]->unknown44aec0() <= 3)
-			filled[parts[j]->unknown4578a0()] = true;
+		if (parts[j].get_9b65b0()->unknown44aec0Nothrow() <= 3)
+			filled[parts[j].get_9b65b0()->unknown4578a0Nothrow()] = true;
 	}
 	return opw8_contains(filled,false);
 }
@@ -4839,7 +4843,7 @@ int Entity::unknown5db5f0(HItem item, bool ignoreSlots, bool ignoreStorage, bool
 			return 0x16;
 		}
 	}
-	if (!quiet && item->unknown4579d0() && item->unknown4579f0().find(opw8_caed27,0) != string::npos && (item != opw8_cec088->unknown188 || opw8_tickCount > opw8_cec088->unknown18C + 8000))
+	if (!quiet && item->unknown4579d0() && item->unknown4579f0().find(opw8_caed27,0) != string::npos && (item.notEqual_9b6510(opw8_cec088->unknown188) || opw8_tickCount > opw8_cec088->unknown18C + 8000))
 	{
 		opw8_cec088->unknown188 = item;
 		opw8_cec088->unknown18C = opw8_tickCount;
@@ -5606,7 +5610,7 @@ void Entity::unknown5da0a0()
 				for (unsigned int i = 0; i < opw8_d25de0.size(); i++)
 				{
 					if (!opw8_d25de0[i]->unknown170.empty() && opw8_d25de0[i]->unknown24 == 1 && opw8_inRange(location - 2,opw8_d25de0[i]->unknown68,location + 2) && opw8_cf4910[i] == 0)
-						candidates.push_back(i);
+						((vector<int> &)candidates).push_back((int &)i);	// NOTE: the exe calls vector<int>::push_back here
 				}
 				vector<unsigned int> chosen;
 				int count = rng.rangeInt(3.0f,5.0f);

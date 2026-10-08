@@ -13,6 +13,8 @@
 // Cursor draw/restore use positive hidden/surface guards; the draw path also
 // requires SDL mouse focus and advances its unsigned redraw deadline by 5000ms.
 #include <stddef.h>
+#include <string>
+using namespace std;
 
 
 typedef unsigned char Uint8;
@@ -105,7 +107,8 @@ class XMouse // NOTE: placeholder layout (object at 0xcefa94)
 public:
 	int x;
 	int y;
-	char padding08[0x10 - 0x08];
+	int unknown08;	// NOTE: placeholder name
+	int unknown0c;	// NOTE: placeholder name
 	int mouseX;
 	int mouseY;
 	unsigned char cursorHidden;
@@ -116,6 +119,7 @@ public:
 	unsigned int nextRedrawTick;
 	XConsole *hoveredConsole;
 
+	XMouse();	// 0x431e30 ("XCursor()" in its log messages)
 	void setPosition(int x_, int y_); // NOTE: placeholder name (0x41a850)
 	void updatePosition(); // NOTE: placeholder name (0x41a8b0)
 	void renderCursor(); // NOTE: placeholder name (0x41a940)
@@ -124,6 +128,60 @@ public:
 	void updateHoveredConsole(); // NOTE: placeholder name (0x4321d0)
 };
 extern XMouse *mouse; // 0xcefa94
+
+class XResourceMgr
+{
+public:
+	bool fileExists(string path);	// NOTE: placeholder name (0x415590)
+};
+extern XResourceMgr *resourceMgr;	// NOTE: placeholder name (0xcefa88)
+void logMessage(string message);	// NOTE: placeholder name
+void logError(string location, string message);	// NOTE: placeholder name
+SDL_Surface *OpR1a_createSurface(int width, int height, bool alpha);	// NOTE: placeholder name (0x413e80)
+extern "C" __declspec(dllimport) SDL_Surface *IMG_Load(const char *file);
+extern "C" void SDL_FreeSurface(SDL_Surface *surface);
+extern "C" unsigned int SDL_MapRGB(SDL_PixelFormat *format, unsigned char r, unsigned char g, unsigned char b);
+extern "C" int SDL_SetColorKey(SDL_Surface *surface, unsigned int flag, unsigned int key);
+extern "C" int SDL_ShowCursor(int toggle);
+
+XMouse::XMouse()
+{
+	x = 0;
+	y = 0;
+	unknown08 = 0;
+	unknown0c = 0;
+	mouseX = 0;
+	mouseY = 0;
+	cursorHidden = false;
+	cursorSurface = NULL;
+	backgroundSurface = NULL;
+	nextRedrawTick = 0;
+	hoveredConsole = NULL;
+	if (resourceMgr->fileExists("rex/cursor.png"))
+	{
+		cursorSurface = IMG_Load("rex/cursor.png");
+		if (cursorSurface == NULL)
+			logError("XCursor()","Failed to load software cursor from source \"" + string("rex/cursor.png") + "\", falling back on hardware cursor!");
+		else
+		{
+			logMessage("Loaded software cursor " + string("rex/cursor.png"));
+			backgroundSurface = OpR1a_createSurface(cursorSurface->w,cursorSurface->h,false);
+			if (backgroundSurface == NULL)
+			{
+				logError("XCursor()","Failed to create background texture to support software cursor, falling back on hardware cursor!");
+				SDL_FreeSurface(cursorSurface);
+				cursorSurface = NULL;
+			}
+			else
+			{
+				backgroundRect.w = cursorSurface->w;
+				backgroundRect.h = cursorSurface->h;
+				SDL_SetColorKey(cursorSurface,0x1000,SDL_MapRGB(cursorSurface->format,255,0,255));
+				SDL_ShowCursor(0);
+			}
+		}
+	}
+}
 
 void XMouse::setPosition(int x_, int y_)
 {

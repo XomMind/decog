@@ -102,6 +102,7 @@ public:
 	int unknown45a920();	// NOTE: placeholder name
 	bool isPlayer();
 	Pos &getPosition() throw();	// NOTE: placeholder name (0x45a4a0)
+	Pos &getPositionNothrow() throw();	// NOTE: placeholder name (same function; private name keeps the throw() declaration under LTCG)
 	string *getNameAt0c();	// NOTE: placeholder name (folded getter 0x416f40)
 	void unknown45b070(const string &name);	// NOTE: placeholder name
 	void unknown642940(class HProp item, int a, int b, int c, int d);	// NOTE: placeholder name
@@ -116,6 +117,7 @@ public:
 	bool isValid() const;
 	void reset();	// NOTE: placeholder name (0x9b7270)
 	Entity *operator->() const throw();	// 0x9b6570
+	Entity *get_9b6570() const throw();	// NOTE: placeholder name (operator-> under a private name, so LTCG keeps this TU's throw())
 };
 
 class OpW1_Item	// NOTE: placeholder name
@@ -237,6 +239,7 @@ public:
 	void unknown72e8e0(int value);	// NOTE: placeholder name
 	void unknown729eb0(const Pos &pos, const string &text, int a, int b);	// NOTE: placeholder name
 	HEntity getPlayer() throw();	// 0x4630f0
+	HEntity getPlayerNothrow() throw();	// NOTE: placeholder name (same function; private name keeps the throw() declaration under LTCG)
 	bool unknown71bbd0();	// NOTE: placeholder name
 };
 extern OpW1_World *opw1_world;	// NOTE: placeholder name
@@ -2367,7 +2370,7 @@ bool opw1_compareResults(OpW1_Result *a, OpW1_Result *b);	// NOTE: placeholder n
 OpW1_Result::OpW1_Result(int x_, int y_)
 {
 	set(x_,y_);
-	distance = opw1_distance(opw1_world->getPlayer()->getPosition(),*this);
+	distance = opw1_distance(opw1_world->getPlayerNothrow().get_9b6570()->getPositionNothrow(),*this);
 }
 
 bool CSearchResults::updateResults(bool force)

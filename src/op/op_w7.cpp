@@ -96,6 +96,7 @@ public:
 	void updateBase429e30();	// NOTE: placeholder name (0x429e30, XConsole::update body)
 	void removeSubconsole(XConsole *console);
 	XConsole *getParent4();	// NOTE: placeholder name (folded +4 getter)
+	XConsole *getParent4nt() throw();	// NOTE: private nothrow alias of the folded +4 getter (keeps ~CEffect free of an EH frame)
 	void setPos(int x, int y);
 	void setBackAll_418410(XColor color);	// NOTE: placeholder name
 	void resetBack_418450() throw();	// NOTE: placeholder name
@@ -920,6 +921,7 @@ class CEffect : public Console
 {
 public:
 	CEffect(XConsole *parent, const Rect &rect, int type_);
+	virtual ~CEffect();	// 0x95fa70, defined after CEffects
 
 	int type;	// NOTE: placeholder name
 };
@@ -956,6 +958,7 @@ public:
 	CEffects(XConsole *parent);
 	virtual ~CEffects();
 	virtual void update();
+	void unknown4b31c0();	// NOTE: placeholder name (defined in cc_r2_17.cpp)
 
 	int unknown6c;	// NOTE: placeholder name
 	int unknown70;	// NOTE: placeholder name
@@ -1004,6 +1007,12 @@ public:
 	int unknown1b0;	// NOTE: placeholder name
 	int unknown1b4;	// NOTE: placeholder name
 };
+
+CEffect::~CEffect()
+{
+	if (type == 0)
+		((CEffects *)getParent4nt())->unknown4b31c0();
+}
 
 CEffects::CEffects(XConsole *parent)
 	: Console(parent,1,1,0,0,0,false,-1)
@@ -2672,7 +2681,7 @@ void OpW7_trim_408ad0(string &text);	// NOTE: placeholder name
 void OpW7_replaceChar_4081c0(string &text, char from, char to);	// NOTE: placeholder name
 void OpC_removeChar_408100(string &text, char c);	// NOTE: placeholder name
 void OpC_replaceAll_407f00(string &text, string from, string to);	// NOTE: placeholder name
-void OpW7_split_408860(string &text, char separator, char quote, vector<string> &out, bool flag);	// NOTE: placeholder name
+void OpW7_split_408860(const string &text, char separator, char quote, vector<string> &out, bool flag);	// NOTE: placeholder name
 float stringToFloat_405ab0(const string &text);	// NOTE: placeholder name
 
 void OpW7_parseLine(string &text, vector<string> &out)	// NOTE: placeholder name

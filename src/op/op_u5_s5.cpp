@@ -21,6 +21,16 @@ struct Point
 struct Pos : public Point
 {
 	Pos(int v);	// 0x409990
+	Pos(int x_, int y_);
+};
+
+struct OpU5_PointVar	// NOTE: placeholder name; a Point-like local whose default ctor is 0x453b40 (-1,-1) and whose operator= folds into Point's copy ctor
+{
+	int x;
+	int y;
+
+	OpU5_PointVar();	// 0x453b40
+	OpU5_PointVar &operator=(const Point &p);
 };
 
 struct XColor
@@ -66,6 +76,9 @@ public:
 	void setFore_417f80(int x, int y, XColor color);	// NOTE: placeholder name
 	void setBack_417fc0(int x, int y, XColor color, int mode);	// NOTE: placeholder name
 	void setIgnoreMouse_4184a0(bool value);	// NOTE: placeholder name
+	void print(int x, int y, const string &text);
+	void putChar_4180b0(int x, int y, int ch);	// NOTE: placeholder name
+	void resetBack_418450();	// NOTE: placeholder name
 	void unknown429fe0(XConsole *console, const Point &pos, int flag);	// NOTE: placeholder name
 	bool inputBase429d00(XEvent *event);	// NOTE: placeholder name (XConsole::input body)
 	void updateBase429e30();	// NOTE: placeholder name (XConsole::update body)
@@ -83,12 +96,14 @@ class Console : public XConsole
 {
 public:
 	Console(XConsole *parent, int width, int height, int x, int y, int font, bool hidden, int layer);
+	virtual ~Console();
 	virtual void open();	// NOTE: placeholder name
 	virtual void close();	// NOTE: placeholder name
 	virtual int getFrame();	// NOTE: placeholder name
 	virtual void trigger(const string &command, int value);	// NOTE: placeholder name
 
 	void unknown48c3c0(int value);	// NOTE: placeholder name
+	void drawFrame(void *area, XColor color, bool thin, bool lines);	// NOTE: placeholder name
 
 	int unknown60;
 	OpU5_Engine *engine;
@@ -123,12 +138,14 @@ public:
 	void unknown7b2870();	// NOTE: placeholder name
 };
 
-class AsciiImage
+class OpU5_AsciiImage	// NOTE: placeholder name (AsciiImage); file-unique so the delete in CCommands() pairs its own deleting destructor with 0x7c6d00
 {
 public:
-	AsciiImage() throw();	// 0x4588d0
-	~AsciiImage();
+	OpU5_AsciiImage() throw();	// 0x4588d0
+	~OpU5_AsciiImage();
 	bool load(const string &file, int font, Pos *offset, int width, int height);
+
+	char pad[0x10];
 };
 
 class CCommandsButton : public Console
@@ -180,8 +197,24 @@ public:
 class Unknown_c34bcc : public Console
 {
 public:
+	Unknown_c34bcc(XConsole *parent, int x, int y, int width, int height, int value);	// 0x496320
 	void setColor();	// 0x496370
+
+	int unknown6c;	// NOTE: placeholder name
 };
+
+
+class OpQ5_U9d7530	// NOTE: placeholder name (elements of the vector at 0xd25de0)
+{
+public:
+	char pad00[0x78];
+	int glyph;	// NOTE: placeholder name
+};
+template <class T> bool OpQ5_findByName(vector<T*> &v, const string &name, T *&result);	// NOTE: placeholder name (0x9d7de0; declared with a const string& here)
+extern vector<OpQ5_U9d7530*> opU5_units_d25de0;	// NOTE: placeholder name
+extern XColor *opU5_color_cfe674;	// NOTE: placeholder name
+extern int opU5_anim_cef7f8[];	// NOTE: placeholder name
+extern string opU5_strings_d161d8[];	// NOTE: placeholder name
 
 class OpW5_Console4931e0 : public Console	// NOTE: placeholder name
 {
@@ -199,6 +232,20 @@ class CTitleAnimated : public Console
 {
 public:
 	void unknown4b29b0();	// NOTE: placeholder name
+};
+
+class Unknown_c34c00 : public OpW5_Console4963e0
+{
+public:
+	Unknown_c34c00(XConsole *parent, int x, int y, int width, int height);	// 0x4963a0
+};
+
+class CArtAnimated : public CTitleAnimated
+{
+public:
+	CArtAnimated(XConsole *parent, OpU5_AsciiImage *image, int x, int y, bool hidden, int anim, int unknown1, int unknown2, const Pos &offset, int width, int height);
+
+	char pad6c[0x88 - 0x6c];
 };
 
 class OpU5_Rex	// NOTE: placeholder name (object at 0xd223f0)
@@ -327,6 +374,7 @@ public:
 class CCommands : public Console
 {
 public:
+	CCommands(XConsole *parent);
 	virtual bool input(void *event);	// 0x7d0aa0 (defined in src/game/team_d_58.cpp)
 	virtual void inputAscii(int key, int mode);
 	virtual void update();
@@ -345,6 +393,7 @@ public:
 	void unknown7d6690();	// NOTE: placeholder name
 	void unknown7d67c0(XConsole *other);	// NOTE: placeholder name
 	void unknown7d08c0();	// NOTE: placeholder name
+	void addGallerySection(const Point &origin, const string &title, vector<int> &items);	// NOTE: placeholder name (0x7d5cf0)
 
 	int ID;	// NOTE: placeholder name
 	vector<CCommandsButton*> tabButtons;	// NOTE: placeholder name
@@ -373,7 +422,7 @@ public:
 	unsigned int unknown144;	// NOTE: placeholder name
 	int unknown148;	// NOTE: placeholder name
 	vector<Unknown_c34b98*> list14c;	// NOTE: placeholder name
-	AsciiImage *unknown15c;	// NOTE: placeholder name
+	OpU5_AsciiImage *unknown15c;	// NOTE: placeholder name
 	vector<Unknown_c34bcc*> list160;	// NOTE: placeholder name
 	vector<OpW5_Console4963e0*> list170;	// NOTE: placeholder name
 	vector<CTitleAnimated*> list180;	// NOTE: placeholder name
@@ -388,6 +437,31 @@ public:
 };
 
 extern CCommands *opU5_cec03c;	// NOTE: placeholder name
+
+// 0x7c6850. The OpU5_AsciiImage ctor is declared throw() (so the new gets no EH state); &Pos(-1) passes the address
+// of a temporary (MSVC extension) to match the uncopied Pos temp.
+CCommands::CCommands(XConsole *parent)
+	: Console(parent,opU5_rex.unknown418980(),opU5_rex.unknown4189a0(),0,0,0,true,-1),
+	ID(opU5_flag_d28d6c ? 1 : 0),
+	unknownb0(false),
+	unknownc4(0), unknownc8(0), unknowncc(0), unknownd0(0),
+	page(0),
+	unknownf8(0), unknownfc(0),
+	unknown104(0), unknown108(0),
+	unknown13c(0),
+	unknown144(0), unknown148(50),
+	unknown15c(0),
+	unknown190(0), unknown194(0), unknown198(0),
+	unknown1cc(0), unknown1d0(0)
+{
+	OpU5_AsciiImage *art = new OpU5_AsciiImage();
+	unknown15c = art;
+	if (!unknown15c->load(string() + "data/art/" + "credits",4,&Pos(-1),0,0))
+	{
+		delete unknown15c;
+		unknown15c = 0;
+	}
+}
 
 void OpU5_unknown7d1cc0(int index, const string &name)	// NOTE: placeholder name
 {
@@ -617,7 +691,6 @@ void CCommands::update()
 		return;
 	switch (unknown60)
 	{
-	default:
 		break;
 	case 1:
 		for (unsigned int i = 0; i < tabButtons.size(); i++)
@@ -689,4 +762,61 @@ void CCommands::update()
 		break;
 	}
 	updateBase429e30();
+}
+
+// 0x7d5cf0. Local names (point/text/label/base/x/unit) are chosen for the frame layout; OpU5_PointVar and the
+// const string& findByName declaration keep their call shapes without touching shared Point/template names.
+void CCommands::addGallerySection(const Point &origin, const string &title, vector<int> &items)
+{
+	OpU5_PointVar point;
+	string text = "=  " + title + "  =";
+	point = origin;
+	point.x -= text.size() / 2;
+	list160.push_back(new Unknown_c34bcc(this,point.x,point.y,text.size(),1,1));
+	list160.back()->print(0,0,text);
+	point.y += 2;
+	for (unsigned int i = 0; i < items.size(); i++)
+	{
+		Point label(origin.x - opU5_strings_d161d8[items[i]].size() / 2,point.y);
+		list160.push_back(new Unknown_c34bcc(this,label.x,label.y,opU5_strings_d161d8[items[i]].size(),1,2));
+		list160.back()->print(0,0,opU5_strings_d161d8[items[i]]);
+		point.y++;
+		Point base(origin.x - 0x13,point.y);
+		list170.push_back(new Unknown_c34c00(this,base.x,base.y,0x13,5));
+		list170.back()->drawFrame(NULL,*opU5_color_cfe674,true,true);
+		if (unknown15c)
+			list180.push_back(new CArtAnimated(this,unknown15c,base.x + 2,base.y + 1,false,opU5_anim_cef7f8[items[i]],-1,-1,Pos(0,items[i] * 3),0x11,3));
+		if (items[i] == 5)
+		{
+			unknown190 = new Console(this,0x11,3,base.x + 2,base.y + 1,2,false,-1);
+			unknown190->resetBack_418450();
+			int x = 1;
+			OpQ5_U9d7530 *unit;
+			if (OpQ5_findByName(opU5_units_d25de0,"Y-45 Defender",unit))
+				unknown190->putChar_4180b0(x,1,unit->glyph);
+			x += 2;
+			if (OpQ5_findByName(opU5_units_d25de0,"T-07 Excavator",unit))
+				unknown190->putChar_4180b0(x,1,unit->glyph);
+			x += 2;
+			if (OpQ5_findByName(opU5_units_d25de0,"O-16 Technician",unit))
+				unknown190->putChar_4180b0(x,1,unit->glyph);
+			x += 2;
+			if (OpQ5_findByName(opU5_units_d25de0,"H-55 Commando",unit))
+				unknown190->putChar_4180b0(x,1,unit->glyph);
+			x += 2;
+			if (OpQ5_findByName(opU5_units_d25de0,"G-34 Mercenary",unit))
+				unknown190->putChar_4180b0(x,1,unit->glyph);
+			x += 2;
+			if (OpQ5_findByName(opU5_units_d25de0,"R-06 Scavenger",unit))
+				unknown190->putChar_4180b0(x,1,unit->glyph);
+			x += 2;
+			if (OpQ5_findByName(opU5_units_d25de0,"U-05 Engineer",unit))
+				unknown190->putChar_4180b0(x,1,unit->glyph);
+			x += 2;
+			if (OpQ5_findByName(opU5_units_d25de0,"D-53 Grenadier",unit))
+				unknown190->putChar_4180b0(x,1,unit->glyph);
+			x += 2;
+		}
+		point.y += 5;
+	}
 }

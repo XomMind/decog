@@ -9,15 +9,26 @@ bool Cartographer2D::findPath(const Point &from, const Point &to, Cartographer2D
 
 bool Cartographer2D::findPath(int startX, int startY, int goalX, int goalY, Cartographer2DMoveCost *moveCost, void *data, vector<Point> &path)
 {
-	unsigned int neighborX[9];
-	unsigned int neighborY[9];
-	unsigned int nx, ny;
-	unsigned int curX, curY;
-	unsigned int heapCount;
-	unsigned int i, pos, smallest, nextNode, nbr, scan, resetIndex;
-	int firstNeighbor, lastNeighbor;
-	int cost, newG, swap;
-	bool found;
+	unsigned int amount[9];
+	unsigned int adj[9];
+	unsigned int center;
+	unsigned int base;
+	unsigned int active;
+	unsigned int a1;
+	unsigned int bonus;
+	unsigned int child;
+	unsigned int ally;
+	unsigned int added;
+	unsigned int col;
+	unsigned int adjacent;
+	unsigned int action;
+	unsigned int attempts;
+	int cur;
+	int areas;
+	int a;
+	int behaviour;
+	int attempt;
+	bool clean;
 
 	path.clear();
 
@@ -27,15 +38,15 @@ bool Cartographer2D::findPath(int startX, int startY, int goalX, int goalY, Cart
 	if (!moveCost->isPassable(goalX,goalY,data))
 		return false;
 
-	firstNeighbor = 1;
-	lastNeighbor = diagonals ? 8 : 4;
-	nextNode = 1;
-	found = false;
+	cur = 1;
+	areas = diagonals ? 8 : 4;
+	col = 1;
+	clean = false;
 
 	if (searchID > 1000000)
 	{
-		for (resetIndex = 0; resetIndex < (width+1)*(height+1); resetIndex++)
-			cellState[resetIndex] = 0;
+		for (attempts = 0; attempts < (width+1)*(height+1); attempts++)
+			cellState[attempts] = 0;
 		searchID = 10;
 	}
 
@@ -45,116 +56,116 @@ bool Cartographer2D::findPath(int startX, int startY, int goalX, int goalY, Cart
 	heap[1] = 1;
 	nodeX[1] = startX;
 	nodeY[1] = startY;
-	heapCount = 1;
+	bonus = 1;
 
 	for (;;)
 	{
-		if (heapCount != 0)
+		if (bonus != 0)
 		{
-			curX = nodeX[heap[1]];
-			curY = nodeY[heap[1]];
-			cellState[curX*height+curY] = searchID;
-			heap[1] = heap[heapCount];
-			heapCount--;
+			active = nodeX[heap[1]];
+			a1 = nodeY[heap[1]];
+			cellState[active*height+a1] = searchID;
+			heap[1] = heap[bonus];
+			bonus--;
 
-			smallest = 1;
+			added = 1;
 			for (;;)
 			{
-				i = smallest;
-				if (2*i+1 <= heapCount)
+				child = added;
+				if (2*child+1 <= bonus)
 				{
-					if (nodeF[heap[i]] >= nodeF[heap[2*i]])
-						smallest = 2*i;
-					if (nodeF[heap[smallest]] >= nodeF[heap[2*i+1]])
-						smallest = 2*i+1;
+					if (nodeF[heap[child]] >= nodeF[heap[2*child]])
+						added = 2*child;
+					if (nodeF[heap[added]] >= nodeF[heap[2*child+1]])
+						added = 2*child+1;
 				}
-				else if (2*i <= heapCount)
+				else if (2*child <= bonus)
 				{
-					if (nodeF[heap[i]] >= nodeF[heap[2*i]])
-						smallest = 2*i;
+					if (nodeF[heap[child]] >= nodeF[heap[2*child]])
+						added = 2*child;
 				}
-				if (i != smallest)
+				if (child != added)
 				{
-					swap = heap[i];
-					heap[i] = heap[smallest];
-					heap[smallest] = swap;
+					attempt = heap[child];
+					heap[child] = heap[added];
+					heap[added] = attempt;
 				}
 				else
 					break;
 			}
 
 			if (customNeighbors)
-				firstNeighbor = !moveCost->getNeighbors(curX,curY,(int *)neighborX,(int *)neighborY,data);
+				cur = !moveCost->getNeighbors(active,a1,(int *)amount,(int *)adj,data);
 
-			neighborX[1] = curX-1;	neighborY[1] = curY;
-			neighborX[2] = curX+1;	neighborY[2] = curY;
-			neighborX[3] = curX;	neighborY[3] = curY-1;
-			neighborX[4] = curX;	neighborY[4] = curY+1;
+			amount[1] = active-1;	adj[1] = a1;
+			amount[2] = active+1;	adj[2] = a1;
+			amount[3] = active;	adj[3] = a1-1;
+			amount[4] = active;	adj[4] = a1+1;
 			if (diagonals)
 			{
-				neighborX[5] = curX-1;	neighborY[5] = curY-1;
-				neighborX[6] = curX+1;	neighborY[6] = curY-1;
-				neighborX[7] = curX-1;	neighborY[7] = curY+1;
-				neighborX[8] = curX+1;	neighborY[8] = curY+1;
+				amount[5] = active-1;	adj[5] = a1-1;
+				amount[6] = active+1;	adj[6] = a1-1;
+				amount[7] = active-1;	adj[7] = a1+1;
+				amount[8] = active+1;	adj[8] = a1+1;
 			}
 
-			for (nbr = firstNeighbor; (int)nbr <= lastNeighbor; nbr++)
+			for (adjacent = cur; (int)adjacent <= areas; adjacent++)
 			{
-				nx = neighborX[nbr];
-				ny = neighborY[nbr];
+				center = amount[adjacent];
+				base = adj[adjacent];
 
-				if (nx < width && ny < height && cellState[nx*height+ny] != searchID && moveCost->getMoveCost(curX,curY,nx,ny,data,cost))
+				if (center < width && base < height && cellState[center*height+base] != searchID && moveCost->getMoveCost(active,a1,center,base,data,a))
 				{
-					if (cellState[nx*height+ny] != openMark)
+					if (cellState[center*height+base] != openMark)
 					{
-						heapCount++;
-						pos = heapCount;
-						heap[heapCount] = nextNode;
-						nodeX[nextNode] = nx;
-						nodeY[nextNode] = ny;
-						nextNode++;
-						cellG[nx*height+ny] = cellG[curX*height+curY] + cost;
+						bonus++;
+						ally = bonus;
+						heap[bonus] = col;
+						nodeX[col] = center;
+						nodeY[col] = base;
+						col++;
+						cellG[center*height+base] = cellG[active*height+a1] + a;
 						// heuristic: Manhattan distance to the goal
-						nodeH[heap[pos]] = abs((int)nx-goalX) + abs((int)ny-goalY);
-						nodeF[heap[pos]] = cellG[nx*height+ny] + nodeH[heap[pos]];
-						parentX[nx*height+ny] = curX;
-						parentY[nx*height+ny] = curY;
-						while (pos != 1)
+						nodeH[heap[ally]] = abs((int)center-goalX) + abs((int)base-goalY);
+						nodeF[heap[ally]] = cellG[center*height+base] + nodeH[heap[ally]];
+						parentX[center*height+base] = active;
+						parentY[center*height+base] = a1;
+						while (ally != 1)
 						{
-							if (nodeF[heap[pos]] < nodeF[heap[pos/2]])
+							if (nodeF[heap[ally]] < nodeF[heap[ally/2]])
 							{
-								swap = heap[pos/2];
-								heap[pos/2] = heap[pos];
-								heap[pos] = swap;
-								pos = pos/2;
+								attempt = heap[ally/2];
+								heap[ally/2] = heap[ally];
+								heap[ally] = attempt;
+								ally = ally/2;
 							}
 							else
 								break;
 						}
-						cellState[nx*height+ny] = openMark;
+						cellState[center*height+base] = openMark;
 					}
 					else
 					{
-						newG = cellG[curX*height+curY] + cost;
-						if (newG < cellG[nx*height+ny])
+						behaviour = cellG[active*height+a1] + a;
+						if (behaviour < cellG[center*height+base])
 						{
-							parentX[nx*height+ny] = curX;
-							parentY[nx*height+ny] = curY;
-							cellG[nx*height+ny] = newG;
-							for (scan = 1; scan <= heapCount; scan++)
+							parentX[center*height+base] = active;
+							parentY[center*height+base] = a1;
+							cellG[center*height+base] = behaviour;
+							for (action = 1; action <= bonus; action++)
 							{
-								if (nodeX[heap[scan]] == nx && nodeY[heap[scan]] == ny)
+								if (nodeX[heap[action]] == center && nodeY[heap[action]] == base)
 								{
-									nodeF[heap[scan]] = cellG[nx*height+ny] + nodeH[heap[scan]];
-									pos = scan;
-									while (pos != 1)
+									nodeF[heap[action]] = cellG[center*height+base] + nodeH[heap[action]];
+									ally = action;
+									while (ally != 1)
 									{
-										if (nodeF[heap[pos]] < nodeF[heap[pos/2]])
+										if (nodeF[heap[ally]] < nodeF[heap[ally/2]])
 										{
-											swap = heap[pos/2];
-											heap[pos/2] = heap[pos];
-											heap[pos] = swap;
-											pos = pos/2;
+											attempt = heap[ally/2];
+											heap[ally/2] = heap[ally];
+											heap[ally] = attempt;
+											ally = ally/2;
 										}
 										else
 											break;
@@ -171,12 +182,12 @@ bool Cartographer2D::findPath(int startX, int startY, int goalX, int goalY, Cart
 
 		if (cellState[goalX*height+goalY] == openMark)
 		{
-			found = true;
+			clean = true;
 			break;
 		}
 	}
 
-	if (found)
+	if (clean)
 	{
 		Point p(goalX,goalY);
 		path.push_back(p);
@@ -190,5 +201,5 @@ bool Cartographer2D::findPath(int startX, int startY, int goalX, int goalY, Cart
 		while (p.x != startX || p.y != startY);
 	}
 
-	return found;
+	return clean;
 }

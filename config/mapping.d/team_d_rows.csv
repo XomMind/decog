@@ -1,0 +1,3 @@
+# team_d_rows: mapping rows for already-matching definitions (src/game/batch8.cpp Trap::escapeStasis, src/op/op_w8.cpp opw8_shoveEntities)
+?escapeStasis@Trap@@QAE_NABUPoint@@VHEntity@@@Z,0x65cfe0,0x4d5
+?opw8_shoveEntities@@YA_NPAV?$Array2D@H@@ABUPoint@@V?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@@Z,0x5ddbf0,0x356

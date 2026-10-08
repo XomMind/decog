@@ -2,18 +2,18 @@
 <style>.fg{fill:#1f2328}.mut{fill:#59636e}.trk{fill:#d1d9e0}.bar{fill:#1a7f37}@media (prefers-color-scheme: dark){.fg{fill:#f0f6fc}.mut{fill:#9198a1}.trk{fill:#3d444d}.bar{fill:#3fb950}}</style>
 <text x="20" y="38" font-size="24" font-weight="700" class="fg">COGMIND.EXE</text>
 <text x="20" y="60" font-size="13" class="mut">Beta 17.1 (260906) · 2026-10-07</text>
-<text x="400" y="44" font-size="34" font-weight="700" text-anchor="end" class="fg">40.94%</text>
+<text x="400" y="44" font-size="34" font-weight="700" text-anchor="end" class="fg">46.64%</text>
 <text x="400" y="62" font-size="12" text-anchor="end" class="mut">matched code</text>
 <text x="20" y="96" font-size="13" font-weight="600" class="fg">Code</text>
-<text x="400" y="96" font-size="12" text-anchor="end" class="mut">40.945% · 2,688,763 / 6,566,785 bytes</text>
+<text x="400" y="96" font-size="12" text-anchor="end" class="mut">46.638% · 3,062,635 / 6,566,785 bytes</text>
 <rect x="20" y="104" width="380" height="12" rx="6" class="trk"/>
-<rect x="20" y="104" width="155.6" height="12" rx="6" class="bar"/>
+<rect x="20" y="104" width="177.2" height="12" rx="6" class="bar"/>
 <text x="20" y="142" font-size="13" font-weight="600" class="fg">Functions</text>
-<text x="400" y="142" font-size="12" text-anchor="end" class="mut">95.934% · 12480 / 13009</text>
+<text x="400" y="142" font-size="12" text-anchor="end" class="mut">97.295% · 12662 / 13014</text>
 <rect x="20" y="150" width="380" height="12" rx="6" class="trk"/>
-<rect x="20" y="150" width="364.5" height="12" rx="6" class="bar"/>
+<rect x="20" y="150" width="369.7" height="12" rx="6" class="bar"/>
 <text x="20" y="188" font-size="13" font-weight="600" class="fg">Data</text>
-<text x="400" y="188" font-size="12" text-anchor="end" class="mut">18.872% · 303,848 / 1,610,052 bytes</text>
+<text x="400" y="188" font-size="12" text-anchor="end" class="mut">20.131% · 324,112 / 1,610,052 bytes</text>
 <rect x="20" y="196" width="380" height="12" rx="6" class="trk"/>
-<rect x="20" y="196" width="71.7" height="12" rx="6" class="bar"/>
+<rect x="20" y="196" width="76.5" height="12" rx="6" class="bar"/>
 </svg>

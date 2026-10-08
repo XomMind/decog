@@ -1,0 +1,5 @@
+# team_a_20: string split/wrap and colour-table helpers from the 600-2500 byte band (src/game/team_a_20.cpp)
+?opr5e_wrapText_408e60@@YAHV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HPAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@2@@Z,0x408e60,0x271
+initColorTable_48b9b0,0x48b9b0,0x31d
+OpW7_split_408860,0x408860,0x261
+opt5_433410,0x433410,0x965

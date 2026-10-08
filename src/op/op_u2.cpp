@@ -54,6 +54,7 @@ struct OpU2_Timeline	// NOTE: placeholder name
 {
 	char pad0[0xdc];
 	vector<OpU2_Event> events;
+	bool hasSounds;	// NOTE: placeholder name
 };
 
 class OpU2_Player	// NOTE: placeholder name
@@ -67,7 +68,9 @@ public:
 
 	void unknown50d500(const OpU2_Event &event);	// 0x50d500
 	void unknown50d6c0(int trigger);	// 0x50d6c0
+	void kill();	// 0x50e830
 };
+extern bool opu2_audioDisabled;	// NOTE: placeholder name (0xd28cbc)
 extern unsigned int opu2_ticks;	// NOTE: placeholder name (0xcaed20)
 
 void OpU2_Player::unknown50d500(const OpU2_Event &event)
@@ -912,4 +915,17 @@ string OpU2_Engine::unknown50fc60(const Pos &pos)
 		}
 	}
 	return text;
+}
+
+void OpU2_Player::kill()
+{
+	if (timeline->hasSounds)
+	{
+		do
+		{
+			if (!timeline->events.empty() && !opu2_audioDisabled)
+				unknown50d6c0(2);
+		} while (false);
+	}
+	start = 0;
 }

@@ -10,10 +10,70 @@ using namespace std;
 
 extern unsigned int tickCount;	// NOTE: placeholder name (0xcaed20)
 
-LONG WINAPI crashHandler_421930(EXCEPTION_POINTERS *info);	// NOTE: placeholder name
+LONG crashHandler_421930(EXCEPTION_POINTERS *info);	// NOTE: placeholder name (__cdecl in the exe)
 void installCrashHandler_421920()	// NOTE: placeholder name
 {
-	SetUnhandledExceptionFilter(crashHandler_421930);
+	SetUnhandledExceptionFilter((LPTOP_LEVEL_EXCEPTION_FILTER)crashHandler_421930);
+}
+
+class JLog
+{
+public:
+	void closeFile_410db0();	// NOTE: placeholder name (closes the run.log stream)
+};
+extern JLog *jlog;	// NOTE: placeholder name (0xcefa64)
+extern FILE *crashLog_cefaa4;	// NOTE: placeholder name (0xcefaa4)
+void dumpStack_421d20(unsigned long faultAddress, unsigned char *stackFrame);	// NOTE: placeholder name
+
+// unhandled-exception filter: appends the fault description and a stack dump to run.log, then renames it crash.log
+LONG crashHandler_421930(EXCEPTION_POINTERS *info)	// NOTE: placeholder name
+{
+	const char *msg = "";
+	switch (info->ExceptionRecord->ExceptionCode)
+	{
+		case EXCEPTION_ACCESS_VIOLATION: msg = "ACCESS VIOLATION"; break;
+		case EXCEPTION_DATATYPE_MISALIGNMENT: msg = "DATATYPE MISALIGNMENT"; break;
+		case EXCEPTION_BREAKPOINT: msg = "BREAKPOINT"; break;
+		case EXCEPTION_SINGLE_STEP: msg = "SINGLE STEP"; break;
+		case EXCEPTION_ARRAY_BOUNDS_EXCEEDED: msg = "ARRAY BOUNDS EXCEEDED"; break;
+		case EXCEPTION_FLT_DENORMAL_OPERAND: msg = "FLT DENORMAL OPERAND"; break;
+		case EXCEPTION_FLT_DIVIDE_BY_ZERO: msg = "FLT DIVIDE BY ZERO"; break;
+		case EXCEPTION_FLT_INEXACT_RESULT: msg = "FLT INEXACT RESULT"; break;
+		case EXCEPTION_FLT_INVALID_OPERATION: msg = "FLT INVALID OPERATION"; break;
+		case EXCEPTION_FLT_OVERFLOW: msg = "FLT OVERFLOW"; break;
+		case EXCEPTION_FLT_STACK_CHECK: msg = "FLT STACK CHECK"; break;
+		case EXCEPTION_FLT_UNDERFLOW: msg = "FLT UNDERFLOW"; break;
+		case EXCEPTION_INT_DIVIDE_BY_ZERO: msg = "INT DIVIDE BY ZERO"; break;
+		case EXCEPTION_INT_OVERFLOW: msg = "INT OVERFLOW"; break;
+		case EXCEPTION_PRIV_INSTRUCTION: msg = "PRIV INSTRUCTION"; break;
+		case EXCEPTION_IN_PAGE_ERROR: msg = "IN PAGE ERROR"; break;
+		case EXCEPTION_ILLEGAL_INSTRUCTION: msg = "ILLEGAL INSTRUCTION"; break;
+		case EXCEPTION_NONCONTINUABLE_EXCEPTION: msg = "NONCONTINUABLE EXCEPTION"; break;
+		case EXCEPTION_STACK_OVERFLOW: msg = "STACK OVERFLOW"; break;
+		case EXCEPTION_INVALID_DISPOSITION: msg = "INVALID DISPOSITION"; break;
+		case EXCEPTION_GUARD_PAGE: msg = "GUARD PAGE"; break;
+		default: msg = "(unknown)";
+	}
+	unsigned long kind = info->ExceptionRecord->ExceptionCode;
+	unsigned long value = (unsigned long)info->ExceptionRecord->ExceptionAddress;
+	crashLog_cefaa4 = fopen("run.log","a");
+	if (crashLog_cefaa4 != NULL)
+	{
+		fprintf(crashLog_cefaa4,"\n");
+		fprintf(crashLog_cefaa4,"****************************************************\n");
+		fprintf(crashLog_cefaa4,"*** A Programm Fault occured:\n");
+		fprintf(crashLog_cefaa4,"*** Error code %08X: %s\n",kind,msg);
+		fprintf(crashLog_cefaa4,"****************************************************\n");
+		fprintf(crashLog_cefaa4,"***   Address: %08X\n",value);
+		fprintf(crashLog_cefaa4,"***     Flags: %08X\n",info->ExceptionRecord->ExceptionFlags);
+		dumpStack_421d20(value,(unsigned char *)info->ContextRecord->Ebp);
+		fclose(crashLog_cefaa4);
+		jlog->closeFile_410db0();
+		rename("run.log","crash.log");
+	}
+	printf("*** Terminating\n");
+	printf("\n");
+	return EXCEPTION_EXECUTE_HANDLER;
 }
 
 class TickStamp_427300	// NOTE: placeholder name

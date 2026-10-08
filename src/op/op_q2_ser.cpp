@@ -2684,7 +2684,7 @@ struct OpQ2_Rec6592b0	// NOTE: placeholder name
 	int unknown144;
 	OpQ2_Obj6592b0_148 unknown148;
 	int unknown150;
-	char pad154[0x158 - 0x154];
+	int unknown154;	// NOTE: placeholder name
 	bool unknown158;
 	char pad159[0x15c - 0x159];
 	int unknown15C;
@@ -2744,6 +2744,7 @@ OpQ2_Rec6592b0::OpQ2_Rec6592b0(OpQ2_Stream *stream)
 	opq2_f9d8480(stream,&unknown144);
 	unknown148.f45f040(stream);
 	opq2_f9d8480(stream,&unknown150);
+	unknown154 = 0;
 	opq2_f9cf520(stream,&unknown158);
 	opq2_f9d5880(stream,&unknown15C,opq2_gcfd2ec);
 	opq2_f9d5880(stream,&unknown160,opq2_gcfd2ec);

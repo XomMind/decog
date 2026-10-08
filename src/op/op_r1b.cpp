@@ -466,24 +466,31 @@ void OpR1b_NoiseField::update()
 class XFontData;
 class XRoot;
 
-struct OpR1b_VideoMode	// NOTE: placeholder name
+struct OpR1b_VideoMode	// NOTE: placeholder name (XFont, 0x4c bytes)
 {
 	string name;
 	int unknown1c;
-	char pad20[4];
+	OpR1b_VideoMode *source;	// NOTE: placeholder name
 	int unknown24;
+	char pad28[0x4c - 0x28];
 };
 
 class OpR1b_FontSet	// NOTE: placeholder name
 {
 public:
 	void generateAutoscaledAll();	// 0x431de0
+	bool initAutoscaled(const string &name_, OpR1b_FontSet *base, int scale, int mode, int count);	// 0x4318d0
 
 	string name;
-	vector<XFontData*> fonts;
-	char pad2c[0x30 - 0x2c];
+	vector<OpR1b_VideoMode*> fonts;
+	int unknown2c;	// NOTE: placeholder name
 	int unknown30;	// NOTE: placeholder name
 	bool unknown34;	// NOTE: placeholder name
+	vector<int> unknown38;	// NOTE: placeholder name
+	vector<int> unknown48;	// NOTE: placeholder name
+	vector<int> unknown58;	// NOTE: placeholder name
+	vector<int> unknown68;	// NOTE: placeholder name
+	vector<int> unknown78;	// NOTE: placeholder name
 };
 
 extern void *screenSurface;	// NOTE: placeholder name (0xcefa80)
@@ -538,6 +545,51 @@ class XConsoleBlit	// NOTE: placeholder name
 public:
 	void blit(void *surface, int flag);	// 0x42a5b0
 };
+
+struct OpR1b_XFontNew	// NOTE: placeholder name (XFont constructor 0x416ad0)
+{
+	OpR1b_XFontNew(REX::FontSetInfo *info, OpR1b_VideoMode *font, OpR1b_VideoMode *source, int size);
+	char pad[0x4c];
+};
+extern REX rex;	// 0xd223f0
+void logMessage(string message);	// NOTE: placeholder name (0x404cb0)
+void logError(string location, string message);	// NOTE: placeholder name (0x404f10)
+std::string intToString(int value);
+bool opU1_checkFontSetFits(int cols, int rows, int mode, bool *removed);	// NOTE: placeholder name (0x42f530)
+
+bool OpR1b_FontSet::initAutoscaled(const string &name_, OpR1b_FontSet *base, int scale, int mode, int count)
+{
+	name = name_;
+	unknown34 = false;
+	logMessage("[font set: " + name + "]");
+	if (scale > 9)
+	{
+		logError("XFontSet::initAutoscaled()","Scaling beyond a factor of 9 not currently supported");
+		return false;
+	}
+	unknown2c = base->unknown2c * scale;
+	unknown30 = base->unknown30 * scale;
+	if (!opU1_checkFontSetFits(unknown2c,unknown30,mode,&unknown34))
+		return false;
+	for (int i = 0; i < count; i++)
+	{
+		OpR1b_VideoMode *font = rex.unknown425d50(&base->fonts[i]->name,base->fonts[i]->unknown24 * scale,(int)&rex.fontSets[i]);
+		if (font != NULL)
+			fonts.push_back(font);
+		else
+		{
+			rex.videoModes.push_back((OpR1b_VideoMode *)new OpR1b_XFontNew(&rex.fontSets[i],base->fonts[i],base->fonts[i]->source ? base->fonts[i]->source : base->fonts[i],base->fonts[i]->unknown24 * scale));
+			fonts.push_back(rex.videoModes.back());
+		}
+		logMessage("..." + fonts.back()->name + " (*" + intToString(fonts.back()->unknown24) + ")");
+	}
+	unknown38 = base->unknown38;
+	unknown48 = base->unknown48;
+	unknown58 = base->unknown58;
+	unknown68 = base->unknown68;
+	unknown78 = base->unknown78;
+	return true;
+}
 
 void REX::unknown423f40(int index, bool flag)
 {

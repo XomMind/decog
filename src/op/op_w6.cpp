@@ -2177,13 +2177,13 @@ CInfoTitle::CInfoTitle(XConsole *parent, int y, HEntity entity, HItem item, bool
 	string name = entity.isValid() ? *entity->getName416f40() : item->getName(1,0);
 	int size = entity.isValid() ? entity->getSize() : 1;
 	name += " [";
-	int glyphX = name.size();
+	int pos = name.size();
 	name.append(size*2,' ');
 	name += "]";
 	Console::resize(name.size(),size);
 	setPos(Pos(centerOffset(getWidth44b0d0(),getParent4()->getWidth44b0d0()),getPos().y));
 	print(0,0,name);
-	glyph = new CInfoTitleGlyph(this,glyphX,size,entity,item,flag);
+	glyph = new CInfoTitleGlyph(this,pos,size,entity,item,flag);
 }
 
 void CInfoTitle::highlight()

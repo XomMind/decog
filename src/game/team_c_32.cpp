@@ -69,7 +69,7 @@ struct C32_Obj2 { char pad[0x1af]; bool f1af; };
 struct C32_Obj { int getA(); C32_Obj2 *getB(); int getNestedField(); };	// NOTE: placeholder (folded GetCachedSize/getNestedField)
 struct C32_Item { int v; C32_Obj *get224(); };
 extern vector<C32_Item> g_cf4944;
-void g_4884c0(); void g_48a3f0(); void g_48ae20();	// NOTE: placeholder names (thread functions)
+void g_4884c0(); int c44_uploadRunData_48a3f0(void *data); void g_48ae20();	// NOTE: placeholder names (thread functions; 0x48a3f0 is in team_c_44.cpp)
 
 class Scorekeeper	// NOTE: placeholder layout
 {
@@ -1080,7 +1080,7 @@ string Scorekeeper::outputScoresheet(bool isDump)
 		lists->f40 = f68c;
 		lists->f44 = fc8;
 		lists->f60 = f110;
-		if (!(opY2_startNetworkThread(4, 0, &g_48a3f0, lists)))
+		if (!(opY2_startNetworkThread(4, 0, &c44_uploadRunData_48a3f0, lists)))
 	{
 		delete lists;
 	}

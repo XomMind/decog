@@ -28,10 +28,25 @@ public:
 	char pad04[0x60 - 0x04];
 };
 
+struct Pos
+{
+	int x;
+	int y;
+
+	Pos(int x_, int y_);	// 0x46ca20
+};
+
+class EngineItem	// NOTE: placeholder name
+{
+public:
+	void unknown50de10();	// NOTE: placeholder name
+};
+
 class Engine
 {
 public:
 	void killGroup(string group);
+	EngineItem *unknown50fb50(Engine *engine, int type, Pos *a, Pos *b, Pos *c, Pos *d, int value);	// NOTE: placeholder name
 };
 
 class Console : public XConsole
@@ -106,11 +121,57 @@ void CInfoButton::mouseLeave()
 	animate("A_ButtonHover_End_SHEL_HOV_OK");
 }
 
+class HProp
+{
+public:
+	int ID;
+	HProp() throw();	// 0x9b6590
+};
+extern int opr2_lineFx_cebfac;	// NOTE: placeholder name
+extern int opr2_textFx_cebf18;	// NOTE: placeholder name
+extern Pos opr2_fxPos_cfbec0;	// NOTE: placeholder name
+
 class CInfoLine : public Console
 {
 public:
+	CInfoLine(XConsole *parent, int y, int item_, bool effects, string left, string right);	// 0x4ae7f0
 	virtual void mouseLeave();	// 0x4aeae0
+
+	int item;	// NOTE: placeholder name
+	HProp prop;	// NOTE: placeholder name
 };
+
+CInfoLine::CInfoLine(XConsole *parent, int y, int item_, bool effects, string left, string right)
+	: Console(parent,parent->getWidth() - 2,1,1,y,0,false,-1)
+	, item(item_)
+{
+	if (effects)
+	{
+		do
+		{
+			for (int x = Pos(0x17,0).x; x < Pos(0x17,0).x + 0x16; x++)
+				engine->unknown50fb50(engine,opr2_lineFx_cebfac,&Pos(x,Pos(0x17,0).y),&opr2_fxPos_cfbec0,0,0,9)->unknown50de10();
+		} while (false);
+	}
+	if (!left.empty())
+	{
+		printAligned(0x15,0,2,left);
+		do
+		{
+			for (int x = Pos(0x15 - (left.size() - 1),0).x; x < Pos(0x15 - (left.size() - 1),0).x + left.size(); x++)
+				engine->unknown50fb50(engine,opr2_textFx_cebf18,&Pos(x,Pos(0x15 - (left.size() - 1),0).y),&opr2_fxPos_cfbec0,0,0,9)->unknown50de10();
+		} while (false);
+	}
+	if (!right.empty())
+	{
+		print(0x17,0,right);
+		do
+		{
+			for (int x = Pos(0x17,0).x; x < Pos(0x17,0).x + right.size(); x++)
+				engine->unknown50fb50(engine,opr2_textFx_cebf18,&Pos(x,Pos(0x17,0).y),&opr2_fxPos_cfbec0,0,0,9)->unknown50de10();
+		} while (false);
+	}
+}
 
 void CInfoLine::mouseLeave()
 {

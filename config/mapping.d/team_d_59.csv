@@ -1,3 +1,5 @@
-# team_d_59: explosion propagation 0x514ee0, 0x514950 (src/game/team_d_59.cpp)
+# team_d_59: explosion propagation 0x514ee0, 0x514950, 0x515790, 0x515250 (src/game/team_d_59.cpp)
 Blast59::unknown514ee0,0x514ee0,0x369
 Blast59::unknown514950,0x514950,0x58c
+Blast59::unknown515250,0x515250,0x53a
+Blast59::unknown515790,0x515790,0x318

@@ -429,14 +429,159 @@ public:
 extern OpU5s4_DataLoader *opU5s4_dataLoader;	// NOTE: placeholder name (0xcefaa8)
 extern vector<int> opU5s4_d1d078;	// NOTE: placeholder name
 
+class OpU5s4_EntityType	// NOTE: placeholder name
+{
+public:
+	char pad000[0x1ac];
+	string name;	// NOTE: placeholder name
+};
+
+class OpU5s4_Entity	// NOTE: placeholder name (Entity)
+{
+public:
+	int getFaction_cbd();	// NOTE: placeholder name (Entity::getFaction)
+	OpU5s4_EntityType *getType_cbd();	// NOTE: placeholder name (a folded getter)
+	string &getName_cbd();	// NOTE: placeholder name (a folded getter)
+};
+
+struct OpU5s4_HEntity	// NOTE: placeholder name (HEntity); file-unique so its calls pair apart from other files'
+{
+	int ID;
+
+	bool isValid_cbd() const;	// NOTE: placeholder name (HItem::isValid, folded)
+	OpU5s4_Entity *operator->() const;
+};
+
+class OpU5s4_Cell	// NOTE: placeholder name (Cell)
+{
+public:
+	OpU5s4_HEntity getEntity_cbd();	// NOTE: placeholder name (Cell::getEntity)
+};
+
+class OpU5s4_CellMap	// NOTE: placeholder name (Array2D<Cell*> at 0xcfd44c)
+{
+public:
+	int getWidth_cbd();	// NOTE: placeholder name
+	int getHeight_cbd();	// NOTE: placeholder name
+	OpU5s4_Cell **at_cbd(int x, int y);	// NOTE: placeholder name
+};
+extern OpU5s4_CellMap opU5s4_cells_cfd44c;	// NOTE: placeholder name
+
+class OpU5s4_Brawler	// NOTE: placeholder name (OpR1h_EntityName, 0x24 bytes)
+{
+public:
+	OpU5s4_Brawler(OpU5s4_HEntity entity_, int value_);	// NOTE: placeholder name
+
+	OpU5s4_HEntity entity;	// NOTE: placeholder name
+	string name;	// NOTE: placeholder name
+	int value;	// NOTE: placeholder name
+};
+
+class OpU5s4_Grid	// NOTE: placeholder name (Array2D<int>)
+{
+public:
+	OpU5s4_Grid();	// NOTE: placeholder name
+	~OpU5s4_Grid();	// NOTE: placeholder name
+	void resize_cbd(int width, int height, int value);	// NOTE: placeholder name
+	void fill_cbd(int value);	// NOTE: placeholder name (0x9cf020)
+
+	char pad[0xc];
+};
+
+void opU5s4_initColorTable_48b9b0();	// NOTE: placeholder name
+void opU5s4_fillShuffled32(vector<int> &pool);	// NOTE: placeholder name
+int opU5s4_popRandom(vector<int> &pool);	// NOTE: placeholder name
+bool opU5s4_removeValue_9d51d0(vector<int> &pool, int value);	// NOTE: placeholder name
+template <class T> void opU5s4_readObjects(istream &stream, vector<T*> &v, int skip);	// NOTE: placeholder name
+template <class T> void opU5s4_writeObjects(ostream &stream, vector<T*> &v);	// NOTE: placeholder name
+template <class T> void opU5s4_eraseAt(vector<T> &v, int index);	// NOTE: placeholder name
+template <class T> void opU5s4_deleteObjectAndStep(vector<T*> &v, unsigned int &index);	// NOTE: placeholder name
+void logError(string location, string message);	// NOTE: placeholder name
+
 class CBD
 {
 public:
 	CBD();	// 0x7ac590
 	~CBD();
 
-	char pad00[0x2c];
+	vector<OpU5s4_Brawler*> brawlers;	// NOTE: placeholder name
+	vector<OpU5s4_Brawler*> brawlers2;	// NOTE: placeholder name
+	OpU5s4_Grid grid;	// NOTE: placeholder name
 };
+
+// 0x7ac590. Entity/cell helpers use file-unique placeholder names (stubs in every build), and a matched
+// entity jumps to the next record with goto (the exe skips deleteObjectAndStep). Local names (ranks/input/
+// entities/result) are chosen for the frame layout.
+CBD::CBD()
+{
+	opU5s4_initColorTable_48b9b0();
+	vector<int> ranks;
+	opU5s4_fillShuffled32(ranks);
+	grid.resize_cbd(0xe,0x20,0);
+	grid.fill_cbd(0);
+	gzifstream input((string() + "data/gen/cubebrawl.bin").c_str(),ios::binary);
+	if (input.is_open())
+	{
+		opU5s4_readObjects(input,brawlers,0);
+		opU5s4_readObjects(input,brawlers2,0);
+		input.close();
+	}
+	vector<OpU5s4_HEntity> entities;
+	for (int x = 0; x < opU5s4_cells_cfd44c.getWidth_cbd(); x++)
+	{
+		for (int y = 0; y < opU5s4_cells_cfd44c.getHeight_cbd(); y++)
+		{
+			if ((*opU5s4_cells_cfd44c.at_cbd(x,y))->getEntity_cbd().isValid_cbd() && (*opU5s4_cells_cfd44c.at_cbd(x,y))->getEntity_cbd()->getFaction_cbd() == 0x30 && (*opU5s4_cells_cfd44c.at_cbd(x,y))->getEntity_cbd()->getName_cbd() != (*opU5s4_cells_cfd44c.at_cbd(x,y))->getEntity_cbd()->getType_cbd()->name)
+				entities.push_back((*opU5s4_cells_cfd44c.at_cbd(x,y))->getEntity_cbd());
+		}
+	}
+	for (unsigned int i = 0; i < brawlers.size(); i++)
+	{
+		for (unsigned int j = 0; j < entities.size(); j++)
+		{
+			if (entities[j]->getName_cbd() == brawlers[i]->name)
+			{
+				brawlers[i]->entity = entities[j];
+				opU5s4_removeValue_9d51d0(ranks,brawlers[i]->value);
+				opU5s4_eraseAt(entities,j);
+				goto nextA;
+			}
+		}
+		opU5s4_deleteObjectAndStep(brawlers,i);
+	nextA:;
+	}
+	for (unsigned int k = 0; k < brawlers2.size(); k++)
+	{
+		for (unsigned int l = 0; l < entities.size(); l++)
+		{
+			if (entities[l]->getName_cbd() == brawlers2[k]->name)
+			{
+				brawlers2[k]->entity = entities[l];
+				opU5s4_removeValue_9d51d0(ranks,brawlers2[k]->value);
+				opU5s4_eraseAt(entities,l);
+				goto nextB;
+			}
+		}
+		opU5s4_deleteObjectAndStep(brawlers2,k);
+	nextB:;
+	}
+	for (unsigned int m = 0; m < entities.size(); m++)
+	{
+		if (ranks.empty())
+			opU5s4_fillShuffled32(ranks);
+		brawlers.push_back(new OpU5s4_Brawler(entities[m],opU5s4_popRandom(ranks)));
+	}
+	entities.clear();
+	gzofstream result((string() + "data/gen/cubebrawl.bin").c_str(),ios::trunc | ios::binary);
+	if (!result.is_open())
+		logError("CBD::CTOR()","Unable to open/create " + (string() + "data/gen/cubebrawl.bin"));
+	else
+	{
+		opU5s4_writeObjects(result,brawlers);
+		opU5s4_writeObjects(result,brawlers2);
+		result.close();
+	}
+}
 extern CBD *opU5s4_cbd;	// NOTE: placeholder name (0xcefc14)
 
 void OpU5s4_recreateCBD_7ad350()	// NOTE: placeholder name (0x7ad350)

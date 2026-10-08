@@ -1,41 +1,43 @@
 // op_x4c: BS::placeProp (0x6c67b0), Beta 17.1. NOTE: class/method names are placeholders.
+// NOTE (delta, round 13): the helper classes carry OpX4c_ prefixes so that, as in try.sh, the
+// full build links their throw() stubs instead of real definitions and the new expression gets no EH state.
 #include <string>
 #include <vector>
 using namespace std;
 
-struct Point
+struct OpX4c_Point
 {
 	int x;
 	int y;
 
-	Point(const Point &p) throw();	// 0x46ca50
+	OpX4c_Point(const OpX4c_Point &p) throw();	// 0x46ca50
 };
 
-class Prop;
+class OpX4c_Prop;
 
-class HProp
+class OpX4c_HProp
 {
 public:
 	int ID;
-	HProp() throw();	// 0x9b6590
-	Prop *operator->() const throw();	// 0x9b64f0
+	OpX4c_HProp() throw();	// 0x9b6590
+	OpX4c_Prop *operator->() const throw();	// 0x9b64f0
 };
 
-class Cell
+class OpX4c_Cell
 {
 public:
 	bool unknown45d6a0();	// NOTE: placeholder name
-	HProp getProp() throw();	// 0x45d550
-	bool unknown45df50(HProp prop);	// NOTE: placeholder name
+	OpX4c_HProp getProp() throw();	// 0x45d550
+	bool unknown45df50(OpX4c_HProp prop);	// NOTE: placeholder name
 };
 
 template <class T>
-class Array2D	// NOTE: placeholder name
+class OpX4c_Array2D	// NOTE: placeholder name
 {
 public:
-	T &operator()(const Point &p) throw();	// 0x9ced70
+	T &operator()(const OpX4c_Point &p) throw();	// 0x9ced70
 };
-extern Array2D<Cell *> cells;	// 0xcfd44c
+extern OpX4c_Array2D<OpX4c_Cell *> cells;	// 0xcfd44c
 
 struct OpX4c_PropData	// NOTE: placeholder name
 {
@@ -45,25 +47,25 @@ struct OpX4c_PropData	// NOTE: placeholder name
 
 struct OpX4c_PropFactory	// NOTE: placeholder name
 {
-	HProp create(OpX4c_PropData *type);	// 0x793360
+	OpX4c_HProp create(OpX4c_PropData *type);	// 0x793360
 };
 extern OpX4c_PropFactory *opx4c_propFactory;	// 0xcefaa8
 
 struct OpX4c_PropLink	// NOTE: placeholder name
 {
-	OpX4c_PropLink(HProp prop_, int index_);	// 0x45c2e0
+	OpX4c_PropLink(OpX4c_HProp prop_, int index_);	// 0x45c2e0
 
-	HProp prop;
+	OpX4c_HProp prop;
 	int index;
-	HProp unknown08;
-	HProp unknown0C;
+	OpX4c_HProp unknown08;
+	OpX4c_HProp unknown0C;
 	int unknown10;
 	int unknown14;
 	int unknown18;
 	int unknown1C;
 };
 
-OpX4c_PropLink::OpX4c_PropLink(HProp prop_, int index_)
+OpX4c_PropLink::OpX4c_PropLink(OpX4c_HProp prop_, int index_)
 {
 	prop = prop_;
 	index = index_;
@@ -73,10 +75,10 @@ OpX4c_PropLink::OpX4c_PropLink(HProp prop_, int index_)
 	unknown1C = 0;
 }
 
-class Prop
+class OpX4c_Prop
 {
 public:
-	void unknown45cc50(const Point &p);	// NOTE: placeholder name
+	void unknown45cc50(const OpX4c_Point &p);	// NOTE: placeholder name
 	OpX4c_PropLink *getLink() throw();			// NOTE: placeholder name (0x44b020)
 	void setLink(OpX4c_PropLink *link) throw();	// NOTE: placeholder name (0x44cea0)
 };
@@ -109,7 +111,7 @@ extern OpX4c_HLocation opx4c_location;	// 0xd1e888
 
 extern int opx4c_caf130;	// NOTE: placeholder name
 extern bool opx4c_cefaed;	// NOTE: placeholder name
-extern vector<vector<HProp> > opx4c_traps;	// 0xd20248
+extern vector<vector<OpX4c_HProp> > opx4c_traps;	// 0xd20248
 extern vector<int> opx4c_d3239c;	// NOTE: placeholder name
 extern int opx4c_weights[3];	// NOTE: placeholder name (0xb9762c)
 extern int opx4c_allowed[];		// NOTE: placeholder name (0xb90ea0)
@@ -118,10 +120,10 @@ void opx4c_dummy(int value);	// NOTE: declaration only; its parameter name seeds
 class BS	// NOTE: placeholder name
 {
 public:
-	bool placeProp(OpX4c_PropData *type, const Point &p, int groupIndex, int linkValue, int linkValue2);	// NOTE: placeholder name (0x6c67b0)
+	bool placeProp(OpX4c_PropData *type, const OpX4c_Point &p, int groupIndex, int linkValue, int linkValue2);	// NOTE: placeholder name (0x6c67b0)
 };
 
-bool BS::placeProp(OpX4c_PropData *type, const Point &p, int groupIndex, int linkValue, int linkValue2)
+bool BS::placeProp(OpX4c_PropData *type, const OpX4c_Point &p, int groupIndex, int linkValue, int linkValue2)
 {
 	if ((opx4c_caf130 != 6 && !cells(p)->unknown45d6a0()) || !cells(p)->unknown45df50(opx4c_propFactory->create(type)))
 		return false;
@@ -129,7 +131,7 @@ bool BS::placeProp(OpX4c_PropData *type, const Point &p, int groupIndex, int lin
 		cells(p)->getProp()->unknown45cc50(p);
 	if (groupIndex == -1)
 	{
-		opx4c_traps.push_back(vector<HProp>());
+		opx4c_traps.push_back(vector<OpX4c_HProp>());
 		opx4c_d3239c.push_back(2);
 		opx4c_traps.back().push_back(cells(p)->getProp());
 		groupIndex = opx4c_traps.size() - 1;

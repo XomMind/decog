@@ -66,3 +66,17 @@ OpR1h_StatSet::add4722b0,0x4722b0,0x184
 CTitleAnimated::CTitleAnimated,0x4b28f0,0xb2
 ??0CShellButton@@QAE@PAVXConsole@@ABURect@@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H_N3@Z,0x4b0840,0x11f
 ??0CEffects@@QAE@PAVXConsole@@@Z,0x4b2dd0,0x25e
+OpY1_getEncodedLine,0x4074b0,0x326
+CMulticonsoleButtons::select,0x7b6ba0,0x1d4
+opW9_orderListCallback,0x7b9340,0x1f2
+??1CEffect@@UAE@XZ,0x95fa70,0x34
+OpW9b_Unknown_cf45d8::unknown77e7c0,0x77e7c0,0x13e
+XMouse::XMouse,0x431e30,0x335
+CInfoTitle::CInfoTitle,0x4ae000,0x2f8
+REX::run,0x426cf0,0x240
+REX::toggleMode_4262c0,0x4262c0,0x689
+Keyboard::init,0x438ad0,0x641
+Keybinds::save,0x43a840,0x666
+OpR1b_FontSet::initAutoscaled,0x4318d0,0x504
+OpW7_Generator::traceRooms,0x4c7950,0xde4
+??_GCPolymindInfo@@UAEPAXI@Z,0x4a1670,0x2d

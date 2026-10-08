@@ -3,6 +3,7 @@
 //	(RTTI class names are real).
 #include <string>
 #include <vector>
+#include "thirdparty/zfstream.h"
 using namespace std;
 
 //==================================================================
@@ -407,9 +408,30 @@ extern OpW9b_KeyMap *opW9b_keyMap;	// NOTE: placeholder name
 class OpW9b_Unknown_cf45d8	// NOTE: placeholder name
 {
 public:
+	bool isFlagActive();	// NOTE: placeholder name (0x46dd50)
 	bool unknown77e7c0();	// NOTE: placeholder name
 };
 extern OpW9b_Unknown_cf45d8 opW9b_unknown_cf45d8;	// NOTE: placeholder name
+extern bool opW9b_cefacd;	// NOTE: placeholder name
+extern bool opW9b_d28de3;	// NOTE: placeholder name
+extern bool opW9b_cefb18;	// NOTE: placeholder name
+int opr4a_unknown77e2b0(gzifstream &stream, bool chrono, bool manual);	// NOTE: placeholder name
+
+// checks that a readable save exists (0x77e7c0)
+bool OpW9b_Unknown_cf45d8::unknown77e7c0()
+{
+	bool valid = !opW9b_cefacd && !opW9b_unknown_cf45d8.isFlagActive() && opW9b_colorScheme != 0 && !opW9b_d28de3;
+	if (opW9b_cefb18)
+		valid = true;
+	gzifstream file;
+	if (valid && opr4a_unknown77e2b0(file,false,valid) == 0)
+	{
+		file.close();
+		return true;
+	}
+	else
+		return false;
+}
 
 class OpW9b_Scorekeeper	// NOTE: placeholder name (0xd2c658)
 {
