@@ -1,8 +1,9 @@
 // NOTE: private aliases and partial layouts for 0x5111e0 message routing.
-struct LB3MsgText;
+#include <string>
+typedef std::string LB3MsgText;
+struct LB3MsgSource;
 struct LB3MsgPoint { int x,y; };
 struct LB3MsgEntity { int id; LB3MsgEntity(); bool operator!=(LB3MsgEntity) const; };
-struct LB3MsgProp { int id; LB3MsgProp(); };
 struct LB3MsgMap {
  LB3MsgEntity player_4630f0();
  bool visibleEntity_4631f0(LB3MsgEntity);
@@ -14,12 +15,14 @@ struct LB3MsgTypes { LB3MsgData *&at_9b81f0(unsigned); };
 extern LB3MsgTypes lb3msg_types_d2b4d8;
 extern int lb3msg_count_d28d18,lb3msg_current_cfe5e4,lb3msg_none_cea000,lb3msg_stamp_cefb78;
 struct LB3Msg {
- LB3Msg(int,LB3MsgText *,LB3MsgText *,int,LB3MsgEntity,LB3MsgProp);
- char bytes[0x28];
+ LB3Msg(int,const LB3MsgText *,const LB3MsgText *,const LB3MsgText *,LB3MsgEntity,LB3MsgEntity);
+ LB3MsgSource *source;
+ std::string text;
+ int row,turn;
 };
 struct LB3MsgLog { int push_5121f0(LB3Msg *); };
 extern LB3MsgLog lb3msg_buffer_d2f75c,lb3msg_log_cf1080;
-bool lb3msg_route_5111e0(int type,LB3MsgText *a,LB3MsgText *b,int c,LB3MsgEntity entity,LB3MsgProp prop,const LB3MsgPoint *point,bool buffered) {
+bool lb3msg_route_5111e0(int type,const LB3MsgText *a,const LB3MsgText *b,const LB3MsgText *c,LB3MsgEntity entity,LB3MsgEntity prop,const LB3MsgPoint *point,bool buffered) {
  switch(lb3msg_types_d2b4d8.at_9b81f0(type)->visibility) {
  break;
  case 1:
@@ -32,7 +35,7 @@ bool lb3msg_route_5111e0(int type,LB3MsgText *a,LB3MsgText *b,int c,LB3MsgEntity
  if(buffered) {
   if(lb3msg_count_d28d18>=0 && lb3msg_types_d2b4d8.at_9b81f0(type)->announce && lb3msg_current_cfe5e4 && lb3msg_current_cfe5e4!=lb3msg_none_cea000) {
    lb3msg_current_cfe5e4=lb3msg_stamp_cefb78;
-   lb3msg_buffer_d2f75c.push_5121f0(new LB3Msg(738,0,0,0,LB3MsgEntity(),LB3MsgProp()));
+   lb3msg_buffer_d2f75c.push_5121f0(new LB3Msg(738,0,0,0,LB3MsgEntity(),LB3MsgEntity()));
   }
   lb3msg_buffer_d2f75c.push_5121f0(new LB3Msg(type,a,b,c,entity,prop));
  } else {
