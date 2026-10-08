@@ -9,3 +9,4 @@
 0x6430b0    0xa5ac  Entity::equipPart (from Heni's draft) alex-yankee 2026-10-08
 0x5e5520    0xbaec  Entity::takeDamage (from Heni's draft) alex-yankee 2026-10-08
 0x605040    0xb3e2  BS::checkEffectScrapEngine (from Heni's draft) alex-xray 2026-10-08
+0x5f1010    0xc534  Entity::projectileImpact (from Heni's draft) alex-zulu 2026-10-08
