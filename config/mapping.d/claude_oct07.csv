@@ -22,3 +22,4 @@ AsciiImage::load,0x437580,0x802
 Cartographer2D::dijkstra,0x40e990,0x972
 Cartographer2D::findNearest,0x40f310,0xaa5
 Cartographer2D::findPathToAny,0x40dd50,0xc39
+Config::parseColorFilters,0x4456b0,0x7bf
