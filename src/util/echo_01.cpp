@@ -5,6 +5,7 @@
 #include "rng.h"
 using namespace std;
 extern RNG rng;
+struct E6Hit : vector<int> {};	// NOTE: placeholder (exe: a 16-byte element type distinct from vector<int>)
 
 struct E6View;
 struct E6Point
@@ -479,10 +480,10 @@ void BS::placeRandomEncounter(vector<int> &encounters, vector<E6Rect> &placed, v
 			e6_vec_d1e8d0[i] = 0;
 	if (encounters.empty())
 		return;
-	vector<vector<int> > hits;
+	vector<E6Hit> hits;
 	for (unsigned int i = 0; i < e6_records_d21afc.size(); i++)
 	{
-		vector<int> list;
+		E6Hit list;
 		if (e6_records_d21afc[i]->depthWeights[ay] != 0)
 			e6_appendIndices(e6_records_d21afc[i]->prefabs,list);
 		hits.push_back(list);
