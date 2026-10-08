@@ -14,4 +14,4 @@
 0x610430    0x215e4 Entity::turnUpdate (137 KB)       alex-november 2026-10-08
 0x74e750    0x24b2c BS::turnUpdate_74e750 (150 KB)    alex-quebec 2026-10-08
 0x5826b0    0x305f0 EntityAI::takeTurn (198 KB)       alex-sierra 2026-10-08
-0xa04ca0    0x65    string hash and Park-Miller reduction codex-hash-oct08 2026-10-08
+0xa04d10    0x12    protobuf repeated-field accessor IsEmpty codex-hash-oct08 2026-10-08
