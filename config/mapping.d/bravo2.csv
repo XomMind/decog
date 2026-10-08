@@ -1,2 +1,10 @@
-# bravo2: Overmind dispatchers, Prop color (src/util/bravo2_*.cpp, src/op/op_r3.cpp). name,va,size
+# bravo2: Prop color, BS map-gen/garrison/factory/DSF, Zionmind, BV13 op (src/util/bravo2_*.cpp, src/op/op_r3.cpp). name,va,size
 Prop::unknown65e040,0x65e040,0x18f
+BS::wastes_6fdcb0,0x6fdcb0,0x15b5
+BV10Zionmind::newTurn,0x6bf880,0x1685
+BS::garrison_6ff590,0x6ff590,0x183c
+BS::postprocessGarrison,0x6e4dc0,0x1b0c
+BV13Operation::complete_65a260,0x65a260,0x1ea3
+BS::factory_6ead20,0x6ead20,0x2388
+??1?$OpR5h_WL@H@@QAE@XZ,0x700dd0,0x56
+BS::dsf_6e68d0,0x6e68d0,0x29a0

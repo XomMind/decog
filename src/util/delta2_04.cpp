@@ -11,7 +11,7 @@ struct Pos
 	int y;
 	Pos();	// 0x40a6e0
 	Pos(int v);	// 0x409990
-	Pos &operator=(const Pos &pos);	// 0x40a720
+	Pos &assign_40a720(const Pos &pos);	// NOTE: placeholder name (0x40a720, Rect assignment)
 };
 
 class XConsole
@@ -525,7 +525,7 @@ D2Evolve::D2Evolve(int count, HLocation location, bool flag)
 	if (unknown74 != 0)
 	{
 		animate("A_CEvolve_Bkg");
-		unknowna0 = d2e_d21db0;
+		unknowna0.assign_40a720(d2e_d21db0);
 		unknowna0.x += (d2e_d223f0.unknown418980() - 160) / 2 / 2;
 		unknowna0.y += (d2e_d223f0.unknown4189a0() - 60) / 2;
 		art = new ConsoleArt(this, string() + "data/art/" + "evolve_circuits", unknowna0.x + d2e_d338c0, unknowna0.y + d2e_d338c4, false, 10, 0, Pos(-1), 0, 0);

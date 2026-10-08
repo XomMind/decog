@@ -1,0 +1,16 @@
+# alpha2: assorted large functions (src/util/alpha2_*.cpp). name,va,size
+lc43_upload4884c0,0x4884c0,0x1758
+LB46Shoot::LB46Shoot,0x64fb40,0x18a8
+A2NItem::getName,0x571db0,0x1ab0
+A2XEntity::drop_631a20,0x631a20,0x1bbc
+A2GGenerator::generate,0x4c1880,0x1b7c
+A2TEntity::checkTriggers,0x5fdd30,0x19cb
+A2SSettings::read,0x4bd340,0x1f3b
+A2IGenerator::init,0x4bf610,0x1e1f
+A2CGenerator::init,0x4c9d80,0x1b4a
+A2LLabel::A2LLabel,0x4a3020,0x3212
+A2PParticle::emit,0x5098e0,0x2fa4
+A2KEntity::pickUp,0x5dfd80,0x2808
+A2HAI::hack,0x5be7c0,0x3d65
+A2QTracker::evaluate,0x518c00,0x3e14
+A2UEffect::update,0x5045f0,0x3d6c
