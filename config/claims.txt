@@ -1,7 +1,6 @@
 # Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
 # remove the line in the commit that maps the function (or when abandoning it).
 # va        size    name / what                       owner   date
-0x63d8a0    0x4900  Entity::move                      claude  2026-10-08
 0x7ffee0    0x513c  CMap::update                      claude  2026-10-08
 0x808de0    0x52f4  CMap anim (activateItem callee)   claude  2026-10-08
 0x81a8e0    0x64d2  debug command parser (GOTO/EVOLVE) claude  2026-10-08
