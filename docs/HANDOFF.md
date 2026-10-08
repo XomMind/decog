@@ -1,6 +1,14 @@
 # Handoff (2026-10-08)
 
-## Latest verified loop checkpoint (2026-10-08, seventh combined loop source batch)
+## Latest verified loop checkpoint (2026-10-08, eighth combined loop source batch)
+
+- **12,827 / 13,016 game functions; 49.484% code matched.** Six unique matches add 18,327 bytes over `310cdfa`; 189 functions remain. Code totals: 3,249,488 / 6,566,759 bytes.
+- **32,144 / 32,144 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_08.log`; candidate gate: `build/manager_loop_source_lvx_08.log`; registered proof: `build/manager_loop_source_registered_08.log`. Six frozen source hashes verified before commit. Raw 4 KiB-slot and code-aware audits report zero interior-stub operands (`build/manager_loop_source_audit_08.log`, `build/manager_loop_source_code_audit_08.log`).
+- Six new TUs reconstruct Cell terrain destruction/trap activation, bomb and escort map handlers, depth rendering and item-label formatting. Real handle/Point/string lifetimes, collection ownership and shared RNG declarations retain observed ABI. Corrected message-routing declarations identify actual optional string pointers; their exact installation sources passed fresh joint standard proof before freezing.
+- Independent Bravo/Delta/Charlie/Alpha reviews found no actionable ABI/layout/ownership issues (`scratch/loop_bravo_14/alpha_cell_review.md`, `scratch/loop_delta_16/cell_review.md`, `scratch/loop_charlie_09/review.md`, `scratch/loop_alpha_15/bomb_review.md`, `scratch/loop_bravo_15/depth_review.md`, `scratch/loop_delta_17/escort_review.md`). Cell destruction preserves the observed upper-y comparison against origin.x+107; escort selection preserves direct conditional Area reference and actual tie behavior. Partial semantic names remain inferred; static reconstruction proofs do not establish game-runtime behavior.
+- The authorized loop continues with frozen teleport navigation, priority-frontier path search, hauler manifest, corrected map-path initialization and item firing. Workers keep fresh probes in scratch. The hauler's isolated shared-string helper discrepancy requires the next full-context gate; no existing match is waived. Manager continues serialized source freezes, candidate gates, registered verification and commits.
+
+## Previous verified loop checkpoint (2026-10-08, seventh combined loop source batch)
 
 - **12,821 / 13,016 game functions; 49.205% code matched.** Sixteen unique matches add 39,342 bytes over `b53dbdf`; 195 functions remain. Code totals: 3,231,161 / 6,566,759 bytes. A genuine mutable string-iterator subtraction alias at an already mapped address adds the seventeenth row without counting its bytes twice.
 - **32,138 / 32,138 comparisons MATCH, zero DIFF.** Final full compile/link: `build/manager_loop_source_full_07_final.log`; candidate gate: `build/manager_loop_source_lvx_07_final.log`; registered proof: `build/manager_loop_source_registered_07.log`. All sixteen frozen source hashes verified before commit. Raw 4 KiB-slot and code-aware audits both report zero interior-stub operands (`build/manager_loop_source_audit_07_final.log`, `build/manager_loop_source_code_audit_07_final.log`).
