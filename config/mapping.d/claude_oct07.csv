@@ -5,3 +5,4 @@ OpS9_Group::removeMember,0x6716f0,0x24b
 OpW7_CaveGen::step,0x4cbcd0,0x570
 ?TCOD_noise_perlin@@YAMPAXPAM@Z,0x41b480,0x2c1e
 ?TCOD_noise_simplex@@YAMPAXPAM@Z,0x41e0a0,0x2710
+CList::CList,0x48d9a0,0x58a
