@@ -1,6 +1,15 @@
 # Handoff (2026-10-07)
 
-## Latest verified loop checkpoint (2026-10-07, descriptor metadata correction)
+## Latest verified loop checkpoint (2026-10-07, second combined loop source batch)
+
+- **12,778 / 13,016 game functions; 47.794% code matched.** Ten new unique matches add 6,277 bytes over `71d1e5f`; 238 functions remain. Code totals: 3,138,495 / 6,566,759 bytes.
+- **32,094 / 32,094 comparisons MATCH, zero DIFF.** Full compile/link: `build/manager_loop_source_full_02.log`; candidate gate: `build/manager_loop_source_lvx_02.log`; registered proof: `build/manager_loop_source_registered_02.log`. Candidate audit reports zero interior-stub operands with 4 KiB slots (`build/manager_loop_source_audit_02.log`). Manager checked the ten-file frozen snapshot hashes before commit.
+- Nine new TUs reconstruct ArenaString allocation, cropped console alpha copy, local danger, restoration, sound attenuation, explosion bounds, Xom decisions, prop marking, and achievement entry construction. The private Xom and prop-mark implementations resolve the two full-link EH mismatches deferred in the prior source batch.
+- Coordinated `global_strings.cpp` correction changes `gameString_d34d1c` from scalar to a one-element string array. The actual array destructor at `0xb5e770` and existing initializer at `0xb51cb0` both MATCH in the combined link; source storage remains 28 bytes. No duplicate global or synthetic cleanup wrapper.
+- Charlie performed read-only operand/layout/callback review of all nine new files and the array correction; no actionable issues found. Detailed evidence and limits: `scratch/loop_charlie_02/cycle2_review.md`. Partial layouts and semantic names remain explicitly identified; static binary checks do not claim game-runtime acceptance.
+- The manager continues the authorized matching/verification/commit loop with scratch-only worker rounds and serialized frozen-source integration. Upcoming isolated proofs include cave generation, sensors, marker replacement, group removal and message routing. Unmatched status initializer probes, color stack-slot and region-helper return-spill issues remain scratch-only.
+
+## Previous verified loop checkpoint (2026-10-07, descriptor metadata correction)
 
 - **12,768 / 13,016 game functions; 47.698% code matched.** Two existing protobuf descriptor helpers add 206 matched bytes over `31141cc`; 248 functions remain.
 - **32,084 / 32,084 comparisons MATCH, zero DIFF.** Candidate gate and registration-order proof: `build/manager_loop_descriptor_gate_01.log`, `build/manager_loop_descriptor_registered_01.log`. The candidate audit reports zero interior-stub operands with 4 KiB slots (`build/manager_loop_descriptor_audit_01.log`). Uses the already verified combined artifact; no source changes.

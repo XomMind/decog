@@ -53,7 +53,7 @@ std::string gameString_d32974 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstu
 // Initializer 0xb51ac0, global 0xd01f04.
 std::string gameString_d01f04 = "`~!@#$%^&*()_+-={}|:\042<>?[]\134;',./";
 // Initializer 0xb51cb0, global 0xd34d1c.
-std::string gameString_d34d1c = "GEN";
+std::string gameString_d34d1c[1] = { "GEN" };
 // Initializer 0xb51d70, global 0xd33e1c.
 std::string gameString_d33e1c = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 // Initializer 0xb51da0, global 0xd346a4.
