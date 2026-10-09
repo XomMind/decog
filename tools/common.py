@@ -41,8 +41,17 @@ def mapping_rows():
             if f.endswith('.csv'): rows += load_csv(os.path.join("mapping.d", f))
     return rows
 
+def mapping_conflicts(rows=None):
+    """{name: [va, ...]} for every name that mapping rows give two or more different VAs.
+    functions() keys by name, so all but the last such row would silently never be verified.
+    Exact duplicate rows (same name and VA) are harmless and not reported."""
+    vas = {}
+    for r in (mapping_rows() if rows is None else rows): vas.setdefault(r[0], set()).add(int(r[1], 16))
+    return {n: sorted(v) for n, v in vas.items() if len(v) > 1}
+
 def functions():
-    """reconstructed functions: name, va, size  ->  {name: (va, size)}"""
+    """reconstructed functions: name, va, size  ->  {name: (va, size)}
+    (a name mapped to several VAs keeps only its last row: lverify reports those as errors)"""
     return {r[0]: (int(r[1], 16), int(r[2], 16)) for r in mapping_rows()}
 
 def symbols():

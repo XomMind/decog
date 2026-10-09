@@ -390,7 +390,13 @@ def main(args):
         DLL, MAP = os.path.join(d, 'match.dll'), os.path.join(d, 'match.map')
     results = verify_all(args, verbose)
     print("%d/%d match" % (sum(results.values()), len(results)))
-    return 0 if results and all(results.values()) else 1
+    # One symbol is one exe function: a name with rows at different VAs verifies only its last row.
+    conflicts = common.mapping_conflicts()
+    for name, vas in sorted(conflicts.items()):
+        print("ERROR: %s is mapped to %d different VAs (%s); only one can be right"
+              % (name, len(vas), ", ".join("%#x" % v for v in vas)))
+    if conflicts: print("ERROR: %d mapping names have rows at different VAs" % len(conflicts))
+    return 0 if results and all(results.values()) and not conflicts else 1
 
 if __name__ == '__main__':
     sys.exit(main(sys.argv[1:]))

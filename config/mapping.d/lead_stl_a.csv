@@ -307,7 +307,6 @@
 ??$_Construct@V?$vector@HV?$allocator@H@std@@@std@@ABV12@@std@@YAXPAV?$vector@HV?$allocator@H@std@@@0@ABV10@@Z,0x9f3750,0x86
 ??_GE8_3@@QAEPAXI@Z,0x9bae40,0x2d
 ??_G?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAEPAXI@Z,0x9ffe20,0x2d
-??4?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@$$QAV01@@Z,0x9b2810,0x22
 ??E?$_Vb_iterator@V?$allocator@_N@std@@@std@@QAEAAV01@XZ,0x9f6420,0x16
 ??E?$_Vb_const_iterator@V?$allocator@_N@std@@@std@@QAEAAV01@XZ,0x9fcf90,0x16
 ?_Inc@?$_Vb_const_iterator@V?$allocator@_N@std@@@std@@QAEXXZ,0x9f63e0,0x3c

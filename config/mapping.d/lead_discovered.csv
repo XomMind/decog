@@ -1,5 +1,4 @@
 # lead_discovered: byte-identical from existing sources, previously unrecorded (tools/discover.py)
-??_Ebad_alloc@std@@UAEPAXI@Z,0x9bad50,0x2d
 ??_EClosure@protobuf@google@@UAEPAXI@Z,0x9bad50,0x2d
 ??_GClosure@protobuf@google@@UAEPAXI@Z,0x9bad50,0x2d
 ?Run@FunctionClosure0@internal@protobuf@google@@UAEXXZ,0x4323d0,0x52
@@ -238,20 +237,17 @@
 ??_EStats@Protobuf@@UAEPAXI@Z,0x9bad50,0x2d
 ?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@ABV12@@Z,0x9af510,0x21
 ??0?$ExtensionIdentifier@VFieldOptions@protobuf@google@@VStringTypeTraits@internal@23@$08$0A@@internal@protobuf@google@@QAE@HABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x9b6410,0x2d
-??0?$ExtensionIdentifier@VFieldOptions@protobuf@google@@V?$PrimitiveTypeTraits@H@internal@23@$04$0A@@internal@protobuf@google@@QAE@HH@Z,0x9b6410,0x2d
 ??0?$ExtensionIdentifier@VFieldOptions@protobuf@google@@V?$PrimitiveTypeTraits@_N@internal@23@$07$0A@@internal@protobuf@google@@QAE@H_N@Z,0x9b6470,0x2d
-??0?$ExtensionIdentifier@VEnumValueOptions@protobuf@google@@VStringTypeTraits@internal@23@$08$0A@@internal@protobuf@google@@QAE@HABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x9b6410,0x2d
 ?mutable_unknown_fields_slow@?$InternalMetadataWithArenaBase@VUnknownFieldSet@protobuf@google@@VInternalMetadataWithArena@internal@23@@internal@protobuf@google@@AAEPAVUnknownFieldSet@34@XZ,0x9bf8f0,0x48
 ?Register@?$ExtensionIdentifier@VFieldOptions@protobuf@google@@VStringTypeTraits@internal@23@$08$0A@@internal@protobuf@google@@SAXH@Z,0x9bf940,0x15
 ?Register@?$ExtensionIdentifier@VFieldOptions@protobuf@google@@V?$PrimitiveTypeTraits@H@internal@23@$04$0A@@internal@protobuf@google@@SAXH@Z,0x9bf960,0x15
 ?Register@?$ExtensionIdentifier@VFieldOptions@protobuf@google@@V?$PrimitiveTypeTraits@_N@internal@23@$07$0A@@internal@protobuf@google@@SAXH@Z,0x9bf980,0x15
-?Register@?$ExtensionIdentifier@VEnumValueOptions@protobuf@google@@VStringTypeTraits@internal@23@$08$0A@@internal@protobuf@google@@SAXH@Z,0x9bf940,0x15
+?Register@?$ExtensionIdentifier@VEnumValueOptions@protobuf@google@@VStringTypeTraits@internal@23@$08$0A@@internal@protobuf@google@@SAXH@Z,0x9bf9a0,0x15
 ??$Create@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Arena@protobuf@google@@SAPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV012@@Z,0x9cf750,0x4f
 ??$Create@UContainer@?$InternalMetadataWithArenaBase@VUnknownFieldSet@protobuf@google@@VInternalMetadataWithArena@internal@23@@internal@protobuf@google@@@Arena@protobuf@google@@SAPAUContainer@?$InternalMetadataWithArenaBase@VUnknownFieldSet@protobuf@google@@VInternalMetadataWithArena@internal@23@@internal@12@PAV012@@Z,0x9e4950,0x4f
 ??$Register@VFieldOptions@protobuf@google@@@StringTypeTraits@internal@protobuf@google@@SAXHE_N@Z,0x9e49a0,0x23
 ??$Register@VFieldOptions@protobuf@google@@@?$PrimitiveTypeTraits@H@internal@protobuf@google@@SAXHE_N@Z,0x9e49a0,0x23
 ??$Register@VFieldOptions@protobuf@google@@@?$PrimitiveTypeTraits@_N@internal@protobuf@google@@SAXHE_N@Z,0x9e49a0,0x23
-??$Register@VEnumValueOptions@protobuf@google@@@StringTypeTraits@internal@protobuf@google@@SAXHE_N@Z,0x9e49a0,0x23
 ??0Container@?$InternalMetadataWithArenaBase@VUnknownFieldSet@protobuf@google@@VInternalMetadataWithArena@internal@23@@internal@protobuf@google@@QAE@XZ,0x9b8dc0,0x16
 ??0bad_alloc@std@@QAE@ABV01@@Z,0x9e7690,0x26
 ??$CreateInternal@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Arena@protobuf@google@@AAEPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z,0x9ec8e0,0x53
@@ -446,7 +442,7 @@
 ?getRoomCount@Generator@DF@@QAEHH@Z,0x448fe0,0x17
 ?addRoomCount@Generator@DF@@QAEXH@Z,0x449040,0x24
 ??0Room@DF@@QAE@XZ,0x4bd0f0,0x50
-??1?$vector@UPos@@V?$allocator@UPos@@@std@@@std@@QAE@XZ,0x9b2bf0,0x53
+??1?$vector@CV?$allocator@C@std@@@std@@QAE@XZ,0x9b2bf0,0x53
 ?back@?$vector@URoom@DF@@V?$allocator@URoom@DF@@@std@@@std@@QAEAAURoom@DF@@XZ,0x9afc50,0x2d
 ?push_back@?$vector@URoom@DF@@V?$allocator@URoom@DF@@@std@@@std@@QAEXABURoom@DF@@@Z,0x9b4d10,0xff
 ?end@?$vector@URoom@DF@@V?$allocator@URoom@DF@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@URoom@DF@@V?$allocator@URoom@DF@@@std@@@std@@@2@XZ,0x9b8c80,0x23
@@ -980,7 +976,6 @@
 ??G?$_Vector_iterator@V?$_Vector_val@HV?$allocator@H@std@@@std@@@std@@QBE?AV01@H@Z,0x9b0980,0x2d
 ??$insert@AAUPoint@@@?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@1@V?$_Vector_const_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@1@AAUPoint@@@Z,0x9cdc20,0x2d
 ??$emplace_back@AAUPoint@@@?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@QAEXAAUPoint@@@Z,0x9f6550,0x6d
-??$rotate@V?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@std@@@std@@YA?AV?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@0@V10@00@Z,0x9edfd0,0x99
 ??$_Unchecked@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@std@@YAPAUPoint@@V?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@0@@Z,0xa008a0,0xd
 ??$_Iter_cat@V?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@std@@@std@@YA?AUrandom_access_iterator_tag@0@ABV?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@0@@Z,0x9ee4b0,0x13
 ??$_Rotate@PAUPoint@@@std@@YAXPAUPoint@@00Urandom_access_iterator_tag@0@@Z,0x9f70a0,0x33

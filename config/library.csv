@@ -13,5 +13,6 @@ __CIatan,0xaa2138,0x6
 # to 0, ~string inlined, and Status::OK/CANCELLED/UNKNOWN sit statically initialized at 0xca9b2c/0xca9b4c/0xca9b6c
 # (codes 0/1/2, empty strings). Unmodified 3rdparty/protobuf-3.5.1 status.cc built with `cl /c /O2 /Oy- /EHsc /GS`
 # gives these 0x8a bytes instruction-for-instruction (relocations aside); /Od cannot inline the ctor.
+??__E?OK@Status@util@protobuf@google@@2V1234@B@@YAXXZ,0xb5c720,0xc
 ??__E?CANCELLED@Status@util@protobuf@google@@2V1234@B@@YAXXZ,0xb5c730,0x8a
 ??__E?UNKNOWN@Status@util@protobuf@google@@2V1234@B@@YAXXZ,0xb5c7c0,0x8a

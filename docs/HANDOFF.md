@@ -1,4 +1,49 @@
-# Handoff (2026-10-08)
+# Handoff (2026-10-08, evening)
+
+## Paused by the user (Claude team, ~23:00)
+
+All agents, the integration loop (`scratch/integrate.sh`) and the origin sync loop (`scratch/syncloop.sh`) are stopped;
+no wine processes and no build lock remain. `origin/main` is in sync with local main.
+
+**State: 13,013 / 13,014 game functions, 96.08% code** (last verified integration build; library reclassifications below
+lower the denominator). Every row passes `tools/lverify.py`, but see "Verifier leniency" before trusting the count.
+
+### Remaining function
+- **0x51da30 `BS::turnUpdate_51da30`** (258 KB, 62,072 insns, claim `alex-uniform` in `config/claims.txt`). Draft in
+  `scratch/whiskey/` (continued from `scratch/uniform/`): the instruction stream matches (ebp-insensitive + jump check) through
+  exe insn 49,297 (+0x31c55, special-script case ~149-172 of 210); snapshots `ufull_ok_*.cpp`. Read `scratch/whiskey/NOTES.md`
+  (`g.sh` prints the match point). Left: remaining special cases, frame layout (lima/romeo solver), EH unwind check
+  (`ehtab.py`, ~930 states), `tools/try.sh`, then install as `src/util/*_01.cpp` + lvx + mapping row.
+- `0xa04d10` is claimed by another session (`codex-hash-oct08`).
+
+### Verifier leniency (open decision, nothing changed yet)
+`lverify` pairs a named callee with whatever exe address the call lands on the first time (ICF fallback
+`if not same and rt and ro: same = learn(ro, av)`), even when config maps that callee elsewhere. Strict check
+(`scratch/bravo3/strict.py`, list `scratch/bravo3/strict_all.txt`): 3,525 rows / 978 distinct VAs call a named callee at a
+different VA than config maps. Some are genuine ICF folds, some are wrong rows (e.g. ~247 `lead_discovered.csv` rows naming
+0x9bad50, basic_stringbuf's `??_G`, for unrelated deleting dtors).
+Partial, unreviewed measurement in `scratch/charlie3/` (agent stopped mid-work): of 32,362 matching rows, 28,731 still match
+with no ICF allowance, 29,171 / 29,434 when identical-code folding up to depth 1 / 2 is allowed (`match_strict*.txt`,
+`classified2.csv`). Next: finish the classification, decide a strictness rule (e.g. callee A may pair with B only if the
+normalised bytes are identical), then fix or demote rows. This will lower the headline count.
+
+### Fixed this evening (committed with this handoff)
+- 19 names mapped to 2-3 different VAs (one row of each was never verified, since `common.functions()` keys by name):
+  renamed to the real symbol or deleted, each change lvx-checked (bravo3; table in its report, tools in `scratch/bravo3/`).
+  `common.mapping_conflicts()` + an ERROR/exit 1 in `lverify` now stop this recurring.
+- Protobuf-3.5.1 `status.cc` static initializers (0xb5c720 OK, 0xb5c730 CANCELLED, 0xb5c7c0 UNKNOWN) moved to
+  `config/library.csv`: an unmodified `/O2` compile of that file is byte-identical (`scratch/alpha3/st/`).
+- `vec_d2b4bc` (team_c_02.cpp) uses a private 3-byte element type: 0x9b3da0 is the 3-byte-element `~vector`.
+
+### How the team worked (to resume)
+- Claims: `tools/claim.py claim|release|list` pushes `config/claims.txt` changes straight to origin (AGENTS.md rule 6; one
+  active claim per agent).
+- Integration: `scratch/integrate.sh` in a loop (full build under `tools/fullbuild.sh` lock, re-verify, commit, push; merges
+  origin first via `scratch/syncorigin.py`, keeping origin's version of duplicated functions); `scratch/syncloop.sh` pulls and
+  pushes every minute in between. Build tools run at utility QoS + nice 10 (`taskpolicy -c utility`); never `-b`.
+- Giant-function toolchain: newest in `scratch/victor/`, `scratch/papa/`, `scratch/romeo/`, `scratch/lima/` (frame-layout
+  solver), `scratch/yankee/td/` (Heni-draft converters). Only `tools/try.sh` is authoritative; ebp-insensitive diffs hide bugs.
+
 
 ## Isolated protobuf bulk matching (2026-10-08)
 

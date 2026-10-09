@@ -8,7 +8,6 @@
 ?assign@?$vector@UY8_10_14_0@@V?$allocator@UY8_10_14_0@@@std@@@std@@QAEXIABUY8_10_14_0@@@Z,0x9b86c0,0x1d
 ??0?$OpR5h_WL@UPoint@@@@QAE@XZ,0x9ba150,0x29
 ??_G?$basic_ofstream@DU?$char_traits@D@std@@@std@@UAEPAXI@Z,0x9bae00,0x36
-?reserve@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAEXI@Z,0x9bb7c0,0x4f
 ?_Assign_n@?$vector@V?$vector@UXColor@@V?$allocator@UXColor@@@std@@@std@@V?$allocator@V?$vector@UXColor@@V?$allocator@UXColor@@@std@@@std@@@2@@std@@IAEXIABV?$vector@UXColor@@V?$allocator@UXColor@@@std@@@2@@Z,0x9bdf00,0xb6
 ??0?$vector@UY8_10_14_0@@V?$allocator@UY8_10_14_0@@@std@@@std@@QAE@ABV01@@Z,0x9c3900,0xe9
 ?_Insert_n@?$vector@V?$vector@UXColor@@V?$allocator@UXColor@@@std@@@std@@V?$allocator@V?$vector@UXColor@@V?$allocator@UXColor@@@std@@@std@@@2@@std@@IAEXV?$_Vector_const_iterator@V?$_Vector_val@V?$vector@UXColor@@V?$allocator@UXColor@@@std@@@std@@V?$allocator@V?$vector@UXColor@@V?$allocator@UXColor@@@std@@@std@@@2@@std@@@2@IABV?$vector@UXColor@@V?$allocator@UXColor@@@std@@@2@@Z,0x9c8ad0,0x3de
@@ -23,7 +22,6 @@
 ??$lower_bound@V?$_Vector_iterator@V?$_Vector_val@VHTurnClock@@V?$allocator@VHTurnClock@@@std@@@std@@@std@@VHTurnClock@@P6A_NABV3@0@Z@std@@YA?AV?$_Vector_iterator@V?$_Vector_val@VHTurnClock@@V?$allocator@VHTurnClock@@@std@@@std@@@0@V10@0ABVHTurnClock@@P6A_N11@Z@Z,0x9e3100,0x53
 ??$insert@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXV?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@1@Z,0x9e3260,0x38
 ??$use_facet@V?$codecvt@DDH@std@@@std@@YAABV?$codecvt@DDH@0@ABVlocale@0@@Z,0x9e36c0,0xf5
-??$copy_backward@V?$_Vb_iterator@V?$allocator@_N@std@@@std@@V12@@std@@YA?AV?$_Vb_iterator@V?$allocator@_N@std@@@0@V10@00@Z,0x9e45a0,0x8a
 ?equal@?$istreambuf_iterator@DU?$char_traits@D@std@@@std@@QBE_NABV12@@Z,0x9e7a60,0x68
 ??0?$pair@HV?$vector@HV?$allocator@H@std@@@std@@@std@@QAE@$$QAH$$QAV?$vector@HV?$allocator@H@std@@@1@@Z,0x9ea270,0x32
 ??$_Rechecked@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@YA?AV?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@0@AAV10@PAD@Z,0x9ebfd0,0x1b

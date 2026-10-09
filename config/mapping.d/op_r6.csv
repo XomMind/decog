@@ -1,11 +1,10 @@
 # op_r6: std::vector instantiations (placeholder element types OpR6_K*) etc. in 0x9bb000-0xa044d0
-?append@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@PBD@Z,0x9bbfb0,0x26
+?assign@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAEAAV12@PB_W@Z,0x9bbfb0,0x26
 ?_Insert_n@?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@IAEXV?$_Vector_const_iterator@V?$_Vector_val@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@2@IABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,0x9bc5b0,0x3ff
 ?_Reserve@?$vector@UOpR6_KA_24_1@@V?$allocator@UOpR6_KA_24_1@@@std@@@std@@IAEXI@Z,0x9bd560,0x61
 ?resize@?$vector@UOpR6_KC_8_0@@V?$allocator@UOpR6_KC_8_0@@@std@@@std@@QAEXI@Z,0x9bd930,0xc8
 ?_Assign_n@?$vector@UOpR6_KC_8_0@@V?$allocator@UOpR6_KC_8_0@@@std@@@std@@IAEXIABUOpR6_KC_8_0@@@Z,0x9bda00,0x76
 ?_Trim@?$vector@_NV?$allocator@_N@std@@@std@@QAEXI@Z,0x9bdda0,0xcc
-?_Assign_n@?$vector@UOpR6_KCD_16_0@@V?$allocator@UOpR6_KCD_16_0@@@std@@@std@@IAEXIABUOpR6_KCD_16_0@@@Z,0x9bdf00,0xb6
 ?_Assign_n@?$vector@UOpR6_KCD_20_0@@V?$allocator@UOpR6_KCD_20_0@@@std@@@std@@IAEXIABUOpR6_KCD_20_0@@@Z,0x9be030,0xb6
 ?_Tidy@?$vector@UOpR6_KA_20_0@@V?$allocator@UOpR6_KA_20_0@@@std@@@std@@IAEXXZ,0x9be0f0,0x75
 ?_Assign_n@?$vector@UOpR6_KC_4_1@@V?$allocator@UOpR6_KC_4_1@@@std@@@std@@IAEXIABUOpR6_KC_4_1@@@Z,0x9be220,0x76
@@ -150,7 +149,6 @@
 ??Z?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KA_12_0@@V?$allocator@UOpR6_KA_12_0@@@std@@@std@@@std@@QAEAAV01@H@Z,0x9c7f10,0x1b
 ?_Insert_n@?$vector@UOpR6_KC_8_0@@V?$allocator@UOpR6_KC_8_0@@@std@@@std@@IAEXV?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KC_8_0@@V?$allocator@UOpR6_KC_8_0@@@std@@@std@@@2@IABUOpR6_KC_8_0@@@Z,0x9c85a0,0x3b3
 ?resize@?$vector@UOpR6_KC_4_0@@V?$allocator@UOpR6_KC_4_0@@@std@@@std@@QAEXIUOpR6_KC_4_0@@@Z,0x9c8a00,0x9f
-?_Insert_n@?$vector@UOpR6_KCDA_16_0@@V?$allocator@UOpR6_KCDA_16_0@@@std@@@std@@IAEXV?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KCDA_16_0@@V?$allocator@UOpR6_KCDA_16_0@@@std@@@std@@@2@IABUOpR6_KCDA_16_0@@@Z,0x9c8ad0,0x3de
 ?_Insert_n@?$vector@UOpR6_KCD_20_0@@V?$allocator@UOpR6_KCD_20_0@@@std@@@std@@IAEXV?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KCD_20_0@@V?$allocator@UOpR6_KCD_20_0@@@std@@@std@@@2@IABUOpR6_KCD_20_0@@@Z,0x9c8f30,0x3f2
 ?_Insert_n@?$vector@UOpR6_KCD_64_0@@V?$allocator@UOpR6_KCD_64_0@@@std@@@std@@IAEXV?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KCD_64_0@@V?$allocator@UOpR6_KCD_64_0@@@std@@@std@@@2@IABUOpR6_KCD_64_0@@@Z,0x9c9750,0x480
 ?allocate@?$allocator@UOpR6_KA_4_0@@@std@@QAEPAUOpR6_KA_4_0@@I@Z,0x9c9d30,0x1b
@@ -170,7 +168,7 @@
 ?_Ufill@?$vector@UOpR6_KA_16_1@@V?$allocator@UOpR6_KA_16_1@@@std@@@std@@IAEPAUOpR6_KA_16_1@@PAU3@IPBU3@@Z,0x9cc480,0x31
 ?allocate@?$allocator@UOpR6_KA_20_1@@@std@@QAEPAUOpR6_KA_20_1@@I@Z,0x9cc500,0x1b
 ?_Ufill@?$vector@UOpR6_KC_16_0@@V?$allocator@UOpR6_KC_16_0@@@std@@@std@@IAEPAUOpR6_KC_16_0@@PAU3@IPBU3@@Z,0x9cc7c0,0x31
-??$copy@V?$_Vb_iterator@V?$allocator@_N@std@@@std@@V12@@std@@YA?AV?$_Vb_iterator@V?$allocator@_N@std@@@0@V10@00@Z,0x9e4f00,0x8a
+??$copy_backward@V?$_Vb_iterator@V?$allocator@_N@std@@@std@@V12@@std@@YA?AV?$_Vb_iterator@V?$allocator@_N@std@@@0@V10@00@Z,0x9e4f00,0x8a
 ??$_Destroy_range@V?$allocator@UOpR6_KA_4_0@@@std@@@std@@YAXPAUOpR6_KA_4_0@@0AAV?$allocator@UOpR6_KA_4_0@@@0@@Z,0x9e56e0,0x34
 ??$_Destroy_range@V?$allocator@UOpR6_KA_4_1@@@std@@@std@@YAXPAUOpR6_KA_4_1@@0AAV?$allocator@UOpR6_KA_4_1@@@0@@Z,0x9e5830,0x34
 ??$_Destroy_range@V?$allocator@UOpR6_KA_8_0@@@std@@@std@@YAXPAUOpR6_KA_8_0@@0AAV?$allocator@UOpR6_KA_8_0@@@0@@Z,0x9e5870,0x34
@@ -181,7 +179,7 @@
 ??$_Destroy_range@V?$allocator@UOpR6_KA_16_1@@@std@@@std@@YAXPAUOpR6_KA_16_1@@0AAV?$allocator@UOpR6_KA_16_1@@@0@@Z,0x9e5fa0,0x34
 ??$_Destroy_range@V?$allocator@UOpR6_KA_20_0@@@std@@@std@@YAXPAUOpR6_KA_20_0@@0AAV?$allocator@UOpR6_KA_20_0@@@0@@Z,0x9e5fe0,0x34
 ??$_Allocate@UOpR6_KA_84_0@@@std@@YAPAUOpR6_KA_84_0@@IPAU1@@Z,0x9e6660,0x5d
-??_Ebad_alloc@std@@UAEPAXI@Z,0x9e7210,0x2d
+??_GOpY9_Rec8@@QAEPAXI@Z,0x9e7210,0x2d
 ??_GOpR6_KCD_4_0@@QAEPAXI@Z,0x9e7240,0x2d
 ??_GOpR6_KCD_4_1@@QAEPAXI@Z,0x9e7270,0x2d
 ??_GOpR6_KCD_8_0@@QAEPAXI@Z,0x9e72a0,0x2d
@@ -212,7 +210,6 @@
 ?reserve@?$vector@UOpR6_KCDA_16_0@@V?$allocator@UOpR6_KCDA_16_0@@@std@@@std@@QAEXI@Z,0x9eb120,0x149
 ?reserve@?$vector@UOpR6_KCDA_16_1@@V?$allocator@UOpR6_KCDA_16_1@@@std@@@std@@QAEXI@Z,0x9eb270,0x149
 ??$_Copy_impl@PAUOpR6_KC_4_0@@PAU1@@std@@YAPAUOpR6_KC_4_0@@PAU1@00U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f04a0,0x30
-??$_Move@PAUOpR6_KA_16_0@@PAU1@@std@@YAPAUOpR6_KA_16_0@@PAU1@00U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f0d10,0x3b
 ??$_Move@PAUOpR6_KA_16_1@@PAU1@@std@@YAPAUOpR6_KA_16_1@@PAU1@00U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f0e20,0x3b
 ??$_Move@PAUOpR6_KA_84_0@@PAU1@@std@@YAPAUOpR6_KA_84_0@@PAU1@00U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f0e60,0x3b
 ??$_Uninit_def_fill_n@PAUOpR6_KCD_16_0@@IU1@V?$allocator@UOpR6_KCD_16_0@@@std@@U1@@std@@YAXPAUOpR6_KCD_16_0@@IPBU1@AAV?$allocator@UOpR6_KCD_16_0@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f1010,0xe0
@@ -237,7 +234,6 @@
 ??$_Uninit_fill_n@PAUOpR6_KA_64_0@@IU1@V?$allocator@UOpR6_KA_64_0@@@std@@U1@@std@@YAXPAUOpR6_KA_64_0@@IPBU1@AAV?$allocator@UOpR6_KA_64_0@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f31d0,0xbd
 ??$_Uninit_fill_n@PAUOpR6_KC_16_0@@IU1@V?$allocator@UOpR6_KC_16_0@@@std@@U1@@std@@YAXPAUOpR6_KC_16_0@@IPBU1@AAV?$allocator@UOpR6_KC_16_0@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f3410,0xbd
 ??$_Uninit_fill_n@PAUOpR6_KC_16_1@@IU1@V?$allocator@UOpR6_KC_16_1@@@std@@U1@@std@@YAXPAUOpR6_KC_16_1@@IPBU1@AAV?$allocator@UOpR6_KC_16_1@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f34d0,0xbd
-?copy@?$char_traits@D@std@@SAPADPADPBDI@Z,0x9f3590,0x19
 ??$_Uninit_fill_n@PAUOpR6_KCA_16_0@@IU1@V?$allocator@UOpR6_KCA_16_0@@@std@@U1@@std@@YAXPAUOpR6_KCA_16_0@@IPBU1@AAV?$allocator@UOpR6_KCA_16_0@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f35b0,0xbd
 ??$_Construct@UOpR6_KC_84_0@@ABU1@@std@@YAXPAUOpR6_KC_84_0@@ABU1@@Z,0x9f3e40,0x86
 ??_GOpR6_KCD_40_0@@QAEPAXI@Z,0x9f45e0,0x2d
@@ -245,7 +241,7 @@
 ??_GOpR6_KCD_44_0@@QAEPAXI@Z,0x9f50f0,0x2d
 ??_GOpR6_KCD_16_1@@QAEPAXI@Z,0x9f5120,0x2d
 ??_GOpR6_KCD_44_1@@QAEPAXI@Z,0x9f5180,0x2d
-?reserve@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXI@Z,0x9f5210,0x4f
+?reserve@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAEXI@Z,0x9f5210,0x4f
 ??4?$vector@UOpR6_KA_20_0@@V?$allocator@UOpR6_KA_20_0@@@std@@@std@@QAEAAV01@ABV01@@Z,0x9f5490,0x182
 ?construct@?$allocator@UOpR6_KA_16_0@@@std@@QAEXPAUOpR6_KA_16_0@@ABU3@@Z,0x9f5850,0x1d
 ?construct@?$allocator@UOpR6_KA_16_1@@@std@@QAEXPAUOpR6_KA_16_1@@ABU3@@Z,0x9f5870,0x1d
