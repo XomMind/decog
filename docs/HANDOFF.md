@@ -8,12 +8,15 @@ no wine processes and no build lock remain. `origin/main` is in sync with local 
 **State: 13,013 / 13,014 game functions, 96.08% code** (last verified integration build; library reclassifications below
 lower the denominator). Every row passes `tools/lverify.py`, but see "Verifier leniency" before trusting the count.
 
-### Remaining function
-- **0x51da30 `BS::turnUpdate_51da30`** (258 KB, 62,072 insns, claim `alex-uniform` in `config/claims.txt`). Draft in
-  `scratch/whiskey/` (continued from `scratch/uniform/`): the instruction stream matches (ebp-insensitive + jump check) through
-  exe insn 49,297 (+0x31c55, special-script case ~149-172 of 210); snapshots `ufull_ok_*.cpp`. Read `scratch/whiskey/NOTES.md`
-  (`g.sh` prints the match point). Left: remaining special cases, frame layout (lima/romeo solver), EH unwind check
-  (`ehtab.py`, ~930 states), `tools/try.sh`, then install as `src/util/*_01.cpp` + lvx + mapping row.
+### Remaining function: done (2026-10-08, late)
+- **0x51da30 `BS::turnUpdate_51da30`** (258 KB, 62,072 insns) now MATCHes in `tools/try.sh`. Source
+  `src/util/uniform_01.cpp`, row `config/mapping.d/uniform.csv`. Gate on a private full build (`build/full_giant`,
+  strict verifier): the candidate adds exactly this row (28,057 -> 28,058 MATCH of 32,328) and no row changes status.
+  All 5,703 frame offsets and all 931 EH unwind entries are identical. Draft history and tools: `scratch/whiskey/NOTES.md`
+  ("completion"), frame solver `scratch/giant_frame/gf.py`. Claim is held as `omp-giant-oct08` until this is committed.
+- Mapping fix found on the way: `lead_discovered.csv` named 0x9af3b0 (`assign(1,c)`) as `string::operator+=(char)`.
+  It is `operator=(char)`; `operator+=(char)` is 0x9af410 (`append(1,c)`). Both rows lvx-MATCH; strict total
+  28,032 -> 28,057 (25 rejected callers recovered). 4,270 strict rejections remain for review.
 - `0xa04d10` is claimed by another session (`codex-hash-oct08`).
 
 ### Verifier leniency (open decision, nothing changed yet)

@@ -2,4 +2,3 @@
 # remove the line in the commit that maps the function (or when abandoning it).
 # va        size    name / what                       owner   date
 0xa04d10    0x12    protobuf repeated-field accessor IsEmpty codex-hash-oct08 2026-10-08
-0x51da30    0x3eed0 BS::turnUpdate_51da30 continuation from alex-uniform handoff omp-giant-oct08 2026-10-08

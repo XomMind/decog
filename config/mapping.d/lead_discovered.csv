@@ -430,7 +430,8 @@
 ?clearBack@XConsole@@QAEXXZ,0x417cf0,0x81
 ?clearChars@XConsole@@QAEXXZ,0x417d80,0x4b
 ?getWidth@XConsole@@QAEHXZ,0x9b6bd0,0x16
-??Y?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@D@Z,0x9af3b0,0x1c
+??4?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@D@Z,0x9af3b0,0x1c
+??Y?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@D@Z,0x9af410,0x1c
 ?size@?$vector@UXColorFilter@@V?$allocator@UXColorFilter@@@std@@@std@@QBEIXZ,0x9b5100,0x19
 ?append@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV12@ID@Z,0x9af490,0x76
 ?_Chassign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXIID@Z,0x9bbbc0,0x4a
