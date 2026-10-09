@@ -460,7 +460,7 @@ public:
 	int unknown45a860();	// NOTE: placeholder name
 	int unknown5c92e0(int a);	// NOTE: placeholder name
 	bool unknown5d9340(bool *placed, Point *pos);	// NOTE: placeholder name
-	void unknown45b070(const char *s);	// NOTE: placeholder name (retail passes the address of the +8 member)
+	void unknown45b070(const string &s);	// NOTE: placeholder name
 	void unknown5dea60(int a, int b);	// NOTE: placeholder name
 	void unknown5deb40(int a);	// NOTE: placeholder name
 	void unknown5ded70(int a);	// NOTE: placeholder name
@@ -845,7 +845,7 @@ void Entity::polymindUnpossess(bool automatic)
 		robot = world->placeEntity(unknownD25de0.at(possessed->unknown0),old,possessed->unknown24,0,0x22,0xe,0);
 		if (robot.isValid())
 		{
-			robot->unknown45b070((const char *)&possessed->unknown8);
+			robot->unknown45b070(possessed->unknown8);
 			robot->unknown5dea60(possessed->unknown28,0);
 			while (!robot->items.isEmpty())
 				robot->items.back()->unknown57dbe0(0,0,1,1);

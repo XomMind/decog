@@ -726,8 +726,6 @@ _floor,0xaa212c,0x6
 ??$_Move@PAVHExplosive@@PAV1@@std@@YAPAVHExplosive@@PAV1@00@Z,0x9e4cf0,0x34
 ??$_Copy_impl@PAVHEntity@@PAV1@@std@@YAPAVHEntity@@PAV1@00@Z,0x9e5070,0x34
 ??$_Umove@PAPAVHAnim@@@?$vector@PAVHAnim@@V?$allocator@PAVHAnim@@@std@@@std@@IAEPAPAVHAnim@@PAPAV2@00@Z,0x9e4e10,0x28
-??$_Ucopy@V?$_Vector_const_iterator@V?$_Vector_val@VHProp@@V?$allocator@VHProp@@@std@@@std@@@std@@@?$vector@VHProp@@V?$allocator@VHProp@@@std@@@std@@IAEPAVHProp@@V?$_Vector_const_iterator@V?$_Vector_val@VHProp@@V?$allocator@VHProp@@@std@@@std@@@1@0PAV2@@Z,0x9e4f90,0x28
-??$_Ucopy@PAVHProp@@@?$vector@VHProp@@V?$allocator@VHProp@@@std@@@std@@IAEPAVHProp@@PAV2@00@Z,0x9e5120,0x28
 ??$_Ucopy@V?$_Vector_const_iterator@V?$_Vector_val@UElem_9e3800@@V?$allocator@UElem_9e3800@@@std@@@std@@@std@@@?$vector@UElem_9e3800@@V?$allocator@UElem_9e3800@@@std@@@std@@IAEPAUElem_9e3800@@V?$_Vector_const_iterator@V?$_Vector_val@UElem_9e3800@@V?$allocator@UElem_9e3800@@@std@@@std@@@1@0PAU2@@Z,0x9e5220,0x28
 ??$_Ucopy@PAUElem_9e3800@@@?$vector@UElem_9e3800@@V?$allocator@UElem_9e3800@@@std@@@std@@IAEPAUElem_9e3800@@PAU2@00@Z,0x9e52d0,0x28
 ??$_Umove@PAUElem_9e3800@@@?$vector@UElem_9e3800@@V?$allocator@UElem_9e3800@@@std@@@std@@IAEPAUElem_9e3800@@PAU2@00@Z,0x9e5300,0x28
@@ -784,7 +782,6 @@ _floor,0xaa212c,0x6
 ??0Container@?$InternalMetadataWithArenaBase@VUnknownFieldSet@protobuf@google@@VInternalMetadataWithArena@internal@23@@internal@protobuf@google@@QAE@XZ,0x9e76c0,0x16
 ??4?$vector@UE10_1@@V?$allocator@UE10_1@@@std@@@std@@QAEAAV01@ABV01@@Z,0x9f5310,0x17d
 ?reserve@?$vector@U?$OpS8g_P@$0BA@@@V?$allocator@U?$OpS8g_P@$0BA@@@@std@@@std@@QAEXI@Z,0x9c5190,0x149
-?_Assign_rv@?$vector@FV?$allocator@F@std@@@std@@QAEX$$QAV12@@Z,0x9f5fe0,0xf1
 ??0?$vector@NV?$allocator@N@std@@@std@@QAE@ABV01@@Z,0x9c5cd0,0xe9
 ??$_Construct@V?$_Vector_iterator@V?$_Vector_val@EV?$allocator@E@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEXV?$_Vector_iterator@V?$_Vector_val@EV?$allocator@E@std@@@std@@@1@0Uforward_iterator_tag@1@@Z,0xa02190,0xd1
 ?resize@?$vector@UE10_2@@V?$allocator@UE10_2@@@std@@@std@@QAEXI@Z,0x9bf1d0,0xc8
@@ -861,3 +858,10 @@ _floor,0xaa212c,0x6
 ??$_Destroy@UExplosive64@@@std@@YAXPAUExplosive64@@@Z,0x9ffad0,0xf
 ??1?$vector@UExplosive64@@V?$allocator@UExplosive64@@@std@@@std@@QAE@XZ,0x9b44c0,0x53
 ??$OpQ5_readObjects@VC065_Rec5188c0@@@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@PAVC065_Rec5188c0@@V?$allocator@PAVC065_Rec5188c0@@@std@@@1@H@Z,0x9d0160,0x132
+??1OpT8a_Layer@@QAE@XZ,0x9b6bd0,0x16
+??E?$_Tree_iterator@V?$_Tree_val@V?$_Tmap_traits@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@U?$less@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@V?$allocator@U?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@@2@$0A@@std@@@std@@@std@@QAEAAV01@XZ,0x9b8dc0,0x16
+??$_Ucopy@V?$_Vector_const_iterator@V?$_Vector_val@UE8_1@@V?$allocator@UE8_1@@@std@@@std@@@std@@@?$vector@UE8_1@@V?$allocator@UE8_1@@@std@@@std@@IAEPAUE8_1@@V?$_Vector_const_iterator@V?$_Vector_val@UE8_1@@V?$allocator@UE8_1@@@std@@@std@@@1@0PAU2@@Z,0x9e39c0,0x28
+??$_Ucopy@V?$_Vector_const_iterator@V?$_Vector_val@UY8_4_00_0@@V?$allocator@UY8_4_00_0@@@std@@@std@@@std@@@?$vector@UY8_4_00_0@@V?$allocator@UY8_4_00_0@@@std@@@std@@IAEPAUY8_4_00_0@@V?$_Vector_const_iterator@V?$_Vector_val@UY8_4_00_0@@V?$allocator@UY8_4_00_0@@@std@@@std@@@1@0PAU2@@Z,0x9e4f90,0x28
+??$_Umove@PAUOpU8_T9c3be0@@@?$vector@UOpU8_T9c3be0@@V?$allocator@UOpU8_T9c3be0@@@std@@@std@@IAEPAUOpU8_T9c3be0@@PAU2@00@Z,0x9e5120,0x28
+?_Assign_rv@?$vector@UOpH_P10_0@@V?$allocator@UOpH_P10_0@@@std@@@std@@QAEX$$QAV12@@Z,0x9f5fe0,0xf1
+??$_Distance@PADH@std@@YAXPAD0AAH@Z,0x9f64d0,0x30

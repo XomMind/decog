@@ -8,6 +8,16 @@ no wine processes and no build lock remain. `origin/main` is in sync with local 
 **Historical state: 13,013 / 13,014 game functions, 96.08% code** (last lenient integration build; library
 reclassifications below lower the denominator). This is not a strict verified count; see the repair below.
 
+**Current state (2026-10-09, strict): 13,013 / 13,013 game functions, 6,566,496 / 6,566,496 code bytes (100.00%).**
+Private strict full build `build/full_r9`, audit `build/target_audit_r9.*`: 29,816 / 32,014 rows MATCH, 0 regressions
+in any round. Rounds 4/4b/5 (agents ConsoleUI, CMapUpdate, XConsoleCallers, Strings, PosPoint, Unnamed, StlTemplates,
+Polymind, StlTail; reports in `scratch/<name>/REPORT.md`): 96.70% -> 99.70% -> 99.94% -> 100%.
+The 2,198 remaining DIFF rows all sit at retail VAs that another row already credits (1,786 body-different,
+412 identity-ambiguous): they are surplus ICF/alias rows, not missing functions. `lverify` still exits 1 because of them,
+so the integration loop's "all-MATCH" auto-commit gate would not pass. Pruning or repointing them is the remaining work.
+Several STL rows name an ICF-arbitrary instantiation at folded VAs ([INFERENCE] in the agents' reports).
+`tools/progress.py` has not been rerun: `docs/progress.*` are stale.
+
 ### Remaining function: done (2026-10-08, late)
 - **0x51da30 `BS::turnUpdate_51da30`** (258 KB, 62,072 insns) now MATCHes in `tools/try.sh`. Source
   `src/util/uniform_01.cpp`, row `config/mapping.d/uniform.csv`. Gate on a private full build (`build/full_giant`,

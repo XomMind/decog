@@ -591,7 +591,6 @@
 ??0?$reverse_iterator@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@std@@QAE@V?$_Vector_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@@Z,0x9b3730,0x1c
 ??0?$reverse_iterator@V?$_Vector_const_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@std@@@std@@QAE@V?$_Vector_const_iterator@V?$_Vector_val@DV?$allocator@D@std@@@std@@@1@@Z,0x9b3730,0x1c
 ??G?$_Vector_const_iterator@V?$_Vector_val@UXColor@@V?$allocator@UXColor@@@std@@@std@@@std@@QBE?AV01@H@Z,0x9b0980,0x2d
-??E?$_Vector_iterator@V?$_Vector_val@UXColor@@V?$allocator@UXColor@@@std@@@std@@@std@@QAEAAV01@XZ,0x9b8dc0,0x16
 ??H?$_Vector_iterator@V?$_Vector_val@UXColor@@V?$allocator@UXColor@@@std@@@std@@@std@@QBE?AV01@H@Z,0x9b0980,0x2d
 ??0?$reverse_iterator@V?$_Vector_iterator@V?$_Vector_val@UXColor@@V?$allocator@UXColor@@@std@@@std@@@std@@@std@@QAE@V?$_Vector_iterator@V?$_Vector_val@UXColor@@V?$allocator@UXColor@@@std@@@std@@@1@@Z,0x9b3730,0x1c
 ??0?$reverse_iterator@V?$_Vector_const_iterator@V?$_Vector_val@UXColor@@V?$allocator@UXColor@@@std@@@std@@@std@@@std@@QAE@V?$_Vector_const_iterator@V?$_Vector_val@UXColor@@V?$allocator@UXColor@@@std@@@std@@@1@@Z,0x9b3730,0x1c
@@ -663,7 +662,6 @@
 ?get_allocator@?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QBE?AV?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@XZ,0x9eb7c0,0x1f
 ?clear@?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAEXXZ,0x9b0900,0x43
 ??D?$_Vector_iterator@V?$_Vector_val@UPHYSFS_ArchiveInfo@@V?$allocator@UPHYSFS_ArchiveInfo@@@std@@@std@@@std@@QBEAAUPHYSFS_ArchiveInfo@@XZ,0x9b0140,0x13
-??E?$_Vector_iterator@V?$_Vector_val@UPHYSFS_ArchiveInfo@@V?$allocator@UPHYSFS_ArchiveInfo@@@std@@@std@@@std@@QAEAAV01@XZ,0x9b8dc0,0x16
 ??E?$_Vector_iterator@V?$_Vector_val@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@std@@QAEAAV01@XZ,0x9c4230,0x16
 ?erase@?$vector@UPHYSFS_ArchiveInfo@@V?$allocator@UPHYSFS_ArchiveInfo@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@UPHYSFS_ArchiveInfo@@V?$allocator@UPHYSFS_ArchiveInfo@@@std@@@std@@@2@V?$_Vector_const_iterator@V?$_Vector_val@UPHYSFS_ArchiveInfo@@V?$allocator@UPHYSFS_ArchiveInfo@@@std@@@std@@@2@0@Z,0x9bd640,0x91
 ?allocate@?$allocator@UPHYSFS_ArchiveInfo@@@std@@QAEPAUPHYSFS_ArchiveInfo@@I@Z,0x9c2b70,0x1b
