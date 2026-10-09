@@ -15,13 +15,9 @@
 ?_Reserve@?$vector@UOpR6_KA_28_1@@V?$allocator@UOpR6_KA_28_1@@@std@@@std@@IAEXI@Z,0x9be780,0x61
 ?_Reserve@?$vector@UOpR6_KA_32_0@@V?$allocator@UOpR6_KA_32_0@@@std@@@std@@IAEXI@Z,0x9be870,0x61
 ?_Reserve@?$vector@UOpR6_KA_32_1@@V?$allocator@UOpR6_KA_32_1@@@std@@@std@@IAEXI@Z,0x9bea00,0x61
-?_Reserve@?$vector@UOpR6_KA_16_0@@V?$allocator@UOpR6_KA_16_0@@@std@@@std@@IAEXI@Z,0x9bed20,0x61
 ?erase@?$vector@UOpR6_KA_4_1@@V?$allocator@UOpR6_KA_4_1@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@UOpR6_KA_4_1@@V?$allocator@UOpR6_KA_4_1@@@std@@@std@@@2@V?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KA_4_1@@V?$allocator@UOpR6_KA_4_1@@@std@@@std@@@2@0@Z,0x9bef90,0x91
 ?_Assign_n@?$vector@UOpR6_KCD_16_1@@V?$allocator@UOpR6_KCD_16_1@@@std@@@std@@IAEXIABUOpR6_KCD_16_1@@@Z,0x9bf030,0xb6
-?_Reserve@?$vector@UOpR6_KA_16_1@@V?$allocator@UOpR6_KA_16_1@@@std@@@std@@IAEXI@Z,0x9bf0f0,0x61
 ?_Tidy@?$vector@UOpR6_KA_16_0@@V?$allocator@UOpR6_KA_16_0@@@std@@@std@@IAEXXZ,0x9bf160,0x6e
-?resize@?$vector@UOpR6_KA_16_0@@V?$allocator@UOpR6_KA_16_0@@@std@@@std@@QAEXI@Z,0x9bf1d0,0xc8
-?erase@?$vector@UOpR6_KA_8_0@@V?$allocator@UOpR6_KA_8_0@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@UOpR6_KA_8_0@@V?$allocator@UOpR6_KA_8_0@@@std@@@std@@@2@V?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KA_8_0@@V?$allocator@UOpR6_KA_8_0@@@std@@@std@@@2@0@Z,0x9bf2a0,0x91
 ?_Reserve@?$vector@UOpR6_KA_40_0@@V?$allocator@UOpR6_KA_40_0@@@std@@@std@@IAEXI@Z,0x9bf340,0x61
 ?erase@?$vector@UOpR6_KA_8_1@@V?$allocator@UOpR6_KA_8_1@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@UOpR6_KA_8_1@@V?$allocator@UOpR6_KA_8_1@@@std@@@std@@@2@V?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KA_8_1@@V?$allocator@UOpR6_KA_8_1@@@std@@@std@@@2@0@Z,0x9bf4a0,0x91
 ?_Reserve@?$vector@UOpR6_KA_40_1@@V?$allocator@UOpR6_KA_40_1@@@std@@@std@@IAEXI@Z,0x9bf540,0x61
@@ -31,12 +27,10 @@
 ?_Tidy@?$vector@UOpR6_KA_36_0@@V?$allocator@UOpR6_KA_36_0@@@std@@@std@@IAEXXZ,0x9bf850,0x75
 ?_Reserve@?$vector@UOpR6_KA_44_0@@V?$allocator@UOpR6_KA_44_0@@@std@@@std@@IAEXI@Z,0x9bf9c0,0x61
 ?_Tidy@?$vector@UOpR6_KA_24_0@@V?$allocator@UOpR6_KA_24_0@@@std@@@std@@IAEXXZ,0x9bfb40,0x75
-?_Assign_n@?$vector@UOpR6_KA_8_0@@V?$allocator@UOpR6_KA_8_0@@@std@@@std@@IAEXIABUOpR6_KA_8_0@@@Z,0x9bfbc0,0x78
 ?_Tidy@?$vector@UOpR6_KA_36_1@@V?$allocator@UOpR6_KA_36_1@@@std@@@std@@IAEXXZ,0x9bfcc0,0x75
 ?_Construct_n@?$vector@UOpR6_KA_8_1@@V?$allocator@UOpR6_KA_8_1@@@std@@@std@@QAEXIPBUOpR6_KA_8_1@@@Z,0x9bfdc0,0xa6
 ?_Assign_n@?$vector@UOpR6_KCDA_16_0@@V?$allocator@UOpR6_KCDA_16_0@@@std@@@std@@IAEXIABUOpR6_KCDA_16_0@@@Z,0x9bff50,0xb6
 ?_Tidy@?$vector@UOpR6_KCDA_16_0@@V?$allocator@UOpR6_KCDA_16_0@@@std@@@std@@IAEXXZ,0x9c0010,0x6e
-?resize@?$vector@UOpR6_KA_16_1@@V?$allocator@UOpR6_KA_16_1@@@std@@@std@@QAEXI@Z,0x9c0080,0xc8
 ?_Reserve@?$vector@UOpR6_KA_44_1@@V?$allocator@UOpR6_KA_44_1@@@std@@@std@@IAEXI@Z,0x9c01c0,0x61
 ?_Assign_n@?$vector@UOpR6_KCDA_16_1@@V?$allocator@UOpR6_KCDA_16_1@@@std@@@std@@IAEXIABUOpR6_KCDA_16_1@@@Z,0x9c05f0,0xb6
 ?_Reserve@?$vector@UOpR6_KA_48_0@@V?$allocator@UOpR6_KA_48_0@@@std@@@std@@IAEXI@Z,0x9c0720,0x61
@@ -51,7 +45,6 @@
 ?erase@?$vector@UOpR6_KA_28_0@@V?$allocator@UOpR6_KA_28_0@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@UOpR6_KA_28_0@@V?$allocator@UOpR6_KA_28_0@@@std@@@std@@@2@V?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KA_28_0@@V?$allocator@UOpR6_KA_28_0@@@std@@@std@@@2@0@Z,0x9c1310,0x91
 ?_Reserve@?$vector@UOpR6_KA_20_0@@V?$allocator@UOpR6_KA_20_0@@@std@@@std@@IAEXI@Z,0x9c1450,0x61
 ?_Reserve@?$vector@UOpR6_KA_52_1@@V?$allocator@UOpR6_KA_52_1@@@std@@@std@@IAEXI@Z,0x9c15e0,0x61
-?erase@?$vector@UOpR6_KA_16_1@@V?$allocator@UOpR6_KA_16_1@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@UOpR6_KA_16_1@@V?$allocator@UOpR6_KA_16_1@@@std@@@std@@@2@V?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KA_16_1@@V?$allocator@UOpR6_KA_16_1@@@std@@@std@@@2@0@Z,0x9c16d0,0x91
 ?_Reserve@?$vector@UOpR6_KA_56_0@@V?$allocator@UOpR6_KA_56_0@@@std@@@std@@IAEXI@Z,0x9c1770,0x61
 ?erase@?$vector@UOpR6_KA_28_1@@V?$allocator@UOpR6_KA_28_1@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@UOpR6_KA_28_1@@V?$allocator@UOpR6_KA_28_1@@@std@@@std@@@2@V?$_Vector_const_iterator@V?$_Vector_val@UOpR6_KA_28_1@@V?$allocator@UOpR6_KA_28_1@@@std@@@std@@@2@0@Z,0x9c17e0,0x91
 ?_Reserve@?$vector@UOpR6_KA_56_1@@V?$allocator@UOpR6_KA_56_1@@@std@@@std@@IAEXI@Z,0x9c1880,0x61
@@ -79,8 +72,6 @@
 ?_Grow_to@?$vector@UOpR6_KA_8_0@@V?$allocator@UOpR6_KA_8_0@@@std@@@std@@IBEII@Z,0x9c4890,0x59
 ?reserve@?$vector@UOpR6_KA_16_0@@V?$allocator@UOpR6_KA_16_0@@@std@@@std@@QAEXI@Z,0x9c4fe0,0x149
 ?_Destroy@?$vector@UOpR6_KA_16_0@@V?$allocator@UOpR6_KA_16_0@@@std@@@std@@IAEXPAUOpR6_KA_16_0@@0@Z,0x9c5160,0x24
-?reserve@?$vector@UOpR6_KA_16_1@@V?$allocator@UOpR6_KA_16_1@@@std@@@std@@QAEXI@Z,0x9c5190,0x149
-?_Destroy@?$vector@UOpR6_KA_16_1@@V?$allocator@UOpR6_KA_16_1@@@std@@@std@@IAEXPAUOpR6_KA_16_1@@0@Z,0x9c5470,0x24
 ?reserve@?$vector@UOpR6_KA_84_0@@V?$allocator@UOpR6_KA_84_0@@@std@@@std@@QAEXI@Z,0x9c5500,0x14e
 ?_Grow_to@?$vector@UOpR6_KA_8_1@@V?$allocator@UOpR6_KA_8_1@@@std@@@std@@IBEII@Z,0x9c56c0,0x59
 ?reserve@?$vector@UOpR6_KA_36_0@@V?$allocator@UOpR6_KA_36_0@@@std@@@std@@QAEXI@Z,0x9c5770,0x14e

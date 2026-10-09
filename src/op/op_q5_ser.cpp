@@ -139,12 +139,11 @@ struct OpQ5_T9cfb70
 	void serialize(ostream &stream);
 };
 
-struct OpQ5_T9d0160
+class C065_Rec5188c0	// NOTE: placeholder layout; the exe's OpQ5_readObjects 0x9d0160 builds its records with 0x5188c0 (row C065_Rec5188c0::C065_Rec5188c0)
 {
 	char pad[20];
-	OpQ5_T9d0160(istream &stream);
-	~OpQ5_T9d0160();
-	void serialize(ostream &stream);
+public:
+	C065_Rec5188c0(istream &stream);
 };
 
 struct OpQ5_T9d02a0
@@ -1944,7 +1943,7 @@ template void OpQ5_clearObjects<OpQ5_T9cf360>(vector<OpQ5_T9cf360*> &v);
 template void OpQ5_deleteObjects<OpQ5_T9cf360>(vector<OpQ5_T9cf360*> &v);
 template void OpQ5_deleteObjects<OpQ5_T9cfb10>(vector<OpQ5_T9cfb10*> &v);
 template void OpQ5_deleteObjects<OpQ5_T9cfb70>(vector<OpQ5_T9cfb70*> &v);
-template void OpQ5_readObjects<OpQ5_T9d0160>(istream &stream, vector<OpQ5_T9d0160*> &v, int skip);
+template void OpQ5_readObjects<C065_Rec5188c0>(istream &stream, vector<C065_Rec5188c0*> &v, int skip);
 template void OpQ5_writeObjects<OpQ5_T9d02a0>(ostream &stream, vector<OpQ5_T9d02a0*> &v);
 template void OpQ5_clearObjects<OpQ5_T9e2c40>(vector<OpQ5_T9e2c40*> &v);
 template void OpQ5_deleteObjects<OpQ5_T9d0710>(vector<OpQ5_T9d0710*> &v);

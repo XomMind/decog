@@ -1101,10 +1101,7 @@ struct OpR5e_EntityData	// NOTE: placeholder name
 	int unknownAc;	// NOTE: placeholder name
 };
 
-struct OpR5e_EntityEffect	// NOTE: placeholder name
-{
-	char pad[4];
-};
+struct EntityEffect;	// configured callee 0x45ac40 is ?unknown45ac40@Entity@@QAEPAUEntityEffect@@H@Z (defined in cc_r2_03.cpp)
 
 class Entity
 {
@@ -1112,7 +1109,7 @@ public:
 	HGroup getGroup();
 	int getAiType();	// 0x45a2a0
 	int getFaction();	// 0x45a2c0
-	OpR5e_EntityEffect *unknown45ac40(int type);	// NOTE: placeholder name
+	EntityEffect *unknown45ac40(int type);	// NOTE: placeholder name
 	unsigned int unknown5cb930(vector<HItem> *out);	// NOTE: placeholder name
 	OpR5e_EntityData *unknown9b4350();	// NOTE: placeholder name (ICF'd getter)
 };

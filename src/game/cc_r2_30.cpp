@@ -5,10 +5,9 @@
 
 using namespace std;
 
-struct HExplosive
+class HExplosive	// NOTE: placeholder layout (4-byte handle; the exe destroys these vectors with the handle family 0x9b7e00)
 {
-	char pad[0x40];	// NOTE: placeholder layout
-	~HExplosive();
+	int ID;
 };
 
 struct Unknown467710	// NOTE: placeholder name

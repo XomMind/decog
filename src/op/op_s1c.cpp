@@ -57,6 +57,8 @@ public:
 	void updateTurn();	// 0x518b30
 };
 
+class C065_Rec5188c0;	// NOTE: placeholder name (0x5188c0 reads one record)
+
 struct OpQ5_T9d0160	// NOTE: placeholder name (record of an entity effect, 20 bytes)
 {
 	OpQ5_T9d0160(istream &stream);
@@ -215,7 +217,7 @@ OpS1c_RecList::OpS1c_RecList(vector<OpS1c_Data*> list)
 
 OpS1c_RecList::OpS1c_RecList(istream &stream)
 {
-	OpQ5_readObjects(stream,records,0);
+	OpQ5_readObjects(stream,(vector<C065_Rec5188c0*>&)records,0);	// the exe's 0x9d0160 builds records with C065_Rec5188c0's ctor 0x5188c0
 	readBinary(stream,&turn);
 }
 
@@ -492,10 +494,9 @@ OpS1c_Path::OpS1c_Path(int a_, int b_, const Point &p1, const Point &p2, const P
 	init515790();
 }
 
-struct HExplosive
+class HExplosive	// NOTE: placeholder layout (4-byte handle; the exe destroys these vectors with the handle family 0x9b7e00)
 {
-	char pad[0x40];	// NOTE: placeholder layout
-	~HExplosive();
+	int ID;
 };
 
 class OpS1c_Base	// NOTE: placeholder name (dtor 0x453c00)

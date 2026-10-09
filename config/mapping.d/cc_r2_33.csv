@@ -8,7 +8,6 @@
 ??$_Ucopy@PAUElem_9e3840@@@?$vector@UElem_9e3840@@V?$allocator@UElem_9e3840@@@std@@@std@@IAEPAUElem_9e3840@@PAU2@00@Z,0x9e3910,0x28
 ??$_Cons_val@V?$allocator@UXColor@@@std@@UXColor@@AAU3@@std@@YAXAAV?$allocator@UXColor@@@0@PAUXColor@@AAU2@@Z,0x9e3980,0x1e
 ??$_Cons_val@V?$allocator@UXColor@@@std@@UXColor@@ABU3@@std@@YAXAAV?$allocator@UXColor@@@0@PAUXColor@@ABU2@@Z,0x9e39a0,0x1e
-??$_Ucopy@PAUXColor@@@?$vector@UXColor@@V?$allocator@UXColor@@@std@@@std@@IAEPAUXColor@@PAU2@00@Z,0x9e39c0,0x28
 ??$_Move@PAUElem_9e39f0@@PAU1@@std@@YAPAUElem_9e39f0@@PAU1@00@Z,0x9e39f0,0x34
 ??$_Umove@PAUElem_9e39f0@@@?$vector@UElem_9e39f0@@V?$allocator@UElem_9e39f0@@@std@@@std@@IAEPAUElem_9e39f0@@PAU2@00@Z,0x9e3a30,0x28
 ??$_Cons_val@V?$allocator@UElem_9e3a60@@@std@@UElem_9e3a60@@ABU3@@std@@YAXAAV?$allocator@UElem_9e3a60@@@0@PAUElem_9e3a60@@ABU2@@Z,0x9e3a60,0x1e

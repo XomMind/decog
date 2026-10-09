@@ -28,9 +28,10 @@ struct EntityEffectDef	// NOTE: placeholder name
 	int type;	// NOTE: placeholder name
 };
 
-struct EntityData4563c0	// NOTE: placeholder name
+struct EntityEffect	// NOTE: placeholder layout (Entity::effects element, as in cc_r2_03.cpp; push_back 0x9b9d30)
 {
 	EntityEffectDef *def;	// NOTE: placeholder name
+	int value;	// NOTE: placeholder name (same layout as cc_r2_03.cpp)
 };
 
 class EntityPart4563c0	// NOTE: placeholder name (dtor 0x4563c0)
@@ -89,9 +90,9 @@ public:
 	void unknown45b2a0();					// NOTE: placeholder name
 	void unknown45b2c0(int a, int b, int c, int d, bool e);	// NOTE: placeholder name
 	void unknown45b300(int a);				// NOTE: placeholder name
-	void unknown45b340(EntityData4563c0 *effect);	// NOTE: placeholder name
+	void unknown45b340(EntityEffect *effect);	// NOTE: placeholder name
 	void unknown45b360(int type);			// NOTE: placeholder name
-	void unknown45b3d0(EntityData4563c0 *effect);	// NOTE: placeholder name
+	void unknown45b3d0(EntityEffect *effect);	// NOTE: placeholder name
 
 	int unknown5ca400();					// NOTE: placeholder name
 	int unknown5ca670();					// NOTE: placeholder name
@@ -116,7 +117,7 @@ public:
 	void						*unknownBC;		// NOTE: placeholder name
 	bool						unknownC0;		// NOTE: placeholder name
 	char						padC1[0xdc - 0xc1];
-	vector<EntityData4563c0 *>	unknownDC;		// NOTE: placeholder name
+	vector<EntityEffect *>	unknownDC;		// NOTE: placeholder name
 	EntityPart4563c0			*unknownEC;		// NOTE: placeholder name
 	AsciiImage					*unknownF0;		// NOTE: placeholder name
 	char						padF4[0x114 - 0xf4];
@@ -275,7 +276,7 @@ void Entity::unknown45b300(int a)
 	takeDamage(0,0,0,a,7,0,0,0,HProp(),1,8,0,0,1);
 }
 
-void Entity::unknown45b340(EntityData4563c0 *effect)
+void Entity::unknown45b340(EntityEffect *effect)
 {
 	unknownDC.push_back(effect);
 }
@@ -292,7 +293,7 @@ void Entity::unknown45b360(int type)
 	}
 }
 
-void Entity::unknown45b3d0(EntityData4563c0 *effect)
+void Entity::unknown45b3d0(EntityEffect *effect)
 {
 	for (unsigned int i = 0; i < unknownDC.size(); i++)
 	{

@@ -37,9 +37,10 @@ struct Rect
 	Rect &operator=(const Rect &rect);	// NOTE: folded with the copy ctor (0x40a720)
 };
 
-struct E8_0	// NOTE: placeholder name
+struct E8_9b3130	// NOTE: placeholder name; element of the vectors copied by vector::operator= 0x9b3130 (distinct from lead/stl_a.cpp E8_0)
 {
 	char pad[8];
+	E8_9b3130 &operator=(const E8_9b3130 &e);	// NOTE: the exe assigns these elements with a call (_Copy_impl 0x9efd30); copies stay inline (construct 0x9f05e0)
 };
 
 struct OpU8c_Area	// NOTE: placeholder name
@@ -231,9 +232,9 @@ OpU8c_Rec30::OpU8c_Rec30(const OpU8c_Rec30 &o)	// 0x9f4960
 
 struct OpU8c_Lists	// NOTE: placeholder name
 {
-	vector<E8_0> list0;
+	vector<E8_9b3130> list0;
 	vector<OpR6_KA_12_0> list10;
-	vector<E8_0> list20;
+	vector<E8_9b3130> list20;
 	vector<OpR6_KA_12_0> list30;
 	int unknown40;
 	char flag44;
@@ -259,7 +260,7 @@ OpU8c_Lists::OpU8c_Lists(const OpU8c_Lists &o)	// 0x9f4a00
 
 struct OpU8c_ListPair	// NOTE: placeholder name
 {
-	vector<E8_0> list0;
+	vector<E8_9b3130> list0;
 	vector<OpR6_KA_12_0> list10;
 
 	OpU8c_ListPair(const OpU8c_ListPair &o);
@@ -321,9 +322,9 @@ struct OpU8c_Rec60	// NOTE: placeholder name
 {
 	int unknown00;
 	Rect rect04;
-	vector<E8_0> list14;
+	vector<E8_9b3130> list14;
 	int unknown24;
-	vector<E8_0> list28;
+	vector<E8_9b3130> list28;
 	vector<int> list38;
 	vector<int> list48;
 	int unknown58;

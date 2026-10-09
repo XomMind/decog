@@ -7,8 +7,9 @@ void logError(string location, string message);
 string intToString(int value);
 class HProp { public: int ID; HProp(); };
 class HEntity;
-struct OpS1c_Inventory;
-class Entity { public: OpS1c_Inventory *getInventory(); };
+class OpS1c_Inventory;	// NOTE: configured callees: getInventory 0x45ad90 returns Inventory*, 0x4569a0 takes OpS1c_Inventory*
+class Inventory;
+class Entity { public: Inventory *getInventory(); };
 class HEntity { public: int ID; Entity *operator->() const; };
 bool OpS1c_unknown4569a0(int a, int b, int c, int d, int e, int f, int g, OpS1c_Inventory *inv, int h, int i, int j, int k);
 bool opU5_logMessage(int id, const string &text, const string *b, int c, HProp d, HProp e, const struct Point *at, int flag);	// NOTE: placeholder name (0x5111e0)
@@ -48,5 +49,5 @@ void teamb_decideCallback8f8340(int index, const string &option)	// NOTE: placeh
 			teamb_msgConsole_cec058->unknown8758d0(true);
 		opr5c_logMsgs->scrollToEnd();
 	} while (0);
-	OpS1c_unknown4569a0(0x3b,teamb_decideEntity_d35bb8.ID,HProp().ID,HProp().ID,HProp().ID,0,0,teamb_decideEntity_d35bb8->getInventory(),teamb_decideEntity_d35bb8.ID,HProp().ID,HProp().ID,0);
+	OpS1c_unknown4569a0(0x3b,teamb_decideEntity_d35bb8.ID,HProp().ID,HProp().ID,HProp().ID,0,0,(OpS1c_Inventory *)teamb_decideEntity_d35bb8->getInventory(),teamb_decideEntity_d35bb8.ID,HProp().ID,HProp().ID,0);
 }

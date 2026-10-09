@@ -29,9 +29,10 @@ struct Point
 	Point &operator=(const Point &p);
 };
 
-struct E8_0
+struct E8_9b3130	// NOTE: placeholder name; element of the vectors copied by vector::operator= 0x9b3130 (distinct from lead/stl_a.cpp E8_0)
 {
 	char pad[8];
+	E8_9b3130 &operator=(const E8_9b3130 &e);	// NOTE: the exe assigns these elements with a call (_Copy_impl 0x9efd30); copies stay inline (construct 0x9f05e0)
 };
 
 struct OpH_CDA10_1	// NOTE: placeholder name
@@ -56,9 +57,9 @@ struct OpR6_KA_20_0
 // implicit operator= of placeholder structs (member-wise)
 struct OpS8f_S9f4e00	// NOTE: placeholder name
 {
-	vector<E8_0> a;
+	vector<E8_9b3130> a;
 	vector<int> b;
-	vector<E8_0> c;
+	vector<E8_9b3130> c;
 	vector<int> d;
 	int e;
 	bool f;
@@ -69,7 +70,7 @@ struct OpS8f_S9f4e00	// NOTE: placeholder name
 
 struct OpS8f_S9f4ea0	// NOTE: placeholder name
 {
-	vector<E8_0> a;
+	vector<E8_9b3130> a;
 	vector<int> b;
 };
 

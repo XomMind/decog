@@ -57,6 +57,5 @@
 ?clear@?$vector@UY8_10_14_1@@V?$allocator@UY8_10_14_1@@@std@@@std@@QAEXXZ,0x9b5c40,0x43
 ?_Construct_n@?$vector@UY8_10_14_1@@V?$allocator@UY8_10_14_1@@@std@@@std@@QAEXIPBUY8_10_14_1@@@Z,0x9be170,0xa6
 ??0?$vector@UY8_10_14_1@@V?$allocator@UY8_10_14_1@@@std@@@std@@QAE@ABV01@@Z,0x9c3af0,0xe9
-??0?$vector@UE60_0@@V?$allocator@UE60_0@@@std@@@std@@QAE@ABV01@@Z,0x9c5cd0,0xe9
 ??1?$vector@UY8_10_14_1@@V?$allocator@UY8_10_14_1@@@std@@@std@@QAE@XZ,0x9b3da0,0x53
 ??1?$vector@UY8_54_00_0@@V?$allocator@UY8_54_00_0@@@std@@@std@@QAE@XZ,0x9b44c0,0x53

@@ -4,7 +4,6 @@
 ??$OpQ5_deleteObjects@UOpQ5_T9cf360@@@@YAXAAV?$vector@PAUOpQ5_T9cf360@@V?$allocator@PAUOpQ5_T9cf360@@@std@@@std@@@Z,0x9cf360,0x5e
 ??$OpQ5_deleteObjects@UOpQ5_T9cfb10@@@@YAXAAV?$vector@PAUOpQ5_T9cfb10@@V?$allocator@PAUOpQ5_T9cfb10@@@std@@@std@@@Z,0x9cfb10,0x5e
 ??$OpQ5_deleteObjects@UOpQ5_T9cfb70@@@@YAXAAV?$vector@PAUOpQ5_T9cfb70@@V?$allocator@PAUOpQ5_T9cfb70@@@std@@@std@@@Z,0x9cfb70,0x5e
-??$OpQ5_readObjects@UOpQ5_T9d0160@@@@YAXAAV?$basic_istream@DU?$char_traits@D@std@@@std@@AAV?$vector@PAUOpQ5_T9d0160@@V?$allocator@PAUOpQ5_T9d0160@@@std@@@1@H@Z,0x9d0160,0x132
 ??$OpQ5_writeObjects@UOpQ5_T9d02a0@@@@YAXAAV?$basic_ostream@DU?$char_traits@D@std@@@std@@AAV?$vector@PAUOpQ5_T9d02a0@@V?$allocator@PAUOpQ5_T9d02a0@@@std@@@1@@Z,0x9d02a0,0x59
 ??$OpQ5_clearObjects@UOpQ5_T9e2c40@@@@YAXAAV?$vector@PAUOpQ5_T9e2c40@@V?$allocator@PAUOpQ5_T9e2c40@@@std@@@std@@@Z,0x9d0670,0x19
 ??$OpQ5_deleteObjects@UOpQ5_T9d0710@@@@YAXAAV?$vector@PAUOpQ5_T9d0710@@V?$allocator@PAUOpQ5_T9d0710@@@std@@@std@@@Z,0x9d0710,0x5e

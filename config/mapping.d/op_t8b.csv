@@ -14,7 +14,6 @@
 ?OpT8b_Fn9d9b60@@YA_NABV?$vector@_NV?$allocator@_N@std@@@std@@@Z,0x9d9b60,0x42
 ?OpT8b_Fn9d76c0@@YAHABV?$vector@_NV?$allocator@_N@std@@@std@@_N@Z,0x9d76c0,0x48
 ?OpT8b_Fn9d78c0@@YAXAAV?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@Z,0x9d78c0,0xb5
-?OpT8b_Fn9d6280@@YA_NAAV?$vector@HV?$allocator@H@std@@@std@@0@Z,0x9d6280,0x71
 ?OpT8b_Fn9d9190@@YAXAAV?$vector@HV?$allocator@H@std@@@std@@HH@Z,0x9d9190,0x53
 ??$sort@V?$_Vector_iterator@V?$_Vector_val@HV?$allocator@H@std@@@std@@@std@@@std@@YAXV?$_Vector_iterator@V?$_Vector_val@HV?$allocator@H@std@@@std@@@0@0@Z,0x9d9920,0x34
 ??$unique@V?$_Vector_iterator@V?$_Vector_val@VHEntity@@V?$allocator@VHEntity@@@std@@@std@@@std@@@std@@YA?AV?$_Vector_iterator@V?$_Vector_val@VHEntity@@V?$allocator@VHEntity@@@std@@@std@@@0@V10@0@Z,0x9d9960,0x3e
