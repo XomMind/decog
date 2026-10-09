@@ -233,7 +233,6 @@
 ?construct@?$allocator@UE84_1@@@std@@QAEXPAUE84_1@@$$QAU3@@Z,0x9f0070,0x88
 ?construct@?$allocator@UEac_1@@@std@@QAEXPAUEac_1@@$$QAU3@@Z,0x9effe0,0x88
 ?construct@?$allocator@M@std@@QAEXPAM$$QAM@Z,0x9f0640,0x4e
-?construct@?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@QAEXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@$$QAV32@@Z,0x9efc10,0x85
 ??$_Uninitialized_copy@V?$_Vector_const_iterator@V?$_Vector_val@UE8_0@@V?$allocator@UE8_0@@@std@@@std@@@std@@PAUE8_0@@V?$allocator@UE8_0@@@2@@std@@YAPAUE8_0@@V?$_Vector_const_iterator@V?$_Vector_val@UE8_0@@V?$allocator@UE8_0@@@std@@@std@@@0@0PAU1@AAV?$allocator@UE8_0@@@0@@Z,0x9efdf0,0x38
 ??$_Uninitialized_copy@PAUE8_0@@PAU1@V?$allocator@UE8_0@@@std@@@std@@YAPAUE8_0@@PAU1@00AAV?$allocator@UE8_0@@@0@@Z,0x9efd70,0x38
 ??$_Uninitialized_move@PAUE8_0@@PAU1@V?$allocator@UE8_0@@@std@@@std@@YAPAUE8_0@@PAU1@00AAV?$allocator@UE8_0@@@0@@Z,0x9f13b0,0x45

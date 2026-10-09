@@ -69,6 +69,16 @@ Triage by delegated agents (reports in `scratch/triage/`, uncommitted; counts fr
   strict verifier): **28,058 / 32,328 MATCH, 4,270 DIFF; 11,672 / 13,013 functions, 3,722,203 / 6,566,496 bytes (56.68%)**;
   audit `build/target_audit_r3.*`. This is the first count that rests on the strict gate; the 96% figure above is obsolete.
   `tools/progress.py` has not been rerun, so `docs/progress.*` are stale.
+- Subagent repair round (scratch/{GetWidthFix,TreeGaps,VectorCallees,PointArrayStubs}, uncommitted evidence): wrong callee rows were
+  re-pointed or added in new `config/mapping.d/strict_repairs.csv` (123 rows; 73 old rows removed from lead_discovered, lead_stl_a,
+  lead_stl_b, team_b_repair), plus real definitions `src/util/zz_point_ctors.cpp` (Pos()/Point()/Pos(const Pos&)/Point(int)/...)
+  and `src/util/zz_array2d_int.cpp` (Array2D<int>::operator()). Fixes: `XConsole::getWidth` is 0x44b0d0 (0x9b6bd0 was freeCells),
+  `vector<int>::push_back(int&&)` 0x9b9280, `vector<HItem>::~vector` 0x9b7e00, `vector<int>::back` 0x9b6540, `vector<string>()` 0x9b8e80.
+  Strict full build `build/full_r4`: **28,643 / 32,375 MATCH, 3,732 DIFF, 0 regressions vs build/full_strict (538 flips, 47 new rows all
+  MATCH); 12,180 / 13,013 functions, 4,621,518 / 6,566,496 bytes (70.38%)**. Buckets: 2,975 body-different, 756 ambiguous, 1 other.
+  Pos/Point folding and the Array2D layout are [INFERENCE] from body equality. Not applied (evidence in scratch): TreeGaps drop list of
+  335 caller rows (_Tree/iterator/pair/allocator, structurally different bodies), 12 `_Pair_base` rows at 0x9eee40, `vector<UHExplosive>`
+  (our 64-byte element vs retail 4-byte handle: a source type bug), lvalue/rvalue caller-source differences (`push_back<string>(const&)` etc.).
 
 ### Fixed this evening (committed with this handoff)
 - 19 names mapped to 2-3 different VAs (one row of each was never verified, since `common.functions()` keys by name):

@@ -4587,7 +4587,6 @@
 ??$_Dest_val@V?$allocator@U_Node@?$_List_nod@IV?$allocator@I@std@@@std@@@std@@U_Node@?$_List_nod@IV?$allocator@I@std@@@2@@std@@YAXAAV?$allocator@U_Node@?$_List_nod@IV?$allocator@I@std@@@std@@@0@PAU_Node@?$_List_nod@IV?$allocator@I@std@@@0@@Z,0x9ee700,0x11
 ??$insert@I@?$list@IV?$allocator@I@std@@@std@@QAE?AV?$_List_iterator@V?$_List_val@IV?$allocator@I@std@@@std@@@1@V?$_List_const_iterator@V?$_List_val@IV?$allocator@I@std@@@std@@@1@$$QAI@Z,0x9eda70,0x2d
 ??$?9II@std@@YA_NABV?$allocator@I@0@0@Z,0x9e36a0,0x1f
-??$_Cons_val@V?$allocator@I@std@@II@std@@YAXAAV?$allocator@I@0@PAI$$QAI@Z,0x9e3620,0x1e
 ??$_Uninitialized_default_fill_n@PAIHIV?$allocator@I@std@@@std@@YAXPAIHPBIAAV?$allocator@I@0@@Z,0x9e4550,0x45
 ??$_Dest_val@V?$allocator@I@std@@I@std@@YAXAAV?$allocator@I@0@PAI@Z,0x9ee700,0x11
 ??$_Swap_adl@PAPAI@std@@YAXAAPAPAI0@Z,0x436980,0x15

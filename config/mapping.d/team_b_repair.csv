@@ -15,8 +15,6 @@ CCodes::~CCodes,0x4affd0,0x69
 Entity::unknown5ddf50,0x5ddf50,0x528
 OpV3h_Map::unknown8279c0,0x8279c0,0x330
 CInfo::unknown8b3d50,0x8b3d50,0x2b4
-??R?$Array2D@H@@QAEAAHHH@Z,0x9cfe20,0x86
-??R?$Array2D@H@@QAEAAHABUPoint@@@Z,0x9cfd90,0x90
 ?front@?$vector@VHEntity@@V?$allocator@VHEntity@@@std@@@std@@QAEAAVHEntity@@XZ,0x9b7060,0x20
 ?getType@Item@@QAEHXZ,0x44aec0,0x11
 EndObjB::unknown508610,0x508610,0xa7
@@ -34,7 +32,6 @@ CFovEnemiesButton::input,0x98a5f0,0x55b
 ?unknown8b4500@CInfo@@QAEXVHEntity@@VHProp@@0PAUPos@@H_N@Z,0x8b4500,0x43c
 ?unknown8074d0@CMap@@QAEXVHEntity@@@Z,0x8074d0,0x508
 ?unknown87a990@CPlayer2@@QAE_NXZ,0x87a990,0x597
-??0Pos@@QAE@XZ,0x40a6e0,0x35
 ?getNestedField@Item@@QAEHXZ,0x457820,0x13
 ?getTarget@C065_Rec517130@@QAEPAHXZ,0x517130,0x97
 ?unknown6008b0@Entity@@QAEHXZ,0x6008b0,0xb9
