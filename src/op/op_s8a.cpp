@@ -84,8 +84,7 @@ template <class T> HProp OpS8a_Pool<T>::add(T *item)
 	{
 		h.unknown9ed820(items.size());
 		items.push_back(item);
-		int gen = h.getGeneration();
-		generations.push_back(gen);
+		generations.push_back(h.getGeneration());
 	}
 	else
 	{

@@ -146,7 +146,7 @@ void parseLine_408d70(string &text, vector<string> &out)	// NOTE: placeholder na
 }
 
 
-void opw1_split(string &text, char separator, vector<string> &out)	// NOTE: placeholder name
+void opw1_split(const string &text, char separator, vector<string> &out)	// NOTE: placeholder name
 {
 	if (text.empty())
 		return;
@@ -166,7 +166,7 @@ void opw1_split(string &text, char separator, vector<string> &out)	// NOTE: plac
 	} while (start != string::npos);
 }
 
-int splitBetween_408c20(string &text, const string &open, const string &close, vector<string> &out)	// NOTE: placeholder name
+int splitBetween_408c20(const string &text, const string &open, const string &close, vector<string> &out)	// NOTE: placeholder name
 {
 	if (text.empty())
 		return 0;

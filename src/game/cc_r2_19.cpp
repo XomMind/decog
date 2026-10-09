@@ -30,7 +30,7 @@ struct XColor
 	unsigned char g;
 	unsigned char b;
 
-	XColor &operator=(const XColor &color);	// 0x411e30
+	XColor &copy411e30(const XColor &color);	// 0x411e30 (copy-ctor body, NOTE: placeholder name)
 };
 
 class XConsole
@@ -279,7 +279,7 @@ XTimerF::XTimerF(const Handle4 &a_, const PosB &pos_, const XColor &color_, int 
 {
 	a = a_;
 	pos = pos_;
-	color = color_;
+	color.copy411e30(color_);
 	b = b_;
 }
 

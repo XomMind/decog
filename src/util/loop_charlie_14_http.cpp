@@ -41,7 +41,7 @@ string LC14Http::newsCheck(bool quiet){
   if(!quiet)logMessage("Closing socket...");SDLNet_TCP_Close(x);x=NULL;
   unsigned a1=response.find("update_content:");
   if(a1==string::npos){if(!quiet)logError("Http::newsCheck()","Invalid news format");return current;}
-  current.assign(static_cast<const string&>(response).begin()+a1,static_cast<const string&>(response).end());
+  current.assign(response.begin()+a1,response.end());
   lc14_remove408100(current,'\r');
   unsigned end=current.rfind("</END>");
   if(end==string::npos){if(!quiet)logError("Http::newsCheck()","Invalid news syntax, missing closing tag");}

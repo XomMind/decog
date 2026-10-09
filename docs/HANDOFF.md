@@ -93,6 +93,23 @@ Triage by delegated agents (reports in `scratch/triage/`, uncommitted; counts fr
   (c) `basic_string(string&&)` where retail copies (14); (d) `vector<UHExplosive>` element type (our 64-byte struct vs retail 4-byte handle);
   (e) 40+ `_Tree<string,X>` instantiations configured to the retail map<string,string> body (our sources use the wrong map value types).
   Unproved/untouched: Pos/Rect source-type confusions (D2Parse, D2Evolve call Pos() where retail zero-inits 4 ints at 0x40a6e0).
+- Third round, caller-SOURCE repairs (scratch/{PushBackForms,StringConstness,RemainingTop,MapValueTypes}): 150 files in `src/` edited (push_back
+  `&&` vs `const&` forms, string constness/copy-vs-move, Pos/Rect source types), 99 mapping rows added and 628 removed (533 of the removals are
+  synthetic deque/list/reverse_iterator alias rows of `src/lead/stl_b.cpp` that retail has no code for and that lost no MATCH), plus 21 re-pointed
+  `map<string,string>` rows (retail has exactly one map instantiation, `pair<const string,string>` 0x38 bytes: `_Isnil` +0x45, `_Color` +0x44;
+  the 686 `map<string,X>` placeholder rows were aliases onto it) and the `Init_40ca90` -> `Unknown_40cde0::Unknown_40cde0()` row rename.
+  Strict full build `build/full_r6`: **29,385 / 31,861 MATCH, 2,476 DIFF, 0 regressions vs build/full_r5 (347 flips, 7 new MATCH rows); 12,703 / 13,013
+  functions, 6,349,686 / 6,566,496 bytes (96.70%)**. Buckets: 2,033 body-different, 441 ambiguous, 2 other. The earlier 96% figure and this one
+  are not comparable: this one rests on the strict verifier.
+  Integration lessons: (1) agents' `try.sh` copies rewrote `#include` paths for scratch; only `<fstream>` in `op_b.cpp` was a real addition. (2) `try.sh`
+  compiles ONE TU, so it cannot see ODR clashes: `op_cmap_808de0.cpp` (`struct Point : Pos {}`) and `team_c_34.cpp` (`C34_Area{Pos,Pos}`) made the
+  compiler emit implicit `Point(const Point&)`/`Pos(const Pos&)` that collide with the explicit definitions in `op_w8.cpp`/`zz_point_ctors.cpp` (LNK2005).
+  Both edits were reverted; they need declared copy ctors or a different type fix.
+  Held back (not installed; copies under scratch/RemainingTop): shared header edits (`engine/xconsole.h` setFore/setBack 0x417b00 vs `setFgColor`,
+  `consoles/consoleui.h`, `pathing/gamedecl.h`, `pathing/dijkstracosts.cpp`), `op_cmap_update.cpp` (replaces file-unique `Cmu*` types; may change LTCG
+  nothrow inference), and the `vector<UHExplosive>` fix (`HExplosive` as a 4-byte handle in `op_s1c/op_r1g/cc_r2_30` plus `src/util/zz_explosive64.cpp`
+  and `explosive64_all.csv`, 8 rows). Optional, also not installed: `scratch/MapValueTypes/optional_drop_diff_aliases.txt` (280 unsupported DIFF alias rows).
+  `tools/progress.py` still not rerun: `docs/progress.*` are stale.
 
 ### Fixed this evening (committed with this handoff)
 - 19 names mapped to 2-3 different VAs (one row of each was never verified, since `common.functions()` keys by name):

@@ -79,7 +79,7 @@ void teamb_create95a640(int value)	// NOTE: placeholder name (0x95a640)
 	new TeamB_954b10(teamb_cec034,value);
 }
 
-class Item { public: int getType() const; HEntity getOwner(); };	// NOTE: placeholder names (0x44aec0, 0x457b50)
+class Item { public: int getType(); HEntity getOwner(); };	// NOTE: placeholder names (0x44aec0, 0x457b50)
 class HItem { public: int ID; Item *operator->() const throw(); };	// 0x9b65b0
 class TeamB_7abf80	// NOTE: placeholder name (object at 0xcf4ac8)
 {
@@ -107,6 +107,6 @@ bool teamb_parenthesized900870(const string &text, string &inner)	// NOTE: place
 	int end = text.rfind(')',string::npos);
 	if (end < start || end == string::npos)
 		return false;
-	inner.assign(text.begin() + start + 1,text.begin() + end);
+	inner.assign(const_cast<string&>(text).begin() + start + 1,const_cast<string&>(text).begin() + end);
 	return true;
 }

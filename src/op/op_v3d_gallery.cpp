@@ -7,16 +7,18 @@ struct OpV3d_ItemObj	// NOTE: placeholder name
 {
 	int getType_457820();	// NOTE: placeholder name (folded getter)
 };
-struct OpV3d_ItemHandle	// NOTE: placeholder name
+class HProp	// NOTE: placeholder layout
 {
+public:
 	int ID;
+	HProp() throw();	// 0x9b6590
 	OpV3d_ItemObj *operator->() const;	// 0x9b65b0
 };
 
 class OpV3d_Factory	// NOTE: placeholder name (0xcefaa8)
 {
 public:
-	OpV3d_ItemHandle createD(int *data);	// 0x7932b0
+	HProp createD(int *data);	// 0x7932b0
 };
 extern OpV3d_Factory *opv3d_factory;	// NOTE: placeholder name (0xcefaa8)
 
@@ -24,8 +26,8 @@ class CInfo : public Console
 {
 public:
 	CInfo(XConsole *parent, bool flag, int layer);
-	OpV3d_ItemHandle getUnknown9c();	// NOTE: placeholder name
-	void unknown8b4500(HEntity a, OpV3d_ItemHandle b, HEntity c, const Pos &pos, int mode, bool e);	// NOTE: placeholder name
+	HProp getUnknown9c();	// NOTE: placeholder name
+	void unknown8b4500(HEntity a, HProp b, HEntity c, Pos *pos, int mode, bool e);	// NOTE: placeholder name
 
 	char pad6c[0xfc - 0x6c];
 };
@@ -72,7 +74,7 @@ bool CGalleryInfoButton::input(XEvent *event)
 						if (!opv3d_cec124->getUnknown9c().operator->() || opv3d_cec124->getUnknown9c()->getType_457820() == getParentGallery()->unknown6c)
 							return false;
 					}
-					opv3d_cec124->unknown8b4500(HEntity(),opv3d_factory->createD(opv3d_d2d1c4[getParentGallery()->unknown6c]),HEntity(),Pos(-1),6,true);
+					opv3d_cec124->unknown8b4500(HEntity(),opv3d_factory->createD(opv3d_d2d1c4[getParentGallery()->unknown6c]),HEntity(),&Pos(-1),6,true);
 				}
 			}
 			return true;

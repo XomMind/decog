@@ -87,7 +87,7 @@ class Map	// NOTE: partial
 {
 public:
 	HEntity getPlayer() throw();	// 0x4630f0
-	bool isVisible(const Point &p);	// NOTE: placeholder name (0x4631c0)
+	bool isVisible4631c0(const Point &p);	// NOTE: placeholder name (0x4631c0, BS::isVisible; not Map::isVisible(int,int) 0x463190)
 };
 extern Map *world;	// NOTE: placeholder name (0xcefc4c)
 extern int opv2_caf164;	// NOTE: placeholder name (0xcaf164)
@@ -153,7 +153,7 @@ bool EntityAI::unknown5b94c0()
 		for (int j = 0; j < 25; j++)
 		{
 			area.randomPoint_40be30(&unknown10);
-			if (selfPos.distance(unknown10) >= 20 && !world->isVisible(unknown10) && cells(unknown10)->isPassableFor(self) && findPathToGoal())
+			if (selfPos.distance(unknown10) >= 20 && !world->isVisible4631c0(unknown10) && cells(unknown10)->isPassableFor(self) && findPathToGoal())
 				return true;
 		}
 	}

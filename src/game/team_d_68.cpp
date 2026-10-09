@@ -28,7 +28,7 @@ extern XColor &col68_cfe674;	// NOTE: placeholder name
 extern XColor &col68_d1ecd4;	// NOTE: placeholder name
 extern XColor &col68_cfabbc;	// NOTE: placeholder name
 
-struct Point68	// NOTE: placeholder name
+struct Point	// NOTE: placeholder name
 {
 	int x;
 	int y;
@@ -37,7 +37,7 @@ struct Point68	// NOTE: placeholder name
 class NoiseField68	// NOTE: placeholder name (OpR1b_NoiseField)
 {
 public:
-	float sample(Point68 *pos);
+	float sample(Point *pos);
 };
 
 struct NoiseOwner68	// NOTE: placeholder name and layout
@@ -49,7 +49,7 @@ struct NoiseOwner68	// NOTE: placeholder name and layout
 class OpV4c_View
 {
 public:
-	const int *getConst(Point68 *p);
+	const int *getConst(Point *p);
 };
 
 class Item68	// NOTE: placeholder name (OpU2_Item)
@@ -107,9 +107,9 @@ public:
 	NoiseOwner68	*owner;		// +0x04
 	unsigned int	start;		// +0x08
 	unsigned int	end;		// +0x0c
-	Point68			pos;		// +0x10
+	Point			pos;		// +0x10
 	char			pad18[8];
-	Point68			pos20;		// +0x20
+	Point			pos20;		// +0x20
 	char			pad28[0x90 - 0x28];
 	XColor			color;		// +0x90
 	char			pad93[0xb4 - 0x93];

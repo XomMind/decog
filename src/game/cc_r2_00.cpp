@@ -229,7 +229,7 @@ HGroup Entity::getGroup()
 
 string Entity::unknown45a410() const
 {
-	return string(name.begin(),name[1] == '-' ? name.begin() + 4 : name.end());
+	return string(const_cast<string&>(name).begin(),const_cast<string&>(name)[1] == '-' ? const_cast<string&>(name).begin() + 4 : const_cast<string&>(name).end());
 }
 
 const Point &Entity::getPosition()

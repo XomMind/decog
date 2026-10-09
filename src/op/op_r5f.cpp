@@ -195,7 +195,7 @@ extern string opr5f_factionNames[];	// NOTE: placeholder name (0xd2f798)
 string OpR5f_toUpper_4083a0(const string &text);	// NOTE: placeholder name
 
 int opr5f_maxInt(int a, int b) throw();	// NOTE: placeholder name (0x9cdb60)
-void opr5f_unknown953d90(HEntity entity, vector<int> *hacks);	// NOTE: placeholder name
+void opr5f_unknown953d90(HEntity entity, vector<unsigned int> *hacks);	// NOTE: placeholder name
 extern int opr5f_hackCosts[];	// NOTE: placeholder name (0xb97d38)
 extern int opr5f_tileWidth;	// NOTE: placeholder name (0xcaf128)
 extern int opr5f_tileHeight;	// NOTE: placeholder name (0xcaf12c)
@@ -215,7 +215,7 @@ extern XConsole *opr5f_cec034;	// NOTE: placeholder name
 class CRobot : public Console	// 0xcec108
 {
 public:
-	CRobot(XConsole *parent, const Pos &pos, HEntity entity, vector<int> hacks);	// 0x9450f0
+	CRobot(XConsole *parent, const Rect &rect, HEntity entity, vector<unsigned int> hacks);	// 0x9450f0
 
 	char pad6c[0xc4 - 0x6c];
 };
@@ -312,7 +312,7 @@ extern CType *opr5f_cec10c;	// NOTE: placeholder name
 
 void opr5f_unknown954640(bool flag)
 {
-	string text = flag ? string() : opr5f_cec10c->textInput->getText_458ef0();
+	string text = (const string &)(flag ? string() : opr5f_cec10c->textInput->getText_458ef0());
 	opr5f_cec10c->callback(text);
 }
 
@@ -428,7 +428,7 @@ bool CParse::input(XEvent *event)
 
 void opr5f_unknown954180(HEntity entity)
 {
-	vector<int> hackList;
+	vector<unsigned int> hackList;
 	opr5f_unknown953d90(entity,&hackList);
 
 	int sections = 0;
@@ -457,9 +457,9 @@ void opr5f_unknown954180(HEntity entity)
 		}
 	}
 
-	Pos windowPos;
-	int windowWidth = opr5f_maxInt(0x28,opr5f_unknown954490(entity).size() * 2 + 6);
-	int windowHeight = hackList.size() + sections * 2 + 3;
+	Rect window;
+	window.width = opr5f_maxInt(0x28,opr5f_unknown954490(entity).size() * 2 + 6);
+	window.height = hackList.size() + sections * 2 + 3;
 	Pos mapPos = entity->getPosition() + opr5f_cec054->unknown458ef0();
 	mapPos.x *= opr5f_tileWidth;
 	mapPos.x += 1;
@@ -467,13 +467,13 @@ void opr5f_unknown954180(HEntity entity)
 	mapPos.x += opr5f_cf27ec;
 	mapPos.y *= opr5f_tileHeight;
 	mapPos.y += opr5f_cf27f0;
-	if (mapPos.x + windowWidth >= opr5f_cf27f4 * opr5f_tileWidth + opr5f_cf27ec)
-		mapPos.x = (entity->getPosition().x + opr5f_cec054->unknown458ef0().x) * opr5f_tileWidth - windowWidth;
-	if (mapPos.y + windowHeight >= opr5f_cf27f8 * opr5f_tileHeight + opr5f_cf27f0)
-		mapPos.y -= mapPos.y + windowHeight - (opr5f_cf27f8 * opr5f_tileHeight + opr5f_cf27f0);
-	windowPos.x = mapPos.x;
-	windowPos.y = mapPos.y;
-	new CRobot(opr5f_cec034,windowPos,entity,hackList);
+	if (mapPos.x + window.width >= opr5f_cf27f4 * opr5f_tileWidth + opr5f_cf27ec)
+		mapPos.x = (entity->getPosition().x + opr5f_cec054->unknown458ef0().x) * opr5f_tileWidth - window.width;
+	if (mapPos.y + window.height >= opr5f_cf27f8 * opr5f_tileHeight + opr5f_cf27f0)
+		mapPos.y -= mapPos.y + window.height - (opr5f_cf27f8 * opr5f_tileHeight + opr5f_cf27f0);
+	window.x = mapPos.x;
+	window.y = mapPos.y;
+	new CRobot(opr5f_cec034,window,entity,hackList);
 }
 
 //==================================================================

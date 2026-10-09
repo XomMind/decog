@@ -68,7 +68,7 @@ class Cell
 {
 public:
 	HItem getItem();
-	void *getEffect(int type);
+	struct CellEffect *getEffect(int type);
 	void unknown45dfb0(int type);	// NOTE: placeholder name
 	void unknown66a050(int a, int b, int c);	// NOTE: placeholder name
 	int unknown45d140();	// NOTE: placeholder name

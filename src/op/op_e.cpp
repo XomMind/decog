@@ -442,6 +442,7 @@ class ManualUI	// NOTE: placeholder name (pointer global at 0xcec03c; the CComma
 {
 public:
 	unsigned int unknown45b590();	// NOTE: placeholder name
+	unsigned int unknown4ab670();	// NOTE: placeholder name (folded getter at +0x6c)
 	void unknown7d1050(int mode);	// NOTE: placeholder name
 	void unknown7d1840();	// NOTE: placeholder name (next page)
 	void unknown7d18d0();	// NOTE: placeholder name (previous page)
@@ -549,7 +550,7 @@ bool CCommandsButton::input(void *event)
 				new CSupporters(false);
 			else if (ID == 10)
 				new CSupporters(true);
-			else if (unknown_cec03c->unknown45b590() != ID)
+			else if (unknown_cec03c->unknown4ab670() != ID)
 				unknown_cec03c->unknown7d1050(ID);
 			return true;
 	}
@@ -563,7 +564,7 @@ void CCommandsButton::draw(int mode)
 	switch (mode)
 	{
 		case 0:
-			unknown48c3c0(unknown_cec03c->unknown45b590() == ID ? opE_unknown_cef818 : opE_unknown_cef8b8);
+			unknown48c3c0(unknown_cec03c->unknown4ab670() == ID ? opE_unknown_cef818 : opE_unknown_cef8b8);
 			break;
 		case 1:
 			unknown48c3c0(opE_unknown_cef960);
@@ -576,7 +577,7 @@ void CCommandsButton::draw(int mode)
 
 bool CCommandsButton::mouseEnter()
 {
-	if (unknown_cec03c->unknown45b590() == ID)
+	if (unknown_cec03c->unknown4ab670() == ID)
 		return false;
 	animate("A_ButtonHover_Begin_CMOD_HOV_OK");
 	return true;

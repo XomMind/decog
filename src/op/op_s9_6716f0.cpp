@@ -5,7 +5,7 @@ using namespace std;
 
 struct Point;
 class Entity;
-struct OpS9_Effect;	// NOTE: placeholder name
+struct EntityEffect;	// NOTE: placeholder name
 
 class HEntity
 {
@@ -19,7 +19,7 @@ class Entity
 public:
 	int getTarget();	// 0x45a760
 	const Point &getPosition();	// 0x45a4a0
-	OpS9_Effect *unknown45ac40(int type);	// NOTE: placeholder name
+	EntityEffect *unknown45ac40(int type);	// NOTE: placeholder name
 	int getFaction();	// 0x45a2c0
 };
 

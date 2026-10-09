@@ -1712,7 +1712,7 @@ extern Cartographer2DMoveCost *moveCost_cefc30;	// NOTE: placeholder name
 extern int exitTypeFlags_b90000[];				// NOTE: placeholder name
 extern bool flag_cefb0a;						// NOTE: placeholder name
 bool OpV4c_Fn9d0ce0(vector<Point> &list, Point p);	// NOTE: placeholder name
-void OpT8a_eraseAt(vector<MapExit *> &v, unsigned int &i);	// NOTE: placeholder name (0x9ce6d0)
+void OpT8a_eraseAtMapExit(vector<MapExit *> &v, unsigned int &i);	// NOTE: placeholder name (0x9ce6d0)
 template <class T> void OpQ5_moveElement(vector<T> &v, unsigned int from, unsigned int to);	// NOTE: placeholder name
 template <class T> void OpS8c_shuffle(vector<T> &v);	// NOTE: placeholder name
 
@@ -1746,7 +1746,7 @@ bool Overmind::unknown683500(Point *out, bool allowVisible, int minDistance, boo
 		for (unsigned int j = 0; j < candidates.size(); j++)
 		{
 			if (candidates[j]->prop.isNull())
-				OpT8a_eraseAt(candidates,j);
+				OpT8a_eraseAtMapExit(candidates,j);
 		}
 	}
 	vector<MapExit *> order;
@@ -1877,7 +1877,7 @@ bool Overmind::unknown68fc40()
 		for (int k = 0; k < 4; k++)
 		{
 			if (tags[k] == tags[base->unknown0])
-				ties.push_back(k);
+				ties.push_back((unsigned int)k);
 		}
 		base->unknown0 = randomElement_uints(ties);
 	}

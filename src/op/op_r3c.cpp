@@ -252,8 +252,7 @@ void OpR3c_Overmind::unknown682110(int terrain, HEntity e)
 
 void OpR3c_Overmind::unknown6821f0()
 {
-	int turn = world->getTurn();
-	unknown16c.push_back(turn);
+	unknown16c.push_back(world->getTurn());
 }
 
 void OpR3c_Overmind::unknown6823f0(int a)

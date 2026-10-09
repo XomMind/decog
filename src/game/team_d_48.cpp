@@ -58,7 +58,7 @@ public:
 	EntityAI	*ai;		// +0x144
 
 	AIData48 *getAI();				// 0x45b590
-	const string &getName();		// NOTE: placeholder name (folded getter 0x416f40)
+	const string &name416f40();		// NOTE: placeholder name (folded getter 0x416f40)
 	void setAI(EntityAI *newAI);	// NOTE: placeholder name (0x64ecf0)
 };
 
@@ -99,13 +99,13 @@ void Entity::setAI(EntityAI *newAI)
 	}
 	if (world48->unknown463510(self))
 	{
-		string text = "Feed link from " + self->getName() + " lost";
+		string text = "Feed link from " + self->name416f40() + " lost";
 		do { if (logMessageSS_5111e0(0x1d6,string(feedName48_cfc9d8),text,0,HEntity(),HEntity(),0,0)) consoleA_cec058->unknown8758d0(true); logMsgs_cec0b4->scrollToEnd(); } while (0);
 		world48->unknown72e790(world48->unknown463540(self));
 	}
 	else if (world48->unknown4635c0(self))
 	{
-		string text = "Feed link from " + self->getName() + " lost";
+		string text = "Feed link from " + self->name416f40() + " lost";
 		do { if (logMessageSS_5111e0(0x1d6,string(feedName48_d2a414),text,0,HEntity(),HEntity(),0,0)) consoleA_cec058->unknown8758d0(true); logMsgs_cec0b4->scrollToEnd(); } while (0);
 		world48->unknown72e790(world48->unknown4635f0(self));
 	}

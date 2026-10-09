@@ -252,9 +252,9 @@ void OpU5_Rec7836e0::write(ostream &stream)
 // PlayerData
 //==================================================================
 
-struct OpR1g_PropPair	// NOTE: placeholder name
+struct OpW8_SlotMarker	// NOTE: placeholder name
 {
-	OpR1g_PropPair(int a_, int b, HProp first_, int c, HProp second_) throw();	// 0x46d1b0
+	OpW8_SlotMarker(int a_, int b, HProp first_, int c, HProp second_) throw();	// 0x46d1b0
 	bool isFirstEmpty();	// NOTE: placeholder name
 
 	int		a;
@@ -287,7 +287,7 @@ struct Unknown46d8b0	// NOTE: placeholder name
 	char			pad58[0x11c];
 	bool	flag174;
 	char			pad175[0x3];
-	vector<vector<OpR1g_PropPair*> >	v178;
+	vector<vector<OpW8_SlotMarker*> >	v178;
 	char			pad188[0x7c];
 	vector<int>	v204;
 	vector<int>	v214;
@@ -531,7 +531,7 @@ void PlayerData::unknown77f2f0(vector<Item*> &list, int *counts)
 {
 	Item *cur = list[0];
 	removeVectorElement(list,0);
-	vector<OpR1g_PropPair*> &vec = v178[cur->unknown4578a0()];
+	vector<OpW8_SlotMarker*> &vec = v178[cur->unknown4578a0()];
 	unsigned int i;
 	int idx;
 	unsigned int kk;
@@ -561,7 +561,7 @@ void PlayerData::unknown77f2f0(vector<Item*> &list, int *counts)
 				removeVectorElement(vec,kk);
 				if (counts[cur->unknown4578a0()] >= 0)
 				{
-					OpR1g_PropPair *slot = new OpR1g_PropPair(amount,0,HProp(),0,HProp());
+					OpW8_SlotMarker *slot = new OpW8_SlotMarker(amount,0,HProp(),0,HProp());
 					OpU5_insertAt(vec,kk,slot);
 				}
 				else

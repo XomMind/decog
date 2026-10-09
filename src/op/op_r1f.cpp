@@ -105,13 +105,25 @@ struct XColor
 	void write(ostream &stream);	// NOTE: placeholder name
 };
 
+struct OpR6_KCDA_16_1	// 16-byte element with non-trivial dtor (vector dtor 0x9b8b60, see op_r6_kcda.cpp)
+{
+	int m0;
+	int m4;
+	int m8;
+	int m12;
+	OpR6_KCDA_16_1();
+	OpR6_KCDA_16_1(const OpR6_KCDA_16_1 &o);
+	OpR6_KCDA_16_1 &operator=(const OpR6_KCDA_16_1 &o);
+	~OpR6_KCDA_16_1();
+};
+
 class OpR1F_Obj45f8c0	// NOTE: placeholder name
 {
 public:
 	vector<unsigned int> unknown0;
-	vector<Pos> unknown10;
-	vector<Pos> unknown20;
-	vector<Pos> unknown30;
+	vector<OpR6_KCDA_16_1> unknown10;
+	vector<OpR6_KCDA_16_1> unknown20;
+	vector<OpR6_KCDA_16_1> unknown30;
 	int unknown40;
 	string unknown44;
 

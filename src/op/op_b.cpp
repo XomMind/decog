@@ -4,6 +4,7 @@
 #include <vector>
 #include <sstream>
 #include <istream>
+#include <fstream>
 
 using namespace std;
 
@@ -81,7 +82,7 @@ public:
 	vector<XColorFilter> colorFiltersA;	// NOTE: placeholder name
 	vector<XColorFilter> colorFiltersB;	// NOTE: placeholder name
 	char pad148[0x250 - 0x148];
-	stringstream unknown250;
+	ofstream unknown250;
 };
 
 extern Config config;	// 0xd28c68
@@ -140,10 +141,19 @@ void OpB_updateFontScale_446320()	// NOTE: placeholder name
 // AsciiImage
 //==================================================================
 
+class OpS7_CellGrid	// NOTE: placeholder name (retail copy-constructs the layers through this configured ctor 0x9cdd40; same layout as XBuffer)
+{
+public:
+	OpS7_CellGrid(const OpS7_CellGrid &grid);	// 0x9cdd40
+
+	int width;
+	int height;
+	void *cells;
+};
+
 class XBuffer	// NOTE: placeholder layout
 {
 public:
-	XBuffer(const XBuffer &buffer);	// 0x9cdd40
 	~XBuffer();	// 0x9cec20
 
 	int width;
@@ -170,14 +180,14 @@ public:
 AsciiImage::AsciiImage(const AsciiImage &image)
 {
 	for (unsigned int i = 0; i < image.layers.size(); i++)
-		layers.push_back(new XBuffer(*image.layers[i]));
+		layers.push_back((XBuffer *)new OpS7_CellGrid(*(OpS7_CellGrid *)image.layers[i]));
 }
 
 AsciiImage &AsciiImage::operator=(const AsciiImage &image)
 {
 	OpB_clearVector(layers);
 	for (unsigned int i = 0; i < image.layers.size(); i++)
-		layers.push_back(new XBuffer(*image.layers[i]));
+		layers.push_back((XBuffer *)new OpS7_CellGrid(*(OpS7_CellGrid *)image.layers[i]));
 	return *this;
 }
 

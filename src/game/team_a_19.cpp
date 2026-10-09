@@ -107,7 +107,7 @@ public:
 	void setMinLevel_4ed0d0(int level);	// NOTE: placeholder name (folded setter)
 	void setCallback_44ed80(void (*callback)(int level));	// NOTE: placeholder name (folded setter)
 	void setUnknown58_404b70(bool value);	// NOTE: placeholder name (0x404b70)
-	string get(int index);	// 0x411110
+	const string get(int index);	// 0x411110
 	void closeFile_410db0();	// NOTE: placeholder name (closes the run.log stream)
 };
 extern JLog *jlog;	// NOTE: placeholder name (0xcefa64)

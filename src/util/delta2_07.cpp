@@ -94,7 +94,7 @@ public:
 class CWorldMapPiece : public Console
 {
 public:
-	CWorldMapPiece(XConsole *parent, int width, int height, int x, int y, D2wH node);
+	CWorldMapPiece(XConsole *parent, int width, int height, int x, int y, int node);
 	D2wH getNode_4aeed0();	// NOTE: placeholder name
 	char pad6c[0x74 - 0x6c];
 };
@@ -171,12 +171,12 @@ void D2WorldMap::unknown993fa0()
 			}
 			int height = rows * size;
 			pos.set_40a010(m - 1, halfDiff_437190(height, getHeight()) + height - size);
-			cell = new CWorldMapPiece(this, 1, opr1c_hasPtr_cebd5c() ? 1 : 2, pos.x + 1, pos.y + 3, D2wH());
+			cell = new CWorldMapPiece(this, 1, opr1c_hasPtr_cebd5c() ? 1 : 2, pos.x + 1, pos.y + 3, D2wH().ID);
 			cell->animate("A_CWorldMap_Path_MAT_N", 0x32, 0);
 			unknown98.push_back(cell);
 		}
 		D2wH elem = nodes[i];
-		cell = new CWorldMapPiece(this, 3, 3, pos.x, pos.y, elem);
+		cell = new CWorldMapPiece(this, 3, 3, pos.x, pos.y, elem.ID);
 		cell->animate("A_CWorldMap_Block_" + d2w_cfe140[elem->type]);
 		cell->putChar_4180b0(1, 1, elem->known ? d2w_d38e40[elem->type][0] : 0x3f);
 		cell->putChar_4180b0(0, 0, 0x88);
@@ -281,7 +281,7 @@ void D2WorldMap::unknown993fa0()
 				suffix += "_S";
 			if (pos.x == pieces.back()->getPos().x)
 			{
-				cell = new CWorldMapPiece(this, 1, opr1c_hasPtr_cebd5c() ? 1 : 2, pos.x + 1, pos.y + 3, D2wH());
+				cell = new CWorldMapPiece(this, 1, opr1c_hasPtr_cebd5c() ? 1 : 2, pos.x + 1, pos.y + 3, D2wH().ID);
 				cell->animate("A_CWorldMap_Path_" + suffix + "_N", 0x32, 0);
 				unknown94 = 0;
 				linked = true;
@@ -290,12 +290,12 @@ void D2WorldMap::unknown993fa0()
 			{
 				if (pos.x < pieces.back()->getPos().x)
 				{
-					cell = new CWorldMapPiece(this, pieces.back()->getPos().x - pos.x - 3, 1, pos.x + 3, pos.y + 1, D2wH());
+					cell = new CWorldMapPiece(this, pieces.back()->getPos().x - pos.x - 3, 1, pos.x + 3, pos.y + 1, D2wH().ID);
 					cell->animate("A_CWorldMap_Path_" + suffix + "_W", 0x33, 0);
 				}
 				else
 				{
-					cell = new CWorldMapPiece(this, pos.x - pieces.back()->getPos().x - 3, 1, pieces.back()->getPos().x + 3, pos.y + 1, D2wH());
+					cell = new CWorldMapPiece(this, pos.x - pieces.back()->getPos().x - 3, 1, pieces.back()->getPos().x + 3, pos.y + 1, D2wH().ID);
 					cell->animate("A_CWorldMap_Path_" + suffix + "_E", 0x32, 0);
 				}
 			}
@@ -306,13 +306,13 @@ void D2WorldMap::unknown993fa0()
 				{
 					if (pos.x < pieces.back()->getPos().x)
 					{
-						cell = new CWorldMapPiece(this, pieces.back()->getPos().x - pos.x - 1, pieces.back()->getPos().y - pos.y - 1, pos.x + 1, pos.y + 3, D2wH());
+						cell = new CWorldMapPiece(this, pieces.back()->getPos().x - pos.x - 1, pieces.back()->getPos().y - pos.y - 1, pos.x + 1, pos.y + 3, D2wH().ID);
 						cell->animate("A_CWorldMap_Path_" + suffix + "_WN", 0x33, 0);
 						unknown94 = 2;
 					}
 					else
 					{
-						cell = new CWorldMapPiece(this, pos.x - pieces.back()->getPos().x - 1, pieces.back()->getPos().y - pos.y - 1, pos.x - (pos.x - pieces.back()->getPos().x - 1) + 2, pos.y + 3, D2wH());
+						cell = new CWorldMapPiece(this, pos.x - pieces.back()->getPos().x - 1, pieces.back()->getPos().y - pos.y - 1, pos.x - (pos.x - pieces.back()->getPos().x - 1) + 2, pos.y + 3, D2wH().ID);
 						cell->animate("A_CWorldMap_Path_" + suffix + "_EN", 0x32, 0);
 						unknown94 = 1;
 					}
@@ -321,13 +321,13 @@ void D2WorldMap::unknown993fa0()
 				{
 					if (pos.x < pieces.back()->getPos().x)
 					{
-						cell = new CWorldMapPiece(this, pieces.back()->getPos().x - pos.x - 1, pieces.back()->getPos().y - pos.y - 1, pos.x + 3, pos.y + 1, D2wH());
+						cell = new CWorldMapPiece(this, pieces.back()->getPos().x - pos.x - 1, pieces.back()->getPos().y - pos.y - 1, pos.x + 3, pos.y + 1, D2wH().ID);
 						cell->animate("A_CWorldMap_Path_" + suffix + "_NW", 0x33, 0);
 						unknown94 = 2;
 					}
 					else
 					{
-						cell = new CWorldMapPiece(this, pos.x - pieces.back()->getPos().x - 1, pieces.back()->getPos().y - pos.y - 1, pos.x - (pos.x - pieces.back()->getPos().x - 1), pos.y + 1, D2wH());
+						cell = new CWorldMapPiece(this, pos.x - pieces.back()->getPos().x - 1, pieces.back()->getPos().y - pos.y - 1, pos.x - (pos.x - pieces.back()->getPos().x - 1), pos.y + 1, D2wH().ID);
 						cell->animate("A_CWorldMap_Path_" + suffix + "_NE", 0x32, 0);
 						unknown94 = 1;
 					}
@@ -403,7 +403,7 @@ void D2WorldMap::unknown993fa0()
 							{
 								if (d2w_b90670[levels[level][k]->type] == 0)
 								{
-									pieces.push_back(new CWorldMapPiece(this, 1, 1, m, y, levels[level][k]));
+									pieces.push_back(new CWorldMapPiece(this, 1, 1, m, y, levels[level][k].ID));
 									pieces.back()->putChar_4180b0(0, 0, d2w_d38e40[levels[level][k]->type][0]);
 									pieces.back()->animate("CWorld_Block_" + d2w_cfe140[levels[level][k]->type] + "_Mid");
 									left -= 2;
@@ -415,7 +415,7 @@ void D2WorldMap::unknown993fa0()
 							{
 								if (d2w_b90670[levels[level][k]->type] == 2)
 								{
-									pieces.push_back(new CWorldMapPiece(this, 1, 1, right, y, levels[level][k]));
+									pieces.push_back(new CWorldMapPiece(this, 1, 1, right, y, levels[level][k].ID));
 									pieces.back()->putChar_4180b0(0, 0, d2w_d38e40[levels[level][k]->type][0]);
 									pieces.back()->animate("CWorld_Block_" + d2w_cfe140[levels[level][k]->type] + "_Mid");
 									if (left == m)
@@ -427,7 +427,7 @@ void D2WorldMap::unknown993fa0()
 							{
 								if (d2w_b90670[levels[level][k]->type] == 1)
 								{
-									pieces.push_back(new CWorldMapPiece(this, 1, 1, left, y, levels[level][k]));
+									pieces.push_back(new CWorldMapPiece(this, 1, 1, left, y, levels[level][k].ID));
 									pieces.back()->putChar_4180b0(0, 0, d2w_d38e40[levels[level][k]->type][0]);
 									pieces.back()->animate("CWorld_Block_" + d2w_cfe140[levels[level][k]->type] + "_Mid");
 									if (right == m)

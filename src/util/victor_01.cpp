@@ -7,8 +7,8 @@ struct TgPos{int x,y;};
 struct TgColor{unsigned char r,g,b;TgColor(const TgColor&);};extern TgColor*tg_cf44c0;
 class XConsole{public:virtual ~XConsole();virtual void resize(int,int);virtual bool mouseEnter();virtual void mouseLeave();virtual bool input(void*);virtual void inputMouse(int,int);virtual void update();virtual void render();
  int getHeight4174c0();int width44b0d0();void putChar418110(int,int,int,TgColor);char pad04[0x60-0x04];};
-struct TgRect{int l,t,r,b;TgRect(int,int,int,int);TgRect(const TgRect&)throw();};
-class Console:public XConsole{public:Console(XConsole*,TgRect,int,bool,int);void animate48c3f0(string);virtual ~Console();virtual void render();virtual void open();virtual void close();virtual int getFrame();virtual void trigger(const string&,int);int u60;struct TgEngine*engine;void*title;int printWrapped418260(int,int,int,int,const string&);};
+struct Rect{int l,t,r,b;Rect(int,int,int,int);Rect(const Rect&)throw();};
+class Console:public XConsole{public:Console(XConsole*,Rect,int,bool,int);void animate48c3f0(string);virtual ~Console();virtual void render();virtual void open();virtual void close();virtual int getFrame();virtual void trigger(const string&,int);int u60;struct TgEngine*engine;void*title;int printWrapped418260(int,int,int,int,const string&);};
 struct TgEntity;struct TgItem;struct TgProp;
 struct TgPosM;struct TgHE{int id;TgEntity*operator->()const;bool isValid()const;bool operator==(TgHE)const;};
 struct TgHI{int id;TgItem*operator->()const;TgItem*ptr9b65b0()const throw();bool isValid()const;};
@@ -894,7 +894,7 @@ void TgInfo::trigger(const string&command,int value){
   else if(h9c.isValid()){
    if(!h9c.operator->()){close();return;}
    Console*art;
-   if(getHeight4174c0()<0x32)art=e8=new Console(this,TgRect(0x31,1,0x32,0xc),0,0,-1);
+   if(getHeight4174c0()<0x32)art=e8=new Console(this,Rect(0x31,1,0x32,0xc),0,0,-1);
    else art=this;
    if(h9c->def9b4350()->art7c.empty9b81b0()||(this==tg_cec124?tg_d25790[h9c->nested457820()]==0:tg_cf4830[h9c->nested457820()]==0)){
     art->animate48c3f0(getHeight4174c0()<0x32?"A_CInfo_Art_NA_Modal":"A_CInfo_Art_NA_Normal");

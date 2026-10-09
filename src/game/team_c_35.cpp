@@ -10,7 +10,7 @@ struct Pos : Point { Pos(int x_, int y_); };	// NOTE: placeholder
 struct XColor { unsigned char r; unsigned char g; unsigned char b; XColor(const XColor &c); XColor &operator=(XColor c); bool operator!=(XColor c); XColor operator*(float f); };
 struct HProp { int v; bool isNull() const; };
 struct C87_Item { int size(); int count(); int unknown457f90(); bool unknown457cf0(); int unknown457fb0(); int unknown457fd0(); int f0(); int f1(); int f2(); };	// NOTE: placeholder (Item)
-struct C87_Handle { int id; C87_Item *get224(); bool isValid() const; bool isNull() const; };	// NOTE: placeholder (HItem)
+class HItemB { public: int id; C87_Item *get224(); bool isValid() const; bool isNull() const; };	// NOTE: placeholder (HItem)
 struct C87_Rec23c { int f0; int f4; int f8; char pad0c[0x25 - 0x0c]; bool f25; };
 struct C87_Tile { C87_Rec23c *get23c(); };	// NOTE: placeholder (OpC_Handle at 0xd1e888)
 class Entity
@@ -22,8 +22,8 @@ public:
 	int unknown5ca8d0(); int unknown5ca960(); int unknown5cab90(); int unknown5cad50(); int unknown5cb000(); int unknown5cb110();
 	int unknown5cca00(); int unknown5c8c40(int a); int unknown5d1070(); int unknown5d1390(); int unknown5d15a0(int a);
 	int unknown5d1d70(); int unknown5d1da0(); float unknown5d1e40(); int unknown5d2090(int a); int unknown5d22a0(int a);
-	C87_Handle unknown5d2380(int a); int unknown5d2430(int a, vector<C87_Handle> &out);
-	vector<C87_Handle> *getInventoryList();
+	HItemB unknown5d2380(int a); int unknown5d2430(int a, vector<HItemB> &out);
+	vector<HItemB> *getInventoryList();
 };
 class HEntity { public: int ID; Entity *operator->() const; };
 class C87_Map { public: HEntity getPlayer(); int unknown463d40(); int unknown4642d0(); int getField(); int getTurn(); };	// NOTE: placeholder (Map)
@@ -224,7 +224,7 @@ void CHudData::drawContent(bool keep)
 		int adj = center->unknown5d1070();
 		if (center->unknown5d2380(154).isValid())
 	{
-		vector<C87_Handle> distances;
+		vector<HItemB> distances;
 		center->unknown5d2430(154, distances);
 		int dy = center->unknown45a920();
 		if (dy != 0)
@@ -237,7 +237,7 @@ void CHudData::drawContent(bool keep)
 	{
 		if (center->unknown45a990() > 0)
 	{
-		vector<C87_Handle> facing;
+		vector<HItemB> facing;
 		center->unknown5d2430(155, facing);
 		for (unsigned int first = 0; first < facing.size(); first++)
 	{
@@ -248,7 +248,7 @@ void CHudData::drawContent(bool keep)
 		float a1 = center->unknown5ca4f0();
 		if (center->unknown5d2380(153).isValid())
 	{
-		vector<C87_Handle> distances;
+		vector<HItemB> distances;
 		center->unknown5d2430(153, distances);
 		for (unsigned int enemies = 0; enemies < distances.size(); enemies++)
 	{
@@ -313,7 +313,7 @@ void CHudData::drawContent(bool keep)
 	{
 		int current = 0;
 		int adj = 0;
-		vector<C87_Handle> * allies = center->getInventoryList();
+		vector<HItemB> * allies = center->getInventoryList();
 		for (unsigned int distanceSq = 0; distanceSq < allies->size(); distanceSq++)
 	{
 		if ((*allies)[distanceSq].get224()->unknown457f90() == 160)
@@ -454,7 +454,7 @@ void CHudData::drawContent(bool keep)
 		print(found, 0, "`f" + intToString(0) + "`" + hits + "`x`");
 		found = hits.size() + found;
 	}
-		vector<C87_Handle> begin;
+		vector<HItemB> begin;
 		if (center->unknown5d2430(4, begin))
 	{
 		int entityID = 0;
@@ -493,7 +493,7 @@ void CHudData::drawContent(bool keep)
 		print(found, 0, "`f" + intToString(0) + "`" + "(amb. " + "`x`");
 		found = found + 6;
 		int hits = c87_cefc4c->unknown463d40();
-		string element = intToString(hits);
+		string element = OpY1_intToStringSigned(hits);
 		c87_d2b4bc[0] = hits < 0 ? *c87_d2043c : *c87_cf27e8;
 		print(found, 0, "`f" + intToString(0) + "`" + element + "`x`");
 		found = element.size() + found;

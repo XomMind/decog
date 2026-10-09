@@ -57,7 +57,7 @@ class HProp;
 class Cell
 {
 public:
-	void unknown45de40();				// NOTE: placeholder name
+	bool unknown45de40();				// NOTE: placeholder name
 	HItem getItem();					// 0x45d8f0
 	bool unknown66b1c0(int type, bool unpowered);
 	bool isPassableFor(HEntity e);		// 0x66ab30	// NOTE: placeholder name
@@ -112,7 +112,7 @@ struct OpR2_EntityData	// NOTE: placeholder name
 	int unknownAC;
 };
 
-struct OpR2_EntityEffect	// NOTE: placeholder name
+struct EntityEffect	// NOTE: placeholder name
 {
 	int unknown0;
 	int duration;
@@ -147,7 +147,7 @@ public:
 	int unknown5d15a0(bool notify);		// NOTE: placeholder name
 	int unknown5df740(int mode);		// NOTE: placeholder name
 	int unknown45acb0(int a);			// NOTE: placeholder name
-	OpR2_EntityEffect *unknown45ac40(int type);	// NOTE: placeholder name
+	EntityEffect *unknown45ac40(int type);	// NOTE: placeholder name
 	class EntityAI *getAI();			// NOTE: placeholder name (0x45b590)
 	int unknown5cc190(int slot);		// NOTE: placeholder name
 	HItem unknown5cc460(int slot, int maxSize);	// NOTE: placeholder name

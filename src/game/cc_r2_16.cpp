@@ -24,6 +24,8 @@ struct Point	// NOTE: placeholder layout
 	Point() throw();	// 0x453b40
 };
 
+struct EntityData4563c0;
+
 class HProp	// NOTE: placeholder layout
 {
 public:
@@ -76,12 +78,12 @@ public:
 	void unknown4544c0(int value);	// NOTE: placeholder name
 	void unknown4544e0();	// NOTE: placeholder name
 	void unknown454500(const Point &p);	// NOTE: placeholder name
-	void updatePropMute(HProp prop);	// 0x454520
+	void updatePropMute(EntityData4563c0 *prop);	// 0x454520
 	void unknown454540();	// NOTE: placeholder name
 
 	vector<int>		unknown00;	// NOTE: placeholder name
 	vector<Point>	points;		// NOTE: placeholder name
-	vector<HProp>	props;		// NOTE: placeholder name
+	vector<EntityData4563c0 *>	props;		// NOTE: placeholder name
 	char			unknown30[0xc];	// NOTE: placeholder name
 	char			pad3c[0x90 - 0x3c];
 	HProp			unknown90;	// NOTE: placeholder name
@@ -130,7 +132,7 @@ void SoundMgr::unknown454500(const Point &p)
 	points.push_back(p);
 }
 
-void SoundMgr::updatePropMute(HProp prop)
+void SoundMgr::updatePropMute(EntityData4563c0 *prop)
 {
 	props.push_back(prop);
 }
@@ -339,3 +341,5 @@ void LogSizeEntry::read(SaveStream *stream)
 	readLogField10(stream,&text);
 }
 
+
+template class std::vector<HProp>;	// keeps the vector<HProp> instances (mapped rows) alive now that SoundMgr::props is a vector of EntityData4563c0 *

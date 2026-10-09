@@ -76,7 +76,7 @@ public:
 	void unknown45b0b0();				// NOTE: placeholder name
 	void setAI(EntityAI57f6a0 *ai);		// NOTE: placeholder name (0x64ecf0)
 	EntityAI52 *getAI();				// 0x45b590
-	void *unknown45ac40(int type);		// NOTE: placeholder name (effect)
+	struct EntityEffect *unknown45ac40(int type);		// NOTE: placeholder name (effect)
 	int getFaction();					// 0x45a2c0
 	int getAiType();					// 0x45a2a0
 	int unknown5ca260();				// NOTE: placeholder name

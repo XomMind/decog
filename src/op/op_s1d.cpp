@@ -77,9 +77,8 @@ public:
 	bool matches45b980(int a, int b);	// NOTE: placeholder name
 };
 
-struct OpQ5_T9e2c40;
-template <class T> void OpQ5_clearObjects(vector<T*> &v);	// NOTE: placeholder name (0x9e2c40)
-
+struct OpV4d_Trivial;
+void OpV4d_deleteMapRecords(vector<OpV4d_Trivial*> &v);	// NOTE: placeholder name (0x9e2c40, deletes every element; the exe calls it directly, not the clear wrapper 0x9d0670)
 class UnknownPart45c060	// NOTE: placeholder name
 {
 public:
@@ -177,7 +176,7 @@ UnknownPart45c060::UnknownPart45c060(istream &stream)
 UnknownPart45c060::~UnknownPart45c060()
 {
 	delete unknown14;
-	OpQ5_clearObjects((vector<OpQ5_T9e2c40*>&)unknown18);
+	OpV4d_deleteMapRecords((vector<OpV4d_Trivial*>&)unknown18);
 	delete unknown38;
 	delete unknown78;
 }

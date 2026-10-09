@@ -243,7 +243,7 @@ void OpU1_Unk426b90::clearGrid()
 // string helpers
 //==================================================================
 
-bool opU1_splitAfterChar(string &text, char separator, string &rest)	// NOTE: placeholder name (0x4090e0)
+bool opU1_splitAfterChar(const string &text, char separator, string &rest)	// NOTE: placeholder name (0x4090e0)
 {
 	if (text.empty())
 		return false;
@@ -252,7 +252,7 @@ bool opU1_splitAfterChar(string &text, char separator, string &rest)	// NOTE: pl
 	if (index == string::npos || index == text.size() - 1)
 		return false;
 
-	rest.assign((const string::const_iterator &)(text.begin() + index + 1),(const string::const_iterator &)text.end());	// the non-template assign(const_iterator, const_iterator)
+	rest.assign(text.begin() + index + 1,text.end());	// the non-template assign(const_iterator, const_iterator)
 	return true;
 }
 

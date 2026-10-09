@@ -33,7 +33,7 @@ public:
 	bool isPlayer();				// 0x5c7600
 	bool unknown45aaa0(HEntity e);	// NOTE: placeholder name
 	bool isHostileTo(HEntity e);
-	const string &getName();		// NOTE: placeholder name (folded getter 0x416f40)
+	const string &name416f40();		// NOTE: placeholder name (folded getter 0x416f40)
 };
 
 struct TrapData51	// NOTE: placeholder name and layout
@@ -155,7 +155,7 @@ extern CLogMsgs *logMsgs_cec0b4;	// NOTE: placeholder name
 extern CLogMsgs *logMsgs51_cec0c4;	// NOTE: placeholder name
 bool logMessageP_5111e0(int id, const string &text, int a, int b, HEntity e, HProp d, const Point &pos, int g);	// NOTE: placeholder name (0x5111e0)
 bool logMessagePP_5111e0(int id, const string &text, int a, int b, HProp e, HProp d, const Point &pos, int g);	// NOTE: placeholder name (0x5111e0)
-bool OpS1c_unknown4569a0(int type, HProp a, HProp b, TeamB_HTrapProp c, HProp d, int e, int f, int g, HProp h, TeamB_HTrapProp i, HProp j, int k);	// NOTE: placeholder name
+bool unknown4569a0_t51(int type, HProp a, HProp b, TeamB_HTrapProp c, HProp d, int e, int f, int g, HProp h, TeamB_HTrapProp i, HProp j, int k);	// NOTE: placeholder name
 
 void Cell::unknown66ce10(bool announce, bool a, bool b, bool c)
 {
@@ -167,7 +167,7 @@ void Cell::unknown66ce10(bool announce, bool a, bool b, bool c)
 		{
 			string msg = trap->getName() + " triggered";
 			if (entity.isValid() && !entity->isPlayer())
-				msg += " by " + entity->getName();
+				msg += " by " + entity->name416f40();
 			do { if (logMessagePP_5111e0(entity.isValid() && entity->unknown45aaa0(world51->getPlayer()) ? 0x2ce : 0x2cf,msg,0,0,HProp(),HProp(),pos,1)) consoleA_cec058->unknown8758d0(false); logMsgs51_cec0c4->scrollToEnd(); } while (0);
 		}
 		if (entity.isValid())
@@ -184,7 +184,7 @@ void Cell::unknown66ce10(bool announce, bool a, bool b, bool c)
 		if (trap->getData()->unknown8c)
 			trap->getState()->unknown1c = 1;
 		log51_d1f3d4 += '\t';
-		OpS1c_unknown4569a0(4,HProp(),HProp(),trap,HProp(),0,0,trap->unknown45c9b0(),HProp(),trap,HProp(),0);
+		unknown4569a0_t51(4,HProp(),HProp(),trap,HProp(),0,0,trap->unknown45c9b0(),HProp(),trap,HProp(),0);
 		vector<TeamB_HTrapProp> *list = trap->getData()->type == 0xc ? &traps51_d20248[trap->getState()->unknown04] : NULL;
 		world51->addRecord(factory_cefaa8->createA(new STrapTrigger(trap,a,b,c)));
 		if (list)

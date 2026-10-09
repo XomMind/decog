@@ -891,7 +891,7 @@ int YkEntity::equipPart(YkHItem item, bool update, int extra)
 			{
 				vector<unsigned int> types;
 				for (int i = 3; i <= 4; i++)
-					types.push_back(i);
+					types.push_back((unsigned int)i);
 				yk_world->unknown734560(self,-2,&types);
 				item->unknown44fc60(item->unknown457fb0());
 				if (isPlayer())
@@ -1244,7 +1244,7 @@ int YkEntity::equipPart(YkHItem item, bool update, int extra)
 									{
 										donors.push_back(parts[i]);
 										cd.push_back(parts[i]->unknown9b6bf0() - (int)(parts[i]->unknown457c80() * yk_ba0bb4));
-										if (((const vector<int> &)cd).back() < amount)
+										if (cd.back() < amount)
 										{
 											donors.pop_back();
 											cd.pop_back();
@@ -1856,13 +1856,13 @@ int YkEntity::equipPart(YkHItem item, bool update, int extra)
 				for (int i = 0; i < 6; i++)
 				{
 					if (yk_mildMalfunctions[i])
-						j4.push_back(i);
+						j4.push_back((unsigned int)i);
 				}
 			}
 			else
 			{
 				for (int i = 0; i < 6; i++)
-					j4.push_back(i);
+					j4.push_back((unsigned int)i);
 			}
 			if (yk_unknownCf497c != 0 && isPlayer() && unknown94 >= 20 && rng.chance(50))
 			{

@@ -213,9 +213,7 @@ void MapView::unknown49ae20(int a)
 
 XBuffer *MapView::unknown49ae50(bool a)
 {
-	XBuffer *buffer = new XBuffer(a);
-	XBuffer *copy = buffer;
-	buffers.push_back(copy);
+	buffers.push_back(static_cast<XBuffer *&&>(new XBuffer(a)));
 	return buffers.back();
 }
 
@@ -304,8 +302,6 @@ bool MapView::unknown49ac90(const Point &p,bool a,int b)
 
 void MapView::unknown49afd0(const Point &p,bool a)
 {
-	XBufferB *buffer = new XBufferB(p,a);
-	XBufferB *copy = buffer;
-	buffersB.push_back(copy);
+	buffersB.push_back(static_cast<XBufferB *&&>(new XBufferB(p,a)));
 	unknown49ac90(p,unknown_d28e40 != 0,0);
 }

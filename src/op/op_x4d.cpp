@@ -279,7 +279,7 @@ public:
 	bool unknown45aaa0(HEntity e);		// NOTE: placeholder name
 	int getAiType();					// 0x45a2a0
 	bool unknown5cb680(OpW2_HGroup g);	// NOTE: placeholder name
-	void unknown45b070(const string &name);	// NOTE: placeholder name
+	void name45b070(const string &name);	// NOTE: placeholder name (retail 0x45b070 takes const string&; config row is the char* mangling)
 	EntityEffect *unknown45ac40(int type);	// NOTE: placeholder name
 	int unknown5cccc0();				// NOTE: placeholder name
 	void unknown63c770(int a);			// NOTE: placeholder name
@@ -580,10 +580,14 @@ struct Area	// NOTE: placeholder name
 	Point max;
 
 	Area();	// 0x40b100
-	Area(int x1, int y1, int x2, int y2);	// 0x40b1e0
 	void set(int x1, int y1, int x2, int y2);	// NOTE: placeholder name (0x40b300)
 	void randomPoint_40be30(Point *out);	// NOTE: placeholder name
 	Point randomPoint_40be90();	// NOTE: placeholder name
+};
+
+struct OpQ1_Box : Area	// NOTE: placeholder name (retail 0x40b1e0 is configured as OpQ1_Box(int,int,int,int))
+{
+	OpQ1_Box(int x1, int y1, int x2, int y2);	// 0x40b1e0
 };
 
 struct OpQ5_U9d7530	// NOTE: placeholder name
@@ -844,7 +848,7 @@ void BS::unknown6f1c70()
 		OpQ5_U9d7530 *record;
 		if (OpQ5_findByName(opX4d_entityRecords,"Enhanced Programmer",record))
 		{
-			Area spot(0,50,160,cells.getLastY());
+			OpQ1_Box spot(0,50,160,cells.getLastY());
 			Point pos;
 			for (int i = 0; i < 10; i++)
 			{
@@ -960,7 +964,7 @@ void BS::unknown6ff270()
 		HEntity e = opX4d_unknown6fd950(opX4d_entityRecords[opX4d_ints_d33a90[i]],group,!target->unknown5cb680(groups[group]));
 		if (e.isValid())
 		{
-			e->unknown45b070(opX4d_strings_d33ab0[i]);
+			e->name45b070(opX4d_strings_d33ab0[i]);
 			if (e->unknown45aaa0(target))
 			{
 				count++;
@@ -996,7 +1000,7 @@ void BS::unknown6ea660()
 			return;
 		vector<Point> path;
 		Point tile;
-		Area area(0,0,cells.getWidth() / 3,cells.getHeight() - 1);
+		OpQ1_Box area(0,0,cells.getWidth() / 3,cells.getHeight() - 1);
 		for (int i = 0; i < 3; i++)
 		{
 			for (int j = 0; i < 100; j++)

@@ -33,6 +33,13 @@ struct Point
 	bool operator==(const Point &p);	// 0x409b90
 };
 
+struct OpT8e_T9f6c50	// NOTE: placeholder name (16-byte element, a Rect in the callers)
+{
+	int a;
+	int b;
+	int c;
+	int d;
+};
 struct OpX5_Handle
 {
 	int h;
@@ -139,7 +146,7 @@ void OpX5_removeAllEntity(vector<HEntity> &v, HEntity e)	// NOTE: placeholder na
 	}
 }
 
-void OpX5_shufflePoints(vector<Point> &v)	// NOTE: placeholder name
+void OpX5_shufflePoints(vector<OpT8e_T9f6c50> &v)	// NOTE: placeholder name; the exe shuffles a vector of 16-byte elements (callers pass vector<Rect>)
 {
 	random_shuffle(v.begin(),v.end(),OpX5_shuffleFn);
 }

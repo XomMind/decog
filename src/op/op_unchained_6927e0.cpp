@@ -626,7 +626,7 @@ void Unknown_45f320_45f560::unknown6927e0()
 					unknown6998a0(6,0,true);
 				}
 				if (unknown020)
-					unknown020->unknown10.back().push_back(i);
+					unknown020->unknown10.back().push_back((unsigned int)i);
 				break;
 			}
 		}

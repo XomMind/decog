@@ -136,7 +136,7 @@ void Owner65::unknown780ac0()
 	for (int i = 0; i <= 2; i++)
 	{
 		unknown42c[i] = 1;
-		unknown43c.push_back(i);
+		unknown43c.push_back((unsigned int)i);
 		unknown44c.push_back(location65_d1e888->unknown08);
 	}
 	dataLoader65_cefaa8->unknown793690();

@@ -170,7 +170,7 @@ int OpX5_maxInt(int a, int b);	// NOTE: placeholder name
 bool OpT8b_Fn9daf80(int low, int value, int high);	// NOTE: placeholder name (in range)
 void OpV4c_Fn9d0690(int *value, int step, int low);	// NOTE: placeholder name
 bool opIT_log_5111e0(int id, const string &text, int a, int b, HEntity c, HEntity d, int e, int f);	// NOTE: placeholder name
-bool OpS1c_unknown4569a0(int a, HEntity b, HEntity c, HEntity d, int e, int f, int g, int h, HEntity i, HEntity j, int k, int l);	// NOTE: placeholder name
+bool OpS1c_he4569a0(int a, HEntity b, HEntity c, HEntity d, int e, int f, int g, int h, HEntity i, HEntity j, int k, int l);	// NOTE: placeholder name -- caller passes HEntity temporaries by value, so not the configured int signature (same address 0x4569a0)
 
 #define OPIT_LOG(id,text,c,f,bubble,log) do { if (opIT_log_5111e0(id,text,0,0,c,HEntity(),0,f)) opIT_consoleA_cec058->unknown8758d0(bubble); log->scrollToEnd(); } while (0)	// NOTE: placeholder macro
 
@@ -290,7 +290,7 @@ bool Item::takeDamage_57ab10(int damage, int sound, int chance, int crit, HEntit
 		if (slot == 5)
 		{
 			opIT_sounds_d1f3d4.lookup_folded(opIT_soundNames_d323f8[sound]);
-			OpS1c_unknown4569a0(5,HEntity(),HEntity(),HEntity(),self.ID,0,0,unknown58,HEntity(),HEntity(),self.ID,0);
+			OpS1c_he4569a0(5,HEntity(),HEntity(),HEntity(),self.ID,0,0,unknown58,HEntity(),HEntity(),self.ID,0);
 		}
 		if (record->effect == 0x66 && owner.operator->())
 		{

@@ -83,7 +83,7 @@ public:
 class Cell
 {
 public:
-	Terrain70 *getTerrain();	// NOTE: folded getter (Array2D<Cell*>::getWidth)
+	Terrain70 *terrain9fcd80();	// NOTE: placeholder name, folded getter 0x9fcd80 (Array2D<Cell*>::getWidth)
 	int getAscii();
 	XColor getColor();
 	HProp getProp();
@@ -120,7 +120,7 @@ ForcegenObject::ForcegenObject(int type, const Point &pos)
 	switch (this->type)
 	{
 	case 0:
-		terrain = (*cells70_cfd44c.atPoint(pos))->getTerrain();
+		terrain = (*cells70_cfd44c.atPoint(pos))->terrain9fcd80();
 		ascii = (*cells70_cfd44c.atPoint(pos))->getAscii();
 		fore = (*cells70_cfd44c.atPoint(pos))->getColor();
 		back = terrain->back;

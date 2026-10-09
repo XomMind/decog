@@ -77,7 +77,7 @@ class PolymindHostKillLeaderboard_HostRecord { public: void set_name(const strin
 class PolymindHostKillLeaderboard { public: PolymindHostKillLeaderboard_HostRecord *add_host_records(); };
 class Game { public: void set_world_seed(const string &v); void set_world_seed_is_manual(bool v); void set_run_time(const string &v); void set_cumulative_hours(const string &v); void set_run_start_date(const string &v); void set_run_end_date(const string &v); void set_run_sessions(int32 v); void set_run_loads(int32 v); void set_difficulty(int v); void set_special_mode(int v); void set_game_number(int32 v); void add_game_counts(int32 v); void set_win_type(int32 v); void set_win_total(int32 v); void add_win_type_history(int32 v); void set_lore_percent(int32 v); void set_gallery_percent(int32 v); void set_achievement_percent(int32 v); void set_wizard_mode_run(bool v); };
 class Options { public: void set_layout(int v); void set_ascii(bool v); void set_keyboard(bool v); void set_movement(int v); void set_keybinds(bool v); void set_fullscreen(int v); void set_font_set(const string &v); void set_map_width(int32 v); void set_map_height(int32 v); void set_zoom_use(int32 v); void set_tactical_hud(bool v); void set_render_filters_map(const string &v); void set_render_filters(const string &v); void set_steam(int v); };
-class Meta { public: void set_run_guid(const string &v); void set_player_public_key(const void *v, size_t size); void set_player_guid(const string &v); void set_player_id(int32 v); void set_run_id(int32 v); };
+class Meta { public: void set_run_guid(const string &v); void set_player_public_key44d000(const void *v, size_t size); void set_player_guid(const string &v); void set_player_id(int32 v); void set_run_id(int32 v); };
 class Stats_Kills { public: void add_list_of_uniques_npcs_destroyed(const string &v); };
 class Stats { public: Stats_Kills *mutable_kills(); };
 class Route_Entry_DiscoveredExit { public: void set_destination(int v); void set_destination_known(bool v); void set_reached(bool v); void set_count(int32 v); };
@@ -118,7 +118,7 @@ public:
 }
 
 struct Point { int x; int y; Point(const Point &p); };	// NOTE: placeholder
-Protobuf::Location *OpR1g_createLocation(Point pos);
+Protobuf::Location *OpR1g_createLocation471f40(Point pos);	// NOTE: placeholder name (0x471f40 takes a Pos by value; the config row spells it (int,int))
 string intToString(int value);
 string floatToString(float value, int unknown1, int unknown2);
 string &padLeft_408090(string &text, int width, char fill);	// NOTE: placeholder name
@@ -345,7 +345,7 @@ void Scorekeeper::createProtobuf(Protobuf::Scoresheet *sheet, string filename, b
 	areas->mutable_movement()->set_speed(f144);
 	areas->mutable_movement()->set_overweight_factor(f14c);
 	areas->mutable_movement()->set_teleportitis_level(f148);
-	areas->set_allocated_location(OpR1g_createLocation(f150));
+	areas->set_allocated_location(OpR1g_createLocation471f40(f150));
 	Protobuf::Parts *bestDist = sheet->mutable_parts();
 	bestDist->mutable_power()->set_slots(f158[0]);
 	for (unsigned int cols = 0; cols < f178[0].size(); cols++)
@@ -494,7 +494,7 @@ void Scorekeeper::createProtobuf(Protobuf::Scoresheet *sheet, string filename, b
 	{
 		center = allies->add_host_records();
 		center->set_name(f4c8[cols]);
-		center->set_allocated_location(OpR1g_createLocation(c37_d1e88c[f4d8[cols]].get23c()->getPos()));
+		center->set_allocated_location(OpR1g_createLocation471f40(c37_d1e88c[f4d8[cols]].get23c()->getPos()));
 		center->set_kills(f4e8[cols]);
 	}
 	Protobuf::Game *bits = sheet->mutable_game();
@@ -537,7 +537,7 @@ void Scorekeeper::createProtobuf(Protobuf::Scoresheet *sheet, string filename, b
 	bestPoint->set_steam(f62c);
 	Protobuf::Meta *col = sheet->mutable_meta();
 	col->set_run_guid(f630);
-	col->set_player_public_key(f64c,32);
+	col->set_player_public_key44d000(f64c,32);
 	col->set_player_guid(f66c);
 	col->set_player_id(f688);
 	col->set_run_id(f68c);
@@ -556,7 +556,7 @@ void Scorekeeper::createProtobuf(Protobuf::Scoresheet *sheet, string filename, b
 		int clean = cols;
 		amount = found2->add_entries();
 		Point branch = c37_d1e88c[cols].get23c()->getPos();
-		amount->set_allocated_location(OpR1g_createLocation(branch));
+		amount->set_allocated_location(OpR1g_createLocation471f40(branch));
 		Protobuf::Route_Entry_DiscoveredExit *desc = amount->add_discovered_exits();
 		for (unsigned int current = 0; current < f2e8[cols].size(); current++)
 		{

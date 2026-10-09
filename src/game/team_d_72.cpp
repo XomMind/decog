@@ -20,11 +20,13 @@ extern vector<OpQ5_U9d7a40 *> itemData72_d2d1c4;	// NOTE: placeholder name
 void logError(string location, string message);
 void opR1d_4541b0(int id, int a, int b);
 
+class Prop;
 class HProp
 {
 public:
 	int ID;
 	HProp();
+	Prop *operator->() const;	// NOTE: folded (OpC_Handle::get22c)
 };
 
 void opW5_message(int type, HProp prop, const string &text, int value);	// NOTE: placeholder name
@@ -177,17 +179,10 @@ public:
 	int unknown_getIndex();					// NOTE: placeholder name (folded getter)
 };
 
-class HProp72	// NOTE: placeholder name
-{
-	int ID;
-public:
-	Prop *operator->() const;	// NOTE: folded (OpC_Handle::get22c)
-};
-
 class Cell
 {
 public:
-	HProp72 getProp();
+	HProp getProp();
 };
 
 class CellGrid72	// NOTE: placeholder name (0xcfd44c)

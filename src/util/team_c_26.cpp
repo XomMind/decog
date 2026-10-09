@@ -41,6 +41,7 @@ public:
 	Console(XConsole *parent, int width, int height, int x, int y, int font, bool hidden, int layer);
 	virtual ~Console();
 
+	virtual void resize(int width, int height);	// 0x7ad4a0 (overrides XConsole::resize 0x4289a0)
 	virtual bool input(void *event);
 	virtual void update();
 	virtual void render();	// NOTE: placeholder name

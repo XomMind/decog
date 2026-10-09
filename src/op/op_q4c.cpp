@@ -113,7 +113,7 @@ public:
 class CTextInput : public Console
 {
 public:
-	void setText(const string &text);	// NOTE: placeholder name (0x48d300)
+	void setText48d300(const string &text);	// NOTE: placeholder name (0x48d300)
 };
 
 class OpQ4c_KeyMap	// NOTE: placeholder name (0xcefa8c)
@@ -264,13 +264,13 @@ void opq4c_scrollShell8fec50(bool up)	// NOTE: placeholder name
 		if (opq4c_cef9dc > 0)
 		{
 			opq4c_cef9dc--;
-			manual->input->setText(opq4c_d33d28[opq4c_cef9dc]);
+			manual->input->setText48d300(opq4c_d33d28[opq4c_cef9dc]);
 		}
 	}
 	else if (opq4c_cef9dc < opq4c_d33d28.size())
 	{
 		opq4c_cef9dc++;
-		manual->input->setText(opq4c_cef9dc >= opq4c_d33d28.size() ? string("") : opq4c_d33d28[opq4c_cef9dc]);
+		manual->input->setText48d300(opq4c_cef9dc >= opq4c_d33d28.size() ? string("") : opq4c_d33d28[opq4c_cef9dc]);
 	}
 }
 
@@ -281,13 +281,13 @@ void opq4c_scrollType8ff120(bool up)	// NOTE: placeholder name
 		if (opq4c_cebd60 > 0)
 		{
 			opq4c_cebd60--;
-			opq4c_cec10c->input->setText(opq4c_d33d48[opq4c_cebd60]);
+			opq4c_cec10c->input->setText48d300(opq4c_d33d48[opq4c_cebd60]);
 		}
 	}
 	else if (opq4c_cebd60 < opq4c_d33d48.size())
 	{
 		opq4c_cebd60++;
-		opq4c_cec10c->input->setText(opq4c_cebd60 >= opq4c_d33d48.size() ? string("") : opq4c_d33d48[opq4c_cebd60]);
+		opq4c_cec10c->input->setText48d300(opq4c_cebd60 >= opq4c_d33d48.size() ? string("") : opq4c_d33d48[opq4c_cebd60]);
 	}
 }
 
@@ -330,7 +330,7 @@ bool opq4c_suggest909990(bool flag)	// NOTE: placeholder name
 	{
 		string command = manual->records2.empty() ? string(opq4c_d2d508[opq4c_d3860c[(int)manual->records[manual->index]]]) : "Schematic(" + opq4c_d2d1c4[opq4c_cfd1cc[(int)manual->records2[manual->index2]]]->name + ")";
 		opq4c_stripText909840(command,manual->text.find('(') != string::npos);
-		manual->input->setText(command);
+		manual->input->setText48d300(command);
 		return true;
 	}
 	return false;
@@ -533,12 +533,12 @@ bool CCodesCode::input8ff4c0(XEvent *event)
 		case 5:
 			if (opq4c_cec108)
 			{
-				opq4c_cec108->getManual_4b1b70()->input->setText(opq4c_d1e930[index]);
+				opq4c_cec108->getManual_4b1b70()->input->setText48d300(opq4c_d1e930[index]);
 				opq4c_cec108->getManual_4b1b70()->input->inputAscii(0xd,5);
 			}
 			else
 			{
-				opq4c_cec100->getManual_48f100()->input->setText(opq4c_d1e900[index]);
+				opq4c_cec100->getManual_48f100()->input->setText48d300(opq4c_d1e900[index]);
 				opq4c_cec100->getManual_48f100()->input->inputAscii(0xd,5);
 			}
 			return true;

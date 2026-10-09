@@ -9,7 +9,6 @@
 ??0?$basic_filebuf@DU?$char_traits@D@std@@@std@@QAE@PAU_iobuf@@@Z,0x9bcf60,0x68
 ?is_open@?$basic_filebuf@DU?$char_traits@D@std@@@std@@QBE_NXZ,0x9bcfd0,0x19
 ?open@?$basic_filebuf@DU?$char_traits@D@std@@@std@@QAEPAV12@PBDHH@Z,0x9bcff0,0xb6
-?open@?$basic_filebuf@DU?$char_traits@D@std@@@std@@QAEPAV12@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@HH@Z,0x9b1c00,0x26
 ?close@?$basic_filebuf@DU?$char_traits@D@std@@@std@@QAEPAV12@XZ,0x9bd0b0,0x65
 ?_Lock@?$basic_filebuf@DU?$char_traits@D@std@@@std@@UAEXXZ,0x9b1cf0,0x24
 ?_Unlock@?$basic_filebuf@DU?$char_traits@D@std@@@std@@UAEXXZ,0x9b1d20,0x24
@@ -106,7 +105,6 @@
 ?clear@?$vector@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@QAEXXZ,0x9b4710,0x43
 ?_Reserve@?$vector@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@IAEXI@Z,0x9be4b0,0x61
 ?_Ufill@?$vector@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@IAEPAUY8_10_00_0@@PAU3@IPBU3@@Z,0x9cc360,0x31
-?allocate@?$allocator@UY8_10_00_0@@@std@@QAEPAUY8_10_00_0@@I@Z,0x9c9c60,0x1b
 ??G?$_Vector_const_iterator@V?$_Vector_val@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@@std@@QBE?AV01@H@Z,0x9b36a0,0x2d
 ??0?$reverse_iterator@V?$_Vector_iterator@V?$_Vector_val@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@@std@@@std@@QAE@V?$_Vector_iterator@V?$_Vector_val@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@@1@@Z,0x9cbf60,0x1c
 ??H?$_Vector_iterator@V?$_Vector_val@UY8_10_14_0@@V?$allocator@UY8_10_14_0@@@std@@@std@@@std@@QBE?AV01@H@Z,0x9c20e0,0x2d

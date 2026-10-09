@@ -468,7 +468,7 @@ public:
 class ConsoleArt : public Console
 {
 public:
-	ConsoleArt(XConsole *parent, OpR4b_Art *image, int x, int y, bool hidden, int anim, int unknown, const Pos &offset, int width, int height);	// NOTE: the image type is AsciiImage
+	ConsoleArt(XConsole *parent, class AsciiImage *image, int x, int y, bool hidden, int anim, int unknown, const Pos &offset, int width, int height);	// NOTE: the image type is AsciiImage
 	char pad6c[0x84 - 0x6c];
 };
 
@@ -563,7 +563,7 @@ claimed:
 		title->setColor();
 	}
 	else
-		new ConsoleArt(this,&opR4b_itemTypes[unknown6c]->art,0,3,false,-1,0,Pos(-1),0,0);
+		new ConsoleArt(this,(AsciiImage *)&opR4b_itemTypes[unknown6c]->art,0,3,false,-1,0,Pos(-1),0,0);
 	infoButton = new CGalleryInfoButton(this);
 }
 

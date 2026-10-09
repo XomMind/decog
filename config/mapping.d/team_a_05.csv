@@ -14,7 +14,6 @@ FloatPair_40c470::FloatPair_40c470,0x40c470,0x1d
 IntRange_40c170::middle,0x40c170,0x1b
 FloatRange_40c730::contains,0x40c730,0x2f
 IntList_40c820::sum,0x40c820,0x17
-Init_40ca90::Init_40ca90,0x40ca90,0x24
 Fov_40c9e0::unknown40c9e0,0x40c9e0,0x32
 Fov_40c9e0::unknown40ca20,0x40ca20,0x2e
 Fov_40c9e0::unknown40ca50,0x40ca50,0x36

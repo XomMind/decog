@@ -12,6 +12,13 @@ struct Point
 	Point(const Point &p) throw();	// 0x46ca50
 };
 
+struct XColor	// NOTE: element type of the retail action path vector (vector<XColor> ctor, ~vector at 0x9b50a0)
+{
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+};
+
 class Entity;
 
 class HEntity	// NOTE: placeholder layout
@@ -84,7 +91,7 @@ public:
 	Point unknown45a4c0();			// NOTE: placeholder name
 	Point unknown5c80f0(const Point &p);	// NOTE: placeholder name
 	bool unknown45aaa0(HEntity e);	// NOTE: placeholder name
-	const string &getName();		// NOTE: placeholder name (folded getter 0x416f40)
+	const string &name416f40();		// NOTE: placeholder name (folded getter 0x416f40, not Entity::getName 0x45a280)
 };
 
 class Map30	// NOTE: placeholder name for the object behind the global at 0xcefc4c
@@ -135,7 +142,7 @@ public:
 class Action64fb40	// NOTE: placeholder name (0x7c-byte object, constructor 0x64fb40)
 {
 public:
-	Action64fb40(HEntity e, int a, const Point &target, Point *origin, int *delay, vector<Point> *path, int b, HProp prop);
+	Action64fb40(HEntity e, int a, const Point &target, Point *origin, int *delay, vector<XColor> *path, int b, HProp prop);
 	char pad[0x7c];
 };
 
@@ -208,9 +215,9 @@ bool Entity::unknown63c340(HEntity target)
 			return false;
 		flag_cefc8b = true;
 		int t;
-		vector<Point> path;
+		vector<XColor> path;
 		world30->addRecord(factory_cefaa8->createA(new Action64fb40(self,0,target->unknown5c80f0(unknown45a4c0()),&point_d2e20c,&t,&path,0,HProp())));
-		do { if (logMessageS_5111e0(isPlayer() ? 0xae : (unknown45aaa0(world30->getPlayer()) ? 0xaf : 0xb0),target->getName(),0,0,self,HProp(),0,0)) consoleA_cec058->unknown8758d0(true); logMsgs_cec0b4->scrollToEnd(); } while (0);
+		do { if (logMessageS_5111e0(isPlayer() ? 0xae : (unknown45aaa0(world30->getPlayer()) ? 0xaf : 0xb0),target->name416f40(),0,0,self,HProp(),0,0)) consoleA_cec058->unknown8758d0(true); logMsgs_cec0b4->scrollToEnd(); } while (0);
 		if (isPlayer())
 		{
 			stats_d2c658.add4729d0(0x1b0,1,"",-1);

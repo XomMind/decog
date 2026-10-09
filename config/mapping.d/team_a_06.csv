@@ -13,5 +13,4 @@
 ??1OpR1h_TurnRecord@@QAE@XZ,0x48b950,0x59
 ??0XTimerB@@QAE@ABUPos@@HH@Z,0x499bb0,0x39
 ??0XTimerE@@QAE@HABUPos@@@Z,0x499c60,0x33
-??1?$OpY5_WeightedList@PAUOpY5_ItemType@@@@QAE@XZ,0x4c6aa0,0x56
 SEntityShoot::getType,0x45b6a0,0x10

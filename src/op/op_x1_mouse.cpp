@@ -57,8 +57,9 @@ struct Pos
 	Pos(int x_, int y_);
 };
 
-struct XConsole
+class XConsole
 {
+public:
 	virtual ~XConsole();
 	virtual void resize(int width, int height);
 	virtual bool isActive();

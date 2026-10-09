@@ -421,8 +421,7 @@ void opR4_fillShuffled32(vector<int> &v)	// NOTE: placeholder name (0x7ac540)
 {
 	for (int i = 0; i < 32; i++)
 	{
-		int value = i;
-		v.push_back(value);
+		v.push_back(+i);
 	}
 	opR4_shuffle(v);
 }

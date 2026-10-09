@@ -80,7 +80,7 @@ public:
 class Item
 {
 public:
-	int getType();			// NOTE: placeholder name
+	int unknown9b4350();		// NOTE: placeholder name (0x9b4350: [this+8], folded getter)
 	bool unknown457cf0();	// NOTE: placeholder name
 	int unknown457fb0();	// NOTE: placeholder name
 };
@@ -286,7 +286,7 @@ void addPropAt(const Point &p, vector<HProp> &out)
 
 bool BS::unknown71bcc0(const Point &p, Point &out)
 {
-	if (cells(p)->hasBlockingObject() || (cells(p)->getItem().isValid() && cells(p)->getItem()->getType() == itemTypeMatter && rng.chance(50)))
+	if (cells(p)->hasBlockingObject() || (cells(p)->getItem().isValid() && cells(p)->getItem()->unknown9b4350() == itemTypeMatter && rng.chance(50)))
 	{
 		out = p;
 		return true;

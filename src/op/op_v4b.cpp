@@ -24,7 +24,7 @@ template <class T> void OpQ5_eraseAt(vector<T> &v, int index);	// NOTE: placehol
 template <class T> void OpS8a_writeRawVector(ostream &stream, vector<T> &v);	// NOTE: placeholder name
 void OpT8a_readInts(istream &in, vector<int> &v);	// NOTE: placeholder name
 template <class T> void OpQ5_readObjects(istream &stream, vector<T*> &v, int skip);	// NOTE: placeholder name
-struct MapRecord;
+class MapRecord;
 void unknown_9e40e0(ostream &os, vector<MapRecord *> &records);	// NOTE: placeholder name
 struct OpQ5_T9e13a0;
 

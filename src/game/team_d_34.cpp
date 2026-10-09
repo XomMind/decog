@@ -64,7 +64,7 @@ extern int TERRAIN_CAVE_WALL;	// NOTE: placeholder (0xcefba0)
 extern int *p_cefb9c;	// NOTE: placeholder name
 extern int *p_cefba8;	// NOTE: placeholder name
 
-bool OpS8b_Fn9d51d0(vector<unsigned int> &v, int value);	// NOTE: placeholder name (remove value)
+bool OpS8b_Fn9d51d0(vector<int> &v, int value);	// NOTE: placeholder name (remove value)
 int OpU8a_randomRec(vector<unsigned int> &v);	// NOTE: placeholder name (0x9d5d00)
 void OpB_translateRotated(Point *pos, int rotation, int dx, int dy);	// NOTE: placeholder name
 bool OpD_digCorridor_6cc2b0(int roomIndex, const Point &start, int dir);	// NOTE: placeholder name (0x6cc2b0)
@@ -78,9 +78,9 @@ bool OpD_digRoomExit_6cc8a0(int roomIndex, int tries, bool cave)	// NOTE: placeh
 	{
 	vector<unsigned int> options;
 	for (int i = 0; i < 4; i++)
-		options.push_back(i);
+		options.push_back((unsigned int)i);
 	for (unsigned int j = 0; j < current.doorDirs.size(); j++)
-		OpS8b_Fn9d51d0(options,current.doorDirs[j]);
+		OpS8b_Fn9d51d0((vector<int> &)options,current.doorDirs[j]);
 	if (!options.empty())
 	{
 		do

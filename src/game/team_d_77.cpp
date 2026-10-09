@@ -78,7 +78,7 @@ extern vector<OpQ5_U9d7710 *> machines77_cf35b0;	// NOTE: placeholder name
 extern int dirMap77_bb8360[];	// NOTE: placeholder name
 extern int dirTable77_b96348[];	// NOTE: placeholder name
 
-bool OpD_findWallStrip_6cbb40(int length, int depth, int type, Rect77 *strip, Rect77 *room, int *outDir, int minDistance, bool avoidMarkers, bool avoidItems);	// NOTE: placeholder name
+bool OpD_findWallStrip_6cbb40_77(int length, int depth, int type, Rect77 *strip, Rect77 *room, int *outDir, int minDistance, bool avoidMarkers, bool avoidItems);	// NOTE: placeholder name (0x6cbb40; file-unique name, the configured signature uses Rect37)
 void opt4_fillRing6cba00(Rect77 *r, Rect77 *inner, int entrance, int *wall, bool caveWalls);	// NOTE: placeholder name
 extern int *TERRAIN_CAVE_WALL;	// NOTE: placeholder (0xcefba0)
 struct Unknown77;	// NOTE: placeholder name
@@ -190,7 +190,7 @@ void BS::unknown6e2cb0()
 	int id;
 	for (int i = 0; i < 8; i++)
 	{
-		if (OpD_findWallStrip_6cbb40(3,2,4,&bottom,&open,&id,0,false,false))
+		if (OpD_findWallStrip_6cbb40_77(3,2,4,&bottom,&open,&id,0,false,false))
 		{
 			opt4_fillRing6cba00(&open,&bottom,0,TERRAIN_CAVE_WALL,false);
 			unknown6c38a0(&open,0,1.0f,ref77_d2c46c);
@@ -230,7 +230,7 @@ void BS::unknown6e2cb0()
 	}
 	for (int count = rng.rangeInt(3.0f,4.0f); count > 0; count--)
 	{
-		if (OpD_findWallStrip_6cbb40(1,1,4,&bottom,&open,&id,0,false,false))
+		if (OpD_findWallStrip_6cbb40_77(1,1,4,&bottom,&open,&id,0,false,false))
 		{
 			opt4_fillRing6cba00(&open,&bottom,0,TERRAIN_CAVE_WALL,false);
 			unknown6c38a0(&open,0,1.0f,ref77_d2c46c);

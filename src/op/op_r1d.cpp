@@ -296,11 +296,11 @@ template <class T> void readBinary(istream &stream, T *value)	// NOTE: placehold
 
 void OpQ1_readString(istream &in, string *text);	// NOTE: placeholder name (0x4096f0)
 
-class AsciiImage
+class OpR1d_AsciiImage
 {
 public:
-	AsciiImage() throw();	// 0x4588d0
-	~AsciiImage();
+	OpR1d_AsciiImage() throw();	// 0x4588d0
+	~OpR1d_AsciiImage();
 	void read(istream &stream);	// 0x437560, NOTE: placeholder name
 
 	vector<void*> layers;
@@ -320,7 +320,7 @@ public:
 	bool unknown48;
 	int unknown4c;
 	string unknown50;
-	AsciiImage image;
+	OpR1d_AsciiImage image;
 };
 
 OpR1d_Entry::OpR1d_Entry(istream &stream)

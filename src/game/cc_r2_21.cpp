@@ -397,6 +397,7 @@ class CTitleAnimated : public ConsoleArt
 public:
 	CTitleAnimated(XConsole *parent, AsciiImage *art, int unknown84_, int frame);	// 0x4b28f0
 	void unknown4b29b0();	// NOTE: placeholder name
+	void unknown48c3c0(int value);	// NOTE: placeholder name (0x48c3c0, effect wrapper over Console::unknown7ad6a0)
 
 	int unknown84;	// NOTE: placeholder name
 };
@@ -411,6 +412,6 @@ CTitleAnimated::CTitleAnimated(XConsole *parent, AsciiImage *art, int unknown84_
 
 void CTitleAnimated::unknown4b29b0()
 {
-	drawArt(unknown84);
+	unknown48c3c0(unknown84);
 };
 

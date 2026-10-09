@@ -299,7 +299,7 @@ public:
 	HItem unknown5d3f80(int a, int b);	// NOTE: placeholder name
 	void unknown5ddac0(const Point &p, int a);	// NOTE: placeholder name
 	int unknown45a320();				// NOTE: placeholder name
-	bool unknown637da0(int count, int id, struct OpW2_Attack *attack, Point &p);	// NOTE: placeholder name
+	bool unknown637da0(int count, int id, struct OpS3b_Actor *attack, const Point *p);	// NOTE: placeholder name
 	bool unknown5d51a0();				// NOTE: placeholder name
 	bool unknown45aaa0(HEntity e);		// NOTE: placeholder name
 	int getAiType();					// 0x45a2a0
@@ -330,7 +330,7 @@ public:
 	int getTerrain();				// NOTE: placeholder name (0x9fcd80)
 	bool unknown45d480();			// NOTE: placeholder name
 	bool unknown45d500();			// NOTE: placeholder name
-	bool unknown6701c0(int count, int id, struct OpW2_Attack *attack);	// NOTE: placeholder name
+	bool unknown6701c0(int count, int id, struct OpR3b_Actor *attack);	// NOTE: placeholder name
 	HProp getProp();				// 0x45d550
 	HEntity getEntity();			// 0x45d250
 	bool isOpen();					// NOTE: placeholder name (0x4550b0)
@@ -1518,7 +1518,7 @@ bool BS::unknown717e40(const Point &from, const Point &to, int range, Point &cur
 				if (cells(cur)->unknown45d500())
 					ok = !penetrate.empty() && cells(cur)->getProp()->unknown6658d0(hits->size(), penetrate.front(), attack);
 				else
-					ok = opw2_distance(from, cur) <= range && !penetrate.empty() && cells(cur)->unknown6701c0(hits->size(), penetrate.front(), attack);
+					ok = opw2_distance(from, cur) <= range && !penetrate.empty() && cells(cur)->unknown6701c0(hits->size(), penetrate.front(), (OpR3b_Actor *)attack);
 				if (ok)
 				{
 					if (penetrate.front() != -1)
@@ -1540,7 +1540,7 @@ bool BS::unknown717e40(const Point &from, const Point &to, int range, Point &cur
 			if (!penetrate.empty())
 			{
 				if (cells(cur)->getEntity().isValid())
-					ok = cells(cur)->getEntity()->unknown637da0(hits->size(), penetrate.front(), attack, cur);
+					ok = cells(cur)->getEntity()->unknown637da0(hits->size(), penetrate.front(), (OpS3b_Actor *)attack, &cur);
 				else
 					ok = cells(cur)->getProp()->unknown6658d0(hits->size(), penetrate.front(), attack);
 				if (ok)

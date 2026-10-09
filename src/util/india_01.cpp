@@ -132,7 +132,7 @@ bool FcCMap::input(FcEvent*event){
  if(fc_between9daf80(0xd4,event->command,0xe7)||fc_between9daf80(0x16a,event->command,0x173))return false;
  if(skipRefresh)skipRefresh=false;else refresh49ad30();
  if(fc_cefc4c->busy71bbd0()){refresh49ad30();return false;}
- history.push_back(event->command);
+ history.push_back((unsigned int)event->command);
  while(history.size()>50)fc_removeAt9de6f0(history,0);
  if(fc_caed20<blockUntil&&!fc_d28e4d)return false;
  if(fc_caf2b0!=32&&!fc_cf45d8.active46dd50()&&fc_caed20>=540000){if(fc_caf2b0-64!=fc_d25de0.size())fc_cefbbc=1;fc_caf2b0=32;}

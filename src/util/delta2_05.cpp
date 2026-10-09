@@ -22,13 +22,15 @@ struct D2nPt : Pos	// NOTE: placeholder name (default ctor 0x453b40; Pos() itsel
 	D2nPt();
 };
 
+struct Point;
+
 struct Area
 {
 	int x;
 	int y;
 	int x2;
 	int y2;
-	void randomPoint_40be30(Pos *p);
+	void randomPoint_40be30(Point *p);
 };
 
 struct XColor
@@ -285,7 +287,7 @@ void D2Ending::render()
 				zone.x2 = zone.x + width - 1;
 				do
 				{
-					zone.randomPoint_40be30(&loc);
+					zone.randomPoint_40be30((Point *)&loc);
 				} while (map->atPoint(loc)->getChar_9b8f00() != 0x20 || map->at(loc.x + 1, loc.y)->getChar_9b8f00() != 0x20 || map->at(loc.x + 2, loc.y)->getChar_9b8f00() != 0x20 || map->at(loc.x + 3, loc.y)->getChar_9b8f00() != 0x20);
 				int anim;
 				switch (rng.rangeInt(1.0f, d2n_c36ecc))

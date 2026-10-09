@@ -97,8 +97,8 @@ bool OpR3f_splitAtBracket(const string &text, string &head, string &tail)	// NOT
 	size_t pos = text.find(']', 0);
 	if (pos == string::npos || pos == text.length() - 1)
 		return false;
-	head.assign(text.begin(), text.begin() + pos + 1);
-	tail.assign(text.begin() + pos + 1, text.end());
+	head.assign(const_cast<string&>(text).begin(), const_cast<string&>(text).begin() + pos + 1);
+	tail.assign(const_cast<string&>(text).begin() + pos + 1, const_cast<string&>(text).end());
 	return true;
 }
 

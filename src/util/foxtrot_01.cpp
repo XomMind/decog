@@ -218,7 +218,7 @@ bool FxParts::input(FxEvent*event){
   int value=31;
   for(int i=0;i<items.size();i++){if(items[i].get9b65b0()->active457cf0()){value=items[i].get9b65b0()->type457880();break;}}
   vector<unsigned>list;
-  for(int t=9;t<=13;t++)list.push_back(t);
+  for(int t=9;t<=13;t++)list.push_back((unsigned int)t);
   list.push_back(31);
   if(value!=31){
    if(value==13)fx_insert9dbdc0(list,0,31);

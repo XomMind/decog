@@ -31,7 +31,7 @@ struct C58_GameData { void setEntryText(const string &key, const string &value);
 struct C58_Record;
 template <class T> bool OpQ5_findByName(vector<T *> &v, const string &name, T *&result);	// NOTE: placeholder name
 void sweepGetSurroundingCells(const C58_Point &p, vector<C58_Point> &out);	// NOTE: placeholder name
-void teamb_setTerrainAt(C58_Point &p, CellTerrainRecord *terrain);	// NOTE: placeholder name
+void teamb_setTerrainAtC58(C58_Point &p, CellTerrainRecord *terrain);	// NOTE: placeholder name
 
 extern vector<C58_Room> c58_cf124c;	// NOTE: placeholder names below
 extern vector<C58_Tunnel> c58_cf125c;
@@ -78,7 +78,7 @@ void BS::setupArchitect_6e2110()
 			for (unsigned int current = 0; current < adj.size(); current++)
 			{
 				if ((*c58_cfd44c.atPoint(adj[current]))->getTerrain() == TERRAIN_CAVE_WALL && rng.chance(50))
-					teamb_setTerrainAt(adj[current],caveinThirdTerrain);
+					teamb_setTerrainAtC58(adj[current],caveinThirdTerrain);
 			}
 		}
 	}
@@ -93,7 +93,7 @@ void BS::setupArchitect_6e2110()
 				for (unsigned int current = 0; current < adj.size(); current++)
 				{
 					if ((*c58_cfd44c.atPoint(adj[current]))->getTerrain() == TERRAIN_CAVE_WALL && rng.chance(50))
-						teamb_setTerrainAt(adj[current],caveinThirdTerrain);
+						teamb_setTerrainAtC58(adj[current],caveinThirdTerrain);
 				}
 			}
 		}

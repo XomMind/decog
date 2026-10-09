@@ -7,7 +7,7 @@ struct Point
 {
 	int x;
 	int y;
-	int randomInRange_40c130() const;	// NOTE: placeholder name
+	int randomInRange_40c130();	// NOTE: placeholder name
 };
 
 class HEntity

@@ -224,8 +224,8 @@ bool Config::breakConfigVar(const string &line, string &name, string &value, int
 		logError("Config::breakConfigVar()","Syntax error in " + file + ", line " + intToString(lineNum));
 		return false;
 	}
-	name.assign(line.begin(),line.begin() + pos);
-	value.assign(line.begin() + pos + 1,line.end());
+	name.assign(const_cast<string&>(line).begin(),const_cast<string&>(line).begin() + pos);
+	value.assign(const_cast<string&>(line).begin() + pos + 1,const_cast<string&>(line).end());
 	return true;
 }
 

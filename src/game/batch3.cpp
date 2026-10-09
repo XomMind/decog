@@ -67,13 +67,13 @@ void CGalleryText::trigger(const string &command, int value)
 {
 	if (command == "show_name")
 	{
-		if (getGalleryData()->supporterIndex == -1)
+		if (((GalleryData*)getParent())->supporterIndex == -1)
 		{
 			logError("CGalleryText::trigger()","gallerySupporterIndex is -1");
 			return;
 		}
 		CGalleryName *name = new CGalleryName(this,1,0,getWidth()-2,1,4);
-		name->setText(0,0,gallerySupporters[getGalleryData()->supporterIndex].name);
+		name->setText(0,0,gallerySupporters[((GalleryData*)getParent())->supporterIndex].name);
 		name->unknown4969a0();
 	}
 }

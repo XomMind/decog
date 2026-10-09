@@ -29,12 +29,12 @@ struct OpBSD_Rect	// NOTE: placeholder name (x, y, width, height)
 	OpBSD_Rect(const Point &p);	// NOTE: placeholder name (0x40a7a0)
 };
 
-struct Area	// NOTE: placeholder name
+struct OpBSD_Area	// NOTE: placeholder name
 {
 	Point min;
 	Point max;
 
-	Area(int x1, int y1, int x2, int y2);	// 0x40b1e0
+	OpBSD_Area(int x1, int y1, int x2, int y2);	// 0x40b1e0
 	void set(const OpBSD_Rect &r);	// NOTE: placeholder name (0x40b3a0)
 	void set_40b360(const Point &p, int w, int h);	// NOTE: placeholder name
 	void randomPoint_40be30(Point *out);	// NOTE: placeholder name
@@ -125,7 +125,7 @@ public:
 	bool isPassableFor(HEntity e);	// 0x66ab30
 	bool isOpen();	// NOTE: placeholder name (0x4550b0)
 	HEntity getEntity();	// 0x45d250
-	void unknown45df90(OpBSD_Effect *effect);	// NOTE: placeholder name
+	void unknown45df90(struct CellEffect *effect);	// NOTE: placeholder name
 	void unknown45e110(bool a, bool b, HProp prop);	// NOTE: placeholder name
 };
 class OpBSD_Grid	// NOTE: placeholder name (0xcfd44c)
@@ -219,7 +219,7 @@ extern OpBSD_GameData opBSD_gameData;	// NOTE: placeholder name
 
 extern int opBSD_level_d1eae0;	// NOTE: placeholder name
 extern int opBSD_d1eae4;	// NOTE: placeholder name
-extern Area opBSD_area_d1eae8;	// NOTE: placeholder name
+extern OpBSD_Area opBSD_area_d1eae8;	// NOTE: placeholder name
 extern bool opBSD_d1e880;	// NOTE: placeholder name
 extern bool opBSD_d257eb;	// NOTE: placeholder name
 extern Point opBSD_d22310;	// NOTE: placeholder name
@@ -405,7 +405,7 @@ void BS::unknown6fdcb0()	// NOTE: placeholder name
 			OpQ5_U9db510 *effectRec;
 			OpQ5_findByName(opBSD_effects_d2f0f8,"ENC_WAS_DERELICTS",effectRec);
 			Point origin = target->getPosition();
-			Area bounds(origin.x - 4,origin.y - 4,origin.x + 4,origin.y + 4);
+			OpBSD_Area bounds(origin.x - 4,origin.y - 4,origin.x + 4,origin.y + 4);
 			bool spoken = false;
 			for (int i = 0; i < 20; i++)
 			{
@@ -494,7 +494,7 @@ placed:
 					for (int x = wallRow.x, y = wallRow.y; x < wallRow.x + 8; x++)
 					{
 						if ((*opBSD_cells_cfd44c.at(x,y - 1))->isOpen() && (*opBSD_cells_cfd44c.at(x,y + 1))->isOpen())
-							(*opBSD_cells_cfd44c.at(x,y))->unknown45df90(new OpBSD_Effect(wallType,1));
+							(*opBSD_cells_cfd44c.at(x,y))->unknown45df90((CellEffect *)new OpBSD_Effect(wallType,1));
 					}
 				}
 			}

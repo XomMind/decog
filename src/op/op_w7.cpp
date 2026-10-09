@@ -29,6 +29,7 @@ struct Point
 	int y;
 
 	Point &operator=(const Point &p);	// 0x46ca50
+	Point &operator=(const Pos &p);	// 0x46ca50
 	void offset_40a2a0(int dx, int dy);	// NOTE: placeholder name
 	int randomInRange_40c130();	// NOTE: placeholder name
 	Point(int v);	// 0x409990
@@ -71,8 +72,8 @@ public:
 	virtual void render();
 
 	bool isHidden();
-	Point getPos();
-	void setPos(const Point &pos);
+	Pos getPos();
+	void setPos(const Pos &pos);
 	int getWidth();	// 0x44b0d0
 	int getHeight();
 	void print(int x, int y, const string &text);
@@ -126,6 +127,7 @@ public:
 	Console(XConsole *parent, int width, int height, int x, int y, int font, bool hidden, int layer);
 	Console(XConsole *parent, Rect rect, int font, bool hidden, int layer);
 	virtual ~Console();
+	virtual void resize(int width, int height);
 	virtual void render();
 	virtual void open();
 	virtual void close();
@@ -727,13 +729,13 @@ CShellManual::CShellManual(XConsole *parent, int y)
 		opw7_d3860c.push_back(0);
 		for (int i = 1; i < 112; i++)
 		{
-			if (!lexicographical_compare(gameStrings_d2d508[i].begin(),gameStrings_d2d508[i].end(),gameStrings_d2d508[opw7_d3860c.back()].begin(),gameStrings_d2d508[opw7_d3860c.back()].end()))
-				opw7_d3860c.push_back(i);
+			if (!lexicographical_compare(((const string &)gameStrings_d2d508[i]).begin(),((const string &)gameStrings_d2d508[i]).end(),((const string &)gameStrings_d2d508[opw7_d3860c.back()]).begin(),((const string &)gameStrings_d2d508[opw7_d3860c.back()]).end()))
+				opw7_d3860c.push_back((unsigned int)i);
 			else
 			{
 				for (unsigned int j = 0; j < opw7_d3860c.size(); j++)
 				{
-					if (lexicographical_compare(gameStrings_d2d508[i].begin(),gameStrings_d2d508[i].end(),gameStrings_d2d508[opw7_d3860c[j]].begin(),gameStrings_d2d508[opw7_d3860c[j]].end()))
+					if (lexicographical_compare(((const string &)gameStrings_d2d508[i]).begin(),((const string &)gameStrings_d2d508[i]).end(),((const string &)gameStrings_d2d508[opw7_d3860c[j]]).begin(),((const string &)gameStrings_d2d508[opw7_d3860c[j]]).end()))
 					{
 						OpW7_insertAt_9dbdc0(opw7_d3860c,j,i);
 						break;
@@ -750,13 +752,13 @@ CShellManual::CShellManual(XConsole *parent, int y)
 		opw7_cfd1cc.push_back(0);
 		for (int i = 1; i < opw7_d2d1c4.size(); i++)
 		{
-			if (!lexicographical_compare(((const string &)names[i]).begin(),((const string &)names[i]).end(),((const string &)names[opw7_cfd1cc.back()]).begin(),((const string &)names[opw7_cfd1cc.back()]).end()))
+			if (!lexicographical_compare(names[i].begin(),names[i].end(),names[opw7_cfd1cc.back()].begin(),names[opw7_cfd1cc.back()].end()))
 				opw7_cfd1cc.push_back(i);
 			else
 			{
 				for (unsigned int j = 0; j < opw7_cfd1cc.size(); j++)
 				{
-					if (lexicographical_compare(((const string &)names[i]).begin(),((const string &)names[i]).end(),((const string &)names[opw7_cfd1cc[j]]).begin(),((const string &)names[opw7_cfd1cc[j]]).end()))
+					if (lexicographical_compare(names[i].begin(),names[i].end(),names[opw7_cfd1cc[j]].begin(),names[opw7_cfd1cc[j]].end()))
 					{
 						OpW7_insertAt_9dbdc0(opw7_cfd1cc,j,i);
 						break;
@@ -852,7 +854,7 @@ void CType::render()
 			scroll = input->getCursor_45ab90();
 		else if (input->getCursor_45ab90() >= scroll + width || (full->size() >= width && scroll > input->getCursor_45ab90() - width))
 			scroll = maxInt(0,input->getCursor_45ab90() - width);
-		text.assign((const string::const_iterator &)(full->begin() + scroll),full->size() <= scroll + width ? (const string::const_iterator &)full->end() : (const string::const_iterator &)(full->begin() + scroll + width));	// non-template assign
+		text.assign(((const string *)full)->begin() + scroll,full->size() <= scroll + width ? ((const string *)full)->end() : ((const string *)full)->begin() + scroll + width);	// non-template assign
 	}
 	else
 		scroll = 0;
@@ -1055,9 +1057,9 @@ CEffects::CEffects(XConsole *parent)
 // console shake effect
 //==================================================================
 
-struct Area	// NOTE: placeholder name
+struct OpW7_Area	// NOTE: placeholder name
 {
-	Area(int x1_, int y1_, int x2_, int y2_);	// NOTE: placeholder name (0x40b1e0)
+	OpW7_Area(int x1_, int y1_, int x2_, int y2_);	// NOTE: placeholder name (0x40b1e0)
 	void randomPoint_40be30(Point *out);	// NOTE: placeholder name
 	bool contains_40b750(const Point &p);	// NOTE: placeholder name
 
@@ -1110,7 +1112,7 @@ void OpW7_ConsoleShake::shake(int duration, int delay)
 			{
 				offsetPos[i] = basePos[i] = opw7_cec028[i]->getPos();
 				offsetPos[i].offset_40a2a0(rng.rangeInt(-1.0f,1.0f),rng.rangeInt(-1.0f,1.0f));
-				opw7_cec028[i]->setPos(offsetPos[i]);
+				opw7_cec028[i]->setPos((const Pos &)offsetPos[i]);
 			}
 		}
 	}
@@ -1136,17 +1138,17 @@ void OpW7_ConsoleShake::update()
 		{
 			if (opw7_b8f988[i] && opw7_cec028[i])
 			{
-				opw7_cec028[i]->setPos(basePos[i]);
+				opw7_cec028[i]->setPos((const Pos &)basePos[i]);
 				if (opw7_tickCount >= endTime)
 					endTime = 0;
 				else if (opw7_tickCount >= nextTime)
 				{
-					Area a(basePos[i].x - 1,basePos[i].y - 1,basePos[i].x + 1,basePos[i].y + 1);
-					Area b(offsetPos[i].x - 1,offsetPos[i].y - 1,offsetPos[i].x + 1,offsetPos[i].y + 1);
+					OpW7_Area a(basePos[i].x - 1,basePos[i].y - 1,basePos[i].x + 1,basePos[i].y + 1);
+					OpW7_Area b(offsetPos[i].x - 1,offsetPos[i].y - 1,offsetPos[i].x + 1,offsetPos[i].y + 1);
 					do
 						a.randomPoint_40be30(&offsetPos[i]);
 					while (!b.contains_40b750(offsetPos[i]));
-					opw7_cec028[i]->setPos(offsetPos[i]);
+					opw7_cec028[i]->setPos((const Pos &)offsetPos[i]);
 				}
 			}
 		}
@@ -2144,11 +2146,11 @@ void CTorRepairValue::render()
 // CEnding
 //==================================================================
 
-class AsciiImage
+class OpW7_AsciiImage
 {
 public:
-	AsciiImage();
-	~AsciiImage();
+	OpW7_AsciiImage();
+	~OpW7_AsciiImage();
 	bool load(const string &file, int font, Pos *offset, int width, int height);
 
 	vector<void*> layers;
@@ -2165,13 +2167,13 @@ public:
 	int index;	// NOTE: placeholder name
 	char pad74[0x78 - 0x74];
 	vector<int> unknown78;	// NOTE: placeholder name
-	AsciiImage unknown88;	// NOTE: placeholder name
+	OpW7_AsciiImage unknown88;	// NOTE: placeholder name
 	vector<OpW7_Point> unknown98;	// NOTE: placeholder name
 	char pada8[0xac - 0xa8];
 	vector<bool> seen;	// NOTE: placeholder name
 	vector<int> unknownc0;	// NOTE: placeholder name
 	char padd0[0xd4 - 0xd0];
-	AsciiImage unknownd4;	// NOTE: placeholder name
+	OpW7_AsciiImage unknownd4;	// NOTE: placeholder name
 	char pade4[0xec - 0xe4];
 	XConsole *unknownec[7];	// NOTE: placeholder name
 	vector<int> unknown108;	// NOTE: placeholder name (subconsoles)
@@ -2183,7 +2185,7 @@ public:
 	XConsole *unknown150;	// NOTE: placeholder name (child of the main console)
 	XConsole *unknown154;	// NOTE: placeholder name (child of the main console)
 	XConsole *unknown158;	// NOTE: placeholder name
-	AsciiImage unknown15c;	// NOTE: placeholder name
+	OpW7_AsciiImage unknown15c;	// NOTE: placeholder name
 	vector<OpW7_Point> unknown16c;	// NOTE: placeholder name
 	XConsole *unknown17c[4];	// NOTE: placeholder name
 	vector<OpW7_Point> unknown18c;	// NOTE: placeholder name
@@ -2398,8 +2400,8 @@ public:
 	bool shake;	// NOTE: placeholder name
 	unsigned int shakeDuration;	// NOTE: placeholder name
 	bool planet;	// NOTE: placeholder name
-	AsciiImage planetArt;	// NOTE: placeholder name
-	AsciiImage scarArt;	// NOTE: placeholder name
+	OpW7_AsciiImage planetArt;	// NOTE: placeholder name
+	OpW7_AsciiImage scarArt;	// NOTE: placeholder name
 };
 
 CEndingFade::CEndingFade(XConsole *parent, unsigned int duration_, bool shake_, bool planet_, int layer)

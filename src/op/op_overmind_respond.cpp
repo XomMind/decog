@@ -70,7 +70,7 @@ public:
 class Cell
 {
 public:
-	OpOR_HProp getProp();	// 0x45d550
+	OpOR_HProp getProp45d550();	// 0x45d550
 };
 class OpOR_Grid	// NOTE: placeholder name (0xcfd44c)
 {
@@ -274,9 +274,9 @@ int Overmind::unknown684250(const Point &target, bool silent)
 			entityCount++;
 		}
 		unknown6827d0(new Party(4,r1,opOR_world->getTurn() + opOR_patrolDelay_d35bc8.randomInRange_40c130(),0,0),to);
-		if (!silent && (*opOR_cells_cfd44c.atPoint(target))->getProp().isValid() && (*opOR_cells_cfd44c.atPoint(target))->getProp().get22c()->getRecord_45cb30())
+		if (!silent && (*opOR_cells_cfd44c.atPoint(target))->getProp45d550().isValid() && (*opOR_cells_cfd44c.atPoint(target))->getProp45d550().get22c()->getRecord_45cb30())
 		{
-			string text = "ALERT: Suspicious activity at " + (*opOR_cells_cfd44c.atPoint(target))->getProp().get22c()->getRecord_45cb30()->unknown65cc80() + ". Dispatching " + opOR_partyTypeNames_cf25d8[4] + " squad.";
+			string text = "ALERT: Suspicious activity at " + (*opOR_cells_cfd44c.atPoint(target))->getProp45d550().get22c()->getRecord_45cb30()->unknown65cc80() + ". Dispatching " + opOR_partyTypeNames_cf25d8[4] + " squad.";
 			OPOR_ALERT_EXPR(opOR_cec0f8->isHidden() ? 0x127 : -1,text);
 			if (opOR_shell_cec100)
 				opOR_shell_cec100->unknown90ec30(text);

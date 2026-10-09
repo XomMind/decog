@@ -186,16 +186,12 @@ public:
 	int limit;
 	int unknown10;
 	int *grids[9];
+	Unknown_40cde0();	// 0x40ca90 (builds and destroys a temporary Unknown_40cde0(1,1))
 	Unknown_40cde0(int width_, int height_);
 	~Unknown_40cde0();
 };
 
-struct Init_40ca90	// NOTE: placeholder name
-{
-	Init_40ca90();
-};
-
-Init_40ca90::Init_40ca90()
+Unknown_40cde0::Unknown_40cde0()
 {
 	Unknown_40cde0 temp(1,1);
 }

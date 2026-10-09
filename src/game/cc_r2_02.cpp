@@ -219,9 +219,7 @@ void Map::setUnknownA18(int v)
 
 void Map::addBuffer(int a, int b)
 {
-	Point *buffer = new Point(b, a);		// NOTE: the element type is declared XBuffer*, the allocation is an 8-byte Point-like object
-	XBuffer *x = (XBuffer *)buffer;
-	buffers.push_back(x);
+	buffers.push_back(static_cast<XBuffer *&&>((XBuffer *)new Point(b, a)));		// NOTE: the element type is declared XBuffer*, the allocation is an 8-byte Point-like object
 }
 
 void Map::deleteBuffers()

@@ -19,6 +19,7 @@ struct Pos
 	int x;
 	int y;
 	Pos(int x_, int y_) throw();	// 0x46ca20
+	Pos(const Pos &p, int dx, int dy) throw();	// 0x4099c0
 };
 struct Rect
 {
@@ -45,10 +46,10 @@ class XConsole
 {
 public:
 	virtual ~XConsole();
-	Point getPos();	// 0x417480
+	Pos getPos();	// 0x417480
 	int getHeight();	// 0x4174c0
 	int getWidth();	// 0x44b0d0
-	void setPos(const Point &pos);	// 0x4289e0
+	void setPos(const Pos &pos);	// 0x4289e0
 	void printWrapped_4182b0(int x, int y, int width, int height, int align, const string &text);	// NOTE: placeholder name
 	char pad04[0x60 - 0x04];
 };
@@ -132,7 +133,7 @@ void OpMD_Dialogs::push_874d80(HEntity source, const string &text)
 	int len = size - fontCellWidth * 2;
 	int count = text.size() / len + (text.size() % len != 0);
 	for (unsigned int i = 0; i < dialogs.size(); i++)
-		dialogs[i]->console->setPos(Point(dialogs[i]->console->getPos(),0,-count));
+		dialogs[i]->console->setPos(Pos(dialogs[i]->console->getPos(),0,-count));
 	const int num = 10;
 	while (dialogs.size() > num)
 	{

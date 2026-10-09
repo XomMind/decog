@@ -53,6 +53,7 @@ public:
 	PropB *operator->() const;	// 0x9b65b0
 };
 
+struct EntityEffect;	// NOTE: placeholder layout
 struct ItemType	// NOTE: placeholder name
 {
 	int ID;
@@ -65,7 +66,7 @@ class Item
 public:
 	int getTypeID();	// NOTE: placeholder name (0x457820: [this+8]->[0])
 	int getCategory();	// NOTE: placeholder name (0x44aec0: [this+0xc]); op_u2.cpp uses the same getter as `getCategory() <= 3`
-	ItemType *getType();	// NOTE: placeholder name (0x9b4350: [this+8])
+	ItemType *unknown9b4350();	// NOTE: placeholder name (0x9b4350: [this+8])
 	string getName(int a, int b);	// NOTE: placeholder name (0x571db0)
 	void unknown57dbe0(int a, int b, int c, int d);	// NOTE: placeholder name
 	void unknown57a190(HEntity e, int a, int b, int c);	// NOTE: placeholder name
@@ -459,14 +460,14 @@ public:
 	int unknown45a860();	// NOTE: placeholder name
 	int unknown5c92e0(int a);	// NOTE: placeholder name
 	bool unknown5d9340(bool *placed, Point *pos);	// NOTE: placeholder name
-	void unknown45b070(const string &s);	// NOTE: placeholder name
+	void unknown45b070(const char *s);	// NOTE: placeholder name (retail passes the address of the +8 member)
 	void unknown5dea60(int a, int b);	// NOTE: placeholder name
 	void unknown5deb40(int a);	// NOTE: placeholder name
 	void unknown5ded70(int a);	// NOTE: placeholder name
 	void unknown45b210(int a);	// NOTE: placeholder name
 	void unknown5fd900(int a, int b);	// NOTE: placeholder name
 	void unknown45b0b0();	// NOTE: placeholder name
-	int unknown45ac40(int a);	// NOTE: placeholder name
+	EntityEffect *unknown45ac40(int a);	// NOTE: placeholder name
 	void unknown45b360(int a);	// NOTE: placeholder name
 
 	int unknown00;	// NOTE: placeholder name
@@ -516,7 +517,7 @@ void Entity::changeFaction(HGroup newGroup, bool flag)
 		bool found = false;
 		for (unsigned int i = 0; i < list->size(); i++)
 		{
-			if (unknownCf4830[(*list)[i]->getTypeID()] == 0 && !(*list)[i]->getType()->unknown271)
+			if (unknownCf4830[(*list)[i]->getTypeID()] == 0 && !(*list)[i]->unknown9b4350()->unknown271)
 			{
 				unknownCf45d8.unknown77ffb0((*list)[i]->getTypeID(),0);
 				found = true;
@@ -844,7 +845,7 @@ void Entity::polymindUnpossess(bool automatic)
 		robot = world->placeEntity(unknownD25de0.at(possessed->unknown0),old,possessed->unknown24,0,0x22,0xe,0);
 		if (robot.isValid())
 		{
-			robot->unknown45b070(possessed->unknown8);
+			robot->unknown45b070((const char *)&possessed->unknown8);
 			robot->unknown5dea60(possessed->unknown28,0);
 			while (!robot->items.isEmpty())
 				robot->items.back()->unknown57dbe0(0,0,1,1);

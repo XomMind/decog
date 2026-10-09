@@ -42,7 +42,7 @@ public:
 class Cell
 {
 public:
-	OpX4b_TerrainRecord *getTerrain();	// NOTE: placeholder name (0x9fcd80)
+	OpX4b_TerrainRecord *terrain9fcd80();	// NOTE: placeholder name (0x9fcd80)
 	bool isDoor();
 	bool unknown45d700();
 	bool unknown45d1e0();
@@ -99,9 +99,9 @@ void MapRecord::opw3_unknown6c1cd0(Cell *cell, bool a, bool b)
 			ascii = prop->unknown45c700();
 			alternateAscii = prop->unknown45c740();
 			foreground = prop->unknown65dbb0();
-			if (cell->getTerrain()->backColor != XColor(*opx4b_colorBlack))
+			if (cell->terrain9fcd80()->backColor != XColor(*opx4b_colorBlack))
 			{
-				background = XColor(cell->getTerrain()->backColor);
+				background = XColor(cell->terrain9fcd80()->backColor);
 				backgroundSet = true;
 			}
 			else
@@ -130,7 +130,7 @@ void MapRecord::opw3_unknown6c1cd0(Cell *cell, bool a, bool b)
 			changed = true;
 		if (OpT8b_Fn9db3a0(foreground,cell->getColor()))
 			changed = true;
-		if (OpT8b_Fn9db3a0(background,cell->unknown45d1e0() ? cell->getProp()->unknown65e040() : unknown6c1c70(&cell->getTerrain()->backColor,&backgroundSet)))
+		if (OpT8b_Fn9db3a0(background,cell->unknown45d1e0() ? cell->getProp()->unknown65e040() : unknown6c1c70(&cell->terrain9fcd80()->backColor,&backgroundSet)))
 			changed = true;
 	}
 	else
@@ -138,7 +138,7 @@ void MapRecord::opw3_unknown6c1cd0(Cell *cell, bool a, bool b)
 		ascii = cell->getAscii();
 		alternateAscii = cell->getAsciiAlt();
 		foreground = cell->getColor();
-		background = cell->unknown45d1e0() ? cell->getProp()->unknown65e040() : unknown6c1c70(&cell->getTerrain()->backColor,&backgroundSet);
+		background = cell->unknown45d1e0() ? cell->getProp()->unknown65e040() : unknown6c1c70(&cell->terrain9fcd80()->backColor,&backgroundSet);
 	}
 	unknown10 = opx4b_intCaf164;
 	unknown24 = opx4b_intCaf15c;

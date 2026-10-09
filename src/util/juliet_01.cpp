@@ -398,13 +398,13 @@ void OpQ5_eraseStep_9d7300(vector<Pos> &list, int &index);
 void OpQ5_eraseStep_9d6440(vector<H2sHMarker> &list, int &index);
 void OpQ5_eraseStep_9d6440(vector<H2sHOwner> &list, int &index);
 void OpQ5_eraseStep_9d6440(vector<H2sHItem> &list, int &index);
-bool OpV4c_Fn9d3020(vector<Pos> &list, Pos pos);
+bool OpV4c_Fn9d3020Pos(vector<Pos> &list, Pos pos);
 bool OpT8b_Fn9daf80(int lo, int v, int hi);
 int OpS8d_popRandom(vector<int> &list);
 void OpC_findNodes_470050(int depth, int start, vector<H2sHOwner> &nodes, vector<H2sHOwner> &links);
 bool OpX5_containsRecord(vector<H2sRec8 *> &list, H2sRec8 *value);
 bool OpX5_containsRecord(vector<H2sRec4 *> &list, H2sRec4 *value);
-void OpS8b_Fn9d51d0(vector<int> &list, int value);
+bool OpS8b_Fn9d51d0(vector<int> &list, int value);
 int OpX5_maxInt(int a, int b);
 string OpQ1_pointToString(const Pos &pos);
 string intToString(int value);
@@ -530,7 +530,7 @@ extern vector<string> jl_d37a40;	// NOTE: placeholder name
 class H2sMapBS { public: H2sRec8 *selectRandomItemOfRating(int rating, int a, int b, int c, int d, int e, int f); bool unknown71ec60(const Pos &p, vector<Pos> points); H2sHEntity unknown6c5dc0(const string &name, const Pos &pos, int group, bool flag, int aiMode1, int aiMode2, bool forced); void unknown6c65a0(H2sHEntity robot, const string &name, int b); void unknown74bb90(H2sHProp machine, H2sHProp *seal, Pos *at, bool *busy); void unknown6c6b90(const Pos &at, const string &name, int a, int b); H2sHItem unknown6c5400(H2sRec8 *type, const Pos &at); H2sHItem unknown6c51d0(H2sRec8 *part, H2sHEntity owner, int a, int b); H2sHEntity placeEntity_6c58c0(struct H2sGroup *group, const Pos &at, int a, int b, int c, int d, int e); };	// NOTE: placeholder name (0xcefc4c as BS)
 extern H2sMapBS *jl_cefc4c;	// NOTE: placeholder name
 extern vector<string> jl_d30540;	// NOTE: placeholder name
-void OpT8b_Fn9db000(vector<int> &list, int value);	// NOTE: placeholder signature (add unique)
+bool OpT8b_Fn9db000(vector<int> &list, int value);	// NOTE: placeholder signature (add unique)
 extern int jl_cf4d24;	// NOTE: placeholder name
 bool OpU8a_containsString(vector<string> &list, string text);	// NOTE: placeholder signature
 class H2sGameData { public: int unknown46f4e0(); string generateID_46f890(); const string &getEntryText_46f6d0(const string &key); void setEntryText_46f700(const string &key, const string &value); int getWeightedDepthCount_7896a0(); int getTier_46fd60(); bool unknown46f4b0(int a); int getNextWeightedDepthCount_789720(); };	// NOTE: placeholder name (0xd1e860)
@@ -554,7 +554,7 @@ extern char jl_d297a8[];	// NOTE: placeholder name
 extern vector<Pos> jl_d15e58;	// NOTE: placeholder name
 extern vector<Pos> jl_cf6a60;	// NOTE: placeholder name
 extern vector<Pos> jl_cf6a70;	// NOTE: placeholder name
-bool OpV4c_Fn9d0ce0(vector<Pos> &list, Pos p);	// NOTE: placeholder signature
+bool OpV4c_Fn9d0ce0Pos(vector<Pos> &list, Pos p);	// NOTE: placeholder signature
 extern string jl_d3a280[];	// NOTE: placeholder name
 string &padLeft_408090(string &s, unsigned int width, char c);
 extern string jl_cf3fb0[];	// NOTE: placeholder name
@@ -668,7 +668,7 @@ extern bool jl_ba034c[];	// NOTE: placeholder name
 int jl_randomIndex_9da8b0(vector<string> &list);	// NOTE: placeholder name (OpQ5_randomIndex<T>)
 void OpU8a_removePoint_9d3060(vector<Pos> &list, Pos p);	// NOTE: placeholder signature
 extern int *jl_cefb9c;	// NOTE: placeholder name (terrain id pointer)
-void OpS8b_Fn9d51d0(vector<H2sAccess *> &list, H2sAccess *value);	// NOTE: placeholder signature
+bool OpS8b_Fn9d51d0Access(vector<H2sAccess *> &list, H2sAccess *value);	// NOTE: placeholder signature
 extern vector<Pos> jl_cf64c0;	// NOTE: placeholder name
 extern vector<int> jl_cf64d0;	// NOTE: placeholder name
 void jl_eraseAt_9ce6d0(vector<H2sJobRef *> &v, unsigned int &i);	// NOTE: placeholder name (OpT8a_eraseAt)
@@ -1448,9 +1448,9 @@ bool CShell::unknown91ca50(H2sHProp machine, H2sHackRec *record, int type, int i
 				{
 					for (int i = 0; i < doors.size(); i++)
 					{
-						if (OpV4c_Fn9d0ce0(jl_cf6a60,doors[i]))
+						if (OpV4c_Fn9d0ce0Pos(jl_cf6a60,doors[i]))
 							OpQ5_eraseStep_9d7300(doors,i);
-						else if (OpV4c_Fn9d0ce0(jl_cf6a70,doors[i]))
+						else if (OpV4c_Fn9d0ce0Pos(jl_cf6a70,doors[i]))
 							continue;
 						else if (rng.chance(50))
 						{
@@ -1780,7 +1780,7 @@ noTraps:
 										props[i]->getTrap_44b020()->fc = h2s_cefc4c->getPlayer();
 										props[i]->unknown65f170();
 										h2s_cefc4c->unknown4647d0(*props[i]->getPosition_4184d0());
-										OpV4c_Fn9d3020(unknownC8,*props[i]->getPosition_4184d0());
+										OpV4c_Fn9d3020Pos(unknownC8,*props[i]->getPosition_4184d0());
 										h2s_cefc4c->unknown9e29b0(h2s_cefc4c->f720,props[i]);
 										count++;
 									}
@@ -3037,7 +3037,7 @@ nextMachine:
 				vector<Pos> offline4((*h2s_cefc4c->unknown463a90())[kind]);
 				for (int i = 0; i < offline4.size(); i++)
 				{
-					if (OpV4c_Fn9d0ce0(online,offline4[i]))
+					if (OpV4c_Fn9d0ce0Pos(online,offline4[i]))
 						OpQ5_eraseStep_9d7300(offline4,i);
 				}
 				msg += "\n" + (opw8_countString(online.size() + offline4.size(),"record") + " found:");
@@ -4391,7 +4391,7 @@ done:
 					OpU8a_removePoint_9d3060(unknownA8,access->pos);
 					(*h2s_cfd44c.atPoint(pos4))->unknown66a050(*jl_cefb9c,2,1);
 					delete access;
-					OpS8b_Fn9d51d0(*h2s_cefc4c->getAccess_462e10(),access);
+					OpS8b_Fn9d51d0Access(*h2s_cefc4c->getAccess_462e10(),access);
 					access = NULL;
 					machine->disableMachine_65ed00();
 					h2s_cefc4c->opw3_unknown727370();
@@ -4504,7 +4504,7 @@ done:
 				OpU8a_removePoint_9d3060(unknownA8,access->pos);
 				(*h2s_cfd44c.atPoint(access->pos))->unknown66a050(*jl_cefb9c,2,0);
 				delete access;
-				OpS8b_Fn9d51d0(*h2s_cefc4c->getAccess_462e10(),access);
+				OpS8b_Fn9d51d0Access(*h2s_cefc4c->getAccess_462e10(),access);
 				access = NULL;
 				machine->disableMachine_65ed00();
 				h2s_cefc4c->opw3_unknown727370();

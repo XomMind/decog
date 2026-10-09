@@ -1178,7 +1178,7 @@ void OpW7_WallThinner::thinWalls()
 	}
 }
 
-extern vector<OpW7_Corridor> opw7_d3161c;	// NOTE: placeholder name (removed corridors)
+extern vector<Rect> opw7_d3161c;	// NOTE: placeholder name (removed corridors)
 void OpW7_eraseIndex_9d4ff0(vector<OpW7_Corridor> &v, unsigned int index);	// NOTE: placeholder name
 
 void OpW7_removeCorridorAt(int x, int y)	// NOTE: placeholder name
@@ -1194,8 +1194,7 @@ void OpW7_removeCorridorAt(int x, int y)	// NOTE: placeholder name
 				for (int cx = ((const vector<OpW7_Corridor>&)opw7_corridors)[i].rect.x; cx < ((const vector<OpW7_Corridor>&)opw7_corridors)[i].rect.x + ((const vector<OpW7_Corridor>&)opw7_corridors)[i].rect.width; cx++)
 					for (int cy = ((const vector<OpW7_Corridor>&)opw7_corridors)[i].rect.y; cy < ((const vector<OpW7_Corridor>&)opw7_corridors)[i].rect.y + ((const vector<OpW7_Corridor>&)opw7_corridors)[i].rect.height; cy++)
 						opw7_grid.at(cx,cy) = 4;
-				// NOTE: the exe calls the ICF-folded vector<vector<int> >::push_back
-				((vector<vector<int> >&)opw7_d3161c).push_back((const vector<int>&)((const vector<OpW7_Corridor>&)opw7_corridors)[i]);
+				opw7_d3161c.push_back(((const vector<OpW7_Corridor>&)opw7_corridors)[i].rect);
 				OpW7_eraseIndex_9d4ff0(opw7_corridors,i);
 				break;
 			}
@@ -2142,7 +2141,7 @@ found:
 			OpW7_Room &room = opw7_rooms[i];
 			vector<unsigned int> dirsList;
 			for (int d = 0; d < 4; d++)
-				dirsList.push_back(d);
+				dirsList.push_back((unsigned int)d);
 			for (unsigned int j = 0; j < room.doorDirs.size(); j++)
 				OpW7_removeElement_9d51d0(dirsList,room.doorDirs[j]);
 			if (!dirsList.empty())
@@ -2242,7 +2241,7 @@ bool OpW7_Generator::checkStarts()
 		{
 			vector<unsigned int> dirs;
 			for (int d = 0; d < 4; d++)
-				dirs.push_back(d);
+				dirs.push_back((unsigned int)d);
 			OpW7_shuffle_9d8f80(dirs);
 			if (opw7_settings->spawns[i].dirs.size() == 1)
 			{
@@ -2365,7 +2364,7 @@ unsigned int OpW7_Generator::traceRooms()
 				lists.push_back(&ends);
 				vector<int> dirsList;
 				for (OpW7_Dir d = (OpW7_Dir)0; d < 4; d = (OpW7_Dir)(d + 1))
-					dirsList.push_back(d);
+					dirsList.push_back((int)d);
 				opW4_shuffle(dirsList);
 				for (unsigned int i = 0; i < dirsList.size(); i++)
 				{

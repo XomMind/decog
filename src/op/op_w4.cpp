@@ -90,13 +90,17 @@ public:
 };
 
 class Entity;
+class Item;
 class HItem
 {
 public:
 	int ID;
-	HItem();
+	HItem();	// 0x9b6590
+	Item *operator->() const;	// 0x9b65b0
+	bool operator!=(HItem other) const;	// 0x9b6510
 	bool isValid() const;
 };
+typedef HItem HItemB;	// NOTE: retail has a single HItem handle class
 
 class HEntity : public HItem	// NOTE: placeholder layout
 {
@@ -109,7 +113,6 @@ public:
 };
 
 class HProp;
-class HItemB;
 class Prop	// NOTE: placeholder name
 {
 public:
@@ -126,7 +129,7 @@ public:
 	bool unknown65e1d0(HEntity e);	// NOTE: placeholder name
 	int opW4_unknown45c630();	// NOTE: placeholder name
 	const string *opW4_unknown45c5b0();	// NOTE: placeholder name
-	class OpW4_Inventory *opW4_getInventory();	// NOTE: placeholder name (folded getter)
+	class Inventory *opW4_getInventory();	// NOTE: placeholder name (folded getter)
 	void unknown45cc50(const Point &p);	// NOTE: placeholder name
 	void unknown45ce10(bool a, int b, bool c, HProp d);	// NOTE: placeholder name
 	void unknown665b10(int value, int a);	// NOTE: placeholder name
@@ -156,7 +159,7 @@ public:
 	struct OpW4_ItemRecord *opW4_unknown9b4350();	// NOTE: placeholder name (folded getter)
 	void unknown57dbe0(int a, int b, int c, int d);	// NOTE: placeholder name
 	int unknown457c80();	// NOTE: placeholder name
-	class OpW4_Inventory *opW4_getInventory();	// NOTE: placeholder name (folded getter)
+	class Inventory *opW4_getInventory();	// NOTE: placeholder name (folded getter)
 	string unknown571db0(bool a, bool b);	// NOTE: placeholder name
 	const Point &unknown575920();	// NOTE: placeholder name
 	int unknown457a30();	// NOTE: placeholder name
@@ -164,13 +167,6 @@ public:
 	void opW4_unknown450460(int value);	// NOTE: placeholder name (folded setter)
 };
 
-class HItemB : public HItem	// NOTE: placeholder name
-{
-public:
-	HItemB();	// 0x9b6590
-	Item *operator->() const;	// 0x9b65b0
-	bool operator!=(HItemB other) const;	// 0x9b6510
-};
 
 class HGroup : public HEntity	// NOTE: placeholder name
 {
@@ -198,7 +194,7 @@ public:
 	void unknown6396f0(const string &key, bool b);	// NOTE: placeholder name
 	void unknown45b340(struct EntityData4563c0 *effect);	// NOTE: placeholder name
 	void unknown64ecf0(class OpW4_AI57f6a0 *ai);	// NOTE: placeholder name
-	class OpW4_Inventory *getInventory();	// 0x45ad90
+	class Inventory *getInventory();	// 0x45ad90
 	bool unknown5c8820(HEntity other);	// NOTE: placeholder name
 	void unknown6398e0();	// NOTE: placeholder name
 	void unknown639730(bool b);	// NOTE: placeholder name
@@ -246,7 +242,7 @@ public:
 	HEntity getEntity();	// 0x45d250
 	bool unknown45df50(HProp prop);	// NOTE: placeholder name
 	bool unknown45dcf0();	// NOTE: placeholder name; has a trap prop
-	HItemB getItem();	// 0x45d8f0
+	HItem getItem();	// 0x45d8f0
 	int getTerrain();	// NOTE: placeholder name (0x9fcd80, folded getter)
 	struct OpW4_TerrainData *opW4_getTerrainData();	// NOTE: placeholder name (0x9fcd80, folded getter)
 	int opW4_unknown9b8f00();	// NOTE: placeholder name (folded getter)
@@ -548,7 +544,8 @@ bool BS::unknown74d200(int id)
 	if (index == -1)
 	{
 		unknownBb4.push_back(id);
-		unknownBc4.push_back(unknown320 + 100);
+		int when = unknown320 + 100;
+		unknownBc4.push_back(when);
 		return true;
 	}
 	else
@@ -871,7 +868,7 @@ extern XConsole *opW4_console_cec11c;	// NOTE: placeholder name
 class CMap	// NOTE: placeholder layout, the object at 0xcec054
 {
 public:
-	void unknown8142d0(int a, int b);	// NOTE: placeholder name
+	void unknown8142d0(unsigned int a, bool b);	// NOTE: placeholder name
 	bool unknown8052f0(const Point &p);	// NOTE: placeholder name
 	bool unknown49b220(int type, const Point &p);	// NOTE: placeholder name
 	void showCommArraySquad(const Point &p);
@@ -2124,7 +2121,7 @@ void BS::unknown74d660(const Point &pos, int count)
 			{
 				e->unknown45b590()->unknown459470(bounds);
 				if (!placed.empty())
-					e->getEntityAI()->setFollowEntity(placed.front(),0);
+					e->getEntityAI()->setFollowEntity(placed.back(),0);
 				placed.push_back(e);
 			}
 		}
@@ -2302,7 +2299,7 @@ struct TurnRecord	// NOTE: placeholder layout
 {
 	OpW4_TurnData *data;	// NOTE: placeholder name
 };
-class OpW4_Inventory	// NOTE: placeholder name
+class Inventory	// NOTE: placeholder name
 {
 public:
 	vector<TurnRecord *> *unknown518c00(int type, HEntity e, HEntity a, HEntity b, HEntity c, int d, int f, int g, int h, int i);	// NOTE: placeholder name

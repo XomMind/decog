@@ -16,12 +16,10 @@ extern int *caveinThirdTerrain;
 void gameOver();
 string intToString(int v);
 
-struct C2XPoint { int x, y; C2XPoint(const C2XPoint &o); void add409a30(const C2XPoint &d); bool test409bd0(const C2XPoint &o); };
+struct Point { int x, y; Point(const Point &o); void add409a30(const Point &d); bool test409bd0(const Point &o); };
 struct C2XPos { int x, y; C2XPos(int nx, int ny); };
-struct C2XBox { C2XPoint p1, p2; C2XBox(); C2XBox(int x1, int y1, int x2, int y2); C2XBox(const C2XPos &p, int w, int h); };
+struct C2XBox { Point p1, p2; C2XBox(); C2XBox(int x1, int y1, int x2, int y2); C2XBox(const C2XPos &p, int w, int h); };
 struct C2XPointTmp { int x, y; void init453b40(); };
-struct C2XPtVec { int f0, f1, f2, f3; C2XPtVec(); ~C2XPtVec(); void push_back(const C2XPoint &p); C2XPoint &back(); C2XPoint &operator[](unsigned i); unsigned size() const; void clear(); };
-struct C2XIntVec { int f0, f1, f2, f3; C2XIntVec(); ~C2XIntVec(); int &operator[](unsigned i); unsigned size() const; void clear(); void push_back(int &&v); };
 struct C2XStrVec { int f0, f1, f2, f3; C2XStrVec(); ~C2XStrVec(); string &operator[](unsigned i); unsigned size() const; void push_back(const string &s); };
 
 struct C2XDone { virtual void v0(); virtual void v1(); virtual bool expired(); };
@@ -37,7 +35,7 @@ struct C2XEntityHandle
 	void reset9b7270();
 };
 struct C2XPropInfo { char p00[0x68]; int f68; };
-struct C2XProp { C2XPoint &pos4184d0(); C2XPropInfo *info(); void move45cc50(C2XPoint &p); };
+struct C2XProp { Point &pos4184d0(); C2XPropInfo *info(); void move45cc50(Point &p); };
 struct C2XPropHandle { int id; C2XPropHandle(); bool isValid() const; bool isNull() const; C2XProp *operator->(); };
 struct C2XRecord { char p00[0x24]; string name; };
 struct C2XItem { void remove57dbe0(int a, int b, int c, int d); int getEffect(int type); C2XRecord *record(); int integrity(); void setIntegrity(int v); int drain457c80(); };
@@ -47,12 +45,12 @@ struct C2XItemHandle { int id; C2XItemHandle(); bool isValid() const; C2XItem *o
 struct C2XItemVec { int f0, f1, f2, f3; C2XItemVec(); ~C2XItemVec(); C2XItemHandle &operator[](unsigned i); unsigned size() const; };
 struct C2XEntity
 {
-	C2XPoint &getPosition();
+	Point &getPosition();
 	int getField490840();
 	int f5cb8b0(C2XItemVec &items);
 	void f5dea60(int v, int w);
 	int getTarget();
-	void changePos(C2XPoint &p, bool flag);
+	void changePos(Point &p, bool flag);
 	void changePos(const C2XPos &p, bool flag);
 };
 struct C2XCell
@@ -66,7 +64,7 @@ struct C2XCell
 	void f66a050(int a, int b, int c);
 	int terrain();
 };
-struct C2XMap { C2XCell **atPoint(const C2XPoint &p); C2XCell **at(int x, int y); int getWidth(); int getHeight(); C2XPoint getRandom9cf050(); void getRect(const C2XPoint &p, int r, C2XBox &out); };
+struct C2XMap { C2XCell **atPoint(const Point &p); C2XCell **at(int x, int y); int getWidth(); int getHeight(); Point getRandom9cf050(); void getRect(const Point &p, int r, C2XBox &out); };
 struct C2XPropList { int f0, f1, f2, f3; unsigned size() const; C2XPropHandle &operator[](unsigned i); };
 struct C2XPropLists { C2XPropList &operator[](unsigned i); };
 struct C2XMover	// NOTE: placeholder layout (scripted prop mover)
@@ -75,7 +73,7 @@ struct C2XMover	// NOTE: placeholder layout (scripted prop mover)
 	int count;			// +0x04
 	vector<int> steps;	// +0x08
 	int sound;			// +0x18
-	C2XPoint pos;		// +0x1c
+	Point pos;		// +0x1c
 	int f24;			// +0x24
 	unsigned last;		// +0x28
 };
@@ -83,10 +81,10 @@ struct C2XMoverVec { int f0, f1, f2, f3; unsigned size() const; C2XMover *&opera
 struct C2XHandleVec { int f0, f1, f2, f3; unsigned size() const; C2XDoneHandle &operator[](unsigned i); bool empty() const; };
 struct C2XSound { char p00[8]; vector<int> channels; char p18[0x34 - 0x18]; int group; };
 struct C2XSoundVec { C2XSound *&operator[](unsigned i); };
-struct C2XLink { C2XPoint pos; int f8; unsigned fc; };
+struct C2XLink { Point pos; int f8; unsigned fc; };
 struct C2XLinkVec { int f0, f1, f2, f3; unsigned size() const; C2XLink *&operator[](unsigned i); bool empty() const; };
 struct C2XEffect { void init503b20(); };
-struct C2XEndObj { bool update(); C2XEffect *f508610(C2XEndObj *owner, void *type, C2XPoint &pos, void *data, int a, int b, int c, int d, int e); };
+struct C2XEndObj { bool update(); C2XEffect *f508610(C2XEndObj *owner, void *type, Point &pos, void *data, int a, int b, int c, int d, int e); };
 struct C2XMapView { void f49ad30(); bool f805190(C2XPointTmp &p); };
 struct C2XPool { void remove(C2XEntityHandle h, bool flag); };
 struct C2XMixer { void haltGroup(int g); void setSoundVolume(int channel, int volume); };
@@ -128,7 +126,7 @@ public:
 	char pa90[0xb1c - 0xa90];
 	unsigned drainTime;			// +0xb1c
 
-	bool isVisible(C2XPoint &p);
+	bool isVisible(Point &p);
 	void f72e8e0(int v);
 	void f732ce0(int v);
 	bool f71bb50();
@@ -150,11 +148,11 @@ extern unsigned c2x_caed20, c2x_cefa78, c2x_cef67c;
 extern C2XMap c2x_cfd44c;
 extern C2XPropLists c2x_d31640;
 extern C2XMixer *c2x_cefa90;
-extern C2XPoint c2x_d015d8[];
+extern Point c2x_d015d8[];
 extern C2XSoundVec c2x_d2e9a0;
 extern int c2x_d28c94[];
 extern C2XLinkVec c2x_d2a86c;
-extern C2XPoint c2x_d2a87c, c2x_d2a884;
+extern Point c2x_d2a87c, c2x_d2a884;
 extern char c2x_d2e20c[];
 extern C2XSoundMgr c2x_d2d2a0;
 extern C2XParts *c2x_cec088;
@@ -176,9 +174,9 @@ void c2x_eraseAt9da940(C2XHandleVec &v, int index);
 void c2x_deleteAndStep9de820(C2XMoverVec &v, int &index);
 bool c2x_containsEntity(C2XPropList &list, C2XPropHandle h);
 void c2x_lookup2(const string &name, void *&out);
-bool traceSubcellLine(const C2XPoint &a, const C2XPoint &b, C2XPtVec &line, C2XIntVec &cells, int step);
+bool traceSubcellLine(const Point &a, const Point &b, vector<Point> &line, vector<int> &cells, int step);
 void c2x_eraseAtLink(C2XLinkVec &v, unsigned &index);
-int c2x_attenuation500500(C2XSound *s, C2XPoint &at, C2XPoint &listener);
+int c2x_attenuation500500(C2XSound *s, Point &at, Point &listener);
 void c2x_clampMin(int *v, int min);
 bool c2x_showMessage5111e0(int id, const string *a, const string *b, const string *c, C2XEntityHandle d, C2XEntityHandle e, int f, int g);
 void c2x_hackEnd954180(C2XEntityHandle h);
@@ -238,7 +236,7 @@ void C2XBS::update774b70()
 				bool seen = false;
 				C2XPropList &props = c2x_d31640[mover->list];
 				int shift;
-				C2XPtVec targets;
+				vector<Point> targets;
 				shift = mover->steps.front();
 				mover->steps.erase(mover->steps.begin());
 				for (unsigned j = 0; j < props.size(); j++)
@@ -252,7 +250,7 @@ void C2XBS::update774b70()
 				}
 				for (unsigned k = 0; k < props.size(); k++)
 				{
-					C2XPoint at = props[k]->pos4184d0();
+					Point at = props[k]->pos4184d0();
 					(*c2x_cfd44c.atPoint(at))->clear45df70();
 					if (!seen && props[k]->info()->f68 != 0 && isVisible(at))
 						seen = true;
@@ -297,11 +295,11 @@ void C2XBS::update774b70()
 		{
 			if (c2x_caed20 >= c2x_d2a86c[i]->fc)
 			{
-				if (c2x_d2a87c.test409bd0(*(C2XPoint *)c2x_d2a86c[i]))
+				if (c2x_d2a87c.test409bd0(*(Point *)c2x_d2a86c[i]))
 				{
-					C2XPtVec path;
-					C2XIntVec cells;
-					traceSubcellLine(c2x_d2a87c, *(C2XPoint *)c2x_d2a86c[i], path, cells, 10);
+					vector<Point> path;
+					vector<int> cells;
+					traceSubcellLine(c2x_d2a87c, *(Point *)c2x_d2a86c[i], path, cells, 10);
 					if (path.size() > 2)
 					{
 						for (unsigned j = 1; j < path.size() - 1; j++)
@@ -309,15 +307,15 @@ void C2XBS::update774b70()
 					}
 					path.clear();
 					cells.clear();
-					traceSubcellLine(*(C2XPoint *)c2x_d2a86c[i], c2x_d2a884, path, cells, 10);
+					traceSubcellLine(*(Point *)c2x_d2a86c[i], c2x_d2a884, path, cells, 10);
 					if (path.size() > 2)
 					{
 						for (unsigned k = 1; k < path.size() - 1; k++)
 							c2x_cefc50->f508610(c2x_cefc50, link, path[k], c2x_d2e20c, 0, 0, 0, cells[k], 0)->init503b20();
 					}
-					c2x_cefc50->f508610(c2x_cefc50, hl, *(C2XPoint *)c2x_d2a86c[i], c2x_d2e20c, 0, 0, 0, 9, 0)->init503b20();
+					c2x_cefc50->f508610(c2x_cefc50, hl, *(Point *)c2x_d2a86c[i], c2x_d2e20c, 0, 0, 0, 9, 0)->init503b20();
 				}
-				(*c2x_cfd44c.atPoint(*(C2XPoint *)c2x_d2a86c[i]))->f66d470(c2x_d2a864, c2x_d2a86c[i]->f8, 1, 0);
+				(*c2x_cfd44c.atPoint(*(Point *)c2x_d2a86c[i]))->f66d470(c2x_d2a864, c2x_d2a86c[i]->f8, 1, 0);
 				c2x_eraseAtLink(c2x_d2a86c, i);
 			}
 		}
@@ -431,7 +429,7 @@ void C2XBS::update774b70()
 					c2x_d2d4d8 = c2x_d1e864;
 					C2XBox area(C2XPos(0x45, 1), 7, 4);
 					C2XStrVec links;
-					C2XIntVec cnt;
+					vector<int> cnt;
 					for (int x = area.p1.x; x <= area.p2.x; x++)
 					{
 						for (int y = area.p1.y; y <= area.p2.y; y++)
@@ -528,7 +526,7 @@ void C2XBS::update774b70()
 						{
 							while (1)
 							{
-								C2XPoint start = c2x_cfd44c.getRandom9cf050();
+								Point start = c2x_cfd44c.getRandom9cf050();
 								C2XBox around;
 								c2x_cfd44c.getRect(start, 2, around);
 								for (int x = around.p1.x; x <= around.p2.x; x++)

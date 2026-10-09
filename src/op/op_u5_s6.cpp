@@ -30,6 +30,12 @@ struct Point
 	Point(const Point &p, int dx, int dy);	// 0x4099c0
 };
 
+struct Pos : public Point
+{
+	Pos(int x_, int y_);
+	Pos(const Pos &p, int dx, int dy);	// 0x4099c0
+};
+
 class XConsole
 {
 public:
@@ -46,8 +52,8 @@ public:
 	bool isHidden();	// NOTE: placeholder name
 	int getWidth();
 	int getHeight();
-	Point getPos();
-	void setPos(const Point &pos);
+	Pos getPos();
+	void setPos(const Pos &pos);
 	void print(int x, int y, const string &text);	// NOTE: placeholder name
 	void setCharRow(int x, int y, int width, int ch, XColor fore);	// NOTE: placeholder name
 	void setCharColumn(int x, int y, int height, int ch, XColor fore);	// NOTE: placeholder name
@@ -367,7 +373,7 @@ void CGallery::unknown7e83f0(int amount)
 			OpQ5_eraseRange((vector<OpQ5_U9e25a0>&)items,keep,items.size() - 1);
 			int spacing = (opR4b_rowSpacing_bcbdf4[opr1c_hasPtr_cebd5c() ? 1 : 0] + 0xd) * amount;
 			for (unsigned int j = 0; j < items.size(); j++)
-				items[j]->setPos(Point(items[j]->getPos(),0,spacing));
+				items[j]->setPos(Pos(items[j]->getPos(),0,spacing));
 			start -= amount * 3;
 			unknown7e8a50(amount,start,&opU5_positions_d257f0[opr1c_hasPtr_cebd5c() ? 1 : 0],true);
 		}
@@ -396,9 +402,9 @@ void CGallery::unknown7e83f0(int amount)
 			}
 			int spacing = (opR4b_rowSpacing_bcbdf4[opr1c_hasPtr_cebd5c() ? 1 : 0] + 0xd) * amount;
 			for (unsigned int j = 0; j < items.size(); j++)
-				items[j]->setPos(Point(items[j]->getPos(),0,-spacing));
+				items[j]->setPos(Pos(items[j]->getPos(),0,-spacing));
 			start += items.size() + amount * 3;
-			unknown7e8a50(amount,start,&Point(items.front()->getPos().x,items.back()->getPos().y + 0xd + opR4b_rowSpacing_bcbdf4[opr1c_hasPtr_cebd5c() ? 1 : 0]),false);
+			unknown7e8a50(amount,start,&Pos(items.front()->getPos().x,items.back()->getPos().y + 0xd + opR4b_rowSpacing_bcbdf4[opr1c_hasPtr_cebd5c() ? 1 : 0]),false);
 		}
 	}
 }

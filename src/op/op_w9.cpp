@@ -3028,7 +3028,7 @@ void CIntel::unknown7ba190()
 	for (int i = 1; i < categories->size(); i++)
 	{
 		if (!(*categories)[i].empty())
-			ids.push_back(i);
+			ids.push_back((unsigned int)i);
 	}
 
 	vector<CIntelLine*> newList;

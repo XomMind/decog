@@ -382,7 +382,7 @@ public:
 	void unknown6706d0(bool flag);		// NOTE: placeholder name
 	bool unknown45dbb0();				// NOTE: placeholder name
 	bool unknown45dbf0();				// NOTE: placeholder name
-	void unknown45df90(Point *p);		// NOTE: placeholder name
+	void unknown45df90(CellEffect *effect);		// NOTE: placeholder name
 	void unknown670dc0();
 	void unknown670ed0();				// NOTE: placeholder name				// NOTE: placeholder name
 	XColor getColor();					// NOTE: placeholder name (0x66a680)
@@ -483,7 +483,7 @@ void Cell::unknown670dc0()
 {
 	if (terrain->passable != 0 && terrain->passable <= 2 && getEffect(6) == NULL)
 	{
-		unknown45df90(new Point(opS3_d2f0f8[6],1));
+		unknown45df90(reinterpret_cast<CellEffect *>(new Point(opS3_d2f0f8[6],1)));
 		do
 		{
 			if (opS3_unknown5111e0((terrain->passable != 1) + 0x1b5,NULL,0,0,HEntity(),HProp(),&position,0))
@@ -499,7 +499,7 @@ void Cell::unknown670ed0()
 {
 	if (terrain->passable != 0 && getEffect(7) == NULL)
 	{
-		unknown45df90(new Point(opS3_d2f0f8[7],1));
+		unknown45df90(reinterpret_cast<CellEffect *>(new Point(opS3_d2f0f8[7],1)));
 		unknown670b60(false);
 	}
 }

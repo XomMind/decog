@@ -31,7 +31,7 @@ class HProp;
 class Prop
 {
 public:
-	const string &getName();				// NOTE: placeholder name (Push_45c590::operate)
+	const string &name45c590();				// NOTE: placeholder name (Push_45c590::operate)
 	void unknown45ce10(bool a, int b, bool c, HProp p);	// NOTE: placeholder name
 	int unknown45c800(int type);			// NOTE: placeholder name
 	bool unknown665be0(bool flag);			// NOTE: placeholder name
@@ -252,7 +252,7 @@ void BS::unknown7480e0(bool alert)
 	{
 		for (int y2 = 0; y2 < cells84_cfd44c.getHeight(); y2++)
 		{
-			if ((*cells84_cfd44c.at(x2,y2))->getProp().isValid() && (*cells84_cfd44c.at(x2,y2))->getProp()->getName() == "LAB_Scan_Trigger")
+			if ((*cells84_cfd44c.at(x2,y2))->getProp().isValid() && (*cells84_cfd44c.at(x2,y2))->getProp()->name45c590() == "LAB_Scan_Trigger")
 				(*cells84_cfd44c.at(x2,y2))->getProp()->unknown45ce10(true,0,true,HProp());
 		}
 	}

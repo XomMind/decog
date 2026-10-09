@@ -5,6 +5,13 @@
 #include <string>
 using namespace std;
 
+struct OpW8_Dice	// NOTE: placeholder name (vector wrapper, ctor 0x4588d0, dtor 0x40c960)
+{
+	OpW8_Dice();
+	~OpW8_Dice();
+	vector<int> values;
+};
+
 struct XCell;	// NOTE: placeholder name
 struct Point	// NOTE: placeholder layout
 {
@@ -117,7 +124,7 @@ Unknown_40cde0	unknown_cfe568;	// NOTE: placeholder name
 Unknown_713fe0	unknown_d225a0;	// NOTE: placeholder name
 Unknown_455030	unknown_cf1080;	// NOTE: placeholder name
 Unknown_455030	unknown_d2f75c;	// NOTE: placeholder name
-vector<bool>	unknown_d2c41c;	// NOTE: placeholder name
+OpW8_Dice	unknown_d2c41c;	// NOTE: placeholder name; retail ctor 0x4588d0, dtor 0x40c960 (wrapper over a vector, not vector<bool>)
 Unknown_460760	unknown_d2a864;	// NOTE: placeholder name
 vector<int>	unknown_d378ac;	// NOTE: placeholder name
 vector<int>	unknown_d01be8;	// NOTE: placeholder name

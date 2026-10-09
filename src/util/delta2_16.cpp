@@ -281,13 +281,14 @@ extern RNG rng;
 void OpQ5_eraseStep_9d7300(vector<Pos> &list, int &index);
 void OpQ5_eraseStep_9d6440(vector<D2sHMarker> &list, int &index);
 void OpQ5_eraseStep_9d6440(vector<D2sHOwner> &list, int &index);
-bool OpV4c_Fn9d3020(vector<Pos> &list, Pos pos);
+struct Point { int x; int y; Point(const Point &p) throw(); };	// 0x46ca50 (same copy ctor as Pos)
+bool OpV4c_Fn9d3020(vector<Point> &list, Point pos);
 bool OpT8b_Fn9daf80(int lo, int v, int hi);
 int OpS8d_popRandom(vector<int> &list);
 void OpC_findNodes_470050(int depth, int start, vector<D2sHOwner> &nodes, vector<D2sHOwner> &links);
 bool OpX5_containsRecord(vector<D2sRec8 *> &list, D2sRec8 *value);
 bool OpX5_containsRecord(vector<D2sRec4 *> &list, D2sRec4 *value);
-void OpS8b_Fn9d51d0(vector<int> &list, int value);
+bool OpS8b_Fn9d51d0(vector<int> &list, int value);
 int OpX5_maxInt(int a, int b);
 string OpQ1_pointToString(const Pos &pos);
 string intToString(int value);
@@ -299,7 +300,8 @@ void opR1f_466800();
 int OpT8a_findString(vector<string> &list, string s);
 int OpT8a_findStringIndex(const string *list, unsigned int count, string s);
 bool OpX5_containsRecord(vector<int> &list, int value);
-bool teamb_hack900340(int id, void *target, int index, int *result);
+class TeamB_Machine;
+bool teamb_hack900340(int id, TeamB_Machine *target, int index, int *result);
 void OpW7_unknown4b1bf0(D2sHEntity a, D2sHEntity b);
 void OpW7_unknown4b1bf0(D2sHEntity a, D2sHProp b);
 void resetCount_466840();
@@ -313,8 +315,10 @@ int opw1_findNoCase(const string &text, const string &term) throw();
 bool OpY1_equalsNoCase(const string &a, const string &b) throw();
 bool teamb_isAvailable9004e0(int type, const string *command);
 bool teamb_parenthesized900870(const string &command, string &inner);
-int OpS8d_findNameNoCase8(vector<D2sRec8 *> &list, const string &name);
-int OpS8d_findNameNoCase4(vector<D2sRec4 *> &list, const string &name);
+struct OpS8d_Rec8;
+int OpS8d_findNameNoCase8(vector<OpS8d_Rec8 *> &list, const string &name);
+struct OpS8d_Rec4;
+int OpS8d_findNameNoCase4(vector<OpS8d_Rec4 *> &list, const string &name);
 int OpQ1_findStringNoCase(const string *list, unsigned int count, const string &text);
 
 #define REPLY(text, type) d2s_cec100->addNew(command, string(text), type, -1, 0)
@@ -532,7 +536,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 			}
 			else
 			{
-				int index = OpS8d_findNameNoCase4(d2s_d35b58, topic);
+				int index = OpS8d_findNameNoCase4((vector<OpS8d_Rec4 *> &)d2s_d35b58, topic);
 				if (index != -1 && (forced || d2s_d35b58[index]->test_45b910(d2s_d1e888->f4)))
 				{
 					if (d2s_cec100->unknown91ca50(d2s_cec0f8->getMachine_4b1460(), 0, type, index, 0, 0, D2sHItem()))
@@ -570,11 +574,11 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 			}
 			else
 			{
-				int index = OpS8d_findNameNoCase8(d2s_d2d1c4, name);
+				int index = OpS8d_findNameNoCase8((vector<OpS8d_Rec8 *> &)d2s_d2d1c4, name);
 				if (index == -1)
 				{
 					type = 2;
-					index = OpS8d_findNameNoCase4(d2s_d25de0, name);
+					index = OpS8d_findNameNoCase4((vector<OpS8d_Rec4 *> &)d2s_d25de0, name);
 					if (index == -1)
 					{
 						int id = OpQ1_findStringNoCase(d2s_d2f798, 0x61, name);
@@ -659,7 +663,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 			}
 			else
 			{
-				int index = OpS8d_findNameNoCase4(d2s_d25de0, name);
+				int index = OpS8d_findNameNoCase4((vector<OpS8d_Rec4 *> &)d2s_d25de0, name);
 				if (index == -1)
 				{
 					for (unsigned int i = 0; i < d2s_d25de0.size(); i++)
@@ -767,8 +771,8 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 		string name;
 		if (teamb_parenthesized900870(command, name))
 		{
-			int index = OpS8d_findNameNoCase8(d2s_d2d1c4, name);
-			int index2 = index == -1 ? OpS8d_findNameNoCase4(d2s_d25de0, name) : -1;
+			int index = OpS8d_findNameNoCase8((vector<OpS8d_Rec8 *> &)d2s_d2d1c4, name);
+			int index2 = index == -1 ? OpS8d_findNameNoCase4((vector<OpS8d_Rec4 *> &)d2s_d25de0, name) : -1;
 			if (index == -1 && index2 == -1)
 			{
 				for (unsigned int i = 0; i < d2s_cf4888.size(); i++)
@@ -879,9 +883,9 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 				}
 				else
 				{
-					if (teamb_hack900340(0x37, d2s_cefc4c->getPlayer()->getInventory_45ad90(), trojan, &result))
+					if (teamb_hack900340(0x37, (TeamB_Machine *)d2s_cefc4c->getPlayer()->getInventory_45ad90(), trojan, &result))
 						done = true;
-					if (d2s_cefc4c->getPlayer().operator->() && d2s_cec0f8->getMachine_4b1460().operator->() && teamb_hack900340(0x38, d2s_cec0f8->getMachine_4b1460()->unknown45c9b0(), trojan, &result))
+					if (d2s_cefc4c->getPlayer().operator->() && d2s_cec0f8->getMachine_4b1460().operator->() && teamb_hack900340(0x38, (TeamB_Machine *)d2s_cec0f8->getMachine_4b1460()->unknown45c9b0(), trojan, &result))
 						done = true;
 					if (done)
 					{
@@ -1433,7 +1437,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 								{
 									d2s_d20248[i][j]->unknown65f170();
 									d2s_cefc4c->unknown4647d0(*d2s_d20248[i][j]->getPosition_4184d0());
-									OpV4c_Fn9d3020(traps, *d2s_d20248[i][j]->getPosition_4184d0());
+									OpV4c_Fn9d3020((vector<Point> &)traps, *(Point *)d2s_d20248[i][j]->getPosition_4184d0());
 								}
 							}
 							if (traps.empty())

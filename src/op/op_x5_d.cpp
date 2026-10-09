@@ -122,8 +122,9 @@ public:
 };
 extern REX opX5D_rex;	// NOTE: placeholder name
 
-struct HEntity
+class HEntity
 {
+public:
 	int ID;
 	HEntity() throw();
 };

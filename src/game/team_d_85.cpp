@@ -53,7 +53,7 @@ public:
 	int getFaction();
 	Point &getPosition();
 	EntityRec85 *getRecord();		// NOTE: placeholder name (folded getter)
-	const string &getName();		// NOTE: placeholder name (folded getter)
+	const string &name416f40();		// NOTE: placeholder name (folded getter)
 	void unknown637bb0();			// NOTE: placeholder name
 	EntityAI *getAI();
 };
@@ -156,7 +156,7 @@ bool BS::unknown748a00(OpV4c_View *view, Source85 *source)
 				if (view && !stringToInt(gameData85_d1e860.getEntryText("ac0ArchitectDodgedTerminator_g")))
 				{
 					gameData85_d1e860.setEntryText("ac0ArchitectDodgedTerminator_g","1");
-					string text = first->getName() + ": \"I'm all too familiar with what that does.\"";
+					string text = first->name416f40() + ": \"I'm all too familiar with what that does.\"";
 					opW5_message(0x322,first,text,0);
 				}
 				if (source)
@@ -166,7 +166,7 @@ bool BS::unknown748a00(OpV4c_View *view, Source85 *source)
 						if (!stringToInt(gameData85_d1e860.getEntryText("ac0ArchitectDodgedLCannon_g")))
 						{
 							gameData85_d1e860.setEntryText("ac0ArchitectDodgedLCannon_g","1");
-							string text = first->getName() + ": \"I'm aware you stole the capacitor, you know...\"";
+							string text = first->name416f40() + ": \"I'm aware you stole the capacitor, you know...\"";
 							opW5_message(0x322,first,text,0);
 						}
 					}
@@ -175,13 +175,13 @@ bool BS::unknown748a00(OpV4c_View *view, Source85 *source)
 						if (!stringToInt(gameData85_d1e860.getEntryText("ac0ArchitectDrainedLCannon_g")))
 						{
 							gameData85_d1e860.setEntryText("ac0ArchitectDrainedLCannon_g","1");
-							string text = first->getName() + ": \"You actually fired it without the capacitor?!\"";
+							string text = first->name416f40() + ": \"You actually fired it without the capacitor?!\"";
 							opW5_message(0x322,first,text,0);
 						}
 						return false;
 					}
 				}
-				string w = first->getName() + " warps through subspace.";
+				string w = first->name416f40() + " warps through subspace.";
 				opW5_message(0x320,HProp(),w,0);
 				do
 				{

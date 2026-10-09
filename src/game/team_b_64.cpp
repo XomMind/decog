@@ -139,11 +139,11 @@ void teamb_insertAt_9d8fc0(vector<TeamB_W9d8fc0> &v, unsigned int index, TeamB_W
 // 0x9df3f0: read a counted list of triples
 //==================================================================
 
-struct OpR1g_Triple	// NOTE: placeholder name
+struct TeamB64_Triple	// NOTE: placeholder name
 {
-	OpR1g_Triple() throw();	// 0x46cb90
-	~OpR1g_Triple();	// 0x9b7080
-	OpR1g_Triple(const OpR1g_Triple &other);
+	TeamB64_Triple() throw();	// 0x46cb90
+	~TeamB64_Triple();	// 0x9b7080
+	TeamB64_Triple(const TeamB64_Triple &other);
 	void read(istream &stream);	// NOTE: placeholder name
 
 	vector<int>	xs;
@@ -151,9 +151,9 @@ struct OpR1g_Triple	// NOTE: placeholder name
 	vector<int>	zs;
 };
 
-void teamb_readTriples_9df3f0(istream &stream, vector<OpR1g_Triple> &v)	// NOTE: placeholder name
+void teamb_readTriples_9df3f0(istream &stream, vector<TeamB64_Triple> &v)	// NOTE: placeholder name
 {
-	OpR1g_Triple triple;
+	TeamB64_Triple triple;
 	int count;
 	stream.read((char*)&count,4);
 	while (count)

@@ -60,11 +60,13 @@ public:
 };
 extern RNG rng;
 
+struct Pos;
+
 class XConsole
 {
 public:
 	virtual ~XConsole();
-	bool inBounds(const Point &p);
+	bool inBounds(const Pos &p);	// retail passes Point objects as the (layout-identical) Pos
 };
 
 class OpR5a_MapView : public XConsole	// NOTE: placeholder name (CMap at 0xcec054)
@@ -86,7 +88,7 @@ void opR5a_machinePoints(vector<int> &indices, vector<Point> *out)	// NOTE: plac
 		{
 			Point p = opR5a_machines[indices[i]][j]->getPosition_4184d0();
 			p.add_409a30(opR5a_mapView->getOffset_458ef0());
-			if (opR5a_mapView->inBounds(p))
+			if (opR5a_mapView->inBounds(reinterpret_cast<const Pos &>(p)))
 				out->push_back(p);
 		}
 	}
@@ -141,7 +143,7 @@ void opR5a_conduitPath(OpR5a_Conduit &conduit, vector<Point> *out)	// NOTE: plac
 		for (unsigned int j = 0; j < out->size(); j++)
 		{
 			(*out)[j].add_409a30(opR5a_mapView->getOffset_458ef0());
-			if (!opR5a_mapView->inBounds((*out)[j]))
+			if (!opR5a_mapView->inBounds(reinterpret_cast<const Pos &>((*out)[j])))
 				OpQ5_eraseStep(*out,j);
 		}
 	}

@@ -204,11 +204,11 @@ public:
 	XCell &at_9cdf20(int x, int y);	// NOTE: placeholder name
 };
 
-class AsciiImage
+class OpQ4f_AsciiImage
 {
 public:
-	AsciiImage();	// 0x4588d0
-	~AsciiImage();
+	OpQ4f_AsciiImage();	// 0x4588d0
+	~OpQ4f_AsciiImage();
 
 	vector<OpQ4f_Grid*> layers;
 };
@@ -232,13 +232,13 @@ public:
 	int index;	// NOTE: placeholder name
 	unsigned int unknown74;	// NOTE: placeholder name
 	vector<int> unknown78;	// NOTE: placeholder name
-	AsciiImage unknown88;	// NOTE: placeholder name
+	OpQ4f_AsciiImage unknown88;	// NOTE: placeholder name
 	vector<Point> unknown98;	// NOTE: placeholder name
 	int unknowna8;	// NOTE: placeholder name
 	vector<bool> seen;	// NOTE: placeholder name
 	vector<int> unknownc0;	// NOTE: placeholder name
 	int unknownd0;	// NOTE: placeholder name
-	AsciiImage unknownd4;	// NOTE: placeholder name
+	OpQ4f_AsciiImage unknownd4;	// NOTE: placeholder name
 	int unknowne4;	// NOTE: placeholder name
 	bool unknowne8;	// NOTE: placeholder name
 	XConsole *unknownec;	// NOTE: placeholder name
@@ -257,7 +257,7 @@ public:
 	XConsole *unknown150;	// NOTE: placeholder name
 	XConsole *unknown154;	// NOTE: placeholder name
 	XConsole *unknown158;	// NOTE: placeholder name
-	AsciiImage unknown15c;	// NOTE: placeholder name
+	OpQ4f_AsciiImage unknown15c;	// NOTE: placeholder name
 	vector<Point> unknown16c;	// NOTE: placeholder name
 	XConsole *unknown17c;	// NOTE: placeholder name
 	XConsole *unknown180;	// NOTE: placeholder name
@@ -498,8 +498,8 @@ public:
 	bool shake;	// NOTE: placeholder name
 	unsigned int shakeDuration;	// NOTE: placeholder name
 	bool planet;	// NOTE: placeholder name
-	AsciiImage planetArt;	// NOTE: placeholder name
-	AsciiImage scarArt;	// NOTE: placeholder name
+	OpQ4f_AsciiImage planetArt;	// NOTE: placeholder name
+	OpQ4f_AsciiImage scarArt;	// NOTE: placeholder name
 };
 
 void CEndingFade::render()

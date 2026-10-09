@@ -564,13 +564,13 @@ void OpY5_Builder::giveXomItems(OpY5_HEntity e)
 			slots.push_back(24);
 			break;
 	}
-	OpY5_WeightedList<OpY5_ItemType *> itemTypes;
+	OpY5_WeightedList<int> itemTypes;
 	for (unsigned int i = 0; i < opY5_itemTypes.size(); i++)
 	{
 		if (opY5_itemTypes[i]->unknown234 != 0 && opY5_inVector(slots,opY5_itemTypes[i]->unknown44))
-			itemTypes.addUnique(opY5_itemTypes[i],opY5_table_ba3acc[opY5_itemTypes[i]->unknown234]);
+			itemTypes.addUnique((int)opY5_itemTypes[i],opY5_table_ba3acc[opY5_itemTypes[i]->unknown234]);
 	}
-	OpY5_ItemType *type = itemTypes.pick();
+	OpY5_ItemType *type = (OpY5_ItemType *)itemTypes.pick();
 	int value = e->unknown448fe0(3);
 	int quantity = opY5_minInt(3,value / type->unknown4c);
 	for (int i = 0; i < quantity; i++)

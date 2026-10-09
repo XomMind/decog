@@ -57,7 +57,7 @@ public:
 int halfProduct_406460(int a, int b, int c);	// NOTE: placeholder name
 int opw8_distance(int x1, int y1, int x2, int y2);	// NOTE: placeholder name (0x406480)
 int OpQ1_distanceCeil_40a3f0(const Point100 &a, const Point100 &b) throw();	// NOTE: placeholder name
-bool OpV4c_Fn9d0ce0(vector<Point100> &list, Point100 p);	// NOTE: placeholder name
+bool OpV4c_Fn9d0ce0_100(vector<Point100> &list, Point100 p);	// NOTE: placeholder name
 
 class Entity100;
 
@@ -228,6 +228,6 @@ Point100 Shot100::unknown658a70(const Point100 &origin, Point100 target, float s
 		yy *= rng.rangeInt(0.0f,1.0f) ? -1 : 1;
 		pick.set(ox,yy);
 		tries++;
-	} while ((pick.x == 0 && pick.y == 0) || ((pick.x == 0 || pick.y == 0) && rng.rangeInt(1.0f,5.0f) <= 2) || opw8_distance(0,0,pick.x,pick.y) > max || Point100(target,pick) == origin || (OpV4c_Fn9d0ce0(tiles,Point100(target,pick)) && tries < 1000));
+	} while ((pick.x == 0 && pick.y == 0) || ((pick.x == 0 || pick.y == 0) && rng.rangeInt(1.0f,5.0f) <= 2) || opw8_distance(0,0,pick.x,pick.y) > max || Point100(target,pick) == origin || (OpV4c_Fn9d0ce0_100(tiles,Point100(target,pick)) && tries < 1000));
 	return Point100(target,pick);
 }

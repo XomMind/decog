@@ -15,8 +15,7 @@ void PenetrationRollPool::initialize()
 	values.clear();
 	while (values.size() < 25)
 	{
-		int value = rng.rangeInt(1,100);
-		values.push_back(value);
+		values.push_back(rng.rangeInt(1,100));
 	}
 }
 

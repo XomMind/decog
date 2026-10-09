@@ -9,9 +9,17 @@ struct Pos
 {
 	int x;
 	int y;
-	Pos();	// 0x40a6e0
 	Pos(int v);	// 0x409990
-	Pos &assign_40a720(const Pos &pos);	// NOTE: placeholder name (0x40a720, Rect assignment)
+};
+
+struct Rect
+{
+	int x;
+	int y;
+	int width;
+	int height;
+	Rect();	// 0x40a6e0
+	Rect &assign_40a720(const Rect &rect);	// NOTE: placeholder name (0x40a720, Rect assignment)
 };
 
 class XConsole
@@ -235,7 +243,7 @@ extern const float d2e_ba853c, d2e_ba682c, d2e_ba6840;
 extern string d2e_d378d0[];
 extern string d2e_d29018[];
 extern const int d2e_b95a1c[], d2e_b95a2c[];
-extern Pos d2e_d21db0;
+extern Rect d2e_d21db0;
 extern const char empty_b99c05[], empty_b99c06[], empty_b99c07[];
 
 void OpX5_fillInts(int *p, unsigned int count, int value);
@@ -266,12 +274,10 @@ public:
 	void *unknown7c;
 	int unknown80[4];
 	int unknown90[4];
-	Pos unknowna0;
-	char pada8[0xb0 - 0xa8];
+	Rect unknowna0;
 	ConsoleArt *art;
 	char padb4[0xb8 - 0xb4];
-	Pos unknownb8;
-	char padc0[0xc8 - 0xc0];
+	Rect unknownb8;
 	unsigned int unknownc8;
 	bool unknowncc;
 	bool flag;

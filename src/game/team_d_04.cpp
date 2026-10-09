@@ -220,7 +220,8 @@ void OpQ1_readString(istream &in, string *text);	// NOTE: placeholder name (0x40
 void OpQ1_writeStringVectorList(ostream &out, vector<vector<string> > *lists);	// NOTE: placeholder name (0x409890)
 void OpQ1_readStringVectorList(istream &in, vector<vector<string> > *lists);	// NOTE: placeholder name (0x4098f0)
 void OpT8a_readInts(istream &stream, vector<int> &v);	// NOTE: placeholder name
-void OpS8a_readP8s(istream &stream, vector<Point> &v);	// NOTE: placeholder name
+struct OpS8a_P8;
+void OpS8a_readP8s(istream &stream, vector<OpS8a_P8> &v);	// NOTE: placeholder name
 
 class HExplosive	// NOTE: placeholder layout
 {
@@ -324,7 +325,7 @@ public:
 class Entity	// NOTE: placeholder layout
 {
 public:
-	const string &getName();			// NOTE: placeholder name (folded getter 0x416f40)
+	const string &name416f40();			// NOTE: placeholder name (folded getter 0x416f40)
 	Point &getPosition();
 	EntityAI *getAI();					// 0x45b590
 	int getField490840(int index);		// NOTE: placeholder name
@@ -359,7 +360,7 @@ public:
 	HEntity getPlayer();
 	bool unknown4631f0(HEntity e);		// NOTE: placeholder name
 	int getTurn();
-	bool isVisible(const Point &p);		// 0x4631c0
+	bool isVisible4631c0(const Point &p);		// 0x4631c0
 	bool unknown716940(const Point &from, const Point &to, Entity *e, int *length);	// NOTE: placeholder name
 	bool isReachable(int range, const Point &from, const Point &to);	// NOTE: placeholder name
 	bool findPlaceableNear(const Point &p, Point &out, int size);	// NOTE: placeholder name
@@ -711,7 +712,7 @@ void Unknown_45f320_45f560::unserialize(istream &stream)
 	unknown088.clear();
 	OpU8_readStructs(stream,unknown088);
 	unknown098.clear();
-	OpS8a_readP8s(stream,unknown098);
+	OpS8a_readP8s(stream,(vector<OpS8a_P8>&)unknown098);
 	VPTB(unknown0a8).clear();
 	OpU8_readStructs(stream,VPTB(unknown0a8));
 	unknown0b8.clear();
@@ -739,7 +740,7 @@ void Unknown_45f320_45f560::unserialize(istream &stream)
 	unknown154.clear();
 	OpU8_readStructs(stream,unknown154);
 	unknown164.clear();
-	OpS8a_readP8s(stream,unknown164);
+	OpS8a_readP8s(stream,(vector<OpS8a_P8>&)unknown164);
 	unknown174.clear();
 	OpT8a_readInts(stream,VINTS(unknown174));
 	readBinary(stream,&unknown184);
@@ -764,9 +765,9 @@ void Unknown_45f320_45f560::unserialize(istream &stream)
 	readBinary(stream,&unknown1d0);
 	OpQ5_readPointer(stream,unknown1d4);
 	unknown1d8.clear();
-	OpS8a_readP8s(stream,unknown1d8);
+	OpS8a_readP8s(stream,(vector<OpS8a_P8>&)unknown1d8);
 	unknown1e8.clear();
-	OpS8a_readP8s(stream,unknown1e8);
+	OpS8a_readP8s(stream,(vector<OpS8a_P8>&)unknown1e8);
 	unknown1f8.clear();
 	OpU8_readStructs(stream,unknown1f8);
 	VSTRS(unknown208)->clear();
@@ -794,7 +795,7 @@ extern const float factor_ba442c;	// NOTE: placeholder name (0.1f)
 
 void Unknown_45f320_45f560::unknown69a0a0(bool flag)
 {
-	string name = unknown0fc->getName();
+	string name = unknown0fc->name416f40();
 	Point pos = unknown0fc->getPosition();
 	if (!flag)
 		unknown0fc->unknown637bb0();
@@ -812,9 +813,9 @@ void Unknown_45f320_45f560::unknown69a0a0(bool flag)
 		unknown120->unknown45b070(names_d2b4f8[unknown120->getRecord()->unknown48]);
 	if (world->unknown4631f0(unknown120))
 	{
-		string msg = flag ? unknown120->getName() + " reconstitutes self from the rubble and scrap." : name + " form shifts and reconstitutes itself, revealing " + unknown120->getName() + ".";
+		string msg = flag ? unknown120->name416f40() + " reconstitutes self from the rubble and scrap." : name + " form shifts and reconstitutes itself, revealing " + unknown120->name416f40() + ".";
 		opW5_message(0x320,HProp(),msg,0);
-		do { logEventS_5141b0(0x91,name,unknown120->getName(),0,unknown120,0); } while (0);
+		do { logEventS_5141b0(0x91,name,unknown120->name416f40(),0,unknown120,0); } while (0);
 	}
 	do {} while (0);
 }
@@ -823,7 +824,7 @@ void Unknown_45f320_45f560::unknown69a5b0(bool flag)
 {
 	if (unknown034 == NULL)
 		do {} while (0);
-	string name = unknown120->getName();
+	string name = unknown120->name416f40();
 	Point pos = unknown120->getPosition();
 	if (!flag)
 		unknown120->unknown637bb0();
@@ -834,9 +835,9 @@ void Unknown_45f320_45f560::unknown69a5b0(bool flag)
 	unknown030->getAI()->unknown5b4710(world->getPlayer(),-2,1,0,0);
 	if (world->unknown4631f0(unknown030))
 	{
-		string msg = flag ? unknown030->getName() + " reconstitutes true form from the rubble and scrap." : name + " form shifts and reconstitutes itself, revealing true form.";
+		string msg = flag ? unknown030->name416f40() + " reconstitutes true form from the rubble and scrap." : name + " form shifts and reconstitutes itself, revealing true form.";
 		opW5_message(0x320,HProp(),msg,0);
-		do { logEventS_5141b0(0x91,name,unknown030->getName(),0,unknown030,0); } while (0);
+		do { logEventS_5141b0(0x91,name,unknown030->name416f40(),0,unknown030,0); } while (0);
 		if (unk_cf6888.unknown02c && unknown030.operator->() && unk_cf6888.unknown030 == unknown030)
 			unk_cf6888.unknown068->unknown672f20(unknown030,10,0,name);
 	}
@@ -893,11 +894,11 @@ bool Unknown_45f320_45f560::unknown69ac10(const Point &loc, Range8 &range, bool 
 			if (choice.x != -1)
 			{
 				Point pos = unknown030->getPosition();
-				if (world->isVisible(pos))
+				if (world->isVisible4631c0(pos))
 				{
 					if (unk_cf6888.unknown02c && unknown030.operator->() && unk_cf6888.unknown030 == unknown030)
 						unk_cf6888.unknown068->unknown672f20(unknown030,0x10,0,"");
-					string text = unknown030->getName() + " shrinks and is drawn into a quantum tunnel.";
+					string text = unknown030->name416f40() + " shrinks and is drawn into a quantum tunnel.";
 					opW5_message(0x320,HProp(),text,0);
 					bool valid = true;
 					if ((!cells_cfd44c.inBounds(pos.x - 1,pos.y) || (*cells_cfd44c.at(pos.x - 1,pos.y))->unknown45d480())
@@ -962,12 +963,12 @@ bool Owned_45f890::unknown672f20(HEntity e, int type, bool force, string text)
 	opS4_unknown4351e0(msg);
 	if (type == 0xf)
 	{
-		msg.insert(0,e->getName() + ": ");
+		msg.insert(0,e->name416f40() + ": ");
 		OPD_ALERT(2,-1,msg);
 	}
 	else
 	{
-		msg.insert(0,e->getName() + ": \"");
+		msg.insert(0,e->name416f40() + ": \"");
 		if (!text.empty())
 			opr5c_replace407e00(msg,string_d20860,text);
 		msg += "\"";

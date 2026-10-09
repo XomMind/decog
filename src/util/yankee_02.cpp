@@ -1619,7 +1619,7 @@ damagePart:
 			{
 				int nG = k5;
 				k5 *= 3;
-				string burnText = b5 ? yt_gameStrings_d1e058[critical] + ": +" + yt_intToString(nG) : yt_gameStrings_d1e058[critical];
+				string burnText = (const string &)(b5 ? yt_gameStrings_d1e058[critical] + ": +" + yt_intToString(nG) : yt_gameStrings_d1e058[critical]);
 				LOG_MESSAGE(b5 ? 0x1b : (unknown5c7fc0(yt_world->getPlayer()) != 2) + 0x1c,&burnText,NULL,0,self,YtHProp(),&static_cast<const YtPoint &>(unknown45a4c0()),0);
 				if (attacker.operator->() != NULL && attacker->isPlayer() && !b5)
 				{

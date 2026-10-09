@@ -129,7 +129,7 @@ public:
 	int unknown5c92e0(int value);	// NOTE: placeholder name
 	bool isHostileTo(HEntity entity);	// NOTE: placeholder name (0x45aa70)
 	Inventory *getInventory();	// NOTE: placeholder name (0x45ad90)
-	void setAI(EntityAI *ai);	// NOTE: placeholder name (0x418da0)
+	void setField418da0(EntityAI *ai);	// NOTE: placeholder name (0x418da0)
 	void setFlag(int flag);	// NOTE: placeholder name (0x44e360)
 };
 
@@ -535,11 +535,11 @@ HEntity BS::placeEntity(EntityRecord *record, const Point &position, int groupIn
 	if (!canPlace)
 		return HEntity();
 	HEntity entity = entityMgr->createEntity(record);
-	if (groupIndex == 3 && factionAttitude[entity->getFaction()] < 2 && entity->getName() == "A-27 Freighter" && entity->getDisplayName() == "Sauler")
+	if (groupIndex == 3 && factionAttitude[entity->getFaction()] < 2 && entity->getName() != "A-27 Freighter" && entity->getDisplayName() != "Sauler")
 		groupIndex = 4;
 	entity->changePos(placedPos,false);
 	groups[groupIndex]->addMember(entity,unknown18);
-	entity->setAI(new EntityAI(entity,aiMode1,aiMode2));
+	entity->setField418da0(new EntityAI(entity,aiMode1,aiMode2));
 	eventQueue.add(new Event(1,new google::protobuf::internal::InternalMetadataWithArenaBase<google::protobuf::UnknownFieldSet,google::protobuf::internal::InternalMetadataWithArena>((google::protobuf::Arena *)entity.ID)),0);
 	if (entity->getInventory())
 	{

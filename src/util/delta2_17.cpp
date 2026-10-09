@@ -283,7 +283,12 @@ void clearDijkstraResults();
 void OpV4c_shuffle_9d7350(vector<Pos> &list);
 string OpQ1_pointToString(const Pos &pos);
 void opR1d_454260(Pos *pos, int sound);
-void opr5f_unknown953d90(D2rHEntity entity, vector<int> *hacks);
+class HEntity	// NOTE: retail signature type of opr5f_unknown953d90 (same layout as D2rHEntity)
+{
+public:
+	int ID;
+};
+void opr5f_unknown953d90(HEntity entity, vector<unsigned int> *hacks);
 bool opS2_logPhrase_5141b0(int id, const string *a, const string *b, const string *c, D2rHEntity subject, const Pos *at);
 int OpS8b_Fn9d4660(vector<int> &list, int value);
 void OpQ5_eraseStep_9d6440(vector<D2rHItem> &list, int &index);
@@ -293,8 +298,14 @@ string intToString(int value);
 char randomChar_4085b0(const string &chars);
 string opr1c_getSecurityName_4332b0(int level);
 bool OpT8b_Fn9db000(vector<int> &list, int value);
-void OpS8c_appendUnique(vector<Pos> &list, vector<Pos> &other);
-bool OpV4c_Fn9d3020(vector<Pos> &list, Pos pos);
+struct Point	// NOTE: retail signature type of the two helpers below (same layout as Pos)
+{
+	int x;
+	int y;
+	Point(const Point &p) throw();	// 0x46ca50
+};
+void OpS8c_appendUnique(vector<Point> &list, vector<Point> &other);
+bool OpV4c_Fn9d3020(vector<Point> &list, Point pos);
 void OpQ5_clearObjects_9d0670(int *list);
 void OpQ5_clearObjects_9e2650(vector<D2rRoute *> &list);
 void OpQ5_deleteBack_9e32e0(vector<D2rRoute *> &list);
@@ -943,7 +954,7 @@ found3:
 						d2r_cefc4c->unknown4647d0(*d2r_d20248[groups[i]][j]->getPosition_4184d0());
 					}
 				}
-				OpS8c_appendUnique(cells, *results);
+				OpS8c_appendUnique((vector<Point> &)cells,(vector<Point> &)*results);
 				for (unsigned int i = 0; i < results->size(); i++)
 					d2r_cefc4c->unknown9e29b0(&d2r_cefc4c->f720, (*d2r_cfd44c.atPoint((*results)[i]))->getProp());
 			}
@@ -977,7 +988,7 @@ found3:
 								vec[i]->stats_44b020()->f10 = 0;
 								vec[i]->unknown65f170();
 								d2r_cefc4c->unknown4647d0(*vec[i]->getPosition_4184d0());
-								OpV4c_Fn9d3020(cells, *vec[i]->getPosition_4184d0());
+								OpV4c_Fn9d3020((vector<Point> &)cells,*(Point *)vec[i]->getPosition_4184d0());
 								d2r_cefc4c->unknown9e29b0(&d2r_cefc4c->f720, vec[i]);
 								count++;
 							}
@@ -1806,7 +1817,7 @@ found3d:
 						if (where.isNull() || dist < first)
 						{
 							ranks.clear();
-							opr5f_unknown953d90(target, &ranks);
+							opr5f_unknown953d90(*(HEntity *)&target,(vector<unsigned int> *)&ranks);
 							if (OpX5_containsRecord(ranks, hack))
 							{
 								vec.clear();

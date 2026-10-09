@@ -85,7 +85,7 @@ bool HttpsConnection::sendHttpsRequest(string& headers, string& data, string* da
 				sent = HttpSendRequestW(hRequest,NULL,0,NULL,0);
 			else
 			{
-				wstring wHeaders(headers.begin(),headers.end());
+				wstring wHeaders(((const string&)headers).begin(),((const string&)headers).end());
 				if (!data.empty())
 				{
 					string body = data;
@@ -178,7 +178,7 @@ retry:
 		delete[] buffer;
 		if (responseHeader.find("HTTP/1.1 200") == string::npos && responseHeader.find("HTTP/1.1 204") == string::npos)
 		{
-			string code(((const string&)responseHeader).begin()+9,((const string&)responseHeader).begin()+12);
+			string code(responseHeader.begin()+9,responseHeader.begin()+12);
 			logError("HttpsConnection::checkResponseHeader()","Connection failed, server response "+code);
 			if (code == "422" && OpC_key_d25664.size() != 36)
 				logError("HttpsConnection::checkResponseHeader()","GUID error detected");

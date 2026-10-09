@@ -90,7 +90,7 @@ public:
 	void setHidden(bool hidden_) throw();	// NOTE: placeholder name
 	void setFgColor(XColor color);	// NOTE: placeholder name (0x4183d0)
 	void setBgColor(XColor color);	// NOTE: placeholder name (0x418410)
-	void setFore(int x, int y, XColor color);	// NOTE: placeholder name (0x417f80)
+	void setFore_417f80(int x, int y, XColor color);	// NOTE: placeholder name (0x417f80)
 	void putChar(int x, int y, int ch, XColor color);	// NOTE: placeholder name (0x418110)
 	void setCharRow(int x, int y, int width, int ch, XColor color);	// NOTE: placeholder name (0x429840)
 	void setFore(XColor color);	// NOTE: placeholder name (0x417b00)
@@ -1306,8 +1306,8 @@ void CEvolveMain::render()
 	{
 		if (unknowna4 != -1)
 		{
-			setFore(1,unknown84[unknowna4]->getPos().y,*opq4e_cfe674);
-			setFore(getWidth() - 2,unknown84[unknowna4]->getPos().y,*opq4e_cfe674);
+			setFore_417f80(1,unknown84[unknowna4]->getPos().y,*opq4e_cfe674);
+			setFore_417f80(getWidth() - 2,unknown84[unknowna4]->getPos().y,*opq4e_cfe674);
 		}
 		putChar(1,unknown84[unknowna0]->getPos().y,0x5b,*opq4e_d2981c);
 		putChar(getWidth() - 2,unknown84[unknowna0]->getPos().y,0x5d,*opq4e_d2981c);

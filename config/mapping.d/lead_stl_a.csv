@@ -291,10 +291,7 @@
 ??$_Construct@UE84_1@@ABU1@@std@@YAXPAUE84_1@@ABU1@@Z,0x9f3a50,0x89
 ??$_Construct@UEac_1@@ABU1@@std@@YAXPAUEac_1@@ABU1@@Z,0x9f39c0,0x89
 ??$_Construct@MABM@std@@YAXPAMABM@Z,0x9f4190,0x4f
-??_GE8_3@@QAEPAXI@Z,0x9bae40,0x2d
 ??_G?$vector@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@QAEPAXI@Z,0x9ffe20,0x2d
-??E?$_Vb_iterator@V?$allocator@_N@std@@@std@@QAEAAV01@XZ,0x9f6420,0x16
-??E?$_Vb_const_iterator@V?$allocator@_N@std@@@std@@QAEAAV01@XZ,0x9fcf90,0x16
 ?_Inc@?$_Vb_const_iterator@V?$allocator@_N@std@@@std@@QAEXXZ,0x9f63e0,0x3c
 ??$_Uninit_copy@PAUE8_0@@PAU1@V?$allocator@UE8_0@@@std@@@std@@YAPAUE8_0@@PAU1@00AAV?$allocator@UE8_0@@@0@U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fb760,0xc2
 ??$_Uninit_copy@PAUEc_0@@PAU1@V?$allocator@UEc_0@@@std@@@std@@YAPAUEc_0@@PAU1@00AAV?$allocator@UEc_0@@@0@U_Nonscalar_ptr_iterator_tag@0@@Z,0x9fa590,0xc2

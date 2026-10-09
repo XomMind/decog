@@ -191,7 +191,7 @@ public:
 	void die(bool a, int cause, HEntity killer, bool b, int c, int d, int e, int f);	// NOTE: placeholder signature (0x633790)
 	int unknown5c8e20(int *count);	// NOTE: placeholder name
 	int unknown5ca210();	// NOTE: placeholder name
-	const Point &getPosition();	// NOTE: placeholder name (0x45a4a0)
+	const Pos &getPosition();	// NOTE: placeholder name (0x45a4a0)
 };
 
 struct OpX5E_Area	// NOTE: placeholder name
@@ -417,7 +417,7 @@ extern OpR5g_EffectMgr *opr5g_effectMgr;	// NOTE: placeholder name (0xcefc50)
 class CMap : public Console	// NOTE: partial layout
 {
 public:
-	void unknown8069e0(Point p, bool flag);	// NOTE: placeholder name
+	void unknown8069e0(Pos p, bool flag);	// NOTE: placeholder name
 	void unknown8051f0(Pos *min, Pos *max);	// NOTE: placeholder name
 	const Point &unknown458ef0();	// NOTE: placeholder name (folded getter)
 };

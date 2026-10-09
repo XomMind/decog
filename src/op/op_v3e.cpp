@@ -520,7 +520,7 @@ bool OpV3e_compareStrings7f2210(int a, int b)	// NOTE: placeholder name
 	string *nameB = &gameStrings_d16318[b];
 	if ((!isalpha((*nameA)[0]) || isupper((*nameA)[0])) && (!isalpha((*nameB)[0]) || isupper((*nameB)[0])))
 	{
-		return lexicographical_compare(nameA->begin(),nameA->end(),nameB->begin(),nameB->end());
+		return lexicographical_compare(((const string &)*nameA).begin(),((const string &)*nameA).end(),((const string &)*nameB).begin(),((const string &)*nameB).end());
 	}
 	else
 	{
@@ -528,7 +528,7 @@ bool OpV3e_compareStrings7f2210(int a, int b)	// NOTE: placeholder name
 		string sb = gameStrings_d16318[b];
 		sa[0] = toupper(sa[0]);
 		sb[0] = toupper(sb[0]);
-		return lexicographical_compare(((const string &)sa).begin(),((const string &)sa).end(),((const string &)sb).begin(),((const string &)sb).end());
+		return lexicographical_compare(sa.begin(),sa.end(),sb.begin(),sb.end());
 	}
 }
 
@@ -538,7 +538,7 @@ bool OpV3e_compareStrings7f2410(int a, int b)	// NOTE: placeholder name
 	string *nameB = &gameStrings_cf4dd0[b];
 	if ((!isalpha((*nameA)[0]) || isupper((*nameA)[0])) && (!isalpha((*nameB)[0]) || isupper((*nameB)[0])))
 	{
-		return lexicographical_compare(nameA->begin(),nameA->end(),nameB->begin(),nameB->end());
+		return lexicographical_compare(((const string &)*nameA).begin(),((const string &)*nameA).end(),((const string &)*nameB).begin(),((const string &)*nameB).end());
 	}
 	else
 	{
@@ -546,7 +546,7 @@ bool OpV3e_compareStrings7f2410(int a, int b)	// NOTE: placeholder name
 		string sb = gameStrings_cf4dd0[b];
 		sa[0] = toupper(sa[0]);
 		sb[0] = toupper(sb[0]);
-		return lexicographical_compare(((const string &)sa).begin(),((const string &)sa).end(),((const string &)sb).begin(),((const string &)sb).end());
+		return lexicographical_compare(sa.begin(),sa.end(),sb.begin(),sb.end());
 	}
 }
 

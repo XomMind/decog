@@ -318,7 +318,7 @@ public:
 	void unknown8197f0(const Pos &pos, bool flag);	// NOTE: placeholder name
 	bool unknown49ac90(const Pos &pos, bool a, int b);	// NOTE: placeholder name
 	void unknown819d50(int value, bool flag);	// NOTE: placeholder name
-	void unknown8142d0(int a, int b);	// NOTE: placeholder name
+	void unknown8142d0(unsigned int a, bool b);	// NOTE: placeholder name
 	void unknown8079e0(OpU6_Path *path);	// NOTE: placeholder name
 	void unknown807e60(bool value);	// NOTE: placeholder name
 	void unknown807eb0(bool full);	// NOTE: placeholder name

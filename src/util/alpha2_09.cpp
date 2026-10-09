@@ -416,7 +416,7 @@ bool A2SSettings::read(const string &filename, bool binary)
 						if (parts[8] == a2s_dash_bcecf0)
 						{
 							for (int d = 0; d < 4; d++)
-								spawns.back().dirs.push_back(d);
+								spawns.back().dirs.push_back((unsigned int)d);
 						}
 						else
 						{
@@ -481,7 +481,7 @@ bool A2SSettings::read(const string &filename, bool binary)
 							for (int i = 0; i < 4; i++)
 							{
 								if (parts[6].find(a2s_dirNames_cf63b8[i],0) != string::npos)
-									data->directions.push_back(i);
+									data->directions.push_back((unsigned int)i);
 							}
 						}
 						if (data->type == 21 && data->directions.empty())

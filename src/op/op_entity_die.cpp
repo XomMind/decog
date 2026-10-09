@@ -20,6 +20,7 @@ struct Point
 };
 
 class Entity;
+struct EntityEffect;
 class Item;
 class Group;
 class Inventory;
@@ -168,7 +169,7 @@ public:
 	bool unknown45aaa0(HEntity e);	// NOTE: placeholder name
 	Inventory *getInventory();	// 0x45ad90
 	bool ed_drop_631a20(HEntity killer, bool flag);	// NOTE: placeholder name
-	void *unknown45ac40(int type);	// NOTE: placeholder name
+	EntityEffect *unknown45ac40(int type);	// NOTE: placeholder name
 	int unknown45acb0(int type);	// NOTE: placeholder name
 	string unknown45a410();	// NOTE: placeholder name
 	int unknown5c7fc0(HEntity other);	// NOTE: placeholder name

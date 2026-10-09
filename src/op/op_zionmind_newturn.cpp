@@ -64,7 +64,7 @@ public:
 class Entity
 {
 public:
-	const string &getName();					// NOTE: placeholder name (0x416f40)
+	const string &name416f40();					// NOTE: placeholder name (0x416f40)
 	vector<Point> *unknown45d1a0();				// NOTE: placeholder name
 	bool unknown5c98c0(int a, int b, int c);	// NOTE: placeholder name
 	void removeEffectsA(int a);					// NOTE: placeholder name (0x639730)
@@ -405,7 +405,7 @@ void Zionmind::newTurn()
 					if (dispType <= 7)
 					{
 						if (dispType == 7)
-							ZNT_LOG(0x86,&entities.front()->getName());
+							ZNT_LOG(0x86,&entities.front()->name416f40());
 						else
 							ZNT_LOG(0x85,&gameStrings_d29af8[dispType]);
 					}

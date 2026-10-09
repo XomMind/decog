@@ -332,6 +332,11 @@ struct OpY2_BridgeSpec	// NOTE: placeholder name (0x34 bytes)
 	char data[0x34];
 };
 
+struct OpV4b_S172	// NOTE: placeholder name (0xac bytes; same name as op_v4b.cpp so the vector destructor pairs with 0x9b48a0)
+{
+	char pad[0xac];
+};
+
 struct OpY2_CaveSettings	// NOTE: placeholder name
 {
 	OpY2_CaveSettings(istream &stream);	// NOTE: placeholder name
@@ -345,7 +350,7 @@ struct OpY2_CaveSettings	// NOTE: placeholder name
 	char pad38[0x10];
 	vector<OpY2_Rect> regions;
 	char pad58[0x18];
-	vector<int> unknown70;
+	vector<OpV4b_S172> unknown70;
 	vector<OpY2_BridgeSpec> bridges;
 	OpY2_Range unknown90;
 	char pad98[0xc];

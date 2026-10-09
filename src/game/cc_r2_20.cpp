@@ -41,6 +41,13 @@ public:
 	bool unknown456600();		// NOTE: placeholder name
 };
 
+class AsciiImage4588d0	// NOTE: placeholder name (retail default ctor 0x4588d0 = Unknown_4588d0_439630, ICF-folded; AsciiImage() display name is ambiguous with the copy ctor row)
+{
+public:
+	AsciiImage4588d0() throw();
+
+	char pad[0x10];
+};
 class AsciiImage	// NOTE: placeholder layout
 {
 public:
@@ -141,7 +148,7 @@ AsciiImage *Entity::unknown45ae50()
 {
 	if (!unknownF0)
 	{
-		AsciiImage *image = new AsciiImage();
+		AsciiImage *image = (AsciiImage *)new AsciiImage4588d0();
 		unknownF0 = image;
 	}
 	return unknownF0;

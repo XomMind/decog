@@ -15,7 +15,13 @@ struct XColor
 	XColor(const string &hex);	// 0x411e00
 };
 
-void OpS8d_appendColors(vector<XColor> &v, XColor *colors, unsigned int count);	// NOTE: placeholder name (0x9e32a0)
+struct OpS8d_Color3	// NOTE: placeholder name (same 3-byte layout as XColor; the exe signature of 0x9e32a0 is typed on it)
+{
+	unsigned char r;
+	unsigned char g;
+	unsigned char b;
+};
+void OpS8d_appendColors(vector<OpS8d_Color3> &v, OpS8d_Color3 *colors, unsigned int count);	// NOTE: placeholder name (0x9e32a0)
 extern string gameStrings_d2d1d8[];	// 0xd2d1d8: "is interested." .. "roars with laughter!"
 
 class CShell
@@ -63,9 +69,9 @@ void CShell::opG1_showXomPortrait(int amusement)
 	{
 		vector<int> characters(width, 174);
 		vector<XColor> fgColors;
-		OpS8d_appendColors(fgColors, colors[row], width);
+		OpS8d_appendColors((vector<OpS8d_Color3> &)fgColors, (OpS8d_Color3 *)colors[row], width);
 		vector<XColor> bgColors;
-		OpS8d_appendColors(bgColors, colors[row + 1], width);
+		OpS8d_appendColors((vector<OpS8d_Color3> &)bgColors, (OpS8d_Color3 *)colors[row + 1], width);
 		unknown90eec0(characters, 8, &fgColors, &bgColors);
 	}
 	unknown90ed30(string("X0-1V1 ") + gameStrings_d2d1d8[amusement], 8, false, false);

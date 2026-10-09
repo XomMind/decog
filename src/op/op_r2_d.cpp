@@ -178,7 +178,7 @@ extern CInventory *inventory;	// NOTE: placeholder name (0xcec08c)
 class CParts	// NOTE: placeholder layout
 {
 public:
-	void unknown8979b0(HItem item, int a, int b);	// NOTE: placeholder name
+	void unknown8979b0(HItem item, bool a, int b);	// NOTE: placeholder name
 	void unknown897290(HItem item, int key);	// NOTE: placeholder name
 };
 extern CParts *parts;	// NOTE: placeholder name (0xcec088)

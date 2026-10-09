@@ -88,7 +88,7 @@ class Prop
 public:
 	int unknown45c870(int type);			// NOTE: placeholder name
 	Machine78 *getMachine();				// NOTE: placeholder name (folded getter)
-	const string &getName();				// NOTE: placeholder name (Push_45c590::operate)
+	const string &name45c590();				// NOTE: placeholder name (Push_45c590::operate)
 	void unknown45ce10(bool a, int b, bool c, class HProp p);	// NOTE: placeholder name
 	void unknown45cc50(const Point &p);		// NOTE: placeholder name
 };
@@ -218,7 +218,7 @@ void BS::unknown6e33a0()
 				{
 					if ((*cells78_cfd44c.at(x,y))->getProp()->getMachine())
 					{
-						if ((*cells78_cfd44c.at(x,y))->getProp()->getName() == "Scraplab SEP")
+						if ((*cells78_cfd44c.at(x,y))->getProp()->name45c590() == "Scraplab SEP")
 						{
 							Machine78 *m = (*cells78_cfd44c.at(x,y))->getProp()->getMachine();
 							int idx = OpU8a_indexOfName4(names78_d35b58,"Notice");

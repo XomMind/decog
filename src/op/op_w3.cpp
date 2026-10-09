@@ -98,9 +98,18 @@ struct OpW3_EntityData	// NOTE: placeholder name
 	int unknown110;	// NOTE: placeholder name
 };
 
+struct OpQ1_Box	// same layout as Area; its 4-int constructor is the configured OpQ1_Box ctor 0x40b1e0
+{
+	OpQ1_Box(int x1_, int y1_, int x2_, int y2_);	// 0x40b1e0
+
+	int x1;
+	int y1;
+	int x2;
+	int y2;
+};
+
 struct Area	// NOTE: placeholder name
 {
-	Area(int x1_, int y1_, int x2_, int y2_);	// NOTE: placeholder name (0x40b1e0)
 	void randomPoint_40be30(Point *out);	// NOTE: placeholder name
 	Point randomPoint_40be90();	// NOTE: placeholder name
 
@@ -3521,11 +3530,11 @@ void BS::opw3_unknown72ffe0(bool quiet)
 			break;
 		}
 	}
-	Area westPart(38,34,71,63);
-	Area eastZone(79,35,116,62);
+	OpQ1_Box westPart(38,34,71,63);
+	OpQ1_Box eastZone(79,35,116,62);
 	for (unsigned int m = 0; m < robots.size(); m++)
 	{
-		robots[m]->opw3_getRecord()->opw3_unknown459470(robots[m]->getPosition().x < 75 ? westPart : eastZone);
+		robots[m]->opw3_getRecord()->opw3_unknown459470(reinterpret_cast<const Area &>(robots[m]->getPosition().x < 75 ? westPart : eastZone));
 		robots[m]->opw3_getRecord()->opw3_setMode(33);
 		if (robots[m]->getPosition().x >= 75)
 			robots[m]->opw3_getRecord()->opw3_setFollowEntity(optimus,0);
@@ -4243,7 +4252,7 @@ void BS::opw3_unknown721600()
 						int tier = opw3_maxInt(bots[i]->opw3_unknown5d2380(13).isValid() ? 4 : 0,bots[i]->opw3_unknown5d22a0(12));
 						vector<HEntity> visibleTo;
 						vector<vector<HEntity> *> groupsListVec;
-						groupsListVec.push_back(team);
+						groupsListVec.push_back(static_cast<vector<HEntity> *&&>(team));
 						groupsListVec.push_back(opw3_world->unknown463890(11)->opw3_getMembers());
 						if (!fromOwner)
 						{

@@ -16,7 +16,7 @@ void logError(string location, string message);
 bool OpU8a_containsString(vector<string> *list, string text);	// NOTE: placeholder name
 int OpT8b_Fn9d4340(vector<int> &v);	// NOTE: placeholder name
 void c32_makeDirectory_409240(string path);	// NOTE: placeholder name (0x409240)
-int opY2_startNetworkThread(int type, int unknown, void *function, void *data);	// NOTE: placeholder name
+void *opY2_startNetworkThread(void *id, bool force, int (*function)(void *), void *data);	// NOTE: placeholder name
 extern string gameStrings_cf10d8[], gameStrings_cf2740[], gameStrings_d01c50[], gameStrings_d1d470[], gameStrings_d293c0[], gameStrings_d2e148[], gameStrings_d378d0[], gameStrings_d38dd0[];	// global_string_arrays.cpp
 extern string g_cfd42c;	// NOTE: placeholder name (gameString_cfd42c)
 
@@ -1064,7 +1064,7 @@ string Scorekeeper::outputScoresheet(bool isDump)
 	{
 		pick->object->set_name(*tmp);
 		g_cefb58 = 0;
-		if (!(opY2_startNetworkThread(3, 0, &lc43_upload4884c0, pick)))
+		if (!(opY2_startNetworkThread((void *)3, false, (int (*)(void *))&lc43_upload4884c0, pick)))
 	{
 		delete pick;
 	}
@@ -1080,7 +1080,7 @@ string Scorekeeper::outputScoresheet(bool isDump)
 		lists->f40 = f68c;
 		lists->f44 = fc8;
 		lists->f60 = f110;
-		if (!(opY2_startNetworkThread(4, 0, &c44_uploadRunData_48a3f0, lists)))
+		if (!(opY2_startNetworkThread((void *)4, false, (int (*)(void *))&c44_uploadRunData_48a3f0, lists)))
 	{
 		delete lists;
 	}
@@ -1108,7 +1108,7 @@ string Scorekeeper::outputScoresheet(bool isDump)
 		small->f34 = g_d25490;
 		small->f44 = g_d254a0;
 		small->f54 = g_d254b0;
-		if (!(opY2_startNetworkThread(5, 0, &opC_uploadRunData_48ae20, small)))
+		if (!(opY2_startNetworkThread((void *)5, false, (int (*)(void *))&opC_uploadRunData_48ae20, small)))
 	{
 		delete small;
 	}

@@ -816,8 +816,7 @@ OpR1e_Spawner::OpR1e_Spawner(int a_, int b_, int c_, int d_, bool e_)
 
 	for (int i = 0; i < 20; i++)
 	{
-		int value = i * 5;
-		items.push_back(value);
+		items.push_back(i * 5);
 	}
 
 	bag = new OpY1_ShuffleBag(items, 1, 1);

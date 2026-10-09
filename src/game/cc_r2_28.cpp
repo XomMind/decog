@@ -11,10 +11,10 @@ struct ItemSet
 	~ItemSet();
 };
 
-struct AsciiImage
+struct OpCc28_AsciiImage
 {
-	AsciiImage();
-	~AsciiImage();
+	OpCc28_AsciiImage();
+	~OpCc28_AsciiImage();
 };
 
 struct Unknown9b8b60	// NOTE: placeholder name
@@ -50,8 +50,8 @@ ItemSet<int>	itemset_d358c0;
 vector<int>	vec_cf35b0;
 vector<int>	vec_cfb844;
 vector<int>	vec_d2d1c4;
-AsciiImage	image_d2e9b0;
-AsciiImage	image_d1da88;
+OpCc28_AsciiImage	image_d2e9b0;
+OpCc28_AsciiImage	image_d1da88;
 vector<int>	vec_d2ed7c;
 vector<int>	vec_d316a0;
 vector<int>	vec_d32990;

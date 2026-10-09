@@ -16,6 +16,13 @@ struct Point
 	Point &operator=(const Point &p);	// 0x46ca50 (ICF with the copy ctor)
 	bool operator==(const Point &p);	// 0x409b90
 };
+struct Pos	// NOTE: same layout as Point; the configured CMap::unknown8069e0 mangles with Pos
+{
+	int x;
+	int y;
+
+	Pos(const Pos &p);	// 0x46ca50
+};
 
 struct XEvent	// NOTE: placeholder name
 {
@@ -98,8 +105,8 @@ class CMap : public Console	// NOTE: partial layout
 public:
 	void centerPush_805020(Point *out);	// NOTE: placeholder name
 	void unknown8051f0(Point *min, Point *max);	// NOTE: placeholder name
-	bool unknown806d00(vector<Point> &points, bool flag);	// NOTE: placeholder name
-	void unknown8069e0(Point p, bool flag);	// NOTE: placeholder name
+	bool unknown806d00(vector<Pos> &points, bool flag);	// NOTE: placeholder name
+	void unknown8069e0(Pos p, bool flag);	// NOTE: placeholder name
 	void unknown807f40(vector<EntityData4563c0*> &entities);	// NOTE: placeholder name
 };
 extern CMap *opx5f_cec054;	// NOTE: placeholder name (0xcec054)
@@ -140,7 +147,7 @@ bool CFovEnemiesButton::input(void *event)
 			mean.y /= opx5f_world->unknown4636b0()->size();
 			Point old;
 			opx5f_cec054->centerPush_805020(&old);
-			opx5f_cec054->unknown8069e0(mean,true);
+			opx5f_cec054->unknown8069e0((Pos &)mean,true);
 			Area region;
 			opx5f_cec054->unknown8051f0(&region.min,&region.max);
 			bool shown = false;
@@ -154,7 +161,7 @@ bool CFovEnemiesButton::input(void *event)
 			}
 			if (!shown)
 			{
-				opx5f_cec054->unknown8069e0(old,true);
+				opx5f_cec054->unknown8069e0((Pos &)old,true);
 				Point cent;
 				opx5f_cec054->centerPush_805020(&cent);
 				vector<Point> sortedList;
@@ -183,13 +190,13 @@ bool CFovEnemiesButton::input(void *event)
 						}
 					}
 				}
-				if (opx5f_cec054->unknown806d00(sortedList,false))
+				if (opx5f_cec054->unknown806d00((vector<Pos> &)sortedList,false))
 					opx5f_cec054->unknown8051f0(&region.min,&region.max);
 			}
 			Point destination;
 			opx5f_cec054->centerPush_805020(&destination);
 			if (destination == old)
-				opx5f_cec054->unknown8069e0(opx5f_world->getPlayer()->getPosition(),false);
+				opx5f_cec054->unknown8069e0((Pos &)opx5f_world->getPlayer()->getPosition(),false);
 			else
 			{
 				vector<HExplosive> visible;

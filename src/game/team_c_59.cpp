@@ -60,7 +60,8 @@ struct C59_Robot	// NOTE: placeholder (robot record)
 	int f1cc[4];
 };
 struct C59_Map { char pad0[0x4c]; int f4c; };
-void OpV4d_deleteMapRecords(vector<int *> &v);	// NOTE: placeholder name
+struct OpV4d_Trivial;
+void OpV4d_deleteMapRecords(vector<OpV4d_Trivial *> &v);	// NOTE: placeholder name
 
 extern vector<C59_Robot *> c59_d25de0;	// NOTE: placeholder names below
 extern vector<C59_Item *> c59_d2d1c4;
@@ -94,7 +95,7 @@ void PlayerData::unknown778930()
 					if (c59_d2d1c4[*c59_d25de0[center]->f160[col][0]]->ff0 == 7)
 					{
 						c59_d25de0[center]->f1c8 += c59_d2d1c4[*c59_d25de0[center]->f160[col][0]]->ff4;
-						OpV4d_deleteMapRecords(c59_d25de0[center]->f160[col]);
+						OpV4d_deleteMapRecords((vector<OpV4d_Trivial *> &)c59_d25de0[center]->f160[col]);
 						OpQ5_eraseStep(c59_d25de0[center]->f160,col);
 					}
 				}

@@ -28,9 +28,8 @@ struct Rect
 	int y;
 	int width;
 	int height;
-	Rect(const Pos &pos);	// 0x40a720
 	Rect(int x_, int y_, int width_, int height_);
-	Rect(const Rect &rect) throw();
+	Rect(const Rect &rect) throw();	// 0x40a720
 };
 
 class XConsole
@@ -163,7 +162,7 @@ public:
 class D2Robot : public Console
 {
 public:
-	D2Robot(XConsole *parent, const Pos &pos, HEntity entity, vector<int> hacks);
+	D2Robot(XConsole *parent, const Rect &rect, HEntity entity, vector<int> hacks);
 	virtual bool input(void *event);
 	virtual void inputMouse(int a, int b);
 	virtual void close();
@@ -200,8 +199,8 @@ void logError(string location, string message);
 int opR1d_4541b0(unsigned int sound, int loopsB, int loops);
 int opR1d_454200(unsigned int sound, unsigned int channel, int loopsB, int loops);
 
-D2Robot::D2Robot(XConsole *parent, const Pos &pos, HEntity entity, vector<int> hacks)
-	: Console(parent, Rect(pos), 0, false, 10), entity(entity), hacks(hacks), manual(NULL), unknownbc(0), unknownc0(0)
+D2Robot::D2Robot(XConsole *parent, const Rect &rect, HEntity entity, vector<int> hacks)
+	: Console(parent, rect, 0, false, 10), entity(entity), hacks(hacks), manual(NULL), unknownbc(0), unknownc0(0)
 {
 	d2r_cec108 = this;
 	string name = "\\ " + opr5f_unknown954490(this->entity) + " \\";
@@ -268,13 +267,13 @@ D2Robot::D2Robot(XConsole *parent, const Pos &pos, HEntity entity, vector<int> h
 		{
 			for (unsigned int i = 1; i < copy.size(); i++)
 			{
-				if (!lexicographical_compare(d2r_cfc460[copy[i]].begin(), d2r_cfc460[copy[i]].end(), d2r_cfc460[list.back()].begin(), d2r_cfc460[list.back()].end()))
+				if (!lexicographical_compare(((const string &)d2r_cfc460[copy[i]]).begin(), ((const string &)d2r_cfc460[copy[i]]).end(), ((const string &)d2r_cfc460[list.back()]).begin(), ((const string &)d2r_cfc460[list.back()]).end()))
 					list.push_back(copy[i]);
 				else
 				{
 					for (unsigned int j = 0; j < list.size(); j++)
 					{
-						if (lexicographical_compare(d2r_cfc460[copy[i]].begin(), d2r_cfc460[copy[i]].end(), d2r_cfc460[list[j]].begin(), d2r_cfc460[list[j]].end()))
+						if (lexicographical_compare(((const string &)d2r_cfc460[copy[i]]).begin(), ((const string &)d2r_cfc460[copy[i]]).end(), ((const string &)d2r_cfc460[list[j]]).begin(), ((const string &)d2r_cfc460[list[j]]).end()))
 						{
 							d2r_insertAt(list, j, copy[i]);
 							break;

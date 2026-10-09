@@ -152,7 +152,7 @@ void logWarning(string location, string message);	// 0x404e50
 bool OpT8b_Fn9daf80(int low, int value, int high);	// NOTE: placeholder name (in range)
 string OpU8a_randomString(vector<string> &v);	// NOTE: placeholder name
 template <class T> bool OpQ5_findByName(vector<T *> &list, const string &name, T *&out);	// NOTE: placeholder name
-HItem OpS8c_popRandom(vector<HItem> &v);	// NOTE: placeholder name
+HItem popRandom9d8030(vector<HItem> &v);	// NOTE: placeholder name (0x9d8030; the config row names the OpS8c_Handle instantiation)
 
 class Overmind	// NOTE: placeholder layout
 {
@@ -222,7 +222,7 @@ int Overmind::spawnCargoDispatch_68aec0()
 					{
 						if (parts.empty())
 							goto loaded;
-						HItem dropped = OpS8c_popRandom(parts);
+						HItem dropped = popRandom9d8030(parts);
 						old -= dropped.get224()->getNestedField_4578c0();
 						dropped.get224()->remove57dbe0(0,0,1,1);
 					}

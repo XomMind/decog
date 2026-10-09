@@ -617,7 +617,7 @@ void GameData122::unknown784410()
 				while (k != 0)
 				{
 					int d = gm784_d21afc[i]->range.y != 0 ? gm784_d21afc[i]->range.randomInRange() : rng.rangeInt(0, 10);
-					list80[d].push_back(i);
+					list80[d].push_back((int)i);
 					k--;
 				}
 			}
@@ -647,7 +647,7 @@ void GameData122::unknown784410()
 				while (k != 0 && areas.size() != 0)
 				{
 					HL784 h = areas.pick();
-					h->records.push_back(i);
+					h->records.push_back((int)i);
 					k--;
 				}
 			}

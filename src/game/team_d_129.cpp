@@ -99,12 +99,12 @@ struct TerrainDef129	// NOTE: placeholder name and layout
 	int				unknown5c;	// +0x5c
 };
 
-struct CellEffect129	// NOTE: placeholder name (CellEffect); the throw() constructor keeps the new expression free of EH state
+struct CellEffect	// NOTE: placeholder name (CellEffect); the throw() constructor keeps the new expression free of EH state
 {
 	int		type;
 	int		count;	// +0x04
 
-	CellEffect129(int type_, int count_) throw();	// NOTE: folded with Pos(int, int), 0x46ca20
+	CellEffect(int type_, int count_) throw();	// NOTE: folded with Pos(int, int), 0x46ca20
 };
 extern vector<int> effectTypes129_d2f0f8;	// NOTE: placeholder name
 
@@ -189,8 +189,8 @@ public:
 	Point			pos;	// +0x30
 
 	void unknown45e110(bool a, bool b, HProp p);	// NOTE: placeholder name (Effect_45e110::trigger)
-	CellEffect129 *getEffect(int type);
-	void unknown45df90(CellEffect129 *effect);
+	CellEffect *getEffect(int type);
+	void unknown45df90(CellEffect *effect);
 	void unknown66a050(int terrainID, int cause, int flag);	// NOTE: placeholder name
 	bool unknown45d4e0();	// NOTE: placeholder name
 	bool unknown66dae0(int damage, int type, int a, int b, int cause, int c, HEntity attacker, bool flag);	// NOTE: placeholder name
@@ -202,11 +202,11 @@ void Cell::unknown66e650(HEntity attacker, int direct, vector<TurnRecord129 *> *
 	if (weapon->getValue457330(0x43))
 	{
 		unknown45e110(false,false,HProp());
-		CellEffect129 *effect = getEffect(5);
+		CellEffect *effect = getEffect(5);
 		if (effect)
 			effect->count++;
 		else
-			unknown45df90(new CellEffect129(effectTypes129_d2f0f8[5],1));
+			unknown45df90(new CellEffect(effectTypes129_d2f0f8[5],1));
 		return;
 	}
 	if (mode129_cf462c == 8 && def->unknown5c != 0 && def->unknown5c <= 2 && (def->unknown5c != 2 || world129_cefc4c->unknown463e90(pos)) && weapon->getValue457330(0x3d))

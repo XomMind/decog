@@ -215,7 +215,7 @@ public:
 class CTextInput : public Console
 {
 public:
-	void setUnknownBc(int unknownBc_, const string &unknownC0_);	// NOTE: placeholder name (0x48d330)
+	void unknownBc48d330(int unknownBc_, const string &unknownC0_);	// NOTE: placeholder name (0x48d330)
 };
 
 class ConsoleTitle : public Console
@@ -330,7 +330,7 @@ extern OpR5e_KeyMap *opr5e_keyMap;	// NOTE: placeholder name
 class OpW5_Unk49b870	// NOTE: placeholder name
 {
 public:
-	void reset();	// NOTE: placeholder name
+	void update();	// NOTE: placeholder name (0x49b890: resets when the flag at +0x26 is clear)
 };
 extern OpW5_Unk49b870 opr5e_d1d9c0;	// NOTE: placeholder name
 
@@ -460,7 +460,7 @@ void CShell::unknown939890()
 	}
 	manual = new CShellManual(this,index);
 	if (opq4c_createCodes8ff5e0())
-		manual->input->setUnknownBc((int)opr5e_unknown8ff8a0,gameString_cf4db4);
+		manual->input->unknownBc48d330((int)opr5e_unknown8ff8a0,gameString_cf4db4);
 }
 
 bool CShell::input(void *event)
@@ -643,7 +643,7 @@ bool CHack::input(void *event)
 	case 0xf8:
 		opr5e_mouse->unknown432170(!opr5e_mouse->getField_41a6e0());
 		opw7_d28c8a = !opw7_d28c8a;
-		opr5e_d1d9c0.reset();
+		opr5e_d1d9c0.update();
 		return true;
 	case 0xf7:
 	case 0xff:
@@ -709,8 +709,8 @@ void CShell::unknown90eec0(vector<int> &chars, int unknown6c, vector<XColor> *fo
 	{
 		for (unsigned int j = 0; j < chars.size(); j++)
 		{
-			line->setFore_417f80(j,0,(*fore)[j]);
-			line->setBack_417fc0(j,0,(*back)[j],1);
+			line->setFore_417f80(j,0,fore->at(j));
+			line->setBack_417fc0(j,0,back->at(j),1);
 		}
 		line->engine->stopAll();
 	}
@@ -1025,7 +1025,7 @@ void CRobot::unknown953c70()
 	opr5e_unknown4541b0(39,0,0);
 	manual = new CRobotManual(this,rect,rect2);
 	if (opq4c_createCodes8ff5e0())
-		manual->textInput->setUnknownBc((int)opr5e_unknown8ff8a0,gameString_cf4db4);
+		manual->textInput->unknownBc48d330((int)opr5e_unknown8ff8a0,gameString_cf4db4);
 }
 
 void CRobot::unknown946da0(int type)
@@ -1192,15 +1192,15 @@ void opr5f_unknown953d90(HEntity entity, vector<unsigned int> *hacks)	// NOTE: p
 			if (opr5e_b97c10[i] == 100)
 			{
 				if (groupType == 4 && (i == 0x43 || i == 0x45))
-					hacks->push_back(i);
+					hacks->push_back((unsigned int)i);
 				else if (groupType == 3 && (i == 0x44 || i == 0x46))
-					hacks->push_back(i);
+					hacks->push_back((unsigned int)i);
 			}
 			else if (opr5e_b97c10[i] == 0x61
 				|| opr5e_b97c10[i] == entity->getFaction()
 				|| (opr5e_b97c10[i] == 0x62 && groupType == 4 && opr5e_bba058[entity->getFaction()] < 6)
 				|| (opr5e_b97c10[i] == 0x63 && groupType == 3 && opr5e_bba058[entity->getFaction()] >= 6 && entity->getFaction() != 0x14 && entity->getFaction() != 6))
-				hacks->push_back(i);
+				hacks->push_back((unsigned int)i);
 		}
 	}
 }

@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 class XConsole { public: virtual ~XConsole(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void v4(); virtual void inputAscii(int key, int modifier); };
-class CTextInput : public XConsole { public: void setText(const string &text); };
+class CTextInput : public XConsole { public: void setText48d300(const string &text); };
 class CShellManual { public: char pad[0x6c]; CTextInput *textInput; };
 struct TeamB_ShellLabel { int pad0; string name; };	// NOTE: placeholder layout
 struct TeamB_ShellLink { char pad[0x6c]; TeamB_ShellLabel *label; char pad70[4]; int id; };	// NOTE: placeholder layout
@@ -41,7 +41,7 @@ bool TeamB_Shell::selectLink90cdf0(int id)	// 0x90cdf0
 					command.erase(command.begin() + pos);
 					command.insert(command.begin() + pos,texts[i]->links[j]->label->name.begin(),texts[i]->links[j]->label->name.end());
 					command.insert(command.begin(),'&');
-					manual->textInput->setText(command);
+					manual->textInput->setText48d300(command);
 					manual->textInput->inputAscii(0xd,5);
 					return true;
 				}

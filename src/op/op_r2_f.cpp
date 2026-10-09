@@ -74,7 +74,7 @@ class Prop
 {
 public:
 	OpR2_PropData *getData();	// NOTE: placeholder name (0x9b8f00)
-	const string &getName();	// NOTE: placeholder name (0x45c590)
+	const string &name45c590();	// NOTE: placeholder name (0x45c590)
 };
 
 class HProp
@@ -849,7 +849,7 @@ bool OpR2_unknown63a2b0(const Point &from, const Point &to)	// NOTE: placeholder
 	OpQ1_lineBresenhamPoints_40ff30(from,to,line);
 	for (unsigned int i = 1; i < line.size(); i++)
 	{
-		if (cells(line[i])->getProp().isValid() && cells(line[i])->getProp()->getName() == "GAR_RIF_Installer")
+		if (cells(line[i])->getProp().isValid() && cells(line[i])->getProp()->name45c590() == "GAR_RIF_Installer")
 			return true;
 	}
 	return false;

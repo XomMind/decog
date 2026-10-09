@@ -46,7 +46,7 @@ class HItemList : public vector<HItem>	// NOTE: placeholder layout
 class Item
 {
 public:
-	int getNestedField();	// NOTE: placeholder name (0x4578a0)
+	int name4578a0();	// NOTE: placeholder name (0x4578a0)
 	int getNestedField2();	// NOTE: placeholder name (0x4578c0)
 	int unknown457f90();	// NOTE: placeholder name
 	int unknown457880();	// NOTE: placeholder name
@@ -425,7 +425,7 @@ void OpX3_Plan::unknown581b80(int mode_)
 		{
 			if (!owner->unknown5c8fc0(i,false))
 			{
-				m10.push_back(i);
+				m10.push_back((unsigned int)i);
 			}
 		}
 		m20 = owner->unknown45a780();
@@ -441,9 +441,9 @@ void OpX3_Plan::unknown581b80(int mode_)
 		owner->unknown5cb830(&items);
 		for (unsigned int i = 0; i < items.size(); i++)
 		{
-			if (items[i]->getNestedField() < 4)
+			if (items[i]->name4578a0() < 4)
 			{
-				m24[items[i]->getNestedField()] += items[i]->getNestedField2();
+				m24[items[i]->name4578a0()] += items[i]->getNestedField2();
 				if (items[i]->unknown457f90() == 1 || items[i]->unknown457f90() == 2)
 				{
 					m34 = m34 - 1;

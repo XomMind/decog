@@ -194,7 +194,7 @@ struct ItemType;
 class Item
 {
 public:
-	ItemType *getType();	// NOTE: placeholder name (0x9b4350: [this+8])
+	ItemType *unknown9b4350();	// NOTE: placeholder name (ICF-folded getter 0x9b4350: [this+8])
 };
 
 class HItem	// NOTE: placeholder layout
@@ -280,7 +280,7 @@ void CMap::updatePredictedExplosion()
 		world->player->getExplosives(&explosives,target,-1);
 		for (unsigned int i = 0; i < explosives.size(); i++)
 		{
-			ExplosionData *explosion = explosives[i]->getType()->explosion;
+			ExplosionData *explosion = explosives[i]->unknown9b4350()->explosion;
 			if (explosion)
 			{
 				if (predicted.data == NULL)

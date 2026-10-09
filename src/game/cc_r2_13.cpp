@@ -12,6 +12,11 @@ public:
 	bool isValid() const;
 };
 
+
+class HProp	// NOTE: placeholder layout
+{
+	int	ID;
+};
 struct Point	// NOTE: placeholder layout
 {
 	int x;
@@ -53,7 +58,7 @@ public:
 	CInfoEntry *unknown4aecc0();	// NOTE: placeholder name
 	bool unknown4aed70();	// NOTE: placeholder name
 	void unknown4aedc0(CInfoEntry *entry);	// NOTE: placeholder name
-	void unknown8b4500(HEntity a, int b, HEntity c, Point *pos, int d, bool e);	// NOTE: placeholder name
+	void unknown8b4500(HEntity a, HProp b, HEntity c, Pos *pos, int d, bool e);	// NOTE: placeholder name
 
 	char pad6c[0x84 - 0x6c];
 	vector<CInfoEntry *> entries;	// NOTE: placeholder name
@@ -168,7 +173,7 @@ void CInfo::unknown4aedc0(CInfoEntry *entry)
 void ItemUI::unknown4aee10(int itemID)
 {
 	if (!isHidden() && unknown9c == *(HEntity *)&itemID)
-		unknown8b4500(HEntity(),itemID,HEntity(),&Point(-1),0,false);
+		unknown8b4500(HEntity(),*(HProp *)&itemID,HEntity(),(Pos *)&Point(-1),0,false);
 }
 
 CInfoCompare::~CInfoCompare()

@@ -37,7 +37,7 @@ public:
 	int unknown5cab90();					// NOTE: placeholder name
 	bool unknown5d6c30(vector<HItem> *out);	// NOTE: placeholder name
 	vector<HItem> *getInventoryList();
-	const string &getName();				// NOTE: placeholder name (folded getter XCell::getFore)
+	const string &name416f40();			// NOTE: placeholder name (folded getter 0x416f40)
 };
 
 class HEntity
@@ -122,5 +122,5 @@ void CompanionData::unknown7ace20(HEntity e)
 		}
 	}
 	if (!parts.empty() && parts[0]->unknown45cb30() >= 2)
-		unknown7ac1c0(e,0xb,0,e->getName());
+		unknown7ac1c0(e,0xb,0,e->name416f40());
 }

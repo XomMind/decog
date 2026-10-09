@@ -20,7 +20,6 @@ unknown7c0ad0,0x7c0ad0,0x165
 ?rfind@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIPBDI@Z,0x9afe90,0x2a
 ?rfind@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIDI@Z,0x9afec0,0x1f
 ?substr@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBE?AV12@II@Z,0x9aff20,0x43
-?find_first_of@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIDI@Z,0x9afee0,0x1f
 ?find_last_not_of@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIDI@Z,0x9aff00,0x1f
 CHelp::input,0x7c1a00,0x6a
 CHelp::update,0x7c18e0,0x86

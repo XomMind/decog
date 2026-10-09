@@ -147,8 +147,8 @@ bool OpQ1_Pt2::fromString(string text)
 	unsigned int comma = text.find(',');
 	if (comma == string::npos)
 		return false;
-	x = stringToInt(string(text.begin(),text.begin() + comma));
-	y = stringToInt(string(text.begin() + comma + 1,text.end()));
+	x = stringToInt(string(const_cast<string&>(text).begin(),const_cast<string&>(text).begin() + comma));
+	y = stringToInt(string(const_cast<string&>(text).begin() + comma + 1,text.end()));
 	return true;
 }
 
@@ -195,8 +195,7 @@ bool OpQ1_Box::parse_40b480(const string &text)
 			{
 				if (current.size())
 				{
-					int value = stringToInt(current);
-					numbers.push_back(value);
+					numbers.push_back(stringToInt(current));
 				}
 				current.clear();
 			}
@@ -224,7 +223,7 @@ bool Pos::parseRange_40bf80(const string &text)
 	{
 		if (dash == text.size() - 1)
 			return false;
-		set(stringToInt(string(text.begin(),text.begin() + dash)),stringToInt(string(text.begin() + dash + 1,text.end())));
+		set(stringToInt(string(const_cast<string&>(text).begin(),const_cast<string&>(text).begin() + dash)),stringToInt(string(const_cast<string&>(text).begin() + dash + 1,const_cast<string&>(text).end())));
 		if (x > y)
 			return false;
 	}
@@ -253,7 +252,7 @@ bool OpQ1_FRange::parse_40c500(const string &text)
 	{
 		if (dash == text.size() - 1)
 			return false;
-		set_40c4e0(stringToInt(string(text.begin(),text.begin() + dash)),stringToInt(string(text.begin() + dash + 1,text.end())));
+		set_40c4e0(stringToInt(string(const_cast<string&>(text).begin(),const_cast<string&>(text).begin() + dash)),stringToInt(string(const_cast<string&>(text).begin() + dash + 1,const_cast<string&>(text).end())));
 		if (min > max)
 			return false;
 	}

@@ -70,7 +70,7 @@ bool LC41Settings::read(const string&filename,bool binary){
      if(!bridges.back().x.parse40bf80(parts[4])||!bridges.back().y.parse40bf80(parts[5])||!bridges.back().width.parse40bf80(parts[7])||!bridges.back().length.parse40bf80(parts[8]))return false;break;}
     case 25:{LC41Record record;records.push_back(record);LC41Record*data=&records.back();data->enabled=true;data->level=lc41_int4bd2c0(parts[1]);data->chance=parts[2]==lc41_bced04?100:lc41_int4bd2c0(parts[2]);data->type=lc41_find9cda80(lc41_d1e4b8,21,parts[3]);data->index=-1;data->flag4c=false;
      if(data->type==-1){data->type=21;if(parts[3][0]=='*'){data->flag4c=true;lc41_erase4077e0(parts[3]);}data->name=parts[3];data->suffix4485a0();if(parts[4]!=lc41_bced08)data->other=parts[4];}
-     data->value=lc41_int4bd2c0(parts[5]);if(parts[6]!=lc41_bced0c){for(int i=0;i<4;i++){if(parts[6].find(lc41_cf63b8[i],0)!=string::npos)data->directions.push_back(i);}}
+     data->value=lc41_int4bd2c0(parts[5]);if(parts[6]!=lc41_bced0c){for(int i=0;i<4;i++){if(parts[6].find(lc41_cf63b8[i],0)!=string::npos)data->directions.push_back((unsigned int)i);}}
      if(data->type==21&&data->directions.empty())data->directions.push_back(2);
      data->category=lc41_find9cda80(lc41_d2e840,6,parts[7]);if(data->category==-1)return false;data->flag84=parts[8][0]!='-';
      if(!data->range88.parse40bf80(parts[9])||!data->range90.parse40bf80(parts[10])||!data->range98.parse40bf80(parts[11])||!data->rangeA0.parse40bf80(parts[12]))return false;data->extra=0;break;}

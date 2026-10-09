@@ -181,7 +181,7 @@ class Cell
 {
 public:
 	bool canCaveIn();	// 0x66af50
-	CellTerrainRecord *getTerrain();	// NOTE: placeholder name (folded getter 0x9fcd80)
+	CellTerrainRecord *unknown9fcd80();	// NOTE: placeholder name (folded getter 0x9fcd80)
 	void unknown45e110(bool a, bool b, HEntity e);	// NOTE: placeholder name (Effect_45e110::trigger)
 	HEntity getEntity();	// 0x45d250
 	void clearEntity();	// 0x66baf0
@@ -373,7 +373,7 @@ public:
 	bool unknown715d20();	// NOTE: placeholder name
 	bool unknown715ed0();	// NOTE: placeholder name
 	vector<vector<Point> > *unknown459070();	// NOTE: placeholder name (folded getter)
-	bool isVisible(const Point &p);	// 0x4631c0
+	bool isVisible4631c0(const Point &p);	// 0x4631c0
 	bool unknown463160(const Point &p);	// NOTE: placeholder name
 	vector<vector<HMarker> > *unknown463ec0();	// NOTE: placeholder name
 	void unknown74bb90(HProp prop, HEntity *owner, Point *target, bool *flag);	// NOTE: placeholder name
@@ -699,9 +699,9 @@ nextPos:;
 		{
 			for (int y = dest.y; y < dest.y + record->size; y++)
 			{
-				if (cells(x,y)->getTerrain() == TERRAIN_CAVE_WALL)
+				if (cells(x,y)->unknown9fcd80() == TERRAIN_CAVE_WALL)
 				{
-					CellTerrainRecord *terrain = cells(x,y)->getTerrain();
+					CellTerrainRecord *terrain = cells(x,y)->unknown9fcd80();
 					cells(x,y)->unknown45e110(false, false, self);
 					OpR3e_unknown6c0f10(Point(x,y), terrain->ID, 100);
 				}
@@ -1029,7 +1029,7 @@ nextPos:;
 								{
 									for (unsigned int j = 0; j < points.size(); j++)
 									{
-										if (world->isVisible(points[j]))
+										if (world->isVisible4631c0(points[j]))
 											opem_effectMgr->create()->init(opem_effectMgr, effect, points[j], opem_effectOrigin, 0, 0, 0, 9, 0);
 										cells(points[j])->getProp()->unknown45ce10(true, 0, true, HEntity());
 									}
@@ -1055,7 +1055,7 @@ nextPos:;
 				{
 					cells(spots[i])->getProp()->unknown45cb30()->unknown11 = true;
 					OPEM_MSG(0x2af, 0, 0, 0, self, HEntity());
-					if (!world->unknown463160(spots[i]) && !world->isVisible(spots[i]))
+					if (!world->unknown463160(spots[i]) && !world->isVisible4631c0(spots[i]))
 					{
 						vector<HMarker> &markers = (*world->unknown463ec0())[0];
 						for (unsigned int j = 0; j < markers.size(); j++)
@@ -1092,7 +1092,7 @@ marked:
 				{
 					world->unknown463b80(spots[i]);
 					OPEM_MSG(0x29f, 0, 0, 0, self, HEntity());
-					if (!world->unknown463160(spots[i]) && !world->isVisible(spots[i]))
+					if (!world->unknown463160(spots[i]) && !world->isVisible4631c0(spots[i]))
 					{
 						vector<HMarker> &markers = (*world->unknown463ec0())[0];
 						for (unsigned int j = 0; j < markers.size(); j++)

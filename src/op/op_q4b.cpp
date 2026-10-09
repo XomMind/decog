@@ -9,14 +9,6 @@ using namespace std;
 // engine-side declarations
 //==================================================================
 
-struct OpQ4b_PosArg	// NOTE: placeholder name (Pos passed by value)
-{
-	int x;
-	int y;
-	OpQ4b_PosArg(int x_, int y_);	// NOTE: placeholder name (Pos::Pos 0x46ca20)
-	OpQ4b_PosArg(const OpQ4b_PosArg &p);	// NOTE: placeholder name
-};
-
 struct Pos
 {
 	int x;
@@ -25,6 +17,7 @@ struct Pos
 	Pos();	// 0x453b40
 	Pos(int v);	// 0x409990
 	Pos(int x_, int y_);	// 0x46ca20
+	Pos(const Pos &pos) throw();
 	Pos &operator=(const Pos &pos);	// 0x46ca50
 };
 
@@ -81,7 +74,6 @@ public:
 	void deleteSubconsolesExcept(XConsole *a, XConsole *b);
 	bool contains(const Pos &pos);
 	Pos localToAbs(Pos pos);
-	Pos localToAbs(struct OpQ4b_PosArg pos);	// NOTE: same function (0x428650); argument type with a copy constructor so the temporary is built in place
 	void setScaleX(float scale);	// NOTE: placeholder name (0x417b60)
 	void setScaleY(float scale);	// NOTE: placeholder name (0x417b80)
 	void setChar_417f50(int x, int y, int ch);	// NOTE: placeholder name
@@ -152,7 +144,7 @@ class Item	// NOTE: placeholder layout
 {
 public:
 	int getType();	// NOTE: placeholder name (folded getter 0x44aec0)
-	int getNestedField();	// NOTE: placeholder name (folded getter 0x4578a0)
+	int field4578a0();	// NOTE: placeholder name (folded getter 0x4578a0, not Item::getNestedField 0x457820)
 	int getField457820();	// NOTE: placeholder name (folded getter)
 	OpQ4b_ItemData *getData();	// NOTE: placeholder name (folded +8 getter 0x9b4350)
 	void unknown458390(int a);	// NOTE: placeholder name
@@ -576,7 +568,7 @@ void CInfo::unknown8b3d50(HEntity a, HProp b, HEntity c, Pos *pos, bool e)
 		int total = 0;
 		for (unsigned int i = 0; i < list->size(); i++)
 		{
-			if ((*list)[i]->getNestedField() == unknown9c->getNestedField())
+			if ((*list)[i]->field4578a0() == unknown9c->field4578a0())
 			{
 				opq4b_swap9da1f0(list,i,total);
 				total++;
@@ -1082,7 +1074,7 @@ bool CInfo::input(void *event)
 				unknown94 = entries.size() - 1;
 			else
 				unknown94 = unknown94 - 1;
-			opq4b_mouse->setPos(entries[unknown94]->localToAbs(OpQ4b_PosArg(4,0)));
+			opq4b_mouse->setPos(entries[unknown94]->localToAbs(Pos(4,0)));
 		}
 		return true;
 	case 0xf2:
@@ -1096,7 +1088,7 @@ bool CInfo::input(void *event)
 				unknown94 = 0;
 			else
 				unknown94 = unknown94 + 1;
-			opq4b_mouse->setPos(entries[unknown94]->localToAbs(OpQ4b_PosArg(4,0)));
+			opq4b_mouse->setPos(entries[unknown94]->localToAbs(Pos(4,0)));
 		}
 		return true;
 	case 0xf3:

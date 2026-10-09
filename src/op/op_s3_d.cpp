@@ -416,8 +416,8 @@ public:
 	void clearEntity();				// NOTE: placeholder name (0x66baf0)
 	bool unknown45dc90(int size);
 	int unknown45d430();				// NOTE: placeholder name
-	CellTerrainRecord *getTerrain();	// 0x9fcd80
-	void unknown45de40();				// NOTE: placeholder name
+	CellTerrainRecord *terrain9fcd80();	// 0x9fcd80 (folded [ecx] getter; Cell::getTerrain is the int-returning csv name)
+	bool unknown45de40();				// NOTE: placeholder name
 
 	bool unknown66ad90(int size);		// NOTE: placeholder name
 	bool unknown66b170();				// NOTE: placeholder name
@@ -636,7 +636,7 @@ void Cell::unknown66a050(int terrainID, int cause, int unknown)
 			sweepGetSurroundingCells(position,surrounding);
 			for (unsigned int i = 0; i < surrounding.size(); i++)
 			{
-				if (cells(surrounding[i])->getTerrain() == TERRAIN_EARTH)
+				if (cells(surrounding[i])->terrain9fcd80() == TERRAIN_EARTH)
 					opS3_unknown6c0f10(surrounding[i],TERRAIN_CAVE_WALL->ID,0);
 			}
 			world->unknown74b060(position,terrain->unknown74,100);

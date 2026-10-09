@@ -8,7 +8,7 @@ struct Point
 	int x;
 	int y;
 
-	int randomInRange_40c130() const;	// NOTE: placeholder name
+	int randomInRange_40c130();	// NOTE: placeholder name
 };
 
 class ItemDef
@@ -31,7 +31,7 @@ bool BS::unknown6ca170(const Point &range, int picks, int count, int chanceType,
 {
 	for (int i = 0; i < count; i++)
 	{
-		int rating = range.randomInRange_40c130();
+		int rating = ((Point &)range).randomInRange_40c130();
 		items->push_back(rating == -1 ? selectRandomItem(chanceType,0x1f,0x12) : selectRandomItemOfRating(rating,0,chanceType,0x1f,0x12,unknown,0));
 		if (items->back() == 0)
 			items->pop_back();

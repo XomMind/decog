@@ -111,7 +111,7 @@ public:
 	string *getName416f40();	// NOTE: placeholder name (folded +0xc getter)
 	class OpR5c_AI *getAI();	// NOTE: placeholder name (folded getter 0x45b590)
 	bool isHostileTo(class HEntity e);	// 0x45aa70
-	class OpR5c_Inventory *getInventory();	// NOTE: placeholder name
+	class OpR5c_Inventory *inventory45ad90();	// NOTE: placeholder name (0x45ad90; Entity::getInventory in the csv returns Inventory*)
 	Pos &getPosition();	// 0x45a4a0
 };
 
@@ -309,7 +309,7 @@ void OpR5c_Transmission::unknown8f5090_x5b()
 	}
 	if (entity->isHostileTo(opr5c_world->getPlayer()) && !entity->getAI()->unknown458fb0(opr5c_world->getPlayer()))
 		entity->getAI()->addTarget(opr5c_world->getPlayer(),1,0,1,0);
-	opr5c_unknown4569a0(0x3a,entity,HEntity(),HProp(),HProp(),0,0,entity->getInventory(),entity,HProp(),HProp(),0);
+	opr5c_unknown4569a0(0x3a,entity,HEntity(),HProp(),HProp(),0,0,entity->inventory45ad90(),entity,HProp(),HProp(),0);
 	if (opr5c_popupMgr)
 	{
 		if (!!((opr5c_transmissions[unknown74]->name == "EX-DEC_EXI" || opr5c_transmissions[unknown74]->name == "EX-DEC_WAR") && !stringToInt(opr5c_gameData.unknown46f6d0("exiAttackedLocals_g"))))

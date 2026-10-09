@@ -336,7 +336,7 @@ Unknown_45eab0_45ebd0::~Unknown_45eab0_45ebd0()
 	OpV4d_deleteMapRecords(unknown108);
 }
 
-struct OpT8a_VBase;
+class OpT8a_VBase;
 void OpT8a_deleteVectorContents(vector<OpT8a_VBase*> &v);	// NOTE: placeholder name
 class Owned_449070	// NOTE: placeholder name (scalar deleting destructor 0x449070)
 {

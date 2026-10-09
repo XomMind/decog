@@ -10,7 +10,6 @@ struct Pos
 {
 	int x;
 	int y;
-	Pos();	// 0x40a6e0
 	Pos(const Pos &pos) throw();	// 0x46ca50
 	Pos add_409b60(const Pos &offset);	// NOTE: placeholder name
 };
@@ -21,6 +20,7 @@ struct Rect
 	int y;
 	int width;
 	int height;
+	Rect();	// 0x40a6e0
 	Rect(int x_, int y_, int width_, int height_);
 	Rect(const Rect &rect);	// 0x40a720
 };
@@ -815,9 +815,9 @@ D2Parse::D2Parse(XConsole *parent, D2pHE entity)
 	}
 	for (unsigned int i = 0, ty = 2; i < labels.size(); i++, ty++)
 		lines.push_back(new D2pLine(this, cols, ty, labels[i], values[i]));
-	Pos pos;
-	int wide = cols + 4;
-	int height = lines.size() + 4;
+	Rect pos;
+	pos.width = cols + 4;
+	pos.height = lines.size() + 4;
 	Pos vec = entity->getPosition()->add_409b60(*d2p_cec054->unknown458ef0());
 	vec.x *= d2p_caf128;
 	vec.x += 1;
@@ -825,17 +825,18 @@ D2Parse::D2Parse(XConsole *parent, D2pHE entity)
 	vec.x += d2p_cf27ec;
 	vec.y *= d2p_caf12c;
 	vec.y += d2p_cf27f0;
-	if (vec.x + wide >= d2p_cf27f4 * d2p_caf128 + d2p_cf27ec)
+	if (vec.x + pos.width >= d2p_cf27f4 * d2p_caf128 + d2p_cf27ec)
 	{
 		int x;
-		if ((x = (entity->getPosition()->x + d2p_cec054->unknown458ef0()->x) * d2p_caf128 - wide) >= 0)
+		if ((x = (entity->getPosition()->x + d2p_cec054->unknown458ef0()->x) * d2p_caf128 - pos.width) >= 0)
 			vec.x = x;
 	}
-	if (vec.y + height >= d2p_cf27f8 * d2p_caf12c + d2p_cf27f0)
-		vec.y -= vec.y + height - (d2p_cf27f8 * d2p_caf12c + d2p_cf27f0);
-	pos = vec;
+	if (vec.y + pos.height >= d2p_cf27f8 * d2p_caf12c + d2p_cf27f0)
+		vec.y -= vec.y + pos.height - (d2p_cf27f8 * d2p_caf12c + d2p_cf27f0);
+	pos.x = vec.x;
+	pos.y = vec.y;
 	setPos(vec);
-	resize(wide, height);
+	resize(pos.width, pos.height);
 	d2p_cec114 = this;
 	setTitle(new ConsoleTitle(this, "\\ P A R S E \\", 0, 2));
 	animate("CParse_Border");

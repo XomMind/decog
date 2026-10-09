@@ -165,12 +165,12 @@ struct OpU5s2_HF
 struct OpU5s2_RecF;
 extern OpU5s2_Pool<OpU5s2_RecF,OpU5s2_HF> opU5s2_poolF;	// 0xcfac14
 
-struct OpU5s2_EntityRecord;
+struct OpW8_EntityRecord;
 class Entity
 {
 	char pad00[0x148];
 public:
-	Entity(OpU5s2_EntityRecord *record_);	// 0x5c3590
+	Entity(OpW8_EntityRecord *record_);	// 0x5c3590
 	void init(HEntity self);	// 0x5c4640
 };
 extern OpU5s2_Pool<Entity,HEntity> opU5s2_entityPool;	// 0xd21720
@@ -209,7 +209,7 @@ public:
 	OpU5s2_HA createA(OpU5s2_RecA *rec);	// 0x7930e0
 	OpU5s2_HB createB();	// 0x793120
 	OpU5s2_HC createC();	// 0x793190
-	HEntity createEntity(OpU5s2_EntityRecord *record);	// 0x793200
+	HEntity createEntity(OpW8_EntityRecord *record);	// 0x793200
 	OpU5s2_HD createD(int *data);	// 0x7932b0
 	OpU5s2_HE createE(int *data);	// 0x793360
 	OpU5s2_HF createF(OpU5s2_RecF *rec);	// 0x793410
@@ -238,7 +238,7 @@ OpU5s2_HC OpU5s2_Factory::createC()
 	return h;
 }
 
-HEntity OpU5s2_Factory::createEntity(OpU5s2_EntityRecord *record)
+HEntity OpU5s2_Factory::createEntity(OpW8_EntityRecord *record)
 {
 	HEntity h = opU5s2_entityPool.add(new Entity(record));
 	h->init(h);

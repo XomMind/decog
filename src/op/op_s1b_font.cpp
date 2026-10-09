@@ -68,7 +68,7 @@ public:
 class XFontData
 {
 public:
-	bool loadCharmap(OpS1b_FontSet *fontSet_, const string file, int columns, int rows);
+	bool loadCharmap(OpS1b_FontSet *fontSet_, string file, int columns, int rows);
 	void setBitmap(XBitmap *bitmap_, int columns, int rows);	// NOTE: placeholder name (0x42efa0)
 
 	string name;
@@ -86,7 +86,7 @@ public:
 	unsigned int colorMaskInverse;	// +0x48
 };
 
-bool XFontData::loadCharmap(OpS1b_FontSet *fontSet_, const string file, int columns, int rows)
+bool XFontData::loadCharmap(OpS1b_FontSet *fontSet_, string file, int columns, int rows)
 {
 	fontSet = fontSet_;
 	name.assign(file.begin(),file.begin() + file.rfind('.',string::npos));

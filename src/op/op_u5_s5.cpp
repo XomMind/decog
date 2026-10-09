@@ -22,6 +22,7 @@ struct Pos : public Point
 {
 	Pos(int v);	// 0x409990
 	Pos(int x_, int y_);
+	Pos(const Pos &p, int dx, int dy);	// 0x4099c0
 };
 
 struct OpU5_PointVar	// NOTE: placeholder name; a Point-like local whose default ctor is 0x453b40 (-1,-1) and whose operator= folds into Point's copy ctor
@@ -113,7 +114,7 @@ public:
 class CText : public Console
 {
 public:
-	CText(XConsole *parent, const Point &pos, const string &text_, int font, int maxWidth, int layer);
+	CText(XConsole *parent, const Pos &pos, const string &text_, int font, int maxWidth, int layer);
 
 	char pad6c[0x88 - sizeof(Console)];
 };
@@ -243,7 +244,7 @@ public:
 class CArtAnimated : public CTitleAnimated
 {
 public:
-	CArtAnimated(XConsole *parent, OpU5_AsciiImage *image, int x, int y, bool hidden, int anim, int unknown1, int unknown2, const Pos &offset, int width, int height);
+	CArtAnimated(XConsole *parent, class AsciiImage *image, int x, int y, bool hidden, int anim, int unknown1, int unknown2, const Pos &offset, int width, int height);
 
 	char pad6c[0x88 - 0x6c];
 };
@@ -517,7 +518,7 @@ void CCommands::unknown7d6690()
 	if (ID == 6)
 	{
 		string text = "Data output to " + score;
-		unknown1cc = new CText(this,Point(list1bc[3]->getPos(),0,3),text,0,0,-1);
+		unknown1cc = new CText(this,Pos(list1bc[3]->getPos(),0,3),text,0,0,-1);
 		unknown1cc->unknown48c3c0(opU5_anim_cef8dc);
 	}
 }
@@ -785,7 +786,7 @@ void CCommands::addGallerySection(const Point &origin, const string &title, vect
 		list170.push_back(new Unknown_c34c00(this,base.x,base.y,0x13,5));
 		list170.back()->drawFrame(NULL,*opU5_color_cfe674,true,true);
 		if (unknown15c)
-			list180.push_back(new CArtAnimated(this,unknown15c,base.x + 2,base.y + 1,false,opU5_anim_cef7f8[items[i]],-1,-1,Pos(0,items[i] * 3),0x11,3));
+			list180.push_back(new CArtAnimated(this,(AsciiImage *)unknown15c,base.x + 2,base.y + 1,false,opU5_anim_cef7f8[items[i]],-1,-1,Pos(0,items[i] * 3),0x11,3));
 		if (items[i] == 5)
 		{
 			unknown190 = new Console(this,0x11,3,base.x + 2,base.y + 1,2,false,-1);

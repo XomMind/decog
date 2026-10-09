@@ -556,9 +556,9 @@ bool OpY1_CharEqualNoCase::operator()(char a, char b)
 	return toupper(a) == toupper(b);
 }
 
-int opw1_findNoCase(string &text, string &term) throw()	// NOTE: placeholder name
+int opw1_findNoCase(const string &text, const string &term) throw()	// NOTE: placeholder name
 {
-	string::iterator it = search(text.begin(),text.end(),term.begin(),term.end(),OpY1_CharEqualNoCase());
+	string::const_iterator it = search(text.begin(),text.end(),term.begin(),term.end(),OpY1_CharEqualNoCase());
 	if (it != text.end())
 		return it - text.begin();
 	else

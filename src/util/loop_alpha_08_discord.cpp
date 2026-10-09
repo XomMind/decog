@@ -36,8 +36,8 @@ int la8_discord4fa0c0(string *data) {
         if(delay>=10000) la8_warn404e50("discordWebhookThread()","long wait: "+la8_int4051f0(delay));
        }
       } else if(response.find("invalid JSON")!=string::npos) {
-       la8_error404f10("discordWebhookThread()","invalid JSON, attempted (first 100 chars sent): "+(msg.length()<=100?string(msg):string(static_cast<const string&>(msg).begin(),static_cast<const string&>(msg).begin()+100)));
-       if(data) la8_error404f10("discordWebhookThread()","invalid JSON returned (first 100 chars): "+(data->length()<=100?string(*data):string(static_cast<const string&>(*data).begin(),static_cast<const string&>(*data).begin()+100)));
+       la8_error404f10("discordWebhookThread()","invalid JSON, attempted (first 100 chars sent): "+(msg.length()<=100?string(msg):string(msg.begin(),msg.begin()+100)));
+       if(data) la8_error404f10("discordWebhookThread()","invalid JSON returned (first 100 chars): "+(data->length()<=100?string(*data):string(data->begin(),data->begin()+100)));
       }
      }
     } else {

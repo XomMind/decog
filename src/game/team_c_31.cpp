@@ -7,6 +7,7 @@
 using namespace std;
 
 string intToString(int value);
+string tc31_OpY1_intToStringSigned(int value);	// 0x405560 (showpos formatting)
 string opR1d_436e70(int unknown1, int unknown2, int unknown3);	// NOTE: placeholder name
 bool OpS8b_Fn9d43b0(int *list, unsigned int count, int value);	// NOTE: placeholder name
 void unknown7d9df0(ostream &out, const string &name, float value, int unknown1, int unknown2, string text);	// c125.cpp
@@ -225,7 +226,7 @@ void C31_Gallery::exportKnown(int key, int mode)
 					unknown7d9f10(out, " Heat Transfer", (element->f158 != 0 ? gameStrings_cf6648[element->f158] + " (" + intToString(g_b96178[element->f158]) + ")" : string("")));
 					unknown7d9f10(out, " Spectrum", (element->f154 != 0 ? gameStrings_d31b68[element->f154] + " (" + intToString(g_b9654c[element->f154]) + ")" : string("")));
 					OpU5_writeNameIntLine(out, " Disruption", element->f150, "", "");
-					unknown7d9f10(out, " Salvage", (element->f12c != 0 ? intToString(element->f12c) : string("")));
+					unknown7d9f10(out, " Salvage", (element->f12c != 0 ? tc31_OpY1_intToStringSigned(element->f12c) : string("")));
 					if (element->f1a0 != 0)
 				{
 					first = element->f1a0;
@@ -238,7 +239,7 @@ void C31_Gallery::exportKnown(int key, int mode)
 					unknown7d9f10(out, " Heat Transfer", (first->f64 != 0 ? gameStrings_cf6648[first->f64] + " (" + intToString(g_b96178[first->f64]) + ")" : string("")));
 					unknown7d9f10(out, " Spectrum", (first->f60 != 0 ? gameStrings_d31b68[first->f60] + " (" + intToString(g_b9654c[first->f60]) + ")" : string("")));
 					OpU5_writeNameIntLine(out, " Disruption", first->f5c, "", "");
-					unknown7d9f10(out, " Salvage", (first->f58 != 0 ? intToString(first->f58) : string("")));
+					unknown7d9f10(out, " Salvage", (first->f58 != 0 ? tc31_OpY1_intToStringSigned(first->f58) : string("")));
 				}
 					string str = element->describe();
 					if (element->f48 != 1)
@@ -579,7 +580,7 @@ void C31_Gallery::exportKnown(int key, int mode)
 					unknown7da020(out, (element->f158 != 0 ? gameStrings_cf6648[element->f158] + " (" + intToString(g_b96178[element->f158]) + ")" : string("")));
 					unknown7da020(out, (element->f154 != 0 ? gameStrings_d31b68[element->f154] + " (" + intToString(g_b9654c[element->f154]) + ")" : string("")));
 					unknown7da060(out, element->f150, "", "");
-					unknown7da020(out, (element->f12c != 0 ? intToString(element->f12c) : string("")));
+					unknown7da020(out, (element->f12c != 0 ? tc31_OpY1_intToStringSigned(element->f12c) : string("")));
 					first = element->f1a0;
 					unknown7da020(out, (first != 0 ? intToString(first->f3c) : string("")));
 					unknown7da020(out, (first != 0 && first->f40 != 0 ? intToString(first->f40) : string("")));
@@ -590,7 +591,7 @@ void C31_Gallery::exportKnown(int key, int mode)
 					unknown7da020(out, (first != 0 && first->f64 != 0 ? gameStrings_cf6648[first->f64] + " (" + intToString(g_b96178[first->f64]) + ")" : string("")));
 					unknown7da020(out, (first != 0 && first->f60 != 0 ? gameStrings_d31b68[first->f60] + " (" + intToString(g_b9654c[first->f60]) + ")" : string("")));
 					unknown7da020(out, (first != 0 && first->f5c != 0 ? intToString(first->f5c) : string("")));
-					unknown7da020(out, (first != 0 && first->f58 != 0 ? intToString(first->f58) : string("")));
+					unknown7da020(out, (first != 0 && first->f58 != 0 ? tc31_OpY1_intToStringSigned(first->f58) : string("")));
 					unknown7da020(out, (element->f208 ? intToString(element->f204) : string("")));
 					unknown7da020(out, (element->f208 ? element->getSuffix() : string("")));
 					unknown7da020(out, (element->f208 ? element->namesJoined() : string("")));

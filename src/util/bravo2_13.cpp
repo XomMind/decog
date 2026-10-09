@@ -96,7 +96,7 @@ void BS::factory_6ead20() {
    parts[g][b].offsetBy(base);
  vector<unsigned> edges;
  for(int k=0;k<=7;k++)
-  edges.push_back(k);
+  edges.push_back((unsigned int)k);
  BV14_shuffle(edges);
  edges.push_back(8);
  OpR5h_WL<int> ranks[5];

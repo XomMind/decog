@@ -140,7 +140,7 @@ extern int d2f_caf128, d2f_caf12c;
 
 void OpX5_addUniqueString(vector<string> &v, string s);
 string OpC_stringFunc_4082b0(const string &s);
-int OpS8d_countNonNull(vector<int> &v);
+int OpS8d_countNonNull_d210(vector<int> &v);
 int OpS8b_Fn9d4500(vector<int> &v);
 void logError(string location, string message);
 bool opS2_logPhrase_5141b0(int id, const string *a, const string *b, const string *c, HEntity subject, const Pos *at);
@@ -454,7 +454,7 @@ void delta2_showTransmission_8f58f0(HEntity speaker, int index)	// NOTE: placeho
 					else
 						counts[vec[i]->data()->damageType]++;
 				}
-				if (OpS8d_countNonNull(counts) == 1)
+				if (OpS8d_countNonNull_d210(counts) == 1)
 				{
 					int type = OpS8b_Fn9d4500(counts);
 					switch (type)

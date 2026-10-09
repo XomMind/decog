@@ -28,7 +28,7 @@ public:
 class Prop
 {
 public:
-	const string &getName();	// NOTE: placeholder name (Push_45c590::operate)
+	const string &name45c590();	// NOTE: placeholder name (Push_45c590::operate)
 	void unknown45ce10(bool a, int b, bool c, HProp p);	// NOTE: placeholder name
 };
 
@@ -194,7 +194,7 @@ void Owner66::unknown783060()
 		{
 			for (int y = area->y1; y <= area->y2; y++)
 			{
-				if ((*cells66_cfd44c.at(x,y))->getProp().isValid() && (*cells66_cfd44c.at(x,y))->getProp()->getName() == "SCR_Reading_Room_Door")
+				if ((*cells66_cfd44c.at(x,y))->getProp().isValid() && (*cells66_cfd44c.at(x,y))->getProp()->name45c590() == "SCR_Reading_Room_Door")
 				{
 					(*cells66_cfd44c.at(x,y))->getProp()->unknown45ce10(true,0,true,HProp());
 					break;

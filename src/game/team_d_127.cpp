@@ -47,7 +47,8 @@ public:
 };
 
 HItem OpX5_randomRecord(vector<HItem> &v);	// NOTE: placeholder name
-HItem OpS8c_popRandom(vector<HItem> &v);	// NOTE: placeholder name
+struct OpS8c_Handle : public HItem {};	// NOTE: placeholder name (handle type named by the configured OpS8c_popRandom signature)
+OpS8c_Handle OpS8c_popRandom(vector<OpS8c_Handle> &v);	// NOTE: placeholder name
 
 class Entity
 {
@@ -249,7 +250,7 @@ void BS::unknown774390(int action, int turns)
 							opR1d_4541b0(0xff,0,0);
 							if (rng.chance(50) && !swallowed127_cf4a38.empty())
 							{
-								HItem back = OpS8c_popRandom(swallowed127_cf4a38);
+								OpS8c_Handle back = OpS8c_popRandom((vector<OpS8c_Handle> &)swallowed127_cf4a38);
 								if (rng.chance(50))
 									back->unknown57dbe0(0,0,1,1);
 								else

@@ -3620,6 +3620,12 @@ void opw8_appendPoints(vector<Point> &dst, vector<Point> &src);	// NOTE: placeho
 bool footprintHasImpassableTile(const Point &p, int size);
 extern vector<HEntity> opw8_d35850;	// NOTE: placeholder name
 
+class OpV4c_View	// NOTE: placeholder name (bounds-checked grid view, op_v4c.cpp; the exe passes it where the signature says Array2D<int>*)
+{
+public:
+	int *get(Point *pos);	// 0x9cfd90
+	int *get(int x, int y);	// 0x9cfe20
+};
 bool opw8_shoveEntities(Array2D<int> *grid, const Point &p, vector<Point> visited)	// NOTE: placeholder name (0x5ddbf0)
 {
 	vector<Point> adjacent;
@@ -3628,16 +3634,16 @@ bool opw8_shoveEntities(Array2D<int> *grid, const Point &p, vector<Point> visite
 		opw8_removePoint(adjacent,visited[i]);
 	for (unsigned int i = 0; i < adjacent.size(); i++)
 	{
-		if (!grid->contains(adjacent[i].x,adjacent[i].y) || ((*grid)(adjacent[i]) != -1 && opw8_d35850[(*grid)(adjacent[i])]->getSize() > 1))
+		if (!grid->contains(adjacent[i].x,adjacent[i].y) || (*((OpV4c_View *)grid)->get(&adjacent[i]) != -1 && opw8_d35850[*((OpV4c_View *)grid)->get(&adjacent[i])]->getSize() > 1))
 			opw8_erasePointStepBack(adjacent,i);
 	}
 	opw8_shufflePoints(adjacent);
 	for (unsigned int i = 0; i < adjacent.size(); i++)
 	{
-		if ((*grid)(adjacent[i]) == -1 && !footprintHasImpassableTile(adjacent[i],1))
+		if (*((OpV4c_View *)grid)->get(&adjacent[i]) == -1 && !footprintHasImpassableTile(adjacent[i],1))
 		{
-			(*grid)(adjacent[i]) = (*grid)(p);
-			(*grid)(p) = -1;
+			*((OpV4c_View *)grid)->get(&adjacent[i]) = *((OpV4c_View *)grid)->get((Point *)&p);
+			*((OpV4c_View *)grid)->get((Point *)&p) = -1;
 			return true;
 		}
 	}
@@ -3645,10 +3651,10 @@ bool opw8_shoveEntities(Array2D<int> *grid, const Point &p, vector<Point> visite
 	opw8_appendPoints(path,adjacent);
 	for (unsigned int i = 0; i < adjacent.size(); i++)
 	{
-		if ((*grid)(adjacent[i]) != -1 && opw8_shoveEntities(grid,adjacent[i],path))
+		if (*((OpV4c_View *)grid)->get(&adjacent[i]) != -1 && opw8_shoveEntities(grid,adjacent[i],path))
 		{
-			(*grid)(adjacent[i]) = (*grid)(p);
-			(*grid)(p) = -1;
+			*((OpV4c_View *)grid)->get(&adjacent[i]) = *((OpV4c_View *)grid)->get((Point *)&p);
+			*((OpV4c_View *)grid)->get((Point *)&p) = -1;
 			return true;
 		}
 	}
@@ -3678,7 +3684,7 @@ bool Entity::unknown5ddf50(const Point &p, Array2D<int> *grid, bool *tooLarge)
 					opw8_d35850.push_back(cells(x,y)->getEntity());
 					index = opw8_d35850.size() - 1;
 				}
-				(*grid)(x,y) = index;
+				*((OpV4c_View *)grid)->get(x,y) = index;
 			}
 		}
 	}
@@ -3694,9 +3700,9 @@ bool Entity::unknown5ddf50(const Point &p, Array2D<int> *grid, bool *tooLarge)
 	Point unused;
 	for (unsigned int i = 0; i < points.size(); i++)
 	{
-		if ((*grid)(points[i]) != -1)
+		if (*((OpV4c_View *)grid)->get(&points[i]) != -1)
 		{
-			entities.push_back(opw8_d35850[(*grid)(points[i])]);
+			entities.push_back(opw8_d35850[*((OpV4c_View *)grid)->get(&points[i])]);
 			if ((entities.back()->isPlayer() && entities.back()->unknown5cad50() && opw8_table_ba0984[opw8_cefb38]) || entities.back()->getFaction() == 0xb)
 				return false;
 			if (entities.back()->getSize() > 1)

@@ -12,7 +12,11 @@ template <class T> void OpQ5_readObjects(istream &stream, vector<T*> &v, int ski
 template <class T> void OpQ5_clearObjects(vector<T*> &v);	// NOTE: placeholder name
 template <class T> void OpQ5_readVectors(istream &stream, vector< vector<T> > &v);	// NOTE: placeholder name
 void OpT8a_readInts(istream &in, vector<int> &v);	// NOTE: placeholder name, defined in op_t8a.cpp
-struct OpS8a_P8;
+struct OpS8a_P8	// NOTE: placeholder layout (8-byte element, vector clear folds with vector<Point>::clear 0x9b3560)
+{
+	int a;
+	int b;
+};
 void OpS8a_readP8s(istream &stream, vector<OpS8a_P8> &v);	// NOTE: placeholder name, defined in op_s8a.cpp
 void OpU3_read9da130(istream &stream, void *value);	// NOTE: placeholder name (0x9da130)
 
@@ -153,7 +157,7 @@ struct OpU3_Rec673e70	// NOTE: placeholder name
 	int unknown8C;
 	OpQ5_T9da4c0 *unknown90;
 	int unknown94;
-	vector<int> unknown98;
+	vector<OpS8a_P8> unknown98;
 	vector<int> unknownA8;
 	int unknownB8;
 	int unknownBC;
@@ -169,7 +173,7 @@ struct OpU3_Rec673e70	// NOTE: placeholder name
 	bool unknown100;
 	int unknown104;
 	vector<OpQ5_T9e2c40 *> unknown108;
-	vector<int> unknown118;
+	vector<OpS8a_P8> unknown118;
 	int unknown128;
 	OpU1_Point unknown12C;
 	int unknown134;
@@ -236,7 +240,7 @@ void OpU3_Rec673e70::load(istream &stream)
 	OpQ5_readPointer(stream,unknown90);
 	readBinary(stream,&unknown94);
 	unknown98.clear();
-	OpS8a_readP8s(stream,(vector<OpS8a_P8>&)unknown98);
+	OpS8a_readP8s(stream,unknown98);
 	unknownA8.clear();
 	OpT8a_readInts(stream,unknownA8);
 	readBinary(stream,&unknownEC);
@@ -256,7 +260,7 @@ void OpU3_Rec673e70::load(istream &stream)
 	OpQ5_clearObjects(unknown108);
 	OpQ5_readObjects(stream,(vector<OpQ5_T9da570*>&)unknown108,0);
 	unknown118.clear();
-	OpS8a_readP8s(stream,(vector<OpS8a_P8>&)unknown118);
+	OpS8a_readP8s(stream,unknown118);
 	readBinary(stream,&unknown128);
 	unknown12C.read(stream);
 	readBinary(stream,&unknown134);

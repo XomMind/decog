@@ -20,7 +20,7 @@ bool opt4_checkSpawnCondition(const string &text)	// NOTE: placeholder name (0x6
 	size_t pos = text.find("%_",0);
 	if (pos == string::npos)
 		goto next;
-	if (rng.chance(stringToInt(string(text.begin(),text.begin() + pos))))
+	if (rng.chance(stringToInt(string(const_cast<string&>(text).begin(),const_cast<string&>(text).begin() + pos))))
 		goto next;
 	else
 		return false;
@@ -29,6 +29,6 @@ next:
 	if (pos == string::npos)
 		return true;
 	vector<string> parts;
-	opw1_split(string(text.begin(),text.begin() + pos),'+',parts);
+	opw1_split(string(const_cast<string&>(text).begin(),const_cast<string&>(text).begin() + pos),'+',parts);
 	return opt4_checkConditions(parts);
 }

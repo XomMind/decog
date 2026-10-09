@@ -162,7 +162,7 @@ public:
 class CArtAnimated : public ConsoleArt
 {
 public:
-	CArtAnimated(XConsole *parent, AsciiImage *image, int x, int y, bool flag, D39EffectDef *animation, int a, int b, const Pos &pos, int c, int d);
+	CArtAnimated(XConsole *parent, AsciiImage *image, int x, int y, bool flag, int animation, int a, int b, const Pos &pos, int c, int d);
 	void unknown4b29b0();	// NOTE: placeholder name
 
 	virtual ~CArtAnimated();
@@ -224,7 +224,7 @@ CGameoverAchievements::CGameoverAchievements(XConsole *parent, const Rect &rect)
 		OpW9b_Achievement *achievement = opW9b_achievementData[(*achievements)[i]];
 		D39EffectDef *animation;
 		opW9b_findAnimation("A_CMap_Achieve_Icon_" + opW9b_achievementCategoryNames[achievement->category],&animation);
-		art = new CArtAnimated(this,&achievement->image,2,y,false,animation,-1,-1,Pos(-1),0,0);
+		art = new CArtAnimated(this,&achievement->image,2,y,false,(int)animation,-1,-1,Pos(-1),0,0);
 		art->resetBack_418450();
 		art->unknown4b29b0();
 		label = new CText(this,Pos(art->getPos().x + art->getWidth_44b0d0() * 2 + 1,y + 2),achievement->name,0,0,-1);
@@ -725,9 +725,9 @@ CGameoverMain::CGameoverMain(CGameover *parent, const Rect &rect)
 // CGameoverOverlay
 //==================================================================
 
-struct Area	// NOTE: placeholder name
+struct OpW9b_Area	// NOTE: placeholder name
 {
-	Area(int x1_, int y1_, int x2_, int y2_);	// NOTE: placeholder name (0x40b1e0)
+	OpW9b_Area(int x1_, int y1_, int x2_, int y2_);	// NOTE: placeholder name (0x40b1e0)
 	Point randomPoint_40be90();	// NOTE: placeholder name
 
 	int x1;
@@ -910,7 +910,7 @@ map:
 
 	if (opW9b_gameoverType == 4 && opW9b_tickCount > unknownb8 + 5)
 	{
-		Area area(0,0,getWidth_44b0d0() - 1,0);
+		OpW9b_Area area(0,0,getWidth_44b0d0() - 1,0);
 		area.y2 = minInt((opW9b_tickCount - unknownb4) / 15 + 1,getHeight() - 1);
 		area.x1 -= 10;
 		area.x2 += 10;

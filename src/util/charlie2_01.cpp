@@ -106,7 +106,7 @@ void D44Lore::input7e93b0(int key,int modifier){
  case 1:if(d44_contains9d43b0(d44_bcabc4,3,key)){
  vector<int>first;first.push_back(0);
  for(int i=1;i<d44_d1d9b0.size();i++){
- if(!lexicographical_compare(d44_d1d9b0[i].begin(),d44_d1d9b0[i].end(),d44_d1d9b0[((const vector<int>&)first).back()].begin(),d44_d1d9b0[((const vector<int>&)first).back()].end()))first.push_back(i);
+ if(!lexicographical_compare(d44_d1d9b0[i].begin(),d44_d1d9b0[i].end(),d44_d1d9b0[first.back()].begin(),d44_d1d9b0[first.back()].end()))first.push_back(i);
  else{for(unsigned j=0;j<first.size();j++){if(lexicographical_compare(d44_d1d9b0[i].begin(),d44_d1d9b0[i].end(),d44_d1d9b0[first[j]].begin(),d44_d1d9b0[first[j]].end())){d44_insert9dbdc0(first,j,i);break;}}}
  }
  vector<D44Entry*>root;

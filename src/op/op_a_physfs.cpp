@@ -52,7 +52,7 @@ string PhysfsWrapper::init(int argc, char *argv[], string organization, string a
 	bool customPathSet = false;
 	for (int i = 0; i < argc; i++)
 	{
-		const string arg(argv[i]);
+		string arg(argv[i]);
 		if (arg == "-nonportable" && !customPathSet)
 		{
 			if (!PHYSFS_setSaneConfig(organization.c_str(),appName.c_str(),NULL,0,0))
@@ -156,7 +156,7 @@ void PhysfsWrapper::getFileList(string dir, vector<string> *files, string ext, b
 	char **rc = PHYSFS_enumerateFiles(dir.c_str());
 	for (char **i = rc; *i != NULL; i++)
 	{
-		const string file(*i);
+		string file(*i);
 		bool add = !checkExt ||
 			(file.find(ext) != string::npos && file.size() > ext.size() && string(file.begin() + (file.size() - ext.size()),file.end()) == ext) ||
 			(includeDirectories && PHYSFS_isDirectory((dir + "/" + file).c_str()));

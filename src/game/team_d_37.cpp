@@ -14,14 +14,14 @@ struct Point
 	Point &operator=(const Point &p);	// NOTE: folded with the copy constructor (0x46ca50)
 };
 
-struct Area37	// NOTE: placeholder name (OpS8c_Area)
+struct OpS8c_Area	// NOTE: placeholder name (OpS8c_Area)
 {
 	int x;
 	int y;
 	int width;
 	int height;
 
-	Area37(const Area37 &a) throw();
+	OpS8c_Area(const OpS8c_Area &a) throw();
 };
 
 struct Rect37	// NOTE: placeholder name
@@ -31,7 +31,7 @@ struct Rect37	// NOTE: placeholder name
 	int width;
 	int height;
 
-	Rect37(const Area37 &a) throw();	// NOTE: placeholder name (0x40a720)
+	Rect37(const OpS8c_Area &a) throw();	// NOTE: placeholder name (0x40a720)
 	Point topLeft() const;				// NOTE: placeholder name (PushBounds::topLeft)
 	void randomPos(Point *out) const;	// NOTE: placeholder name (0x40b000)
 };
@@ -39,7 +39,7 @@ struct Rect37	// NOTE: placeholder name
 struct Room37	// NOTE: placeholder name (DF::Room, 0x6c bytes)
 {
 	int				type;
-	Area37			rect;
+	OpS8c_Area			rect;
 	vector<int>		unknown14;
 	int				unknown24;
 	vector<Point>	doors;
@@ -50,7 +50,7 @@ struct Room37	// NOTE: placeholder name (DF::Room, 0x6c bytes)
 	~Room37() throw();	// 0x4bd140
 };
 extern vector<Room37> rooms37_cf13e8;	// NOTE: placeholder name
-extern vector<Area37> boxes37_d222f0;	// NOTE: placeholder name
+extern vector<OpS8c_Area> boxes37_d222f0;	// NOTE: placeholder name
 
 class HItem
 {
@@ -109,7 +109,7 @@ extern int *TERRAIN_CAVE_WALL;	// NOTE: placeholder (0xcefba0)
 int OpQ1_distanceCeil_40a3f0(const Point &a, const Point &b);
 int OpX5_minInt(int a, int b);	// NOTE: placeholder name (0x9cdb30)
 bool terrainFlagC_448ba0(const Point &p);	// NOTE: placeholder name
-Area37 OpS8c_randomArea(vector<Area37> &v);	// NOTE: placeholder name
+OpS8c_Area OpS8c_randomArea(vector<OpS8c_Area> &v);	// NOTE: placeholder name
 Room37 OpX5_randomElem(vector<Room37> &v);	// NOTE: placeholder name
 void OpB_translateRotated(Point *pos, int rotation, int dx, int dy);	// NOTE: placeholder name
 bool opt4_isRingFree6cb8c0(Rect37 *r, Rect37 *inner);	// NOTE: placeholder name
