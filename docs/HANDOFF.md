@@ -65,6 +65,10 @@ Triage by delegated agents (reports in `scratch/triage/`, uncommitted; counts fr
   is 0x9af410, rows 427/428, both MATCH), re-audit `build/target_audit_r2.*`: **28,057 / 32,327 MATCH, 4,270 DIFF;
   11,671 / 13,013 functions, 3,464,459 / 6,566,496 bytes (52.76%)**. Buckets: 3,350 body-different, 919 ambiguous, 1 other.
   Both sessions edit `lead_discovered.csv` and this file; nothing is committed yet, so coordinate before committing.
+- Strict private full build of the committed tree (`build/full_strict`, includes `UfBS::turnUpdate_51da30`, which MATCHes under the
+  strict verifier): **28,058 / 32,328 MATCH, 4,270 DIFF; 11,672 / 13,013 functions, 3,722,203 / 6,566,496 bytes (56.68%)**;
+  audit `build/target_audit_r3.*`. This is the first count that rests on the strict gate; the 96% figure above is obsolete.
+  `tools/progress.py` has not been rerun, so `docs/progress.*` are stale.
 
 ### Fixed this evening (committed with this handoff)
 - 19 names mapped to 2-3 different VAs (one row of each was never verified, since `common.functions()` keys by name):
