@@ -10,20 +10,37 @@ import sys, os, re, struct, bisect
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import pefile, capstone, common
 from common import demangle
+from retail_equivalence import code_falls_through
 
 DLL = os.path.join(common.REPO, "build", "full", "match.dll")
 MAP = os.path.join(common.REPO, "build", "full", "match.map")
 
 class Image:
-    def __init__(self, pe, names):
+    def __init__(self, pe, names, identities=None):
         self.pe, self.names = pe, names            # names: VA -> demangled name
         self.base = pe.OPTIONAL_HEADER.ImageBase
+        self.name_targets = {}
+        for va, aliases in names.items():
+            for name in aliases:
+                self.name_targets.setdefault(name, set()).add(va)
+        if identities is None:
+            generated = {demangle(n) for aliases in names.values() for n in aliases
+                         if n.startswith('?') and demangle(n) != n}
+            self.identities = {n: vas for n, vas in self.name_targets.items() if n not in generated}
+        else:
+            self.identities = {}
+            for name, va in identities.items():
+                self.identities.setdefault(name, set()).add(va)
         self.lo, self.hi = self.base, self.base + pe.OPTIONAL_HEADER.SizeOfImage
         pe.parse_data_directories(directories=[pefile.DIRECTORY_ENTRY['IMAGE_DIRECTORY_ENTRY_IMPORT']])
         self.imps = {}
         for e in getattr(pe, 'DIRECTORY_ENTRY_IMPORT', []):
             for i in e.imports:
-                if i.name: self.imps[i.address] = '__imp_' + i.name.decode()
+                if i.name:
+                    name = '__imp_' + i.name.decode()
+                    self.imps[i.address] = name
+                    self.name_targets.setdefault(name, set()).add(i.address)
+                    self.identities.setdefault(name, set()).add(i.address)
         # Suffix pooling can put a literal operand inside a named constant.
         # Recognize only compiler string storage, never arbitrary zero-filled data.
         literals = {}
@@ -112,6 +129,52 @@ def learn(oname_set, tva):
     STAGE[key] = tva
     return True
 
+ACCESS = re.compile(r'@@[AIQ]([ABCD]E)')
+
+def access_key(name):
+    """Decorated name with the member access letter (public/protected/private) neutralised."""
+    return ACCESS.sub(r'@@#\1', name, count=1) if name.startswith('?') else name
+
+def access_index(theirs):
+    index = getattr(theirs, '_access_index', None)
+    if index is None:
+        index = {}
+        for name, vas in getattr(theirs, 'identities', {}).items():
+            if name.startswith('?'): index.setdefault(access_key(name), set()).update(vas)
+        theirs._access_index = index
+    return index
+
+def configured_targets(theirs, onames):
+    """(addresses, ambiguous): decorated identities take precedence over display aliases."""
+    identities = getattr(theirs, 'identities', theirs.name_targets)
+    exact = [n for n in onames if n.startswith('?') and n in identities]
+    if exact:
+        return set().union(*(identities[n] for n in exact)), False
+    # Same symbol differing only in access specifier: one configured identity, fail closed otherwise.
+    same = set().union(*(access_index(theirs).get(access_key(n), set()) for n in onames if n.startswith('?')))
+    if len(same) == 1:
+        return same, False
+    explicit = set().union(*(identities.get(n, set()) for n in onames))
+    if explicit:
+        return explicit, len(explicit) != 1
+    derived = set().union(*(theirs.name_targets.get(n, set()) for n in onames))
+    # A signature-free alias derived from a different configured overload does
+    # not establish this decorated symbol's identity, even at the same address.
+    return derived, bool(derived)
+
+def target_matches(theirs, tva, onames):
+    """Configured identities are authoritative; only unconfigured symbols may be learned.
+
+    Different retail addresses are not evidence of ICF equivalence. Reject aliases
+    until a separate complete-body equivalence proof establishes their identity.
+    """
+    if not onames:
+        return False
+    targets, ambiguous = configured_targets(theirs, onames)
+    if targets:
+        return not ambiguous and tva in targets
+    return learn(onames, tva)
+
 STRING_TYPE = 'basic_string@DU?$char_traits@D@std@@'
 
 def string_constructor_argument(insns, index, image):
@@ -194,6 +257,10 @@ def _compare(name, theirs, tva, ours, ova, size, verbose):
             oa = struct.unpack('<I', ours.read(ova + off, 4))[0] - ova
             if ta != oa or ta not in boundaries:
                 problems.append("switch target differs or is invalid at +%#x" % off)
+    if not ti or ti[-1].address + ti[-1].size != tva + code_size:
+        problems.append("retail code extent is not completely decoded")
+    if table is not None and ti and code_falls_through(theirs, tva, ti, code_size, tables):
+        problems.append("code falls through into switch tables")
     for k, a in enumerate(ti):
         if k >= len(oi): problems.append("ours is shorter"); break
         b = oi[k]
@@ -201,6 +268,7 @@ def _compare(name, theirs, tva, ours, ova, size, verbose):
         if a.size != b.size or a.mnemonic != b.mnemonic:
             problems.append(line); continue
         ab, bb = bytearray(a.bytes), bytearray(b.bytes)
+        operand_mismatch = False
         for (off, sz, av, rel), (_, _, bv, _) in zip(operand_fields(a), operand_fields(b)):
             in_t = theirs.lo <= av < theirs.hi; in_o = ours.lo <= bv < ours.hi
             if tva <= av < tva + size and ova <= bv < ova + size:
@@ -209,18 +277,12 @@ def _compare(name, theirs, tva, ours, ova, size, verbose):
                 if tva <= av < tva + size and ova <= bv < ova + size + 64:
                     same = av - tva == bv - ova
                 else:
-                    rt, ro = theirs.resolve(av), ours.resolve(bv)
-                    same = bool((rt or set()) & (ro or set())) if rt else learn(ro, av)
-                    # The exe was linked with ICF: one address serves every identical function, so
-                    # naming one alias (XConsole::getParent) must not break callers that reach the same
-                    # body under another name (Array2D::getHeight). When the names don't overlap, fall
-                    # back to the same consistent-pairing rule used for unnamed targets.
-                    if not same and rt and ro: same = learn(ro, av)
+                    same = target_matches(theirs, av, ours.resolve(bv))
             elif in_t and in_o and stub_interior(bv):
                 # [stub+k]: pair the stub with the exe address k bytes earlier, consistently with every other
                 # use of that stub. Comparing the stub's zero bytes with exe data would pass by luck.
                 sname, k = stub_interior(bv)
-                same = learn({sname}, av - k)
+                same = target_matches(theirs, av - k, {sname})
             elif in_t and in_o:
                 rt, ro = theirs.resolve(av), ours.resolve(bv)
                 n = max([const_len(x, ours, bv) for x in (ro or ())] or [0])
@@ -231,8 +293,8 @@ def _compare(name, theirs, tva, ours, ova, size, verbose):
                 if n:
                     same = theirs.read(av, n) == ours.read(bv, n)   # typed string/constant: compare contents
                     if same: LIT_STAGE.append((av, n))
-                elif rt: same = bool(rt & (ro or set()))
-                elif ro and not any(x.startswith('__real@') or x.startswith('??_C@') for x in ro): same = learn(ro, av)
+                elif ro and not any(x.startswith('__real@') or x.startswith('??_C@') for x in ro): same = target_matches(theirs, av, ro)
+                elif rt: same = False
                 else:   # Compare the complete memory operand; pointer arguments need eight bytes.
                     width = next((op.size for op in a.operands if op.type == capstone.x86.X86_OP_MEM), 8)
                     same = theirs.read(av, width) == ours.read(bv, width)
@@ -250,7 +312,9 @@ def _compare(name, theirs, tva, ours, ova, size, verbose):
             if same:
                 ab[off:off + sz] = bb[off:off + sz] = b'\0' * sz
                 if in_t and in_o and not (tva <= av < tva + size): PAIRS.append((bv, av))
-        if ab != bb: problems.append(line)
+            else:
+                operand_mismatch = True
+        if ab != bb or operand_mismatch: problems.append(line)
     else:
         if ti and oi[len(ti) - 1].address + oi[len(ti) - 1].size - ova != code_size:
             problems.append("size differs")
@@ -300,7 +364,7 @@ def verify_all(args=(), verbose=False, quiet=False):
     import io, contextlib
     mp = load_map()
     ours = Image(pefile.PE(DLL), map_names(mp))
-    theirs = Image(pefile.PE(common.EXE, fast_load=True), exe_names())
+    theirs = Image(pefile.PE(common.EXE, fast_load=True), exe_names(), common.symbols())
     CTX['v'] = (mp, ours, theirs)
     by_name = code_names(mp, ours)
     results = {}
@@ -355,9 +419,11 @@ def data_stats():
         good, staged = True, {}
         for i, tva in enumerate(slots):
             ota = struct.unpack('<I', ours.read(ova + 4 * i, 4))[0]
-            rt, ro = theirs.resolve(tva), ours.resolve(ota)
-            if rt and ro and rt & ro: continue
-            # same rule as call targets: the slot's symbol pairs consistently with this exe address (ICF aliases, unnamed exe functions)
+            ro = ours.resolve(ota)
+            targets, ambiguous = configured_targets(theirs, ro or ())
+            if targets:
+                if not ambiguous and tva in targets: continue
+                good = False; break
             key = sym_key(ro) if ro else None
             if key is None or key.startswith(('__real@', '??_C@', '__xmm@')) or staged.get(key, LEARN_FWD.get(key, tva)) != tva: good = False; break
             staged[key] = tva

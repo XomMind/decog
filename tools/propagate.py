@@ -15,7 +15,7 @@ def main(outdir, area, prefix=None):
     mp = lverify.load_map()
     dll = pefile.PE(lverify.DLL)
     ours = lverify.Image(dll, lverify.map_names(mp))
-    theirs = lverify.Image(pefile.PE(common.EXE, fast_load=True), lverify.exe_names())
+    theirs = lverify.Image(pefile.PE(common.EXE, fast_load=True), lverify.exe_names(), common.symbols())
     obase = dll.OPTIONAL_HEADER.ImageBase
     text = [s for s in dll.sections if s.Name.rstrip(b'\0') == b'.text'][0]
     t0, t1 = obase + text.VirtualAddress, obase + text.VirtualAddress + text.Misc_VirtualSize

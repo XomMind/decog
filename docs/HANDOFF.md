@@ -5,8 +5,8 @@
 All agents, the integration loop (`scratch/integrate.sh`) and the origin sync loop (`scratch/syncloop.sh`) are stopped;
 no wine processes and no build lock remain. `origin/main` is in sync with local main.
 
-**State: 13,013 / 13,014 game functions, 96.08% code** (last verified integration build; library reclassifications below
-lower the denominator). Every row passes `tools/lverify.py`, but see "Verifier leniency" before trusting the count.
+**Historical state: 13,013 / 13,014 game functions, 96.08% code** (last lenient integration build; library
+reclassifications below lower the denominator). This is not a strict verified count; see the repair below.
 
 ### Remaining function: done (2026-10-08, late)
 - **0x51da30 `BS::turnUpdate_51da30`** (258 KB, 62,072 insns) now MATCHes in `tools/try.sh`. Source
@@ -19,16 +19,52 @@ lower the denominator). Every row passes `tools/lverify.py`, but see "Verifier l
   28,032 -> 28,057 (25 rejected callers recovered). 4,270 strict rejections remain for review.
 - `0xa04d10` is claimed by another session (`codex-hash-oct08`).
 
-### Verifier leniency (open decision, nothing changed yet)
-`lverify` pairs a named callee with whatever exe address the call lands on the first time (ICF fallback
-`if not same and rt and ro: same = learn(ro, av)`), even when config maps that callee elsewhere. Strict check
-(`scratch/bravo3/strict.py`, list `scratch/bravo3/strict_all.txt`): 3,525 rows / 978 distinct VAs call a named callee at a
-different VA than config maps. Some are genuine ICF folds, some are wrong rows (e.g. ~247 `lead_discovered.csv` rows naming
-0x9bad50, basic_stringbuf's `??_G`, for unrelated deleting dtors).
-Partial, unreviewed measurement in `scratch/charlie3/` (agent stopped mid-work): of 32,362 matching rows, 28,731 still match
-with no ICF allowance, 29,171 / 29,434 when identical-code folding up to depth 1 / 2 is allowed (`match_strict*.txt`,
-`classified2.csv`). Next: finish the classification, decide a strictness rule (e.g. callee A may pair with B only if the
-normalised bytes are identical), then fix or demote rows. This will lower the headline count.
+### Verifier leniency (fixed fail-closed; mapping review required)
+`tools/lverify.py` no longer learns a replacement address for a configured callee. Configured symbol identities,
+including imports, must target an address named for that symbol. Only unconfigured symbols may learn consistent
+target pairings. The same restriction applies to vtable coverage accounting and unnamed pointer operands.
+There is no ICF exception: different addresses are rejected until a separate complete-body equivalence proof
+exists. This deliberately rejects unproved genuine aliases as well as incorrect rows; DIFF is not by itself
+proof that the reconstructed caller is wrong. No depth-limited recursive equivalence claim is made.
+
+Strict state after this pass (retained `build/full`, repaired mappings, `tools/classify_targets.py`):
+**27,996 / 32,326 MATCH; 4,330 DIFF; exit 1. Strict coverage 11,611 / 13,013 functions, 3,125,157 / 6,566,496 code
+bytes (47.59%)**, down from the lenient 96%. Evidence (local, uncommitted): `build/target_audit_final.{json,csv,log}`.
+DIFF buckets by rejected-target evidence only: 3,384 body-different, 945 identity-ambiguous (signature-free
+display-name collisions, e.g. `std::...::insert` overloads), 1 other. Body equivalence is never overload identity.
+
+New tools: `tools/retail_equivalence.py` (complete-body proof: full extents, relocation-aware internal addresses,
+exact data/IAT targets, cycle-safe recursive callee proof, CFG fallthrough/indirect-jump guard, shared with lverify)
+and `tools/classify_targets.py` (read-only report). Regressions: `tests/check_target_identity.py`,
+`tests/check_retail_equivalence.py`. lverify now also: prefers exact decorated identities over display aliases,
+rejects truncated retail decodes, and fails if a rejected target is hidden by equal relative displacement bytes.
+Every retail-side `Image(...)` caller passes `common.symbols()`.
+
+`0x9bad50` cluster (270 rows in `lead_discovered.csv`; the body is the stringbuf deleting dtor, not a universal
+one): 234 rows repointed to their existing canonical wrapper address (each direct strict MATCH), 36 with no unique
+canonical alias deleted. Manifests: `build/target_repair_{original,changes,demoted}`.
+
+Next: the 945 ambiguous and 3,384 body-different rows (many are real wrong rows or unresolved stub callees such
+as `??1Closure`, not ICF folds); `tools/progress.py` was not rerun, so `docs/progress.*` still show the lenient count.
+No full build, source edits, or loop restarts happened. Previous research dirs `scratch/bravo3/`, `scratch/charlie3/` were absent.
+
+Triage by delegated agents (reports in `scratch/triage/`, uncommitted; counts from `build/target_audit_final.json`):
+- Access-letter rule R1 applied in `lverify.configured_targets` (names differing only in `Q/I/A` access letter resolve to the
+  one configured identity; zero or several matches stay rejected). Re-audit `build/target_audit_r1.*`:
+  **28,029 / 32,326 MATCH, 4,297 DIFF; 11,644 / 13,013 functions, 3,125,688 / 6,566,496 bytes (47.60%)**.
+- 912 ambiguous rows left: 182 same-address different signature/instantiation (genuine), 632 callee configured only under an
+  ICF-folded sibling (config gaps: `_Tree`, Point/Pos/Area/Rect ctors, vector members), 95 placeholder-named retail targets,
+  2 `U`/`V` struct-key rows (not recommended), 1 `_floorf`. A looser alias-bucket rule would convert 189 rows but accepts
+  signature mismatches; rejected.
+- 3,384 body-different rows: 204 our callee is a stub, 1,500 real callee size differs, 1,555 dependency mismatch, 125 other.
+  Highest leverage callees: `XConsole::getWidth` (129 rows; retail calls 0x44b0d0 but config maps 0x9b6bd0),
+  `vector<int>::push_back(int&&)` (109), `string::operator+=(char)` (47), `Pos::Pos()`/`Point::Point()` stubs (82 combined),
+  `Array2D<int>::operator()` stubs (58), `vector<HItem>::~vector` (39), `vector<int>::back` (31).
+- Most affected mapping files: `lead_stl_b.csv` 2,703 rows, `lead_discovered.csv` 312, `op_h.csv` 121. No import-only rejections.
+- Combined with the other session's row-427 fix in `lead_discovered.csv` (0x9af3b0 is `string::operator=(char)`; the real `+=`
+  is 0x9af410, rows 427/428, both MATCH), re-audit `build/target_audit_r2.*`: **28,057 / 32,327 MATCH, 4,270 DIFF;
+  11,671 / 13,013 functions, 3,464,459 / 6,566,496 bytes (52.76%)**. Buckets: 3,350 body-different, 919 ambiguous, 1 other.
+  Both sessions edit `lead_discovered.csv` and this file; nothing is committed yet, so coordinate before committing.
 
 ### Fixed this evening (committed with this handoff)
 - 19 names mapped to 2-3 different VAs (one row of each was never verified, since `common.functions()` keys by name):

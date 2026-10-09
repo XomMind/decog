@@ -298,7 +298,7 @@ def main(argv=None):
     for name, va in lverify.MAP_ALL:
         ours.names.setdefault(va, set()).update((name, common.demangle(name)))
     ours.names = {va: StableNames(names) for va, names in ours.names.items()}
-    theirs = lverify.Image(pefile.PE(common.EXE, fast_load=True), lverify.exe_names())
+    theirs = lverify.Image(pefile.PE(common.EXE, fast_load=True), lverify.exe_names(), common.symbols())
     mapped = {va for va, _ in common.functions().values()}
     spans, index_info = retail_spans(theirs, args.lo, args.hi, mapped)
     symbols, skipped, repeated = source_spans(ours)

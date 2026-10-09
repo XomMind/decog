@@ -19,7 +19,7 @@ def main(argv):
     lverify.DLL, lverify.MAP = os.path.join(d, 'match.dll'), os.path.join(d, 'match.map')
     mp = lverify.load_map()
     ours = lverify.Image(pefile.PE(lverify.DLL), lverify.map_names(mp))
-    theirs = lverify.Image(pefile.PE(common.EXE, fast_load=True), lverify.exe_names())
+    theirs = lverify.Image(pefile.PE(common.EXE, fast_load=True), lverify.exe_names(), common.symbols())
     by = lverify.code_names(mp, ours)
     mapped_names = set(common.functions())
     mapped_vas = {va for va, _ in common.functions().values()}
