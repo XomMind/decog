@@ -256,13 +256,15 @@ public:
 	void delegate4a9120();				// NOTE: placeholder name (0x4a9120, Calls_4a9120::delegate in the csv)
 };
 
+enum XsLink { xsLinkMax = 0x7fffffff };	// private element type: keeps vector<unsigned> symbols out of this file (lverify pairing)
+
 class XsCParts	// NOTE: partial (object at 0xcec088)
 {
 public:
 	XsCPart *unknown894e70(XsHItem item);	// NOTE: placeholder name (0x894e70)
 	void unknown896820(XsHItem item);		// NOTE: placeholder name (0x896820)
-	void unknown8987b0(XsHItem item, vector<unsigned int> *out);	// NOTE: placeholder name (0x8987b0)
-	void unknown898860(XsHItem item, vector<unsigned int> *list);	// NOTE: placeholder name (0x898860)
+	void unknown8987b0(XsHItem item, vector<XsLink> *out);	// NOTE: placeholder name (0x8987b0)
+	void unknown898860(XsHItem item, vector<XsLink> *list);	// NOTE: placeholder name (0x898860)
 	void unknown8993e0(XsCPart *part, bool flag);	// NOTE: placeholder name (0x8993e0)
 	bool isLinked4a9b10(XsHItem item);	// NOTE: placeholder name (0x4a9b10)
 	void unknown89d610(XsHItem item, int type);	// NOTE: placeholder name (0x89d610)
@@ -460,7 +462,7 @@ void XsEnt::checkEffectScrapEngine_605040(XsHItem engine)
 				int b0 = (engine->unknown9b6bf0() == engine->unknown457c80()) ? 100 : engine->unknown457ca0();
 				bool active = engine->unknown457cf0();
 				bool b5 = engine->unknown458220();
-				vector<unsigned int> links;
+				vector<XsLink> links;
 				xs_parts->unknown8987b0(engine,&links);
 				engine->unknown57dbe0(1,0,0,1);
 				XsHItem arm = xs_world->unknown6c51d0(armType,self,true,false);
