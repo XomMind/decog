@@ -8,3 +8,10 @@ __CIsin,0xaa2120,0x6
 __CIlog,0xaa2126,0x6
 __CIcos,0xaa2132,0x6
 __CIatan,0xaa2138,0x6
+# protobuf-3.5.1 stubs/status.cc: dynamic initializers of `const Status Status::CANCELLED/UNKNOWN = Status(error::X, "")`
+# (libprotobuf.lib, /O2, not LTCG). Evidence: the out-of-line Status(Code, StringPiece) ctor is inlined, strlen("") folded
+# to 0, ~string inlined, and Status::OK/CANCELLED/UNKNOWN sit statically initialized at 0xca9b2c/0xca9b4c/0xca9b6c
+# (codes 0/1/2, empty strings). Unmodified 3rdparty/protobuf-3.5.1 status.cc built with `cl /c /O2 /Oy- /EHsc /GS`
+# gives these 0x8a bytes instruction-for-instruction (relocations aside); /Od cannot inline the ctor.
+??__E?CANCELLED@Status@util@protobuf@google@@2V1234@B@@YAXXZ,0xb5c730,0x8a
+??__E?UNKNOWN@Status@util@protobuf@google@@2V1234@B@@YAXXZ,0xb5c7c0,0x8a

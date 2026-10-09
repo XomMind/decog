@@ -34,7 +34,11 @@ extern XColor&	ptr_d204ac;
 extern Unknown3&	ptr_d2c418;
 extern Unknown3&	ptr_d2e7c4;
 
-vector<unsigned int>	vec_d2b4bc;
+// vec_d2b4bc holds 3-byte elements: its exe destructor (0x9b3da0) calls the _Tidy at 0x9be310, which divides
+// by 3. A private element type keeps the instance distinct from vector<unsigned int>, whose destructor other
+// files pair with the 4-byte-element destructor (sharing it broke the ??__Fvec_d2b4bc row).
+struct Elem3_d2b4bc { unsigned char r, g, b; };	// NOTE: placeholder name and layout (size 3 from the exe)
+vector<Elem3_d2b4bc>	vec_d2b4bc;
 XColor	color_cefd14(1, 1, 1);
 vector<unsigned int>	vec_d20ae8;
 string	str_d204b0;
