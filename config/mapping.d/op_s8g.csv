@@ -13,4 +13,3 @@
 ??$_Make_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HV12@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0P6A_NABV10@1@ZPAH0@Z,0x9feeb0,0xc4
 ??$_Sort_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P6A_NABV12@0@Z@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0P6A_NABV10@1@Z@Z,0x9fef80,0x39
 ??$_Insertion_sort1@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@P6A_NABV12@0@ZV12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0P6A_NABV10@1@Z0@Z,0x9fefc0,0x13f
-??$_Rotate@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@00Urandom_access_iterator_tag@0@@Z,0xa007f0,0x33

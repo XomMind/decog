@@ -21,7 +21,6 @@
 ??$_Uninit_def_fill_n@PAUE16_40a720@@IU1@V?$allocator@UE16_40a720@@@std@@U1@@std@@YAXPAUE16_40a720@@IPBU1@AAV?$allocator@UE16_40a720@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f0d50,0xc4
 ??$move@PAUOpV4d_C16b@@PAU1@@std@@YAPAUOpV4d_C16b@@PAU1@00@Z,0x9ec2b0,0x43
 ??$rotate@V?$_Vector_iterator@V?$_Vector_val@UOpV4d_T4a@@V?$allocator@UOpV4d_T4a@@@std@@@std@@@std@@@std@@YA?AV?$_Vector_iterator@V?$_Vector_val@UOpV4d_T4a@@V?$allocator@UOpV4d_T4a@@@std@@@std@@@0@V10@00@Z,0x9ef130,0x99
-??$rotate@V?$_Vector_iterator@V?$_Vector_val@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@std@@@std@@YA?AV?$_Vector_iterator@V?$_Vector_val@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@2@@std@@@0@V10@00@Z,0x9ef5c0,0x99
 ??$rotate@V?$_Vb_iterator@V?$allocator@_N@std@@@std@@@std@@YA?AV?$_Vb_iterator@V?$allocator@_N@std@@@0@V10@00@Z,0x9ef1d0,0xdb
 ?OpV4d_assign@OpV4d_Handle@@QAEXI@Z,0x9ed820,0x6b
 ?OpV4d_deleteMapRecords@@YAXAAV?$vector@PAUOpV4d_Trivial@@V?$allocator@PAUOpV4d_Trivial@@@std@@@std@@@Z,0x9e2c40,0x49

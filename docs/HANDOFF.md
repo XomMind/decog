@@ -79,6 +79,20 @@ Triage by delegated agents (reports in `scratch/triage/`, uncommitted; counts fr
   Pos/Point folding and the Array2D layout are [INFERENCE] from body equality. Not applied (evidence in scratch): TreeGaps drop list of
   335 caller rows (_Tree/iterator/pair/allocator, structurally different bodies), 12 `_Pair_base` rows at 0x9eee40, `vector<UHExplosive>`
   (our 64-byte element vs retail 4-byte handle: a source type bug), lvalue/rvalue caller-source differences (`push_back<string>(const&)` etc.).
+- Second subagent round (scratch/{GeometryCtors,StringFamily,VectorCopies,SameAddressFolds}): 214 rows added to `strict_repairs.csv`, 186 old rows
+  removed from 11 files, new real definitions `src/util/zz_geometry_ctors.cpp` (Rect(), Rect(const Rect&), Area(), XEvent(int), Array2D<bool>::operator()),
+  `zz_entity_inventory_hitem.cpp`, `zz_entity_inventory_hitemb.cpp` (Entity::getInventoryList). Notable: `less<string>` is 0x9be6c0 (0x9e7970 is
+  allocator<string>::construct), string::insert overloads 0x9af760/0x9bb200/0x9bb340, `vector<Point>(const&)` 0x9b35b0, `vector<int>(const&)` 0x9f5990,
+  `vector<vector<int>>::push_back(&&)` 0x9e8d90 with the scalar vector move ctor chain. One old MATCH row, `_Construct<vector<int>>` (lead_stl_a 0x9f3750),
+  was dropped without replacement (conflicts with the corrected chain). Strict full build `build/full_r5`: **29,038 / 32,403 MATCH, 3,365 DIFF, 0
+  regressions vs build/full_r4 (367 flips, 29 new rows MATCH); 12,436 / 13,013 functions, 5,120,633 / 6,566,496 bytes (77.98%)**. Buckets: 2,746
+  body-different, 618 ambiguous, 1 other.
+  Remaining are mostly CALLER-SOURCE issues, not mapping: (a) `push_back(const&)` vs `&&` (29 rows, `scratch/VectorCopies/caller_source_issues.csv`;
+  VS2010 picks const& for implicit int<->unsigned conversions and named lvalues, && for casts, literals and call results; fixed copies proven in
+  `scratch/VectorCopies/src/`); (b) string `begin/end/operator+` const vs mutable (27+13 rows, source constness, e.g. `const string file` locals);
+  (c) `basic_string(string&&)` where retail copies (14); (d) `vector<UHExplosive>` element type (our 64-byte struct vs retail 4-byte handle);
+  (e) 40+ `_Tree<string,X>` instantiations configured to the retail map<string,string> body (our sources use the wrong map value types).
+  Unproved/untouched: Pos/Rect source-type confusions (D2Parse, D2Evolve call Pos() where retail zero-inits 4 ints at 0x40a6e0).
 
 ### Fixed this evening (committed with this handoff)
 - 19 names mapped to 2-3 different VAs (one row of each was never verified, since `common.functions()` keys by name):

@@ -17,7 +17,6 @@
 ??$distance@PAUOpT8d_H4@@@std@@YAHPAUOpT8d_H4@@0@Z,0x9f70e0,0x3c
 ??$_Rotate@PAUOpT8d_H4@@@std@@YAXPAUOpT8d_H4@@00Urandom_access_iterator_tag@0@@Z,0x9f7500,0x33
 ??$make_heap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0@Z,0x9f8230,0x54
-??$_Construct@V?$_Vector_iterator@V?$_Vector_val@PAUOpT8d_H4@@V?$allocator@PAUOpT8d_H4@@@std@@@std@@@std@@@?$vector@PAUOpT8d_H4@@V?$allocator@PAUOpT8d_H4@@@std@@@std@@QAEXV?$_Vector_iterator@V?$_Vector_val@PAUOpT8d_H4@@V?$allocator@PAUOpT8d_H4@@@std@@@std@@@1@0Uinput_iterator_tag@1@@Z,0x9f8c30,0x96
 ??$emplace@AAUOpV4e_W4@@@?$vector@UOpV4e_W4@@V?$allocator@UOpV4e_W4@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@UOpV4e_W4@@V?$allocator@UOpV4e_W4@@@std@@@std@@@1@V?$_Vector_const_iterator@V?$_Vector_val@UOpV4e_W4@@V?$allocator@UOpV4e_W4@@@std@@@std@@@1@AAUOpV4e_W4@@@Z,0x9f82f0,0xa5
 ??$emplace@AAPAUOpT8d_H4@@@?$vector@PAUOpT8d_H4@@V?$allocator@PAUOpT8d_H4@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@PAUOpT8d_H4@@V?$allocator@PAUOpT8d_H4@@@std@@@std@@@1@V?$_Vector_const_iterator@V?$_Vector_val@PAUOpT8d_H4@@V?$allocator@PAUOpT8d_H4@@@std@@@std@@@1@AAPAUOpT8d_H4@@@Z,0x9f8a90,0xa5
 ??$make_heap@PAUOpT8d_H4@@P6A_NU1@0@Z@std@@YAXPAUOpT8d_H4@@0P6A_NU1@1@Z@Z,0x9f8f90,0x53
