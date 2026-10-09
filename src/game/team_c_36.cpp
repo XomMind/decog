@@ -293,8 +293,8 @@ extern int c36_ba6abc[];
 extern string c36_cfd42c;
 extern unsigned int c36_d035d0;
 extern unsigned int c36_d035d4;
-extern char c36_d2a504[];
-extern char c36_d2f184[];
+extern string c36_d2a504;
+extern string c36_d2f184;
 void Config::init_43afa0()
 {
 	f0 = 1;

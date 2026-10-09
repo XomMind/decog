@@ -152,7 +152,7 @@ public:
 	void *title;
 };
 
-typedef Pos Point;
+struct Point { int x; int y; };	// configured Area::fitAround_40bcb0/contains_40b750 (lead_c005) take Point; retail folds Pos and Point
 
 //==================================================================
 // game-side declarations (partial; placeholder names)
@@ -259,10 +259,10 @@ class World	// NOTE: placeholder name (the object behind the global at 0xcefc4c)
 public:
 	OpX4e_HGroup unknown463890(int i);	// NOTE: placeholder name
 	bool unknown4631f0(HEntity e);	// NOTE: placeholder name
-	bool unknown465200(const Point &a, const Point &b);	// NOTE: placeholder name
+	bool unknown465200(const Pos &a, const Pos &b);	// NOTE: placeholder name
 	int getTurn();	// 0x464270
 	HEntity getPlayer();	// 0x4630f0
-	bool isVisible(const Point &p);	// 0x4631c0
+	bool isVisible(const Pos &p);	// 0x4631c0
 	char pad0[0x66c];
 	HEntity unknown66c;	// NOTE: placeholder name
 };
@@ -291,10 +291,10 @@ public:
 	bool fitAround_40bcb0(const Point &p, int margin);	// NOTE: placeholder name
 	bool contains_40b750(const Point &p);	// NOTE: placeholder name
 
-	Point min;
-	Point max;
+	Pos min;
+	Pos max;
 };
-void OpX4e_placePoint_9d5460(vector<Point> &list, unsigned int index, Point p);	// NOTE: placeholder name
+void OpX4e_placePoint_9d5460(vector<Pos> &list, unsigned int index, Pos p);	// NOTE: placeholder name
 
 class Cell	// NOTE: partial
 {
@@ -306,8 +306,8 @@ template <class T>
 class Array2D	// NOTE: partial
 {
 public:
-	T &operator()(const Point &p);	// 0x9ced70
-	bool contains(const Point &p);	// NOTE: placeholder name (0x9b43b0)
+	T &operator()(const Pos &p);	// 0x9ced70
+	bool contains(const Pos &p);	// NOTE: placeholder name (0x9b43b0)
 	int getWidth();	// 0x9fcd80
 	int getHeight();	// 0x9b8f00
 };
@@ -343,7 +343,7 @@ public:
 extern OpX4e_HLocation opX4e_location;	// NOTE: placeholder name (0xd1e888)
 extern bool opX4e_d28fa0;	// NOTE: placeholder name
 int stringToInt(const string &s);	// NOTE: placeholder name (0x405610)
-int OpQ1_distanceCeil_40a3f0(const Point &a, const Point &b);	// NOTE: placeholder name (0x40a3f0)
+int OpQ1_distanceCeil_40a3f0(const Pos &a, const Pos &b);	// NOTE: placeholder name (0x40a3f0)
 extern float opX4e_bba1dc;	// NOTE: placeholder name (0.85f)
 extern float opX4e_bba054;	// NOTE: placeholder name (0.5f)
 extern float opX4e_cf46f8;	// NOTE: placeholder name
@@ -440,11 +440,11 @@ public:
 	void unknown7f5fd0(int value);	// NOTE: placeholder name
 	void centerPush_805020(Pos *out);	// NOTE: placeholder name
 	void unknown8051f0(Pos *min, Pos *max);	// NOTE: placeholder name
-	bool unknown806d00(vector<Point> &points, bool flag);	// NOTE: placeholder name
+	bool unknown806d00(vector<Pos> &points, bool flag);	// NOTE: placeholder name
 	bool unknown805de0(HEntity entity, bool flag);	// NOTE: placeholder name
 	int unknown806420(HEntity entity, HItem *outItem, int *outSlot);	// NOTE: placeholder name
 	virtual void trigger(const string &command, int value);
-	void unknown8069e0(Point p, bool flag);	// NOTE: placeholder name
+	void unknown8069e0(Pos p, bool flag);	// NOTE: placeholder name
 
 	OpX4e_CMapPos scroll;	// NOTE: placeholder name
 	OpX4e_CMapHEntity unknown74;	// NOTE: placeholder name
@@ -842,7 +842,7 @@ void opX4e_createDragDrop_7f4560(HItem item)	// NOTE: placeholder name
 	opX4e_keys->setMarked(0x15,true);
 }
 
-void CMap::unknown8069e0(Point p, bool flag)
+void CMap::unknown8069e0(Pos p, bool flag)
 {
 	if (opX4e_cefacd && unknown7f4.isValid())
 	{
@@ -893,7 +893,7 @@ void opX4e_toggleMapFont_7f46e0()	// NOTE: placeholder name
 			opX4e_allies->endOrder();
 		opX4e_mapView->unknown827950();
 	}
-	Point p;
+	Pos p;
 	opX4e_mapView->centerPush_805020(&p);
 	OpB_updateFontScale_446320();
 	opX4e_screenRect.set(0,opX4e_cebd5c == 2 ? 1 : 10,opX4e_cefab4,opX4e_cefab8);
@@ -921,8 +921,8 @@ void CMap::trigger(const string &command, int value)
 {
 	if (command == "jam_check")
 	{
-		Point pos = *((Particle *)value)->getPos();
-		Point diff = pos - this->scroll;
+		Pos pos = *((Particle *)value)->getPos();
+		Pos diff = pos - this->scroll;
 		if (opX4e_cells.contains(diff))
 		{
 			if (!opX4e_world->isVisible(diff))
@@ -942,7 +942,7 @@ void CMap::trigger(const string &command, int value)
 	}
 }
 
-bool CMap::unknown806d00(vector<Point> &points, bool flag)
+bool CMap::unknown806d00(vector<Pos> &points, bool flag)
 {
 	if (flag)
 	{
@@ -950,15 +950,15 @@ bool CMap::unknown806d00(vector<Point> &points, bool flag)
 	}
 	Area bounds;
 	unknown8051f0(&bounds.min,&bounds.max);
-	Point initial = bounds.min;
+	Pos initial = bounds.min;
 	for (int idx = 0; idx < points.size(); idx++)
 	{
 		Area trial = bounds;
-		if (trial.fitAround_40bcb0(points[idx],1))
+		if (trial.fitAround_40bcb0((const Point&)points[idx],1))
 		{
 			for (int x = 0; x < idx; x++)
 			{
-				if (!trial.contains_40b750(points[x]))
+				if (!trial.contains_40b750((const Point&)points[x]))
 					goto next;
 			}
 			bounds = trial;

@@ -302,10 +302,9 @@ void Item::reset578800()	// 0x578800
 struct TeamB_783020	// NOTE: placeholder name/layout
 {
 	char pad[0x4f4];
-	vector<Point>::iterator it4f4;
-	char pad2[0x510 - 0x4f4 - sizeof(vector<Point>::iterator)];
-	vector<Point>::const_iterator it510;
-	char pad3[0x548 - 0x510 - sizeof(vector<Point>::const_iterator)];
+	string str4f4;	// NOTE: placeholder name
+	string str510;	// NOTE: placeholder name
+	char pad3[0x548 - 0x510 - sizeof(string)];
 	int value548;
 	void unknown783020();
 };
@@ -313,7 +312,7 @@ void TeamB_783020::unknown783020()	// 0x783020
 {
 	if (value548)
 		return;
-	it4f4 - it510;
+	str4f4 = str510;	// 0x9af370 basic_string::operator=(const string &)
 }
 
 class OpR2c_Options { public: bool unknown46f4b0(int a); };	// NOTE: placeholder name

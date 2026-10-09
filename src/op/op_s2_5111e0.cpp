@@ -6,8 +6,9 @@ using namespace std;
 
 struct Point;
 
-struct HEntity
+class HEntity	// class, as src/op/op_s2.cpp declares it (OpS2_PhraseTextB ctor mangling)
 {
+public:
 	int ID;
 	HEntity() throw();	// 0x9b6590
 	bool operator!=(HEntity other) const;	// 0x9b6510

@@ -232,7 +232,7 @@ public:
 class CTextInput : public Console
 {
 public:
-	CTextInput(XConsole *parent, int x, int y, int width, int font, bool hidden, bool unknown8c_, int unknownAc_, int unknownB4_, int unknownB8_, int unknownBc_, const char *unknownC0_, int unknownDc_);
+	CTextInput(XConsole *parent, int x, int y, int width, int font, bool hidden, bool unknown8c_, int unknownAc_, int unknownB4_, int unknownB8_, int unknownBc_, const string *unknownC0_, int unknownDc_);
 
 	void setText(const string &text);	// NOTE: placeholder name
 	string &getText_458ef0();	// NOTE: placeholder name (folded getter, +0x6c)

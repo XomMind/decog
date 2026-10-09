@@ -94,17 +94,17 @@ public:
 	Pos getPos();
 	Pos getMaxCoord();	// NOTE: placeholder name
 	void setPos(Pos pos);	// NOTE: placeholder name
-	void setFgColor(XColor color);	// NOTE: placeholder name
-	void setBgColor(XColor color);	// NOTE: placeholder name
+	void setFore(XColor color);	// 0x417b00 (engine/xconsole.h inline)
+	void setBack(XColor color);	// 0x417b30 (engine/xconsole.h inline)
 	void removeSubconsole(XConsole *console);
 	XConsole *getParent() { return parent; };
 	XBuffer *getBuffer() { return &buffer; };	// NOTE: placeholder name
 	void print(int x, int y, const string &text);	// NOTE: placeholder name
 	void printAligned(int x, int y, int align, const string &text);	// NOTE: placeholder name
-	void clear();	// NOTE: placeholder name
 	bool isTileFont();	// NOTE: placeholder name
 	void setHidden(bool hidden_) throw();	// NOTE: placeholder name
-	void setFgColor(int x, int y, XColor color) throw();	// NOTE: placeholder name
+	void setForeNothrow_417f80(int x, int y, XColor color) throw();	// NOTE: placeholder alias of setFore_417f80 (0x417f80, cc_r1_07.cpp): a file-unique stub keeps the call nothrow as in the exe
+	void resetBack_418450();	// NOTE: placeholder name (cc_r1_07.cpp)
 	void setArtFgColor(XColor color) throw();	// NOTE: placeholder name
 	void setArtBgColor(XColor color) throw();	// NOTE: placeholder name
 

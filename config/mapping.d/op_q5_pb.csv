@@ -11,7 +11,6 @@
 ?Add@?$OpQ5p_RepeatedPtrField@VRoute_Entry_RepairedObject@Protobuf@@@@QAEPAVRoute_Entry_RepairedObject@Protobuf@@XZ,0x9cf9f0,0x15
 ?Add@?$OpQ5p_RepeatedPtrField@VRoute_Entry_ObtainedStudy@Protobuf@@@@QAEPAVRoute_Entry_ObtainedStudy@Protobuf@@XZ,0x9cfa10,0x15
 ?Add@?$OpQ5p_RepeatedPtrField@VRoute_Entry@Protobuf@@@@QAEPAVRoute_Entry@Protobuf@@XZ,0x9cfa30,0x15
-??$Add@V?$OpQ5p_TypeHandler@VRoute_Entry@Protobuf@@@@@RepeatedPtrFieldBase@internal@protobuf@google@@QAEPAVRoute_Entry@Protobuf@@PAV45@@Z,0x9ec9f0,0xd0
 ??$Add@VTypeHandler@?$RepeatedPtrField@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@protobuf@google@@@RepeatedPtrFieldBase@internal@protobuf@google@@QAEPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV45@@Z,0x9ec9f0,0xd0
 ??$Add@V?$OpQ5p_TypeHandler@VClassDistribution_ClassEntry@Protobuf@@@@@RepeatedPtrFieldBase@internal@protobuf@google@@QAEPAVClassDistribution_ClassEntry@Protobuf@@PAV45@@Z,0x9ecd00,0xd0
 ??$Add@V?$OpQ5p_TypeHandler@VCogshopPurchases_Purchase@Protobuf@@@@@RepeatedPtrFieldBase@internal@protobuf@google@@QAEPAVCogshopPurchases_Purchase@Protobuf@@PAV45@@Z,0x9ecdd0,0xd0

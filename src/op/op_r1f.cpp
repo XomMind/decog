@@ -16,6 +16,7 @@ void OpQ1_readString(istream &in, string *text);	// 0x4096f0
 void OpQ1_writeStringVector(ostream &out, vector<string> *list);	// 0x409770
 void OpQ1_readStringVector(istream &in, vector<string> *list);	// 0x4097e0
 void OpR1F_write409740(ostream &out, string *text);	// NOTE: placeholder name (0x409740)
+void opr2_readText_436960(istream &stream, string *value);	// NOTE: placeholder name (0x436960, forwards to OpQ1_readString)
 
 class OpR1F_Rec45fd10	// NOTE: placeholder name
 {
@@ -441,7 +442,7 @@ OpR1F_PosText460aa0::OpR1F_PosText460aa0(istream &stream)
 	Pos::read(stream);
 	readBinary(stream,&value8);
 	readBinary(stream,&valueC);
-	OpQ1_readString(stream,&text10);
+	opr2_readText_436960(stream,&text10);
 }
 
 void OpR1F_PosText460aa0::write(ostream &stream)
@@ -660,7 +661,7 @@ public:
 OpR1F_PosText4614f0::OpR1F_PosText4614f0(istream &stream)
 {
 	Pos::read(stream);
-	OpQ1_readString(stream,&text8);
+	opr2_readText_436960(stream,&text8);
 	readBinary(stream,&value24);
 }
 

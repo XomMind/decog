@@ -334,7 +334,7 @@ public:
 	EntityRecord04 *getRecord();		// NOTE: placeholder name (folded getter 0x9b4350)
 	void unknown45b2a0();				// NOTE: placeholder name
 	int unknown639530(int type, int value);	// NOTE: placeholder name
-	void unknown45b070(const char *name);	// NOTE: placeholder name
+	void unknown45b070(const string &name);	// NOTE: placeholder name
 	int unknown5c7d30();				// NOTE: placeholder name
 	bool unknown5c9aa0(int value);		// NOTE: placeholder name
 	vector<HItem> *getInventoryList();
@@ -790,7 +790,7 @@ void Unknown_45f320_45f560::unserialize(istream &stream)
 }
 
 extern Unknown_45f320_45f560 unk_cf6888;
-extern char names_d2b4f8[][0x1c];	// NOTE: placeholder name
+extern string names_d2b4f8[];	// NOTE: placeholder name
 extern const float factor_ba442c;	// NOTE: placeholder name (0.1f)
 
 void Unknown_45f320_45f560::unknown69a0a0(bool flag)

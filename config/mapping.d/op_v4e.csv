@@ -25,4 +25,3 @@
 ??$_Rotate@PAUOpV4e_R8c@@@std@@YAXPAUOpV4e_R8c@@00Urandom_access_iterator_tag@0@@Z,0x9f85f0,0x33
 ??$AllocateInternal@UOpV4e_Meta@@@OpV4e_Arena@@QAEPAX_N@Z,0x9f9f10,0x56
 ??$arena_destruct_object@UOpV4e_Meta@@@internal@protobuf@google@@YAXPAX@Z,0x9ff1d0,0xf
-??$replace@V?$_Vector_iterator@V?$_Vector_val@EV?$allocator@E@std@@@std@@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@V?$_String_const_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0V?$_Vector_iterator@V?$_Vector_val@EV?$allocator@E@std@@@std@@@1@1@Z,0x9f7060,0x3c

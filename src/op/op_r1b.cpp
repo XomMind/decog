@@ -729,12 +729,12 @@ void REX::unknown425bb0()
 			if (modeAIndex == -1 || (fontSetList[i]->unknown30 > fontSetList[modeAIndex]->unknown30 && fontSetList[i]->unknown30 * unknown68 < unknown20))
 			{
 				modeAIndex = i;
-				modeA.assign(fontSetList[modeAIndex]->name);
+				modeA = fontSetList[modeAIndex]->name;
 			}
 			if ((modeBIndex == -1 || fontSetList[i]->unknown30 > fontSetList[modeBIndex]->unknown30) && fontSetList[i]->unknown30 * unknown68 <= unknown20)
 			{
 				modeBIndex = i;
-				modeB.assign(fontSetList[modeBIndex]->name);
+				modeB = fontSetList[modeBIndex]->name;
 			}
 		}
 	}
@@ -828,7 +828,7 @@ void OpR1b_Screenshots::setName(string name_)
 {
 	if (name != name_ || !opR1b_resMgr->fileExists(name_))
 	{
-		name.assign(name_);
+		name = name_;
 		OpR1b_unknown_409240(name);
 	}
 }
@@ -929,7 +929,7 @@ void OpR1b_ScreenshotRex::takeScreenshot()
 			}
 			else
 			{
-				filename.assign(name);
+				filename = name;
 				break;
 			}
 		} while (filename.empty());

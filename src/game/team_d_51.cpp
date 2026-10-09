@@ -183,7 +183,7 @@ void Cell::unknown66ce10(bool announce, bool a, bool b, bool c)
 		}
 		if (trap->getData()->unknown8c)
 			trap->getState()->unknown1c = 1;
-		log51_d1f3d4 += '\t';
+		log51_d1f3d4 = '\t';
 		unknown4569a0_t51(4,HProp(),HProp(),trap,HProp(),0,0,trap->unknown45c9b0(),HProp(),trap,HProp(),0);
 		vector<TeamB_HTrapProp> *list = trap->getData()->type == 0xc ? &traps51_d20248[trap->getState()->unknown04] : NULL;
 		world51->addRecord(factory_cefaa8->createA(new STrapTrigger(trap,a,b,c)));

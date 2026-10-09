@@ -5,7 +5,7 @@
 using namespace std;
 
 struct Point { int x; int y; Point(); Point(int x_, int y_); Point(const Point &p); Point(const Point &p, int dx, int dy); void set(int x_, int y_); void assign(const Point &p); Point operator+(const Point &p) const; };	// NOTE: placeholder
-struct Pos : Point { Pos(int v); };	// NOTE: placeholder
+struct Pos : Point { Pos(int v); Pos(int x_, int y_); };	// NOTE: placeholder
 struct XColor { unsigned char r; unsigned char g; unsigned char b; XColor(const XColor &c); bool operator!=(XColor c); };
 struct C34_Area { Point min; Point max; C34_Area(int x1, int y1, int x2, int y2); int width(); int height(); };	// NOTE: placeholder (0x40b670/0x40b690)
 struct C34_Box { char pad[16]; C34_Box(int x1, int y1, int x2, int y2); int width(); int height(); };	// NOTE: placeholder (OpQ1_Box)
@@ -77,12 +77,12 @@ public:
 class ConsoleArt : public Console
 {
 public:
-	ConsoleArt(XConsole *parent, const string &file, int x, int y, bool hidden, int layer, int frame, const Point &offset, int width, int height);
+	ConsoleArt(XConsole *parent, const string &file, int x, int y, bool hidden, int layer, int frame, const Pos &offset, int width, int height);
 	vector<C34_Grid *> f6c;
 	char pad7c[0x84 - 0x7c];
 };
 
-class CText : public Console { public: CText(XConsole *parent, const Point &pos, const string &text, int font, int maxWidth, int layer); char pad6c[0x88 - 0x6c]; };
+class CText : public Console { public: CText(XConsole *parent, const Pos &pos, const string &text, int font, int maxWidth, int layer); char pad6c[0x88 - 0x6c]; };
 class CTorRepairValue : public Console { public: CTorRepairValue(XConsole *parent, const Point &pos, int type, int layer); char pad6c[0x74 - 0x6c]; };
 class CTorShieldValue : public Console { public: CTorShieldValue(XConsole *parent, const Point &pos, int type, int layer); char pad6c[0x74 - 0x6c]; };
 class CEndingFade : public Console { public: CEndingFade(XConsole *parent, unsigned int duration, bool shake, bool planet, int layer); char pad6c[0xa0 - 0x6c]; };
@@ -196,18 +196,18 @@ void CEnding::update()
 	switch (f70)
 	{
 	case 1:
-		f78.push_back(new CText(this, Point(1, 2), " ANOMALY / SYNCHRONIZING ", 2, 0, 10));
+		f78.push_back(new CText(this, Pos(1, 2), " ANOMALY / SYNCHRONIZING ", 2, 0, 10));
 		f78.back()->resetBack_418450();
 		f78.back()->animate("A_CEnding_Text");
 		break;
 	case 2:
-		f78.push_back(new CText(this, Point(1, 4), " TOR / LINKING ", 2, 0, 10));
+		f78.push_back(new CText(this, Pos(1, 4), " TOR / LINKING ", 2, 0, 10));
 		f78.back()->resetBack_418450();
 		f78.back()->animate("A_CEnding_Text");
 		opR1d_4541b0(114, 0, 0);
 		break;
 	case 3:
-		f78.push_back(new CText(this, Point(1, 6), " SURFACE_DATA / IMPORTING ", 2, 0, 10));
+		f78.push_back(new CText(this, Pos(1, 6), " SURFACE_DATA / IMPORTING ", 2, 0, 10));
 		f78.back()->resetBack_418450();
 		f78.back()->animate("A_CEnding_Text");
 		c34_cec144->setHidden(1);
@@ -1560,7 +1560,7 @@ void CEnding::update()
 		OpU8a_lookup1("Surrender_Fgd_Scan_E", &col);
 		for (unsigned int cols = 0; cols < center.size(); cols++)
 	{
-		f1b4.push_back(new ConsoleArt(this, string() + "data/art/" + "ending/mainc", c34_d0155c.x + center[cols].min.x, c34_d0155c.y + center[cols].min.y, 0, 8, 1, center[cols].min, center[cols].width(), center[cols].height()));
+		f1b4.push_back(new ConsoleArt(this, string() + "data/art/" + "ending/mainc", c34_d0155c.x + center[cols].min.x, c34_d0155c.y + center[cols].min.y, 0, 8, 1, static_cast<const Pos &>(center[cols].min), center[cols].width(), center[cols].height()));	// NOTE: ctor takes const Pos& (0x48c910); C34_Area keeps placeholder Point corners
 		f1b4.back()->setForeAll_4183d0(*c34_cfe674);
 		f1b4.back()->resetBack_418450();
 		for (int current = 0; current < f1b4.back()->getWidth(); current++)

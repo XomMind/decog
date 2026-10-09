@@ -152,6 +152,7 @@ public:
 	bool unknown4579d0();					// NOTE: placeholder name
 	string unknown4579f0();					// NOTE: placeholder name
 	bool unknown5776c0();					// NOTE: placeholder name
+	bool unknown5775a0();					// NOTE: placeholder name
 	bool unknown577700();					// NOTE: placeholder name
 	bool unknown577640();					// NOTE: placeholder name
 };
@@ -277,6 +278,19 @@ extern vector<OpR5d_ItemType *> opR5d_itemTypes;	// NOTE: placeholder name (0xcf
 //==================================================================
 // item lookup by display name
 //==================================================================
+
+string teamb_itemLabel8f8e90(HItem item);	// 0x8f8e90 (src/game/team_b_47.cpp)
+
+HItem OpR5d_findItem8f90d0(const string &name)	// NOTE: placeholder name
+{
+	HItemList *inventory = opR5d_world->getPlayer()->getInventoryList();
+	for (unsigned int i = 0; i < inventory->size(); i++)
+	{
+		if ((*inventory)[i]->unknown5775a0() && teamb_itemLabel8f8e90((*inventory)[i]) == name)
+			return (*inventory)[i];
+	}
+	return HItem();
+}
 
 string OpR5d_getItemDescription8f9230(HItem item)	// NOTE: placeholder name
 {

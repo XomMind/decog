@@ -30,6 +30,14 @@ struct CmuPos	// NOTE: placeholder name (Pos, under a file-unique type so its no
 	bool operator!=(const CmuPos &pos) const throw();	// 0x409bd0
 };
 typedef CmuPos Point;
+// The configured callees absToLocal/setPos/inBounds/unknown8069e0/unknown806d00 take the shared Pos. A Pos derived
+// from the file-unique CmuPos gives those calls their configured decorated names while every other Pos operation
+// (and every vector<CmuPos> instance) stays file-local. Only the copy constructor is declared, so no inline Pos
+// member is ever emitted here (zz_point_ctors.cpp defines it).
+struct Pos : CmuPos	// NOTE: placeholder layout (the shared Pos)
+{
+	Pos(const Pos &pos) throw();	// 0x46ca50
+};
 
 class CmuStepper	// NOTE: placeholder name (Bresenham2DStepper, file-unique so its nothrow spec stays local)
 {
@@ -64,12 +72,12 @@ public:
 
 	bool isHidden();	// 0x4175f0
 	int getWidth();	// 0x44b0d0 (folded getter)
-	bool inBounds(const CmuPos &pos);	// 0x4173d0
+	bool inBounds(const Pos &pos);	// 0x4173d0
 	void setPos(int x, int y);	// 0x417a90
-	void setPos(const CmuPos &pos);	// 0x4289e0
+	void setPos(const Pos &pos);	// 0x4289e0
 	void setHidden(bool hidden_);	// 0x417ba0
 	void removeSubconsole(XConsole *console);	// 0x428b20
-	CmuPos absToLocal(CmuPos pos);	// 0x428560
+	Pos absToLocal(Pos pos);	// 0x428560
 
 	char pad04[0x60 - 0x04];
 };
@@ -80,7 +88,7 @@ public:
 	virtual ~Console();
 
 	virtual bool input(XEvent *event);
-	virtual void update();	// 0x429e30
+	virtual void update();	// 0x48c280
 	virtual void render();	// NOTE: placeholder name
 
 	int unknown60;
@@ -98,7 +106,7 @@ class CmuMouse	// NOTE: placeholder name (object at *0xcefa94)
 {
 public:
 	bool isOutsideMargin(bool flag);	// 0x41a780
-	CmuPos topLeft();	// 0x40a970 NOTE: placeholder name
+	Pos topLeft();	// 0x40a970 NOTE: placeholder name
 	bool getField41a6e0();	// NOTE: placeholder name
 	void setCell(int x, int y);	// 0x4322a0
 	void setCursorHidden(bool hidden);	// 0x432170
@@ -161,6 +169,28 @@ public:
 	Prop *operator->() const;	// 0x9b64f0
 };
 
+// Shared handle names for the configured Cell getters (0x45d250/0x45d550/0x45d8f0), Cell::isPassableFor (0x66ab30)
+// and the placeholder callees that take the getter results by value (passing a derived handle to a CmuH* parameter
+// would slice through a temporary). Derived from the file-unique handles, so the handle methods used on them stay
+// file-local. Only the default constructor is declared, so no inline handle member is emitted here.
+class HEntity : public CmuHEntity	// NOTE: placeholder layout (the shared HEntity)
+{
+public:
+	HEntity() throw();	// 0x9b6590
+};
+
+class HItem : public CmuHItem	// NOTE: placeholder layout (the shared HItem)
+{
+public:
+	HItem() throw();	// 0x9b6590
+};
+
+class HProp : public CmuHProp	// NOTE: placeholder layout (the shared HProp)
+{
+public:
+	HProp() throw();	// 0x9b6590
+};
+
 class CmuGroup	// NOTE: placeholder name
 {
 public:
@@ -198,7 +228,7 @@ public:
 	int unknown5d6890();	// NOTE: placeholder name
 	bool unknown5d69a0();	// NOTE: placeholder name
 	CmuHItem unknown5d2380(int slot);	// NOTE: placeholder name
-	bool unknown45aaa0(CmuHEntity e);	// NOTE: placeholder name
+	bool unknown45aaa0(HEntity e);	// NOTE: placeholder name
 	bool isPlayer();	// 0x5c7600
 	bool unknown5c8710(const Point &p);	// NOTE: placeholder name
 	int getSize();	// 0x45a360
@@ -233,11 +263,11 @@ public:
 class Cell	// NOTE: partial
 {
 public:
-	CmuHEntity getEntity();	// 0x45d250
-	CmuHProp getProp();	// 0x45d550
-	CmuHItem getItem();	// 0x45d8f0
+	HEntity getEntity();	// 0x45d250
+	HProp getProp();	// 0x45d550
+	HItem getItem();	// 0x45d8f0
 	bool isMachinePart();	// 0x45dcd0
-	bool isPassableFor(CmuHEntity e);	// 0x66ab30
+	bool isPassableFor(HEntity e);	// 0x66ab30
 	void unknown45db10();	// NOTE: placeholder name
 	void unknown45db30();	// NOTE: placeholder name
 };
@@ -594,8 +624,13 @@ public:
 	virtual void update();
 
 	void centerPush_805020(CmuPos &out);	// NOTE: placeholder name
-	void unknown8069e0(Point p, bool flag) throw();	// NOTE: placeholder name
-	bool unknown806d00(vector<Point> &points, bool flag);	// NOTE: placeholder name
+private:
+	// Retail treats 0x8069e0 as nothrow (no EH state for `line` around the scroll loop). Our full-build definition
+	// (op_x4e.cpp) calls stubs, so LTCG cannot prove that; the private declaration keeps this call on a file-unique
+	// throw() stub (`@@AAE`), which lverify pairs with the configured public identity (access letter neutralised).
+	void unknown8069e0(Pos p, bool flag) throw();	// NOTE: placeholder name
+public:
+	bool unknown806d00(vector<Pos> &points, bool flag);	// NOTE: placeholder name
 	bool unknown805190(CmuPos &out);	// NOTE: placeholder name
 	void edges8146c0();	// NOTE: placeholder name
 	void unknown8142d0(unsigned int a, bool b);	// NOTE: placeholder name
@@ -603,9 +638,9 @@ public:
 	void unknown807eb0(bool flag);	// NOTE: placeholder name
 	void updatePredictedExplosion();	// 0x808320
 	void labelAccess80e3a0(bool flag, const CmuPos &pos);	// NOTE: placeholder name
-	void label810270(int a, CmuHEntity e, int b, int c);	// NOTE: placeholder name
-	void label813050(int a, CmuHProp p, int b, int c, int d);	// NOTE: placeholder name
-	void items8119c0(CmuHItem item, bool a, int b, int c);	// NOTE: placeholder name
+	void label810270(int a, HEntity e, int b, int c);	// NOTE: placeholder name
+	void label813050(int a, HProp p, int b, int c, int d);	// NOTE: placeholder name
+	void items8119c0(HItem item, bool a, int b, int c);	// NOTE: placeholder name
 	bool unknown8052f0(const CmuPos &pos);	// NOTE: placeholder name
 	void labelEntity80fa60(int a, const CmuPos &pos, int b, int c, int d, int e);	// NOTE: placeholder name
 	void addMemoryLabel812950(const CmuPos &pos, int a);	// NOTE: placeholder name
@@ -724,7 +759,7 @@ void CMap::update()
 		{
 			CmuPos center;
 			centerPush_805020(center);
-			CmuPos local = absToLocal(cmu_mouse_cefa94->topLeft());
+			Pos local = absToLocal(cmu_mouse_cefa94->topLeft());
 			CmuPos point(local.x - scroll.x,local.y - scroll.y);
 			CmuStepper line(center.x,center.y,point.x,point.y);
 			CmuPos cur;
@@ -740,7 +775,7 @@ void CMap::update()
 					unknown750 = cmu_tick_caed20;
 					break;
 				}
-				unknown8069e0(center,true);
+				unknown8069e0(static_cast<const Pos &>(center),true);
 				unknown750 += delay;
 			}
 		}
@@ -775,7 +810,7 @@ void CMap::update()
 			vector<Point> points;
 			for (unsigned int k = 0; k < list2.size(); k++)
 				points.push_back(list2[k]->getPosition());
-			unknown806d00(points,true);
+			unknown806d00(reinterpret_cast<vector<Pos> &>(points),true);
 		}
 		unknown66c.clear();
 	}
@@ -1030,16 +1065,16 @@ void CMap::update()
 		unknown1e8 = scroll;
 		if (hasActiveLabel(4))
 		{
-			label810270(0,CmuHEntity(),0,1);
-			label813050(1,CmuHProp(),0,1,0);
+			label810270(0,HEntity(),0,1);
+			label813050(1,HProp(),0,1,0);
 		}
 		else if (hasActiveLabel(5))
 		{
-			label810270(2,CmuHEntity(),0,1);
-			label813050(0,CmuHProp(),0,1,0);
+			label810270(2,HEntity(),0,1);
+			label813050(0,HProp(),0,1,0);
 		}
 		else if (hasActiveLabel(6))
-			items8119c0(CmuHItem(),cmu_tick_caed20 <= unknown1f0 + 5000,1,0);
+			items8119c0(HItem(),cmu_tick_caed20 <= unknown1f0 + 5000,1,0);
 		else if (hasActiveLabel(0x10))
 			cmu_world_cefc4c->unknown735e70(0);
 		else if (hasActiveLabel(0x11))
@@ -1196,7 +1231,7 @@ moved_:
 			if (unknown544.empty() || unknown544.front() != player->getPosition() || unknown544.back() != unknown78c)
 				cmu_world_cefc4c->unknown7168e0(player->getPosition(),unknown78c,player.operator->(),unknown544);
 		}
-		else if (onMap && operate49aa00() && cmu_cells_cfd44c(mouse)->isPassableFor(player))
+		else if (onMap && operate49aa00() && cmu_cells_cfd44c(mouse)->isPassableFor(static_cast<const HEntity &>(player)))
 		{
 			if (unknown544.empty() || unknown544.front() != player->getPosition() || unknown544.back() != mouse)
 				cmu_world_cefc4c->unknown7168e0(player->getPosition(),mouse,player.operator->(),unknown544);
@@ -1220,7 +1255,7 @@ moved_:
 					unknown554 = 1;
 			}
 		}
-		else if ((cmu_d28d31 || (cmu_cec14e && cmu_cec14d)) && cmu_cells_cfd44c(mouse)->isPassableFor(player))
+		else if ((cmu_d28d31 || (cmu_cec14e && cmu_cec14d)) && cmu_cells_cfd44c(mouse)->isPassableFor(static_cast<const HEntity &>(player)))
 		{
 			unknown554 = 0;
 			if ((cmu_cefacd || cmu_playerData_cf45d8.isFlagActive46dd50()) && cmu_cells_cfd44c(mouse)->getEntity().isValid() && cmu_cells_cfd44c(mouse)->getEntity()->getAI())
@@ -1305,7 +1340,7 @@ moved_:
 	{
 		while (!unknown730.empty() && cmu_tick_caed20 >= unknown740.front())
 		{
-			unknown8069e0(unknown730.front(),true);
+			unknown8069e0(static_cast<const Pos &>(unknown730.front()),true);
 			cmu_eraseAt_9d5190(unknown730,0);
 			cmu_removeElement_9de6f0(unknown740,0);
 		}
@@ -1316,7 +1351,7 @@ moved_:
 		{
 			if (!cmu_d28c8a && cmu_cec108 == 0 && cmu_cec0f8->isHidden())
 			{
-				CmuPos mouse = cmu_mouse_cefa94->topLeft();
+				Pos mouse = cmu_mouse_cefa94->topLeft();
 				if (unknown718.x == -1)
 				{
 					unknown718 = mouse;
@@ -1351,7 +1386,7 @@ moved_:
 						CmuPos dest(center,steps);
 						if (cmu_cells_cfd44c.contains(dest))
 						{
-							unknown8069e0(dest,true);
+							unknown8069e0(static_cast<const Pos &>(dest),true);
 							cmu_mouse_cefa94->setCell(unknown718.x,unknown718.y);
 							cmu_mouse_cefa94->setCursorHidden(true);
 						}
@@ -1585,11 +1620,11 @@ moved_:
 			else
 			{
 				CmuPos pos = unknown7c0[i] + unknown7d0[i] + scroll;
-				unknown7b0[i]->setPos(pos);
-				unknown7b0[i]->setHidden(!cmu_cec054->inBounds(pos));
+				unknown7b0[i]->setPos(static_cast<const Pos &>(pos));
+				unknown7b0[i]->setHidden(!cmu_cec054->inBounds(static_cast<const Pos &>(pos)));
 			}
 		}
 	}
 
-	Console::update();
+	XConsole::update();	// 0x429e30 (retail skips Console::update)
 }

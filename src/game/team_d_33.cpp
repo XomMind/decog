@@ -34,13 +34,14 @@ public:
 	string &pick();			// NOTE: placeholder name
 };
 
-string OpD_baseName_604420(PartRec33 *rec);	// NOTE: placeholder name (0x604420)
+struct PartRec120;	// the record type src/game/team_d_120.cpp defines OpD_baseName_604420 with
+string OpD_baseName_604420(PartRec120 *rec);	// NOTE: placeholder name (0x604420, src/game/team_d_120.cpp)
 string OpU8a_randomString(vector<string> &v);	// NOTE: placeholder name (0x9d3280)
 
 void OpD_namePart_604c20(vector<int> &sources, PartRec33 *rec)	// NOTE: placeholder name
 {
 	string text = rec->name;
-	rec->name = OpD_baseName_604420(rec);
+	rec->name = OpD_baseName_604420((PartRec120 *)rec);
 	if (!rec->name.empty())
 		rec->name += " ";
 	vector<string> parts;

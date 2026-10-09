@@ -20,7 +20,7 @@ public:
 		, title	(title_)
 		, align	(align_)
 	{
-		setFgColor(consoleDefaultColor);
+		setFore(consoleDefaultColor);
 		print(0,0,title);
 	};
 
@@ -194,7 +194,7 @@ public:
 class CTextInput : public Console
 {
 public:
-	CTextInput(XConsole *parent, int x, int y, int width, int font, bool hidden, bool unknown8c_, int unknownAc_, int unknownB4_, int unknownB8_, int unknownBc_, const char *unknownC0_, int unknownDc_)
+	CTextInput(XConsole *parent, int x, int y, int width, int font, bool hidden, bool unknown8c_, int unknownAc_, int unknownB4_, int unknownB8_, int unknownBc_, const string *unknownC0_, int unknownDc_)
 		: Console(parent,width,1,x,y,font,hidden,-1)
 		, unknown8c	(unknown8c_)
 		, unknown90	(0)
@@ -211,7 +211,7 @@ public:
 		, unknownE0	(0)
 	{
 		if (unknownC0_)
-			unknownC0 = unknownC0_;
+			unknownC0 = *unknownC0_;
 		clear();
 	};
 
@@ -219,7 +219,7 @@ public:
 
 	void clear()	// NOTE: placeholder name
 	{
-		XConsole::clear();
+		resetBack_418450();
 		text.clear();
 		cursor = 0;
 	};
@@ -230,7 +230,7 @@ public:
 		text = text_;
 		cursor = text.size();
 	};
-	void setUnknownBc(int unknownBc_, const char *unknownC0_)	// NOTE: placeholder name
+	void setUnknownBc(int unknownBc_, const string &unknownC0_)	// NOTE: placeholder name
 	{
 		unknownBc = unknownBc_;
 		unknownC0 = unknownC0_;
@@ -282,7 +282,7 @@ public:
 	{
 		command = command_;
 		setHidden(true);
-		setFgColor(0,0,color);
+		setForeNothrow_417f80(0,0,color);
 	};
 
 	virtual bool mouseEnter()
@@ -439,7 +439,7 @@ public:
 
 		for (int i = 0, y = 2; i < numVisible; i++, y++)
 		{
-			listOptions.push_back(new CListOption(this,7,y,optionWidth,options[i],font,false,i,0,enabled ? (*enabled)[i] : true,unknownA4 ? (*unknownA4)[i] : 0,unknownA8 ? (*unknownA8)[i] : -1));
+			listOptions.push_back(new CListOption(this,7,y,optionWidth,options[i],font,false,i,0,enabled ? enabled->at(i) : true,unknownA4 ? unknownA4->at(i) : 0,unknownA8 ? unknownA8->at(i) : -1));
 			listOptions.back()->draw();
 			updateScroll();
 		}

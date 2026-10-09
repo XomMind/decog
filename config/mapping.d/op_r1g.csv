@@ -1,5 +1,4 @@
 # op_r1g: serialization/container helpers 0x46cbc0-0x4729d0
-OpR1g_Triple::OpR1g_Triple,0x46cbc0,0x9e
 OpR1g_Triple::write,0x46cc90,0x43
 OpR1g_Triple::read,0x46cce0,0x4b
 OpR1g_Triple::add,0x46cd30,0x86

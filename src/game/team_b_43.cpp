@@ -38,7 +38,7 @@ extern TeamB_AccessGrid teamb_accessGrid_cfd44c;	// NOTE: placeholder name
 class TeamB_AccessMark { public: void resetField_9b7270(); };	// NOTE: placeholder name
 extern int opw8_cf462c;	// NOTE: placeholder name (game mode)
 extern int teamb_difficulty_cf4718;	// NOTE: placeholder name (0xcf4718)
-extern const char teamb_accessText_cfe110[];	// NOTE: placeholder name
+extern string gameString_cfe110;	// "Final Abomination's Lair" (src/game/global_strings.cpp)
 extern string teamb_locationNames_cfaca0[];	// NOTE: placeholder name
 extern const bool teamb_lockedBranch_ba6650[][3];	// NOTE: placeholder name
 extern XConsole *opx5e_cec054;	// NOTE: placeholder name (0xcec054)
@@ -80,7 +80,7 @@ void TeamB_CMapAccess::labelAccess80e3a0(bool timed, const Point &pos)	// 0x80e3
 			{
 				TeamB_HAccessNode node = zone->node;
 				if (opw8_cf462c == 4 && node->type == 0x24)
-					label = teamb_accessText_cfe110;
+					label = gameString_cfe110;
 				else
 				{
 					label = node->known ? OpR5f_toUpper_4083a0(teamb_locationNames_cfaca0[node->type]) : string("???");

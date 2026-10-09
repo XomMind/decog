@@ -35,7 +35,6 @@
 ??$_Lexicographical_compare@PBDPBD@std@@YA_NPBD000@Z,0x9edb00,0x7b
 ??$_Insert@V?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@std@@@?$vector@UPoint@@V?$allocator@UPoint@@@std@@@std@@QAEXV?$_Vector_const_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@1@V?$_Vector_iterator@V?$_Vector_val@UPoint@@V?$allocator@UPoint@@@std@@@std@@@1@1Uforward_iterator_tag@1@@Z,0x9edc00,0x24f
 ??$?5DU?$char_traits@D@std@@V?$allocator@D@1@@std@@YAAAV?$basic_istream@DU?$char_traits@D@std@@@0@AAV10@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@@Z,0x9ede50,0x1e
-??$_Assign@V?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QAEAAV01@V?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0Uinput_iterator_tag@1@@Z,0x9edf80,0x49
 ??$rotate@V?$_Vector_iterator@V?$_Vector_val@UOpQ5_U9d5760@@V?$allocator@UOpQ5_U9d5760@@@std@@@std@@@std@@@std@@YA?AV?$_Vector_iterator@V?$_Vector_val@UOpQ5_U9d5760@@V?$allocator@UOpQ5_U9d5760@@@std@@@std@@@0@V10@00@Z,0x9edfd0,0x99
 ??$_Uninit_def_fill_n@PAUOpQ5s_T9f0a40@@IU1@V?$allocator@UOpQ5s_T9f0a40@@@std@@U1@@std@@YAXPAUOpQ5s_T9f0a40@@IPBU1@AAV?$allocator@UOpQ5s_T9f0a40@@@0@0U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f0a40,0xc4
 ??$iter_swap@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PAV12@@std@@YAXPAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0@Z,0x9f93c0,0x15

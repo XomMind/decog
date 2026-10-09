@@ -298,7 +298,7 @@ CMainUiButton::CMainUiButton(XConsole *parent, int x, int index_)
 	index = index_;
 	unknown70 = (index_ == 1 ? 2 : 0);
 	unknown9cdcc0(unknown74,4,0);
-	setFgColor(*unknown_cf6b24);
+	setFore(*unknown_cf6b24);
 	print(0,0,unknown_d39618[index]);
 }
 
@@ -315,7 +315,7 @@ public:
 CFovEnemiesButton::CFovEnemiesButton(XConsole *parent, int x, const string &text)
 	: Console(parent,text.size(),1,x,0,0,false,-1)
 {
-	setFgColor(*unknown_cf169c);
+	setFore(*unknown_cf169c);
 	print(0,0,text);
 }
 

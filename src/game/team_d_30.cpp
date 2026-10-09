@@ -12,7 +12,7 @@ struct Point
 	Point(const Point &p) throw();	// 0x46ca50
 };
 
-struct XColor	// NOTE: element type of the retail action path vector (vector<XColor> ctor, ~vector at 0x9b50a0)
+struct D30PathStep	// NOTE: placeholder name; element type of the retail action path vector (ctor 0x9b8e80, ~vector 0x9b50a0). File-private so the template instances pair only here (a shared ~vector<D30PathStep> pairs elsewhere)
 {
 	unsigned char r;
 	unsigned char g;
@@ -142,7 +142,7 @@ public:
 class Action64fb40	// NOTE: placeholder name (0x7c-byte object, constructor 0x64fb40)
 {
 public:
-	Action64fb40(HEntity e, int a, const Point &target, Point *origin, int *delay, vector<XColor> *path, int b, HProp prop);
+	Action64fb40(HEntity e, int a, const Point &target, Point *origin, int *delay, vector<D30PathStep> *path, int b, HProp prop);
 	char pad[0x7c];
 };
 
@@ -215,7 +215,7 @@ bool Entity::unknown63c340(HEntity target)
 			return false;
 		flag_cefc8b = true;
 		int t;
-		vector<XColor> path;
+		vector<D30PathStep> path;
 		world30->addRecord(factory_cefaa8->createA(new Action64fb40(self,0,target->unknown5c80f0(unknown45a4c0()),&point_d2e20c,&t,&path,0,HProp())));
 		do { if (logMessageS_5111e0(isPlayer() ? 0xae : (unknown45aaa0(world30->getPlayer()) ? 0xaf : 0xb0),target->name416f40(),0,0,self,HProp(),0,0)) consoleA_cec058->unknown8758d0(true); logMsgs_cec0b4->scrollToEnd(); } while (0);
 		if (isPlayer())

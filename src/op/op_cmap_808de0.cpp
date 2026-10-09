@@ -30,11 +30,15 @@ struct Pos
 	bool operator!=(const Pos &pos) const;	// 0x409bd0
 	void set(int x_, int y_);	// 0x40a010 NOTE: placeholder name
 };
-typedef Pos Point;
+// Configured callee signatures name Point / TeamB_Pair (traceSubcellLine 0x4106d0, OpV4c_Fn9d5460 0x9d5460,
+// teamb_select808db0 0x808db0); retail folds Pos and Point. Only used through casts at those call sites.
+// The copy ctor is declared (defined in src/op/op_w8.cpp, 0x46ca50) so no implicit copy is emitted here.
+struct Point { int x; int y; Point(const Point &p) throw(); };	// layout identical to Pos
+struct TeamB_Pair { int a; int b; };	// NOTE: placeholder name, as in src/game/team_b_01.cpp
 struct PosB { int x; int y; };	// NOTE: same name as src/game/cc_r2_19.cpp
 
-int OpQ1_distanceCeil_40a3f0(const Point &a, const Point &b);	// NOTE: placeholder name
-int teamb_select808db0(bool useX, Point &p);	// NOTE: placeholder name (picks x or y)
+int OpQ1_distanceCeil_40a3f0(const Pos &a, const Pos &b);	// NOTE: placeholder name
+int teamb_select808db0(bool useX, TeamB_Pair &p);	// NOTE: placeholder name (picks x or y)
 void OpV4c_Fn9d5460(vector<Point> &v, unsigned int index, Point p);	// NOTE: placeholder name (insert at index)
 bool traceSubcellLine(const Point &from, const Point &to, vector<Point> &path, vector<int> &steps, int speed);
 template <class T> void OpQ5_appendVector(vector<T> &v, vector<T> &other);	// NOTE: placeholder name
@@ -47,11 +51,11 @@ public:
 	Area();	// 0x40b100
 	Area(int x1, int y1, int x2, int y2);	// 0x40b1e0
 	bool touches_40baa0(const Area &other);	// NOTE: placeholder name
-	void clip_40bc40(const Point &min_, const Point &max_);	// NOTE: placeholder name
-	void offset_40bdd0(const Point &by);	// NOTE: placeholder name
+	void clip_40bc40(const Pos &min_, const Pos &max_);	// NOTE: placeholder name
+	void offset_40bdd0(const Pos &by);	// NOTE: placeholder name
 
-	Point min;
-	Point max;
+	Pos min;
+	Pos max;
 };
 
 template <class T>
@@ -63,13 +67,13 @@ public:
 	T *data;
 
 	T &operator()(int x, int y);	// 0x9ceda0
-	T &operator()(const Point &p);	// 0x9ced70
+	T &operator()(const Pos &p);	// 0x9ced70
 	bool inBounds(int x, int y);	// 0x9b45c0
-	bool contains(const Point &p);	// 0x9b43b0
+	bool contains(const Pos &p);	// 0x9b43b0
 	int getWidth();	// 0x9fcd80
 	int getHeight();	// 0x9b8f00
-	void getRect(const Point &p, int radius, Area &out);	// 0x9b4430
-	void getBounds(const Point &center, int radius, Point &min, Point &max);	// 0x9b7a40
+	void getRect(const Pos &p, int radius, Area &out);	// 0x9b4430
+	void getBounds(const Pos &center, int radius, Pos &min, Pos &max);	// 0x9b7a40
 };
 
 struct XColor;
@@ -131,7 +135,7 @@ public:
 	int getSize();	// 0x45a360
 	int getTarget();	// 0x45a760
 	HGroup getGroup();	// 0x45a3f0
-	const Point &getPosition() throw();	// 0x45a4a0
+	const Pos &getPosition() throw();	// 0x45a4a0
 };
 
 class HEntity	// NOTE: placeholder layout
@@ -265,14 +269,14 @@ extern unsigned int cmapAnim_tickCount;	// NOTE: placeholder name (0xcaed20)
 extern XConsole *cmapAnim_mapConsole;	// NOTE: placeholder name (0xcec054)
 extern bool cmapAnim_asciiEnabled;	// NOTE: placeholder name (0xd28d15)
 extern string cmapAnim_d33e38[];	// NOTE: placeholder name (decoy anim suffixes)
-extern vector<Point> cmapAnim_d35860;	// NOTE: placeholder name
-extern vector<Point> cmapAnim_d1daec;	// NOTE: placeholder name
+extern vector<Pos> cmapAnim_d35860;	// NOTE: placeholder name
+extern vector<Pos> cmapAnim_d1daec;	// NOTE: placeholder name
 extern vector<CmapAnim_Conduit *> cmapAnim_d39f1c;	// NOTE: placeholder name
 
 struct C63_CMap : public Console	// NOTE: placeholder name (CMap); partial layout
 {
 	bool unknown808de0(int type);	// NOTE: placeholder name
-	void unknown808510(const Pos &center, int radius, vector<Point> &points);	// NOTE: placeholder name
+	void unknown808510(const Pos &center, int radius, vector<Pos> &points);	// NOTE: placeholder name
 	void unknown8051f0(Pos *min, Pos *max);	// NOTE: placeholder name
 	bool hasEntityLabel(int type, HEntity entity);	// NOTE: placeholder name (0x49b1a0)
 	void removeLabels(int type);	// NOTE: placeholder name (0x49b390)
@@ -280,14 +284,14 @@ struct C63_CMap : public Console	// NOTE: placeholder name (CMap); partial layou
 	Pos unknown6c;	// NOTE: placeholder name
 	char pad74[0x134 - 0x74];
 	int mode;	// NOTE: placeholder name
-	vector<Point> points;	// NOTE: placeholder name
+	vector<Pos> points;	// NOTE: placeholder name
 	int radius;	// NOTE: placeholder name
 	Pos center;	// NOTE: placeholder name
 	Pos offset;	// NOTE: placeholder name
 	unsigned int startTick;	// NOTE: placeholder name
 	int unknown160;	// NOTE: placeholder name
 	int unknown164;	// NOTE: placeholder name
-	vector<vector<Point> > paths;	// NOTE: placeholder name
+	vector<vector<Pos> > paths;	// NOTE: placeholder name
 	vector<vector<int> > steps;	// NOTE: placeholder name
 	vector<Area> boxes;	// NOTE: placeholder name
 	vector<unsigned int> boxTimes;	// NOTE: placeholder name
@@ -353,13 +357,13 @@ bool C63_CMap::unknown808de0(int type)
 			if (!points.empty())
 			{
 				bool vertical = mode == 6;
-				vector<Point> copy(points);
+				vector<Pos> copy(points);
 				points.clear();
 				points.push_back(copy.back());
 				copy.pop_back();
 				while (!copy.empty())
 				{
-					if (teamb_select808db0(vertical,copy.back()) >= teamb_select808db0(vertical,points.back()))
+					if (teamb_select808db0(vertical,(TeamB_Pair&)copy.back()) >= teamb_select808db0(vertical,(TeamB_Pair&)points.back()))
 					{
 						points.push_back(copy.back());
 						copy.pop_back();
@@ -368,9 +372,9 @@ bool C63_CMap::unknown808de0(int type)
 					{
 						for (unsigned int i = 0; i < points.size(); i++)
 						{
-							if (teamb_select808db0(vertical,copy.back()) < teamb_select808db0(vertical,points[i]))
+							if (teamb_select808db0(vertical,(TeamB_Pair&)copy.back()) < teamb_select808db0(vertical,(TeamB_Pair&)points[i]))
 							{
-								OpV4c_Fn9d5460(points,i,copy.back());
+								OpV4c_Fn9d5460((vector<Point>&)points,i,(Point&)copy.back());
 								copy.pop_back();
 								break;
 							}
@@ -383,7 +387,7 @@ bool C63_CMap::unknown808de0(int type)
 					OpU8a_lookup1("CMap_Anim_Jam_Comm",&anim);
 					if (anim)
 					{
-						vector<Point> edge;
+						vector<Pos> edge;
 						Pos pos = center + offset;
 						for (unsigned int i = 0; i < points.size(); i++)
 						{
@@ -419,7 +423,7 @@ bool C63_CMap::unknown808de0(int type)
 				OpU8a_lookup1("CMap_Anim_Unused_A_E",&anim);
 				if (anim)
 				{
-					vector<Point> edge;
+					vector<Pos> edge;
 					Pos pos = center + offset;
 					for (unsigned int i = 0; i < points.size(); i++)
 					{
@@ -736,7 +740,7 @@ bool C63_CMap::unknown808de0(int type)
 				OpU8a_lookup1("CMap_Anim_Ent_IFF_MC",&animMC);
 				int animNMCPos;
 				OpU8a_lookup1("CMap_Anim_Ent_IFF_NMC",&animNMCPos);
-				vector<Point> allies(cmapAnim_d35860);
+				vector<Pos> allies(cmapAnim_d35860);
 				int count2 = allies.size();
 				OpQ5_appendVector(allies,cmapAnim_d1daec);
 				for (int i = 0; i < allies.size(); i++)
@@ -825,10 +829,10 @@ bool C63_CMap::unknown808de0(int type)
 						labels.push_back(new XTimerI(0xd,new Console(cmapAnim_mapConsole,textVal.size(),1,cx,cy,cmapAnim_asciiEnabled != 0,false,-1),true,(mode == 13 ? 1075 : 2000) + cmapAnim_tickCount,mode == 13 ? (const PosB&)Pos(1,0) : (const PosB&)Pos(-1,1),cmapAnim_cells(x,y)->getEntity().ID,HProp().ID,HProp().ID,(const PosB&)Pos(cmapAnim_cells(x,y)->getEntity()->getSize() / 2,cmapAnim_cells(x,y)->getEntity()->getSize() - 1)));
 						labels.back()->console->print(0,0,textVal);
 						labels.back()->console->unknown48c3c0(anim);
-						paths.push_back(vector<Point>());
+						paths.push_back(vector<Pos>());
 						steps.push_back(vector<int>());
 						float speed = 10.0f;
-						traceSubcellLine(center,Pos(x,y),paths.back(),steps.back(),(int)speed);
+						traceSubcellLine((const Point&)center,(const Point&)Pos(x,y),(vector<Point>&)paths.back(),steps.back(),(int)speed);
 					}
 				}
 			}
@@ -895,8 +899,8 @@ bool C63_CMap::unknown808de0(int type)
 			if (high.y > vMax2.y)
 				high.y = vMax2.y;
 			int groupTypePos = cmapAnim_world->player->getGroup()->getType();
-			vector<Point> doors;
-			vector<Point> trapsVal;
+			vector<Pos> doors;
+			vector<Pos> trapsVal;
 			for (int x = min.x, cx = min.x + offset.x; x <= high.x; x++, cx++)
 			{
 				for (int y = min.y, cy = min.y + offset.y; y <= high.y; y++, cy++)

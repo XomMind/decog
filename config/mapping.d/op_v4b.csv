@@ -12,7 +12,6 @@ OpV4b_Tri::~OpV4b_Tri,0x9b7080,0x65
 ??1?$vector@UOpV4b_S132@@V?$allocator@UOpV4b_S132@@@std@@@std@@QAE@XZ,0x9b4a80,0x53
 ?erase@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAEAAV12@II@Z,0x9c2790,0x96
 ?assign@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAEAAV12@PB_WI@Z,0x9c2710,0x7f
-?max_size@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QBEIXZ,0x9c2540,0x36
 OpV4b_StrPair::OpV4b_StrPair,0x9c0ec0,0x63
 ?_Chassign@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAEXII_W@Z,0x9c2830,0x50
 ?_Eos@?$basic_string@_WU?$char_traits@_W@std@@V?$allocator@_W@2@@std@@QAEXI@Z,0x9c2880,0x39

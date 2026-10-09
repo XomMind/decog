@@ -28,7 +28,7 @@ void harness_consoles2()
 	string s;
 	XColor *c = 0;
 	vector<int> v;
-	CTextInput *ti = new CTextInput(NULL,1,2,3,4,true,true,5,6,7,8,"",9);
+	CTextInput *ti = new CTextInput(NULL,1,2,3,4,true,true,5,6,7,8,NULL,9);
 	ti->setUnknown98(v);
 	ti->setUnknownA9(true);
 	ti->setText("");

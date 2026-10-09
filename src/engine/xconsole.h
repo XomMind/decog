@@ -434,8 +434,9 @@ public:
 	void clearChars()
 	{
 		for (int y = 0; y < buffer.getHeight(); y++)
-			setCharRow(0,y,buffer.getWidth());
+			setCharRow_4183a0(0,y,buffer.getWidth());
 	};
+	void setCharRow_4183a0(int x, int y, int width);	// NOTE: placeholder name (0x4183a0 = setCharRow(x,y,width), cc_r1_07.cpp)
 	void deleteSubconsolesExcept(XConsole *console)
 	{
 		for (int i = 0; i < (int)subconsoles.size(); i++)

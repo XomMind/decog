@@ -84,7 +84,7 @@ void REX::toggleFullscreen()
 	fullscreen = !fullscreen;
 	if (fullscreen)
 	{
-		modeA.assign(*videoMode);
+		modeA = *videoMode;
 		if (modeB != *videoMode)
 		{
 			unknown424020(&modeB,false);
@@ -93,7 +93,7 @@ void REX::toggleFullscreen()
 	}
 	else
 	{
-		modeB.assign(*videoMode);
+		modeB = *videoMode;
 		if (modeA != *videoMode)
 		{
 			unknown424020(&modeA,false);

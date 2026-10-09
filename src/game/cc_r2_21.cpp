@@ -190,8 +190,8 @@ public:
 	Pos getPos();
 	Pos getMaxCoord();	// NOTE: placeholder name
 	void setPos(Pos pos);	// NOTE: placeholder name
-	void setFgColor(XColor color);	// NOTE: placeholder name
-	void setBgColor(XColor color);	// NOTE: placeholder name
+	void setFore(XColor color);	// 0x417b00 (engine/xconsole.h inline)
+	void setBack(XColor color);	// 0x417b30 (engine/xconsole.h inline)
 	void removeSubconsole(XConsole *console);
 	XConsole *getParent() { return parent; };
 	XBuffer *getBuffer() { return &buffer; };	// NOTE: placeholder name
@@ -199,10 +199,9 @@ public:
 	void printAligned(int x, int y, int align, const string &text);	// NOTE: placeholder name
 	int printWrapped_418260(int x, int y, int width, int height, const string &text);	// NOTE: placeholder name
 	int printWrapped_4182b0(int x, int y, int width, int height, int align, const string &text);	// NOTE: placeholder name
-	void clear() throw();	// NOTE: placeholder name
 	bool isTileFont();	// NOTE: placeholder name
 	void setHidden(bool hidden_) throw();	// NOTE: placeholder name
-	void setFgColor(int x, int y, XColor color) throw();	// NOTE: placeholder name
+	void setForeNothrow_417f80(int x, int y, XColor color) throw();	// NOTE: placeholder alias of setFore_417f80 (consoles/xconsole.h)
 	void setArtFgColor(XColor color) throw();	// NOTE: placeholder name
 	void setArtBgColor(XColor color) throw();	// NOTE: placeholder name
 	void setForeAll_4183d0(XColor color);	// NOTE: placeholder name (cc_r1_07.cpp)

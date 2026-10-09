@@ -53,10 +53,10 @@ bool traceSubcellLine(int x0, int y0, int x1, int y1, vector<Point> &cells, vect
 	cells.push_back(current);
 	steps.push_back(1);
 	Point cell;
-	Point subcell;
+	Point subPt;	// name sets the frame slot (0x4104f0)
 	do
 	{
-		stepper.next(cell,subcell);
+		stepper.next(cell,subPt);
 		if (cell != current)
 		{
 			cells.push_back(cell);

@@ -27,9 +27,9 @@ extern vector<int*> teamb_itemTypes_d2d1c4;
 int teamb_find8f8930(const string &name);
 int teamb_find8f89f0(const string &name);
 HItem teamb_findInventoryItem8f8d30(const string &name);
-HItem OpR5d_findItem8f98c0(const string &name);
+HItem OpR5d_findItem8f90d0(const string &name);
 HItem OpR5d_findItem8f96a0(const string &name);
-HItem OpR5d_findItem8f98c0b(const string &name);
+HItem OpR5d_findItem8f98c0(const string &name);
 // NOTE: HEntity()/HItem()-typed temporaries below are spelled HProp() because the exe uses the shared handle ctor
 #define H_E (*(HEntity*)&HProp())
 void teamb_info8f9c60(int type, const string &name)	// NOTE: placeholder name (0x8f9c60)
@@ -54,7 +54,7 @@ void teamb_info8f9c60(int type, const string &name)	// NOTE: placeholder name (0
 		break;
 	case 7:
 		{
-			HItem item = OpR5d_findItem8f98c0(name);
+			HItem item = OpR5d_findItem8f90d0(name);
 			opx5e_cec11c->unknown8b4500(H_E,*(HProp*)&item,H_E,&Pos(-1),1,false);
 		}
 		break;
@@ -66,7 +66,7 @@ void teamb_info8f9c60(int type, const string &name)	// NOTE: placeholder name (0
 		break;
 	case 9:
 		{
-			HItem item = OpR5d_findItem8f98c0b(name);
+			HItem item = OpR5d_findItem8f98c0(name);
 			opx5e_cec11c->unknown8b4500(H_E,*(HProp*)&item,H_E,&Pos(-1),1,false);
 		}
 		break;

@@ -2,9 +2,6 @@
 CLog::~CLog,0x48e720,0x1c
 CGameoverAchievements::~CGameoverAchievements,0x48fc70,0x1c
 ??H?$_String_iterator@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBE?AV01@H@Z,0x9b0950,0x2d
-?unknown458700@Item@@QAEXPBD@Z,0x458700,0x1c
-??0CTextInput@@QAE@PAVXConsole@@HHHH_N1HHHHPBDH@Z,0x48d130,0x160
-?setUnknownBc@CTextInput@@QAEXHPBD@Z,0x48d330,0x2b
 REX::REX,0x418820,0xb4
 ??1Config@@QAE@XZ,0x446260,0xb3
 ??1CRobot@@UAE@XZ,0x4b1a90,0x9f

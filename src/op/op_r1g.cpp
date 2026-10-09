@@ -100,6 +100,10 @@ struct OpR1g_Triple	// NOTE: placeholder name
 	vector<int>	zs;
 };
 
+OpR1g_Triple::OpR1g_Triple() throw()
+{
+}
+
 OpR1g_Triple::OpR1g_Triple(const OpR1g_Triple &other)
 {
 	xs = other.xs;

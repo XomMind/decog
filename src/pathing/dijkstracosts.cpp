@@ -6,6 +6,21 @@
 
 extern RNG rng;
 
+// The world object (0xcefc4c) seen as BS: retail calls BS::isVisible(const Point&) (0x4631c0, src/game/cc_r2_06.cpp),
+// the Point overload of Map::isVisible in gamedecl.h has no configured identity.
+class BS : public Map	// NOTE: placeholder name, same object as Map
+{
+public:
+	bool isVisible(const Point &p);	// 0x4631c0
+};
+
+// Retail reads the item's type through the folded +0x08 getter 0x9b4350, not Item::getType (0x44aec0, +0x0c).
+class DijkstraItem	// NOTE: placeholder name (Item)
+{
+public:
+	int getType_9b4350();	// NOTE: placeholder name (ICF'd trivial getter of +0x08)
+};
+
 //==================================================================
 // Dijkstra results
 //==================================================================
@@ -84,7 +99,7 @@ public:
 		if (distance != 0 &&
 			(cells(x,y)->hasBlockingObject() ||
 			 (data != NULL && (int)data == itemTypeMatter && cells(x,y)->getItem().isValid() &&
-			  cells(x,y)->getItem()->getType() == (int)data && rng.chance(30))))
+			  ((DijkstraItem *)cells(x,y)->getItem().operator->())->getType_9b4350() == (int)data && rng.chance(30))))
 		{
 			dijkstraCells.push_back(Point(x,y));
 			dijkstraDistances.push_back(distance);
@@ -517,7 +532,7 @@ public:
 			getAdjacentCells(Point(x,y),adjacent);
 			for (unsigned int i = 0; i < adjacent.size(); i++)
 			{
-				if (!world->isVisible(adjacent[i]))
+				if (!((BS *)world)->isVisible(adjacent[i]))
 				{
 					if (addUnique(dijkstraCells,Point(x,y)))
 						dijkstraDistances.push_back(distance);
@@ -547,7 +562,7 @@ public:
 			getAdjacentCells(Point(x,y),adjacent);
 			for (unsigned int i = 0; i < adjacent.size(); i++)
 			{
-				if (cells(adjacent[i])->isPassableFor(HEntity()) && world->isVisible(adjacent[i]))
+				if (cells(adjacent[i])->isPassableFor(HEntity()) && ((BS *)world)->isVisible(adjacent[i]))
 				{
 					if (addUnique(dijkstraCells,Point(x,y)))
 						dijkstraDistances.push_back(distance);

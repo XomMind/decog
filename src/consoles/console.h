@@ -58,8 +58,8 @@ public:
 		unknown60 = 0;
 		title = NULL;
 		engine = new Engine(this, NULL, NULL);
-		setFgColor(consoleDefaultColor);
-		setBgColor(consoleDefaultColor);
+		setFore(consoleDefaultColor);
+		setBack(consoleDefaultColor);
 	};
 	Console(XConsole *parent, Rect rect, int font, bool hidden, int layer)
 		: XConsole(parent, rect.width, rect.height, rect.x, rect.y, font, hidden, layer)
@@ -67,8 +67,8 @@ public:
 		unknown60 = 0;
 		title = NULL;
 		engine = new Engine(this, NULL, NULL);
-		setFgColor(consoleDefaultColor);
-		setBgColor(consoleDefaultColor);
+		setFore(consoleDefaultColor);
+		setBack(consoleDefaultColor);
 	};
 	virtual ~Console()
 	{

@@ -165,7 +165,7 @@ string OpV1_GameData::generateID()
 	{
 		string numbers("123456789");
 		string letters("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
-		id += opw8_randomChar(numbers);
+		id = opw8_randomChar(numbers);
 		id.push_back(opw8_randomChar(letters));
 	}
 	while (OpU8a_containsString(recentIDs,id));

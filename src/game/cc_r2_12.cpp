@@ -116,7 +116,7 @@ public:
 	void unknown4585c0(int id);				// NOTE: placeholder name
 	void unknown458630(ItemTrait *trait);	// NOTE: placeholder name
 	void unknown458690(int a, bool b);		// NOTE: placeholder name
-	void unknown458700(const char *s);		// NOTE: placeholder name
+	void unknown458700(const string &s);		// NOTE: placeholder name
 
 	char					pad00[8];
 	ItemType				*type;
@@ -192,7 +192,7 @@ void Item::unknown458690(int a, bool b)
 	}
 }
 
-void Item::unknown458700(const char *s)
+void Item::unknown458700(const string &s)
 {
 	unknown5c = s;
 }

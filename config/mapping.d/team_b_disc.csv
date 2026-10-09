@@ -8,7 +8,6 @@
 ?unknown68d6d0@OpS3g_A@@QAEX_N@Z,0x68d6d0,0x247
 ?opt5_replaceColors@@YAXXZ,0x78f210,0x102
 ?findSlot@OpU5_SlotTable@@QAEHVHEntity@@@Z,0x7ac070,0x6f
-?OpR5d_findItem8f98c0@@YA?AVHItem@@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x8f90d0,0x158
 ?opq4c_stripText909840@@YAXAAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@_N@Z,0x909840,0x14d
 ?opt7_killGroupFore@@YAXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x964f80,0x137
 ?input@CWorldMapInfo@@UAE_NPAX@Z,0x9934e0,0x6f

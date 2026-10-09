@@ -36,9 +36,9 @@ extern vector<ItemType*> teamb_itemTypes_d2d1c4;
 int teamb_find8f8930(const string &name);
 int teamb_find8f89f0(const string &name);
 HItem teamb_findInventoryItem8f8d30(const string &name);
-HItem OpR5d_findItem8f98c0(const string &name);
+HItem OpR5d_findItem8f90d0(const string &name);	// NOTE: placeholder name (0x8f90d0, src/op/op_r5d.cpp)
 HItem OpR5d_findItem8f96a0(const string &name);
-HItem OpR5d_findItem8f98c0b(const string &name);	// NOTE: placeholder name (0x8f98c0; src/op name clashes with 0x8f90d0)
+HItem OpR5d_findItem8f98c0(const string &name);
 void teamb_select8f9a20(int type, const string &name)	// NOTE: placeholder name (0x8f9a20)
 {
 	if (name.empty())
@@ -66,13 +66,13 @@ void teamb_select8f9a20(int type, const string &name)	// NOTE: placeholder name 
 		item = teamb_findInventoryItem8f8d30(name);
 		goto show;
 	case 7:
-		item = OpR5d_findItem8f98c0(name);
+		item = OpR5d_findItem8f90d0(name);
 		goto show;
 	case 8:
 		item = OpR5d_findItem8f96a0(name);
 		goto show;
 	case 9:
-		item = OpR5d_findItem8f98c0b(name);
+		item = OpR5d_findItem8f98c0(name);
 	show:
 		opr5c_activeList->unknown7b2870();
 		opU5_shell->unknown91ca50(opX5C_cec0fc->get4aeb30(),opX5C_cec0fc->getEntity_45ab90()->getTarget(),0x70,-1,NULL,NULL,item);

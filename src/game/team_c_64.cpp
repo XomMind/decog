@@ -38,6 +38,7 @@ string teamb_name8f8820(int a, int b);
 string teamb_itemName8f8ab0(HItem item);
 string teamb_itemLabel8f8e90(HItem item);
 HItem teamb_findInventoryItem8f8d30(const string &name);
+HItem OpR5d_findItem8f90d0(const string &name);
 HItem OpR5d_findItem8f98c0(const string &name);
 HItem OpR5d_findItem8f96a0(const string &name);
 string OpR5d_getItemDescription8f9230(HItem item);
@@ -123,7 +124,7 @@ void opR5d_unknown8f9ee0(int type)
 			vector<int> *col = new vector<int>(names.size(),-1);
 			for (unsigned int cols = 0; cols < names.size(); cols++)
 			{
-				HItem v104 = OpR5d_findItem8f98c0(names[cols]);
+				HItem v104 = OpR5d_findItem8f90d0(names[cols]);
 				if (v104.isValid())
 				{
 					col->at(cols) = v104->unknown577350();
