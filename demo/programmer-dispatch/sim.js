@@ -11,9 +11,13 @@
      OpV1_GameData::generateID        0x46f890  src/op/op_v1.cpp
    Table values were read from the exe at the addresses given next to each table.
 
-   NOT from the decomp: map generation, movement, pathing, field of view and spotting. They are simple stand-ins
-   so the dispatch logic has something to react to. Robot speed, sight, memory and spot % come from
-   cog-minder's bot data. DOM-free; ui.js drives it in the browser, and node can require() it. */
+   Map layouts come from mapgen.js, a port of the game's matched DF map generator, run with each map's own
+   generator parameters; exits, Garrison Accesses and machines come from props.js (see its header for what is taken
+   from BS::populate and what is a stand-in).
+
+   NOT from the decomp: robot movement, pathing, field of view and spotting. They are simple stand-ins so the
+   dispatch logic has something to react to. Robot speed, sight, memory and spot % come from cog-minder's bot data.
+   DOM-free; ui.js drives it in the browser, and node can require() it. */
 (function (root) {
 'use strict';
 
@@ -47,6 +51,23 @@ const SURGICAL_BLOCKS = {
 // Map types the demo offers. Surface sits outside the depth tables; at Command spawnSurgicalParty pulls the squad
 // from robots already on the map (type == 0x22) instead of an exit.
 const DEMO_MAP_TYPES = [3, 4, 5, 9, 27, 28, 30, 31, 32, 33];
+// Depths each map type can occupy in a run (positive depth: 7 = -7), from the matched world builder
+// GameData::unknown784410 (0x784410, src/op/op_gm_784410.cpp:368-606). The main chain is fixed; branch depths are
+// rolled per run: Storage -9..-7; Hub_04(d) shares one roll of -6..-4 with Extension/Cetus/Archives; Armory -4/-3;
+// Quarantine and Testing take -3 and -2 between them; Section 7 and Protoforge hang off one of those (-2 75%, -3 25%).
+const LOCATIONS = {
+	3: [7, 6, 5, 4],	// Factory
+	4: [3, 2],			// Research
+	5: [1],				// Access
+	9: [9, 8, 7],		// Storage
+	27: [6, 5, 4],		// Hub_04(d)
+	28: [4, 3],			// Armory
+	30: [3, 2],			// Quarantine
+	31: [3, 2],			// Testing
+	32: [3, 2],			// Section 7
+	33: [3, 2],			// Protoforge
+};
+const validLocation = (mapType, depth) => !!LOCATIONS[mapType] && LOCATIONS[mapType].includes(depth);
 
 // 0xb90000: per destination map type, 1 = 0b10-controlled (findDispatchExit accepts it), 2 = caves/outsiders
 const EXIT_FLAGS = [1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1,
@@ -125,8 +146,11 @@ function makeRng(seed)
 	return rng;
 }
 
-const WALL = 0, FLOOR = 1, MACHINE = 2;
-const MAP_W = 100, MAP_H = 64;
+// cell codes shared with mapgen.js (MapGen.CELL); the modules are looked up lazily so props.js/mapgen.js tests can
+// require this file for makeRng
+const CELL = { WALL: 0, FLOOR: 1, DOOR: 2, MACHINE: 3 };
+const { WALL, FLOOR, DOOR, MACHINE } = CELL;
+const lib = name => root[name] || (typeof require === 'function' ? require(name === 'MapGen' ? './mapgen.js' : './props.js') : null);
 const DIRS = [[1, 0], [-1, 0], [0, 1], [0, -1], [1, 1], [1, -1], [-1, 1], [-1, -1]];
 const cheb = (ax, ay, bx, by) => Math.max(Math.abs(ax - bx), Math.abs(ay - by));
 
@@ -134,115 +158,6 @@ const cheb = (ax, ay, bx, by) => Math.max(Math.abs(ax - bx), Math.abs(ay - by));
 function getRect(x, y, r, w, h)
 {
 	return { x1: Math.max(0, x - r), y1: Math.max(0, y - r), x2: Math.min(w - 1, x + r), y2: Math.min(h - 1, y + r) };
-}
-
-// ---------------------------------------------------------------------------------------------------------------
-// Stand-in 0b10 map: a grid of rooms joined by corridors, exits on the edges, two Garrison Accesses
-// ---------------------------------------------------------------------------------------------------------------
-
-const COMPLEX_DESTS = [3, 4, 9, 10, 12, 2, 7];	// Factory, Research, Storage, Recycling, Waste, Materials, Mines
-const CAVE_DESTS = [16, 17, 8, 20];				// Lower Caves, Upper Caves, Exiles, Zion
-
-function generateMap(rng, mapType)
-{
-	const w = MAP_W, h = MAP_H;
-	const cells = new Uint8Array(w * h);
-	const set = (x, y) => { if (x > 0 && y > 0 && x < w - 1 && y < h - 1 && cells[y * w + x] === WALL) cells[y * w + x] = FLOOR; };
-	const COLS = 7, ROWS = 5, sw = Math.floor((w - 2) / COLS), sh = Math.floor((h - 2) / ROWS);
-	const rooms = [];
-	for (let r = 0; r < ROWS; r++)
-	{
-		for (let c = 0; c < COLS; c++)
-		{
-			const hall = rng.chance(18);
-			const rw = hall ? rng.rangeInt(2, 3) : rng.rangeInt(5, sw - 3);
-			const rh = hall ? rng.rangeInt(2, 3) : rng.rangeInt(4, sh - 3);
-			const rx = 1 + c * sw + 1 + rng.rangeInt(0, sw - 2 - rw);
-			const ry = 1 + r * sh + 1 + rng.rangeInt(0, sh - 2 - rh);
-			for (let y = ry; y < ry + rh; y++)
-				for (let x = rx; x < rx + rw; x++)
-					set(x, y);
-			rooms.push({ c, r, x: rx, y: ry, w: rw, h: rh, cx: rx + (rw >> 1), cy: ry + (rh >> 1), hall });
-		}
-	}
-	const at = (c, r) => rooms[r * COLS + c];
-	const corridor = (a, b) =>
-	{
-		const wide = rng.chance(30);
-		const dig = (x, y) => { set(x, y); if (wide) { set(x + 1, y); set(x, y + 1); } };
-		let x = a.cx, y = a.cy;
-		const horizontalFirst = rng.chance(50);
-		const stepX = () => { while (x !== b.cx) { x += Math.sign(b.cx - x); dig(x, y); } };
-		const stepY = () => { while (y !== b.cy) { y += Math.sign(b.cy - y); dig(x, y); } };
-		if (horizontalFirst) { stepX(); stepY(); } else { stepY(); stepX(); }
-	};
-	// spanning tree over the sector grid, then a few loops
-	const visited = new Set([0]);
-	const stack = [rooms[0]];
-	while (stack.length)
-	{
-		const cur = stack[stack.length - 1];
-		const next = rng.shuffle([[1, 0], [-1, 0], [0, 1], [0, -1]])
-			.map(([dc, dr]) => [cur.c + dc, cur.r + dr])
-			.filter(([c, r]) => c >= 0 && r >= 0 && c < COLS && r < ROWS && !visited.has(r * COLS + c));
-		if (!next.length) { stack.pop(); continue; }
-		const n = at(next[0][0], next[0][1]);
-		visited.add(n.r * COLS + n.c);
-		corridor(cur, n);
-		stack.push(n);
-	}
-	for (let k = 0; k < 9; k++)
-	{
-		const a = rng.pick(rooms);
-		const [dc, dr] = rng.pick([[1, 0], [0, 1]]);
-		if (a.c + dc < COLS && a.r + dr < ROWS)
-			corridor(a, at(a.c + dc, a.r + dr));
-	}
-
-	// exits: short corridors from edge rooms to the map border
-	const exits = [];
-	const edgeRooms = rng.shuffle(rooms.filter(m => !m.hall && (m.c === 0 || m.r === 0 || m.c === COLS - 1 || m.r === ROWS - 1)));
-	const exitPlan = ['arrival', 'complex', 'complex', 'complex', 'cave', 'complex'];
-	const usedDest = new Set([mapType]);
-	for (let k = 0; k < exitPlan.length && k < edgeRooms.length; k++)
-	{
-		const m = edgeRooms[k];
-		const sides = [];
-		if (m.c === 0) sides.push('W');
-		if (m.c === COLS - 1) sides.push('E');
-		if (m.r === 0) sides.push('N');
-		if (m.r === ROWS - 1) sides.push('S');
-		const side = rng.pick(sides);
-		let x = m.cx, y = m.cy;
-		if (side === 'W') { y = m.y + rng.rangeInt(0, m.h - 1); for (x = m.x; x > 1; x--) set(x - 1, y); x = 1; }
-		if (side === 'E') { y = m.y + rng.rangeInt(0, m.h - 1); for (x = m.x + m.w - 1; x < w - 2; x++) set(x + 1, y); x = w - 2; }
-		if (side === 'N') { x = m.x + rng.rangeInt(0, m.w - 1); for (y = m.y; y > 1; y--) set(x, y - 1); y = 1; }
-		if (side === 'S') { x = m.x + rng.rangeInt(0, m.w - 1); for (y = m.y + m.h - 1; y < h - 2; y++) set(x, y + 1); y = h - 2; }
-		const kind = exitPlan[k];
-		let dest;
-		if (kind === 'arrival')
-			dest = mapType === 3 ? 2 : 3;	// came down/up from a neighbouring 0b10 level
-		else
-		{
-			const pool = (kind === 'cave' ? CAVE_DESTS : COMPLEX_DESTS).filter(d => !usedDest.has(d));
-			dest = rng.pick(pool.length ? pool : (kind === 'cave' ? CAVE_DESTS : COMPLEX_DESTS));
-		}
-		usedDest.add(dest);
-		exits.push({ x, y, idx: y * w + x, kind: 'stairs', dest, flag: EXIT_FLAGS[dest], arrival: kind === 'arrival', prop: null });
-	}
-
-	// Garrison Accesses: machines set into a room's top wall, dispatch spot just inside the room
-	const garrisonRooms = rng.shuffle(rooms.filter(m => !m.hall && m.w >= 5 && m.y > 2 && !edgeRooms.slice(0, exitPlan.length).includes(m)));
-	for (let k = 0; k < 2 && k < garrisonRooms.length; k++)
-	{
-		const m = garrisonRooms[k];
-		const x = m.x + 1 + rng.rangeInt(0, m.w - 3), y = m.y - 1;
-		if (cells[y * w + x] !== WALL)
-			continue;
-		cells[y * w + x] = MACHINE;
-		exits.push({ x, y, idx: y * w + x, kind: 'garrison', dest: 13, flag: EXIT_FLAGS[13], arrival: false, prop: { disabled: false } });
-	}
-	return { w, h, cells, exits, rooms };
 }
 
 // ---------------------------------------------------------------------------------------------------------------
@@ -254,13 +169,15 @@ class Sim
 	constructor(opts = {})
 	{
 		this.mapType = opts.mapType ?? 3;
-		this.depth = opts.depth ?? 5;
+		this.depth = opts.depth ?? 7;
+		if (!validLocation(this.mapType, this.depth))
+			throw new Error(`-${this.depth}/${MAP_NAMES[this.mapType]} does not exist`);
 		this.zoneCloak = opts.zoneCloak ?? 0;
 		this.analysis = opts.analysis ?? true;	// Overmind+0x90 build analysis exists (needed for Q-Series)
 		this.qsAssemblerDestroyed = opts.qsAssemblerDestroyed ?? false;	// 0xd1eb99: a Garrison's GAR_QS_Assembler was destroyed
 		this.comConduitDisabled = opts.comConduitDisabled ?? false;		// comConduitDisabled_g: COM_0b10_Conduit destroyed in Command
 		this.mode = opts.mode ?? 'frontier';	// frontier | zones | wander | hold | manual
-		this.playerCost = opts.playerCost ?? 75;
+		this.playerCost = opts.playerCost ?? 125;
 		this.newMap(opts.seed ?? 1);
 	}
 
@@ -276,17 +193,43 @@ class Sim
 		this.seed = seed >>> 0;
 		const mapRng = makeRng(this.seed);
 		this.rng = makeRng(this.seed ^ 0x9e3779b9);
-		const m = generateMap(mapRng, this.mapType);
-		this.w = m.w; this.h = m.h; this.cells = m.cells; this.exits = m.exits;
+		const m = lib('MapGen').generate(this.mapType, mapRng);
+		const pop = lib('Props').populate(m, this.depth, mapRng);
+		this.mapId = (Sim.maps = (Sim.maps || 0) + 1);
+		this.w = m.w; this.h = m.h; this.cells = m.cells; this.rooms = m.rooms; this.variant = m.variant;
+		this.machines = pop.machines;
+		// the game's exit record sits on the door cell in front of a Garrison/DSF Access machine (BS::placeMachine);
+		// DSF records are created with kind 1 (MapExit+0x0c), which findDispatchExit skips. The arrival point is not
+		// an exit record (BS+0x8).
+		this.exits = pop.exits.filter(e => e.dest >= 0).map(e =>
+		{
+			const d = e.door || e;
+			return {
+				x: d.x, y: d.y, idx: d.y * m.w + d.x, mx: e.x, my: e.y, machine: e.machine ?? -1,
+				kind: e.kind, dest: e.dest, flag: EXIT_FLAGS[e.dest], blocked: e.kind === 'dsf',
+				prop: e.kind === 'garrison' ? { disabled: false } : null,
+			};
+		});
 		const n = this.w * this.h;
 		this.vis = new Uint8Array(n);
 		this.seen = new Uint8Array(n);
 		this.occ = new Int32Array(n);
-		this.walked = new Uint8Array(n);
+		this.machineAt = new Int16Array(n).fill(-1);
+		this.machines.forEach((mc, k) =>
+		{
+			for (let y = mc.y; y < mc.y + mc.h; y++)
+				for (let x = mc.x; x < mc.x + mc.w; x++)
+					this.machineAt[y * m.w + x] = k;
+		});
+		this._mark = new Int32Array(n);
+		this._gen = 0;
 		this._prev = new Int32Array(n);
 		this._q = new Int32Array(n);
+		this.visList = [];
+		this.dirty = [];
+		this.dirtyMark = new Uint8Array(n);
 		this.floorCount = 0;
-		for (let i = 0; i < n; i++) if (this.cells[i] === FLOOR) this.floorCount++;
+		for (let i = 0; i < n; i++) if (this.passable(i)) this.floorCount++;
 		this.seenFloor = 0;
 		this.turn = 0;
 		this.mapTurn = 0;						// Map+0x324: turns on this map
@@ -306,15 +249,25 @@ class Sim
 		this.trace = {};
 		this.travel = -1;
 		this.playerPath = [];
-		const start = this.exits.find(e => e.arrival) || this.exits[0];
-		this.player = { x: start.x, y: start.y, energy: 100 };
-		this.occ[start.idx] = 1;
-		this.walked[start.idx] = 1;
+		this.playerGoal = -1;
+		this.player = { x: pop.start.x, y: pop.start.y, energy: 100 };
+		this.occ[pop.start.y * m.w + pop.start.x] = 1;
 		this.applyBlocks();
 		this.computeFov();
-		this.say(`Entered -${this.depth}/${MAP_NAMES[this.mapType]}.`, 'info');
+		this.say(`Entered -${this.depth}/${MAP_NAMES[this.mapType]} (${this.w}x${this.h}).`, 'info');
 		this.resetSurgicalTimer();	// on map load (src/util/delta2_12.cpp)
 		this.recordHistory();
+	}
+
+	passable(i) { const c = this.cells[i]; return c === FLOOR || c === DOOR; }
+	opaque(i) { const c = this.cells[i]; return c === WALL || c === MACHINE || (c === DOOR && !this.occ[i]); }
+
+	takeDirty()
+	{
+		const d = this.dirty;
+		for (const i of d) this.dirtyMark[i] = 0;
+		this.dirty = [];
+		return d;
 	}
 
 	applyBlocks()
@@ -327,17 +280,9 @@ class Sim
 		this.enterable = new Uint8Array(this.bw * this.bh);
 		for (let y = 0; y < this.h; y++)
 			for (let x = 0; x < this.w; x++)
-				if (this.cells[y * this.w + x] === FLOOR)
+				if (this.passable(y * this.w + x))
 					this.enterable[((y / size) | 0) * this.bw + ((x / size) | 0)] = 1;
 		this.enterableCount = this.enterable.reduce((a, b) => a + b, 0);
-	}
-
-	// change location rules in place (same layout, fresh timer, like arriving there)
-	setLocation(mapType, depth)
-	{
-		this.mapType = mapType;
-		this.depth = depth;
-		this.newMap(this.seed);
 	}
 
 	hit(key) { this.trace[key] = (this.trace[key] || 0) + 1; }
@@ -580,7 +525,7 @@ class Sim
 		const candidates = [];
 		for (const e of this.exits)
 		{
-			if (e.flag !== 1)
+			if (e.flag !== 1 || e.blocked)
 				continue;
 			// sealing or destroying a Garrison Access deletes its record from this list (BS+0x10); modelled as a flag
 			if (e.prop && e.prop.disabled)
@@ -699,7 +644,7 @@ class Sim
 		if (dx || dy)
 		{
 			const nx = p.x + dx, ny = p.y + dy;
-			if (nx < 0 || ny < 0 || nx >= this.w || ny >= this.h || this.cells[ny * this.w + nx] !== FLOOR || this.occ[ny * this.w + nx])
+			if (nx < 0 || ny < 0 || nx >= this.w || ny >= this.h || !this.passable(ny * this.w + nx) || this.occ[ny * this.w + nx])
 				return false;
 			this.movePlayer(ny * this.w + nx);
 			cost = this.playerCost;
@@ -733,57 +678,70 @@ class Sim
 		this.occ[p.y * this.w + p.x] = 0;
 		p.x = i % this.w; p.y = (i / this.w) | 0;
 		this.occ[i] = 1;
-		this.walked[i] = 1;
 		this.computeFov();
 	}
 
 	autopilotAct()
 	{
 		const p = this.player, here = p.y * this.w + p.x;
-		if (this.travel >= 0 && this.travel === here)
+		if (this.travel === here)
 			this.travel = -1;
-		let path = null;
-		if (this.travel >= 0)
+		if (this.mode === 'hold' && this.travel < 0)
+			return 100;
+		const size = this.blocks ? this.blocks.size : 20;
+		const blockOf = i => (((i / this.w) | 0) / size | 0) * this.bw + ((i % this.w) / size | 0);
+		const goalValid = g =>
 		{
-			const goal = this.travel;
-			path = this.bfs(here, i => i === goal);
-			if (!path) this.travel = -1;
-		}
-		if (!path)
+			if (g < 0 || g === here)
+				return false;
+			if (this.travel >= 0)
+				return g === this.travel;
+			if (this.mode === 'zones')
+				return this.explored[blockOf(g)] === 0;
+			if (this.mode === 'frontier')
+				return this.seen[g] === 0;
+			return true;
+		};
+		const next0 = this.playerPath[0];
+		const blocked = this.occ[next0] && this.playerBlocked > 2;
+		const stale = !goalValid(this.playerGoal) || !this.playerPath.length
+			|| cheb(next0 % this.w, (next0 / this.w) | 0, p.x, p.y) !== 1 || blocked;
+		if (stale)
 		{
-			const size = this.blocks ? this.blocks.size : 20;
-			const blockOf = i => (((i / this.w) | 0) / size | 0) * this.bw + ((i % this.w) / size | 0);
-			switch (this.mode)
+			// after being blocked, route around robots in the way (otherwise BFS returns the same blocked path)
+			const avoid = blocked ? 1 : 0;
+			let path = null;
+			if (this.travel >= 0)
 			{
-			case 'hold':
-				return 100;
-			case 'zones':
-				path = this.bfs(here, i => this.explored[blockOf(i)] === 0);
-				break;
-			case 'frontier':
-				path = this.bfs(here, i => this.seen[i] === 0);
-				break;
+				const goal = this.travel;
+				path = this.bfs(here, i => i === goal, 0, avoid);
+				if (!path)
+					this.travel = -1;
 			}
+			if (!path && this.mode === 'zones')
+				path = this.bfs(here, i => this.explored[blockOf(i)] === 0, 0, avoid);
+			if (!path && this.mode === 'frontier')
+				path = this.bfs(here, i => this.seen[i] === 0, 0, avoid);
 			if (!path)
 			{
-				if (this.playerPath.length === 0 || this.occ[this.playerPath[0]])
-				{
-					const goal = this.randomFloor();
-					this.playerPath = this.bfs(here, i => i === goal) || [];
-				}
-				path = this.playerPath;
+				const goal = this.randomFloor();
+				path = this.bfs(here, i => i === goal, 0, avoid);
 			}
-			else
-				this.playerPath = [];
+			this.playerPath = path || [];
+			this.playerGoal = this.playerPath.length ? this.playerPath[this.playerPath.length - 1] : -1;
+			this.playerBlocked = 0;
 		}
-		if (!path || !path.length)
+		if (!this.playerPath.length)
 			return 100;
-		const next = path[0];
+		const next = this.playerPath[0];
 		if (this.occ[next])
+		{
+			this.playerBlocked++;
 			return 100;
+		}
 		this.movePlayer(next);
-		if (path === this.playerPath)
-			path.shift();
+		this.playerPath.shift();
+		this.playerBlocked = 0;
 		return this.playerCost;
 	}
 
@@ -792,7 +750,7 @@ class Sim
 		for (;;)
 		{
 			const i = Math.floor(this.rng.next() * this.w * this.h);
-			if (this.cells[i] === FLOOR)
+			if (this.passable(i))
 				return i;
 		}
 	}
@@ -803,7 +761,7 @@ class Sim
 		{
 			const x = this.rng.rangeInt(a.x1, a.x2), y = this.rng.rangeInt(a.y1, a.y2);
 			const i = y * this.w + x;
-			if (this.cells[i] === FLOOR)
+			if (this.passable(i))
 				return i;
 		}
 		return -1;
@@ -843,7 +801,8 @@ class Sim
 		if (party.goal !== goal || !party.path.length)
 		{
 			party.goal = goal;
-			party.path = this.bfs(here, i => i === goal) || [];
+			party.path = this.bfs(here, i => i === goal, 0, party.reroute) || [];
+			party.reroute = false;
 		}
 		if (!party.path.length)
 		{
@@ -860,6 +819,7 @@ class Sim
 			party.path = [];
 			party.target = -1;
 			party.blocked = 0;
+			party.reroute = true;
 		}
 	}
 
@@ -876,7 +836,7 @@ class Sim
 			if (nx < 0 || ny < 0 || nx >= this.w || ny >= this.h)
 				continue;
 			const i = ny * this.w + nx;
-			if (this.cells[i] !== FLOOR || this.occ[i])
+			if (!this.passable(i) || this.occ[i])
 				continue;
 			const nd = cheb(nx, ny, L.x, L.y);
 			if (nd < bestD)
@@ -887,7 +847,7 @@ class Sim
 		}
 		if (best < 0)
 		{
-			const path = this.bfs(b.y * this.w + b.x, i => cheb(i % this.w, (i / this.w) | 0, L.x, L.y) <= 1 && !this.occ[i]);
+			const path = this.bfs(b.y * this.w + b.x, i => cheb(i % this.w, (i / this.w) | 0, L.x, L.y) <= 1 && !this.occ[i], 4000);
 			if (path && path.length)
 				best = path[0];
 		}
@@ -897,7 +857,7 @@ class Sim
 
 	moveBot(b, i)
 	{
-		if (this.occ[i] || this.cells[i] !== FLOOR)
+		if (this.occ[i] || !this.passable(i))
 			return false;
 		this.occ[b.y * this.w + b.x] = 0;
 		b.x = i % this.w; b.y = (i / this.w) | 0;
@@ -954,15 +914,29 @@ class Sim
 			const e2 = 2 * err;
 			if (e2 >= dy) { err += dy; x += sx; }
 			if (e2 <= dx) { err += dx; y += sy; }
-			if ((x !== x1 || y !== y1) && this.cells[y * this.w + x] === WALL)
+			if ((x !== x1 || y !== y1) && this.opaque(y * this.w + x))
 				return false;
+		}
+	}
+
+	markDirty(i)
+	{
+		if (!this.dirtyMark[i])
+		{
+			this.dirtyMark[i] = 1;
+			this.dirty.push(i);
 		}
 	}
 
 	computeFov()
 	{
 		const R = COGMIND_SIGHT, R2 = R * R + R, px = this.player.x, py = this.player.y;
-		this.vis.fill(0);
+		for (const i of this.visList)
+		{
+			this.vis[i] = 0;
+			this.markDirty(i);
+		}
+		const list = [];
 		for (let dy = -R; dy <= R; dy++)
 		{
 			const y = py + dy;
@@ -977,23 +951,27 @@ class Sim
 					continue;
 				const i = y * this.w + x;
 				this.vis[i] = 1;
+				list.push(i);
+				this.markDirty(i);
 				if (!this.seen[i])
 				{
 					this.seen[i] = 1;
-					if (this.cells[i] === FLOOR) this.seenFloor++;
+					if (this.passable(i)) this.seenFloor++;
 				}
 			}
 		}
-		this.fovVersion = (this.fovVersion || 0) + 1;
+		this.visList = list;
 	}
 
-	// 8-way BFS over floor; returns the steps after start up to the first goal cell, or null
-	bfs(start, isGoal)
+	// 8-way BFS over passable cells; returns the steps after start up to the first goal cell, or null.
+	// limit caps the cells visited (0 = whole map).
+	bfs(start, isGoal, limit, avoidOccupied)
 	{
-		const prev = this._prev, q = this._q, w = this.w, h = this.h, cells = this.cells;
-		prev.fill(-1);
+		const prev = this._prev, q = this._q, mark = this._mark, w = this.w, h = this.h, cells = this.cells;
+		const gen = ++this._gen;
 		let head = 0, tail = 0;
 		q[tail++] = start;
+		mark[start] = gen;
 		prev[start] = start;
 		while (head < tail)
 		{
@@ -1005,6 +983,8 @@ class Sim
 					path.push(k);
 				return path.reverse();
 			}
+			if (limit && tail > limit)
+				return null;
 			const x = i % w, y = (i / w) | 0;
 			for (let d = 0; d < 8; d++)
 			{
@@ -1012,8 +992,10 @@ class Sim
 				if (nx < 0 || ny < 0 || nx >= w || ny >= h)
 					continue;
 				const j = ny * w + nx;
-				if (prev[j] !== -1 || cells[j] !== FLOOR)
+				const c = cells[j];
+				if (mark[j] === gen || (c !== FLOOR && c !== DOOR) || (avoidOccupied && this.occ[j]))
 					continue;
+				mark[j] = gen;
 				prev[j] = i;
 				q[tail++] = j;
 			}
@@ -1023,10 +1005,10 @@ class Sim
 }
 
 const API = {
-	Sim, makeRng, generateMap, selectRobotOfClass, getRect, depthIndexOf,
+	Sim, makeRng, selectRobotOfClass, getRect, depthIndexOf, validLocation, LOCATIONS, CELL,
 	MAP_NAMES, SURGICAL_BLOCKS, DEMO_MAP_TYPES, EXIT_FLAGS, INTERVALS, LEADER_WEIGHTS, PARTY_SIZES, ROBOTS, ROBOT_CLASS,
 	ZONE_CLOAK_DELAY, GARRISON_DELAY, DISPATCH_COOLDOWN, MAX_EXTERMINATION, TARGET_RADIUS, TRACK_TURNS, WIDEN_DELAY, WIDEN,
-	WALL, FLOOR, MACHINE, MAP_W, MAP_H,
+	WALL, FLOOR, DOOR, MACHINE,
 };
 if (typeof module === 'object' && module.exports)
 	module.exports = API;

@@ -74,12 +74,14 @@ function buildSource()
 const hash = new URLSearchParams(location.hash.slice(1));
 const ui = {
 	playing: true, speed: 15, acc: 0, last: performance.now(), lastPanels: 0, hover: null,
-	trace: {}, dispatches: 0, logKey: '',
+	trace: {}, dispatches: 0, logKey: '', follow: true,
 };
+const hashMap = +hash.get('map'), hashDepth = +hash.get('depth');
+const startValid = D.validLocation(hashMap, hashDepth);
 let sim = new D.Sim({
 	seed: +hash.get('seed') || 1 + Math.floor(Math.random() * 99999),
-	mapType: D.DEMO_MAP_TYPES.includes(+hash.get('map')) ? +hash.get('map') : 3,
-	depth: +hash.get('depth') >= 1 && +hash.get('depth') <= 10 ? +hash.get('depth') : 5,
+	mapType: startValid ? hashMap : 3,
+	depth: startValid ? hashDepth : 7,
 });
 const renderer = new Renderer($('map'), $('chart'));
 const lines = buildSource();
@@ -87,6 +89,19 @@ const lines = buildSource();
 function writeHash()
 {
 	history.replaceState(null, '', `#map=${sim.mapType}&depth=${sim.depth}&seed=${sim.seed}`);
+}
+
+// depths the chosen map type can really occupy; keeps the current depth when it is one of them
+function fillDepths(mapType, keep)
+{
+	const sel = $('depth');
+	sel.innerHTML = '';
+	for (const d of D.LOCATIONS[mapType])
+	{
+		const iv = D.INTERVALS[D.depthIndexOf(d)];
+		sel.add(new Option(`-${d}${iv[0] ? `  (${iv[0]}-${iv[1]} turns)` : '  (no timed squads)'}`, d));
+	}
+	sel.value = D.LOCATIONS[mapType].includes(keep) ? keep : D.LOCATIONS[mapType][0];
 }
 
 function rebuild(seed)
@@ -97,6 +112,8 @@ function rebuild(seed)
 	ui.dispatches = 0;
 	ui.trace = {};
 	ui.logKey = '';
+	ui.follow = true;
+	$('zoomFollow').classList.add('on');
 	$('seed').value = sim.seed;
 	writeHash();
 	buildTables();
@@ -111,19 +128,17 @@ function initControls()
 	for (const t of D.DEMO_MAP_TYPES)
 	{
 		const b = D.SURGICAL_BLOCKS[t];
-		$('mapType').add(new Option(`${D.MAP_NAMES[t]}  (zones ${b.size}x${b.size}, -${b.credit} turns)`, t));
-	}
-	for (let d = 10; d >= 1; d--)
-	{
-		const iv = D.INTERVALS[D.depthIndexOf(d)];
-		$('depth').add(new Option(`-${d}${iv[0] ? `  (${iv[0]}-${iv[1]} turns)` : '  (no timed squads)'}`, d));
+		const depths = D.LOCATIONS[t];
+		const range = depths.length > 1 ? `-${depths[0]}..-${depths[depths.length - 1]}` : `-${depths[0]}`;
+		$('mapType').add(new Option(`${D.MAP_NAMES[t]}  ${range}  (zones ${b.size}x${b.size}, -${b.credit}t)`, t));
 	}
 	$('mapType').value = sim.mapType;
-	$('depth').value = sim.depth;
+	fillDepths(sim.mapType, sim.depth);
 	$('seed').value = sim.seed;
 	$('mode').value = sim.mode;
 	$('pcost').value = sim.playerCost;
-	$('mapType').onchange = $('depth').onchange = () => rebuild(sim.seed);
+	$('mapType').onchange = () => { fillDepths(+$('mapType').value, sim.depth); rebuild(sim.seed); };
+	$('depth').onchange = () => rebuild(sim.seed);
 	$('newMap').onclick = () => rebuild(1 + Math.floor(Math.random() * 99999));
 	$('seed').onchange = () => rebuild(Math.max(1, +$('seed').value | 0));
 	$('mode').onchange = () => { sim.mode = $('mode').value; sim.travel = -1; updatePanels(true); };
@@ -164,24 +179,19 @@ function initControls()
 	toggle('vZones', 'zones');
 	toggle('vAreas', 'areas');
 
-	const canvas = $('map');
-	canvas.addEventListener('mousemove', ev => { ui.hover = renderer.cellAt(sim, ev.clientX, ev.clientY); showTip(ev); });
-	canvas.addEventListener('mouseleave', () => { ui.hover = null; $('tip').style.display = 'none'; });
-	canvas.addEventListener('click', ev =>
+	initMapInput();
+	$('zoomIn').onclick = () => { const r = $('map').getBoundingClientRect(); renderer.zoomAt(sim, r.left + r.width / 2, r.top + r.height / 2, 1.5); };
+	$('zoomOut').onclick = () => { const r = $('map').getBoundingClientRect(); renderer.zoomAt(sim, r.left + r.width / 2, r.top + r.height / 2, 1 / 1.5); };
+	$('zoomFit').onclick = () => { ui.follow = false; $('zoomFollow').classList.remove('on'); renderer.fit(sim); };
+	$('zoomFollow').onclick = () =>
 	{
-		const c = renderer.cellAt(sim, ev.clientX, ev.clientY);
-		if (!c)
-			return;
-		const party = sim.partyAt(c.x, c.y);
-		const exit = sim.exits.find(e => e.x === c.x && e.y === c.y);
-		if (party)
-			sim.destroyParty(party);
-		else if (exit && exit.kind === 'garrison')
-			sim.disableGarrison(exit);
-		else if (sim.cells[c.y * sim.w + c.x] === D.FLOOR && sim.mode !== 'manual')
-			sim.travel = c.y * sim.w + c.x;
-		updatePanels(true);
-	});
+		ui.follow = !ui.follow;
+		$('zoomFollow').classList.toggle('on', ui.follow);
+		if (ui.follow && renderer.cam.scale < renderer.fitScale(sim) * 2.5)
+			renderer.cam.scale = Math.min(2 * renderer.dpr, renderer.fitScale(sim) * 4);
+	};
+	$('settingsBtn').onclick = () => document.body.classList.add('settings-open');
+	$('settingsClose').onclick = () => document.body.classList.remove('settings-open');
 	$('squads').addEventListener('click', ev =>
 	{
 		const id = ev.target.dataset && ev.target.dataset.kill;
@@ -211,6 +221,125 @@ function initControls()
 		if (ev.key === ' ') { togglePlay(); ev.preventDefault(); }
 		else if (ev.key === 'n' || ev.key === 'N') { advance(1); updatePanels(true); }
 	});
+}
+
+// drag to pan, wheel or pinch to zoom, tap/click to act on a cell
+function initMapInput()
+{
+	const canvas = $('map');
+	const pointers = new Map();
+	let drag = null, pinch = null;
+	const stopFollow = () => { ui.follow = false; $('zoomFollow').classList.remove('on'); };
+	const hover = ev =>
+	{
+		ui.hover = renderer.cellAt(sim, ev.clientX, ev.clientY);
+		showTip(ev);
+	};
+	canvas.addEventListener('pointerdown', ev =>
+	{
+		canvas.setPointerCapture(ev.pointerId);
+		pointers.set(ev.pointerId, { x: ev.clientX, y: ev.clientY });
+		if (pointers.size === 1)
+			drag = { moved: 0 };
+		else if (pointers.size === 2)
+		{
+			const [a, b] = [...pointers.values()];
+			pinch = { dist: Math.hypot(a.x - b.x, a.y - b.y) || 1 };
+			drag = null;
+			stopFollow();
+		}
+		if (ev.pointerType !== 'mouse')
+			$('tip').style.display = 'none';
+	});
+	canvas.addEventListener('pointermove', ev =>
+	{
+		const p = pointers.get(ev.pointerId);
+		if (!p)
+		{
+			if (ev.pointerType === 'mouse')
+				hover(ev);
+			return;
+		}
+		const dx = ev.clientX - p.x, dy = ev.clientY - p.y;
+		p.x = ev.clientX;
+		p.y = ev.clientY;
+		if (pinch && pointers.size >= 2)
+		{
+			const [a, b] = [...pointers.values()];
+			const dist = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+			renderer.zoomAt(sim, (a.x + b.x) / 2, (a.y + b.y) / 2, dist / pinch.dist);
+			renderer.panBy(sim, dx / 2, dy / 2);
+			pinch.dist = dist;
+		}
+		else if (drag)
+		{
+			drag.moved += Math.abs(dx) + Math.abs(dy);
+			if (drag.moved > 6)
+			{
+				renderer.panBy(sim, dx, dy);
+				canvas.classList.add('dragging');
+				stopFollow();
+				$('tip').style.display = 'none';
+			}
+		}
+	});
+	const end = ev =>
+	{
+		const tap = ev.type === 'pointerup' && drag && drag.moved <= 6 && pointers.size === 1;
+		pointers.delete(ev.pointerId);
+		if (pointers.size < 2)
+			pinch = null;
+		if (!pointers.size)
+		{
+			drag = null;
+			canvas.classList.remove('dragging');
+		}
+		if (tap)
+			tapAt(ev.clientX, ev.clientY);
+	};
+	canvas.addEventListener('pointerup', end);
+	canvas.addEventListener('pointercancel', end);
+	canvas.addEventListener('pointerleave', ev =>
+	{
+		if (ev.pointerType === 'mouse')
+		{
+			ui.hover = null;
+			$('tip').style.display = 'none';
+		}
+	});
+	canvas.addEventListener('wheel', ev =>
+	{
+		ev.preventDefault();
+		renderer.zoomAt(sim, ev.clientX, ev.clientY, Math.exp(-ev.deltaY * 0.0015));
+	}, { passive: false });
+}
+
+// the exit at a cell: stairs on their own cell, Garrison/DSF Accesses anywhere on their machine
+function exitAt(x, y)
+{
+	const i = y * sim.w + x, mi = sim.machineAt[i];
+	return sim.exits.find(e => (e.kind === 'stairs' && e.idx === i) || (mi >= 0 && e.machine === mi)) || null;
+}
+
+function tapAt(clientX, clientY)
+{
+	const c = renderer.cellAt(sim, clientX, clientY);
+	if (!c)
+		return;
+	const party = sim.partyAt(c.x, c.y);
+	const exit = exitAt(c.x, c.y);
+	if (party && (renderer.opts.observer || sim.vis[c.y * sim.w + c.x]))
+		sim.destroyParty(party);
+	else if (exit && exit.kind === 'garrison' && (renderer.opts.observer || sim.seen[exit.my * sim.w + exit.mx]))
+		sim.disableGarrison(exit);
+	else if (sim.mode === 'manual')
+	{
+		sim.manualAct(Math.sign(c.x - sim.player.x), Math.sign(c.y - sim.player.y));
+		noticeDispatches();
+	}
+	else if (sim.passable(c.y * sim.w + c.x))
+		sim.travel = c.y * sim.w + c.x;
+	updatePanels(true);
 }
 
 function togglePlay()
@@ -262,6 +391,7 @@ function updatePanels(force)
 	ui.lastPanels = now;
 	const c = sim.cycle, b = sim.blocks, name = D.MAP_NAMES[sim.mapType];
 	$('turnLabel').textContent = `turn ${sim.turn} \u00b7 ${sim.mapTurn} on this map`;
+	$('mapinfo').textContent = `-${sim.depth}/${name}  ${sim.w}x${sim.h}  \u00b7  ${sim.bw * sim.bh} zones  \u00b7  layout ${sim.seed}`;
 
 	// timer
 	if (!sim.dispatchEnabled)
@@ -410,14 +540,22 @@ function showTip(ev)
 		const s = sim.blocks.size, bx = (c.x / s) | 0, by = (c.y / s) | 0, k = by * sim.bw + bx;
 		out[0] += `  zone ${bx},${by}: ${sim.explored[k] ? 'entered since the last roll' : sim.enterable[k] ? `entering it pulls the timer ${sim.blocks.credit} turns closer` : 'no floor'}`;
 	}
-	const exit = sim.exits.find(e => e.idx === i);
+	const known = renderer.opts.observer || sim.seen[i], inView = renderer.opts.observer || sim.vis[i];
+	if (!known)
+		out.push('not seen yet');
+	const exit = known ? exitAt(c.x, c.y) : null;
+	const machine = known && sim.machineAt[i] >= 0 ? sim.machines[sim.machineAt[i]] : null;
+	if (machine && !exit)
+		out.push(`${machine.name}${machine.interactive ? '' : ' (non-interactive)'}`);
 	if (exit && exit.kind === 'garrison')
 		out.push(exit.prop.disabled ? 'Garrison Access (sealed/destroyed): its record is deleted from the access list, so it is no longer a dispatch point' : 'Garrison Access: squads can enter here even while you watch. Click to seal it (+75 turns).');
+	else if (exit && exit.kind === 'dsf')
+		out.push('DSF Access: it adds an exit record, but with kind 1 (MapExit+0x0c), which findDispatchExit skips: never a dispatch point.');
 	else if (exit)
-		out.push(`Exit to ${D.MAP_NAMES[exit.dest]}${exit.arrival ? ' (you arrived here)' : ''}: ` + (exit.flag === 1
-			? (sim.vis[i] ? 'a 0b10 exit, but in your view: skipped while another entry point qualifies' : 'a 0b10 exit out of your view: squads can enter here')
+		out.push(`Exit to ${D.MAP_NAMES[exit.dest]}: ` + (exit.flag === 1
+			? (sim.vis[exit.idx] ? 'a 0b10 exit, but in your view: skipped while another entry point qualifies' : 'a 0b10 exit out of your view: squads can enter here')
 			: 'leads outside 0b10 control (flag 2): never used for dispatch'));
-	const id = sim.occ[i];
+	const id = inView ? sim.occ[i] : 0;
 	if (id === 1)
 		out.push('Cogmind');
 	else if (id > 1)
@@ -454,6 +592,8 @@ function frame(now)
 		if (n)
 			advance(n);
 	}
+	if (ui.follow)
+		renderer.centerOn(sim, sim.player.x, sim.player.y);
 	renderer.draw(sim, ui.hover);
 	renderer.drawChart(sim);
 	updatePanels(false);
