@@ -257,6 +257,8 @@ class Sim
 		this.depth = opts.depth ?? 5;
 		this.zoneCloak = opts.zoneCloak ?? 0;
 		this.analysis = opts.analysis ?? true;	// Overmind+0x90 build analysis exists (needed for Q-Series)
+		this.qsAssemblerDestroyed = opts.qsAssemblerDestroyed ?? false;	// 0xd1eb99: a Garrison's GAR_QS_Assembler was destroyed
+		this.comConduitDisabled = opts.comConduitDisabled ?? false;		// comConduitDisabled_g: COM_0b10_Conduit destroyed in Command
 		this.mode = opts.mode ?? 'frontier';	// frontier | zones | wander | hold | manual
 		this.playerCost = opts.playerCost ?? 75;
 		this.newMap(opts.seed ?? 1);
@@ -515,9 +517,19 @@ class Sim
 	// ---- Overmind::spawnSurgicalParty (0x685a10) ----
 	spawnSurgicalParty()
 	{
+		if (this.comConduitDisabled)	// || Overmind+0x4c || world state 2 (not modelled)
+		{
+			this.hit('sp.off');
+			this.say('Timer due, nobody sent: the COM_0b10_Conduit is destroyed (comConduitDisabled_g).', 'dim');
+			this.event('skip');
+			return 0;
+		}
 		const di = this.depthIndex;
+		const weights = LEADER_WEIGHTS[di].slice();
+		if (weights[1] && this.qsAssemblerDestroyed)
+			weights[1] = Math.floor(weights[1] / 2);
 		let tag;
-		do tag = this.rng.weighted(LEADER_WEIGHTS[di]);
+		do tag = this.rng.weighted(weights);
 		while (tag === 1 && !this.analysis);
 		this.hit('sp.pick');
 		const cls = tag === 1 ? 'Q' : 'P';
@@ -570,6 +582,7 @@ class Sim
 		{
 			if (e.flag !== 1)
 				continue;
+			// sealing or destroying a Garrison Access deletes its record from this list (BS+0x10); modelled as a flag
 			if (e.prop && e.prop.disabled)
 				continue;
 			if (allowVisible && !e.prop && this.vis[e.idx])

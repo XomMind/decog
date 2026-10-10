@@ -138,7 +138,7 @@ footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-to
 		<span><span style="color:#ffd84a">&#9643;</span><span style="color:#ff8a3a">&#9643;</span><span style="color:#ff4646">&#9643;</span> search area &plusmn;15 / &plusmn;30 / &plusmn;45</span>
 		<span><span style="color:var(--title)">-20t</span> zone not entered since the last roll</span>
 	</div>
-	<p class="note">Click a robot to destroy its squad, click a <span style="color:#e2e24c">G</span> to disable that Garrison Access, click any floor to send Cogmind there.
+	<p class="note">Click a robot to destroy its squad, click a <span style="color:#e2e24c">G</span> to seal that Garrison Access, click any floor to send Cogmind there.
 	Manual mode: arrows / numpad / hjklyubn to move, <span style="color:var(--title)">.</span> or space to wait.</p>
 </section>
 
@@ -175,8 +175,10 @@ footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-to
 			<div class="row"><span class="k">RIF Zone Cloak</span>
 				<select id="cloak"><option value="0">none</option><option value="1">level 1 (+75)</option><option value="2">level 2 (+150)</option></select>
 			</div>
-			<div class="row"><label class="k" title="Overmind+0x90: written by 0x68fc40 from combat events. Without it the Q-Series roll repeats until it lands on Programmers."><input type="checkbox" id="analysis" checked> 0b10 has analysed your build</label></div>
-			<div class="row" style="margin-top:6px"><button id="garrison">Disable a Garrison Access</button><button id="other" title="Intercept, search-patrol and assault dispatches write the same lastDispatchTurn">Other dispatch now</button><button id="kill">Destroy all squads</button></div>
+			<div class="row"><label class="k" title="Overmind+0x90, rebuilt by 0x68fc40 when a Researcher's scan (effect 0x73) hits you or a hostile Q-Series dies. Without it the Q-Series roll repeats until it lands on Programmers."><input type="checkbox" id="analysis" checked> 0b10 has analysed your build</label></div>
+			<div class="row"><label class="k" title="0xd1eb99, set when a Garrison's GAR_QS_Assembler is destroyed: halves the Q-Series leader weight."><input type="checkbox" id="qsAssembler"> a Garrison's QS Assembler is destroyed</label></div>
+			<div class="row"><label class="k" title="comConduitDisabled_g, set when COM_0b10_Conduit is destroyed in Command: spawnSurgicalParty returns without sending anyone, as do the intercept, coupling, hunter, response and 0x686c60 spawners."><input type="checkbox" id="conduit"> COM_0b10_Conduit destroyed (Command)</label></div>
+			<div class="row" style="margin-top:6px"><button id="garrison" title="Sealing (hack) or destroying an access calls BS::onGarrisonAccessDisabled and deletes it from the dispatch list">Seal a Garrison Access</button><button id="other" title="Intercept, search-patrol and assault dispatches write the same lastDispatchTurn">Other dispatch now</button><button id="kill">Destroy all squads</button></div>
 		</div>
 	</div>
 	<div class="panel">
@@ -222,7 +224,8 @@ footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-to
 				<li><b>They search a box around where you stood.</b> &plusmn;15 cells around your position at dispatch. After 150 turns the box grows to &plusmn;30, 200 turns later to &plusmn;45. Every 100 turns on the map the box snaps to your current position, even if they never saw you. While the leader knows where you are, every 10 turns the box re-centres at &plusmn;15 and the 150-turn clock restarts.</li>
 				<li><b>They don't time out.</b> A squad can carry an expiry turn at which the Overmind breaks it up; extermination squads are created with -1, so theirs never comes. They pile up until the timer stops adding more at 10.</li>
 				<li><b>"Zone 7F" is noise.</b> The ID in the alert is a random digit + letter that doesn't repeat the last ten; it says nothing about where they are going.</li>
-				<li><b>Q-Series replace Programmers only at -3..-1</b> (20%, 30%, 50%), and only once 0b10 has analysed your build. They then get weapons picked against it.</li>
+				<li><b>Q-Series replace Programmers only at -3..-1</b> (20%, 30%, 50%), and only once 0b10 has analysed your build: a Researcher's scan has to hit you, or a hostile Q-Series has to die. They then get weapons picked against that snapshot. Destroying a Garrison's QS Assembler halves their weight (11%, 18%, 33%).</li>
+				<li><b>The COM conduit turns it all off.</b> Destroying COM_0b10_Conduit in Command makes the timed extermination, intercept, coupling, hunter and response spawners return without sending anyone. The timer still runs and re-rolls.</li>
 			</ul>
 		</div>
 		<div class="panel">
