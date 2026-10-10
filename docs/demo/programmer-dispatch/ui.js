@@ -50,7 +50,9 @@ const SRC = [
 	['gar', 'disabledGarrisonAccesses++,  surgicalTimer += 75;'],
 	['', ''],
 	['', '// Overmind::spawnSurgicalParty  0x685a10', 1],
-	['sp.pick', 'do tag = leaderWeights_b93738[depth].pick();             // Programmer or Q-Series'],
+	['sp.off', 'if (comConduitDisabled_g || ...) return 0;                 // COM_0b10_Conduit destroyed'],
+	['sp.pick', 'weights = leaderWeights_b93738[depth];  if (qsAssemblerDestroyed_d1eb99) weights[QSERIES] /= 2;'],
+	['sp.pick', 'do tag = weights.pick();                                 // Programmer or Q-Series'],
 	['sp.pick', 'while (tag == QSERIES && (!buildAnalysis || mapType == COMMAND));'],
 	['sp.pick', 'followers = partySizes_d29310[depth][tag].random() - 1;'],
 	['sp.exit sp.fail', 'if (!findDispatchExit(&spot, true /* skip exits in view */, ...)) { failedDispatches++; return 0; }'],
@@ -89,7 +91,8 @@ function writeHash()
 
 function rebuild(seed)
 {
-	const keep = { mode: sim.mode, playerCost: sim.playerCost, zoneCloak: sim.zoneCloak, analysis: sim.analysis };
+	const keep = { mode: sim.mode, playerCost: sim.playerCost, zoneCloak: sim.zoneCloak, analysis: sim.analysis,
+		qsAssemblerDestroyed: sim.qsAssemblerDestroyed, comConduitDisabled: sim.comConduitDisabled };
 	sim = new D.Sim(Object.assign(keep, { seed, mapType: +$('mapType').value, depth: +$('depth').value }));
 	ui.dispatches = 0;
 	ui.trace = {};
@@ -132,6 +135,8 @@ function initControls()
 		updatePanels(true);
 	};
 	$('analysis').onchange = () => { sim.analysis = $('analysis').checked; updatePanels(true); };
+	$('qsAssembler').onchange = () => { sim.qsAssemblerDestroyed = $('qsAssembler').checked; updatePanels(true); };
+	$('conduit').onchange = () => { sim.comConduitDisabled = $('conduit').checked; updatePanels(true); };
 	$('garrison').onclick = () => { if (!sim.disableGarrison()) sim.say('No working Garrison Access left on this map.', 'dim'); updatePanels(true); };
 	$('other').onclick = () => { sim.otherDispatch(); updatePanels(true); };
 	$('kill').onclick = () => { sim.destroyAllSquads(); updatePanels(true); };
@@ -289,7 +294,7 @@ function updatePanels(force)
 		row('timer pulled forward by', `${c.credits} turns`),
 		row('entered at least once on this map', `${ever} of ${sim.enterableCount}`),
 		row('map seen (exploration %)', `${(100 * sim.seenFloor / sim.floorCount).toFixed(0)}%`),
-		`<div class="note" style="margin-top:4px">Seeing a zone does nothing; standing in it does. Every roll clears the zone grid, so the next action credits the zone you are standing in again.</div>`,
+		`<div class="note" style="margin-top:4px">Seeing a zone does nothing; standing in it does (your cell after each action). Every roll clears the zone grid, so the next action credits the zone you are standing in again. A diagonal step across a zone corner skips the two side zones; idling on a corner leaves four zones one step away.</div>`,
 	].join('') : row('zones', 'this map type has no zone timer');
 
 	// conditions
@@ -298,16 +303,18 @@ function updatePanels(force)
 	const n = sim.countParties(5);
 	const hidden = sim.exits.filter(e => e.kind === 'stairs' && e.flag === 1 && !sim.vis[e.idx]).length;
 	const garrisons = sim.exits.filter(e => e.kind === 'garrison' && !e.prop.disabled).length;
-	const qw = D.LEADER_WEIGHTS[sim.depthIndex];
+	const qw = D.LEADER_WEIGHTS[sim.depthIndex].slice();
+	if (qw[1] && sim.qsAssemblerDestroyed) qw[1] = Math.floor(qw[1] / 2);
 	const qChance = qw[0] + qw[1] ? Math.round(100 * qw[1] / (qw[0] + qw[1])) : 0;
 	$('gates').innerHTML = [
 		gate(b ? 'ok' : 'no', `${name} gets timed extermination squads (0xb90180)`),
+		gate(sim.comConduitDisabled ? 'no' : 'ok', sim.comConduitDisabled ? 'COM_0b10_Conduit destroyed: the timer runs, nobody is sent' : 'COM_0b10_Conduit intact (comConduitDisabled_g = 0)'),
 		gate(iv[0] ? 'ok' : 'no', iv[0] ? `-${sim.depth} interval ${iv[0]}&ndash;${iv[1]} turns (0xb93790)` : `-${sim.depth}: interval 0, nothing is ever sent`),
 		gate(sim.turn >= cooldownEnd ? 'ok' : 'no', sim.lastDispatchTurn < 0 ? 'no timed dispatch yet on this map (25-turn cooldown clear)'
 			: sim.turn >= cooldownEnd ? `last timed dispatch T${sim.lastDispatchTurn}, cooldown clear` : `last timed dispatch T${sim.lastDispatchTurn}: blocked until T${cooldownEnd}`),
 		gate(n < D.MAX_EXTERMINATION ? 'ok' : 'no', `${n} / ${D.MAX_EXTERMINATION} extermination squads on the map`),
 		gate(hidden + garrisons ? 'ok' : 'info', `entry points now: ${hidden} 0b10 exit${hidden === 1 ? '' : 's'} out of view, ${garrisons} working Garrison Access${garrisons === 1 ? '' : 'es'}${hidden + garrisons ? '' : ' (falls back to any 0b10 exit)'}`),
-		gate('info', qChance ? `Q-Series ${qChance}% of squads here${sim.analysis ? '' : ', but no build analysis yet: always Programmers'}` : 'Q-Series: never at this depth'),
+		gate('info', qChance ? `Q-Series ${qChance}% of squads here${sim.qsAssemblerDestroyed ? ' (halved by the QS Assembler)' : ''}${sim.analysis ? '' : ', but no build analysis yet: always Programmers'}` : 'Q-Series: never at this depth'),
 		gate('info', `next squad: ${D.selectRobotOfClass('P', sim.depthIndex) ? `${D.PARTY_SIZES[sim.depthIndex][0].join('&ndash;')} x ${D.selectRobotOfClass('P', sim.depthIndex).name}` : '&ndash;'}`),
 		sim.mapType === 3 ? gate('info', `Factory derelict warning: ${sim.warned ? 'given' : sim.f74 ? `armed for T${sim.f74}, but only checked on a turn the timer is due` : 'not armed'}`) : '',
 	].join('');
@@ -374,7 +381,7 @@ function buildTables()
 			<td>${iv[0] ? `${w[0]} : ${w[1]}` : '&ndash;'}</td><td>${range(s[0])}</td><td>${range(s[1])}</td><td>${iv[0] && v ? v.name : '&ndash;'}</td></tr>`);
 	}
 	$('depthTable').innerHTML = rows.join('') +
-		'<tr><td colspan="6" class="note" style="text-align:left;white-space:normal">0xb93790 interval &middot; 0xb93738 leader weights &middot; 0xd29310 squad sizes (leader included) &middot; variant = highest Programmer tier &le; depth index (selectRobotOfClass)</td></tr>';
+		'<tr><td colspan="6" class="note" style="text-align:left;white-space:normal">0xb93790 interval &middot; 0xb93738 leader weights (the Q-Series weight is halved once a Garrison\'s QS Assembler is destroyed, 0xd1eb99) &middot; 0xd29310 squad sizes (leader included) &middot; variant = highest Programmer tier &le; depth index (selectRobotOfClass)</td></tr>';
 	const mrows = ['<tr><th>map</th><th>zone</th><th>credit</th><th></th></tr>'];
 	for (const t of [...D.DEMO_MAP_TYPES, 6, 34])
 	{
@@ -405,7 +412,7 @@ function showTip(ev)
 	}
 	const exit = sim.exits.find(e => e.idx === i);
 	if (exit && exit.kind === 'garrison')
-		out.push(exit.prop.disabled ? 'Garrison Access (disabled): no longer a dispatch point' : 'Garrison Access: squads can enter here even while you watch. Click to disable it (+75 turns).');
+		out.push(exit.prop.disabled ? 'Garrison Access (sealed/destroyed): its record is deleted from the access list, so it is no longer a dispatch point' : 'Garrison Access: squads can enter here even while you watch. Click to seal it (+75 turns).');
 	else if (exit)
 		out.push(`Exit to ${D.MAP_NAMES[exit.dest]}${exit.arrival ? ' (you arrived here)' : ''}: ` + (exit.flag === 1
 			? (sim.vis[i] ? 'a 0b10 exit, but in your view: skipped while another entry point qualifies' : 'a 0b10 exit out of your view: squads can enter here')
