@@ -4,7 +4,7 @@
    (CRT, protobuf) until those are classified in config/library.csv."""
 import sys, os, json, html, collections, datetime
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-import common, funcindex, lverify
+import common, funcindex, lverify, hero
 from fnsize import fn_size
 
 DATA = {}
@@ -104,7 +104,8 @@ def squarify(items, x, y, w, h):
             y += ch; h -= ch
     return out
 
-COLORS = {'matched': '#2da44e', 'named': '#d4a72c', 'unknown': '#8c959f', 'library': '#6e7781'}
+# Cog-Minder "Cogmind" theme palette (noemica/cog-minder src/styles/colors.less, theme.less): details green/yellow, dim green, na grey
+COLORS = {'matched': '#00b200', 'named': '#b2b200', 'unknown': '#004000', 'library': '#262626'}
 
 def treemap(funcs, s):
     groups = collections.defaultdict(list)
@@ -138,37 +139,46 @@ def treemap(funcs, s):
             labels.append('<text x="%.1f" y="%.1f" class="lbl">%s</text>' % (x + 4, y + 13, html.escape(g)))
     cp, fp = pct(s['code_matched'], s['code_bytes']), pct(s['funcs_matched'], s['funcs'])
     legend = ''.join('<span><i style="background:%s"></i>%s</span>' % (c, k) for k, c in COLORS.items() if k != 'library')
-    return '''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cogmind Decomp Progress</title><style>
-:root{--bg:#ffffff;--fg:#1f2328;--mut:#59636e;--line:#d1d9e0;--trk:#d1d9e0;--bar:#1a7f37}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0d1117;--fg:#f0f6fc;--mut:#9198a1;--line:#3d444d;--trk:#3d444d;--bar:#3fb950}}
-:root[data-theme="dark"]{--bg:#0d1117;--fg:#f0f6fc;--mut:#9198a1;--line:#3d444d;--trk:#3d444d;--bar:#3fb950}
-body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 -apple-system,"Segoe UI",Helvetica,Arial,sans-serif}
-main{max-width:1640px;margin:0 auto;padding:24px 16px}
-h1{font-size:22px;margin:0 0 4px} .mut{color:var(--mut)}
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin:20px 0}
-.stat b{font-size:28px;display:block;font-variant-numeric:tabular-nums}
-.trk{height:10px;border-radius:5px;background:var(--trk);overflow:hidden;margin-top:6px}.trk i{display:block;height:100%%;background:var(--bar);min-width:2px}
-.legend{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0}.legend i{display:inline-block;width:12px;height:12px;border-radius:2px;margin-right:6px;vertical-align:-1px}
-.map{overflow:auto;border:1px solid var(--line);border-radius:6px}
-svg{display:block;width:100%%;height:auto;min-width:800px}.grp{fill:none;stroke:var(--bg);stroke-width:2}
-.lbl{font-size:11px;fill:#fff;paint-order:stroke;stroke:#0008;stroke-width:3px;pointer-events:none}
-rect[fill]:hover{fill-opacity:.7}
+    page = '''<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cogmind Decomp Progress</title><meta name="color-scheme" content="dark"><style>@@FONTS@@
+:root{--bg:#080808;--fg:#9da9af;--mut:#747e83;--title:#00cc00;--line:#006200;--label:#162416;--trk:#002100;--bar:#00b200}
+*{border-radius:0}
+body{margin:0;background:var(--bg);color:var(--fg);font:18px/1.35 smallcaps-mono,courier-new-adjusted,monospace}
+main{max-width:1700px;margin:0 auto;padding:24px 16px}
+h1{font:44px/1.1 cog-mono,smallcaps-mono,courier-new-adjusted,monospace;font-weight:400;margin:0 0 10px;color:var(--title)}h1:before{content:"> "}
+.mut{color:var(--mut)}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:8px;margin:20px 0}
+.stat{border:1px solid var(--line);background:var(--bg);padding:0 0 8px}
+.stat>span:first-child{display:block;background:var(--label);color:var(--title);padding:2px 8px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.05em}
+.stat>*:not(:first-child){margin-left:8px;margin-right:8px}
+.stat b{font-size:28px;font-weight:400;display:block;color:var(--title);font-variant-numeric:tabular-nums}
+.trk{height:12px;border:1px solid var(--line);background:var(--trk);overflow:hidden;margin-top:6px}
+.trk i{display:block;height:100%%;min-width:2px;background:repeating-linear-gradient(90deg,var(--bar) 0,var(--bar) 6px,#005800 6px,#005800 8px)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;margin:8px 0}.legend i{display:inline-block;width:12px;height:12px;border:1px solid var(--line);margin-right:6px;vertical-align:-2px}
+.map{overflow:auto;border:1px solid var(--line)}
+.map svg{display:block;width:100%%;height:auto;min-width:800px}.grp{fill:none;stroke:var(--bg);stroke-width:2}
+.lbl{font:14px smallcaps-mono,courier-new-adjusted,monospace;fill:#00cc00;paint-order:stroke;stroke:#000;stroke-width:3px;pointer-events:none}
+.hero{display:flex;gap:24px;align-items:flex-start;justify-content:space-between;border:1px solid var(--line);background:var(--bg);padding:16px 20px}
+.hero>div{min-width:0}
+.hero .logo{flex:none;width:176px;height:auto}
+@media (max-width:640px){.hero{gap:12px;padding:14px}.hero .logo{width:64px}h1{font-size:28px}}
+rect[fill]:hover{fill-opacity:1;stroke:#00cc00;stroke-width:1}
 </style></head><body><main>
-<h1>COGMIND.EXE decomp</h1><div class="mut">Beta 17.1 (260906) · generated %s · game code only: %s library functions (%s bytes, protobuf/CRT) excluded · code bytes include compiler-generated EH funclets, function counts don't</div>
+<header class="hero"><div><h1>COGMIND.EXE decomp</h1><div class="mut">Beta 17.1 (260906) | generated %s | game code only: %s library functions (%s bytes, protobuf/CRT) excluded</div></div>@@LOGO@@</header>
 <div class="stats">
 <div class="stat"><span class="mut">Code matched</span><b>%.3f%%</b><span class="mut">%s / %s bytes</span><div class="trk"><i style="width:%.4f%%"></i></div></div>
 <div class="stat"><span class="mut">Functions matched</span><b>%d / %d</b><span class="mut">%.3f%%</span><div class="trk"><i style="width:%.4f%%"></i></div></div>
 <div class="stat"><span class="mut">Functions named</span><b>%d</b><span class="mut">%.2f%% of all functions</span><div class="trk"><i style="width:%.4f%%"></i></div></div>
-<div class="stat"><span class="mut">Data matched</span><b>%.2f%%</b><span class="mut">%s / %s bytes of .rdata + initialized .data (all of it, library data included) · %s string/float constants · %s vtable bytes (%d/%d vtables) · %s initialized globals · %d zero-init globals paired (not counted)</span><div class="trk"><i style="width:%.4f%%"></i></div></div>
+<div class="stat"><span class="mut">Data matched</span><b>%.2f%%</b><span class="mut">%s / %s bytes of .rdata + initialized .data | %s string/float constants | %s vtable bytes (%d/%d vtables) | %s initialized globals | %d zero-init globals</span><div class="trk"><i style="width:%.4f%%"></i></div></div>
 </div>
-<div class="legend">%s<span class="mut">rectangle area = function size · hover for name/address</span></div>
+<div class="legend">%s<span class="mut">rectangle area = function size | hover for name/address</span></div>
 <div class="map"><svg viewBox="0 0 %d %d" xmlns="http://www.w3.org/2000/svg">%s%s</svg></div>
 </main></body></html>''' % (s['date'], f"{s['lib_funcs']:,}", f"{s['lib_bytes']:,}", cp, f"{s['code_matched']:,}", f"{s['code_bytes']:,}", cp,
         s['funcs_matched'], s['funcs'], fp, fp, s['funcs_named'], pct(s['funcs_named'], s['funcs']), pct(s['funcs_named'], s['funcs']),
         pct(s['data_matched'], s['data_bytes']), f"{s['data_matched']:,}", f"{s['data_bytes']:,}", f"{s['data_detail'].get('literals', 0):,}", f"{s['data_detail'].get('vtables', 0):,}",
         s['data_detail'].get('vtables_ok', 0), s['data_detail'].get('vtables_all', 0), f"{s['data_detail'].get('globals', 0):,}", s['data_detail'].get('zero_globals', 0), pct(s['data_matched'], s['data_bytes']),
         legend, W, H, ''.join(parts), ''.join(labels))
+    return page.replace('@@FONTS@@', hero.font_face_css()).replace('@@LOGO@@', hero.logo_svg('class="logo"'))
 
 def main():
     funcs = collect(); s = stats(funcs)
