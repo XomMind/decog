@@ -1,4 +1,0 @@
-# Functions someone is actively reconstructing. Pull, add a line, commit and push BEFORE starting;
-# remove the line in the commit that maps the function (or when abandoning it).
-# va        size    name / what                       owner   date
-0xa04d10    0x12    protobuf repeated-field accessor IsEmpty codex-hash-oct08 2026-10-08

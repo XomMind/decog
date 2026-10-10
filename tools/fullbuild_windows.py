@@ -171,7 +171,7 @@ def main():
         parser.error('Use tools/fullbuild.sh on non-Windows hosts')
     if args.setup:
         setup()
-    # Same lock directory as the existing integration build; never silently remove a lock.
+    # Same lock directory as tools/fullbuild.sh; never silently remove a lock.
     lock = ROOT / 'build/.fullbuild.lock'
     lock.parent.mkdir(exist_ok=True)
     while True:

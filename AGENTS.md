@@ -18,37 +18,29 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
   Safe to run in parallel; about 20 s. `Name` is `Class::member` or mangled. Unknown callees and globals are
   stubbed automatically, so you only need declarations for them.
 - `tools/lvx.py <build dir> <extra.csv> [name-to-drop ...]`: lverify with candidate rows injected (or rows dropped)
-  without touching `config/`. Never put unproven rows in `config/mapping.d/`: main auto-commits only all-MATCH builds.
+  without touching `config/`.
 - `tools/stubaudit.py <build dir>`: rows whose operands sit inside a stub at a non-zero offset. Stubs are 4 KiB `.bss`
   slots (`STUB_SLOT` env; 16 = old layout, which disables lverify's interior-pairing check).
 - `tools/discover.py <ltcg dir> [filter]`: finds exe functions that code you already built matches by accident.
-- `tools/fullbuild.sh <build/full_X> [lverify args]`: THE way to run a private full build. A machine-wide lock allows
+- `tools/fullbuild.sh <build/full_X> [lverify args]`: full build into its own directory. A machine-wide lock allows
   only one full build at a time (several at once ran a 48 GB machine out of memory) and waits for 12 GB free.
-  Never call `tools/ltcg.py` on all sources directly. Normally don't run private full builds at all: the
-  integration loop rebuilds ALL of `src/` into `build/full` every cycle, so put try.sh-verified code in `src/`, keep
-  candidate rows in `scratch/`, and install them once `tools/lvx.py build/full <cand.csv>` passes on a build that
-  includes your files. Private full builds only for tool changes that need a before/after comparison.
+  Never call `tools/ltcg.py` on all sources directly.
 - `tools/build.sh`: full build + verify + progress (about 3.5 min, writes `build/full`). Only one may run at a
-  time. For a private full check use `tools/fullbuild.sh build/full_X`.
+  time. For a full check into another directory use `tools/fullbuild.sh build/full_X`.
 - `build/rtti.csv` (vtables -> class + slots), `build/namestrings.csv` ("Class::method()" strings -> function),
   `build/callgraph.json`. Regenerate with `tools/rtti.py`, `tools/namestrings.py`, `tools/callgraph.py`.
 
 ## Rules
 1. Work on files that are not in `src/` until they compile. `sources.py` globs all of `src/`, so a file that
-   does not compile breaks everyone's build. Draft in `scratch/<you>/` (gitignored) and move the file into
+   does not compile breaks the full build. Draft in `scratch/` (gitignored) and move the file into
    `src/<dir>/` only when every function it maps MATCHes in `try.sh`.
-2. Only add new files. Don't edit another area's `.cpp`/`.csv` without coordinating; the LTCG link order
-   (`config/link_order.txt`) affects EH state numbering in other functions.
+2. The LTCG link order (`config/link_order.txt`) affects EH state numbering in other functions: after changing it,
+   or a file's position in it, re-verify the full build.
 3. One definition rule across the whole link: before you define a non-inline function or a global, grep `src/`
    for its name and for its exe address. A placeholder name carries the exe address (`unknown4544e0`, `vec_d33d38`),
    which keeps names unique and lets `lverify` pair placeholder globals with their exe address.
 4. Mark guesses: `// NOTE: placeholder name` / `// NOTE: placeholder layout`.
 5. Never commit `resources/*.exe` or anything from `dls/`.
-6. Claim before you start: `.venv/bin/python tools/claim.py claim <va> <owner> "<what>"` pushes a line to the shared
-   `config/claims.txt` on origin (other people work on this repo too). If it says the VA is claimed or already mapped,
-   pick something else. Release a claim you abandon with `tools/claim.py release <va>`; claims of matched functions are
-   released automatically after the integration push. `tools/claim.py list` shows all claims. Hold ONE active claim at
-   a time (plus any that only wait for their lvx check); claiming a queue of functions blocks other people.
 
 ## Matching tips (`/Od`)
 - Code gen is literal: the order of statements, temporaries, `for` vs `while`, `++i` vs `i++` on iterators,
@@ -68,7 +60,7 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
 - LTCG adds an EH frame when *any* TU declares a callee without `throw()`. If the exe has no EH frame but the full
   build does, declare the callees under names unique to your file with `throw()` (they stub and pair by address).
 - lverify pairs each of our symbols with one exe address. With identical code folded by ICF in the exe, a row can
-  pass in `try.sh` yet DIFF (or break older rows) in the full verify; prove mapping-only rows with a private full build.
+  pass in `try.sh` yet DIFF (or break older rows) in the full verify; prove mapping-only rows with a full build.
 - Extra stack slot around `new` (memory slot, ctor result, *extra slot*, then the variable or argument) with no EH
   states: VS2010 gives every `new` of a ctor that might throw a result temporary; when LTCG later proves the ctor
   nothrow it deletes the EH state stores but keeps the slot. LTCG can prove it only if the ctor is declared WITHOUT
@@ -133,7 +125,7 @@ Goal: C++ that VS2010 SP1 (`/Od /GL`, LTCG link) compiles to byte-identical code
   with the address but can DIFF in the full build. Placeholder vector/struct layouts must use int fields, not `char pad[N]`
   (a char array is a /GS buffer and moves temporaries into the early pool).
 - A `continue;` jumps to the loop increment; if the exe jumps to the end of the body instead, use `goto next;` there.
-- Checking whether a VA is already matched: grep mapping rows only (`git grep -h ",<va>," origin/main -- config/mapping.d`);
+- Checking whether a VA is already matched: grep mapping rows only (`grep -rh ",<va>," config/mapping.d`);
   `config/names.csv` lists named-but-unmatched functions and gives false positives.
 - A template instance over a type that other files define differently (e.g. XColor) can silently use another
   file's copy; give such instances private element types.
