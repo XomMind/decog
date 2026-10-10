@@ -5,15 +5,19 @@
 **Historical state: 13,013 / 13,014 game functions, 96.08% code** (last lenient full build; library
 reclassifications below lower the denominator). This is not a strict verified count; see the repair below.
 
-**Current state (2026-10-09, strict): 13,013 / 13,013 game functions, 6,566,496 / 6,566,496 code bytes (100.00%).**
-Strict full build `build/full_r9`, audit `build/target_audit_r9.*`: 29,816 / 32,014 rows MATCH, 0 regressions
-in any round. Rounds 4/4b/5 (ConsoleUI, CMapUpdate, XConsoleCallers, Strings, PosPoint, Unnamed, StlTemplates,
-Polymind, StlTail; reports in `scratch/<name>/REPORT.md`): 96.70% -> 99.70% -> 99.94% -> 100%.
-The 2,198 remaining DIFF rows all sit at retail VAs that another row already credits (1,786 body-different,
-412 identity-ambiguous): they are surplus ICF/alias rows, not missing functions. `lverify` still exits 1 because of them.
-Pruning or repointing them is the remaining work.
-Several STL rows name an ICF-arbitrary instantiation at folded VAs ([INFERENCE] in the round reports).
-`tools/progress.py` has not been rerun: `docs/progress.*` are stale.
+**Current state (2026-10-10, strict): 13,013 / 13,013 game functions, 6,566,496 / 6,566,496 code bytes (100.00%).**
+Full build `build/full`: **29,661 / 29,661 rows MATCH, `lverify` exits 0.** Earlier rounds 4/4b/5 (ConsoleUI, CMapUpdate,
+XConsoleCallers, Strings, PosPoint, Unnamed, StlTemplates, Polymind, StlTail; reports in `scratch/<name>/REPORT.md`)
+took the count 96.70% -> 99.70% -> 99.94% -> 100%.
+Alias pruning (2026-10-10): 2,353 rows removed. All of them sat at retail VAs that another MATCH row still credits, so
+coverage did not change. The first 2,198 were DIFF bodies (1,786 body-different, 412 identity-ambiguous; mostly
+`lead_stl_b.csv`). The other 155 had MATCHed only through those wrong identities, e.g. `map<string,X>::clear` paired with
+the int-key `_Erase` at 0x9c0ce0; two more rounds of fixed-point pruning removed them. Three game functions depended on
+the wrong rows and now use the element type their exe callee implies:
+- BS+0x5ec is `vector<HEntity> followers` (`BS::getFollowers` / `addFollower` / `removeFollower`, 0x463d80 / 0x463da0 / 0x463dc0).
+- MapView+0x66c is `vector<HEntity>`.
+- `CParts::unknown898860` takes a `vector<HItem>*`, matching its caller in `team_d_72.cpp`.
+Several STL rows still name an ICF-arbitrary instantiation at folded VAs ([INFERENCE] in the round reports).
 
 ### Remaining function: done (2026-10-08, late)
 - **0x51da30 `BS::turnUpdate_51da30`** (258 KB, 62,072 insns) now MATCHes in `tools/try.sh`. Source

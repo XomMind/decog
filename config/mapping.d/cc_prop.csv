@@ -277,7 +277,6 @@ _floorf,0x4011d0,0x1f
 ??$?9DU?$char_traits@D@std@@V?$allocator@D@1@@std@@YA_NABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@0@Z,0x9ce7e0,0x1f
 ??$deleteVector@VConsole@@@@YAXAAV?$vector@PAVConsole@@V?$allocator@PAVConsole@@@std@@@std@@@Z,0x9d21f0,0x19
 ??$_Dest_val@V?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@2@@std@@YAXAAV?$allocator@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@0@PAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@@Z,0x9e3640,0x11
-??$_Cons_val@V?$allocator@UPoint@@@std@@UPoint@@ABU3@@std@@YAXAAV?$allocator@UPoint@@@0@PAUPoint@@ABU2@@Z,0x9e38b0,0x1e
 ??$_Move@PAUPoint@@PAU1@@std@@YAPAUPoint@@PAU1@00@Z,0x9e38d0,0x34
 ??$_Cons_val@V?$allocator@H@std@@HAAH@std@@YAXAAV?$allocator@H@0@PAHAAH@Z,0x9e3960,0x1e
 ??$_Cons_val@V?$allocator@PAVXBuffer@@@std@@PAVXBuffer@@PAV3@@std@@YAXAAV?$allocator@PAVXBuffer@@@0@PAPAVXBuffer@@$$QAPAV2@@Z,0x9e3960,0x1e
@@ -376,7 +375,6 @@ _floorf,0x4011d0,0x1f
 ??$_Uninit_copy@HH@std@@YAPAHPAH00AAV?$allocator@H@0@U_Scalar_ptr_iterator_tag@0@@Z,0x9ff2e0,0x32
 ??$_Uninit_move@HHH@std@@YAPAHPAH00AAV?$allocator@H@0@0U_Scalar_ptr_iterator_tag@0@@Z,0x9ff2e0,0x32
 ??$_Uninit_move@PAVXBuffer@@PAV1@PAV1@@std@@YAPAPAVXBuffer@@PAPAV1@00AAV?$allocator@PAVXBuffer@@@0@0U_Scalar_ptr_iterator_tag@0@@Z,0x9ff2e0,0x32
-?construct@?$allocator@UPoint@@@std@@QAEXPAUPoint@@ABU3@@Z,0xa000f0,0x1d
 ?construct@?$allocator@H@std@@QAEXPAHABH@Z,0xa00530,0x1d
 ??$move@AAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@std@@YA$$QAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@0@AAV10@@Z,0xa01760,0x8
 ??$forward@V?$allocator@D@std@@@std@@YA$$QAV?$allocator@D@0@AAV10@@Z,0xa01760,0x8

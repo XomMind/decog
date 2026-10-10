@@ -101,7 +101,6 @@
 ?assign@?$vector@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@QAEXIABUY8_10_00_0@@@Z,0x9b3b60,0x1d
 ?insert@?$vector@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@QAEXV?$_Vector_const_iterator@V?$_Vector_val@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@@2@IABUY8_10_00_0@@@Z,0x9c3800,0x21
 ?clear@?$vector@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@QAEXXZ,0x9b4710,0x43
-?_Reserve@?$vector@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@IAEXI@Z,0x9be4b0,0x61
 ?_Ufill@?$vector@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@IAEPAUY8_10_00_0@@PAU3@IPBU3@@Z,0x9cc360,0x31
 ??0?$reverse_iterator@V?$_Vector_iterator@V?$_Vector_val@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@@std@@@std@@QAE@V?$_Vector_iterator@V?$_Vector_val@UY8_10_00_0@@V?$allocator@UY8_10_00_0@@@std@@@std@@@1@@Z,0x9cbf60,0x1c
 ??H?$_Vector_iterator@V?$_Vector_val@UY8_10_14_0@@V?$allocator@UY8_10_14_0@@@std@@@std@@@std@@QBE?AV01@H@Z,0x9c20e0,0x2d

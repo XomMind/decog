@@ -241,7 +241,7 @@ public:
 	CPart(XConsole *parent, int y, HItem item_, bool unknown70_, HItem unknown74_, int unknown7c_, int key_);	// 0x4a8bd0
 	void unknown4a8f90(bool flag);	// NOTE: placeholder name
 	void unknown4a9120();	// NOTE: placeholder name
-	void unknown4a9210(unsigned int value);	// NOTE: placeholder name
+	void unknown4a9210(HItem value);	// NOTE: placeholder name (stores the linked item at +0x74)
 	void unknown890710(int value);	// NOTE: placeholder name
 	void unknown49ac50();	// NOTE: placeholder name
 
@@ -295,7 +295,7 @@ public:
 	int unknown8985d0(int value);	// NOTE: placeholder name
 	int unknown8986c0(int value);	// NOTE: placeholder name
 	void unknown8987b0(HItem item, vector<HItem> *out);	// NOTE: placeholder name
-	void unknown898860(HItem item, vector<unsigned int> *list);	// NOTE: placeholder name
+	void unknown898860(HItem item, vector<HItem> *list);	// NOTE: placeholder name
 
 	char pad6c[0x70 - 0x6c];
 	unsigned int unknown70;	// NOTE: placeholder name
@@ -625,7 +625,7 @@ void CParts::unknown8987b0(HItem item, vector<HItem> *out)
 	}
 }
 
-void CParts::unknown898860(HItem item, vector<unsigned int> *list)
+void CParts::unknown898860(HItem item, vector<HItem> *list)
 {
 	for (unsigned int i = 0; i < parts.size(); i++)
 	{

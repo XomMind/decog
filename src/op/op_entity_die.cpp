@@ -234,7 +234,7 @@ public:
 	bool findPropSpotNear(const Point &p, Point &out, void *data);	// NOTE: placeholder name (0x71c3c0)
 	void unknown6c6b90(const Point &p, const string &name, int a, int b);	// NOTE: placeholder name
 	int getTurn();	// 0x464270
-	bool unknown463dc0(HEntity e);	// NOTE: placeholder name
+	bool removeFollower(HEntity e);
 	string unknown463060(const Point &p);	// NOTE: placeholder name
 	void unknown730f40(HEntity e);	// NOTE: placeholder name
 	void unknown74b060(const Point &p, int type, int percent);	// NOTE: placeholder name
@@ -809,7 +809,7 @@ void Entity::die(bool a, int cause, HEntity killer, int type, int crit, ED_DieIn
 				}
 			}
 		}
-		if (!world->unknown463dc0(self))
+		if (!world->removeFollower(self))
 			ed_removeEntity_9d2f00(ed_cf6adc, self);
 	}
 	{

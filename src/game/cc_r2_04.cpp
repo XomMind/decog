@@ -87,7 +87,7 @@ public:
 	void unknown49ad70(int a);	// NOTE: placeholder name
 	void unknown49ada0(int a);	// NOTE: placeholder name
 	void unknown49adc0(int a);
-	void unknown49adf0(unsigned int a);	// NOTE: placeholder name
+	void unknown49adf0(HEntity e);	// NOTE: placeholder name
 	void unknown49ae20(int a);	// NOTE: placeholder name
 	XBuffer *unknown49ae50(bool a);	// NOTE: placeholder name
 	XBuffer *unknown49aec0();	// NOTE: placeholder name
@@ -132,7 +132,7 @@ public:
 	int value650;	// NOTE: placeholder name
 	char pad654[0x668 - 0x654];
 	unsigned int tick668;	// NOTE: placeholder name
-	vector<unsigned int> values66c;	// NOTE: placeholder name
+	vector<HEntity> values66c;	// NOTE: placeholder name (entities; drained and sorted by record level in the CMap update)
 	unsigned int tick67c;	// NOTE: placeholder name
 	char pad680[0x760 - 0x680];
 	int state760;	// NOTE: placeholder name
@@ -199,10 +199,10 @@ void MapView::unknown49adc0(int a)
 	unknown49ada0(tickCount + a);
 }
 
-void MapView::unknown49adf0(unsigned int a)
+void MapView::unknown49adf0(HEntity e)
 {
 	tick668 = tickCount;
-	values66c.push_back(a);
+	values66c.push_back(e);
 }
 
 void MapView::unknown49ae20(int a)

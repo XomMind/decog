@@ -182,7 +182,7 @@ public:
 	void unknown464f60(HItem item);			// NOTE: placeholder name
 	void unknown465060(HItem item);			// NOTE: placeholder name
 	void opw3_unknown726b70(HItem item);	// NOTE: placeholder name
-	void unknown463da0(HEntity e);			// NOTE: placeholder name
+	void addFollower(HEntity e);
 	HEntity unknown6c5e20(StoredEntity52 *rec, const Point &pos, int index, bool flag, bool makeAI, bool follow);	// NOTE: placeholder name
 };
 
@@ -234,7 +234,7 @@ HEntity BS::unknown6c5e20(StoredEntity52 *rec, const Point &pos, int index, bool
 		}
 	}
 	if (index == 0 && entity->unknown45ac40(0x39))
-		unknown463da0(entity);
+		addFollower(entity);
 	if (entity->getFaction() == 0x42 && entity->getAiType() == 0)
 	{
 		entity->unknown5de870(entity->unknown5ca260() * 0x32 / 100,0);

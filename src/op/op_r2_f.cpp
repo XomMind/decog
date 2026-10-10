@@ -209,7 +209,7 @@ public:
 	MapZone *getZone(const Point &p);	// NOTE: placeholder name (0x462e30)
 	void unknown7353a0(int x, int y);	// NOTE: placeholder name
 	int unknown463e50();				// NOTE: placeholder name
-	bool unknown463dc0(HEntity e);		// NOTE: placeholder name
+	bool removeFollower(HEntity e);
 	void unknown464800(HEntity e);		// NOTE: placeholder name
 	void opw3_unknown729470(HEntity e, bool ownerOnly);	// NOTE: placeholder name
 };
@@ -619,7 +619,7 @@ void Entity::unknown637bb0()
 	if (ai != NULL)
 		ai->willDie(true);
 	opr2_cf6428.unknown681b70(self,HProp());
-	if (unknown45ac40(0x39) && !world->unknown463dc0(self))
+	if (unknown45ac40(0x39) && !world->removeFollower(self))
 		OpR2_eraseEntity(opr2_cf6adc,self);
 	for (unsigned int i = 0; i < inventory.size(); i++)
 	{

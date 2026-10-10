@@ -330,14 +330,11 @@
 ??$_Destroy_range@V?$allocator@V?$vector@HV?$allocator@H@std@@@std@@@std@@@std@@YAXPAV?$vector@HV?$allocator@H@std@@@0@0AAV?$allocator@V?$vector@HV?$allocator@H@std@@@std@@@0@U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f23c0,0x2a
 ?push_back@?$vector@V?$vector@HV?$allocator@H@std@@@std@@V?$allocator@V?$vector@HV?$allocator@H@std@@@std@@@2@@std@@QAEX$$QAV?$vector@HV?$allocator@H@std@@@2@@Z,0x9e8d90,0x110
 ??$_Move@PAV?$vector@HV?$allocator@H@std@@@std@@PAV12@@std@@YAPAV?$vector@HV?$allocator@H@std@@@0@PAV10@00U_Nonscalar_ptr_iterator_tag@0@@Z,0x9f10f0,0x3b
-?begin@?$vector@VHProp@@V?$allocator@VHProp@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@VHProp@@V?$allocator@VHProp@@@std@@@std@@@2@XZ,0x9c1270,0x22
 ??0?$vector@UXColor@@V?$allocator@UXColor@@@std@@@std@@QAE@IABUXColor@@@Z,0x9b3c00,0x76
 ?unknown45b070@Entity@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x45b070,0x1c
 ?setText@CTextInput@@QAEXABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z,0x48d300,0x30
 ??0Rect@@QAE@ABUPos@@HH@Z,0x40a760,0x38
 ??0Area@@QAE@HHHH@Z,0x40b1e0,0x46
-??1?$vector@V?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@std@@V?$allocator@V?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@std@@@2@@std@@QAE@XZ,0x9b8b60,0x53
-?begin@?$vector@VHItem@@V?$allocator@VHItem@@@std@@@std@@QAE?AV?$_Vector_iterator@V?$_Vector_val@VHItem@@V?$allocator@VHItem@@@std@@@std@@@2@XZ,0x9c1270,0x22
 _floor,0xaa212c,0x6
 ?find_first_not_of@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QBEIDI@Z,0x9afee0,0x1f
 ?clear@?$vector@VHProp@@V?$allocator@VHProp@@@std@@@std@@QAEXXZ,0x9b73d0,0x43
@@ -420,11 +417,9 @@ _floor,0xaa212c,0x6
 ??$_Cons_val@V?$allocator@UPos@@@std@@UPos@@ABU3@@std@@YAXAAV?$allocator@UPos@@@0@PAUPos@@ABU2@@Z,0x9e38b0,0x1e
 ?destroy@?$allocator@UPos@@@std@@QAEXPAUPos@@@Z,0x9e9740,0x19
 ??$_Dest_val@V?$allocator@UPos@@@std@@UPos@@@std@@YAXAAV?$allocator@UPos@@@0@PAUPos@@@Z,0x9e42f0,0x11
-??$_Cons_val@V?$allocator@URoom@DF@@@std@@URoom@DF@@U34@@std@@YAXAAV?$allocator@URoom@DF@@@0@PAURoom@DF@@$$QAU23@@Z,0x9e3be0,0x1e
 ??$_Uninitialized_copy@PBQAUMapRecord@@PAPAU1@V?$allocator@PAUMapRecord@@@std@@@std@@YAPAPAUMapRecord@@PBQAU1@0PAPAU1@AAV?$allocator@PAUMapRecord@@@0@@Z,0x9ff8b0,0x38
 ??$_Dest_val@V?$allocator@UOpR6_KA_8_0@@@std@@UOpR6_KA_8_0@@@std@@YAXAAV?$allocator@UOpR6_KA_8_0@@@0@PAUOpR6_KA_8_0@@@Z,0x9e42f0,0x11
 ??$_Dest_val@V?$allocator@UOpR6_KA_4_1@@@std@@UOpR6_KA_4_1@@@std@@YAXAAV?$allocator@UOpR6_KA_4_1@@@0@PAUOpR6_KA_4_1@@@Z,0x9e42f0,0x11
-?push_back@?$vector@PAV?$vector@VHEntity@@V?$allocator@VHEntity@@@std@@@std@@V?$allocator@PAV?$vector@VHEntity@@V?$allocator@VHEntity@@@std@@@std@@@2@@std@@QAEX$$QAPAV?$vector@VHEntity@@V?$allocator@VHEntity@@@std@@@2@@Z,0x9b9280,0x110
 ?push_back@?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@std@@QAEXABQAVXConsole@@@Z,0x9b9d30,0xfa
 ??1?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@QAE@XZ,0x9f51d0,0x13
 ??0?$pair@$$CBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@V12@@std@@QAE@ABV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@1@0@Z,0x9b8e30,0x20
@@ -456,7 +451,6 @@ _floor,0xaa212c,0x6
 ?_Reserve@?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@std@@IAEXI@Z,0x9bca50,0x61
 ?max_size@?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@std@@QBEIXZ,0x9c5bb0,0x16
 ??$_Cons_val@V?$allocator@PAVXConsole@@@std@@PAVXConsole@@AAPAV3@@std@@YAXAAV?$allocator@PAVXConsole@@@0@PAPAVXConsole@@AAPAV2@@Z,0x9e3960,0x1e
-??$_Cons_val@V?$allocator@PAVXConsole@@@std@@PAVXConsole@@ABQAV3@@std@@YAXAAV?$allocator@PAVXConsole@@@0@PAPAVXConsole@@ABQAV2@@Z,0x9e40c0,0x1e
 ??0XBuffer@@QAE@HHUGlyph@@@Z,0x9cde40,0xd5
 ??$_Dest_val@V?$allocator@PAVCCommandButton@@@std@@PAVCCommandButton@@@std@@YAXAAV?$allocator@PAVCCommandButton@@@0@PAPAVCCommandButton@@@Z,0x9e3c20,0x11
 ??$_Dest_val@V?$allocator@V?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@std@@@std@@V?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@2@@std@@YAXAAV?$allocator@V?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@std@@@0@PAV?$vector@PAVXConsole@@V?$allocator@PAVXConsole@@@std@@@0@@Z,0x9e3c20,0x11

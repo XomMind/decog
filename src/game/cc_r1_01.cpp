@@ -27,7 +27,7 @@ public:
 };
 
 template <class T> bool inVector(vector<T> &v, T e);	// NOTE: placeholder name (0x9d0ce0)
-bool eraseValue(vector<unsigned int> &v, unsigned int value);				// NOTE: placeholder name (0x9d2f00)
+bool eraseValue(vector<HEntity> &v, HEntity value);				// NOTE: placeholder name (0x9d2f00)
 
 class UnknownList6c2110	// NOTE: placeholder name (0x24 bytes, created on demand by BS)
 {
@@ -65,9 +65,9 @@ public:
 	int unknown463d20();						// NOTE: placeholder name
 	int unknown463d40();						// NOTE: placeholder name
 	vector<int> &unknown463d60();				// NOTE: placeholder name
-	vector<unsigned int> &unknown463d80();				// NOTE: placeholder name
-	void unknown463da0(unsigned int value);				// NOTE: placeholder name
-	void unknown463dc0(int value);				// NOTE: placeholder name
+	vector<HEntity> &getFollowers();			// entities with effect 0x39 (capped at 8 by callers)
+	void addFollower(HEntity e);
+	void removeFollower(HEntity e);
 	vector<int> &unknown463df0();				// NOTE: placeholder name
 	HEntity unknown463e10();					// NOTE: placeholder name
 	int unknown463e30();						// NOTE: placeholder name
@@ -99,7 +99,7 @@ public:
 	int value570;						// NOTE: placeholder name
 	vector<int> list574;				// NOTE: placeholder name
 	char pad584[0x5ec - 0x584];
-	vector<unsigned int> list5ec;				// NOTE: placeholder name
+	vector<HEntity> followers;					// +0x5ec: pushed through the HEntity-family push_back (0x9b80b0), removed with 0x9d2f00
 	char pad5fc[0x604 - 0x5fc];
 	vector<int> list604;				// NOTE: placeholder name
 	char pad614[0x618 - 0x614];
@@ -213,19 +213,19 @@ vector<int> &BS::unknown463d60()
 	return list574;
 }
 
-vector<unsigned int> &BS::unknown463d80()
+vector<HEntity> &BS::getFollowers()
 {
-	return list5ec;
+	return followers;
 }
 
-void BS::unknown463da0(unsigned int value)
+void BS::addFollower(HEntity e)
 {
-	list5ec.push_back(value);
+	followers.push_back(e);
 }
 
-void BS::unknown463dc0(int value)
+void BS::removeFollower(HEntity e)
 {
-	eraseValue(list5ec,value);
+	eraseValue(followers,e);
 }
 
 vector<int> &BS::unknown463df0()
