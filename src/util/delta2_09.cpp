@@ -109,7 +109,7 @@ extern int opw6_bcca3c[], opw6_bcca5c[];
 extern bool d2t_d28e18, d2t_cf4780, d2t_d28f66, d2t_cefacd;
 extern int d2t_cf4b20, d2t_cf462c, d2t_d1eb70, d2t_d1eb68;
 extern string d2t_cfb79c, d2t_d379d0, d2t_cf4acc;
-extern string d2t_d2f660[], d2t_cfc230[], d2t_d2f798[], d2t_d31348[];
+extern string d2t_d2f660[], d2t_cfc230[], d2t_robotClassNames_d2f798[], d2t_d31348[];
 extern vector<int> d2t_cf4784, d2t_cf4794;
 extern const float d2t_c36eb4;
 
@@ -262,7 +262,7 @@ void D2Tactical::render()
 			string label = " ";
 			if (d2t_cf4794.back() != 20)
 				label += d2t_cfc230[d2t_cf4794.back()] + "-";
-			label += d2t_cf462c == 11 ? d2t_d2f798[d2t_cf4784.back()] : d2t_d31348[d2t_cf4784.back()];
+			label += d2t_cf462c == 11 ? d2t_robotClassNames_d2f798[d2t_cf4784.back()] : d2t_d31348[d2t_cf4784.back()];
 			label += " ";
 			label = OpR5f_toUpper_4083a0(label);
 			D2T_FITLABEL(label);

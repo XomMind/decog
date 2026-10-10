@@ -111,7 +111,7 @@ extern int opu3_cf4724;	// NOTE: placeholder name
 extern int opu3_cf4740;	// NOTE: placeholder name
 extern int opu3_table_b90000[];	// NOTE: placeholder name
 extern int opu3_table_b90098[];	// NOTE: placeholder name
-extern int opu3_table_b90290[][2];	// NOTE: placeholder name
+extern int opu3_surgicalBlocks_b90290[][2];	// NOTE: placeholder name
 extern int opu3_table_b91a40[][2];	// NOTE: placeholder name
 extern int opu3_table_ba6550[];	// NOTE: placeholder name
 extern int opu3_table_ba655c[];	// NOTE: placeholder name
@@ -145,14 +145,14 @@ struct OpU3_Rec673e70	// NOTE: placeholder name
 	bool unknown4A;
 	int unknown4C;
 	vector<OpQ5_T9d1d80 *> unknown50;
-	OpS7_IntGrid2 unknown60;
-	int unknown6C;
-	int unknown70;
+	OpS7_IntGrid2 surgicalExplored;
+	int lastDispatchTurn;
+	int surgicalTimer;
 	int unknown74;
 	bool unknown78;
 	int unknown7C;
 	int unknown80;
-	int unknown84;
+	int extraTrackers;
 	int unknown88;
 	int unknown8C;
 	OpQ5_T9da4c0 *unknown90;
@@ -174,7 +174,7 @@ struct OpU3_Rec673e70	// NOTE: placeholder name
 	int unknown104;
 	vector<OpQ5_T9e2c40 *> unknown108;
 	vector<OpS8a_P8> unknown118;
-	int unknown128;
+	int failedDispatches;
 	OpU1_Point unknown12C;
 	int unknown134;
 	int unknown138;
@@ -226,14 +226,14 @@ void OpU3_Rec673e70::load(istream &stream)
 	readBinary(stream,&unknown4C);
 	OpQ5_clearObjects(unknown50);
 	OpQ5_readObjects(stream,(vector<OpQ5_T9da380*>&)unknown50,0);
-	unknown60.read_9cee40(stream);
-	readBinary(stream,&unknown6C);
-	readBinary(stream,&unknown70);
+	surgicalExplored.read_9cee40(stream);
+	readBinary(stream,&lastDispatchTurn);
+	readBinary(stream,&surgicalTimer);
 	readBinary(stream,&unknown74);
 	readBinary(stream,&unknown78);
 	readBinary(stream,&unknown7C);
 	readBinary(stream,&unknown80);
-	readBinary(stream,&unknown84);
+	readBinary(stream,&extraTrackers);
 	readBinary(stream,&unknown88);
 	readBinary(stream,&unknown8C);
 	delete unknown90;
@@ -261,7 +261,7 @@ void OpU3_Rec673e70::load(istream &stream)
 	OpQ5_readObjects(stream,(vector<OpQ5_T9da570*>&)unknown108,0);
 	unknown118.clear();
 	OpS8a_readP8s(stream,unknown118);
-	readBinary(stream,&unknown128);
+	readBinary(stream,&failedDispatches);
 	unknown12C.read(stream);
 	readBinary(stream,&unknown134);
 	readBinary(stream,&unknown138);
@@ -337,12 +337,12 @@ void OpU3_Rec673e70::init(OpU3_HLocation from, OpU3_HLocation to)
 	unknown40 = false;
 	if (opu3_gameData.unknown46f4b0(1) && opu3_location->type != 0x23)
 		opu3_stats.add4729d0(0x217,unknown0,"",-1);
-	unknown60.init_9cf690(opu3_cells.getWidth() / opu3_table_b90290[opu3_location->type][0] + 1,opu3_cellsX.getHeight() / opu3_table_b90290[opu3_location->type][0] + 1,0);
-	unknown6C = 0;
+	surgicalExplored.init_9cf690(opu3_cells.getWidth() / opu3_surgicalBlocks_b90290[opu3_location->type][0] + 1,opu3_cellsX.getHeight() / opu3_surgicalBlocks_b90290[opu3_location->type][0] + 1,0);
+	lastDispatchTurn = 0;
 	unknown74 = 0;
 	unknown78 = false;
 	unknown7C = 0;
-	unknown84 = 0;
+	extraTrackers = 0;
 	unknown8C = 0;
 	unknown194 = to->type == 0x22;
 	unknown195 = false;
@@ -364,7 +364,7 @@ void OpU3_Rec673e70::init(OpU3_HLocation from, OpU3_HLocation to)
 	unknown100 = false;
 	OpQ5_clearObjects(unknown108);
 	unknown118.clear();
-	unknown128 = 0;
+	failedDispatches = 0;
 	unknown12C.fill_409ff0(-1);
 	unknown138 = 0;
 	unknown13C = 0;

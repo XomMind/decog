@@ -26,7 +26,7 @@ struct GqPair{int*a;int b;GqPair(int*,int);};
 struct GqHack{int a,b,c;GqHack(int,int);};
 struct GqShot{char d[0x10];GqShot(GqPoint,int,int);};
 struct GqParty{char d[0x38];GqParty(int,struct GqHE,int,int,int);};
-struct GqProp;struct GqEntity;struct GqItem;struct GqGroup;struct GqLoc{int a;int type;int depth;int f46ed20();};
+struct GqProp;struct GqEntity;struct GqItem;struct GqGroup;struct GqLoc{int a;int type;int depth;int getDepthIndex();};
 struct GqHP{int id;GqHP();GqProp*operator->()const;bool isNull()const;bool valid()const;};
 struct GqHE{int id;GqHE();GqEntity*operator->()const;bool isNull()const;bool valid()const;};
 struct GqHI{int id;GqHI();GqItem*operator->()const;bool isNull()const;};
@@ -49,16 +49,16 @@ template<class T>struct GqWL{vector<T>values;vector<int>weights;int total;GqWL()
 struct GqBS{char p0[0xc0];GqWL<int>wlc0;char pe4[0x64];vector<GqPoint>v148;char p158[0x70];vector<GqShot*>v1c8;char p1d8[0x1b8];vector<GqHI>v390;vector<int>v3a0;char p3b0[0x1b0];vector<string>v560;char p570[0x14];vector<GqPoint>v584;vector<GqHE>v594;vector<vector<GqHE> >v5a4;
  void place6cd110(GqPrefab&,int,bool,float);
  void f6c38a0(GqRect*,vector<GqPoint>*,float,GqTerrain*);void f6dd0e0(const GqPoint&,int);GqMachineRec*placeMachine6c70a0(int,const GqPoint&,int,bool,bool);void f464e60(GqHP);
- GqPoint f6c6d10(vector<GqPoint>&,const GqPoint&);bool placeProp6c67b0(GqPropDef*,const GqPoint&,int,int,int);GqEntityDef*f6c5600(int,int,bool,bool);GqHE placeEntity6c58c0(GqEntityDef*,const GqPoint&,int,bool,int,int,bool);
+ GqPoint f6c6d10(vector<GqPoint>&,const GqPoint&);bool placeProp6c67b0(GqPropDef*,const GqPoint&,int,int,int);GqEntityDef*selectRobotOfClass(int,int,bool,bool);GqHE placeEntity6c58c0(GqEntityDef*,const GqPoint&,int,bool,int,int,bool);
  GqHI f6c5400(GqItemDef*,const GqPoint&);GqItemDef*selectRandomItem6c3bc0(int,int,int);GqItemDef*selectRandomItemOfRating6c40e0(int,int,int,int,int,int,int);void f464f60(GqHI);void f465060(GqHI);
  GqHI f6c51d0(GqItemDef*,GqHE,int,int);};
 extern GqBS*gq_world_cefc4c;
 struct GqFactory{GqHP createE(GqPropDef*);GqHI createD(GqItemDef*,GqHE,int,int,int);};extern GqFactory*gq_factory_cefaa8;
-struct GqOvermind{void f6827d0(GqParty*,int);};extern GqOvermind gq_overmind_cf6428;
-struct GqGameData{int f789250(int)throw();int f46f4e0();};extern GqGameData gq_gd_d1e860;
+struct GqOvermind{void addParty(GqParty*,int);};extern GqOvermind gq_overmind_cf6428;
+struct GqGameData{int f789250(int)throw();int getDepthIndex();};extern GqGameData gq_gd_d1e860;
 extern GqColor gq_cf127c[];extern GqColor gq_d223c8;extern GqTerrain*gq_cefb88,*gq_cefb9c,*TERRAIN_CAVE_WALL,*gq_cefb84,*caveinThirdTerrain,*gq_cefbb0,*gq_cefba8,*gq_cefbac,*gq_d2c46c;
 extern vector<int>gq_cfc1a4,gq_d2a2cc;extern vector<int*>gq_d2f0f8;extern vector<GqRect>gq_d22fa8;extern vector<GqPrefabDef*>gq_d15d9c;extern vector<GqTerrain*>gq_cfb844;extern string gq_cf0c28;extern GqHL gq_loc_d1e888;
-extern vector<GqPropDef*>gq_cf35b0;extern vector<GqEntityDef*>gq_d35b58,gq_d25de0;extern vector<GqItemDef*>gq_d2d1c4;extern string gq_cf6730[],gq_d2d508[],gq_d2f798[],gq_d21bb8[],gq_cf3668[];
+extern vector<GqPropDef*>gq_cf35b0;extern vector<GqEntityDef*>gq_d35b58,gq_d25de0;extern vector<GqItemDef*>gq_d2d1c4;extern string gq_cf6730[],gq_d2d508[],gq_robotClassNames_d2f798[],gq_d21bb8[],gq_cf3668[];
 extern int gq_bb8370[],gq_bb8340[],gq_b96348[];extern vector<vector<GqHP> >gq_d31640;extern vector<vector<GqPoint> >gq_d2f32c;extern vector<vector<GqHI> >gq_cf3a10;
 extern GqPoint gq_cf4538,gq_d2ecf8,gq_d21948[];extern int gq_cf462c,gq_cf4718;extern const float gq_ba780c,gq_c36fb8;extern float gq_ba65d8[];extern bool gq_b9651c[];
 extern GqWL<GqItemDef*>gq_d2ae08,gq_d31700,gq_cf0c04,gq_cfe5ec;
@@ -587,9 +587,9 @@ void GqBS::place6cd110(GqPrefab&prefab,int id,bool flag,float chance){
      hidden.clear();
      gq_split408700(current->spec,'|',hidden);
      text=gq_randomString9d3280(hidden);
-     int cls=gq_findString9cda80(gq_d2f798,0x61,text);
+     int cls=gq_findString9cda80(gq_robotClassNames_d2f798,0x61,text);
      if(cls!=-1){
-      defender=f6c5600(energy,cls,r1,old);
+      defender=selectRobotOfClass(energy,cls,r1,old);
       if(defender==0)goto end3;
      }else if(!gq_findEntity9d7530(gq_d25de0,text,defender))goto end3;
     }
@@ -642,7 +642,7 @@ void GqBS::place6cd110(GqPrefab&prefab,int id,bool flag,float chance){
      }
      if(player){
       parent=shooter;
-      if(groupID!=0xb)gq_overmind_cf6428.f6827d0(new GqParty(groupID,parent,-1,0,0),0);
+      if(groupID!=0xb)gq_overmind_cf6428.addParty(new GqParty(groupID,parent,-1,0,0),0);
       player=false;
      }else if(parent.valid())shooter->ai45b590()->follow5b2f80(parent,0);
      for(unsigned a=0;a<option.size();a++){
@@ -747,7 +747,7 @@ void GqBS::place6cd110(GqPrefab&prefab,int id,bool flag,float chance){
       if(arg[0]=='+'){
        string s(arg);
        gq_eraseFirst4077e0(s);
-       cx=gq_minInt9cdb30(gq_loc_d1e888->f46ed20()+gq_stringToInt(s),10);
+       cx=gq_minInt9cdb30(gq_loc_d1e888->getDepthIndex()+gq_stringToInt(s),10);
       }else cx=gq_stringToInt(arg);
       break;
      case 3:cost.parseRange40bf80(arg);break;
@@ -776,7 +776,7 @@ void GqBS::place6cd110(GqPrefab&prefab,int id,bool flag,float chance){
     if(text[0]=='&')ex=gq_d2d1c4[gq_stringToInt(string(text.begin()+1,text.end()))];
     else if(elem==2)gq_findItem9d7a40(gq_d2d1c4,"Scrap",ex);
     else if(text=="TRAP"){
-     int depth=gq_gd_d1e860.f46f4e0();
+     int depth=gq_gd_d1e860.getDepthIndex();
      GqWL<GqItemDef*> wl;
      for(unsigned a=0;a<gq_cf35b0.size();a++)
       if(gq_cf35b0[a]->f140!=0x10&&gq_cf35b0[a]->f144!=0&&gq_cf35b0[a]->f154!=0&&(groupID==2||gq_cf35b0[a]->f150==groupID)&&(gq_cf35b0[a]->range148.y==0||gq_cf35b0[a]->range148.contains40c190(depth)))

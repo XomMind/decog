@@ -22,7 +22,7 @@ class OpT4_GameData	// NOTE: placeholder name (object at 0xd1e860)
 {
 public:
 	bool unknown46f4b0(int value);	// NOTE: placeholder name
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 
 struct OpT4_LocationInfo	// NOTE: placeholder name
@@ -75,7 +75,7 @@ public:
 
 void OpT4_Selector::unknown6c3a50(OpT4_WeightedTable *table, bool flag, int rating)
 {
-	rating = rating ? rating : opt4_gameData.unknown46f4e0();
+	rating = rating ? rating : opt4_gameData.getDepthIndex();
 	table->clear();
 	int weight;
 	for (unsigned int i = 0; i < opt4_itemTypes.size(); i++)
@@ -140,7 +140,7 @@ void OpT4_Selector::unknown6c4fd0()
 			}
 		}
 		float chance = 1.0f;
-		if (opt4_maxInt(1,opt4_gameData.unknown46f4e0()) < type->unknown68)
+		if (opt4_maxInt(1,opt4_gameData.getDepthIndex()) < type->unknown68)
 			continue;
 		switch (type->unknownec)
 		{
@@ -148,7 +148,7 @@ void OpT4_Selector::unknown6c4fd0()
 			break;
 		case 1:
 		case 2:
-			chance -= (opt4_gameData.unknown46f4e0() - type->unknown68) * (type->unknownec == 1 ? 0.35f : 0.15f);
+			chance -= (opt4_gameData.getDepthIndex() - type->unknown68) * (type->unknownec == 1 ? 0.35f : 0.15f);
 			if (chance <= 0.0)
 				continue;
 			break;

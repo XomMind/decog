@@ -15,7 +15,7 @@ struct LB23AI{void area459470(const LB23Area&)throw();void follow5b2f80(LB23H,in
 struct LB23Map{int turn464270()throw();LB23H player4630f0()throw();LB23H companion463110()throw();int companion463e50()throw();bool flag714a50();LB23Hs*followers463d80()throw();void removeFollower463dc0(LB23H);LB23HI give6c52b0(const string&,LB23H,bool,bool);LB23HI create6c51d0(LB23Def*,LB23H,bool,bool);void update72ea10();void remove464fd0(LB23HI);void remove4650c0(LB23HI);};extern LB23Map*lb23_cefc4c;
 struct LB23Stats{bool add4729d0(unsigned,int,string,int);};extern LB23Stats lb23_d2c658;
 struct LB23Rule{void update682420(int,int);};extern LB23Rule lb23_cf6428;
-struct LB23Rec{int rating46ed20()throw();};struct LB23HR{int id;LB23Rec*get9b7910()const throw();};extern LB23HR lb23_d1e888;
+struct LB23Rec{int getDepthIndex()throw();};struct LB23HR{int id;LB23Rec*get9b7910()const throw();};extern LB23HR lb23_d1e888;
 struct LB23Player{bool companion780790()throw();};extern LB23Player lb23_cf45d8;
 struct LB23Tracker{bool spawn7aa280(unsigned,bool,string);};struct LB23State{char p[0x30];LB23Tracker*tracker;};extern LB23State*lb23_cf4ac8;
 struct LB23View{void select44e360(LB23HP)throw();};extern LB23View*lb23_cec054;
@@ -26,7 +26,7 @@ struct LB23Xom{bool enabled;int event69e700(int,int,float);};extern LB23Xom lb23
 struct LB23Queue{void remove672980(LB23HI);};extern LB23Queue lb23_d225a0;
 struct LB23Pool{void remove9d05e0(LB23HI,bool);};extern LB23Pool lb23_d2a298;
 struct LB23Grid{LB23Area area9b4400()throw();};extern LB23Grid lb23_cfd44c;
-extern LB23Ints lb23_cf4b74,lb23_cf4a04;extern LB23Items lb23_d33d74;extern LB23P lb23_cefcfc,lb23_cf3a30[];
+extern LB23Ints lb23_cf4b74,lb23_rifLevels_cf4a04;extern LB23Items lb23_d33d74;extern LB23P lb23_cefcfc,lb23_cf3a30[];
 extern int lb23_cf4b70,lb23_cf4b84,lb23_d254c0,lb23_d254c4,lb23_ba3df8[][4],lb23_ba3ff8[];extern bool lb23_cefc5f,lb23_ba40f8[];extern unsigned lb23_c2ea48;
 string lb23_chrono432d80();string lb23_int4051f0(int);int lb23_max(int,int)throw();void lb23_erase9d2f00(LB23Items&,LB23HI);
 bool lb23_route5111e0(int,const string*,const string*,const string*,LB23H,LB23H,const LB23P*,bool);
@@ -37,7 +37,7 @@ void LB23Item::remove57dbe0(bool refresh,bool destroyed,int mode,bool scrap){
  if(destroyed&&owner.valid9b7230()){
   if(owner.get9b6570()->player5c7600()){
    lb23_d2c658.add4729d0(144,1,"",-1);lb23_d2c658.add4729d0(def->kind+145,1,"",-1);lb23_cf4b70++;lb23_cf4b74.at9b81f0(def->kind)++;lb23_cf4b84=lb23_cefc4c->turn464270();lb23_d2c658.add4729d0(149,lb23_cf4b70,"",-1);
-   if(lb23_d25450.enabled)lb23_d254c0+=lb23_max(0,rating457920()+4-lb23_d1e888.get9b7910()->rating46ed20());lb23_cf6428.update682420(36,0);
+   if(lb23_d25450.enabled)lb23_d254c0+=lb23_max(0,rating457920()+4-lb23_d1e888.get9b7910()->getDepthIndex());lb23_cf6428.update682420(36,0);
   }else if(owner.equal9b78e0(lb23_cefc4c->companion463110())){lb23_d2c658.add4729d0(1100,1,"",-1);lb23_cf6428.update682420(36,0);}
  }
  switch(def->special){case 183:if(owner.equal9b78e0(lb23_cefc4c->player4630f0())&&state<=3){lb23_cec054->select44e360(LB23HP());remove(lb23_chrono432d80().c_str());LB23_MSG(279,lb23_cefc4c->player4630f0());}break;
@@ -81,6 +81,6 @@ void LB23Item::remove57dbe0(bool refresh,bool destroyed,int mode,bool scrap){
    }
   }
  }
- if(f.equal9b78e0(lb23_cefc4c->player4630f0())&&lb23_cf4a04.at9b81f0(11)&&def->special==124&&def->name.find("Relay Coupler [NC]",0)!=lb23_c2ea48&&!f.get9b6570()->flag5d4100())lb23_cefc4c->update72ea10();
+ if(f.equal9b78e0(lb23_cefc4c->player4630f0())&&lb23_rifLevels_cf4a04.at9b81f0(11)&&def->special==124&&def->name.find("Relay Coupler [NC]",0)!=lb23_c2ea48&&!f.get9b6570()->flag5d4100())lb23_cefc4c->update72ea10();
  lb23_cefc4c->remove464fd0(self);lb23_cefc4c->remove4650c0(self);if(queue571d70())lb23_d225a0.remove672980(self);lb23_d2a298.remove9d05e0(self,true);
 }

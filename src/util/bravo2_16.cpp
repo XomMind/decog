@@ -12,7 +12,7 @@ struct PM6HP {int id;PM6HP() throw();bool isNull() const;bool isValid() const;PM
 struct PM6HI {int id;PM6ItemObj *operator->() const;};
 struct PM6HL {int id;PM6HL() throw();bool isNull() const;PM6Loc *operator->() const;};
 struct PM6HM {int id;};
-struct PM6Loc {int pad0;int type;int f8;vector<PM6HL> events;char pad1c[0x2f-0x1c];bool linked;vector<int> pending;void init(int,int,int,int);bool inRange();int depth46ed20();};
+struct PM6Loc {int pad0;int type;int f8;vector<PM6HL> events;char pad1c[0x2f-0x1c];bool linked;vector<int> pending;void init(int,int,int,int);bool inRange();int getDepthIndex();};
 struct PM6Layer {int getWidth();int getHeight();PM6Glyph *at(int,int);};
 struct PM6Glyph {int ch();};
 struct PM6Image {vector<PM6Layer*> layers;PM6Image(const PM6Image&);~PM6Image();void rotate_437ee0(int);};
@@ -41,7 +41,7 @@ PM6Shot::PM6Shot(PM6Point p,int id_,int amount_) {x=p.x;y=p.y;id=id_;amount=amou
 struct PM6Marker {int doorX,doorY;PM6HL loc;int kind;int pad10;PM6HP prop;PM6HP other;char pad1c[0x60-0x1c];PM6Marker(const PM6Point&,PM6HL,int,PM6HP,PM6HP);};
 PM6Marker::PM6Marker(const PM6Point &door_,PM6HL loc_,int kind_,PM6HP prop_,PM6HP other_) {doorX=door_.x;doorY=door_.y;loc=loc_;kind=kind_;prop=prop_;other=other_;}
 struct PM6Location {int id;PM6Loc *operator->() const;};extern PM6HL pm6_location_d1e888;
-struct PM6GameData {int unknown46f4e0();int unknown789250(int) throw();};extern PM6GameData pm6_gameData_d1e860;
+struct PM6GameData {int getDepthIndex();int unknown789250(int) throw();};extern PM6GameData pm6_gameData_d1e860;
 template <class T>
 class OpR5h_WL	// NOTE: partial declaration of the weighted list from src/op/op_r5h_wl.cpp
 {
@@ -125,7 +125,7 @@ PM6Placed *BS::placeMachine(int id,const PM6Point &pos,int rotation,bool bare,bo
    switch(other) {
    case 0: {
     int kind=pm6_location_d1e888->type;
-    int location=pm6_gameData_d1e860.unknown46f4e0();
+    int location=pm6_gameData_d1e860.getDepthIndex();
     vector<int> tags;
     int num;
     int roll;
@@ -164,7 +164,7 @@ PM6Placed *BS::placeMachine(int id,const PM6Point &pos,int rotation,bool bare,bo
          item=0;
          break;
         }
-        item=selectRandomItemOfRating(pm6_location_d1e888->depth46ed20()+rng.rangeInt(0.0f,2.0f),0,0,0x1f,0x12,0x2a,0);
+        item=selectRandomItemOfRating(pm6_location_d1e888->getDepthIndex()+rng.rangeInt(0.0f,2.0f),0,0,0x1f,0x12,0x2a,0);
         if(!item)
          break;
        } while(item->rating<6||pm6_containsRecord(tags,item->id)||unique[item->id]&&rng.chance(0x4b));
@@ -242,7 +242,7 @@ PM6Placed *BS::placeMachine(int id,const PM6Point &pos,int rotation,bool bare,bo
      int temp;
      for(int k=0;k<0x32;k++) {
       if(first) {
-       chosen=selectRandomItemOfRating(pm6_location_d1e888->depth46ed20()+rng.rangeInt(0.0f,3.0f),0,0,0x1f,0x12,0x2a,0);
+       chosen=selectRandomItemOfRating(pm6_location_d1e888->getDepthIndex()+rng.rangeInt(0.0f,3.0f),0,0,0x1f,0x12,0x2a,0);
        if(chosen&&chosen->rating>=6) {
         group->item80=chosen->id;
         group->item84=group->item80;
@@ -316,7 +316,7 @@ PM6Placed *BS::placeMachine(int id,const PM6Point &pos,int rotation,bool bare,bo
  if(other==3&&rng.chance(0x4b)&&pm6_location_d1e888->type!=0&&pm6_cf462c!=2) {
   vector<PM6HI> &items=pm6_items_cf3a10[tag];
   for(int k=rng.rangeInt(1.0f,3.0f);k>0;k--) {
-   int level=pm6_minInt(8,pm6_location_d1e888->depth46ed20()+group->level/2);
+   int level=pm6_minInt(8,pm6_location_d1e888->getDepthIndex()+group->level/2);
    PM6ItemDef *item=selectRandomItemOfRating(level,0,0,0x1f,0x12,0x2a,0);
    if(item) {
     PM6HI h=pm6_factory_cefaa8->createD(item);
@@ -361,7 +361,7 @@ PM6Placed *BS::placeMachine(int id,const PM6Point &pos,int rotation,bool bare,bo
     open=false;
    if(pm6_cf4740)
     open=true;
-   vector<int> &orders=pm6_pending_d1e8e0[pm6_gameData_d1e860.unknown46f4e0()];
+   vector<int> &orders=pm6_pending_d1e8e0[pm6_gameData_d1e860.getDepthIndex()];
    if(!orders.empty()) {
     entity->pending=orders;
     orders.clear();
@@ -420,7 +420,7 @@ PM6Placed *BS::placeMachine(int id,const PM6Point &pos,int rotation,bool bare,bo
     for(unsigned k=0;k<markers.size();k++)
      if(markers[k]->prop.isValid())
       for(unsigned l=0;l<markers[k]->loc->events.size();l++)
-       if(markers[k]->loc->events[l]->inRange()&&markers[k]->loc->events[l]->depth46ed20()>pm6_location_d1e888->depth46ed20()) {
+       if(markers[k]->loc->events[l]->inRange()&&markers[k]->loc->events[l]->getDepthIndex()>pm6_location_d1e888->getDepthIndex()) {
         ev->events.push_back(markers[k]->loc);
         goto done;
        }

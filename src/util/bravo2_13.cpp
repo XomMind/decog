@@ -64,7 +64,7 @@ void sweepGetSurroundingCells(const BV14Point&,vector<BV14Point>&);
 struct BS {
  BV14HI unknown6c5400(BV14ItemType*,const BV14Point&);
  void unknown7430a0(int,int);
- BV14Record *unknown6c5600(int,int,bool,bool);
+ BV14Record *selectRobotOfClass(int,int,bool,bool);
  BV14HE placeEntity(BV14Record*,const BV14Point&,int,bool,int,int,bool);
  bool unknown6c65a0(BV14HE,const string&,bool);
  void factory_6ead20();
@@ -190,7 +190,7 @@ void BS::factory_6ead20() {
      v->removeEffectsA(0);
      unknown6c65a0(v,"FRG_VSeries_Unstable2",false);
      v->getAI()->unknown4593d0(posts);
-     vs=unknown6c5600(1,0x14,false,true);
+     vs=selectRobotOfClass(1,0x14,false,true);
      if(vs) {
       BV14HE o=placeEntity(vs,at2,3,true,2,0xe,false);
       if(o.isValid()) {
@@ -204,7 +204,7 @@ void BS::factory_6ead20() {
   }
  }
  BV14Area root(0x71,0x83,0xa3,0xb5);
- BV14Record *rec=unknown6c5600(1,8,false,false);
+ BV14Record *rec=selectRobotOfClass(1,8,false,false);
  if(rec)
   for(int q=0;q<4;q++) {
    bool found=false;

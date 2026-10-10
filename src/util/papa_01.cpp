@@ -20,7 +20,7 @@ extern NvGVec nv_cf4bf0,nv_cf4c00,nv_cf4c10,nv_cf4c28;extern int nv_cf4c24,nv_cf
 struct NvStats{NvGVec*vals;int get472c70(int);bool add4729d0(unsigned,int,string,int);};extern NvStats nv_d2c658;
 struct NvPlayerData{bool u46dd90();bool u780380(int,int);bool u77ffb0(int,int);void u780810(NvHE,int,int);void unlock77fbc0(int);bool isSlotEmpty46de40(int);};extern NvPlayerData nv_cf45d8;
 struct NvGameData{const string&getEntryText46f6d0(const string&);void setEntryText46f700(const string&,const string&);bool u46f4b0(int);};extern NvGameData nv_d1e860;
-struct NvLoc{int f0;int f4;int f8;int u46ed20();};struct NvHLoc{int id;NvLoc*operator->()const;};extern NvHLoc nv_d1e888;
+struct NvLoc{int f0;int f4;int f8;int getDepthIndex();};struct NvHLoc{int id;NvLoc*operator->()const;};extern NvHLoc nv_d1e888;
 struct NvVecPt;struct NvIntGrid2;struct NvS34Grid;struct NvVVMarker;struct NvVMk;struct NvMk;
 struct NvVGrp;struct NvMap{void u71f700(const NvPos&,int);NvHE u715c70();bool u463750();int u463690();void u72e4c0(NvHE,int);void u721600();void u724480();void u724a10();void u724cf0();void u724f00();int u717dd0();int u464020();int u463710();void u465380();NvHE getEntity463110t()throw();int getTurn464270t()throw();float u7163d0(int,int);void u71cf70();bool u4633c0(const NvPos&);bool isVisible463190(int,int);bool u72a900(int,const NvPos&,const NvPos&);NvVecPt*u463ad0();NvGVec*u463af0();void u7471d0(NvHE);void u747400b(NvHE,NvHI,int,int);const NvPos&u4184d0();NvPos u71d000(int);NvHE u6c5dc0(const string&,const NvPos&,int,int,int,int,int);void u6c65a0(NvHE,const string&,int);NvVGrp*u463950();NvHE placeEntity6c58c0b(int,const NvPos&,int,int,int,int,int);bool u74d420(const NvPos&,NvPos&);bool u71bc10(const NvPos&,NvPoint*);void opw3_7243c0(int,int,int);void u744800(int);char pad0[0x720];int f720;NvIntGrid2*u463830();NvS34Grid*u463e70();bool u463e90(const NvPos&);bool isKnown463130(int,int);NvVVMarker*u463ec0();NvVMk*u462e10();bool u463ee0(int,const NvPos&);void opw3_724420(int,int);void u9e29b0(int*,NvHP);void u734d60(const NvPoint&);void u4647a0(const NvPoint&,int);NvMk*getZone462e30(const NvPoint&);void announceMachine71dd30(int);bool u729de0();NvVecHE3*u4636b0();bool u463400(NvHE);NvHG u463890(int);int u71ac50(NvHE);int u714b50();int u463d40();NvHE placeEntity6c58c0(NvRec*,const NvPos&,int,int,int,int,int);bool u4631f0(NvHE);NvHI u6c5400(NvRecI*,const NvPos&);NvHI u71e7c0(const NvPos&,int,int);bool u463380(int,int);bool findPlaceableNear71c150(NvPos&,NvPos&,int);void u734560(NvHE,int,int);bool isReachable465230(int,const NvPos&,const NvPos&);NvHRec addRecord777a20(NvHRec);void zap7273e0(const NvPoint&,NvHE);void u464750(int);bool isVisible4631c0(const NvPos&);NvHE getEntity463110();NvHI u6c51d0(NvRecI*,NvHE,int,int);bool u72a290(NvPos,int,int);NvHE getPlayer4630f0();void u747400(NvHE,NvHE,int,int);bool u72a4d0(int,NvPos,int,int);int getTurn464270();int u4642d0();};extern NvMap*nv_cefc4c;
 int nv_threshold433260(int);int nv_sum9cdbd0(NvVecI&)throw();int nv_minInt9cdb30(int,int)throw();
@@ -69,7 +69,7 @@ extern NvRange nv_d2a4f4,nv_d1f38c;
 void nv_dummy(int);
 extern const char nv_be65f8[];void nv_logPhrase5141b0b(int,const string*,int,int,NvHE,int);
 struct NvVecHE3{char pad[16];bool empty9b86e0()const throw();unsigned size9b9260()const throw();NvHE&at9b81f0(unsigned)throw();};void nv_eraseAt9da940(NvVecHE3&,int);
-extern NvGVec nv_cf4a04;extern int nv_b989c8[],nv_b989bc[];extern bool nv_b95758[];string nv_intToString4051f0(int);
+extern NvGVec nv_rifLevels_cf4a04;extern int nv_b989c8[],nv_b989bc[];extern bool nv_b95758[];string nv_intToString4051f0(int);
 struct NvVecXG{char pad[16];NvVecXG()throw();};struct NvXGroup{int f0;int f4;NvVecXG v8;NvHE h18;NvXGroup(int);};NvXGroup::NvXGroup(int a):f0(a),f4(-1){}
 struct NvVPos2{char pad[16];void push_back9b3020(NvPos&&);};struct NvAIEnt{int f0;int f4;NvVPos2 v8;};
 struct NvAIL{NvAIEnt*u57f140(NvXGroup*);};struct NvAI2{NvAIL*u4590f0();};
@@ -82,7 +82,7 @@ struct NvRegion;struct NvAI{int u9b8f00();NvHI u4592c0t()throw();NvHI u4592c0();
 struct NvVecHE5;struct NvGroup{NvVecHE5*u416f40();int type9b4350()throw();};struct NvHG{int id;NvHG();NvGroup*operator->()const throw();};
 struct NvVecRP{char pad[16];NvVecRP();~NvVecRP();void push_back9b9d30(NvRec*const&);};
 NvRecI*nv_randomRec9d5d00(NvVRecP*);NvRec*nv_randomRec9d5d00b(NvVecRP*);
-extern const float nv_c36e30,nv_c370a8;extern string nv_d2f798[];
+extern const float nv_c36e30,nv_c370a8;extern string nv_robotClassNames_d2f798[];
 struct NvVecHI{char pad[16];NvVecHI();~NvVecHI();void push_back9b7cf0(const NvHI&);unsigned size9b9260()const throw();NvHI&at9b81f0(unsigned)throw();};void nv_shuffle9d9fc0(NvVecHI&);
 struct NvVecPosL{char pad[16];NvVecPosL();~NvVecPosL();unsigned size9b9a50()const throw();bool empty9b86e0()const throw();NvPos&at9e7c10(unsigned)throw();};
 void nv_appendUnique9d80a0(NvVecPosL&,NvVPt*);bool nv_fn9d3020(NvVecPosL&,NvPoint);int nv_fn6c10f0(const NvPos&);
@@ -115,7 +115,7 @@ struct NvVVMarker{char pad[16];NvVMarker&at9b8070(unsigned)throw();};
 struct NvIntGrid2{int*at9ceda0(int,int)throw();};struct NvS34{char pad[0x10];int f10;char pad14[0x10];int f24;};struct NvS34Grid{NvS34*at9d2c30(int,int)throw();};
 struct NvEntRec{int f0;NvHE h4;};struct NvVEntRec{char pad[16];unsigned size9b9260()const throw();NvEntRec*&at9b81f0(unsigned)throw();};
 struct NvMission{void u987de0();};extern NvMission*nv_cec034;
-extern const int nv_ba0aa0[10][4],nv_ba0b40[4],nv_ba0b50[4];extern int nv_cf4744,nv_caf15c;extern const float nv_ba0a88;extern bool nv_b90480[];extern string nv_cf25d8[],nv_cfaca0[];
+extern const int nv_ba0aa0[10][4],nv_ba0b40[4],nv_ba0b50[4];extern int nv_cf4744,nv_caf15c;extern const float nv_ba0a88;extern bool nv_b90480[];extern string nv_cf25d8[],nv_mapNames_cfaca0[];
 extern const char nv_be6670[],nv_be667c[],nv_be6684[],nv_be66a0[],nv_be66a8[],nv_be66b4[],nv_be66bc[],nv_be66c8[],nv_be66d0[],nv_be66dc[],nv_be66e4[],nv_be66f8[];
 void nv_fn9d0690(int*,int,int);extern const char nv_be6c5c[],nv_be6c68[],nv_be6c70[],nv_be6c7c[];void nv_addUnique9d30e0c(NvVecHI3&,NvHI);extern int nv_cf68b4;extern NvHE nv_cf68b8;struct NvPlan{bool u672dd0(NvHE,int);void u672f20(NvHE,int,int,string);};extern NvPlan*nv_cf68f0;
 struct NvComp{void u7ace20(NvHE);};extern NvComp*nv_cefc14;extern int nv_cefbb8;extern const float nv_c37178,nv_c36ed8;int nv_randomRec9d5d00d(NvVRec*);void nv_deleteObjects9d9bb0(NvVecU2&);extern bool nv_cefaef;extern int nv_cefaf4,nv_cf4b38;
@@ -724,7 +724,7 @@ skipC0:;
 					NvHE z7=nv_cefc4c->placeEntity6c58c0(rec,p,eB,0,0x22,0xe,0);
 					if(z7.isValid9b7230()){
 						z7->u6396a0("Anomaly_Polymorph_Check",0);
-						do{if(nv_show5111e0(0x2f7,&a7,&string(nv_d2f798[z7->getFaction45a2c0()]),0,z7,NvHE(),0,0))nv_cec058->bubble8758d0(1);nv_cec0b4->scrollToEnd7b4f10();}while(0);
+						do{if(nv_show5111e0(0x2f7,&a7,&string(nv_robotClassNames_d2f798[z7->getFaction45a2c0()]),0,z7,NvHE(),0,0))nv_cec058->bubble8758d0(1);nv_cec0b4->scrollToEnd7b4f10();}while(0);
 						int link=0;
 						NvVPt*cells=z7->u45d1a0();
 						for(unsigned k=0;k<cells->size9b9a50();k++){
@@ -891,7 +891,7 @@ skipC0:;
 		i90-=aH;
 		u5ded70(aH);
 	}
-	if(b5&&(nv_cf4a04.at9b81f0(0x10)!=0||nv_cf4a04.at9b81f0(0x11)!=0)){
+	if(b5&&(nv_rifLevels_cf4a04.at9b81f0(0x10)!=0||nv_rifLevels_cf4a04.at9b81f0(0x11)!=0)){
 		NvVecHE3*list=nv_cefc4c->u4636b0();
 		if(!list->empty9b86e0()){
 			for(int i=list->size9b9260()-1;i>=0;i--){
@@ -899,19 +899,19 @@ skipC0:;
 				else if(list->at9b81f0(i)->getGroup45a3f0()->type9b4350()==3&&nv_cefc4c->u463400(list->at9b81f0(i))){
 					NvHE e=list->at9b81f0(i);
 					int g31=0x13;
-					if(nv_cf4a04.at9b81f0(0x11)!=0&&e->u45ac40(0x27)==0&&u5d4490(e)){
+					if(nv_rifLevels_cf4a04.at9b81f0(0x11)!=0&&e->u45ac40(0x27)==0&&u5d4490(e)){
 						e->u45b340(new NvEffPair(nv_d2f0f8.at9b81f0(0x27),1));
 						NvVecHE g45;
 						u5d47c0(e,g45,0);
 						for(unsigned j=0;j<g45.size9b9260();j++){
-							if(::rng.chance406c90(nv_b989c8[nv_cf4a04.at9b81f0(0x11)])){g31=0x11;break;}
+							if(::rng.chance406c90(nv_b989c8[nv_rifLevels_cf4a04.at9b81f0(0x11)])){g31=0x11;break;}
 						}
-					}else if(nv_cf4a04.at9b81f0(0x10)!=0&&e->u45ac40(0x26)==0&&u5d4490(e)){
+					}else if(nv_rifLevels_cf4a04.at9b81f0(0x10)!=0&&e->u45ac40(0x26)==0&&u5d4490(e)){
 						e->u45b340(new NvEffPair(nv_d2f0f8.at9b81f0(0x26),1));
 						NvVecHE g49;
 						u5d47c0(e,g49,0);
 						for(unsigned j=0;j<g49.size9b9260();j++){
-							if(::rng.chance406c90(nv_b989bc[nv_cf4a04.at9b81f0(0x10)])){g31=0x10;break;}
+							if(::rng.chance406c90(nv_b989bc[nv_rifLevels_cf4a04.at9b81f0(0x10)])){g31=0x10;break;}
 						}
 					}
 					if(g31!=0x13){
@@ -1261,7 +1261,7 @@ nextY:;
 							nv_cefc4c->u4647a0(*ok5,1);
 							ok5->bd=1;
 							nv_cec054->labelAccess80e3a0(1,*ok5);
-							string old=nv_cfaca0[ok5->h8->f4]+nv_be66e4;
+							string old=nv_mapNames_cfaca0[ok5->h8->f4]+nv_be66e4;
 							do{if(nv_show5111e0(0x1d6,&string(nv_be66f8),&old,0,NvHE(),NvHE(),0,0))nv_cec058->bubble8758d0(1);nv_cec0b4->scrollToEnd7b4f10();}while(0);
 							break;}
 						}
@@ -2651,7 +2651,7 @@ haveRec:
 							sorted.at9b81f0(rb34)->u44fc60(sorted.at9b81f0(rb34)->u45cb30()+rb38);
 							do{if(nv_show5111e0(0x51,&sorted.at9b81f0(rb34)->getName571db0(0,0),&rb30->getName571db0(0,0),&nv_intToString4051f0(rb38),self,NvHE(),0,0))nv_cec058->bubble8758d0(1);nv_cec0b4->scrollToEnd7b4f10();}while(0);
 							nv_sound4541b0(0xd6,0,0);
-							if(nv_cefb48!=0&&rb30->u457920()>nv_d1e888->u46ed20()&&nv_cefb48!=0)nv_cefb48->say49e250(rb30.eq9b78e0t(nv_cefc4c->getEntity463110t()->ai45b590t()->u4592c0t())?0x1b:0x1c,0,rb30->getName571db0(0,0));
+							if(nv_cefb48!=0&&rb30->u457920()>nv_d1e888->getDepthIndex()&&nv_cefb48!=0)nv_cefb48->say49e250(rb30.eq9b78e0t(nv_cefc4c->getEntity463110t()->ai45b590t()->u4592c0t())?0x1b:0x1c,0,rb30->getName571db0(0,0));
 							int b=0;
 							int a=0;
 							if(rb30->u457ff0()&&rb30->u45cb30()){

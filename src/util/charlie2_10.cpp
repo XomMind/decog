@@ -166,7 +166,7 @@ extern C2YColor c2y_d2cf08[][10];
 extern C2YGameData c2y_d1e860;
 extern C2YOvermind c2y_cf6428;
 extern int c2y_cefb38, c2y_cfb794, c2y_cf4718;
-extern string c2y_d35c40[], c2y_d323f8[], c2y_cfaca0[];
+extern string c2y_d35c40[], c2y_d323f8[], c2y_mapNames_cfaca0[];
 extern C2YColor &c2y_d22e44, &c2y_d1d4d4;
 extern C2YColor *c2y_d2b4f4;
 extern C2YIntVec c2y_cf4830;
@@ -386,7 +386,7 @@ changed:
 						}
 						seen = true;
 					}
-					caption = loc->known ? c2y_cfaca0[loc->type] : string(c2y_c01548);
+					caption = loc->known ? c2y_mapNames_cfaca0[loc->type] : string(c2y_c01548);
 					if (c2y_ba6650[loc->type][c2y_cf4718])
 						caption += c2y_c0154c;
 					else if (zone->kind == 2)

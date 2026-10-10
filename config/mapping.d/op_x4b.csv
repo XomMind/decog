@@ -7,7 +7,7 @@ OpR3e_Conduit::unknown6c1320,0x6c1320,0x73
 OpR3e_Marker::OpR3e_Marker,0x6c13a0,0x9d
 OpX4b_Terrain::unknown6c38a0,0x6c38a0,0x1a7
 MapRecord::opw3_unknown6c1cd0,0x6c1cd0,0x3de
-OpX4b_World::unknown6c5600,0x6c5600,0x2bc
+OpX4b_World::selectRobotOfClass,0x6c5600,0x2bc
 OpX4b_Zone::unknown6c16d0,0x6c16d0,0x33e
 opt4_checkSpawnCondition,0x6c36c0,0x1d9
 OpX4b_unknown6c4600,0x6c4600,0x4bc

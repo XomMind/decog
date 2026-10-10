@@ -14,7 +14,7 @@ bool OpV3h_Map::unknown826920(HEntity player)
 				opV3h_logMsgs->scrollToEnd();
 			}
 			while (0);
-			opV3h_world->unknown774390(3,player->unknown6421a0(false));
+			opV3h_world->playerActionFinish(3,player->unknown6421a0(false));
 			break;
 		case 3:
 			OpV3h_message7b1750(4,0,0,0,player,HProp(),0);
@@ -48,7 +48,7 @@ bool OpV3h_Map::unknown826920(HEntity player)
 						opV3h_logMsgs->scrollToEnd();
 					}
 					while (0);
-					opV3h_world->unknown774390(3,player->unknown6421a0(false));
+					opV3h_world->playerActionFinish(3,player->unknown6421a0(false));
 					break;
 					break;
 				}
@@ -95,7 +95,7 @@ void OpV3h_Map::unknown826e50(HEntity player, bool flagA, bool flagB)
 						opV3h_partswap->open(0,0,item,flagB);
 				}
 			}
-			else if (opV3h_popup != NULL && item.operator->() != NULL && item->unknown457920() > opV3h_gameState->unknown46ed20() && item == opV3h_world->getEntity671()->getAI_45b590()->unknown4592c0() && opV3h_popup != NULL)
+			else if (opV3h_popup != NULL && item.operator->() != NULL && item->unknown457920() > opV3h_gameState->getDepthIndex() && item == opV3h_world->getEntity671()->getAI_45b590()->unknown4592c0() && opV3h_popup != NULL)
 				opV3h_popup->say(0x1a,false,item->getName_571db0(0,0));
 			break;
 		case 3:

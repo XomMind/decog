@@ -132,7 +132,7 @@ class BS
 public:
 	HEntity getPlayer();	// 0x4630f0
 	int getTurn();
-	EntityRecord *unknown6c5600(int a, int b, bool c, bool d);	// NOTE: placeholder name
+	EntityRecord *selectRobotOfClass(int a, int b, bool c, bool d);	// NOTE: placeholder name
 	void unknown715570(int radius, int *a, int *b);	// NOTE: placeholder name
 	int unknown4638e0(int a, int b);	// NOTE: placeholder name
 	bool unknown715a70();				// NOTE: placeholder name
@@ -217,7 +217,7 @@ extern DifficultySettings difficultySettings_b939b0[];	// NOTE: placeholder name
 class GameData46f4b0	// NOTE: placeholder name (0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 	const string &getEntryText(const string &key);	// NOTE: placeholder name (0x46f6d0)
 	bool isFlagEnabledB();	// NOTE: placeholder name
 };
@@ -274,17 +274,17 @@ public:
 	int spawnCargoDispatch_68aba0();
 	bool redirectParty(Party *party, const Point &target, HEntity e);
 	int spawnResponseParty(int type, HEntity target, Point *area, Point *outAccess);
-	bool unknown683500(Point *out, bool allowVisible, int minDistance, bool ignoreProps, const Point &from, Point **access, bool preferProps, bool ignoreUsed);	// NOTE: placeholder name
-	void unknown6827d0(Party *party, Point *access);	// NOTE: placeholder name
+	bool findDispatchExit(Point *out, bool allowVisible, int minDistance, bool ignoreProps, const Point &from, Point **access, bool preferProps, bool ignoreUsed);	// NOTE: placeholder name
+	void addParty(Party *party, Point *access);	// NOTE: placeholder name
 	void unknown681810();	// NOTE: placeholder name
 	void unknown681550();	// NOTE: placeholder name
 	int unknown68a500(bool anywhere, Point *patrol, bool forced);	// NOTE: placeholder name
 	int unknown6892c0(bool anywhere, Point *patrol, bool forced);	// NOTE: placeholder name
 	bool unknown68c960(const Point &target);	// NOTE: placeholder name
-	void spawnSurgicalParty(vector<int> &out, vector<int> &records);
+	void loadZPartList(vector<int> &out, vector<int> &records);	// NOTE: placeholder name (Q-Series surgical utility parts)
 	void unknown683e60(const Point &p, vector<vector<HEntity> > &out);	// NOTE: placeholder name
-	int unknown686490(bool programmer, HEntity target, Point *area);	// NOTE: placeholder name
-	int unknown6868e0(const Point &target);	// NOTE: placeholder name
+	int spawnInterceptParty(bool programmer, HEntity target, Point *area);	// NOTE: placeholder name (party type 9: Trackers or one Combat Programmer)
+	int spawnCouplingParty(const Point &target);	// NOTE: placeholder name (party type 10: Programmer carrying items)
 	void loadZWeaponList(vector<int> &out, int level);
 	int unknown68bc80(int exitIndex, int type, const Point &target);	// NOTE: placeholder name
 	int unknown686c60(const Point &target, int num, int recType, int recClass);	// NOTE: placeholder name
@@ -298,7 +298,7 @@ public:
 	char pad[0x4c];
 	int unknown4c;		// NOTE: placeholder name
 	char pad50[0x84 - 0x50];
-	int unknown84;		// NOTE: placeholder name
+	int extraTrackers;		// NOTE: placeholder name
 	char pad88[0x90 - 0x88];
 	struct SurgicalSettings *surgical;	// +0x90, NOTE: placeholder name
 	char pad94[0xbc - 0x94];
@@ -308,7 +308,7 @@ public:
 	int unknownd0;		// NOTE: placeholder name
 	char padd4[0x118 - 0xd4];
 	vector<Point> usedExits;	// +0x118, NOTE: placeholder name
-	int unknown128;		// NOTE: placeholder name
+	int failedDispatches;	// NOTE: placeholder name
 };
 
 bool Overmind::spawnAntiInfestationCarrier(const Point &target, const string &message)
@@ -316,7 +316,7 @@ bool Overmind::spawnAntiInfestationCarrier(const Point &target, const string &me
 	EntityRecord *level = record_cefc08;
 	Point pos;
 	Point *index = NULL;
-	if (!unknown683500(&pos,1,0,1,world->getPlayer()->getPosition(),&index,0,0))
+	if (!findDispatchExit(&pos,1,0,1,world->getPlayer()->getPosition(),&index,0,0))
 	{
 		logWarning("Overmind::spawnAntiInfestationCarrier()","No valid access point for spawning assault party");
 		return false;
@@ -330,7 +330,7 @@ bool Overmind::spawnAntiInfestationCarrier(const Point &target, const string &me
 	current->getAI()->unknown459470(room);
 	if (!message.empty())
 		OPD_ALERT(0x129,message);
-	unknown6827d0(new Party(7,current,-1,0,0),index);
+	addParty(new Party(7,current,-1,0,0),index);
 	return true;
 }
 
@@ -427,7 +427,7 @@ void Overmind::unknown681810()
 
 bool Overmind::findCargoDispatchTarget(const Point &from, Point *out)
 {
-	bool checkProps = unknownbc == 0 || rng.chance(difficultySettings_b939b0[gameData_d1e860.unknown46f4e0()].cargoChance);
+	bool checkProps = unknownbc == 0 || rng.chance(difficultySettings_b939b0[gameData_d1e860.getDepthIndex()].cargoChance);
 	if (checkProps)
 	{
 		int bestIndex = -1;
@@ -472,7 +472,7 @@ bool Overmind::findCargoDispatchTarget(const Point &from, Point *out)
 int Overmind::spawnCargoDispatch_68aba0()
 {
 	Point *loc = NULL;
-	if (!unknown683500(&unknownc0,1,0x1e,0,Point(-1),&loc,0,0))
+	if (!findDispatchExit(&unknownc0,1,0x1e,0,Point(-1),&loc,0,0))
 	{
 		logWarning("Overmind::spawnCargoDispatch()","No valid access point for spawning");
 		return 0;
@@ -484,11 +484,11 @@ int Overmind::spawnCargoDispatch_68aba0()
 		rolledValues_cefb48->say(0x30,false,"");
 	int num = 0;
 	HEntity entity;
-	int value = difficultySettings_b939b0[gameData_d1e860.unknown46f4e0()].cargoCount;
+	int value = difficultySettings_b939b0[gameData_d1e860.getDepthIndex()].cargoCount;
 	EntityRecord *rec;
 	if (value)
 	{
-		rec = world->unknown6c5600(1,0xd,false,false);
+		rec = world->selectRobotOfClass(1,0xd,false,false);
 		if (rec)
 		{
 			for (int i = 0; i < value; i++)
@@ -570,14 +570,14 @@ int Overmind::spawnResponseParty(int type, HEntity target, Point *area, Point *o
 	pool.push_back(rec);
 	Point pos;
 	Point *loc = NULL;
-	if (!unknown683500(&pos,1,0,1,world->getPlayer()->getPosition(),&loc,1,0))
+	if (!findDispatchExit(&pos,1,0,1,world->getPlayer()->getPosition(),&loc,1,0))
 	{
 		logWarning("Overmind::spawnResponseParty()","No valid access point for spawning");
-		unknown128++;
+		failedDispatches++;
 		return 0;
 	}
 	else
-		OpV4c_Fn9d0690(&unknown128,1,0);
+		OpV4c_Fn9d0690(&failedDispatches,1,0);
 	int count = 0;
 	HEntity leader = world->placeEntity(pool.front(),pos,3,false,0x22,0xe,false);
 	if (leader.isValid())
@@ -599,7 +599,7 @@ int Overmind::spawnResponseParty(int type, HEntity target, Point *area, Point *o
 			member->getAI()->setFollowEntity(leader,0);
 			count++;
 		}
-		unknown6827d0(new Party(type,leader,-1,0,0),loc);
+		addParty(new Party(type,leader,-1,0,0),loc);
 	}
 	if (count && outAccess && loc)
 		*outAccess = *loc;
@@ -647,7 +647,7 @@ public:
 };
 extern PlayerData81b70 playerData_cf45d8;	// NOTE: placeholder name
 
-extern vector<int> flags_cf4a04;		// NOTE: placeholder name
+extern vector<int> rifLevels_cf4a04;		// NOTE: placeholder name
 extern float rewards_b91998[];	// NOTE: placeholder name
 extern float multiplier_b919a0;	// NOTE: placeholder name
 extern float multiplier_b919a8;	// NOTE: placeholder name
@@ -665,7 +665,7 @@ void Overmind::unknown681b70(HEntity killed, HEntity killer)
 			int type = killed->getGroup()->unknown9c3a90();
 			if (type == 3 || type == 4)
 			{
-				if (flags_cf4a04[0xd] && (killer->getAiType() == 1 || killer->getAiType() == 2) && world->getPlayer()->unknown5d4490(killer))
+				if (rifLevels_cf4a04[0xd] && (killer->getAiType() == 1 || killer->getAiType() == 2) && world->getPlayer()->unknown5d4490(killer))
 					stats_d2c658.add4729d0(0x23f,1,"",-1);
 				else
 				{
@@ -711,16 +711,16 @@ int Overmind::unknown68b9a0(vector<Point> &targets, bool repeat)
 {
 	if (targets.empty())
 		return 0;
-	EntityRecord *rec = world->unknown6c5600(1,3,false,false);
+	EntityRecord *rec = world->selectRobotOfClass(1,3,false,false);
 	if (!rec)
 		return 0;
-	EntityRecord *current = world->unknown6c5600(1,0x10,false,false);
+	EntityRecord *current = world->selectRobotOfClass(1,0x10,false,false);
 	int total = 0;
 	Point pos;
 	Point *loc = NULL;
 	for (int i = 0; i < 4; i++)
 	{
-		if (unknown683500(&pos,1,0,1,world->getPlayer()->getPosition(),&loc,0,0))
+		if (findDispatchExit(&pos,1,0,1,world->getPlayer()->getPosition(),&loc,0,0))
 		{
 			HEntity leader = world->placeEntity(rec,pos,4,false,0x22,0xe,false);
 			Area area;
@@ -808,10 +808,10 @@ int Overmind::unknown68a500(bool anywhere, Point *patrol, bool forced)
 	{
 		OpR5h_WL<int> weights;
 		for (int i = 0; i < 2; i++)
-			weights.add(i,spawnWeights_b92500[gameData_d1e860.unknown46f4e0()][i]);
+			weights.add(i,spawnWeights_b92500[gameData_d1e860.getDepthIndex()][i]);
 		weights.pick(&kind);
 	}
-	EntityRecord *current = world->unknown6c5600(1,4,false,false);
+	EntityRecord *current = world->selectRobotOfClass(1,4,false,false);
 	if (!current)
 		return 0;
 	int total = 0;
@@ -819,7 +819,7 @@ int Overmind::unknown68a500(bool anywhere, Point *patrol, bool forced)
 	Point *loc = NULL;
 	bool success = false;
 	if (!anywhere)
-		success = unknown683500(&pos,0,0,0,Point(-1),&loc,0,0);
+		success = findDispatchExit(&pos,0,0,0,Point(-1),&loc,0,0);
 	else
 	{
 		for (int j = 0; j < 100; j++)
@@ -849,7 +849,7 @@ int Overmind::unknown68a500(bool anywhere, Point *patrol, bool forced)
 					{
 						if (gameState_d1e888->unknown4 != 2)
 							leader->getAI()->setUnknown451400(1);
-						EntityRecord *rec = world->unknown6c5600(1,0x10,false,false);
+						EntityRecord *rec = world->selectRobotOfClass(1,0x10,false,false);
 						if (!rec)
 						{
 						}
@@ -867,7 +867,7 @@ int Overmind::unknown68a500(bool anywhere, Point *patrol, bool forced)
 							}
 						}
 					}
-					overmind_cf6428.unknown6827d0(new Party(3,leader,-1,0,0),loc);
+					overmind_cf6428.addParty(new Party(3,leader,-1,0,0),loc);
 					if (gameMode_cf462c != 2)
 						unknown6901e0(leader,kind == 1,range_cfd300.randomInRange_40c130(),range_d33bd8.randomInRange_40c130(),Point(-1),0,0x2a);
 				}
@@ -888,14 +888,14 @@ int Overmind::unknown6892c0(bool anywhere, Point *patrol, bool forced)
 	{
 		OpR5h_WL<int> weights;
 		for (int i = 0; i < 2; i++)
-			weights.add(i,spawnWeights_b91e30[gameData_d1e860.unknown46f4e0()][i]);
+			weights.add(i,spawnWeights_b91e30[gameData_d1e860.getDepthIndex()][i]);
 		weights.pick(&kind);
 	}
 	EntityRecord *source = NULL;
 	switch (kind)
 	{
 		case 0:
-			source = world->unknown6c5600(1,0xc,false,false);
+			source = world->selectRobotOfClass(1,0xc,false,false);
 			break;
 		case 1:
 			OpQ5_findByName(entityRecords_d25de0,"N-01 Spotter",source);
@@ -908,7 +908,7 @@ int Overmind::unknown6892c0(bool anywhere, Point *patrol, bool forced)
 	Point *loc = NULL;
 	bool found = false;
 	if (!anywhere)
-		found = unknown683500(&pos,1,0,1,Point(-1),&loc,0,0);
+		found = findDispatchExit(&pos,1,0,1,Point(-1),&loc,0,0);
 	else
 	{
 		for (int j = 0; j < 100; j++)
@@ -933,7 +933,7 @@ int Overmind::unknown6892c0(bool anywhere, Point *patrol, bool forced)
 					total++;
 					if (patrol)
 						leader->getAI()->setPatrolRandom(*patrol);
-					overmind_cf6428.unknown6827d0(new Party(1,leader,-1,0,0),loc);
+					overmind_cf6428.addParty(new Party(1,leader,-1,0,0),loc);
 				}
 				break;
 			case 1:
@@ -943,7 +943,7 @@ int Overmind::unknown6892c0(bool anywhere, Point *patrol, bool forced)
 					total++;
 					if (patrol)
 						leader->getAI()->setPatrolRandom(*patrol);
-					overmind_cf6428.unknown6827d0(new Party(1,leader,-1,0,0),loc);
+					overmind_cf6428.addParty(new Party(1,leader,-1,0,0),loc);
 				}
 				break;
 		}
@@ -1080,7 +1080,7 @@ int OpU8a_indexOfName(vector<PartRecord24 *> &list, const string &name);	// NOTE
 void opT3_f6854b0(vector<int> &list, int key);	// NOTE: placeholder name
 bool OpT8b_Fn9daf80(int low, int value, int high);	// NOTE: placeholder name (in range)
 
-void Overmind::spawnSurgicalParty(vector<int> &out, vector<int> &records)
+void Overmind::loadZPartList(vector<int> &out, vector<int> &records)
 {
 	if (surgical->unknowne)
 		opT3_f6854b0(out,10);
@@ -1259,7 +1259,7 @@ public:
 };
 extern PlayerData26 playerData26_cf45d8;	// NOTE: placeholder name
 int stringToInt(const string &s);	// NOTE: placeholder name (0x405610)
-extern Point ranges_d387d8[];	// NOTE: placeholder name
+extern Point trackerCounts_d387d8[];	// NOTE: placeholder name
 
 struct TrackerChance	// NOTE: placeholder name (12-byte records at 0xb938c0)
 {
@@ -1268,26 +1268,26 @@ struct TrackerChance	// NOTE: placeholder name (12-byte records at 0xb938c0)
 };
 extern TrackerChance trackerChances_b938c0[];	// NOTE: placeholder name
 
-int Overmind::unknown686490(bool programmer, HEntity target, Point *area)
+int Overmind::spawnInterceptParty(bool programmer, HEntity target, Point *area)
 {
 	if (stringToInt(gameData_d1e860.getEntryText("comConduitDisabled_g")) || unknown4c || world->unknown4638e0(0,3) == 2)
 		return 0;
 	EntityRecord *source;
 	OpQ5_findByName(entityRecords_d25de0,programmer ? "Combat Programmer" : "Tracker",source);
-	int count = programmer ? 1 : ranges_d387d8[gameData_d1e860.unknown46f4e0()].randomInRange_40c130() + unknown84;
-	if (!programmer && rng.chance(trackerChances_b938c0[gameData_d1e860.unknown46f4e0()].chance))
-		unknown84++;
+	int count = programmer ? 1 : trackerCounts_d387d8[gameData_d1e860.getDepthIndex()].randomInRange_40c130() + extraTrackers;
+	if (!programmer && rng.chance(trackerChances_b938c0[gameData_d1e860.getDepthIndex()].chance))
+		extraTrackers++;
 	if (!source)
 		return 0;
 	Point pos;
 	Point *loc = NULL;
-	if (!unknown683500(&pos,1,0,1,Point(-1),&loc,0,0))
+	if (!findDispatchExit(&pos,1,0,1,Point(-1),&loc,0,0))
 	{
-		unknown128++;
+		failedDispatches++;
 		return 0;
 	}
 	else
-		OpV4c_Fn9d0690(&unknown128,1,0);
+		OpV4c_Fn9d0690(&failedDispatches,1,0);
 	int total = 0;
 	while (count)
 	{
@@ -1310,7 +1310,7 @@ int Overmind::unknown686490(bool programmer, HEntity target, Point *area)
 			}
 			else
 				e->getAI()->unknown5b4710(target,-1,0,0,0);
-			unknown6827d0(new Party(9,e,-1,0,0),loc);
+			addParty(new Party(9,e,-1,0,0),loc);
 		}
 	}
 	return total;
@@ -1322,24 +1322,24 @@ public:
 	int unknown789250(int value);	// NOTE: placeholder name
 };
 extern GameData27 gameData27_d1e860;	// NOTE: placeholder name
-extern Point ranges_cf0c90[];		// NOTE: placeholder name
+extern Point couplingSizes_cf0c90[];		// NOTE: placeholder name
 extern Point range_d2f130;			// NOTE: placeholder name
 extern float multiplier_ba780c;		// NOTE: placeholder name
 extern float multipliers_ba65d8[];	// NOTE: placeholder name
 extern OpR5h_WL<ItemType27 *> itemWeights_d2ae08;	// NOTE: placeholder name
 
-int Overmind::unknown6868e0(const Point &target)
+int Overmind::spawnCouplingParty(const Point &target)
 {
 	if (stringToInt(gameData_d1e860.getEntryText("comConduitDisabled_g")) || unknown4c || world->unknown4638e0(0,3) == 2)
 		return 0;
-	EntityRecord *current = world->unknown6c5600(1,0x19,true,false);
+	EntityRecord *current = world->selectRobotOfClass(1,0x19,true,false);
 	EntityRecord *closest = NULL;
 	if (!closest)
 		closest = current;
-	int num = ranges_cf0c90[gameData_d1e860.unknown46f4e0()].randomInRange_40c130() - 1;
+	int num = couplingSizes_cf0c90[gameData_d1e860.getDepthIndex()].randomInRange_40c130() - 1;
 	Point pos;
 	Point *loc = NULL;
-	if (!unknown683500(&pos,1,0,1,Point(-1),&loc,0,0))
+	if (!findDispatchExit(&pos,1,0,1,Point(-1),&loc,0,0))
 		return 0;
 	int total = 0;
 	HEntity leader = world->placeEntity(current,pos,3,false,0x13,0xe,false);
@@ -1366,7 +1366,7 @@ int Overmind::unknown6868e0(const Point &target)
 			num--;
 			total++;
 		}
-		unknown6827d0(new Party(10,leader,-1,0,0),loc);
+		addParty(new Party(10,leader,-1,0,0),loc);
 	}
 	return total;
 }
@@ -1472,20 +1472,20 @@ int Overmind::unknown68bc80(int exitIndex, int type, const Point &target)
 	switch (type)
 	{
 		case 0:
-			source = world->unknown6c5600(1,0x15,false,false);
+			source = world->selectRobotOfClass(1,0x15,false,false);
 			if (!source)
-				source = world->unknown6c5600(1,0x10,false,false);
+				source = world->selectRobotOfClass(1,0x10,false,false);
 			current.push_back(source);
 			break;
 		case 1:
 			if (rng.chance(50))
 			{
-				source = world->unknown6c5600(1,0x15,false,false);
+				source = world->selectRobotOfClass(1,0x15,false,false);
 				current.push_back(source);
 			}
 			if (!source)
 			{
-				source = world->unknown6c5600(1,0x10,false,false);
+				source = world->selectRobotOfClass(1,0x10,false,false);
 				current.assign(2,source);
 			}
 			break;
@@ -1501,32 +1501,32 @@ int Overmind::unknown68bc80(int exitIndex, int type, const Point &target)
 				{
 					case 0:
 					case 1:
-						source = world->unknown6c5600(1,0x15,false,false);
+						source = world->selectRobotOfClass(1,0x15,false,false);
 						if (source)
 							current.assign((pick != 0) + 1,source);
 						break;
 					case 2:
 					case 3:
-						source = world->unknown6c5600(1,0x10,false,false);
+						source = world->selectRobotOfClass(1,0x10,false,false);
 						if (source)
 							current.assign((pick != 2) + 1,source);
 						break;
 					case 4:
-						source = world->unknown6c5600(1,0x11,false,false);
+						source = world->selectRobotOfClass(1,0x11,false,false);
 						if (source)
 							current.push_back(source);
-						source = world->unknown6c5600(1,0x12,false,false);
+						source = world->selectRobotOfClass(1,0x12,false,false);
 						if (source)
 							current.push_back(source);
 						break;
 					case 5:
 					case 6:
-						source = world->unknown6c5600(1,0xd,false,false);
+						source = world->selectRobotOfClass(1,0xd,false,false);
 						if (source)
 							current.assign((pick != 5) + 2,source);
 						break;
 					case 7:
-						source = world->unknown6c5600(1,0x16,false,false);
+						source = world->selectRobotOfClass(1,0x16,false,false);
 						if (source)
 							current.push_back(source);
 						break;
@@ -1562,7 +1562,7 @@ int Overmind::unknown68bc80(int exitIndex, int type, const Point &target)
 			do { if (logMessageAt_5111e0(0x1cd,0,0,0,member,HProp(),member->getPosition(),0)) consoleA_cec058->unknown8758d0(true); logMsgs_cec0b4->scrollToEnd(); } while (0);
 			count++;
 		}
-		unknown6827d0(new Party(8,leader,world->getTurn() + range_d30350.randomInRange_40c130(),0,0),node);
+		addParty(new Party(8,leader,world->getTurn() + range_d30350.randomInRange_40c130(),0,0),node);
 	}
 	stats29_d2c658.add4729d0(0x231,1,"",-1);
 	stats29_d2c658.add4729d0(0x236,1,"",-1);
@@ -1593,26 +1593,26 @@ int Overmind::unknown686c60(const Point &target, int num, int recType, int recCl
 		unknown683e60(target,targets);
 	OpR5h_WL<int> weight;
 	for (int i = 0; i < 2; i++)
-		weight.add(i,weights_b93c60[gameData_d1e860.unknown46f4e0()][i]);
+		weight.add(i,weights_b93c60[gameData_d1e860.getDepthIndex()][i]);
 	int mode;
 	weight.pick(&mode);
-	int entityCount = num == -1 ? ranges_cf1400[gameData_d1e860.unknown46f4e0()][mode].randomInRange_40c130() - 1 : num - 1;
+	int entityCount = num == -1 ? ranges_cf1400[gameData_d1e860.getDepthIndex()][mode].randomInRange_40c130() - 1 : num - 1;
 	EntityRecord30 *current;
 	EntityRecord30 *element;
 	switch (mode)
 	{
 		case 0:
-			current = (EntityRecord30 *)world->unknown6c5600(1,0x10,false,false);
+			current = (EntityRecord30 *)world->selectRobotOfClass(1,0x10,false,false);
 			element = NULL;
 			break;
 		case 1:
-			current = (EntityRecord30 *)world->unknown6c5600(1,0x18,false,false);
+			current = (EntityRecord30 *)world->selectRobotOfClass(1,0x18,false,false);
 			element = NULL;
 			break;
 	}
 	if (recType != 0x61)
 	{
-		current = (EntityRecord30 *)world->unknown6c5600(1,recType,false,false);
+		current = (EntityRecord30 *)world->selectRobotOfClass(1,recType,false,false);
 		element = NULL;
 	}
 	else if (recClass != 0x7a)
@@ -1632,13 +1632,13 @@ int Overmind::unknown686c60(const Point &target, int num, int recType, int recCl
 		element = current;
 	Point pos;
 	Point *loc = NULL;
-	if (!active && !unknown683500(&pos,1,0,1,world->getPlayer()->getPosition(),&loc,0,0))
+	if (!active && !findDispatchExit(&pos,1,0,1,world->getPlayer()->getPosition(),&loc,0,0))
 	{
-		unknown128++;
+		failedDispatches++;
 		return 0;
 	}
 	else
-		OpV4c_Fn9d0690(&unknown128,1,0);
+		OpV4c_Fn9d0690(&failedDispatches,1,0);
 	vector<HEntity> group;
 	HEntity parent;
 	if (active)
@@ -1678,15 +1678,15 @@ int Overmind::unknown686c60(const Point &target, int num, int recType, int recCl
 			entityCount--;
 			group.push_back(member);
 		}
-		unknown6827d0(new Party(6,parent,-1,0,0),loc);
+		addParty(new Party(6,parent,-1,0,0),loc);
 		stats29_d2c658.add4729d0(0x231,1,"",-1);
 		stats29_d2c658.add4729d0(0x234,1,"",-1);
 		if (recType == 0x17 && flag_d1eb68 && gameData_d1e860.isFlagEnabledB() && rng.chance(25))
 		{
 			string name;
-			if (gameData_d1e860.unknown46f4e0() >= 8)
+			if (gameData_d1e860.getDepthIndex() >= 8)
 				name = "Infiltrator_8";
-			else if (gameData_d1e860.unknown46f4e0() == 7)
+			else if (gameData_d1e860.getDepthIndex() == 7)
 				name = "Infiltrator_7";
 			else
 				name = "Infiltrator_6";
@@ -1716,7 +1716,7 @@ void OpT8a_eraseAtMapExit(vector<MapExit *> &v, unsigned int &i);	// NOTE: place
 template <class T> void OpQ5_moveElement(vector<T> &v, unsigned int from, unsigned int to);	// NOTE: placeholder name
 template <class T> void OpS8c_shuffle(vector<T> &v);	// NOTE: placeholder name
 
-bool Overmind::unknown683500(Point *out, bool allowVisible, int minDistance, bool ignoreProps, const Point &from, Point **access, bool preferProps, bool ignoreUsed)
+bool Overmind::findDispatchExit(Point *out, bool allowVisible, int minDistance, bool ignoreProps, const Point &from, Point **access, bool preferProps, bool ignoreUsed)
 {
 	vector<MapExit *> candidates;
 	bool alive = false;
@@ -1737,7 +1737,7 @@ bool Overmind::unknown683500(Point *out, bool allowVisible, int minDistance, boo
 	if (candidates.empty())
 	{
 		if (allowVisible || minDistance || (!ignoreUsed && !usedExits.empty()))
-			return unknown683500(out,false,0,ignoreProps,from,access,preferProps,true);
+			return findDispatchExit(out,false,0,ignoreProps,from,access,preferProps,true);
 		else
 			return false;
 	}

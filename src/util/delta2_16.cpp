@@ -86,7 +86,7 @@ public:
 struct D2sCheck { bool test_45e380(); };	// NOTE: placeholder name
 class D2sHCheck { public: int ID; D2sCheck *operator->() const; };	// NOTE: placeholder name (0x9b7250)
 
-struct D2sOwner { int f0; int f4; int f8; char padc[0x26 - 0xc]; bool b26; int unknown46ed20(); bool inRange_46ecb0(); };	// NOTE: placeholder layout
+struct D2sOwner { int f0; int f4; int f8; char padc[0x26 - 0xc]; bool b26; int getDepthIndex(); bool inRange_46ecb0(); };	// NOTE: placeholder layout
 class D2sHOwner { public: int ID; D2sOwner *operator->() const; bool operator!=(D2sHEntity other) const; };	// NOTE: placeholder name (0x9b7910)
 struct D2sAccess { Pos pos; D2sHOwner owner; bool b0c; bool b0d; bool unknown6c1a10(); };	// NOTE: placeholder layout
 struct D2sMarker { char pad0[8]; Pos pos; char pad10[4]; int f14; void unknown6c20b0(int layer, const Pos &pos, int value); };	// NOTE: placeholder layout
@@ -145,7 +145,7 @@ extern vector<D2sRec4 *> d2s_d35b58;
 extern vector<int> d2s_cf4888;
 extern vector<int> d2s_cf4844;
 extern vector<int> d2s_cf4910;
-extern string d2s_d2f798[];
+extern string d2s_robotClassNames_d2f798[];
 extern string d2s_d2d578;
 
 extern D2sHOwner d2s_d1e888;
@@ -253,7 +253,7 @@ extern D2sGrid d2s_cfd44c;
 struct D2sGuard { int faction; D2sHEntity entity; bool test_45e820(); };	// NOTE: placeholder layout
 extern vector<D2sGuard *> d2s_cf6478;
 extern vector<vector<D2sHProp> > d2s_d20248;
-extern string d2s_cfaca0[];
+extern string d2s_mapNames_cfaca0[];
 extern vector<int> d2s_d1ddbc;
 extern int d2s_d38624;
 extern int d2s_d38628;
@@ -581,7 +581,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 					index = OpS8d_findNameNoCase4((vector<OpS8d_Rec4 *> &)d2s_d25de0, name);
 					if (index == -1)
 					{
-						int id = OpQ1_findStringNoCase(d2s_d2f798, 0x61, name);
+						int id = OpQ1_findStringNoCase(d2s_robotClassNames_d2f798, 0x61, name);
 						if (id != -1)
 						{
 							bool found = false;
@@ -677,7 +677,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 				}
 				if (index == -1)
 				{
-					int id = OpQ1_findStringNoCase(d2s_d2f798, 0x61, name);
+					int id = OpQ1_findStringNoCase(d2s_robotClassNames_d2f798, 0x61, name);
 					if (id != -1)
 					{
 						bool found = false;
@@ -963,7 +963,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 						int value = 130;
 						text += "[ Establishing connection... ]";
 						bool blocked = false;
-						int faction = d2s_d1e888->unknown46ed20();
+						int faction = d2s_d1e888->getDepthIndex();
 						if (d2s_d1dd48[faction] || d2s_cefc4c->unknown463890(2, 10)->test_45e380())
 						{
 							text += "\n[ Loyalty in question, dispatches revoked. ]";
@@ -1022,7 +1022,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 								{
 									text += "\n[ Squads on standby: ]";
 									for (unsigned int i = 0; i < d2s_d1dd90.size(); i++)
-										text += "\n  [ " + intToString(i + 1) + " : " + (d2s_d1dd90[i]->name.empty() ? (d2s_d1dd90[i]->type == 7 ? d2s_d25de0[d2s_d1dd58[d2s_d1e888->unknown46ed20()]]->f1ac + "/" + d2s_d29bbc : d2s_d29af8[d2s_d1dd90[i]->type]) : d2s_d1dd90[i]->name + "/" + d2s_d29af8[d2s_d1dd90[i]->type] + "(" + intToString(d2s_d1dd90[i]->f20) + ")") + " ]";
+										text += "\n  [ " + intToString(i + 1) + " : " + (d2s_d1dd90[i]->name.empty() ? (d2s_d1dd90[i]->type == 7 ? d2s_d25de0[d2s_d1dd58[d2s_d1e888->getDepthIndex()]]->f1ac + "/" + d2s_d29bbc : d2s_d29af8[d2s_d1dd90[i]->type]) : d2s_d1dd90[i]->name + "/" + d2s_d29af8[d2s_d1dd90[i]->type] + "(" + intToString(d2s_d1dd90[i]->f20) + ")") + " ]";
 								}
 								for (int i = 1, j = 0; i <= 6; i++, j++)
 									d2s_d1e920[i] = j < d2s_d1dd90.size();
@@ -1043,7 +1043,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 					case 4:
 					case 5:
 					case 6:
-						if (d2s_d1dd48[d2s_d1e888->unknown46ed20()])
+						if (d2s_d1dd48[d2s_d1e888->getDepthIndex()])
 						{
 							string text = "\n[ Loyalty in question, dispatches revoked. ]";
 							text += "\n[ Suggest relying on intel support... ]";
@@ -1162,7 +1162,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 							else
 							{
 								vector<Pos> points;
-								text += "\n[ Confirmed " + intToString(count) + "x main access to " + d2s_cfaca0[type] + "... ]";
+								text += "\n[ Confirmed " + intToString(count) + "x main access to " + d2s_mapNames_cfaca0[type] + "... ]";
 								for (unsigned int i = 0; i < vec->size(); i++)
 								{
 									if ((*vec)[i]->owner->inRange_46ecb0())
@@ -1201,7 +1201,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 								{
 									if ((*vec)[i]->unknown6c1a10())
 									{
-										text += "\n  [ " + OpQ1_pointToString((*vec)[i]->pos) + " " + d2s_cfaca0[(*vec)[i]->owner->f4] + " ]";
+										text += "\n  [ " + OpQ1_pointToString((*vec)[i]->pos) + " " + d2s_mapNames_cfaca0[(*vec)[i]->owner->f4] + " ]";
 										d2s_cefc4c->announceMachine_71dd30((*vec)[i]->owner);
 										d2s_cefc4c->unknown4647a0((*vec)[i]->pos, 1);
 										(*vec)[i]->b0d = true;
@@ -1400,7 +1400,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 						}
 						case 9:
 						{
-							int faction = d2s_d1e888->unknown46ed20();
+							int faction = d2s_d1e888->getDepthIndex();
 							vector<int> pool;
 							for (int i = 0; i < d2s_d25de0.size(); i++)
 							{
@@ -1507,7 +1507,7 @@ void delta2_shellCommand_900920(bool cancelled)	// NOTE: placeholder name
 								text += "\n[ Confirmed " + intToString(nodes.size()) + "x " + (nodes.size() == 1 ? "sector... ]" : "sectors... ]");
 								for (unsigned int i = 0; i < nodes.size(); i++)
 								{
-									text += "\n  [ " + d2s_cfaca0[nodes[i]->f4] + " ]";
+									text += "\n  [ " + d2s_mapNames_cfaca0[nodes[i]->f4] + " ]";
 									nodes[i]->b26 = true;
 									d2s_d2c658.add4729d0(0x405, 1, "", -1);
 								}

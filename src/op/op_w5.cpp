@@ -1398,7 +1398,7 @@ public:
 };
 extern OpW5_HSaveInfo opW5_saveInfo;	// NOTE: placeholder name (0xcf4618)
 extern int opW5_saveTurn;	// NOTE: placeholder name (0xcf461c)
-extern string gameStrings_cfaca0[];	// NOTE: placeholder name
+extern string mapNames_cfaca0[];	// NOTE: placeholder name
 extern string gameStrings_d2b480[];	// NOTE: placeholder name
 extern string gameStrings_d1daa8[];	// NOTE: placeholder name
 
@@ -1436,7 +1436,7 @@ CGamemenuSaveloadButton::CGamemenuSaveloadButton(XConsole *parent, int y, int ty
 	{
 		if (hasSave)
 		{
-			text = "-" + intToString(opW5_saveInfo->depth) + "/" + (opW5_saveInfo->known ? gameStrings_cfaca0[opW5_saveInfo->location] : "???");
+			text = "-" + intToString(opW5_saveInfo->depth) + "/" + (opW5_saveInfo->known ? mapNames_cfaca0[opW5_saveInfo->location] : "???");
 			text += ", turn " + intToString(opW5_saveTurn);
 		}
 		else

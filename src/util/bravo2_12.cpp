@@ -23,7 +23,7 @@ struct BV13Grid {BV13Cell **atPoint(const BV13Point&);};extern BV13Grid bv13_cel
 struct BV13ItemType {int id;char pad4[0x24-4];string name;char pad40[0x50-0x40];int rating;char pad54[0x204-0x54];int count;};
 struct BV13Record {char pad[0x68];int value;char pad6c[0x9c-0x6c];int size;char pada0[0xe4-0xa0];int count;char pade8[0x1ac-0xe8];string name;};
 struct BV13MapView {void removeMarker(const BV13Point&);void unknown49ada0(int);};extern BV13MapView *bv13_mapView_cec054;
-struct BV13World {bool unknown71bde0(const BV13Point&,BV13Point&);BV13Record *unknown6c5600(int,int,bool,bool);void unknown7142a0(vector<BV13Spot>&);void unknown714340(vector<BV13Spot>&);BV13HE placeEntity(BV13Record*,const BV13Point&,int,bool,int,int,bool);vector<vector<BV13HP> > &unknown463be0();bool isVisible(const BV13Point&);void opw3_unknown729eb0(const BV13Point&,const string&,int,int);void opw3_unknown72a1e0(const BV13Point&,int);void opw3_unknown726c30(BV13HP,int);bool findPlaceableNear(const BV13Point&,BV13Point&,int);BV13HE getPlayer();bool unknown6c65a0(BV13HE,const string&,bool);};
+struct BV13World {bool unknown71bde0(const BV13Point&,BV13Point&);BV13Record *selectRobotOfClass(int,int,bool,bool);void unknown7142a0(vector<BV13Spot>&);void unknown714340(vector<BV13Spot>&);BV13HE placeEntity(BV13Record*,const BV13Point&,int,bool,int,int,bool);vector<vector<BV13HP> > &unknown463be0();bool isVisible(const BV13Point&);void opw3_unknown729eb0(const BV13Point&,const string&,int,int);void opw3_unknown72a1e0(const BV13Point&,int);void opw3_unknown726c30(BV13HP,int);bool findPlaceableNear(const BV13Point&,BV13Point&,int);BV13HE getPlayer();bool unknown6c65a0(BV13HE,const string&,bool);};
 extern BV13World *bv13_world_cefc4c;
 struct BV13Factory {BV13HI createD(BV13ItemType*);};extern BV13Factory *bv13_factory_cefaa8;
 bool bv13_show_5111e0(int,const string*,const string*,int,BV13HE,BV13HE,const BV13Point*,bool);
@@ -95,7 +95,7 @@ bool BV13Operation::complete_65a260(bool flag) {
      if(!made[j].get())
       BV13_eraseStep(made,j);
     if(!hacked&&!made.empty()) {
-     BV13Record *rec=bv13_world_cefc4c->unknown6c5600(1,4,false,true);
+     BV13Record *rec=bv13_world_cefc4c->selectRobotOfClass(1,4,false,true);
      if(rec) {
       vector<BV13Spot> spots;
       bv13_world_cefc4c->unknown7142a0(spots);
@@ -242,7 +242,7 @@ bool BV13Operation::complete_65a260(bool flag) {
    }
   (*bv13_cells_cfd44c.atPoint(branch))->getProp()->unknown45ce10(1,0,1,BV13HE());
   (*bv13_cells_cfd44c.atPoint(branch))->unknown66b690(bv13_randomOf(bv13_flag_d28d30?bv13_tableA_ba6a28:bv13_tableB_ba69e0,0x11),bv13_d1f32c);
-  BV13Record *elem=bv13_world_cefc4c->unknown6c5600(3,visible?0x2e:0x2f,false,true);
+  BV13Record *elem=bv13_world_cefc4c->selectRobotOfClass(3,visible?0x2e:0x2f,false,true);
   int count=visible?5:1;
   vector<BV13HE> hits;
   BV13HE v;

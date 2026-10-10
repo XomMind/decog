@@ -152,7 +152,7 @@ class D2hGameData
 {
 public:
 	const string &getEntryText(const string &key);
-	int unknown46f4e0();
+	int getDepthIndex();
 };
 extern D2hGameData d2h_d1e860;
 
@@ -436,7 +436,7 @@ bool D2Hack::unknown940ad0(int a, int b, int result)
 				d2h_cf6428.unknown68c960(machine->getPosition_4184d0());
 				break;
 			default:
-				if (rng.chance(d2h_b936e0[d2h_d1e860.unknown46f4e0()].chance))
+				if (rng.chance(d2h_b936e0[d2h_d1e860.getDepthIndex()].chance))
 				{
 					d2h_cf6428.dispatch684250(machine->getPosition_4184d0(), 0);
 					d2h_cf45d8.unknown77fbc0(0x40);

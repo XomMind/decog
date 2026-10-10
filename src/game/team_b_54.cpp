@@ -18,7 +18,7 @@ public:
 struct TeamB_AiTarget { HEntity entity; int pad4; int priority; };	// NOTE: placeholder layout
 class TeamB_AiWorld { public: HEntity getPlayer(); bool unknown463400(HEntity e); bool isReachable(int range, const Point &from, const Point &to); };	// NOTE: placeholder name (Map)
 extern TeamB_AiWorld *teamb_aiWorld_cefc4c;	// NOTE: placeholder name
-extern vector<int> teamb_aiFlags_cf4a04;	// NOTE: placeholder name
+extern vector<int> teamb_rifLevels_cf4a04;	// NOTE: placeholder name
 class TeamB_EntityAI	// NOTE: placeholder name (EntityAI)
 {
 public:
@@ -33,7 +33,7 @@ public:
 TeamB_AiTarget *TeamB_EntityAI::pickTarget580ec0()	// 0x580ec0
 {
 	bool first = entity->getGroup()->getType_9b4350() <= 1 || unknown580ba0(teamb_aiWorld_cefc4c->getPlayer());
-	bool found = first && teamb_aiFlags_cf4a04[0xb] != 0;
+	bool found = first && teamb_rifLevels_cf4a04[0xb] != 0;
 	TeamB_AiTarget *best = NULL;
 	for (unsigned int i = 0; i < targets.size(); i++)
 	{

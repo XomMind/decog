@@ -215,7 +215,7 @@ class OpW2_Machine	// NOTE: placeholder name
 {
 public:
 	bool unknown46ecb0();	// NOTE: placeholder name
-	int unknown46ed20();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 
 	int		unknown0;
 	int		type;	// NOTE: placeholder name
@@ -387,7 +387,7 @@ class GameData	// NOTE: placeholder name
 {
 public:
 	bool unknown46f4b0(int a);					// NOTE: placeholder name
-	int unknown46f4e0();						// NOTE: placeholder name
+	int getDepthIndex();						// NOTE: placeholder name
 	string &unknown46f6d0(const string &key);	// NOTE: placeholder name
 };
 extern GameData gameData;			// NOTE: placeholder name (0xd1e860)
@@ -405,7 +405,7 @@ public:
 extern OpW2_Obj_cf6428	opw2_cf6428;	// NOTE: placeholder name
 extern int		opw2_cf4718;			// NOTE: placeholder name
 extern int		opw2_table_ba65fc[];	// NOTE: placeholder name
-extern string	gameStrings_d2f798[];
+extern string	robotClassNames_d2f798[];
 void opw2_lowerToMax(int &value, int maxValue);	// NOTE: placeholder name (0x9cf5a0)
 void raiseToMin(int &value, int minValue);		// NOTE: placeholder name (0x9cf5c0)
 
@@ -1112,7 +1112,7 @@ bool BS::unknown716250(HEntity e, int rating, string *reason)
 	if (e->getFaction() == 10 || e->getFaction() == 11 || e->getFaction() == 6)
 	{
 		if (reason)
-			*reason = gameStrings_d2f798[e->getFaction()];
+			*reason = robotClassNames_d2f798[e->getFaction()];
 		return false;
 	}
 	if (e->unknown45ac40(57))
@@ -1417,7 +1417,7 @@ int BS::unknown71abf0(bool flag)
 {
 	int count = props268[10].size();
 	if (flag)
-		count += opw2_d1ea9c[gameData.unknown46f4e0()];
+		count += opw2_d1ea9c[gameData.getDepthIndex()];
 	return count;
 }
 
@@ -1428,7 +1428,7 @@ int BS::unknown71ac50(HEntity e)
 	else
 	{
 		int bonus = 0;
-		int depth = opw2_gameState->unknown46ed20();
+		int depth = opw2_gameState->getDepthIndex();
 		if (depth >= 3 && (opw2_d1ea9c[depth - 1] != 0 || opw2_d1ea9c[depth - 2] != 0) && e->getGroup()->unknown9b4350() == 3 && e->getAiType() == 1 && e->getAI()->unknown9b4350() >= 6 && !e->unknown45ac40(36) && !e->getTarget())
 		{
 			bonus += opw2_d1ea9c[depth - 1] * 3;
@@ -2327,7 +2327,7 @@ public:
 class OpW2_Options	// NOTE: placeholder name
 {
 public:
-	int unknown46f4e0();						// NOTE: placeholder name
+	int getDepthIndex();						// NOTE: placeholder name
 	string &unknown46f6d0(const string &key);	// NOTE: placeholder name
 };
 
@@ -2420,10 +2420,10 @@ int BS::unknown71adc0(HEntity attacker, HProp target, OpW2_WeaponRef *weapon, in
 	OpW2_Rec *inner = (weapon ? weapon->type : type) == 0 ? opw2_d35b58[weapon ? weapon->index : index] : 0;
 	if (inner)
 	{
-		if (opw2_d1e860.unknown46f4e0() < inner->unknown2c)
-			roll -= (inner->unknown2c - opw2_d1e860.unknown46f4e0()) * 15;
+		if (opw2_d1e860.getDepthIndex() < inner->unknown2c)
+			roll -= (inner->unknown2c - opw2_d1e860.getDepthIndex()) * 15;
 		else
-			roll += (opw2_d1e860.unknown46f4e0() - inner->unknown2c) * 10;
+			roll += (opw2_d1e860.getDepthIndex() - inner->unknown2c) * 10;
 	}
 	if (!weapon && !opw2_b9b17b[type].c[0])
 		roll -= (type ? 15 : 5) * choices->unknownc;

@@ -42,7 +42,7 @@ void unknown4b3540(void *parent);	// NOTE: placeholder name
 
 extern int c52_cf4730, c52_cf462c;	// NOTE: placeholder names below
 extern C52_CellGrid c52_cfd44c;
-extern vector<int> c52_cf4a04, c52_d01be8;
+extern vector<int> c52_rifLevels_cf4a04, c52_d01be8;
 extern vector<C52_MapRec *> c52_d2d1c4;
 extern C52_Console2 *c52_cec058;
 extern C52_Log *c52_cec0b4;
@@ -97,7 +97,7 @@ void BS::playerActionPrepare()
 			unknown71e7c0(f66c->getPosition(),10,0);
 		}
 	}
-	if (c52_cf4a04[18] != 0 && (*c52_cfd44c.atPoint(f66c->getPosition()))->getItem().isValid() && (*c52_cfd44c.atPoint(f66c->getPosition()))->getItem()->unknown578830())
+	if (c52_rifLevels_cf4a04[18] != 0 && (*c52_cfd44c.atPoint(f66c->getPosition()))->getItem().isValid() && (*c52_cfd44c.atPoint(f66c->getPosition()))->getItem()->unknown578830())
 	{
 		C52_HItem adj = (*c52_cfd44c.atPoint(f66c->getPosition()))->getItem();
 		int center = adj->getValue();

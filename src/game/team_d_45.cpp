@@ -46,7 +46,7 @@ public:
 	HItem unknown5d2380(int slot);	// NOTE: placeholder name
 };
 
-extern string factionNames45_d2f798[];	// NOTE: placeholder name
+extern string robotClassNames45_d2f798[];	// NOTE: placeholder name
 void logError(string location, string message);	// NOTE: placeholder name (0x404f10)
 
 class EntityAI
@@ -233,7 +233,7 @@ void EntityAI::AllyData::checkCapable(HEntity ally)
 	default:
 		if (true)
 		{
-			logError("EntityAI::AllyData::checkCapable()","unknown class: " + factionNames45_d2f798[ally->getFaction()]);
+			logError("EntityAI::AllyData::checkCapable()","unknown class: " + robotClassNames45_d2f798[ally->getFaction()]);
 			capable = true;
 		}
 		break;

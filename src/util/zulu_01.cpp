@@ -69,7 +69,7 @@ extern ZuRange zu_d22268,zu_d305d8;int zu_distance40a3f0(const ZuPos&,const ZuPo
 string zu_intToString4051f0(int);void zu_eraseStep9d6440(ZuVecHI&,unsigned&);string zu_countString407a80(int,const string&);
 struct ZuRec{char p0[0x28];int f28;char p2c[0x4c-0x2c];int f4c;};
 struct ZuVecRec{int a,b,c,d;unsigned size9b9260()const throw();ZuRec*&at9b81f0(unsigned);};extern ZuVecRec zu_cfd2cc;
-struct ZuGameData{int u46f4e0();const string&getEntryText46f6d0(const string&);void setEntryText46f700(const string&,const string&);};extern ZuGameData zu_d1e860;
+struct ZuGameData{int getDepthIndex();const string&getEntryText46f6d0(const string&);void setEntryText46f700(const string&,const string&);};extern ZuGameData zu_d1e860;
 struct ZuEvent{int a[16];ZuEvent(ZuHE,ZuRec*,const ZuPos&,ZuHE,const ZuPos&,const ZuPos&);};
 struct ZuFactory{ZuHME createA7930e0(ZuEvent*);};extern ZuFactory*zu_cefaa8;
 struct ZuRange2{int a,b;ZuRange2();void set40a010(int,int);};
@@ -438,7 +438,7 @@ void ZuEntity::projectileImpact(ZuHE attacker,int a2,void*records,ZuItemDef*weap
 						ZuHE src=aI==3?attacker:tgt;
 						ZuPos posRef=src->getPosition45a4a0();
 						ZuHE aD=aI==3?tgt:attacker;
-						int level6=zu_d1e860.u46f4e0();
+						int level6=zu_d1e860.getDepthIndex();
 						ZuRec*best=0;
 						for(unsigned i=0;i<zu_cfd2cc.size9b9260();i++)
 							if(zu_cfd2cc.at9b81f0(i)->f4c!=0&&(best==0||zu_cfd2cc.at9b81f0(i)->f28<=level6))

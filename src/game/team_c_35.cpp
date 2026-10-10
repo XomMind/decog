@@ -68,7 +68,7 @@ struct C87_GM { unsigned int unknown470aa0(int a); };	// NOTE: placeholder
 struct C87_GameData { const string &getEntryText(const string &name); bool unknown46f4b0(int a); };	// NOTE: placeholder
 struct C87_Flags { int delegate(int id); };	// NOTE: placeholder
 struct C87_PlayerData { void unknown77fbc0(int id); };	// NOTE: placeholder
-extern string gameStrings_cf2740[], gameStrings_cf67e0[], gameStrings_cfaca0[], gameStrings_d227b0[], gameStrings_d2e148[];
+extern string gameStrings_cf2740[], gameStrings_cf67e0[], mapNames_cfaca0[], gameStrings_d227b0[], gameStrings_d2e148[];
 string intToString(int value);
 int stringToInt(const string &s);
 void logError(string location, string message);
@@ -699,7 +699,7 @@ void CHudData::drawContent(bool keep)
 	}
 	else
 	{
-		cols = "Loc: -" + intToString(c87_d1e888.get23c()->f8) + "/" + (c87_d1e888.get23c()->f25 ? string(gameStrings_cfaca0[c87_d1e888.get23c()->f4]) : string("???"));
+		cols = "Loc: -" + intToString(c87_d1e888.get23c()->f8) + "/" + (c87_d1e888.get23c()->f25 ? string(mapNames_cfaca0[c87_d1e888.get23c()->f4]) : string("???"));
 	}
 		setFore((keep ? *c87_cfe674 : *c87_d2981c));
 		print(0, 0, cols);

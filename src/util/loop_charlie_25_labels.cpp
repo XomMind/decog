@@ -21,7 +21,7 @@ struct LC25Item{int type457820()throw();int subtype4578a0()throw();unsigned char
 struct LC25Cell{LC25HI item45d8f0()throw();};
 template<class T>struct LC25Grid{int width,height;T*data;LC25Grid();~LC25Grid();T*at(int,int)throw();};
 struct LC25World{char p0[0x69c];LC25Grid<int>visible;char p6a8[0x7c4-0x6a8];LC25Grid<LC25Memory>memory;bool visible463190(int,int)throw();};extern LC25World*lc25_cefc4c;extern LC25Grid<LC25Cell*>lc25_cfd44c;extern vector<int>lc25_cf4830;extern vector<LC25Def*>lc25_d2d1c4;
-struct LC25Location{int inverse46ed20()throw();};struct LC25HC{int id;LC25Location*get9b7910()const throw();};extern LC25HC lc25_d1e888;
+struct LC25Location{int getDepthIndex()throw();};struct LC25HC{int id;LC25Location*get9b7910()const throw();};extern LC25HC lc25_d1e888;
 extern int lc25_d28df4,lc25_cf462c,lc25_cf27f4,lc25_cf27f8,lc25_d28df0,lc25_caf164;extern unsigned char lc25_d28df8,lc25_d28df9;extern unsigned lc25_caed20;
 extern const bool lc25_bcbe54[];struct LC25OffsetColumn{int value,pair;};extern LC25OffsetColumn lc25_cefd20[],lc25_cefd24[];
 struct LC25HE{int id;void clear9b7270()throw();};
@@ -39,7 +39,7 @@ int LC25View::items8119c0(LC25HI item,bool full,bool unique,bool costly){
   for(unsigned j=0;j<labels.size();j++)if(lc25_between9daf80(4,labels[j]->type,7))x2.push_back(labels[j]->console);
   focus= item.get9b65b0()->position575920();entity.clear9b7270();
  }else{
-  LC25Memory*idx2;LC25HI record;int mode=lc25_d28df4?lc25_d1e888.get9b7910()->inverse46ed20()-lc25_d28df4:0;bool hidden=lc25_cf462c==4;LC25Grid<int>*temp=&lc25_cefc4c->visible;LC25Point first,last;limits8051f0(first,last);
+  LC25Memory*idx2;LC25HI record;int mode=lc25_d28df4?lc25_d1e888.get9b7910()->getDepthIndex()-lc25_d28df4:0;bool hidden=lc25_cf462c==4;LC25Grid<int>*temp=&lc25_cefc4c->visible;LC25Point first,last;limits8051f0(first,last);
   for(int col=first.x,sx=lc25_max(offset.x,0);col<=last.x&&sx<lc25_cf27f4;col++,sx++){
    for(int p=first.y,idx=lc25_max(offset.y,0);p<=last.y&&idx<lc25_cf27f8;p++,idx++){
     if(*temp->at(col,p)){

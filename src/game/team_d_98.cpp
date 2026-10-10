@@ -50,7 +50,7 @@ public:
 	int unknown5d7e90();			// NOTE: placeholder name
 };
 
-extern string gameStrings_d2f798[];
+extern string robotClassNames_d2f798[];
 
 class GameData98	// NOTE: placeholder name (GameData at 0xd1e860)
 {
@@ -83,7 +83,7 @@ extern int opw8_cf462c;	// NOTE: placeholder name
 
 int teamb_getEntityLabel_7fea30(HEntity e, bool full, string &out, bool longForm)
 {
-	out = OpR5f_toUpper_4083a0(full ? *e->getName98() : (!e->getData98()->name.empty() ? e->getData98()->name : gameStrings_d2f798[e->getFaction()]));
+	out = OpR5f_toUpper_4083a0(full ? *e->getName98() : (!e->getData98()->name.empty() ? e->getData98()->name : robotClassNames_d2f798[e->getFaction()]));
 	if (e->getGroup()->getType() == 3 && gameData98_d1e860.unknown789580(e))
 	{
 		Squad98 *squad = overmind98_cf6428.unknown683310(e);

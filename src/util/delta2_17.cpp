@@ -217,7 +217,7 @@ extern D2rLog *d2r_cec0b4;
 class D2rPlayerData { public: void unknown780810(D2rHEntity robot, int hack, int c); void unknown77fbc0(int id); bool unknown77ffb0(int id, int b); bool unknown780380(int id, int b); void unknown780700(int id, int b); };	// NOTE: placeholder name
 extern D2rPlayerData d2r_cf45d8;
 extern int d2r_cf4718;
-struct D2rOwner { int f0; int f4; int unknown46ed20(); };	// NOTE: placeholder layout
+struct D2rOwner { int f0; int f4; int getDepthIndex(); };	// NOTE: placeholder layout
 class D2rHOwner { public: int ID; D2rOwner *operator->() const; };	// NOTE: placeholder name (0x9b7910)
 extern D2rHOwner d2r_d1e888;
 class D2rPathfinder	// NOTE: placeholder name (Cartographer2D)
@@ -237,9 +237,9 @@ extern Pos d2r_d22268;
 extern const float d2r_b91a34;
 extern Pos d2r_d305d8;
 extern bool d2r_b95758[];
-extern vector<int> d2r_cf4a04;
+extern vector<int> d2r_rifLevels_cf4a04;
 extern vector<int> d2r_cf4a14;
-extern int d2r_b98948[];
+extern int d2r_commandFork_b98948[];
 extern int d2r_b97d38[];
 extern vector<int> d2r_d2f0f8;
 extern string d2r_d3a280[];
@@ -1336,7 +1336,7 @@ found3:
 	{
 		STARTC();
 		SHOWS(0x1f5, "Accessing analysis database...");
-		int group = d2r_d1e888->unknown46ed20();
+		int group = d2r_d1e888->getDepthIndex();
 		vector<int> candidates;
 		for (int i = 0; i < d2r_d25de0.size(); i++)
 		{
@@ -1793,7 +1793,7 @@ found3d:
 		unknown953c70();
 		return;
 	}
-	if (chain && d2r_cf4a04[6] && rng.chance(d2r_b98948[d2r_cf4a04[6]]))
+	if (chain && d2r_rifLevels_cf4a04[6] && rng.chance(d2r_commandFork_b98948[d2r_rifLevels_cf4a04[6]]))
 	{
 		D2rHEntity where;
 		int first = 99999;

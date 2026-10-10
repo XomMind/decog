@@ -1,5 +1,6 @@
-// op_overmind_surgical: Overmind::unknown685a10 (0x685a10), sends an investigation squad (Q-series Zionites get
-// surgical loadouts) after a target and returns the number of robots spawned (COGMIND.exe Beta 17.1).
+// op_overmind_surgical: Overmind::spawnSurgicalParty (0x685a10; name from its logError string). Sends a surgical
+// party (party type 5, "extermination" in the UI): Programmers, or Q-Series with surgical loadouts at -3..-1, after a
+// target, and returns the number of robots spawned (COGMIND.exe Beta 17.1).
 // NOTE: placeholder names and partial layouts.
 #include <string>
 #include <vector>
@@ -75,7 +76,7 @@ class OpOS_World	// NOTE: placeholder name (BS at 0xcefc4c)
 public:
 	int unknown4638e0(int a, int b);	// NOTE: placeholder name
 	int getTurn();	// 0x464270
-	EntityRecord *unknown6c5600(int a, int b, bool c, bool d);	// NOTE: placeholder name
+	EntityRecord *selectRobotOfClass(int a, int b, bool c, bool d);	// NOTE: placeholder name
 	HEntity placeEntity(EntityRecord *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);
 };
 extern OpOS_World *opOS_world;	// NOTE: placeholder name
@@ -92,7 +93,7 @@ extern OpOS_Handle opOS_current_d1e888;	// NOTE: placeholder name
 class OpOS_GameData	// NOTE: placeholder name (GameData at 0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name (difficulty)
+	int getDepthIndex();	// NOTE: placeholder name (difficulty)
 	const string &getEntryText(const string &key);	// NOTE: placeholder name (0x46f6d0)
 };
 extern OpOS_GameData opOS_gameData;	// NOTE: placeholder name
@@ -128,8 +129,8 @@ void opOS_eraseAt_9da940(vector<HEntity> &v, int index);	// NOTE: placeholder na
 
 struct OpOS_ItemRecord;	// NOTE: placeholder name
 extern vector<OpOS_ItemRecord *> opOS_itemRecords_d2d1c4;	// NOTE: placeholder name
-extern int opOS_kindWeights_b93738[][2];	// NOTE: placeholder name
-extern Point opOS_squadSizes_d29310[][2];	// NOTE: placeholder name
+extern int opOS_surgicalLeaderWeights_b93738[][2];	// NOTE: placeholder name
+extern Point opOS_surgicalPartySizes_d29310[][2];	// NOTE: placeholder name
 extern bool opOS_d1eb99;	// NOTE: placeholder name
 extern const int opOS_targetRadius_b91df4;	// NOTE: placeholder name (15)
 extern const int opOS_partyDuration_b91e00;	// NOTE: placeholder name (150)
@@ -140,12 +141,12 @@ void logError(string location, string message);	// 0x404f10
 class Overmind	// NOTE: placeholder layout
 {
 public:
-	int unknown685a10(HEntity target, Point *area);	// NOTE: placeholder name
-	bool unknown683500(Point *out, bool allowVisible, int minDistance, bool ignoreProps, const OpOS_Pos &from, Point **access, bool preferProps, bool ignoreUsed);	// NOTE: placeholder name
+	int spawnSurgicalParty(HEntity target, Point *area);	// NOTE: placeholder name
+	bool findDispatchExit(Point *out, bool allowVisible, int minDistance, bool ignoreProps, const OpOS_Pos &from, Point **access, bool preferProps, bool ignoreUsed);	// NOTE: placeholder name
 	void unknown683e60(const Point &p, vector<vector<HEntity> > &out);	// NOTE: placeholder name
-	bool unknown6827d0(Party *party, Point *access);	// NOTE: placeholder name
+	bool addParty(Party *party, Point *access);	// NOTE: placeholder name
 	void loadZWeaponList(vector<int> &out, int level);
-	void spawnSurgicalParty(vector<int> &out, vector<int> &records);
+	void loadZPartList(vector<int> &out, vector<int> &records);
 
 	char pad00[0x4c];
 	int unknown4c;	// NOTE: placeholder name
@@ -155,7 +156,7 @@ public:
 	int failedDispatches;	// +0x128, NOTE: placeholder name
 };
 
-int Overmind::unknown685a10(HEntity target, Point *area)
+int Overmind::spawnSurgicalParty(HEntity target, Point *area)
 {
 	if (stringToInt(opOS_gameData.getEntryText("comConduitDisabled_g")) || unknown4c || opOS_world->unknown4638e0(0,3) == 2)
 		return 0;
@@ -166,7 +167,7 @@ int Overmind::unknown685a10(HEntity target, Point *area)
 	OpR5h_WL<int> tags;
 	for (int i = 0; i < 2; i++)
 	{
-		int weight = opOS_kindWeights_b93738[opOS_gameData.unknown46f4e0()][i];
+		int weight = opOS_surgicalLeaderWeights_b93738[opOS_gameData.getDepthIndex()][i];
 		if (weight && i == 1 && opOS_d1eb99)
 			weight /= 2;
 		tags.add(i,weight);
@@ -175,17 +176,17 @@ int Overmind::unknown685a10(HEntity target, Point *area)
 	do
 		tags.pick(&tag);
 	while (tag == 1 && (!surgical || ok));
-	int value = opOS_squadSizes_d29310[opOS_gameData.unknown46f4e0()][tag].randomInRange_40c130() - 1;
+	int value = opOS_surgicalPartySizes_d29310[opOS_gameData.getDepthIndex()][tag].randomInRange_40c130() - 1;
 	EntityRecord *first;
 	EntityRecord *element;
 	switch (tag)
 	{
 		case 0:
-			first = opOS_world->unknown6c5600(1,0x19,false,false);
+			first = opOS_world->selectRobotOfClass(1,0x19,false,false);
 			element = NULL;
 			break;
 		case 1:
-			first = opOS_world->unknown6c5600(1,0x1b,false,false);
+			first = opOS_world->selectRobotOfClass(1,0x1b,false,false);
 			element = NULL;
 			break;
 	}
@@ -195,7 +196,7 @@ int Overmind::unknown685a10(HEntity target, Point *area)
 		element = first;
 	Point pt;
 	Point *prev = NULL;
-	if (!ok && !unknown683500(&pt,true,0,true,OpOS_Pos(-1),&prev,false,false))
+	if (!ok && !findDispatchExit(&pt,true,0,true,OpOS_Pos(-1),&prev,false,false))
 	{
 		failedDispatches++;
 		return 0;
@@ -249,7 +250,7 @@ int Overmind::unknown685a10(HEntity target, Point *area)
 			value--;
 			entityCount++;
 		}
-		unknown6827d0(new Party(5,cur,-1,target.isValid() && target->isPlayer(),opOS_world->getTurn() + opOS_partyDuration_b91e00),prev);
+		addParty(new Party(5,cur,-1,target.isValid() && target->isPlayer(),opOS_world->getTurn() + opOS_partyDuration_b91e00),prev);
 	}
 	if (!xx.empty())
 	{
@@ -261,9 +262,9 @@ int Overmind::unknown685a10(HEntity target, Point *area)
 		for (unsigned int i = 0; i < xx.size(); i++)
 		{
 			vector<int> weapons;
-			loadZWeaponList(weapons,opOS_gameData.unknown46f4e0());
+			loadZWeaponList(weapons,opOS_gameData.getDepthIndex());
 			vector<int> parts;
-			spawnSurgicalParty(parts,weapons);
+			loadZPartList(parts,weapons);
 			for (unsigned int j = 0; j < weapons.size(); j++)
 				xx[i]->unknown5de480(opOS_itemRecords_d2d1c4[weapons[j]]);
 			for (unsigned int k = 0; k < parts.size(); k++)

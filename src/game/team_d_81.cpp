@@ -85,8 +85,8 @@ struct Squad81	// NOTE: placeholder name and layout
 class Squads81	// NOTE: placeholder name (0xcf6428)
 {
 public:
-	Squad81 *unknown45ed10();	// NOTE: placeholder name (last squad)
-	int unknown687520(HProp entity, int a, int b);	// NOTE: placeholder name
+	Squad81 *lastParty();	// NOTE: placeholder name (last squad)
+	int spawnHunterParty(HProp entity, int a, int b);	// NOTE: placeholder name
 };
 extern Squads81 squads81_cf6428;	// NOTE: placeholder name
 
@@ -153,9 +153,9 @@ void BS::unknown744010(bool quiet)
 	int count = quiet ? 1 : 2;
 	for (int i = 0; i < count; i++)
 	{
-		if (squads81_cf6428.unknown687520(HProp(),0,0))
+		if (squads81_cf6428.spawnHunterParty(HProp(),0,0))
 		{
-			Squad81 *center = squads81_cf6428.unknown45ed10();
+			Squad81 *center = squads81_cf6428.lastParty();
 			if (!center || center->type != 7)
 			{
 			}

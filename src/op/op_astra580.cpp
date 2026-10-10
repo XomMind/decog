@@ -39,7 +39,7 @@ public:
 	bool isReachable(int range, const Point &from, const Point &to);
 };
 extern Map *world;
-extern vector<int> flags_cf4a04; // NOTE: placeholder name (0xcf4a04)
+extern vector<int> rifLevels_cf4a04; // NOTE: placeholder name (0xcf4a04)
 
 struct OpAstra580_Record // NOTE: placeholder name and layout
 {
@@ -63,7 +63,7 @@ public:
 OpAstra580_Record *EntityAI::unknown580ec0()
 {
 	bool changed = !(self->getGroup()->unknown9b4350() > 1 && !unknown580ba0(world->getPlayer()));
-	bool found = changed && flags_cf4a04[11] != 0;
+	bool found = changed && rifLevels_cf4a04[11] != 0;
 	OpAstra580_Record *best = 0;
 	for (unsigned int i = 0; i < records.size(); i++)
 	{

@@ -161,7 +161,7 @@ extern ZNT_HLocation znt_location_d1e888;	// NOTE: placeholder name
 class OpV1_GameData
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 	const string &getEntryText(const string &key);
 };
 extern OpV1_GameData znt_gameData_d1e860;	// NOTE: placeholder name
@@ -346,7 +346,7 @@ void Zionmind::newTurn()
 										break;
 									case 1:
 									case 2:
-										mult -= (znt_gameData_d1e860.unknown46f4e0() - znt_itemTypes_d2d1c4[i]->minDepth) * (znt_itemTypes_d2d1c4[i]->decay == 1 ? 0.35f : 0.15f);
+										mult -= (znt_gameData_d1e860.getDepthIndex() - znt_itemTypes_d2d1c4[i]->minDepth) * (znt_itemTypes_d2d1c4[i]->decay == 1 ? 0.35f : 0.15f);
 										if (mult <= 0.0)
 											continue;
 										break;

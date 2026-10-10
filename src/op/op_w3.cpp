@@ -928,7 +928,7 @@ public:
 	void opw3_unknown726ff0(const Point &p);	// NOTE: placeholder name
 	void opw3_unknown7270c0(Point *p);	// NOTE: placeholder name
 	bool opw3_unknown7272e0();	// NOTE: placeholder name
-	void opw3_unknown727370();	// NOTE: placeholder name
+	void onGarrisonAccessDisabled();	// NOTE: placeholder name
 	int opw3_unknown7275f0(HEntity e, int value);	// NOTE: placeholder name
 	bool opw3_unknown7276b0(HEntity e, int value);	// NOTE: placeholder name
 	bool opw3_unknown727780(HEntity e, int value);	// NOTE: placeholder name
@@ -1013,7 +1013,7 @@ public:
 	char pad1d9[0x200 - 0x1d9];
 	int counter200;	// 0x200	NOTE: placeholder name
 	char pad204[0x230 - 0x204];
-	int counter230;	// 0x230	NOTE: placeholder name
+	int disabledGarrisonAccesses;	// 0x230	NOTE: placeholder name
 	char pad234[0x320 - 0x234];
 	int unknown320;	// 0x320	NOTE: placeholder name
 	int unknown324;	// 0x324	NOTE: placeholder name
@@ -1139,7 +1139,7 @@ extern Point opw3_effectOrigin;	// NOTE: placeholder name (0xd2e20c)
 
 extern int opw3_difficulty_cf4718;	// NOTE: placeholder name (0xcf4718)
 extern int opw3_table_ba65a8[];	// NOTE: placeholder name (0xba65a8)
-extern int opw3_counter_cf6498;	// NOTE: placeholder name (0xcf6498)
+extern int opw3_surgicalTimer_cf6498;	// NOTE: placeholder name (0xcf6498)
 
 class OpW3_Obj_d2c658	// NOTE: placeholder name
 {
@@ -1272,10 +1272,10 @@ bool BS::opw3_unknown7272e0()
 	return counter200 > opw3_table_ba65a8[opw3_difficulty_cf4718] && rng.chance(opw3_maxInt(5,25 - player->opw3_unknown5c7f40() / 2));
 }
 
-void BS::opw3_unknown727370()
+void BS::onGarrisonAccessDisabled()
 {
-	counter230++;
-	opw3_counter_cf6498 += 75;
+	disabledGarrisonAccesses++;
+	opw3_surgicalTimer_cf6498 += 75;
 	opw3_obj_d2c658.opw3_unknown4729d0(0x25c,1,"",-1);
 	opw3_obj_cf6888.opw3_unknown6998a0(8,1,0);
 }
@@ -3675,7 +3675,7 @@ extern int opw3_mode_d28d48;	// NOTE: placeholder name
 extern bool opw3_flag_cefb0a;	// NOTE: placeholder name
 extern bool opw3_flag_d1eacc;	// NOTE: placeholder name
 extern bool opw3_flag_d28d09;	// NOTE: placeholder name
-extern vector<int> opw3_list_cf4a04;	// NOTE: placeholder name
+extern vector<int> opw3_rifLevels_cf4a04;	// NOTE: placeholder name
 extern vector<int> opw3_list_d22590;	// NOTE: placeholder name
 void opw3_pushUnique9d3020(vector<Point> &v, Point p);	// NOTE: placeholder name
 void opw3_append9d7f20(vector<Point> &v, vector<Point> &add);	// NOTE: placeholder name
@@ -3726,7 +3726,7 @@ void BS::opw3_unknown72c700(int index, bool flag)
 		else if (opw3_gameState->type == 22 && !stringToInt(opw3_gameData.opw3_unknown46f6d0("zhiCloakGeneratorsDisabled_g")))
 			range2 = 0;
 	}
-	bool mapAll = index == 0 && opw3_list_cf4a04[14] != 0;
+	bool mapAll = index == 0 && opw3_rifLevels_cf4a04[14] != 0;
 	bool revealEverything = index == 0 && opw3_flag_cf4a00;
 	opw3_flag_cefc9f = entity->opw3_unknown5d2380(13).isValid();
 

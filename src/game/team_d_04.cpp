@@ -486,7 +486,7 @@ class GameData04	// NOTE: placeholder name (0xd1e860)
 public:
 	bool unknown7894d0(HLoc04 loc);	// NOTE: placeholder name
 	bool unknown46f4b0(int value);	// NOTE: placeholder name
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 extern GameData04 gameData_d1e860;	// NOTE: placeholder name
 
@@ -1164,7 +1164,7 @@ void Unknown_45f320_45f560::unknown69b560(bool flag)
 {
 	if (unknown1cc)
 		delete unknown1cc;
-	int level = table_ba5d54[gameData_d1e860.unknown46f4e0()];
+	int level = table_ba5d54[gameData_d1e860.getDepthIndex()];
 	vector<int> ranks;
 	ranks.push_back(level);
 	ranks.push_back(level - 1);

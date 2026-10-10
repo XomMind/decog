@@ -30,7 +30,7 @@ struct D28Item{bool special5775a0();void move57a520(D28HP,int);string name571db0
 struct D28Level{int p0,type;char p8[0x25-8];bool known;};
 struct D28Console{char pad[0x60];int state;void*engine,*title;D28Console(D28Console*,D28Rect,int,bool,int);bool hidden4175f0()throw();bool active48e740()throw();void close7b60e0();void hide7b1cc0();void hidden417ba0(bool)throw();void copy429fe0(D28Console*,D28P&,const D28Rect*);void update8758d0(bool);void end7b4f10();int layer44a7d0()throw();void clear417bc0();void interior417c70();void animate48c3f0(string);void scale417b60(float)throw();void scale417b80(float)throw();};
 struct D28Inventory{void reopen8a2ce0(int,D28HI);};
-struct D28Map{D28HE player4630f0()throw();bool check462f00(D28HP);void announce71dd30(D28HL);void event774390(int,int);};
+struct D28Map{D28HE player4630f0()throw();bool check462f00(D28HP);void announce71dd30(D28HL);void playerActionFinish(int,int);};
 struct D28Data{bool enabled46f4b0(int);const string&text46f6d0(const string&);};
 struct D28Stats{int count472c90(unsigned);};
 struct D28Player{void suspect77ee70(float,int,D28HI);};
@@ -41,7 +41,7 @@ extern D28Console*d28_cec0f4,*d28_cec0b0,*d28_cec058,*d28_cec0b4,*d28_cec034,*d2
 extern D28Map*d28_cefc4c;extern D28HL d28_d1e888;extern D28Data d28_d1e860;extern D28Player d28_cf45d8;extern D28Factory*d28_cefaa8;extern D28Graph*d28_cefa8c;extern D28Stats d28_d2c658;
 extern int*d28_cf4700;extern D28MapRecords d28_d25de0;extern D28ItemLists d28_cf3a10;
 extern bool d28_cefb3e,d28_d28d15;extern LuigiMachineHacking*d28_cec024;extern int d28_cf27ec,d28_d01a20,d28_cf27f4,d28_cf27f8;extern const float d28_ba8514;
-extern string d28_cfaca0[];
+extern string d28_mapNames_cfaca0[];
 bool d28_contains9db330(D28Flags&,int);int d28_string405610(const string&);void d28_lookup4af3e0();
 bool d28_route5111e0(int,const string*,const string*,const string*,D28HE,D28HE,const D28P*,bool);
 // Retail repeated xor/test backedges support the original do/while(false) message macro.
@@ -57,10 +57,10 @@ void D28Hack::open939b50(D28HP p){
   D28Items*tag=&d28_cf3a10.at9b8070(p.get9b64f0()->index44ab40());
   first.get9b65b0()->move57a520(p,0);tag->push9b80b0(first);d28_cec08c->reopen8a2ce0(0,D28HI());
   D28_MSG(783,&first.get9b65b0()->name571db0(false,false));
-  d28_cf45d8.suspect77ee70(d28_ba8514,5,D28HI());d28_cefc4c->event774390(17,100);return;
+  d28_cf45d8.suspect77ee70(d28_ba8514,5,D28HI());d28_cefc4c->playerActionFinish(17,100);return;
  }
  D28_MSG(446,&p.get9b64f0()->name45c5b0());
- if(!d28_d1e888.get9b7910()->known){d28_cefc4c->announce71dd30(d28_d1e888);D28_MSG(447,&d28_cfaca0[d28_d1e888.get9b7910()->type]);}
+ if(!d28_d1e888.get9b7910()->known){d28_cefc4c->announce71dd30(d28_d1e888);D28_MSG(447,&d28_mapNames_cfaca0[d28_d1e888.get9b7910()->type]);}
  if(p.get9b64f0()->def9b8f00()->kind==0&&d28_d1e860.enabled46f4b0(1)&&!p.get9b64f0()->state45cb30()->ready&&d28_string405610(d28_d1e860.text46f6d0("zioWasImprinted_g"))&&!d28_string405610(d28_d1e860.text46f6d0("zioAttackedLocals_g")))p.get9b64f0()->state45cb30()->imprinted=true;
  d28_lookup4af3e0();mode=2;prop=p;D28Machine*machine=prop.get9b64f0()->state45cb30();machine->values65cdc0(&value,&extra);
  if(d28_cefb3e){d28_cec024=new LuigiMachineHacking(value,extra);}

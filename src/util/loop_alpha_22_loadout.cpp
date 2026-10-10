@@ -14,7 +14,7 @@ struct LA22Item{int category4578a0()throw();void*effect457b70(int)throw();void r
 struct LA22P{int x,y;};struct LA22AI{void update5b2d10();};
 struct LA22Entity{int pad0;LA22H self;char p8[0x12c];LA22Items items;LA22AI*ai;void loadout63c770(bool);int movement5d1440()throw();int status5cba50()throw();bool effect5d26e0(int)throw();void update5fdab0();bool hostile45aa70(LA22H)throw();const LA22P&pos45a4a0()throw();};
 struct LA22Map{LA22HI add6c51d0(LA22Def*,LA22H,bool,bool);LA22H player4630f0()throw();};extern LA22Map*la22_cefc4c;
-struct LA22Data{int depth46f4e0()throw();};extern LA22Data la22_d1e860;extern LA22Defs la22_d2d1c4;
+struct LA22Data{int getDepthIndex()throw();};extern LA22Data la22_d1e860;extern LA22Defs la22_d2d1c4;
 struct LA22UI{void update8758d0(bool);};extern LA22UI*la22_cec058;struct LA22Log{void end7b4f10()throw();};extern LA22Log*la22_cec0b4;
 void la22_erase(LA22Defs&,unsigned&)throw();bool la22_contains(LA22Ints&,int)throw();LA22Def*la22_random(LA22Defs&);LA22Def*la22_pop(LA22Defs&);int la22_min(int,int)throw();int la22_max(int,int)throw();string la22_int(int);int la22_sound454260(const LA22P&,unsigned);
 bool la22_route5111e0(int,const string*,const string*,const string*,LA22H,LA22H,const LA22P*,bool);
@@ -31,7 +31,7 @@ void LA22Entity::loadout63c770(bool quiet){
  case 35:if(movement5d1440()>=3)la22_erase(f.at9b8070(2),i);break;
  }
  LA22Weights first;first.add9ba310(0,25);first.add9ba310(1,50);first.add9ba310(2,20);first.add9ba310(3,5);
- int label=la22_d1e860.depth46f4e0();int temp=la22_max(5,label);
+ int label=la22_d1e860.getDepthIndex();int temp=la22_max(5,label);
  while(true){
   int p=first.pick9ba470();LA22Ints h;
   switch(p){case 0:h.push9b9280(26);h.push9b9280(27);h.push9b9280(28);break;case 1:h.push9b9280(20);h.push9b9280(22);break;case 2:h.push9b9280(21);h.push9b9280(23);break;case 3:h.push9b9280(24);break;}

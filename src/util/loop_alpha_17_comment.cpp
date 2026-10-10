@@ -11,7 +11,7 @@ struct LA17Entity{char pad[0x134];LA17Items items;LA17Items*inventory45ab00() th
 struct LA17AI{LA17H self;void comment5bd7d0();};
 struct LA17Speaker{bool can49e120(int) throw();bool say49e250(int,bool,string);};extern LA17Speaker*la17_cefb48;
 struct LA17GM{unsigned time470aa0(bool) throw();};extern LA17GM*la17_cefaa8;
-struct LA17Mode{int score46ed20() throw();};struct LA17ModeH{int id;LA17Mode*get9b7910()const throw();};extern LA17ModeH la17_d1e888;
+struct LA17Mode{int getDepthIndex() throw();};struct LA17ModeH{int id;LA17Mode*get9b7910()const throw();};extern LA17ModeH la17_d1e888;
 struct LA17Player{bool item77ffb0(int,bool);};extern LA17Player la17_cf45d8;
 struct LA17Scores{int a,b,c,d;int&at9b81f0(unsigned) throw();};extern LA17Scores la17_cf4c28;
 // Destination records start with a Point; trailing fields are never accessed here.
@@ -25,7 +25,7 @@ void LA17AI::comment5bd7d0(){
  if(la17_cefb48&&la17_cefb48->can49e120(9)){
   LA17HI first;
   for(unsigned i=0;i<self.get9b6570()->items.size9b9260();i++)if(self.get9b6570()->items.at9b81f0(i).get9b65b0()->kind4578a0()==3&&self.get9b6570()->items.at9b81f0(i).get9b65b0()->type44aec0()<=3){if(first.null9b65d0()||self.get9b6570()->items.at9b81f0(i).get9b65b0()->score457920()>first.get9b65b0()->score457920())first=self.get9b6570()->items.at9b81f0(i);}
-  if(first.valid9b7230()&&first.get9b65b0()->score457920()>la17_d1e888.get9b7910()->score46ed20()){
+  if(first.valid9b7230()&&first.get9b65b0()->score457920()>la17_d1e888.get9b7910()->getDepthIndex()){
    la17_cf45d8.item77ffb0(first.get9b65b0()->id457820(),0);if(la17_cefb48->say49e250(9,true,first.get9b65b0()->name571db0(false,false)))return;
   }
  }

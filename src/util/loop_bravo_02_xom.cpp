@@ -133,7 +133,7 @@ extern lb2x_OpS4_Flags lb2x_opS4_flags;	// NOTE: placeholder name (0xd1e860)
 struct lb2x_OpS4_GameState	// NOTE: placeholder name
 {
 	int unknown04;
-	int unknown46ed20() throw();	// NOTE: placeholder name
+	int getDepthIndex() throw();	// NOTE: placeholder name
 };
 
 class lb2x_OpS4_HGameState	// NOTE: placeholder name (object at 0xd1e888)

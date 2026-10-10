@@ -18,7 +18,7 @@ struct LB42UI{void bubble8758d0(bool);};struct LB42Log{void end7b4f10();};extern
 bool lb42_route5111e0(int,const string*,const string*,const string*,LB42HE,LB42HE,const LB42P*,bool);bool lb42_phrase5141b0(int,const string*,const string*,const string*,LB42HE,const LB42P*);
 struct LB42Stats{bool add4729d0(unsigned,int,string,int);};extern LB42Stats lb42_d2c658;struct LB42Player{bool achieve77fbc0(int);};extern LB42Player lb42_cf45d8;
 struct LB42Xom{bool active;int action69e700(int,int,float);};extern LB42Xom lb42_d25450;
-extern int lb42_b985e0[][11],lb42_b98480[][11],lb42_bba058[],lb42_d28d18;extern vector<int>lb42_cf4a04;
+extern int lb42_b985e0[][11],lb42_b98480[][11],lb42_bba058[],lb42_d28d18;extern vector<int>lb42_rifLevels_cf4a04;
 bool lb42_effect4569a0(int,LB42HE,LB42HE,LB42HP,LB42HI,const LB42P*,const string*,LB42Effects*,LB42HE,LB42HP,LB42HI,const LB42P*);
 #define LB42_MSG0(ID,TEXT,A,B,POS) do{if(lb42_route5111e0(ID,TEXT,0,0,A,B,POS,false))lb42_cec058->bubble8758d0(true);lb42_cec0b4->end7b4f10();}while(false)
 #define LB42_MSG1(ID,TEXT,A,B,POS) do{if(lb42_route5111e0(ID,TEXT,0,0,A,B,POS,true))lb42_cec058->bubble8758d0(false);lb42_cec0c4->end7b4f10();}while(false)
@@ -40,7 +40,7 @@ int LB42AI::assimilate5bbf70(int chance,LB42HE proposed){
    if(!rng.chance(convert?lb42_b985e0[target.get9b6570()->def9b4350()->mode][entity.get9b6570()->def9b4350()->kind]:lb42_b98480[target.get9b6570()->def9b4350()->mode][entity.get9b6570()->def9b4350()->kind])){
     LB42_MSG0(entity.get9b6570()->friendly45aaa0(lb42_cefc4c->player4630f0())?479:480,0,entity,target,0);
     if(lb42_d28d18>=0){LB42_MSG1(entity.get9b6570()->friendly45aaa0(lb42_cefc4c->player4630f0())?731:732,0,entity,target,0);}
-   }else if(target.get9b6570()->friendly45aaa0(lb42_cefc4c->player4630f0())&&lb42_cf4a04[15]&&(target.get9b6570()->type45a2a0()==1||target.get9b6570()->type45a2a0()==2)&&lb42_cefc4c->player4630f0().get9b6570()->test5d4490(target)){
+   }else if(target.get9b6570()->friendly45aaa0(lb42_cefc4c->player4630f0())&&lb42_rifLevels_cf4a04[15]&&(target.get9b6570()->type45a2a0()==1||target.get9b6570()->type45a2a0()==2)&&lb42_cefc4c->player4630f0().get9b6570()->test5d4490(target)){
     LB42_MSG0(680,0,target,LB42HE(),0);if(lb42_d28d18>=0){LB42_MSG1(736,0,target,LB42HE(),0);}lb42_cf45d8.achieve77fbc0(125);
    }else{
     LB42HE other=lb42_cefc4c->convert7345f0(entity,target,false);

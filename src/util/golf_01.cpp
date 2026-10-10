@@ -35,13 +35,13 @@ struct GolfGCell{void cleanup45df70();void f45b090(int);GolfGHP getProp();GolfGH
 struct GolfGGrid{GolfGCell**atPoint(const GolfGPoint&);GolfGCell**at(int,int);void rect9b4430(const GolfGPoint&,int,GolfGRect&);};extern GolfGGrid gf_grid_cfd44c;
 struct GolfGXomSet{int unused;};
 struct GolfGWorld{void mark729bc0(GolfGHP);vector<vector<GolfGPoint> >&f459070();vector<GolfGRec*>&f462e10();bool f726d60();void f72ed70(int);void f714000(vector<GolfGPoint>&);GolfGHG getGroup(int);
- GolfGHE getPlayer();void f464f60(GolfGHI);void f7480e0(int);void f742c80();void f7430a0(int,int);bool isVisible(const GolfGPoint&);GolfGRec*f462f60(GolfGHP);GolfGRec*f462fd0(GolfGHP);void f727370();
+ GolfGHE getPlayer();void f464f60(GolfGHI);void f7480e0(int);void f742c80();void f7430a0(int,int);bool isVisible(const GolfGPoint&);GolfGRec*f462f60(GolfGHP);GolfGRec*f462fd0(GolfGHP);void onGarrisonAccessDisabled();
  vector<vector<GolfGHP> >&f463be0();void removeMachine(int,const GolfGPoint&);void f72f2e0();void f72f6b0();void f72ffe0(int);bool f714a50();GolfGHI f71e7c0(const GolfGPoint&,int,int);void f464840(GolfGHI);
  bool f464a20();bool f71bde0(const GolfGPoint&,GolfGPoint&);GolfGHI f6c5400(GolfGItemDef*,const GolfGPoint&);vector<GolfGTF*>&f464940();void f74b060(const GolfGPoint&,int,int);GolfGHX addRecord(GolfGHX);void f727150(const GolfGPoint&,int,int,int);
  void f464ed0(GolfGHP);void addPoint(const GolfGPoint&);};
 extern GolfGWorld*gf_world_cefc4c;
-struct GolfGOvermind{int f687520(GolfGHE,const GolfGPoint&,int);void f6821f0();void destroyed681eb0(GolfGHP,GolfGHE);};extern GolfGOvermind gf_overmind_cf6428;
-struct GolfGGameData{void addToEntry(const string&,int);const string&getEntryText(const string&);void setEntryText(const string&,const string&);void f7897a0(int);int f46f4e0();};extern GolfGGameData gf_gd_d1e860;
+struct GolfGOvermind{int spawnHunterParty(GolfGHE,const GolfGPoint&,int);void f6821f0();void destroyed681eb0(GolfGHP,GolfGHE);};extern GolfGOvermind gf_overmind_cf6428;
+struct GolfGGameData{void addToEntry(const string&,int);const string&getEntryText(const string&);void setEntryText(const string&,const string&);void f7897a0(int);int getDepthIndex();};extern GolfGGameData gf_gd_d1e860;
 struct GolfGStats{bool add4729d0(int,int,string,int);void add472b90(int,int);int f472c90(int);};extern GolfGStats gf_stats_d2c658;
 struct GolfGStat2{void f451400(int);};extern GolfGStat2 gf_stat2_cf1080;
 struct GolfGPlayerData{void f77fbc0(int);};extern GolfGPlayerData gf_pd_cf45d8;
@@ -111,9 +111,9 @@ bool GolfGProp::damage65f520(int damage,int type,bool force,bool quiet,int cause
        }
       }
      }
-     if(gf_overmind_cf6428.f687520(GolfGHE(),position,1)){
+     if(gf_overmind_cf6428.spawnHunterParty(GolfGHE(),position,1)){
       string msg("ALERT: Garrison Access compromised, dispatching ");
-      if(gf_cf4718==0){gf_overmind_cf6428.f687520(GolfGHE(),position,1);msg+="multiple assault carriers.";}
+      if(gf_cf4718==0){gf_overmind_cf6428.spawnHunterParty(GolfGHE(),position,1);msg+="multiple assault carriers.";}
       else msg+="assault squad.";
       GOLF_ALERT(1,0x129,&msg);
      }
@@ -315,7 +315,7 @@ bool GolfGProp::damage65f520(int damage,int type,bool force,bool quiet,int cause
         gf_erase9d51d0(gf_world_cefc4c->f462e10(),rec);
         rec=0;
        }
-       gf_world_cefc4c->f727370();
+       gf_world_cefc4c->onGarrisonAccessDisabled();
       }else if(record->tag=="DSF Access"){
        GolfGRec*rec=gf_world_cefc4c->f462fd0(parts[i]);
        if(rec){
@@ -399,7 +399,7 @@ bool GolfGProp::damage65f520(int damage,int type,bool force,bool quiet,int cause
   }
   if(record->tag=="TF Node"){
    bool visible=gf_world_cefc4c->f464a20();
-   int level=gf_gd_d1e860.f46f4e0();
+   int level=gf_gd_d1e860.getDepthIndex();
    vector<GolfGItemDef*> items;
    if(visible||rng.chance(50))items.push_back(gf_d2d1c4[gf_indexOf9d74d0(gf_d2d1c4,level<=2?"Sensor Array":level<=6?"Imp. Sensor Array":"Adv. Sensor Array")]);
    if(visible||rng.chance(50))items.push_back(gf_d2d1c4[gf_indexOf9d74d0(gf_d2d1c4,level<=2?"Signal Interpreter":level<=6?"Imp. Signal Interpreter":"Adv. Signal Interpreter")]);

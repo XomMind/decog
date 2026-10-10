@@ -547,7 +547,7 @@ public:
 class OpQ3_GameData	// NOTE: placeholder name (object at 0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 extern OpQ3_GameData opq3_gameData;	// NOTE: placeholder name (0xd1e860)
 extern vector<OpQ3_ItemTypeEntry *> opq3_itemTypes;	// NOTE: placeholder name (0xd2d1c4)
@@ -569,7 +569,7 @@ public:
 
 void OpQ3_Selector::unknown6c3a50(OpQ3_WeightedTable2 *table, bool flag, int rating)
 {
-	rating = rating ? rating : opq3_gameData.unknown46f4e0();
+	rating = rating ? rating : opq3_gameData.getDepthIndex();
 	table->clear();
 	for (unsigned int i = 0; i < opq3_itemTypes.size(); i++)
 	{

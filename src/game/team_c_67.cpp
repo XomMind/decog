@@ -26,14 +26,14 @@ class C67_NewAI { public: C67_NewAI(C67_HEntity entity, int a, int b); char data
 template <class T> class C67_WL { public: vector<T> values; vector<int> weights; int total; C67_WL(); C67_WL(const T *weights, int count); ~C67_WL(); void add(T value, int weight); bool pick(T *out); };	// NOTE: placeholder (OpR5h_WL)
 struct C67_World	// NOTE: placeholder (BS/Map at 0xcefc4c)
 {
-	C67_Record *unknown6c5600(int a, int b, bool c, int d);
+	C67_Record *selectRobotOfClass(int a, int b, bool c, int d);
 	C67_HEntity placeEntity(C67_Record *record, const C67_Point &position, int groupIndex, bool flag, int aiMode1, int aiMode2, bool forced);
 	C67_HItem giveItem(const string &name, C67_HEntity entity, int a, int b);
 	void unknown6c65a0(C67_HEntity entity, const string &text, int a);
 	C67_Rect &unknown464690();
 	int getTurn();
 };
-struct C67_GameData { int unknown46f4e0(); };
+struct C67_GameData { int getDepthIndex(); };
 class C67_Party { public: C67_Party(int type, C67_HEntity leader, int a, bool b, int c); char data[0x38]; };	// NOTE: placeholder (Party)
 template <class T> bool OpQ5_findByName(vector<T *> &v, const string &name, T *&result);	// NOTE: placeholder name
 template <class T> void OpQ5_moveElement(vector<T> &v, unsigned int from, unsigned int to);	// NOTE: placeholder name
@@ -52,7 +52,7 @@ extern int c67_b91e18;
 class Overmind	// NOTE: placeholder layout (partial)
 {
 public:
-	void unknown6827d0(C67_Party *party, int a);	// NOTE: placeholder name
+	void addParty(C67_Party *party, int a);	// NOTE: placeholder name
 	int deployAssaultParty(C67_HEntity owner, int type, bool flag, vector<C67_HEntity> *out);
 };
 
@@ -61,7 +61,7 @@ int Overmind::deployAssaultParty(C67_HEntity owner, int type, bool flag, vector<
 	vector<C67_Record *> adj;
 	if (type == 1)
 	{
-		C67_Record *cols = c67_cefc4c->unknown6c5600(1,22,0,1);
+		C67_Record *cols = c67_cefc4c->selectRobotOfClass(1,22,0,1);
 		if (cols == 0)
 		{
 			logError("Overmind::deployAssaultParty()","No CLASS_DEMOLISHER found");
@@ -78,26 +78,26 @@ int Overmind::deployAssaultParty(C67_HEntity owner, int type, bool flag, vector<
 				int current;
 				C67_WL<int> element;
 				for (int distanceSq = 0; distanceSq < 5; distanceSq++)
-					element.add(distanceSq,c67_b93b58[c67_d1e860.unknown46f4e0()][distanceSq]);
+					element.add(distanceSq,c67_b93b58[c67_d1e860.getDepthIndex()][distanceSq]);
 				for (int distanceSq = 0; distanceSq < 4; distanceSq++)
 				{
 					element.pick(&current);
 					switch (current)
 					{
 						case 0:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,24,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,24,0,1));
 							break;
 						case 1:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,25,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,25,0,1));
 							break;
 						case 2:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,23,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,23,0,1));
 							break;
 						case 3:
-							adj.push_back(c67_cefc4c->unknown6c5600(2,30,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(2,30,0,1));
 							break;
 						case 4:
-							adj.push_back(c67_cefc4c->unknown6c5600(2,31,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(2,31,0,1));
 							break;
 					}
 				}
@@ -108,23 +108,23 @@ int Overmind::deployAssaultParty(C67_HEntity owner, int type, bool flag, vector<
 				int current;
 				C67_WL<int> element;
 				for (int distanceSq = 0; distanceSq < 4; distanceSq++)
-					element.add(distanceSq,c67_b93cb8[c67_d1e860.unknown46f4e0()][distanceSq]);
+					element.add(distanceSq,c67_b93cb8[c67_d1e860.getDepthIndex()][distanceSq]);
 				for (int distanceSq = 0; distanceSq < 3; distanceSq++)
 				{
 					element.pick(&current);
 					switch (current)
 					{
 						case 0:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,24,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,24,0,1));
 							break;
 						case 1:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,25,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,25,0,1));
 							break;
 						case 2:
-							adj.push_back(c67_cefc4c->unknown6c5600(2,30,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(2,30,0,1));
 							break;
 						case 3:
-							adj.push_back(c67_cefc4c->unknown6c5600(2,31,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(2,31,0,1));
 							break;
 					}
 				}
@@ -140,22 +140,22 @@ int Overmind::deployAssaultParty(C67_HEntity owner, int type, bool flag, vector<
 					switch (current)
 					{
 						case 0:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,13,0,0));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,13,0,0));
 							break;
 						case 1:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,16,0,0));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,16,0,0));
 							break;
 						case 2:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,17,0,0));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,17,0,0));
 							break;
 						case 3:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,18,0,0));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,18,0,0));
 							break;
 						case 4:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,24,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,24,0,1));
 							break;
 						case 5:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,25,0,1));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,25,0,1));
 							break;
 					}
 				}
@@ -166,7 +166,7 @@ int Overmind::deployAssaultParty(C67_HEntity owner, int type, bool flag, vector<
 				int current;
 				C67_WL<int> element;
 				for (int distances = 0; distances < 3; distances++)
-					element.add(distances,c67_b93d68[c67_d1e860.unknown46f4e0()][distances]);
+					element.add(distances,c67_b93d68[c67_d1e860.getDepthIndex()][distances]);
 				bool distanceSq = false;
 				for (int distances = 0; distances < 4; distances++)
 				{
@@ -174,14 +174,14 @@ int Overmind::deployAssaultParty(C67_HEntity owner, int type, bool flag, vector<
 					switch (current)
 					{
 						case 0:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,16,!distanceSq,0));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,16,!distanceSq,0));
 							distanceSq = true;
 							break;
 						case 1:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,17,0,0));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,17,0,0));
 							break;
 						case 2:
-							adj.push_back(c67_cefc4c->unknown6c5600(1,18,0,0));
+							adj.push_back(c67_cefc4c->selectRobotOfClass(1,18,0,0));
 							break;
 					}
 				}
@@ -189,19 +189,19 @@ int Overmind::deployAssaultParty(C67_HEntity owner, int type, bool flag, vector<
 		}
 		C67_WL<int> cols;
 		for (int current = 0; current < 3; current++)
-			cols.add(current,c67_b93df8[c67_d1e860.unknown46f4e0()][current]);
+			cols.add(current,c67_b93df8[c67_d1e860.getDepthIndex()][current]);
 		int dy;
 		cols.pick(&dy);
 		switch (dy)
 		{
 			case 0:
-				adj.push_back(c67_cefc4c->unknown6c5600(1,8,0,0));
+				adj.push_back(c67_cefc4c->selectRobotOfClass(1,8,0,0));
 				break;
 			case 1:
-				adj.push_back(c67_cefc4c->unknown6c5600(1,19,0,0));
+				adj.push_back(c67_cefc4c->selectRobotOfClass(1,19,0,0));
 				break;
 			case 2:
-				adj.push_back(c67_cefc4c->unknown6c5600(1,15,0,0));
+				adj.push_back(c67_cefc4c->selectRobotOfClass(1,15,0,0));
 				break;
 		}
 	}
@@ -269,6 +269,6 @@ int Overmind::deployAssaultParty(C67_HEntity owner, int type, bool flag, vector<
 			clean[distanceSq]->unknown639530(148,1);
 		}
 	}
-	unknown6827d0(new C67_Party(7,behaviour,-1,flag,c67_cefc4c->getTurn() + c67_b91e18),0);
+	addParty(new C67_Party(7,behaviour,-1,flag,c67_cefc4c->getTurn() + c67_b91e18),0);
 	return center;
 }

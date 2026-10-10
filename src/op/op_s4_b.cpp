@@ -132,7 +132,7 @@ extern OpS4_Flags opS4_flags;	// NOTE: placeholder name (0xd1e860)
 struct OpS4_GameState	// NOTE: placeholder name
 {
 	int unknown04;
-	int unknown46ed20();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 
 class OpS4_HGameState	// NOTE: placeholder name (object at 0xd1e888)
@@ -363,7 +363,7 @@ bool OpS4_Xom::unknown69eba0(OpS4_HItem item)
 	{
 		return false;
 	}
-	if (item->getData()->unknown54 == 0 || item->unknown457920() >= opS4_gameState->unknown46ed20() + 3)
+	if (item->getData()->unknown54 == 0 || item->unknown457920() >= opS4_gameState->getDepthIndex() + 3)
 	{
 		return true;
 	}

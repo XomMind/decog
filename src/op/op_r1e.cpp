@@ -446,7 +446,7 @@ HEntity *OpR1e_RecLists::getEntity459570(HEntity entity)
 // OpR1e_Variant
 //==================================================================
 
-extern string gameStrings_d2f798[];
+extern string robotClassNames_d2f798[];
 string intToString(int value);
 
 template <class T> T sumArray(const T *values, unsigned int count) throw();	// NOTE: placeholder name (0x9d0ca0)
@@ -527,7 +527,7 @@ string OpR1e_Variant::getName459a40()
 	case 1:
 	case 2:
 	case 3:
-		name = unknown2c.empty() ? gameStrings_d2f798[index] : unknown2c;
+		name = unknown2c.empty() ? robotClassNames_d2f798[index] : unknown2c;
 
 		if (kind == 2)
 		{

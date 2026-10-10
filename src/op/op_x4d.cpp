@@ -187,7 +187,7 @@ class OpW2_Machine	// NOTE: placeholder name
 {
 public:
 	bool unknown46ecb0();	// NOTE: placeholder name
-	int unknown46ed20();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 
 	int		unknown0;
 	int		type;	// NOTE: placeholder name
@@ -367,7 +367,7 @@ class GameData	// NOTE: placeholder name
 {
 public:
 	bool unknown46f4b0(int a);					// NOTE: placeholder name
-	int unknown46f4e0();						// NOTE: placeholder name
+	int getDepthIndex();						// NOTE: placeholder name
 	string &unknown46f6d0(const string &key);	// NOTE: placeholder name
 	int unknown789090();	// NOTE: placeholder name
 	void setEntryText(const string &key, const string &text);	// NOTE: placeholder name (0x46f700)
@@ -387,7 +387,7 @@ public:
 extern OpW2_Obj_cf6428	opw2_cf6428;	// NOTE: placeholder name
 extern int		opw2_cf4718;			// NOTE: placeholder name
 extern int		opw2_table_ba65fc[];	// NOTE: placeholder name
-extern string	gameStrings_d2f798[];
+extern string	robotClassNames_d2f798[];
 void opw2_lowerToMax(int &value, int maxValue);	// NOTE: placeholder name (0x9cf5a0)
 void raiseToMin(int &value, int minValue);		// NOTE: placeholder name (0x9cf5c0)
 

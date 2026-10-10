@@ -110,7 +110,7 @@ class OpV3h_World	// NOTE: placeholder name (0xcefc4c)
 {
 public:
 	int unknown715800(vector<HEntity> &out);	// NOTE: placeholder name
-	void unknown774390(int type, int value);	// NOTE: placeholder name
+	void playerActionFinish(int type, int value);	// NOTE: placeholder name
 	HEntity getEntity671();	// NOTE: placeholder name (0x463110)
 
 	char pad[0x66c];
@@ -185,7 +185,7 @@ extern OpV3h_Popup *opV3h_popup;	// NOTE: placeholder name
 
 struct OpV3h_GameStateData	// NOTE: placeholder name
 {
-	int unknown46ed20();	// NOTE: placeholder name (folded getter)
+	int getDepthIndex();	// NOTE: placeholder name (folded getter)
 };
 class OpV3h_HGameState	// NOTE: placeholder name
 {

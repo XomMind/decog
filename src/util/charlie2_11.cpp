@@ -83,7 +83,7 @@ struct C2RFactory { C2RH createC(); };
 extern C2RBS *c2r_cefc4c;
 extern C2RMap c2r_cfd44c;
 extern C2RLocH c2r_d1e888;
-extern string c2r_cfaca0[], c2r_cf3fb0[];
+extern string c2r_mapNames_cfaca0[], c2r_cf3fb0[];
 extern C2RView *c2r_cec054;
 extern C2RShell *c2r_cec100;
 extern C2REngine *c2r_cefc64;
@@ -133,7 +133,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 		c2r_showPointsA(points);
 		if (count != original)
 		{
-			string msg = c2r_bf81c8 + intToString(original - count) + c2r_bf81c4 + c2r_cfaca0[c2r_d1e888->type] + (original - count > 1 ? c2r_bf81b4 : c2r_bf81bc) + c2r_bf81b0;
+			string msg = c2r_bf81c8 + intToString(original - count) + c2r_bf81c4 + c2r_mapNames_cfaca0[c2r_d1e888->type] + (original - count > 1 ? c2r_bf81b4 : c2r_bf81bc) + c2r_bf81b0;
 			opU5_logWithShell(flag, msg);
 		}
 		return points.size();
@@ -152,7 +152,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 		c2r_showPointsA(points);
 		if (count != original)
 		{
-			string msg = c2r_bf81f4 + intToString(original - count) + c2r_bf81f0 + c2r_cfaca0[max] + (original - count > 1 ? c2r_bf81d8 : c2r_bf81e4) + c2r_bf81d4;
+			string msg = c2r_bf81f4 + intToString(original - count) + c2r_bf81f0 + c2r_mapNames_cfaca0[max] + (original - count > 1 ? c2r_bf81d8 : c2r_bf81e4) + c2r_bf81d4;
 			opU5_logWithShell(flag, msg);
 			(*c2r_cefc4c->known463ce0())[kind] = 1;
 		}
@@ -172,7 +172,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 		c2r_showPointsA(points);
 		if (count != original)
 		{
-			string msg = c2r_bf8218 + intToString(original - count) + c2r_bf8214 + c2r_cfaca0[c2r_d1e888->type] + (original - count > 1 ? c2r_bf8204 : c2r_bf820c) + c2r_bf8200;
+			string msg = c2r_bf8218 + intToString(original - count) + c2r_bf8214 + c2r_mapNames_cfaca0[c2r_d1e888->type] + (original - count > 1 ? c2r_bf8204 : c2r_bf820c) + c2r_bf8200;
 			opU5_logWithShell(flag, msg);
 			(*c2r_cefc4c->known463ce0())[kind] = 1;
 		}
@@ -185,7 +185,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 		int tx = c2r_cfd44c.getHeight() / 25 + (c2r_cfd44c.getHeight() % 25 ? 1 : 0);
 		if (count >= cols * tx && cols * tx * 25 >= c2r_cfd44c.getWidth() * c2r_cfd44c.getHeight())
 		{
-			string text = c2r_bf8230 + c2r_cfaca0[c2r_d1e888->type] + c2r_bf8224;
+			string text = c2r_bf8230 + c2r_mapNames_cfaca0[c2r_d1e888->type] + c2r_bf8224;
 			opU5_logWithShell(flag, text);
 			(*c2r_cefc4c->known463ce0())[kind] = 1;
 			C2RBox area(0, 0, c2r_cfd44c.getWidth() - 1, c2r_cfd44c.getHeight() - 1);
@@ -234,7 +234,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 			}
 			if (!blocks.empty())
 			{
-				string msg = c2r_bf824c + intToString(count) + c2r_bf8248 + c2r_cfaca0[c2r_d1e888->type] + c2r_bf823c;
+				string msg = c2r_bf824c + intToString(count) + c2r_bf8248 + c2r_mapNames_cfaca0[c2r_d1e888->type] + c2r_bf823c;
 				opU5_logWithShell(flag, msg);
 				(*c2r_cefc4c->known463ce0())[kind] = 1;
 			}
@@ -308,7 +308,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 		c2r_markPropPoints(pts);
 		if (!pts.empty())
 		{
-			string msg = c2r_bf828c + c2r_cfaca0[c2r_d1e888->type] + c2r_bf8278 + intToString(pts.size()) + c2r_bf8270;
+			string msg = c2r_bf828c + c2r_mapNames_cfaca0[c2r_d1e888->type] + c2r_bf8278 + intToString(pts.size()) + c2r_bf8270;
 			opU5_logWithShell(flag, msg);
 			(*c2r_cefc4c->known463ce0())[kind] = 1;
 			string records = c2r_countString(pts.size(), c2r_bf8298);
@@ -347,7 +347,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 		c2r_showPointsB(pts);
 		if (!pts.empty())
 		{
-			string msg = c2r_bf82c8 + c2r_cfaca0[c2r_d1e888->type] + c2r_bf82ac + intToString(pts.size()) + c2r_bf82a4;
+			string msg = c2r_bf82c8 + c2r_mapNames_cfaca0[c2r_d1e888->type] + c2r_bf82ac + intToString(pts.size()) + c2r_bf82a4;
 			opU5_logWithShell(flag, msg);
 			(*c2r_cefc4c->known463ce0())[kind] = 1;
 			return 1;
@@ -381,7 +381,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 		}
 		if (!points.empty())
 		{
-			string msg = c2r_bf82f0 + c2r_cfaca0[c2r_d1e888->type] + c2r_bf82dc + intToString(points.size()) + c2r_bf82d4;
+			string msg = c2r_bf82f0 + c2r_mapNames_cfaca0[c2r_d1e888->type] + c2r_bf82dc + intToString(points.size()) + c2r_bf82d4;
 			opU5_logWithShell(flag, msg);
 			(*c2r_cefc4c->known463ce0())[kind] = 1;
 			if (!c2r_cec100)
@@ -418,7 +418,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 		}
 		if (found)
 		{
-			string msg = c2r_bf8318 + c2r_cfaca0[c2r_d1e888->type] + c2r_bf8304 + intToString(found) + c2r_bf82fc;
+			string msg = c2r_bf8318 + c2r_mapNames_cfaca0[c2r_d1e888->type] + c2r_bf8304 + intToString(found) + c2r_bf82fc;
 			opU5_logWithShell(flag, msg);
 			(*c2r_cefc4c->known463ce0())[kind] = 1;
 			if (!c2r_cec100)
@@ -529,7 +529,7 @@ int c2p_reveal794da0(int kind, int count, bool flag, int max)
 			default:
 				title = c2r_cf3fb0[kind - 12];
 			}
-			string msg = c2r_bf8370 + c2r_cfaca0[c2r_d1e888->type] + c2r_bf836c + title + c2r_bf8360 + intToString(machines) + c2r_bf8358;
+			string msg = c2r_bf8370 + c2r_mapNames_cfaca0[c2r_d1e888->type] + c2r_bf836c + title + c2r_bf8360 + intToString(machines) + c2r_bf8358;
 			opU5_logWithShell(flag, msg);
 			(*c2r_cefc4c->known463ce0())[kind] = 1;
 			string text = c2r_countString(machines, title + c2r_bf837c);

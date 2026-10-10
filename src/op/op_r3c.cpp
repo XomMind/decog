@@ -75,7 +75,7 @@ public:
 	int getTurn();			// 0x464270
 	HEntity getPlayer();	// 0x4630f0
 	OpR3c_HGroup unknown463890(int i);	// NOTE: placeholder name
-	int unknown463ba0();	// NOTE: placeholder name
+	int getDisabledGarrisonAccesses();	// NOTE: placeholder name
 	void unknown7297a0();	// NOTE: placeholder name
 };
 
@@ -126,7 +126,7 @@ class OpR3c_GameData	// NOTE: placeholder name (0xd1e860)
 {
 public:
 	bool unknown46f4b0(int a);					// NOTE: placeholder name
-	int unknown46f4e0();						// NOTE: placeholder name
+	int getDepthIndex();						// NOTE: placeholder name
 	string &unknown46f6d0(const string &key);	// NOTE: placeholder name
 };
 
@@ -171,9 +171,9 @@ public:
 	char pad38[0x4c - 0x38];
 	int unknown4c;				// NOTE: placeholder name
 	vector<OpR3c_Squad *> squads;	// NOTE: placeholder name
-	OpR3c_IntGrid unknown60;	// NOTE: placeholder name
+	OpR3c_IntGrid surgicalExplored;	// NOTE: placeholder name
 	char pad6c[0x70 - 0x6c];
-	int unknown70;				// NOTE: placeholder name
+	int surgicalTimer;				// NOTE: placeholder name
 	char pad74[0x88 - 0x74];
 	int unknown88;				// NOTE: placeholder name
 	int unknown8c;				// NOTE: placeholder name
@@ -196,7 +196,7 @@ public:
 	OpR3c_Squad *unknown683310(HEntity e);			// NOTE: placeholder name
 	bool unknown683380(HEntity e, int *out);			// NOTE: placeholder name
 	int unknown683410(HEntity e, vector<HEntity> &out);	// NOTE: placeholder name
-	void unknown684c40();								// NOTE: placeholder name
+	void resetSurgicalTimer();								// NOTE: placeholder name
 	void unknown68d920(int a);						// NOTE: placeholder name
 	bool unknown68e1a0();								// NOTE: placeholder name
 };
@@ -212,12 +212,12 @@ extern int opr3c_terrainCefbac;			// NOTE: placeholder name
 extern int opr3c_terrainCefbb0;			// NOTE: placeholder name
 extern const float opr3c_three;			// NOTE: placeholder name (0xb919e0, 3.0f)
 extern const float opr3c_amounts[];		// NOTE: placeholder name (0xb91998)
-extern const int opr3c_resistTable2[];	// NOTE: placeholder name (0xb989b4)
-extern const int opr3c_resistTable[];	// NOTE: placeholder name (0xb989a8)
+extern const int opr3c_zoneCloakDelay[];	// NOTE: placeholder name (0xb989b4)
+extern const int opr3c_threatObfuscation[];	// NOTE: placeholder name (0xb989a8)
 extern const int opr3c_statTable[];		// NOTE: placeholder name (0xbbc238)
 extern const bool opr3c_gainsTable[];	// NOTE: placeholder name (0xb8ffd4)
-extern const int opr3c_ranges[][5];		// NOTE: placeholder name (0xb93790)
-extern vector<int> opr3c_mapObjects;	// NOTE: placeholder name (0xcf4a04)
+extern const int opr3c_surgicalIntervals[][5];		// NOTE: placeholder name (0xb93790)
+extern vector<int> opr3c_rifLevels;	// NOTE: placeholder name (0xcf4a04)
 extern OpR3c_HGameState opr3c_gameState;	// NOTE: placeholder name (0xd1e888)
 extern OpR3c_Chance opr3c_chance;		// NOTE: placeholder name (0xcf45d8)
 extern int opr3c_mode;					// NOTE: placeholder name (0xcf462c)
@@ -242,7 +242,7 @@ void OpR3c_Overmind::unknown682110(int terrain, HEntity e)
 	if (opr3c_gameData.unknown46f4b0(1) && e.operator->() && e->getGroup()->unknown9b8f00() <= 2)
 	{
 		if (terrain == opr3c_terrainCefbb0 || terrain == TERRAIN_CAVE_WALL)
-			unknown682420(0x12,opr3c_maxInt(1,(int)(opr3c_gameData.unknown46f4e0() / opr3c_three)));
+			unknown682420(0x12,opr3c_maxInt(1,(int)(opr3c_gameData.getDepthIndex() / opr3c_three)));
 		else if (terrain == caveinThirdTerrain)
 			unknown682420(0x13,0);
 		else if (terrain == opr3c_terrainCefbac)
@@ -269,8 +269,8 @@ void OpR3c_Overmind::unknown682420(int a, int b)
 		b = (int)opr3c_amounts[a];
 	if (b > 0)
 	{
-		if (opr3c_mapObjects[7] != 0)
-			b = opr3c_maxInt(1,b - b * opr3c_resistTable[opr3c_mapObjects[7]] / 100);
+		if (opr3c_rifLevels[7] != 0)
+			b = opr3c_maxInt(1,b - b * opr3c_threatObfuscation[opr3c_rifLevels[7]] / 100);
 		int reduction = world->getPlayer()->unknown5d22a0(0x1d);
 		if (reduction != 0)
 			b = opr3c_maxInt(1,b - b * reduction / 100);
@@ -387,10 +387,12 @@ int OpR3c_Overmind::unknown683410(HEntity e, vector<HEntity> &out)
 	return out.size();
 }
 
-void OpR3c_Overmind::unknown684c40()
+// Rolls the turn at which the next surgical party is due: interval for this depth, Zone Cloak delay, 75 turns per
+// disabled Garrison Access. Exploration pulls it earlier (BS::playerActionFinish), so the visited-block grid is cleared.
+void OpR3c_Overmind::resetSurgicalTimer()
 {
-	unknown70 = world->getTurn() + ((opr3c_mapObjects[9] ? opr3c_resistTable2[opr3c_mapObjects[9]] : 0) + rng.rangeInt((float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][0],(float)opr3c_ranges[opr3c_gameData.unknown46f4e0()][1])) + world->unknown463ba0() * 75;
-	unknown60.fill(0);
+	surgicalTimer = world->getTurn() + ((opr3c_rifLevels[9] ? opr3c_zoneCloakDelay[opr3c_rifLevels[9]] : 0) + rng.rangeInt((float)opr3c_surgicalIntervals[opr3c_gameData.getDepthIndex()][0],(float)opr3c_surgicalIntervals[opr3c_gameData.getDepthIndex()][1])) + world->getDisabledGarrisonAccesses() * 75;
+	surgicalExplored.fill(0);
 }
 
 void OpR3c_Overmind::unknown68d920(int a)

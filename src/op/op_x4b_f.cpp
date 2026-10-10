@@ -18,7 +18,7 @@ public:
 
 struct OpX4b_LocationInfo	// NOTE: placeholder name
 {
-	int unknown46ed20();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 
 class OpX4b_HLocation	// NOTE: placeholder name (object at 0xd1e888)
@@ -105,7 +105,7 @@ int OpX4b_unknown6c4600(const string &text)	// NOTE: placeholder name
 	if (split[0][0] == '+')
 	{
 		opw8_eraseFirstChar(split[0]);
-		rating = OpX5_minInt(opx4b_location->unknown46ed20() + stringToInt(split[0]),10);
+		rating = OpX5_minInt(opx4b_location->getDepthIndex() + stringToInt(split[0]),10);
 	}
 	else
 	{
@@ -146,15 +146,15 @@ int OpX4b_unknown6c4ac0(const string &text)
 	if (isdigit(split[0][0]))
 		range.low = unknown405b40(split[0][0]);
 	else if (split[0][0] == '+')
-		range.low = OpX5_minInt(opx4b_location->unknown46ed20() + unknown405b40(split[0][1]),10);
+		range.low = OpX5_minInt(opx4b_location->getDepthIndex() + unknown405b40(split[0][1]),10);
 	else
-		range.low = OpX5_maxInt(opx4b_location->unknown46ed20() - unknown405b40(split[0][1]),1);
+		range.low = OpX5_maxInt(opx4b_location->getDepthIndex() - unknown405b40(split[0][1]),1);
 	if (isdigit(split[1][0]))
 		range.high = unknown405b40(split[1][0]);
 	else if (split[1][0] == '+')
-		range.high = OpX5_minInt(opx4b_location->unknown46ed20() + unknown405b40(split[1][1]),10);
+		range.high = OpX5_minInt(opx4b_location->getDepthIndex() + unknown405b40(split[1][1]),10);
 	else
-		range.high = OpX5_maxInt(opx4b_location->unknown46ed20() - unknown405b40(split[1][1]),1);
+		range.high = OpX5_maxInt(opx4b_location->getDepthIndex() - unknown405b40(split[1][1]),1);
 	OpR5h_WL<int> wl;
 	for (unsigned int n = 0; n < opx4b_entityRecords.size(); n++)
 	{

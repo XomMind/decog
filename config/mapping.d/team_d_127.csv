@@ -1,2 +1,2 @@
 # team_d_127: BS end of player action 0x774390 (src/game/team_d_127.cpp)
-BS::unknown774390,0x774390,0x7d8
+BS::playerActionFinish,0x774390,0x7d8

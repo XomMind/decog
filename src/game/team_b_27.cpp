@@ -40,7 +40,7 @@ public:
 class TeamB_GridCell { public: HEntity getEntity_45d250(); };	// NOTE: placeholder name (Cell)
 class TeamB_CellGrid { public: TeamB_GridCell **atPoint(Point &p); };	// NOTE: placeholder name
 extern TeamB_CellGrid teamb_cells_cfd44c;	// NOTE: placeholder name
-class TeamB_World825 { public: TeamB_HGroup getGroup_463890(int index); void unknown774390(int a, int b); };	// NOTE: placeholder name
+class TeamB_World825 { public: TeamB_HGroup getGroup_463890(int index); void playerActionFinish(int a, int b); };	// NOTE: placeholder name
 extern TeamB_World825 *teamb_world825_cefc4c;	// NOTE: placeholder name
 bool teamb_logMessage_5111e0(int id, const string *text, const string *b, int c, HEntity entity, HProp prop, const Point *at, int flag);	// NOTE: placeholder name
 void teamb_logMessage_5141b0(int id, const string *a, int b, int c, HProp e, int d);	// NOTE: placeholder name
@@ -107,7 +107,7 @@ bool TeamB_MapView825::interact825a60(HEntity actor, Point &pos, bool check)	// 
 		teamb_playerData_cf45d8.unknown77fbc0(0x63);
 		unknown49aee0();
 	}
-	teamb_world825_cefc4c->unknown774390(0xf,-1);
+	teamb_world825_cefc4c->playerActionFinish(0xf,-1);
 	unknown49ad30();
 	return false;
 }

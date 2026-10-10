@@ -744,7 +744,7 @@ std::string gameStrings_d1ed68[] =
 };
 
 // Initializer 0xb27120, array 0xcfaca0, 38 x 28-byte x86 std::string.
-std::string gameStrings_cfaca0[] =
+std::string mapNames_cfaca0[] =
 {
 	"Sandbox",
 	"Scrapyard",
@@ -999,7 +999,7 @@ std::string gameStrings_cf25d8[] =
 };
 
 // Initializer 0xb28870, array 0xd2f350, 11 x 28-byte x86 std::string.
-std::string gameStrings_d2f350[] =
+std::string partyTypeNames_d2f350[] =
 {
 	"security",
 	"surveillance",
@@ -1146,7 +1146,7 @@ std::string gameStrings_d38648[] =
 };
 
 // Initializer 0xb2a150, array 0xd2f798, 97 x 28-byte x86 std::string.
-std::string gameStrings_d2f798[] =
+std::string robotClassNames_d2f798[] =
 {
 	"Cogmind",
 	"Worker",
@@ -1961,7 +1961,7 @@ std::string gameStrings_d32d18[] =
 };
 
 // Initializer 0xb2e870, array 0xd2a2e0, 19 x 28-byte x86 std::string.
-std::string gameStrings_d2a2e0[] =
+std::string rifAbilityNames_d2a2e0[] =
 {
 	"Alert Monitor",
 	"Garrison Interface",

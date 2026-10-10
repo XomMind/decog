@@ -10,13 +10,13 @@ struct LB28Prop{bool pass65e1d0(LB28H);LB28Def*def9b8f00()throw();int armor45c63
 struct LB28CellDef{char p[0x50];LB28Material*material;};struct LB28Cell{LB28H entity45d250()throw();LB28HP prop45d550()throw();bool solid4550b0()throw();bool machine45dcd0()throw();int armor66ae70()throw();const string&name45d140()throw();LB28CellDef*def9fcd80()throw();};struct LB28Grid{LB28Cell**at9ced70(const LB28P&)throw();};extern LB28Grid lb28_cfd44c;
 struct LB28Phrase{const void*definition;string text;LB28Phrase(int,const string*,const string*,const string*,LB28H,LB28H);};struct LB28Interface{void add7b1880(LB28Phrase*);};extern LB28Interface*lb28_cec0f4;
 struct LB28Data{string&text46f6d0(const string&);};extern LB28Data lb28_d1e860;int lb28_parse405610(const string&);string lb28_int4051f0(int);
-struct LB28Map{void spend774390(int,int);};extern LB28Map*lb28_cefc4c;extern int lb28_cf462c,lb28_cf46f4;struct LB28Location;extern LB28Location*lb28_cf4700;extern unsigned lb28_caed20;
+struct LB28Map{void playerActionFinish(int,int);};extern LB28Map*lb28_cefc4c;extern int lb28_cf462c,lb28_cf46f4;struct LB28Location;extern LB28Location*lb28_cf4700;extern unsigned lb28_caed20;
 struct LB28Cinematic{void integrate9682e0(LB28H);};extern LB28Cinematic*lb28_cec138;
 void lb28_warn7b1750(int,const string*,const string*,const string*,LB28H,LB28H,const LB28P*);void lb28_message49c610(int,LB28H,const string&,const LB28P*);int lb28_sound4541b0(unsigned,int,int);int lb28_max9cdb60(int,int)throw();extern int lb28_b95fd8;extern int lb28_b95fa0[];
 struct LB28CMap{char p[0x55c];LB28H target;unsigned start,last;LB28P wallPoint;unsigned wallStart,wallLast;char p578[0x5c4-0x578];LB28H shell;unsigned shellStart;bool last824c40(LB28H,const LB28P&,int,bool);bool confirm805520(const LB28P&);bool first805de0(LB28H,bool);bool second8062d0();void enter825e00();};
 bool LB28CMap::last824c40(LB28H entity,const LB28P&point,int direction,bool quiet){
  if(entity.get9b6570()->blocked5d1280(false)){lb28_cec0f4->add7b1880(new LB28Phrase(131,0,0,0,LB28H(),LB28H()));return false;}
- if(entity.get9b6570()->stopped5fdae0()){lb28_cefc4c->spend774390(14,lb28_b95fd8);return true;}
+ if(entity.get9b6570()->stopped5fdae0()){lb28_cefc4c->playerActionFinish(14,lb28_b95fd8);return true;}
  int type=11;
  if(!quiet){
   if((*lb28_cfd44c.at9ced70(point))->entity45d250().valid9b7230()){
@@ -61,5 +61,5 @@ wallReset:wallPoint.assign46ca50(point);wallStart=lb28_caed20;wallLast=lb28_caed
    if(first805de0(entity,false))return true;if(second8062d0())return true;entity.get9b6570()->wall600970(direction,point);if(!entity.get9b6570()->value490840())return true;wallLast=lb28_caed20;
   }else return false;
  }
- int value=lb28_b95fa0[type];if(entity.get9b6570())value=lb28_max9cdb60(value,entity.get9b6570()->speed5d15a0(false));lb28_cefc4c->spend774390(type,value);return true;
+ int value=lb28_b95fa0[type];if(entity.get9b6570())value=lb28_max9cdb60(value,entity.get9b6570()->speed5d15a0(false));lb28_cefc4c->playerActionFinish(type,value);return true;
 }

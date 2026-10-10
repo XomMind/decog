@@ -56,7 +56,7 @@ public:
 	T &pick();
 	char pad[0x24];
 };
-class TeamB_ShopLocation { public: int unknown46ed20(); };	// NOTE: placeholder name
+class TeamB_ShopLocation { public: int getDepthIndex(); };	// NOTE: placeholder name
 class TeamB_HShopLocation { public: int ID; TeamB_ShopLocation *operator->() const; };	// NOTE: placeholder name
 extern TeamB_HShopLocation teamb_shopLocation_d1e888;	// NOTE: placeholder name
 class TeamB_ShopFactory { public: TeamB_HShopItem createD(TeamB_ShopType *type); };	// NOTE: placeholder name (OpU5s2_Factory)
@@ -114,7 +114,7 @@ void teamb_buy877150(void *source, const string &value)	// 0x877150 (local names
 				list.add(1,25);
 				list.add(2,40);
 				list.add(3,15);
-				int level = ops7_clamp_9cdc80(1,teamb_shopLocation_d1e888->unknown46ed20() + list.pick(),9);
+				int level = ops7_clamp_9cdc80(1,teamb_shopLocation_d1e888->getDepthIndex() + list.pick(),9);
 				bool first = rng.chance(25);
 				for (int i = 0; i < 30; i++)
 				{

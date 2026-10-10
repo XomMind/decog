@@ -180,7 +180,7 @@ struct E6Group {char pad[4]; E6HE leader;};
 struct E6Overmind
 {
 	int spawnPatrolParty(E6HE e, int a, int b, void *room, int c, int d, int f, int g, int h);	// 0x6896d0
-	E6Group *lastGroup45ed10();	// 0x45ed10
+	E6Group *lastParty();	// 0x45ed10
 	void members683410(E6HE leader, vector<E6HE> &out);	// 0x683410
 };
 extern E6Overmind e6_overmind_cf6428;
@@ -356,7 +356,7 @@ struct E6Location
 	bool b24;
 	char pad25[0x30 - 0x25];
 	vector<int> list30;
-	int count46ed20();	// 0x46ed20
+	int getDepthIndex();	// 0x46ed20
 	E6HItem find(int type) throw();	// 0x46ee80
 };
 struct E6HLocation {int id; E6HLocation(); E6Location *operator->() const throw();};	// 0x9b6590	// 0x9b7910
@@ -450,7 +450,7 @@ struct BS
 	vector<int> c38;
 	char padc48[0x10];
 	vector<int> c58;
-	E6Rec2 *getRecord6c5600(int a, int b, bool c, bool d);	// 0x6c5600
+	E6Rec2 *selectRobotOfClass(int a, int b, bool c, bool d);	// 0x6c5600
 	E6HE placeEntity(E6Rec2 *r, const E6Point &p, int a, bool b, int c, int d, bool e);	// 0x6c58c0
 	void terrain6c38a0(E6Rect *r, E6Room *room, float f, int t);	// 0x6c38a0
 	E6ItemType *selectRandomItem(int a, int b, int c);	// 0x6c3bc0
@@ -474,7 +474,7 @@ void BS::placeRandomEncounter(vector<int> &encounters, vector<E6Rect> &placed, v
 {
 	int ay = e6_location_d1e888->dlev;
 	int ratio = e6_location_d1e888->f8;
-	int num = e6_location_d1e888->count46ed20();
+	int num = e6_location_d1e888->getDepthIndex();
 	for (int i = 0; i < 0x12e; i++)
 		if (e6_records_d21afc[i]->f30 >= 0)
 			e6_vec_d1e8d0[i] = 0;
@@ -1648,7 +1648,7 @@ extraDone:
 					}
 					if (spot.x != -1)
 					{
-						E6Rec2 *er = getRecord6c5600(1,3,false,false);
+						E6Rec2 *er = selectRobotOfClass(1,3,false,false);
 						if (er != 0)
 						{
 							E6HE e = placeEntity(er,spot,4,true,0x22,0xe,false);
@@ -1710,7 +1710,7 @@ extraDone:
 								ranks.push_back(5);
 								while (vv2 != 0)
 								{
-									E6Rec2 *er = getRecord6c5600(1,e6_randomRec(ranks),false,false);
+									E6Rec2 *er = selectRobotOfClass(1,e6_randomRec(ranks),false,false);
 									if (er != 0)
 									{
 										E6Point p = element ? element->rect.randomPos() : e6_randomPoint(room->points);
@@ -1756,7 +1756,7 @@ extraDone:
 								while (vv2 != 0)
 								{
 									bool e30 = rng.chance(66);
-									E6Rec2 *g38 = getRecord6c5600(1,e6_randomRec(e30 ? g24 : e27),false,true);
+									E6Rec2 *g38 = selectRobotOfClass(1,e6_randomRec(e30 ? g24 : e27),false,true);
 									if (g38 != 0)
 									{
 										E6Point p;
@@ -1827,7 +1827,7 @@ extraDone:
 									r.y = rng.rangeInt(0,element->rect.h - 1) + element->rect.y;
 									break;
 								}
-								E6Rec2 *er = getRecord6c5600(1,5,false,false);
+								E6Rec2 *er = selectRobotOfClass(1,5,false,false);
 								if (er == 0)
 									goto nextTry;
 								r.w = r.h = er->size9c;
@@ -1942,7 +1942,7 @@ nextTry:;
 					}
 					if (idx == 7)
 					{
-						E6Rec2 *er = getRecord6c5600(1,1,false,false);
+						E6Rec2 *er = selectRobotOfClass(1,1,false,false);
 						if (er != 0)
 							for (int i = 0; i < 2; i++)
 							{
@@ -1954,7 +1954,7 @@ nextTry:;
 					{
 						if (e6_overmind_cf6428.spawnPatrolParty(E6HE(),1,0,room,0,0,0,10,0))
 						{
-							E6Group *g = e6_overmind_cf6428.lastGroup45ed10();
+							E6Group *g = e6_overmind_cf6428.lastParty();
 							g->leader->getAI()->unknown459470(ww3);
 						}
 					}
@@ -2015,7 +2015,7 @@ nextDir:
 				}
 				case 9:
 				{
-					E6Rec2 *er = getRecord6c5600(1,3,false,false);
+					E6Rec2 *er = selectRobotOfClass(1,3,false,false);
 					if (er != 0)
 					{
 						for (int i = 0; i < 2; i++)
@@ -2038,7 +2038,7 @@ nextDir:
 						valid = true;
 					if (e6_overmind_cf6428.spawnPatrolParty(E6HE(),1,0,room,0,3,0,10,0))
 					{
-						E6Group *z18 = e6_overmind_cf6428.lastGroup45ed10();
+						E6Group *z18 = e6_overmind_cf6428.lastParty();
 						E6Area m49;
 						e6_cells_cfd44c.getRect(z18->leader->getPosition(),5,m49);
 						z18->leader->getAI()->unknown459470(m49);
@@ -2325,7 +2325,7 @@ nextDir:
 						valid = true;
 						if (idx == 0x9b)
 						{
-							e6_overmind_cf6428.lastGroup45ed10()->leader->getAI()->unknown4594c0(room);
+							e6_overmind_cf6428.lastParty()->leader->getAI()->unknown4594c0(room);
 							unknown6dd0e0(e6_randomPoint(room->points),0x12);
 							unknown6dd0e0(e6_randomPoint(room->points),0x12);
 							unknown6dd0e0(e6_randomPoint(room->points),0x11);
@@ -2346,7 +2346,7 @@ nextDir:
 						ranks.add(5,50);
 					}
 					ranks.add(0x35,0x19);
-					E6Rec2 *er = getRecord6c5600(3,ranks.pick(),false,false);
+					E6Rec2 *er = selectRobotOfClass(3,ranks.pick(),false,false);
 					if (er != 0)
 					{
 						for (int n = rng.rangeInt(1,3); n > 0; n--)
@@ -2374,7 +2374,7 @@ nextDir:
 				}
 				case 0x99:
 				{
-					E6Rec2 *er = getRecord6c5600(1,7,false,true);
+					E6Rec2 *er = selectRobotOfClass(1,7,false,true);
 					if (er != 0)
 					{
 						E6WL traps;
@@ -2404,7 +2404,7 @@ nextDir:
 								}
 								if (rng.chance(50))
 								{
-									E6Rec2 *escort = getRecord6c5600(1,0x10,false,true);
+									E6Rec2 *escort = selectRobotOfClass(1,0x10,false,true);
 									if (escort != 0)
 									{
 										for (int n = rng.rangeInt(1,2); n > 0; n--)

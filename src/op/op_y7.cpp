@@ -268,7 +268,7 @@ class OpY7_World	// NOTE: placeholder name (object at 0xcefc4c)
 public:
 	bool unknown71bbd0();	// NOTE: placeholder name
 	HEntity getPlayer();	// 0x4630f0
-	void unknown774390(int type, int value);	// NOTE: placeholder name
+	void playerActionFinish(int type, int value);	// NOTE: placeholder name
 };
 extern OpY7_World *opy7_world;	// NOTE: placeholder name
 
@@ -520,7 +520,7 @@ int OpY7_Inventory::unknown8a4ec0(HProp item, bool flag)
 			}
 			while (0);
 			unknown94 = item;
-			opy7_world->unknown774390(8,player->unknown642940(item,1,0,0,0));
+			opy7_world->playerActionFinish(8,player->unknown642940(item,1,0,0,0));
 			break;
 		case 8:
 			opy7_message7b1750(0x14,opy7_cells(player->getPosition())->getItem()->getName(0,0),0,0,player,HProp(),0);

@@ -75,7 +75,7 @@ public:
 	int getTurn();			// 0x464270
 	HEntity getPlayer();	// 0x4630f0
 	OpR3c_HGroup unknown463890(int i);	// NOTE: placeholder name
-	int unknown463ba0();	// NOTE: placeholder name
+	int getDisabledGarrisonAccesses();	// NOTE: placeholder name
 	void unknown7297a0();	// NOTE: placeholder name
 };
 
@@ -126,7 +126,7 @@ class OpR3c_GameData	// NOTE: placeholder name (0xd1e860)
 {
 public:
 	bool unknown46f4b0(int a);					// NOTE: placeholder name
-	int unknown46f4e0();						// NOTE: placeholder name
+	int getDepthIndex();						// NOTE: placeholder name
 	string &unknown46f6d0(const string &key);	// NOTE: placeholder name
 };
 
@@ -171,9 +171,9 @@ public:
 	char pad38[0x4c - 0x38];
 	int unknown4c;				// NOTE: placeholder name
 	vector<OpR3c_Squad *> squads;	// NOTE: placeholder name
-	OpR3c_IntGrid unknown60;	// NOTE: placeholder name
+	OpR3c_IntGrid surgicalExplored;	// NOTE: placeholder name
 	char pad6c[0x70 - 0x6c];
-	int unknown70;				// NOTE: placeholder name
+	int surgicalTimer;				// NOTE: placeholder name
 	char pad74[0x88 - 0x74];
 	int unknown88;				// NOTE: placeholder name
 	int unknown8c;				// NOTE: placeholder name
@@ -211,12 +211,12 @@ extern int opr3c_terrainCefbac;			// NOTE: placeholder name
 extern int opr3c_terrainCefbb0;			// NOTE: placeholder name
 extern const float opr3c_three;			// NOTE: placeholder name (0xb919e0, 3.0f)
 extern const float opr3c_amounts[];		// NOTE: placeholder name (0xb91998)
-extern const int opr3c_resistTable2[];	// NOTE: placeholder name (0xb989b4)
-extern const int opr3c_resistTable[];	// NOTE: placeholder name (0xb989a8)
+extern const int opr3c_zoneCloakDelay[];	// NOTE: placeholder name (0xb989b4)
+extern const int opr3c_threatObfuscation[];	// NOTE: placeholder name (0xb989a8)
 extern const int opr3c_statTable[];		// NOTE: placeholder name (0xbbc238)
 extern const bool opr3c_gainsTable[];	// NOTE: placeholder name (0xb8ffd4)
-extern const int opr3c_ranges[][5];		// NOTE: placeholder name (0xb93790)
-extern vector<int> opr3c_mapObjects;	// NOTE: placeholder name (0xcf4a04)
+extern const int opr3c_surgicalIntervals[][5];		// NOTE: placeholder name (0xb93790)
+extern vector<int> opr3c_rifLevels;	// NOTE: placeholder name (0xcf4a04)
 extern OpR3c_HGameState opr3c_gameState;	// NOTE: placeholder name (0xd1e888)
 extern OpR3c_Chance opr3c_chance;		// NOTE: placeholder name (0xcf45d8)
 extern int opr3c_mode;					// NOTE: placeholder name (0xcf462c)
@@ -227,4 +227,4 @@ extern OpR3c_MessageLog opr3c_messageLog;	// NOTE: placeholder name (0xcf1080)
 extern bool opr3c_flag_d28fb0;			// NOTE: placeholder name
 int opr3c_maxInt(int a, int b);			// NOTE: placeholder name (0x9cdb60)
 
-// NOTE: 0x684c40 is OpR3c_Overmind::unknown684c40 in src/op/op_r3c.cpp.
+// NOTE: 0x684c40 is OpR3c_Overmind::resetSurgicalTimer in src/op/op_r3c.cpp.

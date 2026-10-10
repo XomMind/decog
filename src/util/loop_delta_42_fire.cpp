@@ -18,7 +18,7 @@ struct D42Def{char p[0x48];int category;char p4c[0x1c];int kind;char p6c[0x40];i
 struct D42Entity{bool same45a510(const D42P&);D42P nearest5c80f0(const D42P&);D42HI melee5d5d40();bool weapons5d6a80(D42Vec<D42HI>*,const D42P&,int);bool friendly45aaa0(D42HE);int hacking5cab90();int target45a760();void target44e2c0(int);D42Def*def9b4350();const D42P&pos45a4a0();D42P point45a4c0();int relation5c7fc0(D42HE);void reset5fdab0();const string&name416f40();void faction5dc780(D42HG,bool);D42EntityEffect*effect45ac40(int);void level5fd900(int,int);D42Effects*effects45ad90();D42HG group45a3f0();int energy45a8d0();int matter45a920();int heat5d7320(D42Vec<D42HI>*,bool);bool hostile45aa70(D42HE);int rating5df740(int);};
 struct D42Item{int kind457f90();int category457880();int energy5788e0();int matter5789c0();};struct D42Prop{bool passable65e1d0(D42HE);};struct D42Group{int kind9b4350();};
 struct D42Cell{bool blocked45d480();D42HE entity45d250();D42HP prop45d550();bool cave66af50();};struct D42Grid{D42Cell**at9ced70(D42P&);};extern D42Grid d42_cfd44c;
-struct D42World{D42HE player4630f0();bool reachable465230(int,const D42P&,const D42P&);void hack734ae0(D42HE,const D42P&,bool);void turn774390(int,int);D42HG group463890(int);D42HE other7345f0(D42HE,D42HE,bool);int member4638e0(int,int);bool free464370();D42HS add777a20(D42HS);};extern D42World*d42_cefc4c;
+struct D42World{D42HE player4630f0();bool reachable465230(int,const D42P&,const D42P&);void hack734ae0(D42HE,const D42P&,bool);void playerActionFinish(int,int);D42HG group463890(int);D42HE other7345f0(D42HE,D42HE,bool);int member4638e0(int,int);bool free464370();D42HS add777a20(D42HS);};extern D42World*d42_cefc4c;
 struct D42Base{virtual ~D42Base();virtual int kind();virtual bool update();virtual void finish();D42HS record;int state,time;D42Base();};
 struct D42Shoot: D42Base{D42HE entity;int mode;D42P target,origin;D42HE targetEntity;D42Vec<D42Line>children;bool misfire,autonomous,flag;D42HE targeting;D42Vec<D42HI>items;int fired,active,unknown5c,unknown60,unknown64,unknown68;D42Vec<D42P>points;virtual int kind();virtual bool update();virtual void finish();D42Shoot(D42HE,int,const D42P&,const D42P&,int*,D42Vec<D42Line>&,bool,D42HI);~D42Shoot();};
 struct D42PhraseDef;struct D42Phrase{D42PhraseDef*definition;string text;D42Phrase(int,const string*,const string*,const string*,D42HE,D42HE);~D42Phrase();};
@@ -57,7 +57,7 @@ void D42Map::fire821450(D42HE entity){
   D42HE other=(*d42_cfd44c.at9ced70(target))->entity45d250();
   if(other.valid9b7230()){
    if(d42_contains9db330(d42_d25de0.at9b81f0(d42_cf4700->index)->flags,14)&&other.valid9b7230()&&other.get9b6570()->friendly45aaa0(entity)&&other.get9b6570()->hacking5cab90()&&other.get9b6570()->target45a760()==0&&d42_cefc4c->reachable465230(9999,entity.get9b6570()->pos45a4a0(),other.get9b6570()->pos45a4a0())){
-    d42_cefc4c->hack734ae0(entity,other.get9b6570()->pos45a4a0(),true);other.get9b6570()->target44e2c0(0);D42_MSG(793,0,entity,other,0);refresh827950();d42_cefc4c->turn774390(17,100);return;
+    d42_cefc4c->hack734ae0(entity,other.get9b6570()->pos45a4a0(),true);other.get9b6570()->target44e2c0(0);D42_MSG(793,0,entity,other,0);refresh827950();d42_cefc4c->playerActionFinish(17,100);return;
    }
    if(d42_contains9db330(d42_d25de0.at9b81f0(d42_cf4700->index)->flags,15)&&!other.get9b6570()->def9b4350()->unknownAc&&d42_cefc4c->reachable465230(9999,entity.get9b6570()->pos45a4a0(),other.get9b6570()->pos45a4a0())){
     int status=other.get9b6570()->relation5c7fc0(d42_cefc4c->player4630f0());bool allied=status==2;
@@ -68,7 +68,7 @@ void D42Map::fire821450(D42HE entity){
       else{D42_MSG(796,0,other,D42HE(),0);if(d42_b95758[other.get9b6570()->def9b4350()->category])do{d42_phrase5141b0(21,&other.get9b6570()->name416f40(),0,0,D42HE(),0);}while(false);other.get9b6570()->reset5fdab0();other.get9b6570()->faction5dc780(d42_cefc4c->group463890(1),true);d42_sound4541b0(107,0,0);d42_d2c658.add4729d0(890,1,d42_b9641b,-1);d42_cf45d8.achieve77fbc0(99);}
       d42_cefc4c->hack734ae0(entity,other.get9b6570()->pos45a4a0(),true);
      }else{D42_MSG(795,0,other,D42HE(),0);d42_cefc4c->hack734ae0(entity,other.get9b6570()->pos45a4a0(),false);}
-     refresh827950();d42_cefc4c->turn774390(17,100);return;
+     refresh827950();d42_cefc4c->playerActionFinish(17,100);return;
     }else if(other.get9b6570()->target45a760()==0&&status==0&&other.get9b6570()->effect45ac40(57)){
      D42HE from=entity,target=other;bool done=false;bool event=rng.chance(33);
      int score2=event?d42_b985e0[target.get9b6570()->def9b4350()->indexB0][from.get9b6570()->def9b4350()->kind]:d42_b98480[target.get9b6570()->def9b4350()->indexB0][from.get9b6570()->def9b4350()->kind];score2=(int)(score2*0.5);
@@ -81,7 +81,7 @@ void D42Map::fire821450(D42HE entity){
      }
      d42_cefc4c->hack734ae0(from,target.get9b6570()->pos45a4a0(),done);
      if(d42_d1e860.flag46f4b0(1)){if(!d42_cefc4c->member4638e0(3,other.get9b6570()->group45a3f0().get9b7250()->kind9b4350()))d42_cf45d8.suspicion77ee70(-20.0f,14,D42HE());else d42_cf45d8.suspicion77ee70(50.0f,13,D42HE());}
-     refresh827950();d42_cefc4c->turn774390(17,200);return;
+     refresh827950();d42_cefc4c->playerActionFinish(17,200);return;
     }
    }
   }
@@ -114,6 +114,6 @@ void D42Map::fire821450(D42HE entity){
  if(d42_cf45d8.flag46de40(59)&&d42_adj4373c0(entity.get9b6570()->pos45a4a0(),target)&&(*d42_cfd44c.at9ced70(target))->entity45d250().valid9b7230()&&(*d42_cfd44c.at9ced70(target))->entity45d250().get9b6570()->hostile45aa70(entity))for(int i=0;i<slots.size9b9260();i++)if(slots.at9b81f0(i).get9b65b0()->category457880()==24){d42_cf45d8.achieve77fbc0(59);break;}
  if(d42_d28e7a&&d42_d1d9c0.type==5)d42_d1d9c0.type=entity.get9b6570()->rating5df740(0);
  int time;d42_cefc4c->add777a20(d42_cefaa8->create7930e0(new D42Shoot(entity,1,target,origin,&time,paths,false,D42HI())));
- d42_d2c658.add4729d0(378,1,d42_b9641f,-1);d42_d2c658.add4729d0(379,slots.size9b9260(),d42_b96422,-1);refresh827950();d42_cefc4c->turn774390(9,time);
+ d42_d2c658.add4729d0(378,1,d42_b9641f,-1);d42_d2c658.add4729d0(379,slots.size9b9260(),d42_b96422,-1);refresh827950();d42_cefc4c->playerActionFinish(9,time);
 }
 }

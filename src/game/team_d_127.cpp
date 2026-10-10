@@ -143,25 +143,25 @@ extern HLocation127 location127_d1e888;	// NOTE: placeholder name
 
 struct MapFlags127	// NOTE: placeholder name (6-byte per-map-type record)
 {
-	bool	trackExploration;
+	bool	surgicalParties;	// map type gets timed surgical (extermination) parties and credits exploration toward them
 	char	pad[5];
 };
 extern MapFlags127 mapFlags127_b90180[];	// NOTE: placeholder name
 
-struct RegionScale127	// NOTE: placeholder name
+struct SurgicalBlock127	// NOTE: placeholder name (per map type: exploration block edge and timer credit)
 {
-	int		size;
-	int		value;
+	int		size;			// block edge in cells
+	int		timerCredit;	// turns pulled off the surgical timer the first time Cogmind enters a block
 };
-extern RegionScale127 regionScale127_b90290[];	// NOTE: placeholder name
+extern SurgicalBlock127 surgicalBlocks127_b90290[];	// NOTE: placeholder name
 
 class Grid127	// NOTE: placeholder name (OpX5_Array2D<int> at 0xcf6488)
 {
 public:
 	int *atPoint(Point &p);
 };
-extern Grid127 explored127_cf6488;	// NOTE: placeholder name
-extern int unexplored127_cf6498;	// NOTE: placeholder name
+extern Grid127 surgicalExplored127_cf6488;	// Overmind+0x60: blocks entered since the last timer reset
+extern int surgicalTimer127_cf6498;	// Overmind+0x70: turn at which the next surgical party is due
 
 class CMap127	// NOTE: placeholder name (CMap at 0xcec054)
 {
@@ -207,11 +207,11 @@ public:
 	int getTurn();
 	void unknown74b1d0();	// NOTE: placeholder name
 	bool unknown71bc10(const Point &p, Point &out);	// NOTE: placeholder name
-	void unknown774390(int action, int turns);	// NOTE: placeholder name
+	void playerActionFinish(int action, int turns);	// NOTE: placeholder name
 };
 extern BS *world127_cefc4c;	// NOTE: placeholder name
 
-void BS::unknown774390(int action, int turns)
+void BS::playerActionFinish(int action, int turns)
 {
 	actionState = 2;
 	if (turns == -1)
@@ -282,13 +282,13 @@ void BS::unknown774390(int action, int turns)
 				}
 			}
 		}
-		if (mapFlags127_b90180[location127_d1e888->type].trackExploration)
+		if (mapFlags127_b90180[location127_d1e888->type].surgicalParties)
 		{
-			Point cell(player->getPosition().x / regionScale127_b90290[location127_d1e888->type].size,player->getPosition().y / regionScale127_b90290[location127_d1e888->type].size);
-			if (*explored127_cf6488.atPoint(cell) == 0)
+			Point cell(player->getPosition().x / surgicalBlocks127_b90290[location127_d1e888->type].size,player->getPosition().y / surgicalBlocks127_b90290[location127_d1e888->type].size);
+			if (*surgicalExplored127_cf6488.atPoint(cell) == 0)
 			{
-				*explored127_cf6488.atPoint(cell) = 1;
-				unexplored127_cf6498 -= regionScale127_b90290[location127_d1e888->type].value;
+				*surgicalExplored127_cf6488.atPoint(cell) = 1;
+				surgicalTimer127_cf6498 -= surgicalBlocks127_b90290[location127_d1e888->type].timerCredit;
 			}
 		}
 		player->setIdleTurns127(action == 1 || action == 2 ? 0 : player->getIdleTurns127() + 1);

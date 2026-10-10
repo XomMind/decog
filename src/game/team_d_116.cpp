@@ -155,7 +155,7 @@ public:
 	char	pad000[0x66c];
 	HEntity	player;		// +0x66c
 
-	EntityRecord116 *unknown6c5600(int a, int b, bool c, bool d);	// NOTE: placeholder name
+	EntityRecord116 *selectRobotOfClass(int a, int b, bool c, bool d);	// NOTE: placeholder name
 	HEntity unknown715230(int a, int b);	// NOTE: placeholder name
 	HEntity placeEntity(EntityRecord116 *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);
 	bool unknown4631f0(HEntity e);	// NOTE: placeholder name
@@ -170,7 +170,7 @@ void BS::unknown7469f0()
 	opW4_unknown746120(vec2);
 	ItemSet<int> arr;
 	opW4_unknown7464b0(arr);
-	EntityRecord116 *elem = unknown6c5600(2,0x1b,false,false);
+	EntityRecord116 *elem = selectRobotOfClass(2,0x1b,false,false);
 	HEntity other;
 	Point destination;
 	HEntity base = unknown715230(3,0x5f);

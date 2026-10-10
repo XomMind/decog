@@ -76,7 +76,7 @@ struct EntityRec75;	// NOTE: placeholder name
 class BS
 {
 public:
-	EntityRec75 *unknown6c5600(bool flag, int id, bool a, bool b);	// NOTE: placeholder name (OpX4b_World::unknown6c5600)
+	EntityRec75 *selectRobotOfClass(bool flag, int id, bool a, bool b);	// NOTE: placeholder name (OpX4b_World::selectRobotOfClass)
 	HEntity placeEntity(EntityRec75 *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);
 	void unknown739e50(int level);	// NOTE: placeholder name
 };
@@ -134,7 +134,7 @@ void BS::unknown739e50(int level)
 		parent.resetField();
 		for (unsigned int j = 0; j < vec[idx].size(); j++)
 		{
-			part = unknown6c5600(true,vec[idx][j],false,true);
+			part = selectRobotOfClass(true,vec[idx][j],false,true);
 			if (part)
 			{
 				e2 = placeEntity(part,dest,3,false,3,0xe,false);

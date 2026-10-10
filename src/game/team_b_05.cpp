@@ -4,7 +4,7 @@
 #include <vector>
 using namespace std;
 
-// NOTE: 0x684c40 is OpR3c_Overmind::unknown684c40 in src/op/op_r3c.cpp.
+// NOTE: 0x684c40 is OpR3c_Overmind::resetSurgicalTimer in src/op/op_r3c.cpp.
 
 //==================================================================
 // remembered target position, name lookups, fine-map timers

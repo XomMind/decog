@@ -33,7 +33,7 @@ struct GxGrid{bool contains9b43b0(const GxPoint&);GxCell**atPoint(const GxPoint&
 struct GxEntityDef{char p0[0x24];int f24;int f28;char p2c[0x1c];int f48;char p4c[0x1c];int f68;char p6c[0x30];int f9c;char pa0[0x84];int f124;int f128;int f12c;int f130;int f134;char p138[0x74];string f1ac;};
 struct GxEntityDefs{char d[0x10];unsigned size()const;GxEntityDef*&operator[](unsigned);};extern GxEntityDefs gx_ents_d25de0;
 struct GxLoc{int f0;int depth;int f8;bool inRange46ecb0();string getText46ed40();};struct GxLocH{int id;GxLoc*operator->()const;bool operator==(GxLocH)const;};extern GxLocH gx_loc_d1e888,gx_d1ebd8,gx_d1ebe0;
-struct GxOvermind{int f684250(const GxPoint&,int);int f685a10(GxHE,int);int f687520(GxHE,int,int);void f682420(int,int);void f68cd80(struct GxOwnerRec*);bool f683500(GxPoint*,int,int,int,const GxPoint*,int*,int,int);int f6892c0(int,int,int);GxHE f683b60(int,int,int);};extern GxOvermind gx_overmind_cf6428;
+struct GxOvermind{int f684250(const GxPoint&,int);int spawnSurgicalParty(GxHE,int);int spawnHunterParty(GxHE,int,int);void f682420(int,int);void f68cd80(struct GxOwnerRec*);bool findDispatchExit(GxPoint*,int,int,int,const GxPoint*,int*,int,int);int f6892c0(int,int,int);GxHE f683b60(int,int,int);};extern GxOvermind gx_overmind_cf6428;
 struct GxOwnerRec{int f0;GxHE e;int f8;bool fc;bool f45e820();};struct GxOwnerList{char d[0x10];GxOwnerList();~GxOwnerList();void push_back(GxOwnerRec*const&);bool empty()const;unsigned size()const;GxOwnerRec*&operator[](unsigned);};struct GxOwners{char d[0x10];GxOwnerRec*&back();unsigned size()const;GxOwnerRec*&operator[](unsigned);};extern string gx_squadNames_d2f350[];extern GxOwners gx_cf6478;
 void gx_deleteBack9dae60(GxOwners&);
 void gx_eraseAt9da940(GxHEs&,int);void gx_eraseAt9da940(GxItems&,int);unsigned gx_clamp9cdc80(unsigned,unsigned,unsigned);void gx_getAdjacentCells4fab80(const GxPoint&,struct GxPath&);void gx_removeEntity9d2f00(GxHEs&,GxHE);void gx_addUnique9d30e0(GxHEs&,GxHE);void gx_eraseStep9d6440(GxHEs&,unsigned&);void gx_shuffle9d9fc0(GxHEs&);void gx_moveElement9da1f0(GxHEs&,int,int);extern int gx_tbl_bba058[];extern string gx_kindNames_d2f798[];
@@ -67,7 +67,7 @@ struct GxExitList{char d[0x10];GxExitList();~GxExitList();unsigned size()const;G
 struct GxIntGrid{int*at(int,int);};struct GxCell34{char p0[0x10];int f10;char p14[0x10];int f24;};struct GxGrid34{GxCell34*at9d2c30(int,int);};
 extern int gx_caf164,gx_caf15c;
 struct GxIntVec2{char d[0x10];int&front();GxIntVec2();~GxIntVec2();void push_back(int&&);void push_back(const int&);int&operator[](unsigned);int&at9b9230(unsigned);bool empty()const;unsigned size()const;};int gx_minOf9d7290(GxIntVec2&);int gx_maxOf9d4340(GxIntVec2&);
-extern int gx_tbl_ba3bf8[],gx_tbl_b98958[],gx_tbl_b98900[],gx_tbl_b988a8[];extern int gx_cf4a68;void gx_removeElement9de6f0(GxIntVec2&,int);extern GxIntVec2 gx_cf4a14,gx_cf4a04;
+extern int gx_tbl_ba3bf8[],gx_rifMaxLevels_b98958[],gx_tbl_b98900[],gx_tbl_b988a8[];extern int gx_cf4a68;void gx_removeElement9de6f0(GxIntVec2&,int);extern GxIntVec2 gx_cf4a14,gx_rifLevels_cf4a04;
 struct GxStrVec{char d[0x10];unsigned size()const;string&operator[](unsigned);};
 struct GxStrVecs{char d[0x10];GxStrVec&operator[](unsigned);};extern GxStrVecs gx_d204ec;
 struct GxIntVecs{char d[0x10];GxIntVec2&operator[](unsigned);};extern GxIntVecs gx_d25598,gx_cf4a58;
@@ -95,7 +95,7 @@ struct GxDefList{char d[0x10];GxDefList();~GxDefList();void clear();void push_ba
 struct GxDefs{char d[0x10];unsigned size()const;GxDef*&operator[](unsigned);};extern GxDefs gx_defs_d2d1c4,gx_defs_d2ed7c,gx_defs_d316a0,gx_defs_d32990,gx_defs_d31510;
 struct GxIntVec{char d[0x10];int&operator[](unsigned)throw();void push_back(const int&);};extern GxIntVec gx_d2f0f8,gx_cf47cc;
 struct GxGM{void addItemAttachCount778560(int,int,int);};extern GxGM gx_gm_d25628;
-struct GxGameData{const string&getEntryText46f6d0(const string&);bool f46f4b0(int);int f46f4e0();bool f46f550(int);};extern GxGameData gx_gd_d1e860;
+struct GxGameData{const string&getEntryText46f6d0(const string&);bool f46f4b0(int);int getDepthIndex();bool f46f550(int);};extern GxGameData gx_gd_d1e860;
 void gx_clampMin9cf5c0(int*,int);extern int gx_tbl_ba3acc[];extern bool gx_b9651c[];
 string gx_countString407a80(int,const string&);struct GxPlayer{int f46e150();void installRIF780f30(int);void f77fbc0(int);void f77ffb0(int,int);};extern GxPlayer gx_player_cf45d8;
 bool gx_check69d230();void gx_addClamped9d06d0(int*,int,int);bool gx_inRange9daf80(int,int,int);int gx_minInt9cdb30(int,int);int gx_maxInt9cdb60(int,int);
@@ -104,7 +104,7 @@ extern const char gx_e_b9588a[],gx_e_b9588b[],gx_e_b9588e[],gx_e_b9588f[],gx_e_b
 extern bool gx_cf4a00;extern int gx_cf645c,gx_cf6474,gx_d1ec68;extern bool gx_cf6470,gx_cf6471,gx_cf6472;extern int gx_tbl_bba680[];
 struct GxInts{char d[0x10];unsigned size()const;int&operator[](unsigned);};
 struct GxPathLists{char d[0x10];struct GxPath&operator[](unsigned);};
-struct GxMap{GxHI giveItem6c52b0(const string&,GxHE,int,int);bool isVisible463190(int,int);void f464a80(GxHP);struct GxPathLists*f459070();GxDef*selectRandomItemOfRating6c40e0(int,int,int,int,int,int,int);int f4642b0();int f7143e0(int*);int f4645d0();GxHE f7285b0();void f747060(const GxPoint&,int,struct GxRecord*);bool placeProp6c67b0(GxPropDef*,const GxPoint&,int,int,int);bool f464900();void f74bec0(const GxPoint&);struct GxPath*f463ad0();struct GxIntVec2*f463af0();GxHE f727ef0();bool f463e90(const GxPoint&);void f734d60(const GxPoint&);bool f463160(const GxPoint&);bool f463ee0(int,const GxPoint&);struct GxMarkerLists*f463ec0();struct GxExitList*exits462e10();void announceMachine71dd30(GxLocH);void f4647a0(const GxPoint&,int);struct GxIntGrid*f463830();struct GxGrid34*f463e70();void f720470(int);struct GxRecHandle addRecord777a20(struct GxRecHandle);bool f7170a0(GxHE,const GxPoint&,struct GxPath&,struct GxDefList&,struct GxDefList&,GxPoint&,int,int,int,int);int f715730(int);bool findPlaceableNear71c150(const GxPoint&,GxPoint&,int);bool isVisible4631c0(const GxPoint&);int f716a20(const GxPoint&,const GxPoint&,int);void f6c65a0(GxHE,const string&,int);bool f4631f0(GxHE);GxHI f6c51d0(struct GxDef*,GxHE,int,int);bool f71ef30(const GxPoint&,int);GxHI f6c5400(struct GxDef*,const GxPoint&);GxHEs*f4636f0();bool f4633c0(const GxPoint&);bool f71bc10(const GxPoint&,GxPoint&);GxHI f71e7c0(const GxPoint&,int,int);void f464840(GxHI);bool f714a50();GxHE getPlayer4630f0();void f72e4c0(GxHE,int);int f463d40();void f465120(int);int getTurn464270();GxEntityDef*f6c5600(int,int,int,int);GxHE placeEntity6c58c0(GxEntityDef*,const GxPoint&,int,int,int,int,int);bool f716940(const GxPoint&,const GxPoint&,int,int);const GxPoint&f4184d0();GxHGs*f463950();int f4638e0(int,int);int f4642d0();void f72ed70(int);GxHG squad463890(int);};extern GxMap*gx_map_cefc4c;
+struct GxMap{GxHI giveItem6c52b0(const string&,GxHE,int,int);bool isVisible463190(int,int);void f464a80(GxHP);struct GxPathLists*f459070();GxDef*selectRandomItemOfRating6c40e0(int,int,int,int,int,int,int);int f4642b0();int f7143e0(int*);int f4645d0();GxHE f7285b0();void f747060(const GxPoint&,int,struct GxRecord*);bool placeProp6c67b0(GxPropDef*,const GxPoint&,int,int,int);bool f464900();void f74bec0(const GxPoint&);struct GxPath*f463ad0();struct GxIntVec2*f463af0();GxHE f727ef0();bool f463e90(const GxPoint&);void f734d60(const GxPoint&);bool f463160(const GxPoint&);bool f463ee0(int,const GxPoint&);struct GxMarkerLists*f463ec0();struct GxExitList*exits462e10();void announceMachine71dd30(GxLocH);void f4647a0(const GxPoint&,int);struct GxIntGrid*f463830();struct GxGrid34*f463e70();void f720470(int);struct GxRecHandle addRecord777a20(struct GxRecHandle);bool f7170a0(GxHE,const GxPoint&,struct GxPath&,struct GxDefList&,struct GxDefList&,GxPoint&,int,int,int,int);int f715730(int);bool findPlaceableNear71c150(const GxPoint&,GxPoint&,int);bool isVisible4631c0(const GxPoint&);int f716a20(const GxPoint&,const GxPoint&,int);void f6c65a0(GxHE,const string&,int);bool f4631f0(GxHE);GxHI f6c51d0(struct GxDef*,GxHE,int,int);bool f71ef30(const GxPoint&,int);GxHI f6c5400(struct GxDef*,const GxPoint&);GxHEs*f4636f0();bool f4633c0(const GxPoint&);bool f71bc10(const GxPoint&,GxPoint&);GxHI f71e7c0(const GxPoint&,int,int);void f464840(GxHI);bool f714a50();GxHE getPlayer4630f0();void f72e4c0(GxHE,int);int f463d40();void f465120(int);int getTurn464270();GxEntityDef*selectRobotOfClass(int,int,int,int);GxHE placeEntity6c58c0(GxEntityDef*,const GxPoint&,int,int,int,int,int);bool f716940(const GxPoint&,const GxPoint&,int,int);const GxPoint&f4184d0();GxHGs*f463950();int f4638e0(int,int);int f4642d0();void f72ed70(int);GxHG squad463890(int);};extern GxMap*gx_map_cefc4c;
 struct GxView{void f808510(const GxPoint&,int,struct GxPath&);void labelAccess80e3a0(int,struct GxExit*);void labelAccess80e3a0(int,const GxPoint&);void addMemoryLabel812950(const GxPoint&,int);virtual void v0();virtual void v1();virtual void v2();virtual void v3();virtual void v4();virtual void v5();virtual void v6();virtual void v7();void f49abf0();void delay49adc0(int);void items8119c0(GxHI,int,int,int);};extern GxView*gx_view_cec054;
 struct GxBubble{void bubble8758d0(bool);};extern GxBubble*gx_bubble_cec058;
 struct GxLog{void scrollToEnd7b4f10();};extern GxLog*gx_log_cec0b4,*gx_log_cec0c4;
@@ -127,7 +127,7 @@ void gx_addUnique9db000(struct GxIntVec2&,int);void gx_addUnique9d30e0(struct Gx
 void gx_shuffle9d8f80(struct GxOwnerList&);
 extern float gx_tbl_ba65b4[];extern int gx_cf4718;void gx_fill9e2be0(struct GxEntityDef**,int,int);
 void gx_shuffle9d7350(struct GxPath&);void gx_rotatePoint501fc0(const GxPoint&,const GxPoint&,float,GxPoint&);
-extern bool gx_d28fb0;struct GxB93738{int a,b;};extern GxB93738 gx_b93738[];extern string gx_squadNames_cf25d8[];
+extern bool gx_d28fb0;struct GxSurgicalLeaderWeights{int a,b;};extern GxSurgicalLeaderWeights gx_surgicalLeaderWeights_b93738[];extern string gx_squadNames_cf25d8[];
 #define GX_MSG(id,text,e1,at) do{if(gx_showMessage5111e0(id,text,0,0,e1,GxHE(),at,false))gx_bubble_cec058->bubble8758d0(true);gx_log_cec0b4->scrollToEnd7b4f10();}while(false)
 
 struct GxXom{
@@ -310,13 +310,13 @@ void GxXom::update6a0150(bool check)
 			{
 				GxHE leader=v198.front();
 				gx_eraseAt9da940(v198,0);
-				GxEntityDef*nDef=gx_map_cefc4c->f6c5600(1,0x18,0,1);
+				GxEntityDef*nDef=gx_map_cefc4c->selectRobotOfClass(1,0x18,0,1);
 				if(nDef==0){}
 				else
 				{
 					GxPoint pos;
 					int found=0;
-					if(gx_overmind_cf6428.f683500(&pos,0,0,1,&leader->getPosition45a4a0(),&found,1,0))
+					if(gx_overmind_cf6428.findDispatchExit(&pos,0,0,1,&leader->getPosition45a4a0(),&found,1,0))
 						for(int k=0;k<2;k++)
 						{
 							GxHE e=gx_map_cefc4c->placeEntity6c58c0(nDef,pos,3,0,0x22,0xe,0);
@@ -826,7 +826,7 @@ void GxXom::update6a0150(bool check)
 			if(f194)break;
 			{
 				GxDef*e5=0;
-				GxPoint range(gx_gd_d1e860.f46f4e0()+scale7/30-2);
+				GxPoint range(gx_gd_d1e860.getDepthIndex()+scale7/30-2);
 				if(range.x>2)range.x--;
 				if(!player->f5d6480(GxHE()))range.y+=2;
 				if(range.x>8)range.x=8;
@@ -923,7 +923,7 @@ void GxXom::update6a0150(bool check)
 				int count=0;
 				if(act==15)
 				{
-					GxPoint range(gx_gd_d1e860.f46f4e0()+scale7/66-1);
+					GxPoint range(gx_gd_d1e860.getDepthIndex()+scale7/66-1);
 					if(range.x>8)range.x=8;
 					gx_clampMin9cf5c0(&range.x,1);
 					gx_clampMin9cf5c0(&range.y,1);
@@ -939,7 +939,7 @@ void GxXom::update6a0150(bool check)
 				}
 				else
 				{
-					int level=gx_gd_d1e860.f46f4e0()+scale7/50+2;
+					int level=gx_gd_d1e860.getDepthIndex()+scale7/50+2;
 					count=level>10?level-10:1;
 					gx_clampMax9cf5a0(&level,10);
 					GxWL<int> pool;
@@ -1169,7 +1169,7 @@ void GxXom::update6a0150(bool check)
 							int missing=list8[i]->f5cc190(slot);
 							if(missing>0)
 							{
-								GxDef*def=(slot==0?gx_defs_d2ed7c:(slot==1?gx_defs_d316a0:(slot==2?gx_defs_d32990:gx_defs_d31510)))[gx_minInt9cdb30((gx_gd_d1e860.f46f4e0()+3)/5,3)];
+								GxDef*def=(slot==0?gx_defs_d2ed7c:(slot==1?gx_defs_d316a0:(slot==2?gx_defs_d32990:gx_defs_d31510)))[gx_minInt9cdb30((gx_gd_d1e860.getDepthIndex()+3)/5,3)];
 								while(missing)
 								{
 									GxHI part=gx_map_cefc4c->f6c51d0(def,list8[i],1,0);
@@ -1246,7 +1246,7 @@ void GxXom::update6a0150(bool check)
 						case 1:
 							choices.clear();
 							for(unsigned k=0;k<gx_defs_d2d1c4.size();k++)
-								if(gx_defs_d2d1c4[k]->f40==0x23&&gx_defs_d2d1c4[k]->f50<=gx_gd_d1e860.f46f4e0()+2)
+								if(gx_defs_d2d1c4[k]->f40==0x23&&gx_defs_d2d1c4[k]->f50<=gx_gd_d1e860.getDepthIndex()+2)
 									choices.push_back(gx_defs_d2d1c4[k]);
 							if(!choices.empty())b8=gx_randomRec9d5d00(choices);
 							break;
@@ -1346,7 +1346,7 @@ smiteDone:;
 				GxHEs targets;
 				if(!findXomTargets6bdcd0(targets))break;
 				GxHE victimA=targets.front();
-				GxPoint range(gx_minInt9cdb30(1,gx_gd_d1e860.f46f4e0()-2),gx_maxInt9cdb60(gx_gd_d1e860.f46f4e0()+2,10));
+				GxPoint range(gx_minInt9cdb30(1,gx_gd_d1e860.getDepthIndex()-2),gx_maxInt9cdb60(gx_gd_d1e860.getDepthIndex()+2,10));
 				range.f40bf50(scale7/40);
 				gx_clampMax9cf5a0(&range.x,9);
 				gx_clampMax9cf5a0(&range.y,10);
@@ -1727,7 +1727,7 @@ curse:
 				if(!amount6)break;
 				if(cost)
 				{
-					int maxCore=player->info9b4350()->f1dc+(gx_gd_d1e860.f46f4e0()-1)*150;
+					int maxCore=player->info9b4350()->f1dc+(gx_gd_d1e860.getDepthIndex()-1)*150;
 					if(player->f5ca260()-cost<maxCore/2)break;
 					gx_cf4954-=cost;
 					if(player->f490840()>player->f5ca260())player->f5dea60(player->f5ca260(),0);
@@ -1844,7 +1844,7 @@ curse:
 			{
 				int w;
 				GxDef*def2=0;
-				GxPoint range(gx_minInt9cdb30(9,gx_gd_d1e860.f46f4e0()+scale7/40-1));
+				GxPoint range(gx_minInt9cdb30(9,gx_gd_d1e860.getDepthIndex()+scale7/40-1));
 				int base8=range.x;
 				if(range.x>2)range.x--;
 				if(range.y<10)range.y++;
@@ -1963,7 +1963,7 @@ curse:
 								gx_cf47cc.push_back(item9->f9fcd80());
 								gx_gm_d25628.addItemAttachCount778560(item9->f457820(),1,0);
 							}
-							if(item9->f457880()==3)item9->f450460(gx_gd_d1e860.f46f4e0()*10+scale7);
+							if(item9->f457880()==3)item9->f450460(gx_gd_d1e860.getDepthIndex()*10+scale7);
 							gx_inv_cec08c->reopen8a2ce0(5,item9);
 							pGot.push_back(item9);
 						}
@@ -1973,7 +1973,7 @@ curse:
 						GxHI item=gx_map_cefc4c->f6c5400(def2,player->getPosition45a4a0());
 						if(item.valid())
 						{
-							if(item->f457880()==3)item->f450460(gx_gd_d1e860.f46f4e0()*10+scale7);
+							if(item->f457880()==3)item->f450460(gx_gd_d1e860.getDepthIndex()*10+scale7);
 							pGot.push_back(item);
 						}
 					}
@@ -2037,7 +2037,7 @@ curse:
 			else
 			{
 				bool nG=false;
-				GxPoint range(gx_gd_d1e860.f46f4e0()-1,gx_gd_d1e860.f46f4e0()+3);
+				GxPoint range(gx_gd_d1e860.getDepthIndex()-1,gx_gd_d1e860.getDepthIndex()+3);
 				gx_clampMax9cf5a0(&range.x,8);
 				gx_clampMax9cf5a0(&range.y,9);
 				OpR5h_WL<int> pools[4];
@@ -2075,7 +2075,7 @@ curse:
 				level=99;
 				GxWL<int> pool3;
 				for(int r=3;r<19;r++)
-					if((!gx_cf4a04[r]||gx_cf4a04[r]<gx_tbl_b98958[r])&&level>=gx_tbl_b98900[r])pool3.add(r,gx_tbl_b988a8[r]);
+					if((!gx_rifLevels_cf4a04[r]||gx_rifLevels_cf4a04[r]<gx_rifMaxLevels_b98958[r])&&level>=gx_tbl_b98900[r])pool3.add(r,gx_tbl_b988a8[r]);
 				if(pool3.empty9b81b0())break;
 				else
 				{
@@ -2421,7 +2421,7 @@ curse:
 				case 0:
 					{
 						int count=scale7/40+3;
-						GxPoint range_(gx_gd_d1e860.f46f4e0());
+						GxPoint range_(gx_gd_d1e860.getDepthIndex());
 						if(range_.x>8)range_.x=8;
 						gx_clampMin9cf5c0(&range_.x,1);
 						gx_clampMin9cf5c0(&range_.y,1);
@@ -2454,7 +2454,7 @@ curse:
 				case 1:
 					{
 						int w;
-						GxPoint range(gx_minInt9cdb30(9,gx_gd_d1e860.f46f4e0()+1));
+						GxPoint range(gx_minInt9cdb30(9,gx_gd_d1e860.getDepthIndex()+1));
 						int base1=range.x;
 						if(range.x>2)range.x--;
 						if(range.y<10)range.y++;
@@ -2529,7 +2529,7 @@ curse:
 		case 67:
 			if(heatAmt||player->f45a990()>=gx_b960ec)break;
 			{
-				int heat=gx_gd_d1e860.f46f4e0()*10+scale7+200;
+				int heat=gx_gd_d1e860.getDepthIndex()*10+scale7+200;
 				player->f45b210(heat);
 				tmpExtra="X0-1V1 wants to heat up the action around here (+"+gx_intToString4051f0(heat)+" heat).";
 				showXomAct6bdb50(0,player,0);
@@ -2538,7 +2538,7 @@ curse:
 			break;
 		case 68:
 			if(heatAmt||player->f45a990()>=gx_b960f0)break;
-			heatAmt=-gx_minInt9cdb30(gx_cf49dc,rng.rangeInt(15,25)+gx_gd_d1e860.f46f4e0()*2);
+			heatAmt=-gx_minInt9cdb30(gx_cf49dc,rng.rangeInt(15,25)+gx_gd_d1e860.getDepthIndex()*2);
 			heatEnd=turn+5+scale7/10;
 			tmpExtra="X0-1V1: \"Your inner air conditioner seems to have fallen into disrepair.\" ("+gx_intToStringSigned405560(heatAmt)+" heat dissipation)";
 			gx_cf49dc+=heatAmt;
@@ -3074,7 +3074,7 @@ swap:
 				if(gx_map_cefc4c->squad463890(1)->f45e3e0(0x3a)||gx_map_cefc4c->squad463890(2)->f45e3e0(0x3a))break;
 				GxEntityDef*def=0;
 				int count=0;
-				GxPoint range(gx_gd_d1e860.f46f4e0()+scale7/50-1);
+				GxPoint range(gx_gd_d1e860.getDepthIndex()+scale7/50-1);
 				if(range.x>8)range.x=8;
 				gx_clampMin9cf5c0(&range.x,1);
 				gx_clampMin9cf5c0(&range.y,1);
@@ -3146,7 +3146,7 @@ swap:
 				if(active1)break;
 				GxWL<int> kinds;
 				kinds.add(4,0x4b);
-				if(gx_b93738[gx_gd_d1e860.f46f4e0()].a)kinds.add(5,scale7);
+				if(gx_surgicalLeaderWeights_b93738[gx_gd_d1e860.getDepthIndex()].a)kinds.add(5,scale7);
 				kinds.add(7,scale7/2);
 				int nKind=kinds.pick();
 				bool cC=false;
@@ -3156,10 +3156,10 @@ swap:
 					cC=gx_overmind_cf6428.f684250(player->getPosition45a4a0(),1);
 					break;
 				case 5:
-					cC=gx_overmind_cf6428.f685a10(player,0);
+					cC=gx_overmind_cf6428.spawnSurgicalParty(player,0);
 					break;
 				case 7:
-					cC=gx_overmind_cf6428.f687520(player,0,0);
+					cC=gx_overmind_cf6428.spawnHunterParty(player,0,0);
 					break;
 				}
 				if(!cC)break;
@@ -3172,7 +3172,7 @@ swap:
 		case 91:
 			{
 				int maxR5=gx_maxInt9cdb60(1,scale7/10);
-				int depth=gx_gd_d1e860.f46f4e0();
+				int depth=gx_gd_d1e860.getDepthIndex();
 				GxPoint rangeTmp(10,30);
 				GxPoint destX;
 				bool ok=false;
@@ -3210,7 +3210,7 @@ swap:
 						break;
 					}
 				if(start.x==-1)break;
-				GxEntityDef*def=gx_map_cefc4c->f6c5600(1,0x15,0,1);
+				GxEntityDef*def=gx_map_cefc4c->selectRobotOfClass(1,0x15,0,1);
 				int boxesB=scale7/33+3;
 				int stepN=360/boxesB;
 				int placed=0;
@@ -3275,11 +3275,11 @@ swap:
 					int level=(*gx_grid_cfd44c.atPoint(terms[t]))->getProp45d550()->f45cb30()->fc;
 					GxPoint at(terms[t]);
 					for(int k=level;k>=1;k--)
-						if(defs[k-1]&&defs[k-1]->f68<=gx_gd_d1e860.f46f4e0())
+						if(defs[k-1]&&defs[k-1]->f68<=gx_gd_d1e860.getDepthIndex())
 						{
 							GxPoint pos;
 							int got=0;
-							if(gx_overmind_cf6428.f683500(&pos,1,0,0,&at,&got,0,0))
+							if(gx_overmind_cf6428.findDispatchExit(&pos,1,0,0,&at,&got,0,0))
 							{
 								GxHE e=gx_map_cefc4c->placeEntity6c58c0(defs[k-1],pos,3,1,0x22,0xe,0);
 								if(e.valid())
@@ -3350,7 +3350,7 @@ swap:
 			if(gx_d15e58.empty())break;
 			{
 				GxPoint a2=gx_randomPoint9d5350(gx_d15e58);
-				int level=gx_gd_d1e860.f46f4e0();
+				int level=gx_gd_d1e860.getDepthIndex();
 				GxDef*def=0;
 				if(rng.chance(33))
 				{
@@ -3448,7 +3448,7 @@ swap:
 					break;
 				case 4:
 					{
-						GxEntityDef*def=gx_map_cefc4c->f6c5600(3,0x3f,0,1);
+						GxEntityDef*def=gx_map_cefc4c->selectRobotOfClass(3,0x3f,0,1);
 						if(def)
 						{
 							GxHI item=gx_randomRecord9dafb0(scrap0);

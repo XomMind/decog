@@ -73,7 +73,7 @@ extern LossPair114 coreLoss114_b91a40[];	// NOTE: placeholder name
 extern int coreLossByDifficulty114_ba6550[][3];	// NOTE: placeholder name
 extern int mapFlag114_b90000[];		// NOTE: placeholder name
 extern int mapFlag114_b90098[];		// NOTE: placeholder name
-extern LossPair114 gridScale114_b90290[];	// NOTE: placeholder name
+extern LossPair114 surgicalBlocks114_b90290[];	// NOTE: placeholder name
 extern int minCore114_b91b88;		// NOTE: placeholder name
 extern int difficulty114_cf4718;	// NOTE: placeholder name
 extern int flag114_cf4724;			// NOTE: placeholder name
@@ -132,14 +132,14 @@ public:
 	bool				unknown4a;
 	int					unknown4c;
 	vector<Obj114 *>	objects50;
-	OpS8e_Array2D<int>	grid60;
-	int					unknown6c;
-	int					unknown70;
+	OpS8e_Array2D<int>	surgicalExplored;
+	int					lastDispatchTurn;
+	int					surgicalTimer;
 	int					unknown74;
 	bool				unknown78;
 	int					unknown7c;
 	int					unknown80;
-	int					unknown84;
+	int					extraTrackers;
 	int					unknown88;
 	int					unknown8c;
 	int					unknown90;
@@ -161,7 +161,7 @@ public:
 	int					unknown104;
 	vector<Obj114 *>	objects108;
 	vector<Point>		points118;
-	int					unknown128;
+	int					failedDispatches;
 	Point				pos12c;
 	int					unknown134;
 	int					unknown138;
@@ -233,12 +233,12 @@ void State114::init(HLocation114 from, HLocation114 to)
 	unknown40 = false;
 	if (gameData114_d1e860.unknown46f4b0(1) && location114_d1e888->type != 0x23)
 		stats114_d2c658.add4729d0(0x217,unknown00,"",-1);
-	grid60.init_9cf690(cells114_cfd44c.getWidth() / gridScale114_b90290[location114_d1e888->type].leave + 1,cells114_cfd44c.getHeight() / gridScale114_b90290[location114_d1e888->type].leave + 1,0);
-	unknown6c = 0;
+	surgicalExplored.init_9cf690(cells114_cfd44c.getWidth() / surgicalBlocks114_b90290[location114_d1e888->type].leave + 1,cells114_cfd44c.getHeight() / surgicalBlocks114_b90290[location114_d1e888->type].leave + 1,0);
+	lastDispatchTurn = 0;
 	unknown74 = 0;
 	unknown78 = false;
 	unknown7c = 0;
-	unknown84 = 0;
+	extraTrackers = 0;
 	unknown8c = 0;
 	unknown194 = to->type == 0x22;
 	unknown195 = false;
@@ -260,7 +260,7 @@ void State114::init(HLocation114 from, HLocation114 to)
 	unknown100 = false;
 	OpQ5_clearObjects(objects108);
 	points118.clear();
-	unknown128 = 0;
+	failedDispatches = 0;
 	pos12c.set(-1);
 	unknown138 = 0;
 	unknown13c = 0;

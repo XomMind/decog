@@ -1,4 +1,4 @@
-// op_overmind_dispatch: Overmind::unknown6827d0 (0x6827d0), registers a dispatched party, broadcasts the
+// op_overmind_dispatch: Overmind::addParty (0x6827d0), registers a dispatched party, broadcasts the
 // squad composition from the dispatching access point and handles hacked access points (COGMIND.exe Beta 17.1).
 // NOTE: placeholder names and partial layouts.
 #include <string>
@@ -154,7 +154,7 @@ void opOM_eraseAt_9da940(vector<OpOM_HProp> &v, int index);	// NOTE: placeholder
 class Overmind	// NOTE: placeholder layout
 {
 public:
-	bool unknown6827d0(Party *party, OpOM_Access *access);	// NOTE: placeholder name
+	bool addParty(Party *party, OpOM_Access *access);	// NOTE: placeholder name
 	void unknown684250(void *buffer, int flag);	// NOTE: placeholder name
 
 	char pad00[0x50];
@@ -164,7 +164,7 @@ public:
 };
 extern Overmind overmind_cf6428;	// NOTE: placeholder name
 
-bool Overmind::unknown6827d0(Party *party, OpOM_Access *access)
+bool Overmind::addParty(Party *party, OpOM_Access *access)
 {
 	parties.push_back(party);
 	if (access && access->prop.isValid())

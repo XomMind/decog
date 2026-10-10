@@ -23,7 +23,7 @@ Progress_46c930::percent,0x46c930,0x32
 Location_46ecb0::inRange,0x46ecb0,0x1e
 Location_46ecb0::unknown46ee50,0x46ee50,0x28
 GameData_46f4b0::unknown46f4b0,0x46f4b0,0x2a
-GameData_46f4b0::unknown46f4e0,0x46f4e0,0x1d
+GameData_46f4b0::getDepthIndex,0x46f4e0,0x1d
 GameData_46f4b0::unknown46f500,0x46f500,0x26
 GameData_46f4b0::unknown46f530,0x46f530,0x19
 StatTracker_472c90::unknown472c90,0x472c90,0x23

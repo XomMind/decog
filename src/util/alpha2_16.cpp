@@ -182,7 +182,7 @@ struct A2QMap
 };
 struct A2QOvermind
 {
-	int unknown45edd0(int a);
+	int countParties(int a);
 };
 struct A2QGameData
 {
@@ -337,7 +337,7 @@ vector<A2QMatch *> *A2QTracker::evaluate(int type, A2QHE e, A2QHE a, A2QHP b, A2
 						break;
 					}
 					case 9:
-						if (conds[i].compareInt(a2q_overmind_cf6428.unknown45edd0(a2q_stringToInt_405610(conds[i].key)))) goto pass;
+						if (conds[i].compareInt(a2q_overmind_cf6428.countParties(a2q_stringToInt_405610(conds[i].key)))) goto pass;
 						break;
 					case 10:
 						if (conds[i].compareInt(a2q_map_cefc4c->unknown715b10())) goto pass;

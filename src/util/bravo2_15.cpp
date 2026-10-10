@@ -30,10 +30,10 @@ struct T3Grid {T3Cell **atPoint(const T3Point&);};extern T3Grid t3_cells_cfd44c;
 struct T3Expl {T3Expl(T3HE,int,const T3Point&,T3HE,const T3Pos&,const T3Pos&);char pad[0x40];};
 struct T3Factory {T3HS createA(T3Expl*);};extern T3Factory *t3_factory_cefaa8;
 struct T3Lair {int group;int evolve;vector<int> a;vector<int> b;vector<string> c;void add(T3HE);};
-struct T3World {T3HE getPlayer();bool unknown4633c0(const T3Point&);T3HG unknown463890(int);T3Record *unknown6c5600(int,int,int,int);T3HE placeEntity(T3Record*,const T3Point&,int,bool,int,int,bool);
+struct T3World {T3HE getPlayer();bool unknown4633c0(const T3Point&);T3HG unknown463890(int);T3Record *selectRobotOfClass(int,int,int,int);T3HE placeEntity(T3Record*,const T3Point&,int,bool,int,int,bool);
  T3HS addRecord(T3HS);void spawnInfestiationFromTrap(int);vector<T3Lair*> &getLairs();};
 extern T3World *t3_world_cefc4c;
-struct T3Overmind {void unknown6823f0(int);void unknown68d920(int);void unknown687520(T3HE,const T3Point&,int);void unknown684250(const T3Point&,int);void spawnAntiInfestationCarrier(const T3Point&,const string&);};
+struct T3Overmind {void unknown6823f0(int);void unknown68d920(int);void spawnHunterParty(T3HE,const T3Point&,int);void unknown684250(const T3Point&,int);void spawnAntiInfestationCarrier(const T3Point&,const string&);};
 extern T3Overmind t3_overmind_cf6428;
 struct T3Stats {bool add4729d0(unsigned,int,string,int);};extern T3Stats t3_stats_d2c658;
 struct T3Xom {bool enabled;void unknown69e700(int,int,float);void unknown69ea20(bool);};extern T3Xom t3_xom_d25450;
@@ -49,7 +49,7 @@ struct T3RecordT {char pad[0x28];int type;};
 struct T3TrapData {int pad0;string name;char pad20[0x8c-0x20];int blast;char pad90[0x140-0x90];int type;};
 extern T3TrapData *t3_trapData_cefb7c;
 extern int t3_cf462c,t3_cf645c,t3_caf130;
-extern vector<int> t3_vec_cf4a04;
+extern vector<int> t3_rifLevels_cf4a04;
 extern vector<vector<T3HP> > t3_squad_d20248;
 extern vector<T3Point> t3_infest_d20690;
 extern vector<T3Ambush*> t3_ambush_d2c408;
@@ -299,8 +299,8 @@ void STrapTrigger::unknown665fd0(bool hidden) {
   }
   break;
  case 12:
-  if(t3_world_cefc4c->unknown4633c0(position)&&(t3_vec_cf4a04[8]||t3_world_cefc4c->getPlayer()->unknown5d22a0(0x14)&&t3_distance_40a3f0(position,t3_world_cefc4c->getPlayer()->getPosition())<=t3_world_cefc4c->getPlayer()->unknown5d22a0(0x14))) {
-   if(t3_vec_cf4a04[8])
+  if(t3_world_cefc4c->unknown4633c0(position)&&(t3_rifLevels_cf4a04[8]||t3_world_cefc4c->getPlayer()->unknown5d22a0(0x14)&&t3_distance_40a3f0(position,t3_world_cefc4c->getPlayer()->getPosition())<=t3_world_cefc4c->getPlayer()->unknown5d22a0(0x14))) {
+   if(t3_rifLevels_cf4a04[8])
     T3MSG(0x2a7,0,T3HE(),T3HE(),&position);
    else
     T3MSG(0x225,&t3_world_cefc4c->getPlayer()->unknown5d24e0(0x14)->unknown571db0(0,0),T3HE(),T3HE(),&position);
@@ -324,7 +324,7 @@ void STrapTrigger::unknown665fd0(bool hidden) {
     }
     if(t3_caf130!=6) {
      if(t3_cf645c)
-      t3_overmind_cf6428.unknown687520(T3HE(),position,1);
+      t3_overmind_cf6428.spawnHunterParty(T3HE(),position,1);
      else
       t3_overmind_cf6428.unknown684250(position,0);
     }
@@ -371,7 +371,7 @@ void STrapTrigger::unknown665fd0(bool hidden) {
    for(int i=0;i<squad.size()&&i<3;i++)
     for(int t=0;t<20;t++) {
      pick=weight.pick();
-     found.push_back(t3_world_cefc4c->unknown6c5600(1,pick,0,0));
+     found.push_back(t3_world_cefc4c->selectRobotOfClass(1,pick,0,0));
      if(found.back()) {
       if(t3_containsRecord(tags,pick)) {
        cnt++;
@@ -417,7 +417,7 @@ void STrapTrigger::unknown665fd0(bool hidden) {
     leader=t3_world_cefc4c->getPlayer();
    T3Record *rec;
    for(int i=0;i<squad.size()&&i<3;i++) {
-    rec=t3_world_cefc4c->unknown6c5600(3,0x10,0,1);
+    rec=t3_world_cefc4c->selectRobotOfClass(3,0x10,0,1);
     if(rec) {
      T3HE m=t3_world_cefc4c->placeEntity(rec,squad[i]->position4184d0(),9,false,0x22,0xe,false);
      if(m.isValid()) {
@@ -455,7 +455,7 @@ void STrapTrigger::unknown665fd0(bool hidden) {
     for(unsigned i=1;i<squad.size();i++)
      for(int t=0;t<10;t++) {
       pick=weight.pick();
-      found=t3_world_cefc4c->unknown6c5600(1,pick,0,0);
+      found=t3_world_cefc4c->selectRobotOfClass(1,pick,0,0);
       if(found) {
        T3HE m=t3_world_cefc4c->placeEntity(found,squad[i]->position4184d0(),3,false,0x22,0xe,false);
        if(m.isValid()) {

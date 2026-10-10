@@ -50,7 +50,7 @@ extern BS *world108_cefc4c;	// NOTE: placeholder name
 class GameData108	// NOTE: placeholder name (GameData at 0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name (current depth)
+	int getDepthIndex();	// NOTE: placeholder name (current depth)
 };
 extern GameData108 gameData108_d1e860;	// NOTE: placeholder name
 extern vector<int> nameCounts108_cf4b24;	// NOTE: placeholder name
@@ -96,7 +96,7 @@ void Group::addMember(HEntity e, bool flag)
 		string name(data->name.begin() + 5,data->name.end());
 		if (e->getFaction() == 0x1b || e->getFaction() == 0x47 || e->getFaction() == 0x48)
 			name = data->name;
-		name += " " + intToString(gameData108_d1e860.unknown46f4e0());
+		name += " " + intToString(gameData108_d1e860.getDepthIndex());
 		nameCounts108_cf4b24[data->type]++;
 		int count = nameCounts108_cf4b24[data->type];
 		if (count <= 0x1a)

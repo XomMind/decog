@@ -27,7 +27,7 @@ public:
 class OpR2c_Options
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 extern OpR2c_Options opr2c_d1e860;	// NOTE: placeholder name
 
@@ -112,7 +112,7 @@ bool OpR2c_Entity::unknown56f4c0(OpR2c_HProp prop)
 	{
 		return false;
 	}
-	return unknown50 + (unknown94 != 0) < opr2c_d1e860.unknown46f4e0() + prop->unknown45cb30()->unknown8;
+	return unknown50 + (unknown94 != 0) < opr2c_d1e860.getDepthIndex() + prop->unknown45cb30()->unknown8;
 }
 
 bool OpR2c_Entity::unknown56f7e0(OpR2c_HProp prop)
@@ -121,7 +121,7 @@ bool OpR2c_Entity::unknown56f7e0(OpR2c_HProp prop)
 	{
 		return false;
 	}
-	return unknown50 < opr2c_d1e860.unknown46f4e0() + prop->unknown45cb30()->unknown8;
+	return unknown50 < opr2c_d1e860.getDepthIndex() + prop->unknown45cb30()->unknown8;
 }
 
 string OpR2c_Entity::unknown56f520()

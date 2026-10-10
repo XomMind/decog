@@ -26,8 +26,8 @@ class C56_HEntity { public: int ID; C56_HEntity(); C56_Entity *operator->() cons
 struct C56_Loc { int f0; int f4; int f8; };
 class C56_HLoc { public: int ID; C56_HLoc(); C56_Loc *operator->() const; };	// NOTE: placeholder (location handle)
 template <class T> class C56_WL { public: vector<T> values; vector<int> weights; int total; C56_WL(); ~C56_WL(); void add(T value, int weight); bool pick(T *out); };	// NOTE: placeholder (OpR5h_WL)
-struct C56_World { C56_Record *unknown6c5600(int a, int b, int c, int d); int unknown463ba0(); C56_HEntity placeEntity(C56_Record *record, const C56_Point &position, int groupIndex, bool flag, int aiMode1, int aiMode2, bool forced); bool findRandomPlaceable(const C56_Point &center, int radius, int size, C56_Point &out, bool checkEntrance); };	// NOTE: placeholder (BS)
-struct C56_GameData { int unknown46f4e0(); bool isFlagEnabledC(); };
+struct C56_World { C56_Record *selectRobotOfClass(int a, int b, int c, int d); int getDisabledGarrisonAccesses(); C56_HEntity placeEntity(C56_Record *record, const C56_Point &position, int groupIndex, bool flag, int aiMode1, int aiMode2, bool forced); bool findRandomPlaceable(const C56_Point &center, int radius, int size, C56_Point &out, bool checkEntrance); };	// NOTE: placeholder (BS)
+struct C56_GameData { int getDepthIndex(); bool isFlagEnabledC(); };
 class C56_Party { public: C56_Party(int type, C56_HEntity leader, int a, int b, int c); char data[0x38]; };	// NOTE: placeholder (Party)
 template <class T> bool OpQ5_findByName(vector<T *> &v, const string &name, T *&result);	// NOTE: placeholder name
 
@@ -51,8 +51,8 @@ public:
 	char pad42[0x128 - 0x42];
 	int f128;
 
-	bool unknown683500(C56_Point *out, int a, int b, int c, const C56_Pos &p, int *d, int e, int f);	// NOTE: placeholder name
-	void unknown6827d0(C56_Party *party, int a);	// NOTE: placeholder name
+	bool findDispatchExit(C56_Point *out, int a, int b, int c, const C56_Pos &p, int *d, int e, int f);	// NOTE: placeholder name
+	void addParty(C56_Party *party, int a);	// NOTE: placeholder name
 	int spawnPatrolParty(C56_HEntity owner, bool flag, C56_Rect *area, vector<C56_Point> *points, C56_Point *pos, int count, vector<C56_HEntity> *out, int type, bool b);
 };
 
@@ -65,7 +65,7 @@ int Overmind::spawnPatrolParty(C56_HEntity owner, bool flag, C56_Rect *area, vec
 	}
 	C56_WL<int> a1;
 	for (int cols = 0; cols < 10; cols++)
-		a1.add(cols,c56_b92050[c56_d1e860.unknown46f4e0()][cols]);
+		a1.add(cols,c56_b92050[c56_d1e860.getDepthIndex()][cols]);
 	C56_Record *col = 0;
 	C56_Record *adj = 0;
 	int allies;
@@ -73,39 +73,39 @@ int Overmind::spawnPatrolParty(C56_HEntity owner, bool flag, C56_Rect *area, vec
 		allies = type;
 	else
 		a1.pick(&allies);
-	if (owner.isNull() && ((allies <= 5 && rng.chance(7)) || (!flag && allies != 9)) && c56_d1e860.unknown46f4e0() > 1)
+	if (owner.isNull() && ((allies <= 5 && rng.chance(7)) || (!flag && allies != 9)) && c56_d1e860.getDepthIndex() > 1)
 		OpQ5_findByName(c56_d25de0,"C-30 ARC",col);
 	if (col == 0)
 	{
 		switch (allies)
 		{
 			case 0:
-				col = c56_cefc4c->unknown6c5600(1,13,0,b);
+				col = c56_cefc4c->selectRobotOfClass(1,13,0,b);
 				break;
 			case 1:
-				col = c56_cefc4c->unknown6c5600(1,14,0,b);
+				col = c56_cefc4c->selectRobotOfClass(1,14,0,b);
 				break;
 			case 2:
-				col = c56_cefc4c->unknown6c5600(1,16,1,b);
-				adj = c56_cefc4c->unknown6c5600(1,16,0,b);
+				col = c56_cefc4c->selectRobotOfClass(1,16,1,b);
+				adj = c56_cefc4c->selectRobotOfClass(1,16,0,b);
 				break;
 			case 3:
-				col = c56_cefc4c->unknown6c5600(1,17,0,b);
-				adj = c56_cefc4c->unknown6c5600(1,16,0,b);
+				col = c56_cefc4c->selectRobotOfClass(1,17,0,b);
+				adj = c56_cefc4c->selectRobotOfClass(1,16,0,b);
 				break;
 			case 4:
-				col = c56_cefc4c->unknown6c5600(1,18,0,b);
-				adj = c56_cefc4c->unknown6c5600(1,16,0,b);
+				col = c56_cefc4c->selectRobotOfClass(1,18,0,b);
+				adj = c56_cefc4c->selectRobotOfClass(1,16,0,b);
 				break;
 			case 5:
-				col = c56_cefc4c->unknown6c5600(1,24,0,b);
+				col = c56_cefc4c->selectRobotOfClass(1,24,0,b);
 				break;
 			case 6:
-				col = c56_cefc4c->unknown6c5600(1,25,0,b);
+				col = c56_cefc4c->selectRobotOfClass(1,25,0,b);
 				break;
 			case 7:
-				col = c56_cefc4c->unknown6c5600(1,24,0,b);
-				adj = c56_cefc4c->unknown6c5600(1,16,0,b);
+				col = c56_cefc4c->selectRobotOfClass(1,24,0,b);
+				adj = c56_cefc4c->selectRobotOfClass(1,16,0,b);
 				break;
 			case 8:
 				OpQ5_findByName(c56_d25de0,"Hotshot",col);
@@ -113,7 +113,7 @@ int Overmind::spawnPatrolParty(C56_HEntity owner, bool flag, C56_Rect *area, vec
 					count = 3;
 				break;
 			case 9:
-				if (c56_cefc4c->unknown463ba0())
+				if (c56_cefc4c->getDisabledGarrisonAccesses())
 				{
 					switch (rng.rangeInt(1.0f,2.0f))
 					{
@@ -158,7 +158,7 @@ int Overmind::spawnPatrolParty(C56_HEntity owner, bool flag, C56_Rect *area, vec
 				case 0:
 					if (rng.chance(50))
 					{
-						col = rng.chance(50) ? c56_cefc4c->unknown6c5600(1,14,0,1) : c56_cefc4c->unknown6c5600(2,30,0,1);
+						col = rng.chance(50) ? c56_cefc4c->selectRobotOfClass(1,14,0,1) : c56_cefc4c->selectRobotOfClass(2,30,0,1);
 						if (col->f28 == 30)
 							count = 2;
 					}
@@ -166,21 +166,21 @@ int Overmind::spawnPatrolParty(C56_HEntity owner, bool flag, C56_Rect *area, vec
 				case 2:
 					if (rng.chance(25))
 					{
-						col = c56_cefc4c->unknown6c5600(1,23,0,0);
+						col = c56_cefc4c->selectRobotOfClass(1,23,0,0);
 						adj = 0;
 					}
 					break;
 				case 5:
 					if (rng.chance(33))
 					{
-						col = c56_cefc4c->unknown6c5600(2,31,0,0);
+						col = c56_cefc4c->selectRobotOfClass(2,31,0,0);
 						adj = 0;
 					}
 					break;
 				case 6:
 					if (rng.chance(33))
 					{
-						col = c56_cefc4c->unknown6c5600(1,22,0,0);
+						col = c56_cefc4c->selectRobotOfClass(1,22,0,0);
 						adj = 0;
 					}
 					break;
@@ -206,7 +206,7 @@ int Overmind::spawnPatrolParty(C56_HEntity owner, bool flag, C56_Rect *area, vec
 	}
 	else if (!flag)
 	{
-		attempt = unknown683500(&amount,1,0,1,C56_Pos(-1),&areas,0,0);
+		attempt = findDispatchExit(&amount,1,0,1,C56_Pos(-1),&areas,0,0);
 		if (!attempt)
 			f128++;
 		else
@@ -242,7 +242,7 @@ int Overmind::spawnPatrolParty(C56_HEntity owner, bool flag, C56_Rect *area, vec
 				owner->unknown45b590()->unknown5b51b0(behaviour.ID);
 			if (allies == 7)
 				behaviour->unknown45b590()->set_combat_programmer(75);
-			int current = count != 0 ? count - 1 : (col->f28 == 6 ? 0 : c56_d1d640[c56_d1e860.unknown46f4e0()][allies].randomInRange_40c130() - 1);
+			int current = count != 0 ? count - 1 : (col->f28 == 6 ? 0 : c56_d1d640[c56_d1e860.getDepthIndex()][allies].randomInRange_40c130() - 1);
 			C56_HLoc clean;
 			if (current > 1 && c56_d1e88c.size() >= 2)
 			{
@@ -273,7 +273,7 @@ int Overmind::spawnPatrolParty(C56_HEntity owner, bool flag, C56_Rect *area, vec
 				current--;
 			}
 			if (!cols)
-				unknown6827d0(new C56_Party(2,behaviour,-1,0,0),areas);
+				addParty(new C56_Party(2,behaviour,-1,0,0),areas);
 		}
 	}
 	return base;

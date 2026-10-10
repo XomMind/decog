@@ -28,7 +28,7 @@ struct LB27AI{
  int unknown118,unknown11c;LB27Vec<LB27AI120Element>owner120;
  LB27AI(LB27H,int,int);~LB27AI();int kind9b4350()throw();void set44cea0(int)throw();
 };
-struct LB27Map{LB27Vec<LB27H>&list463d80()throw();int chance7163a0(LB27H);bool allowed716250(LB27H,int,string*);int cost7161e0();void spend774390(int,int);void action735720(LB27H,LB27H,bool);void action7358c0(LB27H,LB27H);void remove730f40(LB27H);LB27HG faction463890(int);void add463da0(LB27H);LB27HR add777a20(LB27HR);};extern LB27Map*lb27_cefc4c;
+struct LB27Map{LB27Vec<LB27H>&list463d80()throw();int chance7163a0(LB27H);bool allowed716250(LB27H,int,string*);int cost7161e0();void playerActionFinish(int,int);void action735720(LB27H,LB27H,bool);void action7358c0(LB27H,LB27H);void remove730f40(LB27H);LB27HG faction463890(int);void add463da0(LB27H);LB27HR add777a20(LB27HR);};extern LB27Map*lb27_cefc4c;
 struct LB27Shoot{
  void*retailVtable;LB27HR record04;int unknown08,unknown0c;
  LB27H entity10;int mode14;LB27P point18,point20;LB27H target28;LB27Vec<LB27Child>children2c;
@@ -61,7 +61,7 @@ bool LB27CMap::third8231f0(LB27H entity,const LB27P&point){
     reset:target=pos;start=lb27_caed20;last=lb27_caed20;refresh49ad30();return true;
    }else if(lb27_caed20<start+500)return true;
    else if(lb27_caed20>last+3000)goto reset;
-   last=lb27_caed20;entity.get9b6570()->spend45b1e0(value);lb27_cefc4c->spend774390(17,300);entity.get9b6570()->alert639ec0(pos,false);entity.get9b6570()->destroy63a0d0();lb27_cefc4c->action735720(entity,pos,false);lb27_cefc4c->action7358c0(entity,pos);LB27HI a=entity.get9b6570()->item5d2380(199);
+   last=lb27_caed20;entity.get9b6570()->spend45b1e0(value);lb27_cefc4c->playerActionFinish(17,300);entity.get9b6570()->alert639ec0(pos,false);entity.get9b6570()->destroy63a0d0();lb27_cefc4c->action735720(entity,pos,false);lb27_cefc4c->action7358c0(entity,pos);LB27HI a=entity.get9b6570()->item5d2380(199);
    if(!rng.chance(num)){LB27_MSG(199,&a.get9b65b0()->name571db0(false,false),0);lb27_sound4541b0(226,0,0);}
    else{
     pos.get9b6570()->remove639730(false);lb27_cefc4c->remove730f40(pos);int current=pos.get9b6570()->ai45b590()->kind9b4350();
@@ -81,5 +81,5 @@ bool LB27CMap::third8231f0(LB27H entity,const LB27P&point){
   if(lb27_caed20<caveLast+500)return false;
   else if(lb27_caed20>caveStart+10000){caveStart=lb27_caed20;caveLast=lb27_caed20;lb27_sound4541b0(60,0,0);lb27_cec0f4->add7b1880(new LB27Phrase(167,0,0,0,LB27H(),LB27H()));return false;}
  }
- children.clear9b4710();lb27_cefc4c->add777a20(lb27_cefaa8->create7930e0(new LB27Shoot(entity,0,point,lb27_d2e20c,&amount,children,false,LB27HI())));lb27_cefc4c->spend774390(10,amount);return true;
+ children.clear9b4710();lb27_cefc4c->add777a20(lb27_cefaa8->create7930e0(new LB27Shoot(entity,0,point,lb27_d2e20c,&amount,children,false,LB27HI())));lb27_cefc4c->playerActionFinish(10,amount);return true;
 }

@@ -89,7 +89,7 @@ struct G8Location
 	char pad26[7];
 	bool b2d;
 	bool inRange46ecb0();	// 0x46ecb0
-	int rating46ed20();	// 0x46ed20
+	int getDepthIndex();	// 0x46ed20
 	G8HLocation find46ee80(int kind);	// 0x46ee80
 	void init46eb70(int a, int b, int c, int d);	// 0x46eb70
 };
@@ -242,7 +242,7 @@ struct G8GameData
 	string &getEntryText(const string &key);	// 0x46f6d0
 	void setEntryText(const string &key, const string &value);	// 0x46f700
 	bool unknown46f4b0(int a);	// 0x46f4b0
-	int unknown46f4e0();	// 0x46f4e0
+	int getDepthIndex();	// 0x46f4e0
 	void unknown7897a0(int a);	// 0x7897a0
 	bool hasAnyObjects46f9f0();	// 0x46f9f0
 	bool hasObjectID46fa40(int a);	// 0x46fa40
@@ -967,7 +967,7 @@ bool BS::initilize()
 	if (!g8_findTerrain(g8_terrains_cfb844,string("PHASEWALL_KNOWN"),g8_t_cefb98)) ;
 	f118.assign(9,vector<G8Point>());
 	f128.assign(9,vector<G8Point>());
-	if (g8_hist_d1e88c.size() == 1 || g8_hist_d1e88c.back()->rating46ed20() != g8_hist_d1e88c[g8_hist_d1e88c.size() - 2]->rating46ed20())
+	if (g8_hist_d1e88c.size() == 1 || g8_hist_d1e88c.back()->getDepthIndex() != g8_hist_d1e88c[g8_hist_d1e88c.size() - 2]->getDepthIndex())
 		g8_cf4b24.assign(g8_records_d25de0.size(),0);
 	for (int k = 0; k < 0x26; k++)
 		g8_findTerrain(g8_terrains_cfb844,"FLOOR_" + g8_zoneNames_cfe140[k],e19[k]);
@@ -1799,7 +1799,7 @@ checkKind:
 		fab0.clear();
 		if (g8_cf462c == 9)
 		{
-			int rating = g8_gameData_d1e860.unknown46f4e0();
+			int rating = g8_gameData_d1e860.getDepthIndex();
 			for (int k = 0; k < g8_defs_cfd2cc.size(); k++)
 			{
 				if (g8_defs_cfd2cc[k]->f28 >= 0 && g8_defs_cfd2cc[k]->f28 <= rating)
@@ -2124,7 +2124,7 @@ nextCompanion:;
 		}
 		if (g8_d1eb68 != 0 && g8_gameData_d1e860.isFlagEnabledB46fc40())
 		{
-			int h28 = g8_gameData_d1e860.unknown46f4e0();
+			int h28 = g8_gameData_d1e860.getDepthIndex();
 			int q42 = g8_minInt(g8_d1eb68,g8_cells_cfd44c.getWidth() * g8_cells_cfd44c.getHeight() / 5000);
 			OpR5h_WL<int> h8(g8_b99b38,8);
 			vector<int> q48(e50);
@@ -2326,7 +2326,7 @@ nextCompanion:;
 		{
 			vector<int> rc32(6);
 			G8ItemDef *q21;
-			int g7 = g8_location_d1e888->rating46ed20();
+			int g7 = g8_location_d1e888->getDepthIndex();
 			rc32[0] = f66c->unknown45a920() < 100;
 			rc32[1] = f66c->unknown448fe0(0);
 			rc32[2] = f66c->unknown448fe0(1);
@@ -2477,7 +2477,7 @@ nextCompanion:;
 							g8_cf4634[k] -= (g8_cf4634[k] - target) * g8_ba76d4;
 					}
 				}
-				int level = g8_location_d1e888->rating46ed20();
+				int level = g8_location_d1e888->getDepthIndex();
 				level++;
 				if (e22 == 1)
 					level++;
@@ -2798,7 +2798,7 @@ nextCompanion:;
 	fba4 = 0;
 	fba8.reset9b7270();
 	fbac = 0;
-	if (g8_cf462c == 0xa && g8_location_d1e888->inRange46ecb0() && g8_location_d1e888->rating46ed20() > 3)
+	if (g8_cf462c == 0xa && g8_location_d1e888->inRange46ecb0() && g8_location_d1e888->getDepthIndex() > 3)
 		fba4 = getTurn464270() + g8_range_d35bd8.randomInRange();
 	fbb0 = 1;
 	bbe4 = false;

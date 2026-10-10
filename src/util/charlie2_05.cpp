@@ -72,7 +72,7 @@ class C2WBS	// NOTE: placeholder layout (BS)
 {
 public:
 	void f6c38a0(C2WArea &area, int a, float b, int c);
-	C2WRec *f6c5600(int kind, int type, bool first, int d);
+	C2WRec *selectRobotOfClass(int kind, int type, bool first, int d);
 	C2WHandle placeEntity(C2WRec *rec, const C2WPoint &pos, int a, int b, int c, int d, int e);
 	C2WHandle f463890(int v);
 	bool isVisible(C2WPoint &pos);
@@ -238,7 +238,7 @@ void C2WBS::warStaging73acc0(int param, C2WPoint *pos)
 		leader.reset9b7270();
 		for (unsigned j = 0; j < vec[index].size(); j++)
 		{
-			owner = f6c5600(1, vec[index][j], j == 0, 1);
+			owner = selectRobotOfClass(1, vec[index][j], j == 0, 1);
 			if (owner)
 			{
 				elem = placeEntity(owner, pos ? *pos : room.p1, 3, 0, 3, 0xe, 0);
@@ -290,7 +290,7 @@ void C2WBS::warStaging73acc0(int param, C2WPoint *pos)
 		}
 		if (param > 3 && rng.chance(50) && leader.isValid())
 		{
-			owner = f6c5600(2, rng.chance(50) ? 30 : 31, 0, 1);
+			owner = selectRobotOfClass(2, rng.chance(50) ? 30 : 31, 0, 1);
 			if (owner)
 			{
 				elem = placeEntity(owner, leader->getPosition(), 3, 0, 3, 0xe, 0);

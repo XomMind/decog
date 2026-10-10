@@ -677,7 +677,7 @@ extern int						yk_unknownCf49f4;
 extern int						yk_unknownCf49f8;
 extern int						yk_unknownCf49fc;
 extern bool						yk_unknownCf4a00;
-extern vector<int>				yk_unknownCf4a04;
+extern vector<int>				yk_rifLevels_cf4a04;
 extern vector<int>				yk_unknownCf4a14;
 extern int						yk_unknownCf4a34;
 extern int						yk_unknownCf4d1c;		// teleport counter (achievement 0x133 at 10)
@@ -1576,7 +1576,7 @@ int YkEntity::equipPart(YkHItem item, bool update, int extra)
 							yk_gameData.setEntryText("usedCoreResetMatrix_g",yk_intToString(yk_world->getTurn()));
 						}
 						yk_gameData.setEntryText("installedRif_g","0");
-						yk_unknownCf4a04.assign((unsigned int)0x13,0);
+						yk_rifLevels_cf4a04.assign((unsigned int)0x13,0);
 						yk_unknownCf4a14.clear();
 
 						// an attached RIF installer is rejected

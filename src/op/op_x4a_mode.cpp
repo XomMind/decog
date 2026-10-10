@@ -42,7 +42,7 @@ struct OpU4_EntityRecord	// NOTE: placeholder name
 class OpU4_World	// NOTE: placeholder name (0xcefc4c)
 {
 public:
-	OpU4_EntityRecord *unknown6c5600(int a, int b, bool c, bool d);	// NOTE: placeholder name
+	OpU4_EntityRecord *selectRobotOfClass(int a, int b, bool c, bool d);	// NOTE: placeholder name
 };
 extern OpU4_World *opu4_world;	// NOTE: placeholder name (0xcefc4c)
 
@@ -137,7 +137,7 @@ void OpU4_Mode::unknown6beeb0(int a, int b)
 	{
 		if (n == 2 || n == 6 || n == 7)
 			continue;
-		entityRecord = opu4_world->unknown6c5600(3,opu4_bbb460[n],false,true);
+		entityRecord = opu4_world->selectRobotOfClass(3,opu4_bbb460[n],false,true);
 		if (entityRecord != NULL)
 			list48[n] = entityRecord->unknown0;
 	}

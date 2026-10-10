@@ -16,7 +16,7 @@ struct LC7Entity {const LC7Point &position_45a4a0();bool hostile_45aa70(LC7H);LC
 struct LC7Item {std::string name_571db0(int,int);};
 struct LC7Cell {LC7H entity_45d250();bool pass_66ab30(LC7H);};
 struct LC7Grid {void rect_9b4430(const LC7Point&,int,LC7Rect&);LC7Cell*&at_9ceda0(int,int);LC7Cell*&point_9ced70(LC7Point&);};extern LC7Grid lc7_grid_cfd44c;
-struct LC7Map {LC7H player_4630f0();bool visible_4631f0(LC7H);int turn_464270();int time_4642d0();int sector_463ba0();bool line_716940(const LC7Point&,const LC7Point&,int,int);void notify_728970(LC7H,int);};extern LC7Map *lc7_map_cefc4c;
+struct LC7Map {LC7H player_4630f0();bool visible_4631f0(LC7H);int turn_464270();int time_4642d0();int getDisabledGarrisonAccesses();bool line_716940(const LC7Point&,const LC7Point&,int,int);void notify_728970(LC7H,int);};extern LC7Map *lc7_map_cefc4c;
 int lc7_distance_40a3f0(const LC7Point&,const LC7Point&);int lc7_distance_xy_406480(int,int,int,int);int lc7_min_9cdb30(int,int);
 LC7H lc7_random_9dafb0(std::vector<LC7H>&);
 struct LC7Stats {bool add_4729d0(unsigned,int,std::string,int);};extern LC7Stats lc7_stats_d2c658;extern const char lc7_empty_b93df5[];
@@ -24,9 +24,9 @@ struct LC7Console {void scroll_8758d0(bool);};extern LC7Console *lc7_console_cec
 struct LC7Log {void end_7b4f10();};extern LC7Log *lc7_log_cec0b4;
 bool lc7_show0_5111e0(int,int,int,int,LC7H,LC7HP,int,int);
 bool lc7_show_5111e0(int,const std::string&,int,int,LC7H,LC7HP,int,int);
-struct LC7GlobalRecord {int rank_46ed20();};struct LC7GlobalH {LC7GlobalRecord*get_9b7910();};extern LC7GlobalH lc7_global_d1e888;
+struct LC7GlobalRecord {int getDepthIndex();};struct LC7GlobalH {LC7GlobalRecord*get_9b7910();};extern LC7GlobalH lc7_global_d1e888;
 struct LC7Response {int unk0,id,deadline;};
-struct LC7Overmind {int reinforce_686c60(const LC7Point&,int,int,int);LC7Response*response_45ed10();void ready_68d920(bool);};extern LC7Overmind lc7_overmind_cf6428;
+struct LC7Overmind {int reinforce_686c60(const LC7Point&,int,int,int);LC7Response*lastParty();void ready_68d920(bool);};extern LC7Overmind lc7_overmind_cf6428;
 struct LC7Flags {void set_451400(int);};extern LC7Flags lc7_flags_cf1080;extern bool lc7_mute_d28fb0;
 void lc7_sound_4541b0(int,int,int);
 struct LC7Player {void event_77fbc0(int);};extern LC7Player lc7_player_cf45d8;
@@ -74,11 +74,11 @@ void LC7AI::reinforce_5b3a30(int range) {
   bool damage=target.get_9b6570()->level_5d15a0(0)<=80;
   if(rng.chance(15))damage=rng.chance(50)?true:false;
   bool status=self.get_9b6570()->record_9b4350()->model==47;
-  if(status?(lc7_map_cefc4c->sector_463ba0()?lc7_overmind_cf6428.reinforce_686c60(point,!damage?3:rng.rangeInt(4.0f,5.0f),damage?14:23,122):lc7_overmind_cf6428.reinforce_686c60(point,!damage?3:rng.rangeInt(4.0f,5.0f),97,damage?45:46)):lc7_overmind_cf6428.reinforce_686c60(point,!damage?2:rng.rangeInt(2.0f,3.0f)+(rng.chance(lc7_global_d1e888.get_9b7910()->rank_46ed20()*6)?1:0),damage?14:23,122)) {
+  if(status?(lc7_map_cefc4c->getDisabledGarrisonAccesses()?lc7_overmind_cf6428.reinforce_686c60(point,!damage?3:rng.rangeInt(4.0f,5.0f),damage?14:23,122):lc7_overmind_cf6428.reinforce_686c60(point,!damage?3:rng.rangeInt(4.0f,5.0f),97,damage?45:46)):lc7_overmind_cf6428.reinforce_686c60(point,!damage?2:rng.rangeInt(2.0f,3.0f)+(rng.chance(lc7_global_d1e888.get_9b7910()->getDepthIndex()*6)?1:0),damage?14:23,122)) {
    do {if(lc7_show0_5111e0(573,0,0,0,self,LC7HP(),0,0))lc7_console_cec058->scroll_8758d0(true);lc7_log_cec0b4->end_7b4f10();}while(false);
    std::string text="ALERT: Suspicious intruders detected, dispatching ";
    bool flag=false;
-   if(status&&!lc7_map_cefc4c->sector_463ba0()) {text+=damage?"Decapitator":"Immortal";if(damage)flag=true;}
+   if(status&&!lc7_map_cefc4c->getDisabledGarrisonAccesses()) {text+=damage?"Decapitator":"Immortal";if(damage)flag=true;}
    else text+=damage?"Cutter":"Specialist";
    text+=" reinforcements to area.";
    do {
@@ -89,7 +89,7 @@ void LC7AI::reinforce_5b3a30(int range) {
    }while(false);
    if(target.get_9b6570()->player_5c7600()) {lc7_player_cf45d8.event_77fbc0(72);if(flag)lc7_player_cf45d8.event_77fbc0(73);}
    cooldown=lc7_map_cefc4c->time_4642d0()+lc7_min_9cdb30(120,target.get_9b6570()->level_5d15a0(0));
-   LC7Response *r=lc7_overmind_cf6428.response_45ed10();
+   LC7Response *r=lc7_overmind_cf6428.lastParty();
    if(r){r->deadline=lc7_map_cefc4c->turn_464270()+150;if(!status)lc7_map_cefc4c->notify_728970(self,r->id);}
    lc7_overmind_cf6428.ready_68d920(true);
   }

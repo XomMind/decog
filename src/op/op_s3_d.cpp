@@ -486,7 +486,7 @@ public:
 extern OpS3d_MapView *opS3d_mapView;	// NOTE: placeholder name (0xcec054)
 
 struct MapRecord;
-extern vector<MapRecord *> opS3d_mapRecordsCf4a04;	// NOTE: placeholder name (0xcf4a04)
+extern vector<MapRecord *> opS3d_rifLevels_cf4a04;	// NOTE: placeholder name (0xcf4a04)
 extern bool opS3d_flagCefc9d;							// NOTE: placeholder name (0xcefc9d)
 bool isFootprintOpen(const Point &position, int size);	// NOTE: placeholder name (0x4fad50)
 bool footprintHasImpassableTile(const Point &position, int size);	// NOTE: placeholder name (0x4fae80)
@@ -504,7 +504,7 @@ bool Cell::unknown66ad90(int size)
 		return true;
 	if (isShortcut())
 		return world->unknown463e90(position);
-	return opS3d_mapRecordsCf4a04[14] != NULL && world->unknown463e90(position);
+	return opS3d_rifLevels_cf4a04[14] != NULL && world->unknown463e90(position);
 }
 
 bool Cell::unknown66b170()

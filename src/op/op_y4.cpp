@@ -1480,7 +1480,7 @@ struct OpW8_PropInfo	// NOTE: placeholder name
 class OpW8_GameData	// NOTE: placeholder name (object at 0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 	bool unknown46fb60();	// NOTE: placeholder name
 	const string &unknown46f6d0(const string &key);	// NOTE: placeholder name
 };
@@ -1489,7 +1489,7 @@ extern OpW8_GameData opw8_gameData;	// NOTE: placeholder name
 
 struct OpW8_LocationInfo	// NOTE: placeholder name
 {
-	int unknown46ed20();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 	char pad00[4];
 	int unknown04;
 	int depth;	// NOTE: placeholder name

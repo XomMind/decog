@@ -160,7 +160,7 @@ public:
 struct H2sCheck { bool test_45e380(); int getType_9b8f00(); vector<H2sHEntity> *getMembers_416f40(); };	// NOTE: placeholder name
 class H2sHCheck { public: int ID; H2sCheck *operator->() const; };	// NOTE: placeholder name (0x9b7250)
 
-struct H2sOwner { int f0; int f4; int f8; char padc[0x25 - 0xc]; bool b25; bool b26; bool b27; char pad28[0x60 - 0x28]; bool b60; bool b61; int unknown46ed20(); bool inRange_46ecb0(); };	// NOTE: placeholder layout
+struct H2sOwner { int f0; int f4; int f8; char padc[0x25 - 0xc]; bool b25; bool b26; bool b27; char pad28[0x60 - 0x28]; bool b60; bool b61; int getDepthIndex(); bool inRange_46ecb0(); };	// NOTE: placeholder layout
 class H2sHOwner { public: int ID; H2sHOwner() throw(); bool isValid() const; bool isNull() const; bool operator==(H2sHOwner other) const; H2sOwner *operator->() const; bool operator!=(H2sHEntity other) const; };	// NOTE: placeholder name (0x9b7910)
 struct H2sAccess { Pos pos; H2sHOwner owner; bool b0c; bool b0d; char pade[2]; int f10; char pad14[0x1c - 0x14]; int f1c; bool unknown6c1a10(); void unknown6c16d0(string text); ~H2sAccess(); };	// NOTE: placeholder layout
 struct H2sMarker { char pad0[8]; Pos pos; char pad10[4]; int f14; void unknown6c20b0(int layer, const Pos &pos, int value); };	// NOTE: placeholder layout
@@ -177,7 +177,7 @@ public:
 	vector<H2sAccess *> *getAccess_462e10();
 	H2sAccess *unknown462fd0(H2sHProp machine);
 	H2sAccess *unknown462f60(H2sHProp machine);
-	void opw3_unknown727370();
+	void onGarrisonAccessDisabled();
 	int unknown71ab60(int count);
 	H2sAccess *getZone_462e30(const Pos &pos);
 	bool unknown463e90(const Pos &pos);
@@ -188,7 +188,7 @@ public:
 	void unknown749240();
 	void setFlag2f0_465640();
 	vector<int> *unknown463b30();
-	struct H2sGroup *unknown6c5600(int a, int b, int c, int d);
+	struct H2sGroup *selectRobotOfClass(int a, int b, int c, int d);
 	vector<struct H2sJobRef *> *unknown464920();
 	vector<struct H2sJobRef *> *unknown464940();
 	int unknown71abf0(bool flag);
@@ -250,7 +250,7 @@ extern vector<H2sRec0 *> h2s_d35b58;
 extern vector<int> h2s_cf4888;
 extern vector<int> h2s_cf4844;
 extern vector<int> h2s_cf4910;
-extern string h2s_d2f798[];
+extern string h2s_robotClassNames_d2f798[];
 extern string h2s_d2d578;
 
 extern H2sHOwner h2s_d1e888;
@@ -369,7 +369,7 @@ extern H2sGrid h2s_cfd44c;
 struct H2sGuard { int faction; H2sHEntity entity; char pad8[0x18 - 8]; int f18; string f1c; bool test_45e820(); };	// NOTE: placeholder layout
 extern vector<H2sGuard *> h2s_cf6478;
 extern vector<vector<H2sHProp> > h2s_d20248;
-extern string h2s_cfaca0[];
+extern string h2s_mapNames_cfaca0[];
 extern vector<int> h2s_d1ddbc;
 extern int h2s_d38624;
 extern int h2s_d38628;
@@ -533,7 +533,7 @@ extern vector<string> jl_d30540;	// NOTE: placeholder name
 bool OpT8b_Fn9db000(vector<int> &list, int value);	// NOTE: placeholder signature (add unique)
 extern int jl_cf4d24;	// NOTE: placeholder name
 bool OpU8a_containsString(vector<string> &list, string text);	// NOTE: placeholder signature
-class H2sGameData { public: int unknown46f4e0(); string generateID_46f890(); const string &getEntryText_46f6d0(const string &key); void setEntryText_46f700(const string &key, const string &value); int getWeightedDepthCount_7896a0(); int getTier_46fd60(); bool unknown46f4b0(int a); int getNextWeightedDepthCount_789720(); };	// NOTE: placeholder name (0xd1e860)
+class H2sGameData { public: int getDepthIndex(); string generateID_46f890(); const string &getEntryText_46f6d0(const string &key); void setEntryText_46f700(const string &key, const string &value); int getWeightedDepthCount_7896a0(); int getTier_46fd60(); bool unknown46f4b0(int a); int getNextWeightedDepthCount_789720(); };	// NOTE: placeholder name (0xd1e860)
 extern H2sGameData jl_d1e860;	// NOTE: placeholder name
 int OpX5_minInt(int a, int b);
 int jl_randomIndex_9d9b20(vector<int> &list);	// NOTE: placeholder name (OpQ5_randomIndex<T>, folded)
@@ -574,7 +574,7 @@ int OpU8a_randomRec(vector<int> &v);
 void jl_appendUnique_9d80a0(vector<Pos> &out, vector<Pos> &in);	// NOTE: placeholder name (OpS8c_appendUnique)
 int OpT8a_sumVector(vector<int> &v);	// NOTE: placeholder signature
 extern string jl_cf25d8[];	// NOTE: placeholder name
-extern string jl_d2f350[];	// NOTE: placeholder name
+extern string jl_partyTypeNames_d2f350[];	// NOTE: placeholder name
 char randomChar_4085b0(const string &chars);	// NOTE: placeholder signature
 class H2sOvermind2 { public: void unknown68cd80(H2sGuard *squad); };	// NOTE: placeholder name
 extern H2sOvermind2 jl_ovm2_cf6428;	// NOTE: placeholder name (same object as jl_cf6428)
@@ -677,7 +677,7 @@ extern bool jl_d28f64;	// NOTE: placeholder name
 extern bool jl_d28f65;	// NOTE: placeholder name
 extern H2sFlags6 jl_b9b17a[];	// NOTE: placeholder name (column of the 6-byte hack table)
 extern H2sFlags6 jl_b9b179[];	// NOTE: placeholder name
-class H2sOvermind5 { public: void unknown681e70(int amount); bool unknown683500(H2sPt *out, int a, int b, int c, const Pos &from, void **access, int e, int f); };	// NOTE: placeholder name
+class H2sOvermind5 { public: void unknown681e70(int amount); bool findDispatchExit(H2sPt *out, int a, int b, int c, const Pos &from, void **access, int e, int f); };	// NOTE: placeholder name
 extern H2sOvermind5 jl_ovm5_cf6428;	// NOTE: placeholder name (same object as jl_cf6428)
 extern int jl_b9afb8[];	// NOTE: placeholder name
 extern int *jl_cf4700;	// NOTE: placeholder name
@@ -1214,8 +1214,8 @@ bool CShell::unknown91ca50(H2sHProp machine, H2sHackRec *record, int type, int i
 					break;
 				}
 				vector<int> candidates;
-				int low = OpX5_maxInt(0,jl_d1e860.unknown46f4e0() - 1);
-				int high5 = OpX5_minInt(10,jl_d1e860.unknown46f4e0() + 1);
+				int low = OpX5_maxInt(0,jl_d1e860.getDepthIndex() - 1);
+				int high5 = OpX5_minInt(10,jl_d1e860.getDepthIndex() + 1);
 				for (int i = 0; i < h2s_d2d1c4.size(); i++)
 				{
 					if (h2s_d2d1c4[i]->f94 == 1 && OpT8b_Fn9daf80(low,h2s_d2d1c4[i]->f50,high5) && (h2s_d2d1c4[i]->f54 == 1 || h2s_d2d1c4[i]->f54 == 2))
@@ -1352,7 +1352,7 @@ bool CShell::unknown91ca50(H2sHProp machine, H2sHackRec *record, int type, int i
 					if (h2s_d1e888->f4 == 0xd)
 						msg = "Found " + opw8_countString(found2,"main access point") + ":";
 					else
-						msg = "Found " + opw8_countString(found2,"level access point") + " to " + h2s_cfaca0[depth] + ":";
+						msg = "Found " + opw8_countString(found2,"level access point") + " to " + h2s_mapNames_cfaca0[depth] + ":";
 					for (unsigned int i = 0; i < access->size(); i++)
 					{
 						if ((*access)[i]->owner->inRange_46ecb0() && (*access)[i]->f10 != 0)
@@ -1368,7 +1368,7 @@ bool CShell::unknown91ca50(H2sHProp machine, H2sHackRec *record, int type, int i
 				}
 				addNew(name,msg,1,-1,0);
 				if (found2 != 0)
-					hotel_unknown91c850(hackType,&preBonus,&secondBonus,h2s_cfaca0[depth]);
+					hotel_unknown91c850(hackType,&preBonus,&secondBonus,h2s_mapNames_cfaca0[depth]);
 				break;
 			}
 
@@ -1406,7 +1406,7 @@ bool CShell::unknown91ca50(H2sHProp machine, H2sHackRec *record, int type, int i
 					{
 						if ((*access)[i]->unknown6c1a10() && (*access)[i]->f10 != 0)
 						{
-							msg += "\n  " + OpQ1_pointToString((*access)[i]->pos) + " " + h2s_cfaca0[(*access)[i]->owner->f4];
+							msg += "\n  " + OpQ1_pointToString((*access)[i]->pos) + " " + h2s_mapNames_cfaca0[(*access)[i]->owner->f4];
 							h2s_cefc4c->announceMachine_71dd30((*access)[i]->owner);
 							h2s_cefc4c->unknown4647a0((*access)[i]->pos,true);
 							(*access)[i]->b0d = true;
@@ -1860,7 +1860,7 @@ noTraps:
 				{
 					if (counts3[i] != 0)
 					{
-						msg += "\n  " + intToString(counts3[i]) + " " + h2s_d2f798[i];
+						msg += "\n  " + intToString(counts3[i]) + " " + h2s_robotClassNames_d2f798[i];
 						if (counts3[i] > 1)
 							msg += "s";
 					}
@@ -1931,10 +1931,10 @@ noTraps:
 					}
 				}
 				if (found == 0)
-					msg += "\nNo active " + jl_d2f350[faction] + " squads found.";
+					msg += "\nNo active " + jl_partyTypeNames_d2f350[faction] + " squads found.";
 				else
 				{
-					msg += "\nFound " + opw8_countString(found,"active " + jl_d2f350[faction] + " squad") + ".";
+					msg += "\nFound " + opw8_countString(found,"active " + jl_partyTypeNames_d2f350[faction] + " squad") + ".";
 					msg += "\nDownloaded coordinate data.";
 					unknownD8 = true;
 					if (OpT8b_Fn9daf80(0x1c,hackType,0x1f))
@@ -1961,7 +1961,7 @@ noTraps:
 				bool recalled = false;
 				msg += "Establishing remote squad link...";
 				if (squads2.empty())
-					msg += "\nNo tasked " + jl_d2f350[faction] + " squads found.";
+					msg += "\nNo tasked " + jl_partyTypeNames_d2f350[faction] + " squads found.";
 				else if (h2s_d1e888->f4 == 0x22)
 					msg += "\nUnable to override squad orders.";
 				else
@@ -1970,7 +1970,7 @@ noTraps:
 					string id;
 					for (int i = 0; i < 10; i++)
 						id += randomChar_4085b0(chars);
-					msg += "\nRecalled " + jl_d2f350[faction] + " squad " + id + ".";
+					msg += "\nRecalled " + jl_partyTypeNames_d2f350[faction] + " squad " + id + ".";
 					if (preBonus == 2)
 					{
 						H2sGuard *squad = h2s_cf6478[OpU8a_randomRec(squads2)];
@@ -1986,7 +1986,7 @@ noTraps:
 				}
 				addNew(name,msg,1,-1,0);
 				if (recalled)
-					hotel_unknown91c850(hackType,&preBonus,&secondBonus,jl_d2f350[faction]);
+					hotel_unknown91c850(hackType,&preBonus,&secondBonus,jl_partyTypeNames_d2f350[faction]);
 				break;
 			}
 
@@ -2238,7 +2238,7 @@ noTraps:
 					owner->f0;
 					owner->b60 = true;
 					if (0) {}
-					msg += "Retrieving " + h2s_cfaca0[owner->f4] + " patrol records...";
+					msg += "Retrieving " + h2s_mapNames_cfaca0[owner->f4] + " patrol records...";
 					msg += "\nDownloaded protocol data.";
 					done = true;
 				}
@@ -2259,7 +2259,7 @@ noTraps:
 					owner = h2s_cefc4c->getAccess_462e10()->front()->owner;
 					owner->f0;
 					if (0) {}
-					msg += "Retrieving " + h2s_cfaca0[owner->f4] + " security records...";
+					msg += "Retrieving " + h2s_mapNames_cfaca0[owner->f4] + " security records...";
 					msg += "\nDownloaded coordinate data.";
 					done = true;
 				}
@@ -3273,7 +3273,7 @@ nextMachine:
 							msg += "\nFabnet at current depth includes " + opw8_countString(h2s_cefc4c->unknown71abf0(true),"machine") + ".";
 							msg += "\nAccumulated fabnet effectiveness:";
 							msg += "\n      Active: " + intToString(jl_d1e860.getWeightedDepthCount_7896a0()) + "%";
-							msg += "\n  Next depth: " + (jl_d1e860.unknown46f4e0() == 10 ? string("N/A") : intToString(jl_d1e860.getNextWeightedDepthCount_789720()) + "%");
+							msg += "\n  Next depth: " + (jl_d1e860.getDepthIndex() == 10 ? string("N/A") : intToString(jl_d1e860.getNextWeightedDepthCount_789720()) + "%");
 							break;
 						case 72:
 							msg += "\nHauler tracking enabled and active.";
@@ -3867,7 +3867,7 @@ nextMachine:
 						{
 							if (i != 0)
 								msg += "\n";
-							msg += "DISCOVERED[-" + intToString(found[i]->f8) + "/" + h2s_cfaca0[found[i]->f4] + "]";
+							msg += "DISCOVERED[-" + intToString(found[i]->f8) + "/" + h2s_mapNames_cfaca0[found[i]->f4] + "]";
 						}
 						jl_cf4d2c++;
 						if (jl_cf4d2c >= 5)
@@ -3944,9 +3944,9 @@ nextMachine:
 							lines.push_back(" |   \\\\  ___// /_/ | |  |___|  /  |   \\  |  \\ ");
 							lines.push_back(" \\_  / \\___  \\____ | |_____ \\__\\__|_  /__|__ \\");
 							lines.push_back("   \\/      \\/     \\/       \\/       \\/ v3.71\\/");
-							int readiness = jl_d1eb44[jl_d1e860.unknown46f4e0()];
+							int readiness = jl_d1eb44[jl_d1e860.getDepthIndex()];
 							jl_d1eb54 += readiness >= 3 ? jl_b99930[2] : jl_b99930[readiness];
-							jl_d1eb44[jl_d1e860.unknown46f4e0()] += 1;
+							jl_d1eb44[jl_d1e860.getDepthIndex()] += 1;
 							int tier2 = jl_d1e860.getTier_46fd60();
 							lines.push_back("UFD!MEMBER<" + jl_cf4acc + ">");
 							lines.push_back("UFD!NETWORK<" + padLeft_408090(intToString(rng.rangeInt(1,999)),3,'0') + ">");
@@ -4394,7 +4394,7 @@ done:
 					OpS8b_Fn9d51d0Access(*h2s_cefc4c->getAccess_462e10(),access);
 					access = NULL;
 					machine->disableMachine_65ed00();
-					h2s_cefc4c->opw3_unknown727370();
+					h2s_cefc4c->onGarrisonAccessDisabled();
 					unknown4748 = 2;
 					msg = "Access door sealed.";
 					addNew(name,msg,1,-1,0);
@@ -4507,7 +4507,7 @@ done:
 				OpS8b_Fn9d51d0Access(*h2s_cefc4c->getAccess_462e10(),access);
 				access = NULL;
 				machine->disableMachine_65ed00();
-				h2s_cefc4c->opw3_unknown727370();
+				h2s_cefc4c->onGarrisonAccessDisabled();
 				unknown4748 = 3;
 				jl_ovm_cf6428.unknown682420(0xb,0);
 				STAT(0x2c6,hotel_e_b997ba);
@@ -4784,9 +4784,9 @@ done:
 						h2s_cec0f8->unknown940ad0(100,100,2);
 						H2sPt spawn;
 						void *access;
-						if (jl_ovm5_cf6428.unknown683500(&spawn,1,0,1,JlPos(-1),&access,0,0))
+						if (jl_ovm5_cf6428.findDispatchExit(&spawn,1,0,1,JlPos(-1),&access,0,0))
 						{
-							H2sGroup *group = h2s_cefc4c->unknown6c5600(1,0xe,0,1);
+							H2sGroup *group = h2s_cefc4c->selectRobotOfClass(1,0xe,0,1);
 							H2sHEntity leader2;
 							for (int n = rng.rangeInt(2,4); n > 0; n--)
 							{
@@ -4949,7 +4949,7 @@ done:
 								source = "SOURCE_DEPTH/-" + intToString(jl_cf6a28->f8);
 								break;
 							case 2:
-								source = "SOURCE_MAP/" + h2s_cfaca0[jl_cf6a28->f4];
+								source = "SOURCE_MAP/" + h2s_mapNames_cfaca0[jl_cf6a28->f4];
 								source = OpR5f_toUpper_4083a0(source);
 								break;
 							case 3:

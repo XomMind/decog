@@ -330,7 +330,7 @@ class BS : public Map
 {
 public:
 	void spawnInfestiationFromTrap(unsigned int infestationIndex);	// 0x736ad0
-	EntityRecord *unknown6c5600(int a, int b, int c, int d);	// NOTE: placeholder name
+	EntityRecord *selectRobotOfClass(int a, int b, int c, int d);	// NOTE: placeholder name
 	HEntity placeEntity(EntityRecord *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);	// 0x6c58c0
 	bool findPlacement(const Point &position, Point &result, int size);	// NOTE: placeholder name (0x71c150)
 	void unknown465700(HEntity entity, int value);	// NOTE: placeholder name
@@ -665,7 +665,7 @@ void BS::spawnInfestiationFromTrap(unsigned int infestationIndex)
 		logError("BS::spawnInfestiationFromTrap()","invalid infestationIndex: " + intToString(infestationIndex));
 		return;
 	}
-	EntityRecord *record = unknown6c5600(3,0x3c,0,1);
+	EntityRecord *record = selectRobotOfClass(3,0x3c,0,1);
 	if (record == NULL)
 	{
 		logError("BS::spawnInfestiationFromTrap()","no Assembled data found");

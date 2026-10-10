@@ -76,7 +76,7 @@ class OpCD_World	// NOTE: placeholder name (BS at 0xcefc4c)
 public:
 	HEntity getPlayer();	// 0x4630f0
 	HEntity unknown6c5dc0(const string &name, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);	// NOTE: placeholder name
-	EntityRecord *unknown6c5600(int a, int b, bool c, bool d);	// NOTE: placeholder name
+	EntityRecord *selectRobotOfClass(int a, int b, bool c, bool d);	// NOTE: placeholder name
 	HEntity placeEntity(EntityRecord *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);
 	HItem unknown6c51d0(int record, HEntity owner, int a, int b);	// NOTE: placeholder name
 	void unknown464f60(HItem item);	// NOTE: placeholder name
@@ -98,7 +98,7 @@ bool OpC_findNode_470180(int type, int a, int b, OpCD_Handle *out);	// NOTE: pla
 class OpCD_GameData	// NOTE: placeholder name (GameData at 0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name (difficulty)
+	int getDepthIndex();	// NOTE: placeholder name (difficulty)
 	const string &getEntryText(const string &key);	// NOTE: placeholder name (0x46f6d0)
 };
 extern OpCD_GameData opCD_gameData;	// NOTE: placeholder name
@@ -159,7 +159,7 @@ class Overmind	// NOTE: placeholder layout
 public:
 	int spawnCargoDispatch_68aec0();
 	void unknown6901e0(HEntity leader, int flag, int a, int b, const Pos &p, int c, int d);	// NOTE: placeholder name
-	bool unknown6827d0(Party *party, Point *access);	// NOTE: placeholder name
+	bool addParty(Party *party, Point *access);	// NOTE: placeholder name
 
 	char pad00[0xbc];
 	int unknownbc;	// +0xbc, NOTE: placeholder name
@@ -182,7 +182,7 @@ int Overmind::spawnCargoDispatch_68aec0()
 		freighter->getAI_45b590()->unknown4593b0(unknownc8);
 		convoy = freighter;
 		convoyPos.set_46ca50(convoy->getPosition());
-		int level = opCD_gameData.unknown46f4e0() + 1;
+		int level = opCD_gameData.getDepthIndex() + 1;
 		Pos xx(level,level + 2);
 		if (xx.y > 9)
 			xx.shift_40bf50(9 - xx.y);
@@ -192,7 +192,7 @@ int Overmind::spawnCargoDispatch_68aec0()
 		OpCD_Handle prev;
 		if (OpC_findNode_470180(0xb,-1,opCD_d1e884,&cur) && OpC_findNode_470180(0x1c,-1,opCD_d1e884,&prev) && OpT8b_Fn9daf80(prev.get23c()->depth,opCD_current_d1e888.get23c()->depth,cur.get23c()->depth - 2) && !stringToInt(opCD_gameData.getEntryText("scrConvoyRingOfPowerDropped_g")))
 			visible = true;
-		bool changed = opCD_difficulty_b939b0[opCD_gameData.unknown46f4e0()].cargoChance && rng.chance(opCD_difficulty_b939b0[opCD_gameData.unknown46f4e0()].cargoChance);
+		bool changed = opCD_difficulty_b939b0[opCD_gameData.getDepthIndex()].cargoChance && rng.chance(opCD_difficulty_b939b0[opCD_gameData.getDepthIndex()].cargoChance);
 		if (visible || changed)
 		{
 			if (changed && unknownbc == 1)
@@ -240,7 +240,7 @@ int Overmind::spawnCargoDispatch_68aec0()
 loaded:
 			;
 		}
-		if (opCD_difficulty_b939b0[opCD_gameData.unknown46f4e0()].lootChance && rng.chance(opCD_difficulty_b939b0[opCD_gameData.unknown46f4e0()].lootChance))
+		if (opCD_difficulty_b939b0[opCD_gameData.getDepthIndex()].lootChance && rng.chance(opCD_difficulty_b939b0[opCD_gameData.getDepthIndex()].lootChance))
 		{
 			int n = convoy->unknown45a810();
 			while (n)
@@ -264,7 +264,7 @@ loaded:
 			else
 				logWarning("Overmind::spawnCargoDispatch()","Carrier spawn failed");
 		}
-		base = opCD_world->unknown6c5600(1,0x13,false,true);
+		base = opCD_world->selectRobotOfClass(1,0x13,false,true);
 		if (base)
 		{
 			r1 = opCD_world->placeEntity(base,convoy->getPosition(),3,false,0x22,0xe,false);
@@ -275,7 +275,7 @@ loaded:
 				count++;
 			}
 		}
-		unknown6827d0(new Party(3,freighter,-1,0,0),NULL);
+		addParty(new Party(3,freighter,-1,0,0),NULL);
 		if (opCD_playerData.isSlotEmpty(0x76) && (opCD_world->getPlayer()->unknown5d2380(0x16).isValid() || opCD_world->getPlayer()->unknown5d2380(0x17).isValid()))
 			opCD_playerData.unknown77fbc0(0x76);
 	}

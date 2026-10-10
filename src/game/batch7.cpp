@@ -372,7 +372,7 @@ public:
 extern MoveTracker moveTracker;	// NOTE: placeholder name (0xd1e860)
 extern vector<Point> pointsA;	// NOTE: placeholder name (0xd29774)
 extern vector<Point> pointsB;	// NOTE: placeholder name (0xd2c454)
-extern IntArray unknownCf4a04;	// NOTE: placeholder name (0xcf4a04)
+extern IntArray b7_rifLevels_cf4a04;	// NOTE: placeholder name (0xcf4a04)
 extern bool unknownFlagCf4a00;	// NOTE: placeholder name (0xcf4a00)
 extern int unknownFlagD255ac;	// NOTE: placeholder name (0xd255ac)
 extern bool unknownFlagCefacd;	// NOTE: placeholder name (0xcefacd)
@@ -751,7 +751,7 @@ void Entity::changePos(const Point &newPos, bool flag)
 				if (pointDistance(unknown5c80f0(world->getPlayer()->getPosition()),world->getPlayer()->getPosition()) <= 0x12)
 					world->unknown71fef0(self);
 			}
-			if (unknownCf4a04.at(0xa) != 0 && moveTracker.unknown789580(self))
+			if (b7_rifLevels_cf4a04.at(0xa) != 0 && moveTracker.unknown789580(self))
 			{
 				if (pointDistance(unknown5c80f0(world->getPlayer()->getPosition()),world->getPlayer()->getPosition()) <= 0x18)
 					world->unknown720f00(self);

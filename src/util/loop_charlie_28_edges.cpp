@@ -21,7 +21,7 @@ struct LC28Item{int type457820()throw();int subtype4578a0()throw();unsigned char
 struct LC28Cell{LC28HI item45d8f0()throw();};
 template<class T>struct LC28Grid{int width,height;T*data;LC28Grid();~LC28Grid();T*at(int,int)throw();};
 struct LC28World{char p0[0x69c];LC28Grid<int>visible;char p6a8[0x7c4-0x6a8];LC28Grid<LC28Memory>memory;bool visible463190(int,int)throw();};extern LC28World*lc28_cefc4c;extern LC28Grid<LC28Cell*>lc28_cfd44c;extern vector<int>lc28_cf4830;extern vector<LC28Def*>lc28_d2d1c4;
-struct LC28Location{int inverse46ed20()throw();};struct LC28HC{int id;LC28Location*get9b7910()const throw();};extern LC28HC lc28_d1e888;
+struct LC28Location{int getDepthIndex()throw();};struct LC28HC{int id;LC28Location*get9b7910()const throw();};extern LC28HC lc28_d1e888;
 extern int lc28_d28df4,lc28_cf462c,lc28_cf27f4,lc28_cf27f8,lc28_d28df0,lc28_caf164;extern unsigned char lc28_d28df8,lc28_d28df9;extern unsigned lc28_caed20;
 extern const bool lc28_bcbe54[];struct LC28OffsetColumn{int value,pair;};extern LC28OffsetColumn lc28_cefd20[],lc28_cefd24[];
 struct LC28HE{int id;void clear9b7270()throw();};

@@ -222,7 +222,7 @@ public:
 	U6HEntity placeEntity(U6Record *record, const U6Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);	// 0x6c58c0
 	U6HItem giveItem(const string &name, U6HEntity e, int a, int b);	// 0x6c52b0
 	U6HItem unknown6c51d0(U6Record *record, U6HEntity e, bool a, bool b);	// NOTE: placeholder name
-	U6Record *unknown6c5600(int a, int b, int c, int d);	// NOTE: placeholder name
+	U6Record *selectRobotOfClass(int a, int b, int c, int d);	// NOTE: placeholder name
 	U6Access *unknown7143e0(int a);	// NOTE: placeholder name
 	bool unknown463160(U6Access *access);	// NOTE: placeholder name
 	void announceMachine(U6HLoc loc);	// 0x71dd30
@@ -292,7 +292,7 @@ class U6Overmind	// NOTE: placeholder name (Overmind at 0xcf6428)
 public:
 	void *spawnPatrolParty(U6HEntity e, int a, int b, int c, int d, int e2, int f, int g, int h);	// 0x6896d0
 	vector<U6Party *> &getParties();	// NOTE: placeholder name (folded getter 0x45ee50)
-	bool unknown683500(U6Point *out, bool allowVisible, int minDistance, bool ignoreProps, const U6Point &from, U6Point **access, bool preferProps, bool ignoreUsed);	// 0x683500
+	bool findDispatchExit(U6Point *out, bool allowVisible, int minDistance, bool ignoreProps, const U6Point &from, U6Point **access, bool preferProps, bool ignoreUsed);	// 0x683500
 };
 extern U6Overmind u6_overmind_cf6428;	// NOTE: placeholder name
 
@@ -321,7 +321,7 @@ extern int u6_xomTurn_d25454;	// NOTE: placeholder name
 class U6GameData	// NOTE: placeholder name (0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 	bool isFlagEnabledA();	// 0x46fb60
 };
 extern U6GameData u6_gameData_d1e860;	// NOTE: placeholder name
@@ -755,7 +755,7 @@ announced:
 				range = u6_maxInt(u6_cells_cfd44c.getWidth(),u6_cells_cfd44c.getHeight()) / 3;
 				break;
 			}
-			if (!u6_overmind_cf6428.unknown683500(&pos,false,range,true,U6Point(-1),&entry,false,false))
+			if (!u6_overmind_cf6428.findDispatchExit(&pos,false,range,true,U6Point(-1),&entry,false,false))
 			{
 				bool found = false;
 				for (int n = 0; n < 200; n++)
@@ -789,7 +789,7 @@ announced:
 				unknown030->setAI(new U6AI(unknown030,0x1c,4));
 				unknown030->getAI()->chase(u6_world_cefc4c->getPlayer(),-2,1,0,0);
 				U6Point spot;
-				if (unknown030->getAI()->unknown5b66c0(spot) && u6_overmind_cf6428.unknown683500(&pos,false,0,true,spot,&entry,false,false))
+				if (unknown030->getAI()->unknown5b66c0(spot) && u6_overmind_cf6428.findDispatchExit(&pos,false,0,true,spot,&entry,false,false))
 					unknown030->changePos(pos,1);
 				unknown080.randomize(u6_d223d4);
 				break;
@@ -814,7 +814,7 @@ announced:
 				unknown030->setAI(new U6AI(unknown030,0x1d,4));
 				unknown030->getAI()->chase(u6_world_cefc4c->getPlayer(),-2,1,0,0);
 				U6Point spot;
-				if (unknown030->getAI()->findPatrolSpot(spot) && u6_overmind_cf6428.unknown683500(&pos,false,0,true,spot,&entry,false,false))
+				if (unknown030->getAI()->findPatrolSpot(spot) && u6_overmind_cf6428.findDispatchExit(&pos,false,0,true,spot,&entry,false,false))
 					unknown030->changePos(pos,1);
 				break;
 			}
@@ -847,7 +847,7 @@ announced:
 				types.push_back(0x19);
 				for (int k = 0; k < 2; k++)
 				{
-					U6HEntity escort = u6_world_cefc4c->placeEntity(u6_world_cefc4c->unknown6c5600(1,u6_randomInt_9d5d00(types),1,1),unknown030->getPosition(),0xb,false,3,0xe,false);
+					U6HEntity escort = u6_world_cefc4c->placeEntity(u6_world_cefc4c->selectRobotOfClass(1,u6_randomInt_9d5d00(types),1,1),unknown030->getPosition(),0xb,false,3,0xe,false);
 					if (escort.isValid())
 					{
 						escort->loadout63c770(true);
@@ -1174,7 +1174,7 @@ flee:
 					if (nearest.x == -1)
 					{
 						U6Point *access = NULL;
-						u6_overmind_cf6428.unknown683500(&nearest,true,0,true,U6Point(-1),&access,false,false);
+						u6_overmind_cf6428.findDispatchExit(&nearest,true,0,true,U6Point(-1),&access,false,false);
 					}
 					if (nearest.x != -1 && u6_world_cefc4c->findPlaceableNear(nearest,nearest,unknown02c->unknown9c))
 					{
@@ -1207,7 +1207,7 @@ flee:
 						{
 							U6Point spot(-1);
 							U6Point *access = NULL;
-							if (!u6_overmind_cf6428.unknown683500(&spot,true,0,true,U6Point(-1),&access,false,false) && !u6_world_cefc4c->isVisible(u6_world_cefc4c->unknown4184d0()))
+							if (!u6_overmind_cf6428.findDispatchExit(&spot,true,0,true,U6Point(-1),&access,false,false) && !u6_world_cefc4c->isVisible(u6_world_cefc4c->unknown4184d0()))
 								spot = u6_world_cefc4c->unknown4184d0();
 							if (spot.x != -1)
 							{
@@ -1355,7 +1355,7 @@ flee:
 						{
 							unknown0fc->unknown45b2a0();
 							unknown0fc->unknown639530(0x33,1);
-							int rank = u6_gameData_d1e860.unknown46f4e0();
+							int rank = u6_gameData_d1e860.getDepthIndex();
 							vector<U6Record *> options;
 again:
 							for (unsigned int r = 0; r < u6_records_d25de0.size(); r++)
@@ -1599,7 +1599,7 @@ trigger:
 					{
 						U6Point spot;
 						U6Point *access = NULL;
-						if (u6_overmind_cf6428.unknown683500(&spot,false,0,true,unknown164[s],&access,false,false))
+						if (u6_overmind_cf6428.findDispatchExit(&spot,false,0,true,unknown164[s],&access,false,false))
 						{
 							U6HEntity drone = u6_world_cefc4c->unknown6c5dc0("Aperture Drone",spot,0xb,false,0x1e,4,false);
 							drone->unknown45b2a0();

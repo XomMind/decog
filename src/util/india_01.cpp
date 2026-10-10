@@ -41,7 +41,7 @@ struct FcCharArray{void zero9d28b0();};
 struct FcRec{char pad0[0x24];int x24;int kind;char pad2c[0x9c-0x2c];int x9c;char pada0[0x148-0xa0];vector<int>x148;char pad158[0x1ac-0x158];string x1ac;};
 struct FcRec2{char pad0[8];int x8;};struct FcTerrain{char pad0[0x58];bool x58;};extern vector<FcRec2*>fc_cf0fa8;extern vector<FcTerrain*>fc_cfb844;extern int fc_ce9ff4;extern int*fc_cefb9c,*fc_cefb88,*fc_cf4700;
 struct FcGD{int u789090();bool u46f4b0(int);const string&getEntryText46f6d0(const string&);};extern FcGD fc_d1e860;bool fc_contains9db330(vector<int>&,int);int fc_u6c10f0(const FcPos&);extern const float fc_ba850c,fc_ba8508,fc_ba8510;
-struct FcPropDef;struct FcMap{vector<FcPos*>*u463f60();void u72a1e0(FcPos&,int);bool u4633c0(FcPos&);bool u7168e0(FcPos&,FcPos&,FcEntity*,vector<FcPos>&);int u4642d0();bool u715920();bool u463380(int,int);int u716f20(FcHE,FcPos&);bool u7178d0(FcHE,FcPos&,char*,FcPos&,char*,int);bool u4631f0(FcHE);FcPos u71b5b0(FcHE,int);void u9ebbb0(int);vector<FcPos>&u464060();void u74bec0(FcPos&);void u464d00(FcHI,int);void bomb744aa0(FcHE);void u7289f0(FcHI,int);FcHRec addRecord777a20(FcHRec);void u464cd0(FcHI);void u728fa0(FcHI);void u464f60(FcHI);bool placeProp6c67b0(FcPropDef*,FcPos&,int,int,int);int&u464590();void u72f6b0();int getTurn464270();bool u463e90(FcPos&);void u734db0(FcHE);bool u74d200(int);FcHI giveItem6c52b0(const string&,FcHE,int,int);bool findPropSpotNear71c3c0(FcPos&,FcPos&,FcPropDef*);void addPoint465320(FcPos&);vector<vector<FcPos> >&u459070();char pad0[0x10];vector<FcMachine*>machines;char pad20[0x4c-0x20];vector<FcHGroup>groups;char pad5c[0x66c-0x5c];bool u71ec60(const FcPos&,vector<FcPos>);FcHE player;char pad670[0x674-0x670];FcCharArray known;char pad675[0xb3c-0x675];FcPos repairPos;bool repairFlag;int repairSum;bool busy71bbd0();FcHGroup group463890(int);void reveal726840(const FcBox&,bool);void announce71dd30(FcHMach);FcHE entity463110();bool findPlaceableNear71c150(FcPos&,FcPos&,int);void update71cf70();FcHE place6c58c0(FcRec*,const FcPos&,int,int,int,int,int);FcHE getPlayer4630f0();void*u4636d0();void*u463710();void hostile72e4c0(FcHE,int);void u774390(int,int);bool test71cfb0();bool u463160(const FcPos&);bool isVisible4631c0(const FcPos&);bool u71bc10(const FcPos&,FcPos&);void u464840(FcHI);void u4647a0(const FcPos&,int);};extern FcMap*fc_cefc4c;
+struct FcPropDef;struct FcMap{vector<FcPos*>*u463f60();void u72a1e0(FcPos&,int);bool u4633c0(FcPos&);bool u7168e0(FcPos&,FcPos&,FcEntity*,vector<FcPos>&);int u4642d0();bool u715920();bool u463380(int,int);int u716f20(FcHE,FcPos&);bool u7178d0(FcHE,FcPos&,char*,FcPos&,char*,int);bool u4631f0(FcHE);FcPos u71b5b0(FcHE,int);void u9ebbb0(int);vector<FcPos>&u464060();void u74bec0(FcPos&);void u464d00(FcHI,int);void bomb744aa0(FcHE);void u7289f0(FcHI,int);FcHRec addRecord777a20(FcHRec);void u464cd0(FcHI);void u728fa0(FcHI);void u464f60(FcHI);bool placeProp6c67b0(FcPropDef*,FcPos&,int,int,int);int&u464590();void u72f6b0();int getTurn464270();bool u463e90(FcPos&);void u734db0(FcHE);bool u74d200(int);FcHI giveItem6c52b0(const string&,FcHE,int,int);bool findPropSpotNear71c3c0(FcPos&,FcPos&,FcPropDef*);void addPoint465320(FcPos&);vector<vector<FcPos> >&u459070();char pad0[0x10];vector<FcMachine*>machines;char pad20[0x4c-0x20];vector<FcHGroup>groups;char pad5c[0x66c-0x5c];bool u71ec60(const FcPos&,vector<FcPos>);FcHE player;char pad670[0x674-0x670];FcCharArray known;char pad675[0xb3c-0x675];FcPos repairPos;bool repairFlag;int repairSum;bool busy71bbd0();FcHGroup group463890(int);void reveal726840(const FcBox&,bool);void announce71dd30(FcHMach);FcHE entity463110();bool findPlaceableNear71c150(FcPos&,FcPos&,int);void update71cf70();FcHE place6c58c0(FcRec*,const FcPos&,int,int,int,int,int);FcHE getPlayer4630f0();void*u4636d0();void*u463710();void hostile72e4c0(FcHE,int);void playerActionFinish(int,int);bool test71cfb0();bool u463160(const FcPos&);bool isVisible4631c0(const FcPos&);bool u71bc10(const FcPos&,FcPos&);void u464840(FcHI);void u4647a0(const FcPos&,int);};extern FcMap*fc_cefc4c;
 struct FcPropDef{char pad0[0x68];int x68;char pad6c[0x78-0x6c];bool x78;char pad79[0x8c-0x79];int x8c;char pad90[0xf8-0x90];int xf8;bool xfc;char padfd[0x140-0xfd];int x140;};struct FcPropX{char pad0[0x18];vector<void*>x18;char pad28[8];bool x30;int x34;};
 struct FcDoorRec{char pad0[8];FcHE x8;FcHE xc;int x10;bool u65cf50(int);bool u65cf80();};
 struct FcProp{bool u45cb90(int);void u65f170();FcDoorRec*u44b020();int u45c630();int u665a70(int,int);const string&u45c590();void u45cd50();bool u45cb50();bool u45cb10();int idx44ab40();FcPropX*u45cb30();bool u470b30();void u65f270(FcPos&);void u45ce10(int,int,int,FcHE);void u45cc50(FcPos&);void u65e500();void setIdx451400(int);void set448080(int);int u457af0();void u45cd10(int);void set452270(int);void u45cca0(const FcColor&);void u45cc70(const FcColor&);FcPos&pos4184d0();bool u45cad0();int u45c800(int);void u45cee0(FcPosN*);FcPropDef*def9b8f00();int u457b10();bool isPassableFor65e1d0(FcHE);const string&name45c5b0();};
@@ -52,7 +52,7 @@ struct FcTimer{FcPos pos;unsigned time;FcTimer(FcPos&);};extern const char fc_b9
 bool fc_logPhrase5141b0(int,const string*,const string*,const string*,FcHE,int);int fc_stringToInt405610(const string&);extern const float fc_ba8504;
 struct FcIGrid{int*atPoint9ced70(FcPos&);};extern FcIGrid originalTerrain;extern int*TERRAIN_CAVE_WALL,*caveinThirdTerrain;extern bool fc_d28e47,fc_d28e46,fc_b96a78[];extern int fc_b96bb4[],fc_caf234[];extern const float fc_ba8518;extern const char fc_b9646a[],fc_b9646b[],fc_b96473[],fc_b9648e[];
 void fc_translateRotated446dd0(FcPos&,int,int,int);void fc_offsetDiagonal827d90(FcPos&,int,int,int);extern int fc_cf4a70,fc_cf4a74,fc_cf4a7c,fc_cf4a90,fc_cf4a94;extern bool fc_cf4a78,fc_d28c8a;extern vector<FcPos>fc_cf4a80;extern FcRange fc_d386b8,fc_d30550,fc_d35b7c;struct FcShift{void shift872ef0(int,int,bool);void saveScreenshot873ba0(string);};extern string fc_d1e864;string fc_getLocationName4fd600(int);void fc_openWorldMap997000();
-extern vector<FcEffDef*>fc_d2c408;bool fc_findByName9d7de0(vector<FcEffDef*>&,const string&,FcEffDef*&);extern vector<int>fc_cf4830;extern bool fc_d28e04,fc_d28e05,fc_d1d9c4,fc_d1da38,fc_d1d9f8;extern int fc_d28d34,fc_d1d9f4;extern FcPos fc_d1d9fc,fc_d1da30,fc_d1da20,fc_d1da28;struct FcWay:FcPos{int a,b;};extern vector<FcWay>fc_d1da10;extern FcHI fc_d1da44;extern FcHE fc_d1d9f0;extern bool fc_b96384[];bool fc_containsEntity9d31e0(vector<FcHE>&,FcHE);void fc_insert9d8fc0(vector<FcHI>&,int,FcHI);void fc_insertAt9dbdc0(vector<int>&,int,int);void fc_insert9d8fc0(vector<FcHE>&,int,FcHE);void fc_eraseStep9d6440(vector<FcHE>&,int&);void fc_eraseStep9d6440(vector<FcHI>&,int&);int fc_indexOf9d3110(vector<FcHE>*,FcHE);extern bool fc_cefb3e;extern int fc_cf473c;FcHI fc_randomRecord9dafb0(vector<FcHI>&);void fc_addUnique9d30e0(vector<FcHI>&,FcHI);void fc_removeEntity9d2f00(vector<FcHI>&,FcHI);extern bool fc_d28e07;extern int fc_d28f8c;extern const float fc_ba8544,fc_ba8540,fc_ba8530;extern const char fc_b964bb[],fc_b964c5[],fc_b964c6[],fc_b964c7[];extern vector<int>fc_cf4a04;extern int fc_b989a0[];int fc_maxInt9cdb60(int,int);int fc_minInt9cdb30(int,int);void fc_clampMax9cf5a0(int&,int);extern const char fc_b964b3[];extern FcDef*fc_cefbec,*fc_cefbe8;extern const float fc_c36e30,fc_c36ff0;extern const char fc_b964b2[];extern const char fc_b964a7[];extern int fc_d1eb40;extern const char fc_b964a6[];struct FcArea2{bool contains40b750(const FcPos&);};extern FcArea2 fc_d1eaf8;extern const char fc_b9648f[];
+extern vector<FcEffDef*>fc_d2c408;bool fc_findByName9d7de0(vector<FcEffDef*>&,const string&,FcEffDef*&);extern vector<int>fc_cf4830;extern bool fc_d28e04,fc_d28e05,fc_d1d9c4,fc_d1da38,fc_d1d9f8;extern int fc_d28d34,fc_d1d9f4;extern FcPos fc_d1d9fc,fc_d1da30,fc_d1da20,fc_d1da28;struct FcWay:FcPos{int a,b;};extern vector<FcWay>fc_d1da10;extern FcHI fc_d1da44;extern FcHE fc_d1d9f0;extern bool fc_b96384[];bool fc_containsEntity9d31e0(vector<FcHE>&,FcHE);void fc_insert9d8fc0(vector<FcHI>&,int,FcHI);void fc_insertAt9dbdc0(vector<int>&,int,int);void fc_insert9d8fc0(vector<FcHE>&,int,FcHE);void fc_eraseStep9d6440(vector<FcHE>&,int&);void fc_eraseStep9d6440(vector<FcHI>&,int&);int fc_indexOf9d3110(vector<FcHE>*,FcHE);extern bool fc_cefb3e;extern int fc_cf473c;FcHI fc_randomRecord9dafb0(vector<FcHI>&);void fc_addUnique9d30e0(vector<FcHI>&,FcHI);void fc_removeEntity9d2f00(vector<FcHI>&,FcHI);extern bool fc_d28e07;extern int fc_d28f8c;extern const float fc_ba8544,fc_ba8540,fc_ba8530;extern const char fc_b964bb[],fc_b964c5[],fc_b964c6[],fc_b964c7[];extern vector<int>fc_rifLevels_cf4a04;extern int fc_codeMerge_b989a0[];int fc_maxInt9cdb60(int,int);int fc_minInt9cdb30(int,int);void fc_clampMax9cf5a0(int&,int);extern const char fc_b964b3[];extern FcDef*fc_cefbec,*fc_cefbe8;extern const float fc_c36e30,fc_c36ff0;extern const char fc_b964b2[];extern const char fc_b964a7[];extern int fc_d1eb40;extern const char fc_b964a6[];struct FcArea2{bool contains40b750(const FcPos&);};extern FcArea2 fc_d1eaf8;extern const char fc_b9648f[];
 extern int*TERRAIN_EARTH,*fc_cefb84;struct FcItemTag{void openForPos8abac0(FcPos&,int);};extern FcItemTag*fc_cec0a0;extern int fc_b96600[];extern bool fc_d28e06,fc_d28d3b;extern int fc_d28e6c;void fc_logError404f10(string,string);extern bool fc_d1d9e4,fc_d1d9e5,fc_d28e49;extern bool fc_d28d24,fc_d28e3d;extern FcHE fc_d1da3c;extern unsigned fc_d1da40;int fc_pointsFn4374c0(FcPos&,FcPos&);bool fc_pointsFn4373c0(FcPos&,FcPos&);
 struct FcCell{bool u45dbf0();int u45d0e0();bool u45db70();bool isEdge45dc30();bool canCaveIn66af50();bool isDoor45dda0();void u66ce10(int,int,int,int);void u66b690(int,int);bool u45dcf0();void removeProp66c100(int,int);void u45df50(FcHProp);bool u45d310();void*getEffect45d350(int);void u45dfb0(int);int u45d180();void u66b700(int,int);FcHProp getProp45d550();string&name45d140();bool isPassableFor66ab30(FcHE);bool solid4550b0();FcHI getItem45d8f0();bool isMachinePart45dcd0();FcHE getEntity45d250();void u66a050(int,int,int);};
 struct FcArea{int x1,y1,x2,y2;FcArea();void randomPoint40be30(FcPos*);};
@@ -486,7 +486,7 @@ bool FcCMap::input(FcEvent*event){
        if(fc_cec078)fc_cec078->load884f60(first,0);
        if(fc_cefa94->u41a6e0()||fc_d28e3c)warpMouse806e70(self,true);
       }else state=true;
-      fc_cefc4c->u774390(state?14:x2>1?2:1,result);
+      fc_cefc4c->playerActionFinish(state?14:x2>1?2:1,result);
       break;}
      case 1:
       fc_warn7b1750(0,&fc_intToString4051f0(fc_cefc68),0,0,player,FcHE(),0);
@@ -494,7 +494,7 @@ bool FcCMap::input(FcEvent*event){
       refresh49ad30();
       if(fc_d28e08){
        fc_cec0f4->add7b1880(new FcPhraseA(2,0,0,0,FcHE(),FcHE()));
-       fc_cefc4c->u774390(0,-1);
+       fc_cefc4c->playerActionFinish(0,-1);
       }
       break;
      }
@@ -518,7 +518,7 @@ bool FcCMap::input(FcEvent*event){
        if((*fc_cfd44c.atPoint9ced70(begin))->getEntity45d250()->target45a760()==1||(*fc_cfd44c.atPoint9ced70(begin))->getEntity45d250()->target45a760()==3){
         do{if(fc_showMessage5111e0(130,0,0,0,(*fc_cfd44c.atPoint9ced70(begin))->getEntity45d250(),FcHE(),0,0))fc_cec058->bubble8758d0(true);fc_cec0b4->scrollToEnd7b4f10();}while(0);
         (*fc_cfd44c.atPoint9ced70(begin))->getEntity45d250()->u5fdab0();
-        fc_cefc4c->u774390(15,-1);
+        fc_cefc4c->playerActionFinish(15,-1);
         refresh49ad30();
         return true;
        }
@@ -661,7 +661,7 @@ bool FcCMap::input(FcEvent*event){
         if(fc_lookup9d7980("Spacefold",&first))fc_cefc50->alloc508610()->init503b20(fc_cefc50,first,player->getPosition45a4a0(),&fc_d2e20c,0,0,0,9,0);
         int total=kind.size();
         if(player->u45b300(player->u5ca260()*total/100)==2)return true;
-        fc_cefc4c->u774390(1,100);
+        fc_cefc4c->playerActionFinish(1,100);
        }
        return true;
       }
@@ -700,7 +700,7 @@ bool FcCMap::input(FcEvent*event){
          }
          int first=kind.size()*player->item5d2380(193)->range457fb0();
          if(player->u45b300(first)==2)return true;
-         fc_cefc4c->u774390(1,100);
+         fc_cefc4c->playerActionFinish(1,100);
          return true;
         }
        }
@@ -854,7 +854,7 @@ bool FcCMap::input(FcEvent*event){
             if(fc_cfd44c.contains9b43b0(p)&&fc_cefc4c->isVisible4631c0(p))fc_cefc50->alloc508610()->init503b20(fc_cefc50,cx,p,&fc_d2e20c,0,0,0,9,0);
            }
           }
-          fc_cefc4c->u774390(1,100);
+          fc_cefc4c->playerActionFinish(1,100);
          }
         }
         if(id){
@@ -865,7 +865,7 @@ bool FcCMap::input(FcEvent*event){
          int fx;
          if(fc_lookup9d7980("Teleport_Rough_Fail",&fx))fc_cefc50->alloc508610()->init503b20(fc_cefc50,fx,player->getPosition45a4a0(),&fc_d2e20c,0,0,0,9,0);
          fc_sound4541b0(267,0,0);
-         fc_cefc4c->u774390(17,100);
+         fc_cefc4c->playerActionFinish(17,100);
         }
         return true;
        }
@@ -891,11 +891,11 @@ bool FcCMap::input(FcEvent*event){
         }
         if(flag){
          fc_cf45d8.addSuspicion77ee70(fc_ba850c,3,FcHE());
-         fc_cefc4c->u774390(17,25);
+         fc_cefc4c->playerActionFinish(17,25);
          return true;
         }else{
          fc_cf45d8.addSuspicion77ee70(fc_ba8508,2,FcHE());
-         fc_cefc4c->u774390(17,100);
+         fc_cefc4c->playerActionFinish(17,100);
          return true;
         }
        }
@@ -908,7 +908,7 @@ bool FcCMap::input(FcEvent*event){
         if(rng.chance(50))(*fc_cfd44c.atPoint9ced70(point))->u66b700(0,(*fc_cfd44c.atPoint9ced70(point))->u45d180());
         do{if(fc_showMessage5111e0(782,0,0,0,player,FcHE(),0,0))fc_cec058->bubble8758d0(true);fc_cec0b4->scrollToEnd7b4f10();}while(0);
         fc_cf45d8.addSuspicion77ee70(fc_ba8510,4,FcHE());
-        fc_cefc4c->u774390(17,100);
+        fc_cefc4c->playerActionFinish(17,100);
         return true;
        }
       }
@@ -962,7 +962,7 @@ bool FcCMap::input(FcEvent*event){
          }
          if(desc->x68)fc_cefc4c->addPoint465320(spot);
          player->u45b1e0(range);
-         fc_cefc4c->u774390(17,200);
+         fc_cefc4c->playerActionFinish(17,200);
          do{if(fc_showMessage5111e0(119,&chance->name45c5b0(),0,0,player,FcHE(),0,0))fc_cec058->bubble8758d0(true);fc_cec0b4->scrollToEnd7b4f10();}while(0);
          fc_sound4541b0(227,0,0);
          if(fc_d2f32c[idx].empty()){
@@ -996,7 +996,7 @@ bool FcCMap::input(FcEvent*event){
         fc_clearObjects9d0670(prop->u45cb30()->x18);
         if(!prop->u45cb30()->x30){prop->u45cb30()->x30=true;prop->u45cb30()->x34=0;}
         player->u45b1e0(id);
-        fc_cefc4c->u774390(17,200);
+        fc_cefc4c->playerActionFinish(17,200);
         do{if(fc_showMessage5111e0(121,&prop->name45c5b0(),&fc_intToStringSigned405560(value),0,player,FcHE(),0,0))fc_cec058->bubble8758d0(true);fc_cec0b4->scrollToEnd7b4f10();}while(0);
         fc_sound4541b0(229,0,0);
        }else{
@@ -1035,7 +1035,7 @@ bool FcCMap::input(FcEvent*event){
        fc_sound454260(player->getPosition45a4a0(),230);
        player->alertGroup639ec0(FcHE(),0);
        player->destroyItems63a0d0();
-       fc_cefc4c->u774390(17,res->range457fb0()*100);
+       fc_cefc4c->playerActionFinish(17,res->range457fb0()*100);
       }
       return true;
      }
@@ -1056,7 +1056,7 @@ bool FcCMap::input(FcEvent*event){
         do{if(fc_showMessage5111e0(204,&prop->name45c5b0(),&tool->name571db0(false,false),0,player,FcHE(),0,0))fc_cec058->bubble8758d0(true);fc_cec0b4->scrollToEnd7b4f10();}while(0);
         fc_d2c658.add4729d0(598,1,fc_b96469,-1);
         fc_sound454260(player->getPosition45a4a0(),221);
-        fc_cefc4c->u774390(16,-1);
+        fc_cefc4c->playerActionFinish(16,-1);
        }
       }
       return true;
@@ -1240,7 +1240,7 @@ bool FcCMap::input(FcEvent*event){
         }
         u49aee0();
        }
-       fc_cefc4c->u774390(16,-1);
+       fc_cefc4c->playerActionFinish(16,-1);
        refresh49ad30();
        return true;
       }
@@ -1385,7 +1385,7 @@ bool FcCMap::input(FcEvent*event){
       if(fc_cec078)fc_cec078->load884f60(point,0);
       if(fc_cefa94->u41a6e0()||fc_d28e3c)warpMouse806e70(location,true);
      }else state=true;
-     fc_cefc4c->u774390(state?14:(count>1)+1,result);
+     fc_cefc4c->playerActionFinish(state?14:(count>1)+1,result);
      break;}
     case 1:
      fc_warn7b1750(0,&fc_intToString4051f0(fc_cefc68),0,0,player,FcHE(),0);
@@ -1393,7 +1393,7 @@ bool FcCMap::input(FcEvent*event){
      refresh49ad30();
      if(fc_d28e08){
       fc_cec0f4->add7b1880(new FcPhraseA(2,0,0,0,FcHE(),FcHE()));
-      fc_cefc4c->u774390(0,-1);
+      fc_cefc4c->playerActionFinish(0,-1);
      }
      break;
     }
@@ -1480,7 +1480,7 @@ bool FcCMap::input(FcEvent*event){
       }
      }
      itemDone:
-     fc_cefc4c->u774390(16,-1);
+     fc_cefc4c->playerActionFinish(16,-1);
     }else if((*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0().valid9b7230()&&(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0()->kind457f90()==167&&(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0()->u457d70()&&fc_cf4830[(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0()->u457820()]){
      FcHI item=(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0();
      if(!item->u45cb30())fc_warn7b1750(64,&item->name571db0(false,false),0,0,FcHE(),FcHE(),item->u575920());
@@ -1508,7 +1508,7 @@ bool FcCMap::input(FcEvent*event){
        }while(item.operator->()&&item->u45cb30());
        if(res){
         fc_sound454260(player->getPosition45a4a0(),189);
-        fc_cefc4c->u774390(17,-1);
+        fc_cefc4c->playerActionFinish(17,-1);
        }
       }
      }
@@ -1560,7 +1560,7 @@ bool FcCMap::input(FcEvent*event){
       fc_cefc4c->u464cd0(item);
       item->u458560();
       fc_sound454260(player->getPosition45a4a0(),220);
-      fc_cefc4c->u774390(16,-1);
+      fc_cefc4c->playerActionFinish(16,-1);
      }else if(armTime&&fc_caed20<armTime+5000){
       do{if(fc_showMessage5111e0(219,&item->name571db0(false,false),&fc_intToString4051f0(item->kind457f90()==208?item->range457fb0():8),0,player,FcHE(),0,0))fc_cec058->bubble8758d0(true);fc_cec0b4->scrollToEnd7b4f10();}while(0);
       if(item->kind457f90()==208)fc_d25628.addItemAttachCount778560(item->u457820(),1,0);
@@ -1568,14 +1568,14 @@ bool FcCMap::input(FcEvent*event){
       if(!item->effect457b70(88))item->addEffect4585a0(new FcPosN(fc_d2f0f8[88],1));
       fc_d2c658.add4729d0(600,1,fc_b964a7,-1);
       fc_sound454260(player->getPosition45a4a0(),219);
-      fc_cefc4c->u774390(16,-1);
+      fc_cefc4c->playerActionFinish(16,-1);
      }else{
       fc_warn7b1750(162,&item->name571db0(false,false),0,0,FcHE(),FcHE(),0);
       armTime=fc_caed20;
      }
     }else if((*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0().valid9b7230()&&(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0()->kind457f90()==209&&fc_cf4830[(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0()->u457820()]){
      fc_cefc4c->bomb744aa0(player);
-     fc_cefc4c->u774390(17,-1);
+     fc_cefc4c->playerActionFinish(17,-1);
     }else if((*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0().valid9b7230()&&!(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0()->u4578a0()&&player->item5d2380(197).valid9b7230()){
      FcHI item=(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0();
      FcHI tool=player->item5d2380(197);
@@ -1588,7 +1588,7 @@ bool FcCMap::input(FcEvent*event){
       fc_cefc4c->u7289f0(item,player->getGroup45a3f0()->type9b4350());
       fc_d2c658.add4729d0(598,1,fc_b964b2,-1);
       fc_sound454260(player->getPosition45a4a0(),221);
-      fc_cefc4c->u774390(16,-1);
+      fc_cefc4c->playerActionFinish(16,-1);
      }
     }else if((*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0().valid9b7230()&&(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0()->kind457f90()==204&&fc_cf4830[(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0()->u457820()]){
      FcHI item=(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0();
@@ -1599,7 +1599,7 @@ bool FcCMap::input(FcEvent*event){
       if(fc_d1e888->type==3)fc_cf45d8.u77fbc0(289);
       item->u4585c0(124);
       fc_cefc4c->u74bec0(player->getPosition45a4a0());
-      fc_cefc4c->u774390(17,-1);
+      fc_cefc4c->playerActionFinish(17,-1);
      }else{
       string text("About to release subatomizers! Confirm decision");
       fc_warn7b1750(125,&text,0,0,FcHE(),FcHE(),0);
@@ -1617,7 +1617,7 @@ bool FcCMap::input(FcEvent*event){
       item->u4585c0(124);
       fc_cefc4c->u464d00(item,rng.rangeInt(fc_c36e30,fc_c36ff0));
       fc_sound4541b0(281,0,0);
-      fc_cefc4c->u774390(17,-1);
+      fc_cefc4c->playerActionFinish(17,-1);
      }else{
       string text="About to activate "+item->name571db0(false,false)+"! Confirm decision";
       fc_warn7b1750(125,&text,0,0,FcHE(),FcHE(),0);
@@ -1628,7 +1628,7 @@ bool FcCMap::input(FcEvent*event){
      FcHI cx;
      bool w=false;
      bool clean=false;
-     if(fc_cf4a04[5]){
+     if(fc_rifLevels_cf4a04[5]){
       vector<FcHI>*inventory=fc_cefc4c->player->inventory45ab00();
       for(int i=0;i<inventory->size();i++){
        if((*inventory)[i]->u457820()==x2){
@@ -1641,11 +1641,11 @@ bool FcCMap::input(FcEvent*event){
      if(cx.null9b65d0()){
       if(w)fc_cec0f4->add7b1880(new FcPhraseA(84,0,0,0,FcHE(),FcHE()));
       else if(clean)fc_cec0f4->add7b1880(new FcPhraseA(83,0,0,0,FcHE(),FcHE()));
-      else if(fc_cf4a04[5])fc_cec0f4->add7b1880(new FcPhraseA(86,0,0,0,FcHE(),FcHE()));
+      else if(fc_rifLevels_cf4a04[5])fc_cec0f4->add7b1880(new FcPhraseA(86,0,0,0,FcHE(),FcHE()));
       else fc_cec0f4->add7b1880(new FcPhraseA(85,0,0,0,FcHE(),FcHE()));
      }else{
       FcHI next=(*fc_cfd44c.atPoint9ced70(player->getPosition45a4a0()))->getItem45d8f0();
-      int amount=fc_maxInt9cdb60(1,next->u45cb30()*fc_b989a0[fc_cf4a04[5]]/100);
+      int amount=fc_maxInt9cdb60(1,next->u45cb30()*fc_codeMerge_b989a0[fc_rifLevels_cf4a04[5]]/100);
       int room=99-cx->u45cb30();
       fc_clampMax9cf5a0(amount,room);
       cx->setCharges44fc60(cx->u45cb30()+amount);
@@ -1676,7 +1676,7 @@ bool FcCMap::input(FcEvent*event){
       FcPart*part=fc_cec088->find894e70(best);
       if(part)part->drawStatus4a8e70(0);
       floor->remove57dbe0(0,0,1,1);
-      fc_cefc4c->u774390(17,-1);
+      fc_cefc4c->playerActionFinish(17,-1);
      }
     }else if(player->u5ced30())fc_cec0f4->add7b1880(new FcPhraseA(140,0,0,0,FcHE(),FcHE()));
     else if(!(*fc_cfd44c.atPoint9ced70(pos))->isMachinePart45dcd0())fc_cec0f4->add7b1880(new FcPhraseA(139,0,0,0,FcHE(),FcHE()));
@@ -1789,7 +1789,7 @@ bool FcCMap::input(FcEvent*event){
      if(cx<=0)w->remove57dbe0(0,0,1,1);
      else w->setCount450460(cx);
      if(x2){
-      fc_cefc4c->u774390(17,-1);
+      fc_cefc4c->playerActionFinish(17,-1);
       return true;
      }
     }else if(fc_cf4700){
@@ -1807,7 +1807,7 @@ bool FcCMap::input(FcEvent*event){
       if(sum>p->u45a920())p->u5deb40(fc_maxInt9cdb60(1,sum/3));
      }
     }
-    fc_cefc4c->u774390(0,-1);
+    fc_cefc4c->playerActionFinish(0,-1);
    }
    return true;
   case 0x81:

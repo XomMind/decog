@@ -117,7 +117,7 @@ public:
 	char				pad00[0x50];
 	vector<Squad123 *>	squads;	// +0x50
 
-	Squad123 *unknown687520(HEntity e, int a, bool b);	// NOTE: placeholder name
+	Squad123 *spawnHunterParty(HEntity e, int a, bool b);	// NOTE: placeholder name
 	void unknown68c6d0(HEntity e);	// NOTE: placeholder name
 };
 
@@ -150,6 +150,6 @@ void Overmind123::unknown68c6d0(HEntity e)
 	e->changeFaction(world123_cefc4c->unknown463890(5),true);
 	if (e->getAI123()->getMode123() == 1)
 		e->getAI123()->setArea123(OpQ1_Box(0,0,cells123_cfd44c.getWidth() - 1,cells123_cfd44c.getHeight() - 1));
-	if (unknown687520(e,0,true) && !squads.empty())
+	if (spawnHunterParty(e,0,true) && !squads.empty())
 		squads.back()->leader->getAI123()->setMode123(2);
 }

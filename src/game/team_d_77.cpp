@@ -175,7 +175,7 @@ public:
 	void placeMachine(int id, const Pos &pos, int dir, int a, int b);	// NOTE: placeholder signature
 	ItemDef *selectRandomItem(int chanceType, int rating, int category);
 	HItem unknown6c5400(ItemDef *def, const Pos &pos);					// NOTE: placeholder name
-	EntityRec77 *unknown6c5600(int a, int id, bool b, bool c);			// NOTE: placeholder name
+	EntityRec77 *selectRobotOfClass(int a, int id, bool b, bool c);			// NOTE: placeholder name
 	HEntity placeEntity(EntityRec77 *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);
 	bool unknown6dd0e0(const Point &p, int type);						// NOTE: placeholder name
 	bool findPlaceableNear(const Point &p, Point &out, int size);		// NOTE: placeholder name
@@ -234,7 +234,7 @@ void BS::unknown6e2cb0()
 		{
 			opt4_fillRing6cba00(&open,&bottom,0,TERRAIN_CAVE_WALL,false);
 			unknown6c38a0(&open,0,1.0f,ref77_d2c46c);
-			EntityRec77 *rec = unknown6c5600(1,0x15,false,true);
+			EntityRec77 *rec = selectRobotOfClass(1,0x15,false,true);
 			if (!rec)
 			{
 			}
@@ -274,7 +274,7 @@ void BS::unknown6e2cb0()
 		{
 			if (findPlaceableNear(dest,temp,1))
 			{
-				other = unknown6c5600(3,base.pick(),true,true);
+				other = selectRobotOfClass(3,base.pick(),true,true);
 				if (other)
 				{
 					HEntity e2 = placeEntity(other,temp,9,true,0x18,0xe,false);

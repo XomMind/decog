@@ -93,11 +93,11 @@ struct C2XStatus { void drawStatus(bool flag); };
 struct C2XParts { C2XStatus *f894e70(C2XItemHandle item); };
 struct C2XTimer { int ticks, f4, f8; C2XTimer(int t); };
 struct C2XMission { virtual void v0(); virtual void v1(); virtual void v2(); virtual void v3(); virtual void start(const C2XTimer &t); void f988ad0(int v); };
-struct C2XLocation { int f0; int location; int depth; vector<C2XEntityHandle> exits; int f46ed20(); };
+struct C2XLocation { int f0; int location; int depth; vector<C2XEntityHandle> exits; int getDepthIndex(); };
 struct C2XLocHandle { int id; C2XLocHandle(); C2XLocation *operator->(); };
 struct C2XLocVec { int f0, f1, f2, f3; C2XLocVec(); ~C2XLocVec(); void push_back(const C2XLocHandle &h); };
 struct C2XLocHandleVec { unsigned size() const; C2XLocHandle &operator[](unsigned i); };
-struct C2XGameData { int f46f4e0(); bool f46f4b0(int v); int f789090(); };
+struct C2XGameData { int getDepthIndex(); bool f46f4b0(int v); int f789090(); };
 struct C2XShooter { void saveMapScreenshot873ba0(string name); };
 struct C2XEvolveList { unsigned size() const; C2XLocHandle &operator[](unsigned i); };
 struct C2XRecVec { unsigned size() const; struct C2XWorldRec *&operator[](unsigned i); };
@@ -132,7 +132,7 @@ public:
 	bool f71bb50();
 	void f734db0(C2XEntityHandle h);
 	int getTurn();
-	void f774390(int a, int b);
+	void playerActionFinish(int a, int b);
 	void f726840(C2XBox &area, int v);
 	void f777190(int v);
 	void update774b70();
@@ -418,7 +418,7 @@ void C2XBS::update774b70()
 			if (getTurn() >= c2x_cefaf0)
 				c2x_cec034->start(C2XTimer(10));
 			else
-				f774390(0, -1);
+				playerActionFinish(0, -1);
 		}
 		else if (c2x_cefaf8 >= 1)
 		{
@@ -507,7 +507,7 @@ void C2XBS::update774b70()
 			{
 				f726840(C2XBox(0, 0, c2x_cfd44c.getWidth() - 1, c2x_cfd44c.getHeight() - 1), 0);
 				string name = c2x_d1e864 + c2x_bf5920;
-				name += intToString(c2x_d1e860.f46f4e0());
+				name += intToString(c2x_d1e860.getDepthIndex());
 				name += c2x_bf5924;
 				name += c2x_cfe140[c2x_d1e888->location];
 				name += c2x_d1e888->depth >= 10 ? string(c2x_bf5928) : intToString(c2x_d1e888->depth);
@@ -547,7 +547,7 @@ void C2XBS::update774b70()
 							C2XStrVec kind;
 							for (unsigned r = 0; r < c2x_d25de0.size(); r++)
 							{
-								if (c2x_d25de0[r]->f68 <= c2x_d1e888->f46ed20() && c2x_bba058[c2x_d25de0[r]->f28] >= 6)
+								if (c2x_d25de0[r]->f68 <= c2x_d1e888->getDepthIndex() && c2x_bba058[c2x_d25de0[r]->f28] >= 6)
 								{
 									if ((c2x_d25de0[r]->f24 == 1 || c2x_d25de0[r]->f24 == 2) && (c2x_cf462c != 4 || (c2x_d25de0[r]->f28 != 0x48 && c2x_d25de0[r]->f28 != 0x47)))
 										trapNames.push_back(c2x_d25de0[r]->name);
@@ -572,7 +572,7 @@ void C2XBS::update774b70()
 					if (c2x_cec454 < c2x_cefaf4)
 					{
 						c2x_cec454++;
-						f774390(0, -1);
+						playerActionFinish(0, -1);
 						break;
 					}
 					else

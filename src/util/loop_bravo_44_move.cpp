@@ -21,7 +21,7 @@ struct LB44State{int unknown0,type;};struct LB44HS{int id;LB44State*get9b7910()c
 struct LB44Source;
 struct LB44World{vector<LB44P*>*points462e10()throw();bool clear716940(const LB44P&,const LB44P&,LB44Entity*,unsigned*);bool allow748a00(LB44View*,LB44Source*);LB44HE player4630f0()throw();bool near4631f0(LB44HE);bool observed714920(const LB44P&,LB44HE);bool visible4631c0(const LB44P&);int turn464270()throw();};extern LB44World*lb44_cefc4c;
 struct LB44AI{LB44HE entity;int state,level,unknownc;LB44P goal,unknown18;LB44HE unknown20;vector<LB44P>path;char omitted34[0x1c];LB44HE follow;int unknown54;LB44HE target;char omitted5c[0x58];LB44HE other;bool step581a00(bool);bool find5b8d20();void reset5b7220();bool has459090()throw();LB44Part*part4590f0()throw();bool wait459030()throw();int turn45ad90()throw();LB44HE follow458ed0()throw();void score5b5260(LB44HE,int);int move5b76c0(int*);};
-struct LB44Dispatch{void target6906d0(LB44HE);void remove690750(LB44HE);struct LB44Squad*launch687520(LB44HE,const LB44P*,bool);};extern LB44Dispatch lb44_cf6428;
+struct LB44Dispatch{void target6906d0(LB44HE);void remove690750(LB44HE);struct LB44Squad*spawnHunterParty(LB44HE,const LB44P*,bool);};extern LB44Dispatch lb44_cf6428;
 struct LB44Config{bool mode46f4b0(int);};extern LB44Config lb44_d1e860;
 struct LB44UI{void bubble8758d0(bool);};extern LB44UI*lb44_cec058;struct LB44Log{void end7b4f10();};extern LB44Log*lb44_cec0b4;struct LB44Notice{void set451400(int);};extern LB44Notice lb44_cf1080;
 bool lb44_route5111e0(int,const string*,const string*,const string*,LB44HE,LB44HE,const LB44P*,bool);int lb44_sound4541b0(unsigned,int,int);bool lb44_adjacent4373c0(const LB44P&,const LB44P&)throw();int lb44_distance40a3f0(const LB44P&,const LB44P&)throw();int lb44_direction4374c0(const LB44P&,const LB44P&)throw();void lb44_erase9d5190(vector<LB44P>&,int);extern LB44P lb44_d015d8[];extern vector<LB44Area>lb44_d1ec74;extern bool lb44_d1ebee,lb44_d28fb0,lb44_cefb0a;extern LB44Def*lb44_cefc10;
@@ -50,7 +50,7 @@ int LB44AI::move5b76c0(int*out){
      if(blocked){
       switch(lb44_d1e888.get9b7910()->type){
        case 28:if(entity.get9b6570()->type45a2a0()==2&&entity.get9b6570()->faction45a2c0()==21&&!lb44_d1ebee){
-        lb44_cf6428.launch687520(LB44HE(),&goal,false);lb44_cf6428.launch687520(LB44HE(),&goal,false);
+        lb44_cf6428.spawnHunterParty(LB44HE(),&goal,false);lb44_cf6428.spawnHunterParty(LB44HE(),&goal,false);
         do{lb44_cf1080.set451400(1);if(1&&!(lb44_d28fb0&&1&&1))lb44_sound4541b0(295,0,0);LB44_MSG(0x324,&string("ALERT: Weapon containment endangered. Dispatching heavy reinforcements to area."),LB44HE(),LB44HE());lb44_cec0b4->end7b4f10();}while(false);lb44_d1ebee=true;
        }break;
        case 34:if(entity.get9b6570()->pos45a4a0().x>=135&&lb44_cefc4c->clear716940(entity.get9b6570()->pos45a4a0(),LB44P(153,77),entity.get9b6570(),0))blocked=false;break;

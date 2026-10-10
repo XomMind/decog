@@ -52,7 +52,7 @@ public:
 	void opw3_unknown72e8e0(bool flag);
 };
 extern BS *world;
-extern std::vector<int> flags_cf4a04;
+extern std::vector<int> rifLevels_cf4a04;
 int OpQ1_distanceCeil_40a3f0(const Point &a,const Point &b);
 class EntityAI
 {
@@ -66,7 +66,7 @@ bool EntityAI::unknown581140()
 	bool active = false;
 	if (world->getPlayer()->isHostileTo(self) || self->getGroup()->unknown9b4350() == 4)
 	{
-		if (flags_cf4a04[8] != 0)
+		if (rifLevels_cf4a04[8] != 0)
 		{
 			switch (self->getGroup()->unknown9b4350())
 			{

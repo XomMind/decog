@@ -25,7 +25,7 @@ struct LA18Entry{int type;LA18H entity;bool test45e820() throw();};struct LA18En
 struct LA18EntryVec{int a,b,c,d;LA18EntryVec();~LA18EntryVec();bool empty9b86e0()const throw();LA18Entry*&at9b81f0(unsigned) throw();void push9b9d30(LA18Entry*const&);};
 struct LA18Pair{int value,weight;};extern const LA18Pair la18_ba43fc[];
 struct LA18Weighted{LA18IntVec values,weights;int total;LA18Weighted();~LA18Weighted();void init9b9e90(const LA18Pair*,int);int&pick9ba470() throw();LA18IntVec&values453b40() throw();};
-struct LA18Overmind{int count45edd0(int) throw();LA18Entries*entries45ee50() throw();int response686c60(const LA18Point&,int,int,int);};extern LA18Overmind la18_cf6428;
+struct LA18Overmind{int countParties(int) throw();LA18Entries*entries45ee50() throw();int response686c60(const LA18Point&,int,int,int);};extern LA18Overmind la18_cf6428;
 int la18_distance40a3f0(const LA18Point&,const LA18Point&) throw();int la18_minIndex(LA18IntVec&);int la18_find9d4660(LA18IntVec&,int);
 #define LA18_LOG(MSG,TEXT,LATE,OWNER) do{if(la18_route5111e0(MSG,TEXT,0,0,self,LA18HP(),0,LATE))la18_cec058->update8758d0(!LATE);OWNER->end7b4f10();}while(false)
 void LA18Entity::core5e40f0(int damage,int unused,LA18H attacker,LA18Weapon*weapon,int chance,int critical,bool overflow){
@@ -56,7 +56,7 @@ void LA18Entity::core5e40f0(int damage,int unused,LA18H attacker,LA18Weapon*weap
   LA18IntVec first;
   if(rng.chance(75)){first.push9b9280(0);first.push9b9280(1);}else{first.push9b9280(1);first.push9b9280(0);}
   for(unsigned i=0;i<first.size9b9260();i++)switch(first.at9b81f0(i)){
-   case 0:if(la18_cf6428.count45edd0(2)){
+   case 0:if(la18_cf6428.countParties(2)){
     LA18Entries*first=la18_cf6428.entries45ee50();LA18EntryVec h;LA18IntVec v2;
     for(unsigned i=0;i<first->size9b9260();i++)if(first->at9b81f0(i)->type==2&&!first->at9b81f0(i)->test45e820()){
      int firstDist=la18_distance40a3f0(la18_cefc4c->player4630f0().get9b6570()->position45a4a0(),first->at9b81f0(i)->entity.get9b6570()->position45a4a0());

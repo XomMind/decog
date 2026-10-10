@@ -210,7 +210,7 @@ public:
 	int unknown30c;
 	int unknown310;
 	int unknown314;
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 	int unknown46f530();	// NOTE: placeholder name
 	string &unknown46f6d0(const string &key);	// NOTE: placeholder name
 	void unknown46f700(const string &key, const string &value);	// NOTE: placeholder name
@@ -352,7 +352,7 @@ int GameData::unknown789090()
 
 int GameData::unknown789250(int value)
 {
-	int percent = unknown46f4e0() / 2 * 7;
+	int percent = getDepthIndex() / 2 * 7;
 	int cost = value + value * percent / 100;
 	if (opX1_options[3])
 		cost += opX1_costBonus[opX1_options[3]];

@@ -1569,7 +1569,7 @@ struct OpW7_MapNode	// NOTE: placeholder name (world map node)
 	bool unknown27;	// NOTE: placeholder name
 };
 extern HEntity opw7_d1e884;	// NOTE: placeholder name (world map root node)
-extern string gameStrings_cfaca0[];
+extern string mapNames_cfaca0[];
 extern string gameStrings_d38e40[];
 extern string gameStrings_cfe140[];
 void OpW7_findNodes_470240(HEntity node, int ID, vector<HEntity> &matches, vector<HEntity> &visited);	// NOTE: placeholder name
@@ -1583,7 +1583,7 @@ void CWorldMapInfo::setInfo(HEntity node)
 		return;
 	clearInfo(entity);
 	entity = node;
-	string text = !entity.node_9b7910()->unknown27 || entity.node_9b7910()->unknown25 ? gameStrings_cfaca0[entity.node_9b7910()->type] : "Unknown";
+	string text = !entity.node_9b7910()->unknown27 || entity.node_9b7910()->unknown25 ? mapNames_cfaca0[entity.node_9b7910()->type] : "Unknown";
 	lines.push_back(new CText(this,Pos(1,1),text,2,0,-1));
 	lines.back()->animate("A_CWorldMapInfo_Map");
 	text = "-" + intToString(entity.node_9b7910()->depth);

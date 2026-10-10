@@ -22,19 +22,19 @@ extern vector<OpX4b_EntityRecord *> opx4b_entityRecords;	// NOTE: placeholder na
 class OpX4b_GameData	// NOTE: placeholder name
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 extern OpX4b_GameData opx4b_gameData;	// NOTE: placeholder name (0xd1e860)
 
 class OpX4b_World	// NOTE: placeholder name
 {
 public:
-	OpX4b_EntityRecord *unknown6c5600(int a, int b, bool c, bool d);	// NOTE: placeholder name
+	OpX4b_EntityRecord *selectRobotOfClass(int a, int b, bool c, bool d);	// NOTE: placeholder name
 };
 
-OpX4b_EntityRecord *OpX4b_World::unknown6c5600(int a, int b, bool c, bool d)
+OpX4b_EntityRecord *OpX4b_World::selectRobotOfClass(int a, int b, bool c, bool d)
 {
-	int level = opx4b_gameData.unknown46f4e0();
+	int level = opx4b_gameData.getDepthIndex();
 	for (int i = 0; i < opx4b_entityRecords.size(); i++)
 	{
 		if (opx4b_entityRecords[i]->unknown24 == a && opx4b_entityRecords[i]->unknown28 == b && !opx4b_entityRecords[i]->unknown75)
@@ -64,7 +64,7 @@ OpX4b_EntityRecord *OpX4b_World::unknown6c5600(int a, int b, bool c, bool d)
 								if (opx4b_entityRecords[m]->unknown68 > level)
 									return opx4b_entityRecords[m];
 							}
-							return unknown6c5600(a,b,false,d);
+							return selectRobotOfClass(a,b,false,d);
 						}
 						else
 						{

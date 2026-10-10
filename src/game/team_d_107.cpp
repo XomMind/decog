@@ -33,7 +33,7 @@ void message107_5141b0(int id, const string *text, int b, int c, HProp e, int d)
 class GameData107	// NOTE: placeholder name (GameData at 0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name (current depth)
+	int getDepthIndex();	// NOTE: placeholder name (current depth)
 };
 extern GameData107 gameData107_d1e860;	// NOTE: placeholder name
 
@@ -96,9 +96,9 @@ void Experience107::gain(int amount, bool raw)
 		return;
 	if (!raw)
 	{
-		if (level107_cf4690 > triple_434ac0(gameData107_d1e860.unknown46f4e0()))
+		if (level107_cf4690 > triple_434ac0(gameData107_d1e860.getDepthIndex()))
 		{
-			int n = level107_cf4690 - triple_434ac0(gameData107_d1e860.unknown46f4e0());
+			int n = level107_cf4690 - triple_434ac0(gameData107_d1e860.getDepthIndex());
 			while (n != 0)
 			{
 				amount = (int)(amount * xpBelow107_ba7ac4);
@@ -107,9 +107,9 @@ void Experience107::gain(int amount, bool raw)
 			if (amount == 0)
 				return;
 		}
-		else if (table107_cf4718 && level107_cf4690 < triple_434aa0(gameData107_d1e860.unknown46f4e0()))
+		else if (table107_cf4718 && level107_cf4690 < triple_434aa0(gameData107_d1e860.getDepthIndex()))
 		{
-			int m = triple_434aa0(gameData107_d1e860.unknown46f4e0()) - level107_cf4690;
+			int m = triple_434aa0(gameData107_d1e860.getDepthIndex()) - level107_cf4690;
 			while (m != 0)
 			{
 				amount = (int)(amount * xpAbove107_ba7ac0);

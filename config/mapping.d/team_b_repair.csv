@@ -9,7 +9,7 @@ OpT7_Hud::unknown9650c0,0x9650c0,0x160
 OpT7_Hud::unknown964d60,0x964d60,0x220
 Prop::unknown665860,0x665860,0x70
 Cell::unknown670150,0x670150,0x6d
-OpR3c_Overmind::unknown684c40,0x684c40,0xb2
+OpR3c_Overmind::resetSurgicalTimer,0x684c40,0xb2
 CMachine::~CMachine,0x4afbd0,0x69
 CCodes::~CCodes,0x4affd0,0x69
 Entity::unknown5ddf50,0x5ddf50,0x528

@@ -18,9 +18,9 @@ struct C57_Entity { C57_AI *unknown45b590(); void unknown5fd900(int level, int d
 class C57_HEntity { public: int ID; C57_HEntity(); C57_Entity *operator->() const; bool isNull() const; bool isValid() const; };	// NOTE: placeholder (HEntity)
 struct C57_MoveCost;
 struct C57_Cartographer { bool findPath(const C57_Point &from, const C57_Point &to, C57_MoveCost *moveCost, void *data, vector<C57_Point> &path); };
-struct C57_World { C57_Point *getBuffer_4184d0(); vector<C57_Exit *> *getPos(); C57_HEntity unknown715230(int group, int faction); C57_HEntity spawn6c5dc0(const string &name, const C57_Point &position, int groupIndex, bool flag, int aiMode1, int aiMode2, bool forced); void unknown6c65a0(C57_HEntity entity, const string &text, int a); void unknown6c6b90(const C57_Point &p, const string &text, int a, int b); C57_Record *unknown6c5600(int a, int b, int c, int d); C57_HEntity placeEntity(C57_Record *record, const C57_Point &position, int groupIndex, bool flag, int aiMode1, int aiMode2, bool forced); int unknown4642d0(); };	// NOTE: placeholder (BS)
+struct C57_World { C57_Point *getBuffer_4184d0(); vector<C57_Exit *> *getPos(); C57_HEntity unknown715230(int group, int faction); C57_HEntity spawn6c5dc0(const string &name, const C57_Point &position, int groupIndex, bool flag, int aiMode1, int aiMode2, bool forced); void unknown6c65a0(C57_HEntity entity, const string &text, int a); void unknown6c6b90(const C57_Point &p, const string &text, int a, int b); C57_Record *selectRobotOfClass(int a, int b, int c, int d); C57_HEntity placeEntity(C57_Record *record, const C57_Point &position, int groupIndex, bool flag, int aiMode1, int aiMode2, bool forced); int unknown4642d0(); };	// NOTE: placeholder (BS)
 struct C57_Grid { C57_Rect getArea(); };
-struct C57_GameData { int unknown46f4e0(); const string &getEntryText(const string &key); };
+struct C57_GameData { int getDepthIndex(); const string &getEntryText(const string &key); };
 template <class T> class C57_WL { public: vector<T> values; vector<int> weights; int total; C57_WL(); C57_WL(vector<int> &w); ~C57_WL(); void add(T value, int weight); T &pick(); };	// NOTE: placeholder (OpR5h_WL)
 void OpT8a_eraseAt(vector<int> &v, unsigned int &i);	// NOTE: placeholder name (0x9ce6d0)
 struct OpU8a_Rec;
@@ -46,7 +46,7 @@ void C57_Raid::spawnWarlordRaid_68e1f0(bool flag)
 	int base = 4;
 	vector< vector<string> > center;
 	vector<int> a1;
-	if (c57_d1e860.unknown46f4e0() >= 7)
+	if (c57_d1e860.getDepthIndex() >= 7)
 	{
 		center.push_back(vector<string>());
 		center.back().insert(center.back().end(),6,"Wasp_7");
@@ -162,7 +162,7 @@ void C57_Raid::spawnWarlordRaid_68e1f0(bool flag)
 			bool count = false;
 			if (rng.chance(10))
 			{
-				bottom.push_back(c57_d1e860.unknown46f4e0() >= 6 ? "Surgeon_6" : "Surgeon_4");
+				bottom.push_back(c57_d1e860.getDepthIndex() >= 6 ? "Surgeon_6" : "Surgeon_4");
 				count = true;
 			}
 			for (unsigned int distances = 0; distances < bottom.size(); distances++)
@@ -191,7 +191,7 @@ void C57_Raid::spawnWarlordRaid_68e1f0(bool flag)
 		c57_cefc4c->unknown6c6b90(C57_Point(0,0),"GAR_Warlord_Retreat",0,-1);
 		if (flag && col.x != -1 && rng.chance(50))
 		{
-			C57_Record *current = c57_cefc4c->unknown6c5600(1,21,0,1);
+			C57_Record *current = c57_cefc4c->selectRobotOfClass(1,21,0,1);
 			if (current != 0)
 			{
 				C57_HEntity distanceSq = c57_cefc4c->placeEntity(current,col,3,flag,34,14,false);

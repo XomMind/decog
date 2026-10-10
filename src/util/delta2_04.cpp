@@ -149,7 +149,7 @@ public:
 	int unknown0;
 	int type;
 	int unknown8;
-	int unknown46ed20();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 
 class HLocation	// NOTE: placeholder name
@@ -477,7 +477,7 @@ D2Evolve::D2Evolve(int count, HLocation location, bool flag)
 	}
 	if (d2e_cf471c && this->location->unknown8 != d2e_d1e888->unknown8)
 	{
-		int bonus = (this->location->unknown46ed20() - 5) * d2e_d389c4[7]->unknown4c;
+		int bonus = (this->location->getDepthIndex() - 5) * d2e_d389c4[7]->unknown4c;
 		d2e_d2c658.add472b90(7, bonus);
 	}
 	if (unknown74 < 0)
@@ -579,7 +579,7 @@ D2Evolve::D2Evolve(int count, HLocation location, bool flag)
 		if (d2e_cf4734)
 			d2e_d2c658.add472b90(13, -999999);
 		if (d2e_cf4738)
-			d2e_d2c658.add472b90(14, opr1c_scaleRepeated(d2e_d389c4[14]->unknown4c, d2e_d1e888->unknown46ed20() + 1, d2e_ba682c));
+			d2e_d2c658.add472b90(14, opr1c_scaleRepeated(d2e_d389c4[14]->unknown4c, d2e_d1e888->getDepthIndex() + 1, d2e_ba682c));
 		if (d2e_cf473c)
 			d2e_d2c658.add472b90(15, -999999);
 		if (d2e_cf4740)
@@ -587,6 +587,6 @@ D2Evolve::D2Evolve(int count, HLocation location, bool flag)
 		if (d2e_cf45d8.isTypeAllowed(d2e_d1e888->type))
 			d2e_d2c658.add472b90(17, -999999);
 		if (!d2e_d2c658.unknown472c70(2))
-			d2e_d2c658.add472b90(20, opr1c_scaleRepeated(d2e_d389c4[20]->unknown4c, d2e_d1e888->unknown46ed20() + 1, d2e_ba6840));
+			d2e_d2c658.add472b90(20, opr1c_scaleRepeated(d2e_d389c4[20]->unknown4c, d2e_d1e888->getDepthIndex() + 1, d2e_ba6840));
 	}
 }

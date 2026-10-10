@@ -136,7 +136,7 @@ struct A2XFactory
 };
 struct A2XGameData
 {
-	int value_46f4e0() throw();
+	int getDepthIndex() throw();
 };
 struct A2XWorldRecord
 {
@@ -243,7 +243,7 @@ bool A2XEntity::drop_631a20(A2XHE killer, bool showMessages)
 			if (rng.chance(40))
 			{
 				int amount = a2x_min_9cdb30(a2x_matterCap_d3861c.randomInRange_40c130(),def->salvage.randomInRange_40c130() + a2x_min_9cdb30(0,salvageModifier));
-				amount -= a2x_gameData_d1e860.value_46f4e0() * a2x_matterPenalty_ba77fc[a2x_difficulty_cf4718];
+				amount -= a2x_gameData_d1e860.getDepthIndex() * a2x_matterPenalty_ba77fc[a2x_difficulty_cf4718];
 				if (amount > 0)
 				{
 					A2XHI item = a2x_map_cefc4c->spawnMatter_71e7c0(position_45a4c0(),amount,true);

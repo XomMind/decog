@@ -23,7 +23,7 @@ struct LB46Terrain;struct LB46Cell{LB46HE entity45d250() throw();LB46Terrain*ter
 struct LB46Player{bool enabled46de40(int);bool event77fbc0(int);void suspicion77ee70(float,int,LB46HE);};extern LB46Player lb46_cf45d8;
 struct LB46Target{void init873a50(LB46HE,bool);void pos873ad0(const LB46P&);void update49b8b0();};extern LB46Target lb46_d1d9c0;
 struct LB46World{bool check4631f0(LB46HE);void action464120(LB46HE);bool reach465230(int,const LB46P&,const LB46P&);int mode4636d0() throw();bool group71cb10(LB46HE);void action464160();};extern LB46World*lb46_cefc4c;
-struct LB46Count{int value46ed20() throw();};struct LB46HC{int id;LB46Count*get9b7910()const throw();};extern LB46HC lb46_d1e888;
+struct LB46Count{int getDepthIndex() throw();};struct LB46HC{int id;LB46Count*get9b7910()const throw();};extern LB46HC lb46_d1e888;
 extern LB46V<int>lb46_d1dd48,lb46_cfcd20sum;
 extern LB46V<LB46EffectDef*>lb46_d2f0f8;extern LB46V<LB46HE>lb46_cf46d4;
 bool lb46_contains9db330(const LB46V<int>&,int);void lb46_erase9da940(LB46V<LB46HI>&,int);void lb46_step9d6440(LB46V<LB46HI>&,int&);void lb46_unique9d30e0(LB46V<LB46HE>*,LB46HE);
@@ -63,7 +63,7 @@ LB46Shoot::LB46Shoot(LB46HE e,int m,const LB46P&p,const LB46P&o,int*delay,const 
  if(TARGET.valid9b7230()){
  lb46_d1d9c0.init873a50(TARGET,excluded6591c0(TARGET));lb46_unique9d30e0(&lb46_cf46d4,TARGET);
  if(TARGET.get9b6570()->group45a3f0().get9b7250()->kind9b4350()==2&&TARGET.get9b6570()->name45a280().find("Zion_Hero_",0)!=lb46_c2ea48&&!excluded6591c0(TARGET)){
- int i=0;int j=lb46_d1e888.get9b7910()->value46ed20();for(;i<3&&j<11;i++,j++)lb46_d1dd48.at9b81f0(j)=1;
+ int i=0;int j=lb46_d1e888.get9b7910()->getDepthIndex();for(;i<3&&j<11;i++,j++)lb46_d1dd48.at9b81f0(j)=1;
  }
  if(lb46_cf45d8.enabled46de40(176)&&lb46_distance40a3f0(self.get9b6570()->position45a4a0(),origin)>20&&lb46_cefc4c->check4631f0(TARGET)&&self.get9b6570()->hostile45aa70(TARGET)&&lb46_b951c0[TARGET.get9b6570()->faction45a2c0()]){
  for(unsigned i=0;i<items.size9b9260();i++)if(!lb46_between9daf80(20,items.at9b81f0(i).get9b65b0()->category457880(),23))goto noAction;

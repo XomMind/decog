@@ -1,4 +1,4 @@
 # echo: large functions (src/util/echo_*.cpp). name,va,size
-Overmind::unknown675100,0x675100,0xc448
+Overmind::turnUpdate,0x675100,0xc448
 BS::placeRandomEncounter,0x6f1e90,0xadc4
 BS::initilize,0x7026b0,0xbf51

@@ -4461,7 +4461,7 @@ struct OpW8_PropInfo	// NOTE: placeholder name
 class OpW8_GameData	// NOTE: placeholder name (object at 0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 	bool unknown46fb60();	// NOTE: placeholder name
 	const string &unknown46f6d0(const string &key);	// NOTE: placeholder name
 };
@@ -4471,12 +4471,12 @@ bool OpW8_EntityRecord::unknown5c3260(HProp prop, bool flag)
 {
 	if (flag ? unknown170.empty() : unknownE8 == 0)
 		return false;
-	return unknown68 < opw8_gameData.unknown46f4e0() + prop->unknown45cb30()->unknown08;
+	return unknown68 < opw8_gameData.getDepthIndex() + prop->unknown45cb30()->unknown08;
 }
 
 struct OpW8_LocationInfo	// NOTE: placeholder name
 {
-	int unknown46ed20();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 	char pad00[4];
 	int unknown04;
 	int depth;	// NOTE: placeholder name
@@ -5600,7 +5600,7 @@ void Entity::unknown5da0a0()
 			case20:
 				searchType = 4;
 				stat = 0x27;
-				int location = opw8_d1e888->unknown46ed20();
+				int location = opw8_d1e888->getDepthIndex();
 				vector<int> candidates;
 				for (int i = 0; i < opw8_d25de0.size(); i++)
 				{

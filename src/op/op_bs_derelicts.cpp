@@ -239,7 +239,7 @@ class BS	// NOTE: placeholder layout
 public:
 	void unknown6fdcb0();
 	ItemDef *selectRandomItemOfRating(int level, int mode, int chanceType, int rating, int category, int unknown, int attempt);	// 0x6c40e0
-	EntityRecord *unknown6c5600(int a, int b, bool c, bool d);	// NOTE: placeholder name
+	EntityRecord *selectRobotOfClass(int a, int b, bool c, bool d);	// NOTE: placeholder name
 	HEntity placeEntity(EntityRecord *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);	// 0x6c58c0
 	bool findPlaceableNear(const Point &p, Point &out, int size);	// NOTE: placeholder name (0x71c150)
 	void unknown6c65a0(HEntity e, const string &text, int value);	// NOTE: placeholder name
@@ -282,7 +282,7 @@ void BS::unknown6fdcb0()	// NOTE: placeholder name
 	if (opBSD_d1e880 && (!opBSD_d257eb || (readiness <= 2 && rng.chance(20))))
 	{
 		opBSD_d257eb = true;
-		entityRecord = unknown6c5600(3,0x10,false,true);
+		entityRecord = selectRobotOfClass(3,0x10,false,true);
 		if (entityRecord)
 		{
 			Point pos = target->getPosition();
@@ -301,7 +301,7 @@ void BS::unknown6fdcb0()	// NOTE: placeholder name
 			}
 		}
 	}
-	entityRecord = unknown6c5600(1,0x1d,false,true);
+	entityRecord = selectRobotOfClass(1,0x1d,false,true);
 	vector<HEntity> wrecks;
 	for (int i = 0; i < 6; i++)
 		wrecks.push_back(teamb_spawnRandom6fd950(entityRecord,5,false));
@@ -372,7 +372,7 @@ void BS::unknown6fdcb0()	// NOTE: placeholder name
 			}
 		}
 		Point spot;
-		entityRecord = unknown6c5600(3,0x10,true,true);
+		entityRecord = selectRobotOfClass(3,0x10,true,true);
 		if (entityRecord)
 		{
 			for (int attempt = 0, num = 0; attempt < 50 && num < 5; attempt++)
@@ -417,7 +417,7 @@ void BS::unknown6fdcb0()	// NOTE: placeholder name
 				}
 				continue;
 placed:
-				entityRecord = unknown6c5600(3,types.pick(),true,true);
+				entityRecord = selectRobotOfClass(3,types.pick(),true,true);
 				if (entityRecord)
 				{
 					HEntity e = placeEntity(entityRecord,spot,9,true,1,0xe,false);

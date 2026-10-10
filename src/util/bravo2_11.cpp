@@ -24,7 +24,7 @@ struct BV12Grid {BV12Cell **at(int,int);BV12Cell **atPoint(const BV12Point&);int
 extern BV12Terrain *TERRAIN_EARTH,*TERRAIN_CAVE_WALL,*bv12_terrain_cefb9c;extern int bv12_d2c46c;
 struct BV12LocInfo {bool inRange46ecb0();};
 struct BV12HLoc {int id;BV12LocInfo *operator->() const;};extern vector<BV12HLoc> bv12_locations_d1e88c;
-struct BV12GameData {int unknown46f4e0();};extern BV12GameData bv12_gameData_d1e860;
+struct BV12GameData {int getDepthIndex();};extern BV12GameData bv12_gameData_d1e860;
 extern vector<int> bv12_garrisonTypes_d1eb88;
 struct BV12World {void unknown6c6b90(const BV12Point&,const string&,BV12Dialogue*,int);bool findPlaceableNear(const BV12Point&,BV12Point&,int);};extern BV12World *bv12_world_cefc4c;
 struct BV12Raid {void spawnWarlordRaid_68e1f0(int);};extern BV12Raid bv12_overmind_cf6428;
@@ -49,7 +49,7 @@ struct BV12MoveCost;extern BV12MoveCost *bv12_costs_cefc30;
 struct BV12Cartographer {bool findPath(const BV12Point&,const BV12Point&,BV12MoveCost*,void*,vector<BV12Point>&);};extern BV12Cartographer bv12_cartographer_cfe568;
 struct BS {
  void unknown6c38a0(const BV12Rect4&,int,float,int);
- BV12Record *unknown6c5600(int,int,bool,bool);
+ BV12Record *selectRobotOfClass(int,int,bool,bool);
  bool findPlaceableNear(const BV12Point&,BV12Point&,int);
  BV12HE placeEntity(BV12Record*,const BV12Point&,int,bool,int,int,bool);
  bool unknown6c65a0(BV12HE,const string&,bool);
@@ -63,7 +63,7 @@ struct BS {
 void BS::postprocessGarrison() {
  if(!bv12_locations_d1e88c[bv12_locations_d1e88c.size()-2]->inRange46ecb0())
   return;
- switch(bv12_garrisonTypes_d1eb88[bv12_gameData_d1e860.unknown46f4e0()]) {
+ switch(bv12_garrisonTypes_d1eb88[bv12_gameData_d1e860.getDepthIndex()]) {
  break;
  case 1:
   bv12_world_cefc4c->unknown6c6b90(BV12Point(0,0),"GAR_Cargo_Convoy_Timer",0,-1);
@@ -154,7 +154,7 @@ nextDoor:;
   }
   unknown6c38a0(bv12_cells_cfd44c.getArea().toRect(),0,0.1f,bv12_d2c46c);
   const int x2=10;
-  BV12Record *r1=unknown6c5600(3,0x3c,false,true);
+  BV12Record *r1=selectRobotOfClass(3,0x3c,false,true);
   if(!r1) {
    logError("BS::postprocessGarrison()","no Assembled data found");
    break;
@@ -180,7 +180,7 @@ nextDoor:;
    for(int b2=0;b2<200;b2++) {
     to=bv12_cells_cfd44c.getRandom_9cf050();
     if(findPlaceableNear(to,to,1)) {
-     r1=unknown6c5600(1,bv12_randomRec(tags),false,true);
+     r1=selectRobotOfClass(1,bv12_randomRec(tags),false,true);
      if(r1) {
       BV12HE e2=placeEntity(r1,to,3,true,0x22,0xe,false);
       if(e2.isValid()) {
@@ -198,7 +198,7 @@ nextDoor:;
   const int y2=40;
   BV12WL value;
   for(unsigned i=0;i<tags.size();i++) {
-   r1=unknown6c5600(1,tags[i],false,true);
+   r1=selectRobotOfClass(1,tags[i],false,true);
    if(r1)
     for(unsigned j=0;j<r1->items.size();j++)
      for(unsigned k=0;k<r1->items[j].size();k++)
@@ -263,5 +263,5 @@ nextZone:;
   break;
  }
  }
- bv12_garrisonTypes_d1eb88[bv12_gameData_d1e860.unknown46f4e0()]=0;
+ bv12_garrisonTypes_d1eb88[bv12_gameData_d1e860.getDepthIndex()]=0;
 }

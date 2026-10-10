@@ -100,7 +100,7 @@ struct EntityRecord124	// NOTE: placeholder name and layout
 class World124	// NOTE: placeholder name (BS at 0xcefc4c)
 {
 public:
-	EntityRecord124 *unknown6c5600(int a, int b, bool c, bool d);	// NOTE: placeholder name
+	EntityRecord124 *selectRobotOfClass(int a, int b, bool c, bool d);	// NOTE: placeholder name
 	vector< vector<Point124> > *unknown459070();	// NOTE: placeholder name
 	HEntity124 placeEntity(EntityRecord124 *record, const Point124 &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);
 };
@@ -126,13 +126,13 @@ bool showMessage124(int id, const void *text, const void *b, int c, HProp d, HPr
 class Overmind124	// NOTE: placeholder name (Overmind)
 {
 public:
-	bool unknown683500(Point124 &pos, int a, int b, int c, Pos124 *p, int *d, int e, int f);	// NOTE: placeholder name
+	bool findDispatchExit(Point124 &pos, int a, int b, int c, Pos124 *p, int *d, int e, int f);	// NOTE: placeholder name
 	HEntity124 unknown683b60(int type, bool random, bool *nearPlayer);	// NOTE: placeholder name
 };
 
 HEntity124 Overmind124::unknown683b60(int type, bool random, bool *nearPlayer)
 {
-	EntityRecord124 *first = world124_cefc4c->unknown6c5600(1,spawnTypes124_caf1cc[type],false,false);
+	EntityRecord124 *first = world124_cefc4c->selectRobotOfClass(1,spawnTypes124_caf1cc[type],false,false);
 	if (!first)
 		return HEntity124();
 	Point124 pt;
@@ -169,7 +169,7 @@ HEntity124 Overmind124::unknown683b60(int type, bool random, bool *nearPlayer)
 			else
 				*nearPlayer = false;
 		}
-		if (!visible && unknown683500(pt,0,0,0,&Pos124(-1),&n,0,0))
+		if (!visible && findDispatchExit(pt,0,0,0,&Pos124(-1),&n,0,0))
 			visible = true;
 	}
 	if (visible)

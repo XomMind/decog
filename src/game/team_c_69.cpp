@@ -53,11 +53,11 @@ bool c69_message5111e0(int id, const string *a, const string *b, int c, C69_HPro
 bool c69_message5141b0(int id, const string *a, const string *b, int c, C69_HProp prop, int d);	// NOTE: placeholder name (0x5141b0)
 template <class T> bool OpQ5_findByName(vector<T *> &v, const string &name, T *&result);	// NOTE: placeholder name
 
-extern string gameStrings_d2a2e0[];	// global_string_arrays.cpp
-extern vector<int> c69_cf4a04;	// NOTE: placeholder names below
-extern int c69_b98958[];
-extern int c69_b988f0[];
-extern int c69_b988ec[];	// NOTE: c69_b988f0 - 1 (the previous level's value); a separate symbol keeps [i*4-4] inside its own stub
+extern string rifAbilityNames_d2a2e0[];	// global_string_arrays.cpp
+extern vector<int> c69_rifLevels_cf4a04;	// NOTE: placeholder names below
+extern int c69_rifMaxLevels_b98958[];
+extern int c69_couplerEfficiency_b988f0[];
+extern int c69_couplerEfficiencyPrev_b988ec[];	// NOTE: c69_couplerEfficiency_b988f0 - 1 (the previous level's value); a separate symbol keeps [i*4-4] inside its own stub
 extern C69_HLevel c69_d1e888;
 extern C69_Stats c69_d2c658;
 extern C69_PlayerData2 c69_cf45d8;
@@ -90,16 +90,16 @@ public:
 
 void C69_PlayerData::installRIF_780f30(int ability)
 {
-	if (c69_cf4a04[ability] == c69_b98958[ability])
+	if (c69_rifLevels_cf4a04[ability] == c69_rifMaxLevels_b98958[ability])
 		return;
 	f42c[ability]++;
 	f43c.push_back(ability);
 	f44c.push_back(c69_d1e888.get23c()->f8);
 	c69_d2c658.add4729d0(ability + 782,1,c69_empty_b95b9b,-1);
-	C69_MSG(c69_message5111e0(667,&gameStrings_d2a2e0[ability],0,0,C69_HProp(),C69_HProp(),0,0));
+	C69_MSG(c69_message5111e0(667,&rifAbilityNames_d2a2e0[ability],0,0,C69_HProp(),C69_HProp(),0,0));
 	do
 	{
-		c69_message5141b0(403,&gameStrings_d2a2e0[ability],0,0,C69_HProp(),0);
+		c69_message5141b0(403,&rifAbilityNames_d2a2e0[ability],0,0,C69_HProp(),0);
 	} while (0);
 	c69_cf45d8.unknown77fbc0(103);
 	if (f43c.size() == 8)
@@ -110,9 +110,9 @@ void C69_PlayerData::installRIF_780f30(int ability)
 	{
 		case 3:
 		{
-			int adj = c69_b988f0[c69_cf4a04[3]];
-			if (c69_cf4a04[3] > 1)
-				adj -= c69_b988ec[c69_cf4a04[3]];
+			int adj = c69_couplerEfficiency_b988f0[c69_rifLevels_cf4a04[3]];
+			if (c69_rifLevels_cf4a04[3] > 1)
+				adj -= c69_couplerEfficiencyPrev_b988ec[c69_rifLevels_cf4a04[3]];
 			bool center = false;
 			vector<C69_HItem> *behaviour = c69_cefc4c->getPlayer()->getInventoryList();
 			for (unsigned int col = 0; col < behaviour->size(); col++)

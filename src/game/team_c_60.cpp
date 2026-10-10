@@ -22,7 +22,7 @@ public:
 	char pad0[0x10];
 	vector<C60_Point *> f10;
 
-	C60_Record *unknown6c5600(int a, int b, bool c, bool d);
+	C60_Record *selectRobotOfClass(int a, int b, bool c, bool d);
 	C60_HEntity placeEntity(C60_Record *record, const C60_Point &position, int groupIndex, bool flag, int aiMode1, int aiMode2, bool forced);
 	void unknown741610(int type);
 };
@@ -113,7 +113,7 @@ void BS::unknown741610(int type)
 		areas.resetField();
 		for (unsigned int current = 0; current < adj[cols].size(); current++)
 		{
-			active = unknown6c5600(1,adj[cols][current],current == 0,true);
+			active = selectRobotOfClass(1,adj[cols][current],current == 0,true);
 			if (active != 0)
 			{
 				begin = placeEntity(active,base,3,false,3,14,false);

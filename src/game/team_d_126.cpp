@@ -110,7 +110,7 @@ extern OpV1_GameData gameData126_d1e860;	// NOTE: placeholder name
 class Overmind126	// NOTE: placeholder name (Overmind at 0xcf6428)
 {
 public:
-	void *unknown687520(HEntity e, int a, bool b);	// NOTE: placeholder name
+	void *spawnHunterParty(HEntity e, int a, bool b);	// NOTE: placeholder name
 	void unknown683e60(const Point &pos, vector< vector<HEntity> > *out);	// NOTE: placeholder name
 };
 extern Overmind126 overmind126_cf6428;	// NOTE: placeholder name
@@ -211,7 +211,7 @@ void BS::unknown747860(bool a, bool b)
 	for (unsigned int i = 0; i < vec.size(); i++)
 		(*cells126_cfd44c.atPoint(vec[i]))->unknown66a050(terrain126_cefb9c->ID,2,0);
 	if (!stringToInt(gameData126_d1e860.getEntryText("comPlayerSurrendered_g")))
-		overmind126_cf6428.unknown687520(player,0,false);
+		overmind126_cf6428.spawnHunterParty(player,0,false);
 	vector< vector<HEntity> > list;
 	overmind126_cf6428.unknown683e60(player->getPosition(),&list);
 	Area126 center = cells126_cfd44c.getArea();

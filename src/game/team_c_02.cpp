@@ -305,7 +305,7 @@ Point	point_cf08f8[22] = {
 	Point(2, 3)
 };
 Point	point_d35bc8(250, 400);
-Point	point_d29310[22] = {
+Point	surgicalPartySizes_d29310[22] = {
 	Point(0, 0),
 	Point(0, 0),
 	Point(0, 0),
@@ -329,7 +329,7 @@ Point	point_d29310[22] = {
 	Point(2, 3),
 	Point(2, 2)
 };
-Point	point_d387d8[11] = {
+Point	interceptTrackerCounts_d387d8[11] = {
 	Point(1, 1),
 	Point(1, 1),
 	Point(1, 1),
@@ -342,7 +342,7 @@ Point	point_d387d8[11] = {
 	Point(2, 2),
 	Point(2, 2)
 };
-Point	point_cf0c90[11] = {
+Point	couplingPartySizes_cf0c90[11] = {
 	Point(1, 1),
 	Point(1, 1),
 	Point(1, 1),

@@ -22,12 +22,12 @@ struct BV11Prop {const string &name45c590();int unknown457b10();};
 struct BV11Cell {BV11HP getProp();BV11HI getItem();bool field4550b0();BV11Terrain *terrain();bool unknown66a630();void unknown66a050(int,int,bool);};
 struct BV11Grid {BV11Cell **at(int,int);BV11Cell **atPoint(const BV11Point&);int getWidth();int getHeight();};extern BV11Grid bv11_cells_cfd44c;
 extern BV11Terrain *TERRAIN_EARTH,*TERRAIN_CAVE_WALL;
-struct BV11LocInfo {int depth46ed20();};
+struct BV11LocInfo {int getDepthIndex();};
 struct BV11HLoc {int id;BV11LocInfo *operator->() const;};extern BV11HLoc bv11_location_d1e888;
 extern int bv11_chances_b9388c[];extern const int bv11_weights_b94368[];
 struct BV11Record;
 struct BV11Party {BV11Party(int,BV11HE,int,int,int);char pad[0x38];};
-struct BV11Overmind {void unknown6827d0(BV11Party*,void*);};extern BV11Overmind bv11_overmind_cf6428;
+struct BV11Overmind {void addParty(BV11Party*,void*);};extern BV11Overmind bv11_overmind_cf6428;
 struct BV11WL {BV11WL(const int*,int);~BV11WL();int &pick();void remove(int);char pad[0x24];};
 extern vector<BV11Trap*> bv11_traps_d2f0f8;
 template<class T> bool BV11_findByName(vector<T*>&,const string&,T*&);
@@ -43,7 +43,7 @@ struct BV11Lists {BV11Lists(int);char pad[0x34];};extern vector<BV11Lists*> bv11
 extern vector<vector<BV11HP> > bv11_entries_d31640;
 void sweepGetSurroundingCells(const BV11Point&,vector<BV11Point>&);
 struct BS {
- BV11Record *unknown6c5600(int,int,bool,bool);
+ BV11Record *selectRobotOfClass(int,int,bool,bool);
  BV11HE placeEntity(BV11Record*,const BV11Point&,int,bool,int,int,bool);
  BV11Placed *placeMachine(int,const BV11Point&,int,int,int);
  void garrison_6ff590();
@@ -54,13 +54,13 @@ void BS::garrison_6ff590() {
  BV11Trap *room;
  int pick,type,num2;
  BV11Record *rec,*start;
- int m2=bv11_location_d1e888->depth46ed20();
+ int m2=bv11_location_d1e888->getDepthIndex();
  if(rng.chance(bv11_chances_b9388c[m2])) {
-  rec=unknown6c5600(1,0x1c,false,false);
+  rec=selectRobotOfClass(1,0x1c,false,false);
   if(rec) {
    BV11HE g=placeEntity(rec,BV11Point(0x31,0x31),3,false,0x22,0xe,false);
    if(g.isValid())
-    bv11_overmind_cf6428.unknown6827d0(new BV11Party(0,g,-1,0,0),0);
+    bv11_overmind_cf6428.addParty(new BV11Party(0,g,-1,0,0),0);
   }
  }
  vector<vector<BV11Point> > doors;
@@ -122,7 +122,7 @@ void BS::garrison_6ff590() {
       pick=0xf;
       num2=rng.rangeInt(2.0f,3.0f);
 spawn:
-      rec=unknown6c5600(1,pick,false,false);
+      rec=selectRobotOfClass(1,pick,false,false);
       if(!rec)
        tags.remove(type);
       else {
@@ -136,7 +136,7 @@ spawn:
       }
       break;
      case 3:
-      rec=unknown6c5600(1,0xd,false,false);
+      rec=selectRobotOfClass(1,0xd,false,false);
       if(!rec)
        tags.remove(type);
       else {
@@ -150,7 +150,7 @@ spawn:
       }
       break;
      case 4:
-      rec=unknown6c5600(1,6,false,false);
+      rec=selectRobotOfClass(1,6,false,false);
       if(!rec)
        tags.remove(type);
       else {
@@ -168,8 +168,8 @@ spawn:
       }
       break;
      case 5:
-      rec=unknown6c5600(1,0x11,false,false);
-      start=unknown6c5600(1,0x12,false,false);
+      rec=selectRobotOfClass(1,0x11,false,false);
+      start=selectRobotOfClass(1,0x12,false,false);
       if(!rec&&!start)
        tags.remove(type);
       else {
@@ -191,8 +191,8 @@ spawn:
       }
       break;
      case 8: {
-      rec=unknown6c5600(1,0x16,false,false);
-      start=unknown6c5600(1,0x13,false,false);
+      rec=selectRobotOfClass(1,0x16,false,false);
+      start=selectRobotOfClass(1,0x13,false,false);
       if(!rec||!start||cols.size()<2) {
        tags.remove(type);
        break;

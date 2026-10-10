@@ -307,20 +307,20 @@ struct OpS1e_Entry	// NOTE: placeholder name
 
 struct OpS1e_EntryList	// NOTE: placeholder name
 {
-	OpS1e_Entry *unknown45ed10();			// NOTE: placeholder name
-	OpS1e_Entry *unknown45ed50(int ID);		// NOTE: placeholder name
-	int unknown45edd0(int ID);				// NOTE: placeholder name
+	OpS1e_Entry *lastParty();			// NOTE: placeholder name
+	OpS1e_Entry *findParty(int ID);		// NOTE: placeholder name
+	int countParties(int ID);				// NOTE: placeholder name
 
 	char					pad00[0x50];
 	vector<OpS1e_Entry*>	entries;
 };
 
-OpS1e_Entry *OpS1e_EntryList::unknown45ed10()
+OpS1e_Entry *OpS1e_EntryList::lastParty()
 {
 	return entries.empty() ? NULL : entries.back();
 }
 
-OpS1e_Entry *OpS1e_EntryList::unknown45ed50(int ID)
+OpS1e_Entry *OpS1e_EntryList::findParty(int ID)
 {
 	if (entries.empty())
 		return NULL;
@@ -332,7 +332,7 @@ OpS1e_Entry *OpS1e_EntryList::unknown45ed50(int ID)
 	return NULL;
 }
 
-int OpS1e_EntryList::unknown45edd0(int ID)
+int OpS1e_EntryList::countParties(int ID)
 {
 	int count = 0;
 	for (unsigned int i = 0; i < entries.size(); i++)

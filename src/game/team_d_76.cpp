@@ -133,7 +133,7 @@ struct ItemDef76	// NOTE: placeholder name and layout
 class GameData76	// NOTE: placeholder name (0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 extern GameData76 gameData76_d1e860;	// NOTE: placeholder name
 
@@ -254,6 +254,6 @@ void BS::unknown74cb00()
 	if (best)
 		opR1d_454260(to,0x13d);
 	unknownbac = getTurn();
-	if (rng.chance(gameData76_d1e860.unknown46f4e0() * 4 + 0x23))
+	if (rng.chance(gameData76_d1e860.getDepthIndex() * 4 + 0x23))
 		unknownbb0++;
 }

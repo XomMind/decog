@@ -25,7 +25,7 @@ public:
 	void unknown45b1b0(int value);	// NOTE: placeholder name
 	int unknown642940(HItem item, int a, int b, bool c, int d);	// NOTE: placeholder name
 };
-class TeamB_EquipWorld { public: HEntity getPlayer(); bool unknown464350(); void unknown774390(int a, int b); };	// NOTE: placeholder name (Map)
+class TeamB_EquipWorld { public: HEntity getPlayer(); bool unknown464350(); void playerActionFinish(int a, int b); };	// NOTE: placeholder name (Map)
 extern TeamB_EquipWorld *teamb_equipWorld_cefc4c;	// NOTE: placeholder name
 struct TeamB_EquipSlot { char pad[0x6c]; HItem item; char pad70[0x78 - 0x70]; bool flag78; int getField_416230(); };	// NOTE: placeholder layout
 bool teamb_logMessage3_5111e0(int id, const string *text, const string *b, int c, HEntity d, HProp e, const void *at, int flag);	// NOTE: placeholder name
@@ -64,7 +64,7 @@ int TeamB_PartsEquip::equip89cda0(TeamB_EquipSlot *slot)	// 0x89cda0 (local name
 			} while (0);
 			if (!teamb_equipWorld_cefc4c->unknown464350())
 				player->unknown45b1b0(player->unknown5cb7f0());
-			teamb_equipWorld_cefc4c->unknown774390(8,player->unknown642940(slot->item,1,1,slot->flag78,0));
+			teamb_equipWorld_cefc4c->playerActionFinish(8,player->unknown642940(slot->item,1,1,slot->flag78,0));
 			break;
 		case 9:
 			teamb_msg89c_7b1750(0x15,slot->item->getName_571db0(0,0),0,0,player,HProp(),0);

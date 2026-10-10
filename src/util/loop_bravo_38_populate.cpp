@@ -13,7 +13,7 @@ struct LB38Weights{vector<LB38Def*>values;vector<int>weights;int total;LB38Weigh
 static_assert(sizeof(LB38Weights)==36&&sizeof(LB38P)==8&&sizeof(LB38Area)==16,"real native owner extents");
 extern vector<LB38Def*>lb38_d25de0;extern LB38Terrain*TERRAIN_EARTH;
 LB38P lb38_random9d5350(const vector<LB38P>&);void lb38_terrain6c9c90(LB38P&,LB38Terrain*);void lb38_decode510360(string&);bool lb38_lookup9d7530(vector<LB38Def*>&,const string&,LB38Def*&);bool lb38_terrain448b80(const LB38P&);
-struct LB38World{LB38World();~LB38World();LB38HE spawn6c5dc0(const string&,const LB38P&,int,bool,int,int,bool);LB38HE spawn6c58c0(LB38Def*,const LB38P&,int,bool,int,int,bool);bool dialogue6c65a0(LB38HE,const string&,bool);bool near71c150(const LB38P&,LB38P&,int);void terrain6c38a0(struct LB38Rect&,int,float,LB38Terrain*);LB38Def*find6c5600(int,int,bool,bool);vector<struct LB38Exit*>*exits462e10()throw();bool path716940(const LB38P&,const LB38P&,LB38Entity*,unsigned*);void populate6e3c30();};
+struct LB38World{LB38World();~LB38World();LB38HE spawn6c5dc0(const string&,const LB38P&,int,bool,int,int,bool);LB38HE spawn6c58c0(LB38Def*,const LB38P&,int,bool,int,int,bool);bool dialogue6c65a0(LB38HE,const string&,bool);bool near71c150(const LB38P&,LB38P&,int);void terrain6c38a0(struct LB38Rect&,int,float,LB38Terrain*);LB38Def*selectRobotOfClass(int,int,bool,bool);vector<struct LB38Exit*>*exits462e10()throw();bool path716940(const LB38P&,const LB38P&,LB38Entity*,unsigned*);void populate6e3c30();};
 
 struct LB38Rect{int x,y,w,h;LB38Rect(int,int,int,int)throw();};
 struct LB38Def{char omitted0[0x140];int index;};
@@ -71,7 +71,7 @@ void LB38World::populate6e3c30(){
    }}
   }
  }
- LB38Def*key=find6c5600(3,38,false,true);
+ LB38Def*key=selectRobotOfClass(3,38,false,true);
  if(!key)goto afterGroups;{int state=3;LB38P range(2,3);
   for(int i=0;i<3;i++){LB38HE leader;for(int j=range.random40c130();j>0;j--){
    if(leader.valid9b7230()){LB38HE e=lb38_cefc4c->spawn6c58c0(key,leader.get9b6570()->pos45a4a0(),10,true,34,14,false);if(e.valid9b7230())e.get9b6570()->ai45b590()->follow5b2f80(leader,0);}

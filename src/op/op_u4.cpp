@@ -429,7 +429,7 @@ public:
 	char pad0[0x30];
 	bool unknown30;
 	char pad31[0x658 - 0x31];
-	EntityRecord *unknown6c5600(int a, int b, int c, int d);	// NOTE: placeholder name (0x6c5600)
+	EntityRecord *selectRobotOfClass(int a, int b, int c, int d);	// NOTE: placeholder name (0x6c5600)
 	HEntity placeEntity(EntityRecord *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);	// 0x6c58c0
 	HEntity unknown6c6450(HEntity target, bool flag);	// NOTE: placeholder name
 	ItemDef *selectRandomItem(int chanceType, int rating, int category);	// 0x6c3bc0
@@ -446,7 +446,7 @@ HEntity BS::unknown6c6450(HEntity target, bool flag)
 		EntityRecord *record;
 		for (int i = 0; i < 20; i++)
 		{
-			record = unknown6c5600(1,wl.pick(),0,0);
+			record = selectRobotOfClass(1,wl.pick(),0,0);
 			if (record != NULL)
 				break;
 		}

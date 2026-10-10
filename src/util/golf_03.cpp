@@ -27,7 +27,7 @@ struct GrE20{vector<GrPoint>pts;char p10[0x10];};
 struct GrRoomRec{GrRect r;int score;GrRoomRec(const GrE24&,int);};
 struct GrLists{vector<int>list;vector<int>v10;vector<int>v20;char p30[4];GrLists();GrLists(int);};
 struct GrCfg{int f0,f4,f8,fc,f10,f14,f18,f1c,f20;};
-struct GrLoc{int a;int type;int depth;int f46ed20();bool inRange46ecb0();};
+struct GrLoc{int a;int type;int depth;int getDepthIndex();bool inRange46ecb0();};
 struct GrLayer{int width9fcd80();int height9b8f00();};
 struct GrPropDef{int id;char p4[0x38];vector<GrLayer*>layers;char p4c[0xa8];int kind4;int kind8;char pfc[4];int f100[3];int f10c[3];int f118;char p11c[0x24];int f140;int f144;GrPoint range148;int f150;};
 struct GrEntityDef{char p0[0x24];int f24;int f28;char p2c[0x3c];int f68;char p6c[0x30];int size;};
@@ -56,13 +56,13 @@ struct GrExit{GrPoint pos;GrHL h8;char pc[8];GrHP h14;GrHP h18;};
 struct GrX{char p0[0x24];string name;};
 struct GrBS{char p0[8];GrPoint p8;vector<GrExit*>v10;char p20[0x2c];vector<GrHG>v4c;char p5c[0xbc];vector<vector<GrPoint> >v118;char p128[0x44c];vector<GrPoint>v574;vector<GrPoint>v584;vector<GrHE>v594;vector<vector<GrHE> >v5a4;char p5b4[0x52c];int fae0;char pae4[0xf0];vector<GrPoint>vbd4;
  void populate6d4c00(vector<int>&);
- void*placeMachine6c70a0(int,const GrPoint&,int,bool,bool);void f6c98c0(int,vector<int>&);void f6ca2c0(const GrPoint&,int,int);bool placeProp6c67b0(GrPropDef*,const GrPoint&,int,int,int);GrEntityDef*f6c5600(int,int,bool,bool);
+ void*placeMachine6c70a0(int,const GrPoint&,int,bool,bool);void f6c98c0(int,vector<int>&);void f6ca2c0(const GrPoint&,int,int);bool placeProp6c67b0(GrPropDef*,const GrPoint&,int,int,int);GrEntityDef*selectRobotOfClass(int,int,bool,bool);
  GrHE placeEntity6c58c0(GrEntityDef*,const GrPoint&,int,bool,int,int,bool);void placeRandomEncounter6f1e90(vector<int>&,vector<GrE8>&,vector<bool>&,vector<int>&);GrHI f6c5400(GrItemDef*,const GrPoint&);
  GrItemDef*selectRandomItem6c3bc0(int,int,int);GrItemDef*selectRandomItemOfRating6c40e0(int,int,int,int,int,int,int);bool f716940(const GrPoint&,const GrPoint&,int,int);
  bool f6ca170(const GrPoint&,int,int,int,vector<GrX*>&,vector<int>&,int);GrHI f6c51d0(GrItemDef*,GrHE,int,int);int*f6c5180();};
 extern GrBS*gr_world_cefc4c;
-struct GrOvermind{void f6827d0(GrParty*,int);int f6892c0(int,int,int);int spawnPatrol6896d0(GrHE,int,int,int,int,int,int,int,int);int f68a500(int,int,int);GrHE f683b60(int,int,int);};extern GrOvermind gr_overmind_cf6428;
-struct GrGameData{const string&getEntryText(const string&);int f46f4e0();bool f46fac0();};extern GrGameData gr_gd_d1e860;
+struct GrOvermind{void addParty(GrParty*,int);int f6892c0(int,int,int);int spawnPatrol6896d0(GrHE,int,int,int,int,int,int,int,int);int f68a500(int,int,int);GrHE f683b60(int,int,int);};extern GrOvermind gr_overmind_cf6428;
+struct GrGameData{const string&getEntryText(const string&);int getDepthIndex();bool f46fac0();};extern GrGameData gr_gd_d1e860;
 struct GrPlayerData{bool isTypeAllowed46e100(int);};extern GrPlayerData gr_pd_cf45d8;
 extern GrHL gr_loc_d1e888;extern bool gr_d1ebfc,gr_d1eb98,gr_cf6a24;extern GrCfg gr_b934e8[],gr_b92dd8[],gr_b92f90[],gr_b92880[];extern int gr_cf4734,gr_cf462c,gr_cf4718,gr_ba65e4[];
 struct GrI3{int v[3];};struct GrI9{int v[9];};struct GrI5{int v[5];};struct GrI4{int v[4];};struct GrI15{int v[15];};struct GrF6{float v[6];};struct GrB17{bool v[0x17];};
@@ -97,7 +97,7 @@ void GrBS::populate6d4c00(vector<int>&out){
  int cx;
  cx=gr_loc_d1e888->depth;
  int found2;
- found2=gr_loc_d1e888->f46ed20();
+ found2=gr_loc_d1e888->getDepthIndex();
  vector<int> enemy;
  int door;
  int dest;
@@ -428,13 +428,13 @@ void GrBS::populate6d4c00(vector<int>&out){
   if(command!=0&&v10[e]->h14.isNull()&&v10[e]->h18.isNull()&&gr_b90000[v10[e]->h8->type]==1&&rng.chance(15)&&!gr_flagB448b80(v10[e]->pos)&&(!current||gr_distance40a3f0(p8,v10[e]->pos)>0x18)){
    for(unsigned k=0;k<v584.size();k++)if(gr_distance40a3f0(v584[k],v10[e]->pos)<=0x28)goto nextExit;
    {
-   GrEntityDef*ed=f6c5600(1,0x1a,0,0);
+   GrEntityDef*ed=selectRobotOfClass(1,0x1a,0,0);
    if(ed==0){}
    else{
     GrHE h=placeEntity6c58c0(ed,v10[e]->pos,3,1,0x22,0xe,0);
     if(h.valid()){
      h->ai45b590()->f451400(1);
-     gr_overmind_cf6428.f6827d0(new GrParty(0,h,-1,0,0),0);
+     gr_overmind_cf6428.addParty(new GrParty(0,h,-1,0,0),0);
      v584.push_back(h->getPosition45a4a0());
      v594.push_back(h);
      v5a4.push_back(vector<GrHE>());
@@ -476,7 +476,7 @@ void GrBS::populate6d4c00(vector<int>&out){
   health=owner!=0&&!gr_flagC448ba0(room->r.topLeft40a970());
   if(!angle&&!attempt&&!hp&&!health)continue;
   if(attempt){
-   GrEntityDef*ed=f6c5600(1,0x1a,0,0);
+   GrEntityDef*ed=selectRobotOfClass(1,0x1a,0,0);
    if(ed==0){}
    else{
     mapID=room->r.center40ad40();
@@ -485,7 +485,7 @@ void GrBS::populate6d4c00(vector<int>&out){
     GrHE h=placeEntity6c58c0(ed,mapID,3,1,0x22,0xe,0);
     if(h.valid()){
      h->ai45b590()->f451400(1);
-     gr_overmind_cf6428.f6827d0(new GrParty(0,h,-1,0,0),0);
+     gr_overmind_cf6428.addParty(new GrParty(0,h,-1,0,0),0);
      v584.push_back(h->getPosition45a4a0());
      v594.push_back(h);
      v5a4.push_back(vector<GrHE>());
@@ -507,7 +507,7 @@ void GrBS::populate6d4c00(vector<int>&out){
     }
    }while(tries<5);
   }else if(hp){
-   GrEntityDef*ed=f6c5600(1,0x15,0,0);
+   GrEntityDef*ed=selectRobotOfClass(1,0x15,0,0);
    if(ed==0){}
    else{
     mapID=room->r.center40ad40();
@@ -515,7 +515,7 @@ void GrBS::populate6d4c00(vector<int>&out){
     if(gr_isEven406320(room->r.h)&&rng.chance(50))mapID.y--;
     GrHE h=placeEntity6c58c0(ed,mapID,3,1,0x22,0xe,0);
     if(h.valid()){
-     gr_overmind_cf6428.f6827d0(new GrParty(0,h,-1,0,0),0);
+     gr_overmind_cf6428.addParty(new GrParty(0,h,-1,0,0),0);
      if(gr_cf462c==0xb)vbd4.push_back(h->getPosition45a4a0());
     }
     b2++;
@@ -866,7 +866,7 @@ void GrBS::populate6d4c00(vector<int>&out){
     case 2:oldValue.x=rng.rangeInt(0,room->rect.w-1)+room->rect.x;oldValue.y=room->rect.y+room->rect.h;break;
     case 3:oldValue.x=room->rect.x-1;oldValue.y=rng.rangeInt(0,room->rect.h-1)+room->rect.y;break;
     }
-    oy=f6c5600(1,0x15,0,0);
+    oy=selectRobotOfClass(1,0x15,0,0);
     if(oy==0)continue;
  int num;
  int min;
@@ -876,7 +876,7 @@ void GrBS::populate6d4c00(vector<int>&out){
      gr_fillRing6cba00(oldValue,room->rect,0,TERRAIN_CAVE_WALL,0);
      GrHE h=placeEntity6c58c0(oy,oldValue.toPoint40a970(),3,1,0x22,0xe,0);
      if(h.valid()){
-      gr_overmind_cf6428.f6827d0(new GrParty(0,h,-1,0,0),0);
+      gr_overmind_cf6428.addParty(new GrParty(0,h,-1,0,0),0);
       if(gr_cf462c==0xb)vbd4.push_back(h->getPosition45a4a0());
      }
      doors++;
@@ -918,14 +918,14 @@ void GrBS::populate6d4c00(vector<int>&out){
  int retval;
  int pt;
  GrEntityDef* prev;
-    prev=f6c5600(1,0x1c,0,0);
+    prev=selectRobotOfClass(1,0x1c,0,0);
     pt=prev->size;
     retval=pt;
     if(gr_ringFree6cb8c0(s,r)){
      gr_fillRing6cba00(s,r,0,TERRAIN_CAVE_WALL,0);
      GrHE h=placeEntity6c58c0(prev,s.toPoint40a970(),3,1,0x22,0xe,0);
      if(h.valid()){
-      gr_overmind_cf6428.f6827d0(new GrParty(0,h,-1,0,0),0);
+      gr_overmind_cf6428.addParty(new GrParty(0,h,-1,0,0),0);
       if(gr_cf462c==0xb)vbd4.push_back(h->getPosition45a4a0());
      }
      chosen++;
@@ -1001,7 +1001,7 @@ void GrBS::populate6d4c00(vector<int>&out){
    int lvl=(*gr_grid_cfd44c.atPoint(v118[2][i]))->getProp()->f45cb30()->f8;
    if(lvl==0)continue;
    for(int k=lvl;k>=1;k--){
-    if(attempts[k-1]!=0&&attempts[k-1]->f68<=gr_gd_d1e860.f46f4e0()){
+    if(attempts[k-1]!=0&&attempts[k-1]->f68<=gr_gd_d1e860.getDepthIndex()){
      GrPoint it(v118[2][i]);
      GrPoint h2;
  bool ty;
@@ -1047,7 +1047,7 @@ void GrBS::populate6d4c00(vector<int>&out){
     for(unsigned j=0;j<operators.size();j++)if(gr_distance40a3f0(at,operators[j]->getPosition45a4a0())<20){far=false;break;}
     if(!far)continue;
     for(int k=lvl;k>=1;k--){
-     if(ops[k-1]!=0&&ops[k-1]->f68<=gr_gd_d1e860.f46f4e0()){
+     if(ops[k-1]!=0&&ops[k-1]->f68<=gr_gd_d1e860.getDepthIndex()){
       GrPoint v1;
  bool y2;
       y2=false;

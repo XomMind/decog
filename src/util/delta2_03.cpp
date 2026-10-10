@@ -186,7 +186,7 @@ extern int d2r_cef9b0, d2r_cef9b4, d2r_cef9d0, d2r_cef9d4;
 extern int d2r_b97d38[];
 extern string d2r_cfc460[];
 extern bool d2r_d28ea4;
-extern vector<int> d2r_cf4a04;
+extern vector<int> d2r_rifLevels_cf4a04;
 
 string opr5f_unknown954490(HEntity entity);
 void OpW7_loadRobotAnimations();
@@ -310,7 +310,7 @@ D2Robot::D2Robot(XConsole *parent, const Rect &rect, HEntity entity, vector<int>
 		{
 			for (unsigned int i = 0; i < unknown98.size(); i++)
 				total += unknown98[i]->value45cb30();
-			if (d2r_cf4a04[4])
+			if (d2r_rifLevels_cf4a04[4])
 			{
 				for (unsigned int i = 0; i < unknowna8.size(); i++)
 					total += unknowna8[i]->value45cb30();

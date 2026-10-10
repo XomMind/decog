@@ -53,7 +53,7 @@ extern GameData92 gameData92_d1e860;	// NOTE: placeholder name
 class OpS1e_EntryList	// NOTE: placeholder layout (0xcf6428)
 {
 public:
-	int unknown45edd0(int ID);	// NOTE: placeholder name
+	int countParties(int ID);	// NOTE: placeholder name
 };
 extern OpS1e_EntryList entryList92_cf6428;	// NOTE: placeholder name
 extern int threat92_cf6428;	// NOTE: placeholder name (first field of the object at 0xcf6428)
@@ -174,7 +174,7 @@ int Owner92::unknown65c1f0(Squad92 *squad, int mode)
 					OpS8c_shuffle(types);
 					for (unsigned int m = 0; m < types.size(); m++)
 					{
-						if (entryList92_cf6428.unknown45edd0(types[m]))
+						if (entryList92_cf6428.countParties(types[m]))
 							return types[m] + 0x1f;
 					}
 				}
@@ -212,7 +212,7 @@ int Owner92::unknown65c1f0(Squad92 *squad, int mode)
 				OpS8c_shuffle(types2);
 				for (unsigned int n = 0; n < types2.size(); n++)
 				{
-					if (entryList92_cf6428.unknown45edd0(types2[n]))
+					if (entryList92_cf6428.countParties(types2[n]))
 						return types2[n] + 0x1f;
 				}
 			}

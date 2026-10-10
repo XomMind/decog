@@ -238,7 +238,7 @@ public:
 extern D2vMap *d2v_cefc4c;
 
 class D2vHL;
-struct D2vLoc { int unknown0; int type; int depth; char padc[0x1c - 0xc]; int seed; char pad20[0x25 - 0x20]; bool known; char pad26[0x40 - 0x26]; vector<D2vHL> list40; vector<D2vHL> list50; bool patrols; int unknown46ed20(); D2vHI find_46ee80(int type); };	// NOTE: placeholder layout
+struct D2vLoc { int unknown0; int type; int depth; char padc[0x1c - 0xc]; int seed; char pad20[0x25 - 0x20]; bool known; char pad26[0x40 - 0x26]; vector<D2vHL> list40; vector<D2vHL> list50; bool patrols; int getDepthIndex(); D2vHI find_46ee80(int type); };	// NOTE: placeholder layout
 class D2vHL { public: int ID; D2vLoc *get23c(); D2vLoc *get23c_nt() throw(); bool operator==(D2vHL other) const; };	// NOTE: placeholder name
 
 class D2vStats { public: bool add4729d0(unsigned int id, int amount, string text, int extra); void add472b90(unsigned int id, int value); };	// NOTE: placeholder name
@@ -280,7 +280,7 @@ extern vector<D2vTotals *> d2v_d25de0;
 extern int d2v_cefb74;
 extern int d2v_d1eac0;
 
-class D2vGameData { public: const string &getEntryText(const string &key); void setEntryText(const string &key, const string &value); int unknown46f4e0(); bool isFlagEnabledA(); bool isFlagEnabledB(); };
+class D2vGameData { public: const string &getEntryText(const string &key); void setEntryText(const string &key, const string &value); int getDepthIndex(); bool isFlagEnabledA(); bool isFlagEnabledB(); };
 extern D2vGameData d2v_d1e860;
 struct D2vItemData { char pad0[0x24]; string name; };	// NOTE: placeholder layout
 extern vector<D2vItemData *> d2v_d2d1c4;
@@ -293,7 +293,7 @@ string intToString(int value);
 int stringToInt(const string &text);
 string opR1d_4550d0(int count);
 void opS2_logPhrase_5141b0(int id, const string &text, int a, int b, D2vHE entity, int c);
-extern string d2v_cfaca0[];
+extern string d2v_mapNames_cfaca0[];
 extern vector<int> d2v_cf4d00;
 extern int d2v_cf4d10;
 extern void *d2v_d338e0;
@@ -331,7 +331,7 @@ extern D2vPoolE d2v_d1e720;
 extern D2vPoolF d2v_cfac14;
 class D2vAnimPool { public: D2vAnimPool(); ~D2vAnimPool(); char pad0[0x68]; };	// NOTE: placeholder name
 extern D2vAnimPool *d2v_cefc50;
-class D2vOvermind { public: void clear674a80(); void unknown684c40(); };	// NOTE: placeholder name
+class D2vOvermind { public: void clear674a80(); void resetSurgicalTimer(); };	// NOTE: placeholder name
 extern D2vOvermind d2v_cf6428;
 struct D2vCec068 { char pad0[0x70]; int unknown70; };
 extern D2vCec068 *d2v_cec068;
@@ -822,9 +822,9 @@ void D2Evolve6::update()
 		}
 		string text;
 		if (location.get23c()->type == d2v_d1e888.get23c()->type)
-			text += "another " + d2v_cfaca0[location.get23c()->type] + " area";
+			text += "another " + d2v_mapNames_cfaca0[location.get23c()->type] + " area";
 		else
-			text = d2v_cfaca0[location.get23c()->type];
+			text = d2v_mapNames_cfaca0[location.get23c()->type];
 		do
 		{
 			opS2_logPhrase_5141b0(1, text, 0, 0, D2vHE(), 0);
@@ -844,7 +844,7 @@ void D2Evolve6::update()
 		}
 		if (d2v_d1e888.get23c()->type != 13)
 			d2v_d1eb98 = false;
-		d2v_d1ea9c[d2v_d1e860.unknown46f4e0()] += d2v_cefc4c->unknown71abf0(0);
+		d2v_d1ea9c[d2v_d1e860.getDepthIndex()] += d2v_cefc4c->unknown71abf0(0);
 		for (unsigned int i = 0; i < events->size(); i++)
 		{
 			if ((*events)[i]->type != 4)
@@ -909,10 +909,10 @@ void D2Evolve6::update()
 			}
 		}
 		d2v_cefc50 = new D2vAnimPool();
-		d2v_cf6428.unknown684c40();
+		d2v_cf6428.resetSurgicalTimer();
 		d2v_cf64a8 = d2v_cf47fc;
-		if (d2v_b90180[location.get23c()->type].flag3 && d2v_b939a0[location.get23c()->unknown46ed20()].unknownc != 0 && d2v_cf462c != 4 && d2v_cf462c != 2)
-			d2v_cf64e0 = d2v_cefc4c->getTurn() + rng.rangeInt(d2v_b939a0[location.get23c()->unknown46ed20()].low, d2v_b939a0[location.get23c()->unknown46ed20()].high);
+		if (d2v_b90180[location.get23c()->type].flag3 && d2v_b939a0[location.get23c()->getDepthIndex()].unknownc != 0 && d2v_cf462c != 4 && d2v_cf462c != 2)
+			d2v_cf64e0 = d2v_cefc4c->getTurn() + rng.rangeInt(d2v_b939a0[location.get23c()->getDepthIndex()].low, d2v_b939a0[location.get23c()->getDepthIndex()].high);
 		d2v_cec054->reset_7f5fd0(0);
 		d2v_cefa9c->start_416920();
 		d2v_cec074->open();
@@ -1017,7 +1017,7 @@ void D2Evolve6::update()
 		}
 		else if (d2v_cefb48)
 			d2v_cefb48->slot = 4;
-		string line = "LOCATION=" + (d2v_d1e888.get23c()->known ? OpR5f_toUpper_4083a0(d2v_cfaca0[d2v_d1e888.get23c()->type]) : string("UNKNOWN"));
+		string line = "LOCATION=" + (d2v_d1e888.get23c()->known ? OpR5f_toUpper_4083a0(d2v_mapNames_cfaca0[d2v_d1e888.get23c()->type]) : string("UNKNOWN"));
 		D2V_MESSAGE(&line);
 		if (d2v_cefc4c->unknown463d40())
 		{

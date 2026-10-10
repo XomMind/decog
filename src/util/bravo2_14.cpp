@@ -22,7 +22,7 @@ struct BV15Prop {int id44ab40();void unknown45ce10(int,int,int,BV15HE);int neste
 struct BV15Cell {BV15HI getItem();BV15HP getProp();bool field4550b0();int terrain45d0e0();bool isPassableFor(BV15HE);void trigger45e110(int,int,BV15HE);bool isMachinePart();bool canPlaceEntity(int);bool place45df50(BV15HP);};
 struct BV15Grid {BV15Cell **at(int,int);BV15Cell **atPoint(const BV15Point&);int getWidth();int getHeight();void getRandom_9cf0c0(BV15Point*);};extern BV15Grid bv15_cells_cfd44c;
 extern BV15Terrain *TERRAIN_EARTH,*TERRAIN_CAVE_WALL;
-struct BV15GameData {int unknown46f4e0();void setEntryText(const string&,const string&);};extern BV15GameData bv15_gameData_d1e860;
+struct BV15GameData {int getDepthIndex();void setEntryText(const string&,const string&);};extern BV15GameData bv15_gameData_d1e860;
 extern vector<int> bv15_scenario_d1eb9c;
 struct BV15Range {int a,b;int randomInRange_40c130();};extern BV15Range bv15_range_d2ec2c;
 BV15Area bv15_popRandomArea(vector<BV15Area>&);
@@ -67,7 +67,7 @@ struct BS {
  bool unknown6c65a0(BV15HE,const string&,bool);
  BV15HI unknown6c5400(BV15ItemType*,const BV15Point&);
  bool findPlaceableNear(const BV15Point&,BV15Point&,int);
- BV15Record *unknown6c5600(int,int,bool,bool);
+ BV15Record *selectRobotOfClass(int,int,bool,bool);
  BV15HE placeEntity(BV15Record*,const BV15Point&,int,bool,int,int,bool);
  bool unknown6c6b90(const BV15Point&,const string&,void*,int);
  void unknown6c6700(BV15HP,const string&,int);
@@ -76,7 +76,7 @@ struct BS {
 };
 #define B(a,b,c,d) spots.push_back(BV15Area(BV15Point(a,b),c,d));
 void BS::dsf_6e68d0() {
- switch(bv15_scenario_d1eb9c[bv15_gameData_d1e860.unknown46f4e0()]) {
+ switch(bv15_scenario_d1eb9c[bv15_gameData_d1e860.getDepthIndex()]) {
  case 0:
 scenario0: {
   int n=bv15_range_d2ec2c.randomInRange_40c130();
@@ -135,7 +135,7 @@ scenario0: {
    break;
   }
   else {
-   bv15_scenario_d1eb9c[bv15_gameData_d1e860.unknown46f4e0()]=0;
+   bv15_scenario_d1eb9c[bv15_gameData_d1e860.getDepthIndex()]=0;
    goto scenario0;
   }
   break;
@@ -152,7 +152,7 @@ scenario0: {
   BV15_findByName(bv15_traps_d2f0f8,"DSF_Warlord_Ready",it);
   for(int i=0;i<12;i++) {
    if(findPlaceableNear(vec,y0,1)) {
-    mode=unknown6c5600(3,ranks.pick(),true,true);
+    mode=selectRobotOfClass(3,ranks.pick(),true,true);
     if(mode) {
      BV15HE w=placeEntity(mode,y0,9,true,0x18,0xe,false);
      if(w.isValid()) {
@@ -263,7 +263,7 @@ scenario0: {
   const int num=3;
   BV15Record *dest;
   for(int i=0;i<28;i++) {
-   dest=unknown6c5600(3,i!=0?slots.pick():bv15_randomRec(tags),false,true);
+   dest=selectRobotOfClass(3,i!=0?slots.pick():bv15_randomRec(tags),false,true);
    if(dest) {
     for(int t=0;t<200;t++) {
      bv15_cells_cfd44c.getRandom_9cf0c0(&pt);
@@ -309,7 +309,7 @@ scenario0: {
   const int xx=3;
   for(int i2=0;i2<23;i2++) {
    int type=i2!=0?weight.pick():bv15_randomRec(edges);
-   dest=unknown6c5600(type==0x1e||type==0x1f?2:1,type,false,true);
+   dest=selectRobotOfClass(type==0x1e||type==0x1f?2:1,type,false,true);
    if(dest) {
     for(int t2=0;t2<200;t2++) {
      bv15_cells_cfd44c.getRandom_9cf0c0(&pt);
@@ -345,7 +345,7 @@ scenario0: {
    if(!(*bv15_cells_cfd44c.atPoint(corners[i]))->isPassableFor(BV15HE()))
     BV15_eraseStep(corners,i);
   if(corners.empty()) {
-   bv15_scenario_d1eb9c[bv15_gameData_d1e860.unknown46f4e0()]=0;
+   bv15_scenario_d1eb9c[bv15_gameData_d1e860.getDepthIndex()]=0;
    goto scenario0;
   }
   else {
@@ -361,5 +361,5 @@ scenario0: {
   break;
  }
  }
- bv15_gameData_d1e860.setEntryText("dsfScenario_g",intToString(bv15_scenario_d1eb9c[bv15_gameData_d1e860.unknown46f4e0()]));
+ bv15_gameData_d1e860.setEntryText("dsfScenario_g",intToString(bv15_scenario_d1eb9c[bv15_gameData_d1e860.getDepthIndex()]));
 }

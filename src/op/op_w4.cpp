@@ -1415,8 +1415,8 @@ class OpW4_Obj_cf6428	// NOTE: placeholder name
 {
 public:
 	int opW4_spawnPatrolParty(HProp a, bool b, int c, int d, Point *e, int f, int g, int h, int i);	// NOTE: placeholder name (Overmind::spawnPatrolParty)
-	struct OpW4_Squad *unknown45ed10();	// NOTE: placeholder name
-	int unknown687520(HEntity entity, int a, int b);	// NOTE: placeholder name
+	struct OpW4_Squad *lastParty();	// NOTE: placeholder name
+	int spawnHunterParty(HEntity entity, int a, int b);	// NOTE: placeholder name
 };
 extern OpW4_Obj_cf6428 opW4_cf6428;	// NOTE: placeholder name (0xcf6428)
 Point opW4_randomPoint(vector<Point> &v);	// NOTE: placeholder name (0x9d5350)
@@ -1459,7 +1459,7 @@ bool BS::unknown7380f0(bool flag, int count, HEntity target)
 				}
 			}
 		}
-		else if (opW4_cf6428.unknown687520(HEntity(),0,0))
+		else if (opW4_cf6428.spawnHunterParty(HEntity(),0,0))
 			result = true;
 		count--;
 	}
@@ -1824,7 +1824,7 @@ void BS::unknown7430a0(int count, bool flag)
 		if (opW4_cf6428.opW4_spawnPatrolParty(HProp(),flag,0,0,pos.x != -1 ? &pos : NULL,0,0,9,0))
 		{
 			opW4_shufflePoints(route);
-			OpW4_Squad *squad = opW4_cf6428.unknown45ed10();
+			OpW4_Squad *squad = opW4_cf6428.lastParty();
 			vector<HEntity> robots(1,squad->leader);
 			squad->leader->unknown45b590()->unknown580a90(robots,0xf);
 			for (unsigned int j = 0; j < robots.size(); j++)

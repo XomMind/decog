@@ -75,7 +75,7 @@ struct Location54	// NOTE: placeholder name and layout
 	int type;		// +0x04
 	int depth;		// +0x08
 
-	int unknown46ed20();	// NOTE: placeholder name
+	int getDepthIndex();	// NOTE: placeholder name
 };
 
 class HLoc54	// NOTE: placeholder name
@@ -126,7 +126,7 @@ void BS::unknown6ef100()
 		{
 			if (location54_d1e888->depth == 8)
 			{
-				int index = location54_d1e888->unknown46ed20();
+				int index = location54_d1e888->getDepthIndex();
 				if (uniques54_d1dd58[index] != int_caf160 && rng.chance(33))
 				{
 					Point pos;

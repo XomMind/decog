@@ -38,7 +38,7 @@ struct QbAchv{char p0[0x20];string name;};
 struct QbAchvs{int pv0,pv1,pv2,pv3;unsigned size()const;QbAchv*&operator[](unsigned);};extern QbAchvs qb_achv_cf09a8;
 extern QbIntVec qb_d22590,qb_d2a520;
 struct QbPlayer{void f77ffb0(int,int);bool f780380(int,int);void f780480(int,int);bool hasCompanion780790();bool isSlotEmpty46de40(unsigned);void f77fbc0(int);void f77fea0(int);};extern QbPlayer qb_player_cf45d8;
-struct QbGameData{int f46f4e0();string generateID46f890();int getTier46fd60();bool isFlagEnabledB46fc40();void setEntryText46f700(const string&,const string&);const string&getEntryText46f6d0(const string&);};extern QbGameData qb_gd_d1e860;
+struct QbGameData{int getDepthIndex();string generateID46f890();int getTier46fd60();bool isFlagEnabledB46fc40();void setEntryText46f700(const string&,const string&);const string&getEntryText46f6d0(const string&);};extern QbGameData qb_gd_d1e860;
 struct QbFactory{void f793690();struct QbHM createC793190();bool showOnce793450(int,bool,int,int,int);QbHandle createA7930e0(void*);QbHP createE793360(struct QbPropDef*);};extern QbFactory*qb_factory_cefaa8;
 struct QbSay{char p0[0x20];int f20;int f24;bool say49e250(int,int,string);bool canSay49e120(int);};extern QbSay*qb_say_cefb48;
 struct QbTut{bool f7784b0();};extern QbTut qb_tut_d25628;
@@ -60,7 +60,7 @@ struct QbSquad{int f457dd0();QbHE f45e250(int);QbHE find45e1c0(const string&);vo
 struct QbTbl{int v;int pad[7];};extern QbTbl qb_tbl_b99d84[],qb_tbl_b99d94[],qb_tbl_b99d8c[],qb_tbl_b99d90[];
 struct QbEntDef{int f0;string name;char p20[4];int f24;int f28;char p2c[0x68-0x2c];int f68;char p6c[0x9c-0x6c];int f9c;};struct QbEntDefs{int pv0,pv1,pv2,pv3;unsigned size()const;QbEntDef*&operator[](unsigned);};extern QbEntDefs qb_entDefs_d25de0;
 struct QbRect{int x,y,x2,y2;QbRect();QbPoint center40b620();QbPoint randomPoint40be90();QbRect(int,int,int,int);void set40b300(int,int,int,int);void randomPoint40be30(QbPoint*);};
-struct QbOvRec{int f0;QbHE h4;};struct QbOvermind{bool f68a8b0(QbPoint*,QbPoint*);void f6901e0(QbHE,int,int,int,const QbPoint&,int,int);void f68d6d0(bool);QbOvRec*f45ed10();void wake68d480();void f675100();bool f683500(QbPoint*,int,int,int,const QbPoint*,int*,int,int);void f6827d0(struct QbParty*,int);void spawnCarrier688e80(const QbPoint&,const string&);};extern QbOvermind qb_overmind_cf6428;
+struct QbOvRec{int f0;QbHE h4;};struct QbOvermind{bool f68a8b0(QbPoint*,QbPoint*);void f6901e0(QbHE,int,int,int,const QbPoint&,int,int);void f68d6d0(bool);QbOvRec*lastParty();void wake68d480();void turnUpdate();bool findDispatchExit(QbPoint*,int,int,int,const QbPoint*,int*,int,int);void addParty(struct QbParty*,int);void spawnCarrier688e80(const QbPoint&,const string&);};extern QbOvermind qb_overmind_cf6428;
 struct QbXom{bool active;void turn69d6f0();QbHE findXom6be1d0();void showXomAct6bdb50(bool,QbHE,const QbPoint*);void giveXomItems6be2f0(QbHE);bool placeEntityNear6bd410(int,QbPoint&,QbHE,int,int);void showShift6bd6d0(const QbPoint&,QbHE);void f69e700(int,int,float);};extern QbXom qb_xom_d25450;
 extern const char qb_e_b95ac3[];extern int qb_d254f0,qb_cefc30,qb_d1eb60,qb_d1eb64;extern int qb_tbl_b90f38[];extern QbPoint qb_cf1f1c,qb_d2e21c;
 struct QbArea2{bool contains40b750(const QbPoint&);};extern QbArea2 qb_d1eaf8;
@@ -70,7 +70,7 @@ void qb_deleteObjectAndStep9de640(QbShifts&,unsigned&);int qb_minInt9cdb30(int,i
 struct QbNP{int x,y;QbNP(int,int);};
 struct QbIntVecG{int pv0,pv1,pv2,pv3;int&operator[](unsigned)throw();};extern QbIntVecG qb_d2f0f8;
 struct QbSpawnSet{int pv0,pv1,pv2,pv3;};extern QbSpawnSet qb_cf6adc;
-struct QbPDef{char p0[0x8c];int f8c;char p90[0x140-0x90];int f140;};struct QbFeed{int f0;int f4;};struct QbFeeds{QbFeed*f458950(int);};extern string qb_str_cfc9d8,qb_str_d2a414;extern QbIntVec qb_cf4a04;
+struct QbPDef{char p0[0x8c];int f8c;char p90[0x140-0x90];int f140;};struct QbFeed{int f0;int f4;};struct QbFeeds{QbFeed*f458950(int);};extern string qb_str_cfc9d8,qb_str_d2a414;extern QbIntVec qb_rifLevels_cf4a04;
 void qb_eraseStep9d6440(QbHEs&,unsigned&);
 struct QbOverlay{char p0[0x14];QbPoint p14;QbHE h1c;char p20[8];QbPoint p28;bool f30;};
 struct QbMarker{char p0[8];QbPoint pos;void f6c20b0(int,const QbPoint&,int);};struct QbHM{int id;QbHM();QbMarker*operator->()const;};struct QbMarkers{int pv0,pv1,pv2,pv3;void push_back(QbHM&&);QbHM&back9b6540();unsigned size()const;QbHM&operator[](unsigned);};
@@ -327,7 +327,7 @@ class QbMap{public:
 		QF(0xa0c,bool fa0c)
 	};
 	int getTurn464270();bool f715a70();bool f715920();void f72ed70(int);void f737100();void f737850();bool isVisible4631c0(const QbPoint&);
-	bool f72a4d0(int,int,int,int,int);void displayFabricatorOverloadZap7273e0(const QbPoint&,QbHE);QbHandle addRecord777a20(QbHandle);void f74bdc0();QbHPLists&f463be0();QbPoint f6c6d10(QbPath&,const QbPoint&);const QbPoint&f462f60(QbHP);QbEntDef*f6c5600(int,int,int,int);QbHE placeEntity6c58c0(QbEntDef*,const QbPoint&,int,int,int,int,int);bool f6c65a0(QbHE,const string&,int);bool f4631f0(QbHE);void f74c7d0(QbHI,int);void f464cd0(QbHI);void f72f6b0();QbPoint f71d000(int);bool findPlaceableNear71c150(const QbPoint&,QbPoint&,int);QbPoint*f7141a0();QbHE f6c5dc0(const string&,const QbPoint&,int,int,int,int,int);void f7164a0(QbSpawnSet&);bool f71ef30(const QbPoint&,int);QbHE getPlayer4630f0();int f715380();QbPath*f462e10();void f749890();void f736fe0();void f7373c0();void f72e790(int);bool f463510(QbHE);int f463540(QbHE);void f72e9d0(QbHE);void f72ea10();void f737250();void f737c90();void f464b40(int);bool f4633c0(const QbPoint&);void f464bd0(int);bool f463160(const QbPoint&);void f736e40();QbHI f6c51d0(struct QbIRec*,QbHE,int,int);int f717d60();void f726320();void f7409f0(int);void f745e10();void f747860(int,int);void f7469f0();void f745950();void f7457f0();string f463060(const QbPoint&);bool f7380f0(int,int,QbHE);void f736270(const string&);bool f73d320(int,int,bool,int);int f73e5c0(int,QbStrList&);void f729de0();QbMarkerLists&f463ec0();void f740300(int);void f740fa0();void escort743350(int,int,int);void f72e8e0(int);QbHI f6c5400(QbItemInfo*,const QbPoint&);void f7329f0();void f714000(QbPath&);void f744010(int);bool f71ec60(const QbPoint&,QbPath);bool f71e970(const QbPoint&,QbPath,unsigned);void f73a490();void f73acc0(int,const QbPoint*);void f73c750();void f731b10(int);void f6c6700(QbHP,const string&,int);int f4638e0(int,int);QbHSq squad463890(int);QbPoint f714120(int);void f731680(int,const QbPoint*,int);bool f463380(int,int);bool f463400(QbHE);void f72ffe0(int);void f742270(int);void f74d660(const QbPoint&,int);void f731960();bool isVisible463190(int,int);void f741190();void f741610(int);void f6c6600(QbHE,const string&);void f739e50(int);void exiles6df0b0(int);int*f464590();bool*f4645b0();void removeEntity465750(QbHE);QbHI giveItem6c52b0(const string&,QbHE,int,int);void f4647d0(const QbPoint&);void f9e29b0(QbHPs&,QbHP);bool f71cfb0();void f465950(int,int,int);QbHE f715230(int,int);void f7243c0(int,int,int);bool findPropSpotNear71c3c0(const QbPoint&,QbPoint&,int);void f6c6b90(const QbPoint&,const string&,int,int);bool f716940(const QbPoint&,const void*,QbEntity*,int);QbZone*f462e30(const QbPoint&);
+	bool f72a4d0(int,int,int,int,int);void displayFabricatorOverloadZap7273e0(const QbPoint&,QbHE);QbHandle addRecord777a20(QbHandle);void f74bdc0();QbHPLists&f463be0();QbPoint f6c6d10(QbPath&,const QbPoint&);const QbPoint&f462f60(QbHP);QbEntDef*selectRobotOfClass(int,int,int,int);QbHE placeEntity6c58c0(QbEntDef*,const QbPoint&,int,int,int,int,int);bool f6c65a0(QbHE,const string&,int);bool f4631f0(QbHE);void f74c7d0(QbHI,int);void f464cd0(QbHI);void f72f6b0();QbPoint f71d000(int);bool findPlaceableNear71c150(const QbPoint&,QbPoint&,int);QbPoint*f7141a0();QbHE f6c5dc0(const string&,const QbPoint&,int,int,int,int,int);void f7164a0(QbSpawnSet&);bool f71ef30(const QbPoint&,int);QbHE getPlayer4630f0();int f715380();QbPath*f462e10();void f749890();void f736fe0();void f7373c0();void f72e790(int);bool f463510(QbHE);int f463540(QbHE);void f72e9d0(QbHE);void f72ea10();void f737250();void f737c90();void f464b40(int);bool f4633c0(const QbPoint&);void f464bd0(int);bool f463160(const QbPoint&);void f736e40();QbHI f6c51d0(struct QbIRec*,QbHE,int,int);int f717d60();void f726320();void f7409f0(int);void f745e10();void f747860(int,int);void f7469f0();void f745950();void f7457f0();string f463060(const QbPoint&);bool f7380f0(int,int,QbHE);void f736270(const string&);bool f73d320(int,int,bool,int);int f73e5c0(int,QbStrList&);void f729de0();QbMarkerLists&f463ec0();void f740300(int);void f740fa0();void escort743350(int,int,int);void f72e8e0(int);QbHI f6c5400(QbItemInfo*,const QbPoint&);void f7329f0();void f714000(QbPath&);void f744010(int);bool f71ec60(const QbPoint&,QbPath);bool f71e970(const QbPoint&,QbPath,unsigned);void f73a490();void f73acc0(int,const QbPoint*);void f73c750();void f731b10(int);void f6c6700(QbHP,const string&,int);int f4638e0(int,int);QbHSq squad463890(int);QbPoint f714120(int);void f731680(int,const QbPoint*,int);bool f463380(int,int);bool f463400(QbHE);void f72ffe0(int);void f742270(int);void f74d660(const QbPoint&,int);void f731960();bool isVisible463190(int,int);void f741190();void f741610(int);void f6c6600(QbHE,const string&);void f739e50(int);void exiles6df0b0(int);int*f464590();bool*f4645b0();void removeEntity465750(QbHE);QbHI giveItem6c52b0(const string&,QbHE,int,int);void f4647d0(const QbPoint&);void f9e29b0(QbHPs&,QbHP);bool f71cfb0();void f465950(int,int,int);QbHE f715230(int,int);void f7243c0(int,int,int);bool findPropSpotNear71c3c0(const QbPoint&,QbPoint&,int);void f6c6b90(const QbPoint&,const string&,int,int);bool f716940(const QbPoint&,const void*,QbEntity*,int);QbZone*f462e30(const QbPoint&);
 	void turnUpdate_74e750();
 };
 extern QbMap*qb_map_cefc4c;
@@ -710,7 +710,7 @@ next:;
 				{
 				case 0:
 				{
-					QbEntDef*def=f6c5600(3,0x3c,0,1);
+					QbEntDef*def=selectRobotOfClass(3,0x3c,0,1);
 					if(!def)
 					{
 						qb_logError404f10("BS::turnUpdate()","no Assembled data found");
@@ -741,7 +741,7 @@ next:;
 					for(int n=0;n<qb_tbl_b99d94[f238].v;n++)
 					{
 						nKind=wl.pick9ba470();
-						nDef=f6c5600(3,nKind,0,1);
+						nDef=selectRobotOfClass(3,nKind,0,1);
 						if(nDef)
 						{
 							QbHE e=placeEntity6c58c0(nDef,at,2,0,0x22,0xe,0);
@@ -775,7 +775,7 @@ next:;
 					for(int n=0;n<qb_tbl_b99d94[f238].v;n++)
 					{
 						tmpKind=aE.pick9ba470();
-						if(n!=0)c5=f6c5600(3,tmpKind,0,1);
+						if(n!=0)c5=selectRobotOfClass(3,tmpKind,0,1);
 						else c5=cmdr;
 						if(c5)
 						{
@@ -1418,7 +1418,7 @@ spread2:;
 			}
 		}
 	}
-	if(qb_cf4a04[0xb]!=0)
+	if(qb_rifLevels_cf4a04[0xb]!=0)
 	{
 		if(f66c->f5d4100())
 		{
@@ -1675,7 +1675,7 @@ found2:
 		if(!qb_cf4944[i].p()||qb_cf4944[i]->f5798f0())qb_eraseStep9d6440(qb_cf4944,i);
 	if(qb_caf130!=6)
 	{
-		qb_overmind_cf6428.f675100();
+		qb_overmind_cf6428.turnUpdate();
 		qb_cf6888.f6927e0();
 		qb_xom_d25450.turn69d6f0();
 	}
@@ -1688,11 +1688,11 @@ found2:
 				QbPoint pt;
 				QbZone*lo=f462e30(f5bc[i]);
 				if(lo&&qb_tbl_b90000[lo->h8->kind]==1)pt=f5bc[i];
-				else if(!qb_overmind_cf6428.f683500(&pt,0,0,1,&f66c->pos45a4a0(),(int*)&lo,0,0))pt.x=-1;
+				else if(!qb_overmind_cf6428.findDispatchExit(&pt,0,0,1,&f66c->pos45a4a0(),(int*)&lo,0,0))pt.x=-1;
 				if(pt.x==-1){}
 				else
 				{
-					QbEntDef*def=f6c5600(1,qb_d1eb98?0x15:0x1a,0,0);
+					QbEntDef*def=selectRobotOfClass(1,qb_d1eb98?0x15:0x1a,0,0);
 					if(!def){}
 					else
 					{
@@ -1701,7 +1701,7 @@ found2:
 						{
 							e->ai45b590()->f459540(f5bc[i]);
 							e->ai45b590()->f451400(1);
-							qb_overmind_cf6428.f6827d0(new QbParty(0,e,-1,0,0),0);
+							qb_overmind_cf6428.addParty(new QbParty(0,e,-1,0,0),0);
 							if(def->f28==0x1a)
 							{
 								f584.push_back(f5bc[i]);
@@ -1726,13 +1726,13 @@ found2:
 			{
 				if(rng.chance(0x14))
 				{
-					QbEntDef*def=f6c5600(1,0x1a,0,0);
+					QbEntDef*def=selectRobotOfClass(1,0x1a,0,0);
 					if(!def){}
 					else
 					{
 						QbPoint pt;
 						int n;
-						if(!qb_overmind_cf6428.f683500(&pt,0,0,1,&QbPoint(-1),&n,1,0)){}
+						if(!qb_overmind_cf6428.findDispatchExit(&pt,0,0,1,&QbPoint(-1),&n,1,0)){}
 						else
 						{
 							QbHE e=placeEntity6c58c0(def,pt,3,0,0x22,0xe,0);
@@ -1740,7 +1740,7 @@ found2:
 							{
 								e->ai45b590()->f459540(f584[i]);
 								e->ai45b590()->f451400(1);
-								qb_overmind_cf6428.f6827d0(new QbParty(0,e,-1,0,0),0);
+								qb_overmind_cf6428.addParty(new QbParty(0,e,-1,0,0),0);
 								f594[i]=e;
 								f5a4[i].clear9b73d0();
 								spawned=true;
@@ -3623,7 +3623,7 @@ spotFound:
 						{
 							if(f7380f0(0,1,QbHE()))
 							{
-								QbOvRec*rec=qb_overmind_cf6428.f45ed10();
+								QbOvRec*rec=qb_overmind_cf6428.lastParty();
 								if(rec==0||rec->f0!=7){}
 								else
 								{
@@ -3853,7 +3853,7 @@ spotFound:
 					{
 						if(f73d320(0,0,true,0))
 						{
-							QbOvRec*rec=qb_overmind_cf6428.f45ed10();
+							QbOvRec*rec=qb_overmind_cf6428.lastParty();
 							if(rec==0||rec->f0!=7){}
 							else
 							{
@@ -4322,14 +4322,14 @@ spotFound:
 			int zone=0;
 			QbPoint pFrom;
 			QbPoint to;
-			if(!qb_overmind_cf6428.f683500(&pFrom,0,0,0,&QbPoint(-1),&zone,0,0)||!qb_overmind_cf6428.f68a8b0(&pFrom,&to))
+			if(!qb_overmind_cf6428.findDispatchExit(&pFrom,0,0,0,&QbPoint(-1),&zone,0,0)||!qb_overmind_cf6428.f68a8b0(&pFrom,&to))
 				qb_logWarning404e50("BS::turnUpdate()","No valid route for spawning Sauler");
 			else
 			{
 				fba8=qb_map_cefc4c->f6c5dc0("Sauler",pFrom,3,0,0x14,0xe,0);
 				if(fba8.valid())
 				{
-					int n=qb_gd_d1e860.f46f4e0()+1;
+					int n=qb_gd_d1e860.getDepthIndex()+1;
 					QbPoint range(n,n+2);
 					if(range.y>9)range.f40bf50(9-range.y);
 					qb_overmind_cf6428.f6901e0(fba8,1,qb_d30358.random40c130(),qb_d1de90.random40c130(),range,1,0x2a);

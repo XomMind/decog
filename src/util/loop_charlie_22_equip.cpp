@@ -9,7 +9,7 @@ template<class T>struct LC22Vec{T*first,*last,*capacity;std::allocator<T>alloc;L
 struct LC22Def{char p0[0x9c];int size;};struct LC22ItemDef{char p0[0x1ac];unsigned char needsConfirm;};struct LC22AI{void follow5b2f80(LC22H,int);};
 struct LC22Entity{int check5db5f0(LC22HI,bool,bool,bool);const LC22P&pos45a4a0()throw();int effect639530(int,int);LC22AI*ai45b590()throw();const string&name416f40()throw();unsigned inventory5cb8b0(LC22Vec<LC22HI>*);int first5cb760();int second5cb7f0();int matter5cb7a0();int energy45a8d0()throw();int matter45a920()throw();int mode45a810()throw();unsigned items5cb830(LC22Vec<LC22HI>*);int activate6421a0(bool);int unequip642940(LC22HI,bool,bool,bool,int);int equip6430b0(LC22HI,bool,int);bool usable5dc680(LC22HI);bool active5cd220(LC22HI);};
 struct LC22Item{int has457b70(int);int value457be0(int);string name571db0(bool,bool);void remove57dbe0(bool,bool,int,bool);LC22ItemDef*def9b4350()throw();bool equip57a190(LC22H,int,bool,bool);unsigned char flag415ee0()throw();int index457820()throw();int type44aec0()throw();int subtype4578a0()throw();int limit4578c0()throw();};
-struct LC22Map{LC22H player4630f0()throw();bool nearby71c150(const LC22P&,LC22P&,int);LC22H place6c58c0(LC22Def*,const LC22P&,int,bool,int,int,bool);bool visible4631f0(LC22H);void spend774390(int,int);};extern LC22Map*lc22_cefc4c;extern LC22Vec<LC22Def*>lc22_d25de0;
+struct LC22Map{LC22H player4630f0()throw();bool nearby71c150(const LC22P&,LC22P&,int);LC22H place6c58c0(LC22Def*,const LC22P&,int,bool,int,int,bool);bool visible4631f0(LC22H);void playerActionFinish(int,int);};extern LC22Map*lc22_cefc4c;extern LC22Vec<LC22Def*>lc22_d25de0;
 struct LC22Effect{void init503b20(LC22Engine*,LC22FxDef*,const LC22P&,const LC22P&,const LC22P*,const LC22P*,LC22Owned*,int,LC22Effect*);};struct LC22Engine{LC22Effect*acquire508610();};extern LC22Engine*lc22_cefc50;extern LC22P lc22_d2e20c;
 struct LC22Parts{char p0[0x160];LC22HI confirmItem;unsigned confirmTick;char p168[0x178-0x168];LC22HI activeItem;unsigned activeTick;void confirm4a9cf0(LC22HI);LC22Part*part894e70(LC22HI);void select4a9c90(LC22Part*);bool swap89c350(LC22HI,int);void enable8993e0(LC22Part*,bool);};extern LC22Parts*lc22_cec088;
 struct LC22Dialog{void update8758d0(bool);};extern LC22Dialog*lc22_cec058;struct LC22Log{void end7b4f10();};extern LC22Log*lc22_cec0b4;struct LC22Factory{bool show793450(int,bool,const string*,bool,bool);};extern LC22Factory*lc22_cefaa8;
@@ -66,7 +66,7 @@ bool LC22Inventory::equip8a3f20(LC22HI item,bool active,int slot,bool fast){
    if(!(lc22_d28fa5&&item.get9b65b0()->subtype4578a0()==1)||(item.get9b65b0()->subtype4578a0()==1&&!x2.get9b6570()->active5cd220(item))){LC22Part*part=lc22_cec088->part894e70(item);if(!part){logWarning("CInventory::attemptEquip()","part not found for auto-activation");return true;}lc22_cec088->enable8993e0(part,false);}
   }
   if(fast)amount=lc22_b95fbc;else if(active)amount=lc22_b95fb0;
-  lc22_cefc4c->spend774390(fast?7:active?4:5,amount+current);break;}
+  lc22_cefc4c->playerActionFinish(fast?7:active?4:5,amount+current);break;}
  case 15:lc22_warn7b1750(31,0,0,0,x2,LC22H(),0);break;
  case 16:lc22_warn7b1750(231,0,0,0,x2,LC22H(),0);break;
  case 17:lc22_warn7b1750(32,&intToString(item.get9b65b0()->limit4578c0()),0,0,x2,LC22H(),0);break;

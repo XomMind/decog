@@ -1,4 +1,4 @@
-// NOTE: placeholder names and partial layouts; Overmind::unknown675100 (0x675100): per-turn Complex 0b10 response
+// NOTE: placeholder names and partial layouts; Overmind::turnUpdate (0x675100): per-turn Complex 0b10 response
 // logic (sensor drones, garrison alerts, squad retasking, investigations, intercepts, patrols and other events).
 #include <string>
 #include <vector>
@@ -222,7 +222,7 @@ struct F7Location
 	int depth;
 	int f8;
 	bool inRange46ecb0();	// 0x46ecb0
-	int rating46ed20();	// 0x46ed20
+	int getDepthIndex();	// 0x46ed20
 };
 struct F7HLocation {int id; bool isValid() const; F7Location *operator->() const; bool operator!=(F7HLocation o) const;};	// 0x9b7910, 0x9b6510
 extern F7HLocation f7_location_d1e888;
@@ -233,7 +233,7 @@ struct F7GameData
 	string &getEntryText(const string &key);	// 0x46f6d0
 	bool unknown46f4b0(int a);	// 0x46f4b0
 	void addToEntry46f7e0(const string &key, int v);	// 0x46f7e0
-	int unknown46f4e0();	// 0x46f4e0
+	int getDepthIndex();	// 0x46f4e0
 	void unknown7897a0(int a);	// 0x7897a0
 	string generateID();	// 0x46f890
 };
@@ -271,7 +271,7 @@ struct F7World
 	F7HE unknown6c5dc0(const string &name, const F7Point &p, int a, bool b, int c, int d, bool e);	// 0x6c5dc0
 	void unknown6c65a0(F7HE e, const string &s, bool b);	// 0x6c65a0
 	void unknown7456a0();	// 0x7456a0
-	F7Rec *unknown6c5600(int a, int b, int c, int d);	// 0x6c5600
+	F7Rec *selectRobotOfClass(int a, int b, int c, int d);	// 0x6c5600
 	struct F7ItemDef *selectRandomItemOfRating(int rating, int a, int b, int c, int d, int e, int f);	// 0x6c40e0
 };
 extern F7World *f7_bs_cefc4c;
@@ -303,10 +303,10 @@ extern int f7_b91e04[][2][3];
 extern int f7_b91e08[][6];
 extern int f7_b91e0c[][6];
 extern bool f7_d25450, f7_d25610, f7_d257d7, f7_mute_d28fb0;
-extern bool f7_b90180[][6];
+extern bool f7_surgicalMaps_b90180[][6];
 extern bool f7_b90181[][6];
 extern bool f7_b90182[][6];
-extern int f7_b93790[][5];
+extern int f7_surgicalIntervals_b93790[][5];
 extern int f7_b938b8[][3];
 extern int f7_b938bc[][3];
 extern int f7_b93f18[][4];
@@ -435,8 +435,8 @@ public:
 	int f4c;
 	vector<F7Squad *> squads;
 	char pad60[0x6c - 0x60];
-	int f6c;
-	int f70;
+	int lastDispatchTurn;
+	int surgicalTimer;
 	int f74;
 	bool b78;
 	int f7c;
@@ -483,36 +483,36 @@ public:
 	F7HE unknown683b60(int a, int b, bool *c);	// 0x683b60
 	void unknown6892c0(int a, int b, int c);	// 0x6892c0
 	void unknown68cd80(F7Squad *s);	// 0x68cd80
-	void unknown684c40();	// 0x684c40
-	int unknown45edd0(int a);	// 0x45edd0
-	F7Squad *unknown45ed50(int a);	// 0x45ed50
-	int unknown685a10(F7HE e, int a);	// 0x685a10
-	int unknown686490(int a, F7HE e, int b);	// 0x686490
-	int unknown687520(F7HE e, int a, int b);	// 0x687520
+	void resetSurgicalTimer();	// 0x684c40
+	int countParties(int a);	// 0x45edd0
+	F7Squad *findParty(int a);	// 0x45ed50
+	int spawnSurgicalParty(F7HE e, int a);	// 0x685a10
+	int spawnInterceptParty(int a, F7HE e, int b);	// 0x686490
+	int spawnHunterParty(F7HE e, int a, int b);	// 0x687520
 	int spawnPatrolParty(F7HE e, int a, int b, void *c, int d, int f, int g, int h, int i);	// 0x6896d0
 	bool unknown68e1a0();	// 0x68e1a0
 	void spawnCargoDispatch68aba0();	// 0x68aba0
 	void spawnCargoDispatch68aec0();	// 0x68aec0
 	int unknown684250(const F7Point &p, int a);	// 0x684250
-	int unknown6868e0(const F7Point &p);	// 0x6868e0
+	int spawnCouplingParty(const F7Point &p);	// 0x6868e0
 	void spawnAntiInfestationCarrier(const F7Point &p, const string &text);	// 0x688e80
 	bool filter681a90(vector<F7Point> &points, vector<int> &out);	// 0x681a90
 	void loadZWeaponList(vector<int> &v, int a);	// 0x684de0
-	void spawnSurgicalParty(vector<int> &parts, vector<int> &weapons);	// 0x6854e0
+	void loadZPartList(vector<int> &parts, vector<int> &weapons);	// 0x6854e0
 	void unknown690470(const F7Point &a, const F7Point &b, int c, bool *d);	// 0x690470
 	int spawnResponseParty(int a, F7HE e, const F7Point &p, F7Point &out);	// 0x68c2f0
-	bool unknown683500(F7Point &p, int a, int b, int c, const F7Point &q, int *d, int e, int f);	// 0x683500
-	void unknown6827d0(struct F7Party *p, int a);	// 0x6827d0
+	bool findDispatchExit(F7Point &p, int a, int b, int c, const F7Point &q, int *d, int e, int f);	// 0x683500
+	void addParty(struct F7Party *p, int a);	// 0x6827d0
 	void unknown681550();	// 0x681550
 	void unknown681810();	// 0x681810
 	void unknown68d980(int a, int b, int c);	// 0x68d980
 	void unknown68d6d0(int a);	// 0x68d6d0
-	void unknown675100();
+	void turnUpdate();
 };
 
 extern Overmind f7_overmind_cf6428;
 
-void Overmind::unknown675100()
+void Overmind::turnUpdate()
 {
 	if (!drones.empty())
 	{
@@ -633,7 +633,7 @@ void Overmind::unknown675100()
 		{
 			if (!b194)
 			{
-				int *weights = f7_location_d1e888->inRange46ecb0() ? f7_tblA_b92dd8[f7_gameData_d1e860.unknown46f4e0()] : f7_tblB_b92880[f7_location_d1e888->depth];
+				int *weights = f7_location_d1e888->inRange46ecb0() ? f7_tblA_b92dd8[f7_gameData_d1e860.getDepthIndex()] : f7_tblB_b92880[f7_location_d1e888->depth];
 				if (f7_map_cefc4c->getTurn() % 24 == 0 && f7_anyNonZero(weights,9))
 				{
 					int g31;
@@ -809,18 +809,18 @@ void Overmind::unknown675100()
 			}
 		}
 	}
-	if (f7_b90180[f7_location_d1e888->depth][0] && f7_b93790[f7_gameData_d1e860.unknown46f4e0()][0] && !b195 && f7_map_cefc4c->getTurn() >= f70)
+	if (f7_surgicalMaps_b90180[f7_location_d1e888->depth][0] && f7_surgicalIntervals_b93790[f7_gameData_d1e860.getDepthIndex()][0] && !b195 && f7_map_cefc4c->getTurn() >= surgicalTimer)
 	{
-		unknown684c40();
-		if (f7_map_cefc4c->getTurn() < f6c + 25 || unknown45edd0(5) >= 10)
+		resetSurgicalTimer();
+		if (f7_map_cefc4c->getTurn() < lastDispatchTurn + 25 || countParties(5) >= 10)
 			;
 		else
 		{
 			int before = squads.size();
-			bool sent = unknown685a10(f7_map_cefc4c->getPlayer(),0);
+			bool sent = spawnSurgicalParty(f7_map_cefc4c->getPlayer(),0);
 			if (sent)
 			{
-				f6c = f7_map_cefc4c->getTurn();
+				lastDispatchTurn = f7_map_cefc4c->getTurn();
 				string k5("Programmers");
 				if (before == squads.size())
 				{
@@ -855,7 +855,7 @@ void Overmind::unknown675100()
 		}
 		if (f74 != 0 && f74 == f7_map_cefc4c->getTurn())
 		{
-			F7Squad *squad = unknown45ed50(5);
+			F7Squad *squad = findParty(5);
 			if (squad != 0 && squad->leader->getAI()->path4549b0()->size() >= 20)
 			{
 				F7HE e = f7_bs_cefc4c->unknown6c5dc0("Thug_5",f7_map_cefc4c->getPlayer()->getPosition(),8,false,0x22,0xe,false);
@@ -871,18 +871,18 @@ void Overmind::unknown675100()
 	}
 	if (f7_b90182[f7_location_d1e888->depth][0] && (f7_stringToInt(f7_gameData_d1e860.getEntryText("enemiesWithArchitect_g")) || f7_stringToInt(f7_gameData_d1e860.getEntryText("secScannedCogmind_g"))) && !b198)
 	{
-		int interval = f7_b938b8[f7_gameData_d1e860.unknown46f4e0()][0];
-		if (f7_b938bc[f7_gameData_d1e860.unknown46f4e0()][0] != 0 && f7_map_cefc4c->f324 != 0 && ((f7_map_cefc4c->f324 % interval == 0 && f80 != f7_cf47fc && rng.chance(f7_b938bc[f7_gameData_d1e860.unknown46f4e0()][0])) || f7_cf47fc >= f80 + interval * (100.0 / f7_b938bc[f7_gameData_d1e860.unknown46f4e0()][0])))
+		int interval = f7_b938b8[f7_gameData_d1e860.getDepthIndex()][0];
+		if (f7_b938bc[f7_gameData_d1e860.getDepthIndex()][0] != 0 && f7_map_cefc4c->f324 != 0 && ((f7_map_cefc4c->f324 % interval == 0 && f80 != f7_cf47fc && rng.chance(f7_b938bc[f7_gameData_d1e860.getDepthIndex()][0])) || f7_cf47fc >= f80 + interval * (100.0 / f7_b938bc[f7_gameData_d1e860.getDepthIndex()][0])))
 		{
 			f80 = f7_cf47fc;
-			if (f7_map_cefc4c->getTurn() < f6c + 25 || unknown45edd0(9) >= 5)
+			if (f7_map_cefc4c->getTurn() < lastDispatchTurn + 25 || countParties(9) >= 5)
 				;
 			else
 			{
-				bool sent = unknown686490(0,f7_map_cefc4c->getPlayer(),0);
+				bool sent = spawnInterceptParty(0,f7_map_cefc4c->getPlayer(),0);
 				if (sent)
 				{
-					f6c = f7_map_cefc4c->getTurn();
+					lastDispatchTurn = f7_map_cefc4c->getTurn();
 					if (!f7_map_cefc4c->unknown4658e0())
 					{
 						bool scanned = f7_stringToInt(f7_gameData_d1e860.getEntryText("secScannedCogmind_g"));
@@ -921,14 +921,14 @@ void Overmind::unknown675100()
 	}
 	if (f7_b90181[f7_location_d1e888->depth][0] && !b196)
 	{
-		if (f7_b93f18[f7_gameData_d1e860.unknown46f4e0()][0] != 0 && f7_map_cefc4c->f320 % f7_b93f18[f7_gameData_d1e860.unknown46f4e0()][0] == 0 && f7_map_cefc4c->getTurn() >= f6c + 25)
+		if (f7_b93f18[f7_gameData_d1e860.getDepthIndex()][0] != 0 && f7_map_cefc4c->f320 % f7_b93f18[f7_gameData_d1e860.getDepthIndex()][0] == 0 && f7_map_cefc4c->getTurn() >= lastDispatchTurn + 25)
 		{
 			bool hot = f4 >= f0 * f7_b91b70;
 			if (f7_cf6428 >= (hot ? 200 : 400))
 			{
 				if (hot)
 				{
-					f6c = f7_map_cefc4c->getTurn();
+					lastDispatchTurn = f7_map_cefc4c->getTurn();
 					if (f14 == 0)
 						f14 = 2;
 					else
@@ -956,14 +956,14 @@ void Overmind::unknown675100()
 					unknown682420(0x26,0);
 					f7_tally_cf6888.unknown6998a0(5,1,0);
 				}
-				else if (unknown45edd0(7) < 20)
+				else if (countParties(7) < 20)
 				{
-					f6c = f7_map_cefc4c->getTurn();
-					int k50 = f7_cf6428 / f7_b93f1c[f7_gameData_d1e860.unknown46f4e0()][0];
+					lastDispatchTurn = f7_map_cefc4c->getTurn();
+					int k50 = f7_cf6428 / f7_b93f1c[f7_gameData_d1e860.getDepthIndex()][0];
 					int k51 = 0;
 					while (rng.chance(k50) || (f7_d1ebfc && k51 < 2))
 					{
-						if (!unknown687520(f7_map_cefc4c->getPlayer(),0,0))
+						if (!spawnHunterParty(f7_map_cefc4c->getPlayer(),0,0))
 							break;
 						k50 /= 2;
 						k51++;
@@ -1015,7 +1015,7 @@ void Overmind::unknown675100()
 		}
 		if (f7c != 0 && f7c == f7_map_cefc4c->getTurn())
 		{
-			F7Squad *squad = unknown45ed50(7);
+			F7Squad *squad = findParty(7);
 			if (squad != 0 && squad->leader->getAI()->path4549b0()->size() >= 20)
 			{
 				F7Access *g25 = 0;
@@ -1052,7 +1052,7 @@ void Overmind::unknown675100()
 		if (f7_cf462c == 4 && f7_map_cefc4c->unknown4642d0() >= 200 && f7_map_cefc4c->getTurn() % f7_ba6644[f7_diff_cf4718] == 0 && rng.chance(50) && f7_map_cefc4c->unknown464000() >= f7_map_cefc4c->unknown717d60() / 2)
 		{
 			F7_ALERT(-1,&string("ALERT: Dispatching additional forces to engage threats."));
-			unknown687520(F7HE(),0,0);
+			spawnHunterParty(F7HE(),0,0);
 		}
 	}
 	if (f7_b90183[f7_location_d1e888->depth][0])
@@ -1107,10 +1107,10 @@ void Overmind::unknown675100()
 		if (fb8 != 0 && f7_map_cefc4c->getTurn() == fb8 && !b194 && convoy.isNull())
 		{
 			spawnCargoDispatch68aba0();
-			if (fbc == f7_b939ac[f7_gameData_d1e860.unknown46f4e0()][0])
+			if (fbc == f7_b939ac[f7_gameData_d1e860.getDepthIndex()][0])
 				fb8 = 0;
 			else
-				fb8 = f7_map_cefc4c->getTurn() + rng.rangeInt(f7_b939a0[f7_gameData_d1e860.unknown46f4e0()][0],f7_b939a4[f7_gameData_d1e860.unknown46f4e0()][0] + fbc * f7_b939a8[f7_gameData_d1e860.unknown46f4e0()][0]);
+				fb8 = f7_map_cefc4c->getTurn() + rng.rangeInt(f7_b939a0[f7_gameData_d1e860.getDepthIndex()][0],f7_b939a4[f7_gameData_d1e860.getDepthIndex()][0] + fbc * f7_b939a8[f7_gameData_d1e860.getDepthIndex()][0]);
 		}
 		if (fd0 != 0 && f7_map_cefc4c->getTurn() == fd0 && !b194)
 			spawnCargoDispatch68aec0();
@@ -1202,11 +1202,11 @@ void Overmind::unknown675100()
 			}
 		}
 	}
-	if (!(*f7_map_cefc4c->lists459070())[5].empty() && f7_b9394c[f7_gameData_d1e860.unknown46f4e0()][0] != 0 && f7_map_cefc4c->unknown4642d0() % f7_b93948[f7_gameData_d1e860.unknown46f4e0()][0] == 0 && rng.chance(f7_b9394c[f7_gameData_d1e860.unknown46f4e0()][0]) && f4c == 0 && !b195)
+	if (!(*f7_map_cefc4c->lists459070())[5].empty() && f7_b9394c[f7_gameData_d1e860.getDepthIndex()][0] != 0 && f7_map_cefc4c->unknown4642d0() % f7_b93948[f7_gameData_d1e860.getDepthIndex()][0] == 0 && rng.chance(f7_b9394c[f7_gameData_d1e860.getDepthIndex()][0]) && f4c == 0 && !b195)
 	{
 		F7Point g44 = f7_randomPoint((*f7_map_cefc4c->lists459070())[5]);
 		unsigned int k57 = squads.size();
-		bool g57 = unknown6868e0(g44);
+		bool g57 = spawnCouplingParty(g44);
 		if (g57)
 		{
 			F7HE e;
@@ -1247,7 +1247,7 @@ void Overmind::unknown675100()
 					}
 					if (!found)
 					{
-						bool ok = unknown6868e0(locs[k]);
+						bool ok = spawnCouplingParty(locs[k]);
 						if (ok)
 						{
 							string text = "ALERT: Unscheduled coupler replacement inbound for " + (*f7_cells_cfd44c.atPoint(locs[k]))->getProp()->getType() + ".";
@@ -1320,7 +1320,7 @@ void Overmind::unknown675100()
 				m34.add(0x18,10);
 				m34.add(0x19,10);
 				int h16 = m34.pick();
-				F7Unit *h2 = f7_bs_cefc4c->unknown6c5600(1,h16,0,1);
+				F7Unit *h2 = f7_bs_cefc4c->selectRobotOfClass(1,h16,0,1);
 				if (h2 != 0)
 				{
 					F7HProp m38 = (*f7_cells_cfd44c.atPoint(f7_randomPoint(points)))->getProp();
@@ -1343,7 +1343,7 @@ void Overmind::unknown675100()
 				F7ItemDef *item;
 				for (int k = 0; k < 50; k++)
 				{
-					item = f7_bs_cefc4c->selectRandomItemOfRating(f7_location_d1e888->rating46ed20() + rng.rangeInt(0,2),0,0,0x1f,0x12,0x2a,0);
+					item = f7_bs_cefc4c->selectRandomItemOfRating(f7_location_d1e888->getDepthIndex() + rng.rangeInt(0,2),0,0,0x1f,0x12,0x2a,0);
 					if (item != 0 && item->f44 >= 6)
 						break;
 				}
@@ -1377,7 +1377,7 @@ void Overmind::unknown675100()
 	{
 		if (f12c.x != -1)
 		{
-			F7Rec *unit = f7_bs_cefc4c->unknown6c5600(1,0x16,0,1);
+			F7Rec *unit = f7_bs_cefc4c->selectRobotOfClass(1,0x16,0,1);
 			if (unit == 0)
 			{
 			}
@@ -1420,7 +1420,7 @@ void Overmind::unknown675100()
 				h28 = f7_randomRec(q49)->pos;
 			if (h28.x != -1)
 			{
-				bool late = f7_gameData_d1e860.unknown46f4e0() >= 9;
+				bool late = f7_gameData_d1e860.getDepthIndex() >= 9;
 				F7Def *def;
 				if (f7_findByName(f7_defs_cfd2cc,late ? "WAR_Infiltration_Entrance" : "WAR_Staging_Area_Clear",def))
 				{
@@ -1491,7 +1491,7 @@ void Overmind::unknown675100()
 			}
 			if (!f148.empty() && rng.chance(1))
 			{
-				F7HE e = f7_map_cefc4c->placeEntity(f7_bs_cefc4c->unknown6c5600(1,4,0,0),(*f7_map_cefc4c->accesses462e10())[0]->pos,4,0,0x15,0xe,0);
+				F7HE e = f7_map_cefc4c->placeEntity(f7_bs_cefc4c->selectRobotOfClass(1,4,0,0),(*f7_map_cefc4c->accesses462e10())[0]->pos,4,0,0x15,0xe,0);
 				if (e.isValid())
 				{
 					for (unsigned int k = 0; k < f148.back().size(); k++)
@@ -1558,7 +1558,7 @@ void Overmind::unknown675100()
 					(*f7_cells_cfd44c.atPoint(f184))->getProp()->unknown45ce10(0,0,1,F7HE());
 				else
 				{
-					F7Rec *unit = f7_bs_cefc4c->unknown6c5600(1,0x1b,0,1);
+					F7Rec *unit = f7_bs_cefc4c->selectRobotOfClass(1,0x1b,0,1);
 					if (unit != 0)
 					{
 						F7Cfg *saved = f90;
@@ -1575,9 +1575,9 @@ void Overmind::unknown675100()
 								{
 									e->getAI()->unknown459540(access->pos);
 									vector<int> weapons;
-									loadZWeaponList(weapons,f7_gameData_d1e860.unknown46f4e0());
+									loadZWeaponList(weapons,f7_gameData_d1e860.getDepthIndex());
 									vector<int> parts;
-									spawnSurgicalParty(parts,weapons);
+									loadZPartList(parts,weapons);
 									for (unsigned int j = 0; j < weapons.size(); j++)
 										e->unknown5de480(f7_defs_d2d1c4[weapons[j]]);
 									for (unsigned int j = 0; j < parts.size(); j++)
@@ -1824,7 +1824,7 @@ nextSpot:;
 					{
 						F7Point ra33;
 						int ra37 = 0;
-						if (!unknown683500(ra33,0,0,1,F7Point(-1),&ra37,0,0))
+						if (!findDispatchExit(ra33,0,0,1,F7Point(-1),&ra37,0,0))
 						{
 							f128++;
 							break;
@@ -1838,7 +1838,7 @@ nextSpot:;
 								ra42->getAI()->unknown459540(m43[k]);
 							else
 								ra42->getAI()->unknown459470(f7_cells_cfd44c.getArea9b4400());
-							unknown6827d0(new F7Party(0,ra42,-1,0,0),ra37);
+							addParty(new F7Party(0,ra42,-1,0,0),ra37);
 						}
 					}
 				}
@@ -1859,7 +1859,7 @@ nextSpot:;
 				F7_ALERT(-1,&string("ALERT: Lockdown in effect, collecting threat data."));
 				if (!b40)
 					F7_PHRASE(0x6c,0);
-				F7Rec *unit = f7_bs_cefc4c->unknown6c5600(1,0x15,0,0);
+				F7Rec *unit = f7_bs_cefc4c->selectRobotOfClass(1,0x15,0,0);
 				if (unit != 0)
 				{
 					vector<F7Point> ra46;
@@ -1890,7 +1890,7 @@ nextSpot:;
 						mode = 2;
 					else if (f7_location_d1e888->f8 <= 7 && rng.chance(f7_minInt(0x42,f38 * 15)))
 						mode = 3;
-					if (unknown687520(f7_map_cefc4c->getPlayer(),0,0) && !squads.empty())
+					if (spawnHunterParty(f7_map_cefc4c->getPlayer(),0,0) && !squads.empty())
 						squads.back()->leader->getAI()->setMode4505b0(mode);
 				}
 				string text(f38 <= 2 ? "ALERT: Assault forces dispatched." : "ALERT: Heavy assault forces dispatched.");
@@ -2137,7 +2137,7 @@ nextSpot:;
 				f7_player_cf45d8.unknown77fbc0(0xa2);
 				b4a = false;
 				f7_gameData_d1e860.unknown7897a0(4);
-				switch (f7_d1eb9c[f7_gameData_d1e860.unknown46f4e0()])
+				switch (f7_d1eb9c[f7_gameData_d1e860.getDepthIndex()])
 				{
 				case 3:
 					{

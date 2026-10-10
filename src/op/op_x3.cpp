@@ -542,7 +542,7 @@ int opX3_454260(const Point &pos, unsigned int sound);	// NOTE: placeholder name
 class OpX3_World	// NOTE: placeholder name (0xcefc4c)
 {
 public:
-	OpX3_Record *unknown6c5600(int a, int b, int c, int d);	// NOTE: placeholder name (0x6c5600)
+	OpX3_Record *selectRobotOfClass(int a, int b, int c, int d);	// NOTE: placeholder name (0x6c5600)
 	HEntity placeEntity(OpX3_Record *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);	// 0x6c58c0
 	bool unknown6ca170(const Point &range, int picks, int count, int chanceType, vector<OpX3_ItemDef *> *items, vector<int> *counts, int unknown);	// NOTE: placeholder name
 	HItem unknown6c51d0(OpX3_ItemDef *type, HEntity entity, bool a, bool b);	// NOTE: placeholder name
@@ -591,7 +591,7 @@ void OpX3_Spawner::unknown690470(const Point &pos, const Point &target, bool fla
 	wl.add(3,0xf);
 	wl.add(5,0x19);
 	wl.add(4,5);
-	OpX3_Record *record = opX3_world->unknown6c5600(1,wl.pick(),0,0);
+	OpX3_Record *record = opX3_world->selectRobotOfClass(1,wl.pick(),0,0);
 	if (record != NULL)
 	{
 		HEntity placed = opX3_world->placeEntity(record,pos,4,false,0x19,0xe,false);

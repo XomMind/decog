@@ -14,9 +14,9 @@ Group::unknown45e4c0,0x45e4c0,0x49
 OpS1e_Slot::unknown45e7d0,0x45e7d0,0x44
 ??0OpS1e_Record6f0@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x45e6f0,0x94
 OpS1e_Record6f0::write,0x45e790,0x3f
-OpS1e_EntryList::unknown45ed10,0x45ed10,0x3b
-OpS1e_EntryList::unknown45ed50,0x45ed50,0x76
-OpS1e_EntryList::unknown45edd0,0x45edd0,0x75
+OpS1e_EntryList::lastParty,0x45ed10,0x3b
+OpS1e_EntryList::findParty,0x45ed50,0x76
+OpS1e_EntryList::countParties,0x45edd0,0x75
 ??0OpS1e_HolderA@@QAE@AAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z,0x45ee70,0x8b
 OpS1e_HolderB::write,0x45ef00,0x43
 ??1OpS1e_HolderC@@QAE@XZ,0x45ef50,0x94

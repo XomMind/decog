@@ -341,7 +341,7 @@ public:
 	HLocation_9b7910 location;
 	vector<MapRecord *> unknown2c;
 	bool unknown46f4b0(int type);
-	int unknown46f4e0();
+	int getDepthIndex();
 	Point unknown46f500();
 	int unknown46f530();
 };
@@ -351,7 +351,7 @@ bool GameData_46f4b0::unknown46f4b0(int type)
 	return locationTypes_b90000[location->unknown4] == type;
 }
 
-int GameData_46f4b0::unknown46f4e0()
+int GameData_46f4b0::getDepthIndex()
 {
 	return ((Push_46ed20 *)location.operator->())->operate();
 }

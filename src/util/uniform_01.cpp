@@ -22,7 +22,7 @@ struct UfGroup{int type_9b4350()throw();void resetField_45e460();void unknown458
 struct UfHG{int id;UfHG()throw();bool eq_9b78e0(UfHG)const;UfGroup*get_9b7250()const throw();};
 struct UfVHG{int p0,p1,p2,p3;unsigned size_9b9260()const throw();UfHG&at_9b81f0(unsigned)throw();};
 struct UfVLnk{int p0,p1,p2,p3;UfVLnk&operator=(const UfVLnk&);};
-struct UfLoc{int unknown46ed20();UfHE find_46ee80(int);bool inRange_46ecb0();int pad0;int type;int depth;UfVLnk v0c;char pad1c[0x25-0x1c];bool b25;char pad26[0x2f-0x26];bool b2f;void init_46eb70(int,int,int,int);};
+struct UfLoc{int getDepthIndex();UfHE find_46ee80(int);bool inRange_46ecb0();int pad0;int type;int depth;UfVLnk v0c;char pad1c[0x25-0x1c];bool b25;char pad26[0x2f-0x26];bool b2f;void init_46eb70(int,int,int,int);};
 struct UfHL{int id;UfLoc*get_9b7910()const throw();};
 struct UfBox{int x1,y1,x2,y2;UfBox(int,int,int,int)throw();};struct UfSize{int w,h;};
 struct UfZone{UfZone(const UfPoint&,UfHL,int,UfHE,UfHE){}~UfZone();UfPoint pt;UfHL loc;char bc;bool bd;char pade[2];int x10;UfHP h14;char pad18[4];int kind;int pad20[16];void unknown6c16d0(string);};	// NOTE: placeholder layout (0x60 bytes per operator new)
@@ -40,11 +40,11 @@ struct UfCellDef{int x0;char pad4[0x50-4];UfInfo*info;};
 struct UfCell{bool unknown45dc70();bool unknown45de40();bool unknown45d990();bool unknown45da50();bool unknown45d230();void unknown66b740(UfCell*);void unknown66ce10(int,int,int,int);UfHP getPropNT_45d550()throw();void unknown66b700(int,int);bool isMachinePart_45dcd0();void unknown66d580(int);bool unknown45db70();bool canPlaceEntity_66ad20(int);bool fitsProp_45d570(int);bool hasBlockingObject_45d7b0();bool unknown45df50(UfHP);int unknown45d0e0();void unknown66a050(int,int,int);void unknown670150(struct UfEff*);void trigger_45e110(bool,int,UfHE);const string&unknown45d140();UfPoint&pos_45d1a0();struct UfFx*getEffect_45d350(int);void unknown45df90(struct UfFx*);void remove_45e020(struct UfFx*);bool getField_4550b0()throw();const string&unknown45d100();const string&unknown45d120();UfHE getEntity_45d250();int getEffectValue_45d3c0(int);UfHP getProp_45d550();UfHI getItem_45d8f0();bool isPassableFor_66ab30(UfHE);int getArmor_66ae70();UfCellDef*def_9fcd80()throw();};
 struct UfRect{UfRect(const UfPoint&,int,int)throw();UfRect(const UfPoint&,const UfPoint&)throw();bool contains_40b750(const UfPoint&);UfPoint center_40b620();UfRect(int,int,int,int)throw();UfRect(const UfPoint&,int)throw();void set_40b300(int,int,int,int);int x1,y1,x2,y2;UfRect()throw();UfPoint randomPoint_40be90();void randomPoint_40be30(UfPoint*);};
 struct UfGrid{void getNeighbors_9ce500(const UfPoint&,struct UfVPt*);UfCell**at_9ceda0(int,int)throw();UfBox getArea_9b4400();bool contains_9b43b0(const UfPoint&);void getRect_9b4430(const UfPoint&,int,UfRect&);UfSize size_9b7930();int getWidth_9fcd80()throw();int getHeight_9b8f00()throw();UfCell**atPoint_9ced70(const UfPos&)throw();};
-struct UfMap{void unknown74cb00();void addListB24_465540(UfHI);UfHE unknown71e7c0(const UfPoint&,int,int);void unknown7456a0();struct UfVMsg*unknown464570();UfPoint&unknown7141a0();UfVHI*getItems_4655e0();UfVPt*getItemPositions_465600();void unknown728fa0(UfHI);void unknown465030(UfHI);bool unknown7178d0(UfHE,const UfPoint&,const UfPoint*,const UfPoint&,const UfPoint*,int);void unknown731960();void unknown748a00(int,int);void unknown749240();bool unknown6f0f80(UfHE*,UfHE*,UfHE*);struct UfArr2*unknown4638c0();struct UfVVPt*unknown459070m();void unknown464710(int);void unknown747860(int,int);void unknown7457f0();bool unknown72a850(int,UfHE,UfHE);void unknown6c6600(UfHE,const string&);int spawnSquads_73e5c0(const UfPoint&,struct UfVStr2*);void unknown74bb90(UfHP,UfHE*,UfPoint*,bool*);UfBox&unknown464670();void escort_743350(int,int,int);void unknown742c80();void unknown7430a0(int,int);void unknown7243c0(int,int,int);void announceMachine_71dd30(UfHL);UfPoint&unknown464610();void unknown747060(const UfPoint&,int,int);void unknown7480e0(int);void unknown7409f0(int);void unknown740300(int);struct UfVRoute*unknown4645f0();string unknown463060(const UfPoint&);bool unknown7170a0(UfHE,const UfPoint&,UfVPt&,UfVecU&,UfVecU&,UfPoint&,int,int,int,int);void unknown73a490();void unknown73c750();bool unknown464450();void unknown465890(UfHP);void unknown7149a0(UfHE);void zionAttacked_731b10(int);int unknown4642b0();UfPoint unknown714120(int);void unknown465950(int,int,int);void unknown736510(int,const UfPoint&,struct UfRect&,int,int);bool isVisible_463190(int,int);void unknown72ffe0(int);void removeEntity_465750(UfHE);UfHI placeItem_6c5480(const string&,const UfPoint&);UfHE unknown715230(int,int);UfItemDef*selectRandomItemOfRating_6c40e0(int,int,int,int,int,int,int);void unknown6c3a50(struct UfWL&,int,int);int countPassableAdjacent_71c850(const UfPoint&);UfPoint unknown71d000(int);int unknown4642f0();void unknown738310();bool unknown6c6700(UfHP,const string&,int);UfHE getEntity671_463110();UfHI unknown6c5400(void*,const UfPoint&);UfPoint&unknown4184d0()throw();UfHE unknown6c5e20(struct UfBP*,const UfPoint&,int,int,int,int);UfPoint*unknown6f0ca0();void setUnknownA18_4653e0(bool);void unknown6c6b90(const UfPoint&,const string&,int,int);UfHE unknown6c5dc0(const string&,const UfPoint&,int,int,int,int,int);UfHE getPlayer_4630f0();bool isVisible_4631c0(const UfPoint&);bool unknown4631f0(UfHE);bool unknown4633c0(const UfPoint&);bool unknown463400(UfHE);int unknown463710();UfHG group_463890(int);void*unknown4638e0(int,int);UfVHG*groups_463950();int getTurn_464270()throw();int unknown4642d0()throw();void unknown4647a0(const UfPoint&,int);struct UfEntityDef*unknown6c5600(int,int,bool,int);UfHE placeEntity_6c58c0(struct UfEntityDef*,const UfPoint&,int,int,int,int,int);bool unknown71bc10(const UfPoint&,UfPoint*);UfItemDef*selectRandomItem_6c3bc0(int,int,int);struct UfVZone*zones_462e10();bool findPlaceableNear_71c150(UfPoint&,UfPoint&,int);bool unknown7168e0(const UfPoint&,const UfPoint&,UfEntity*,struct UfVPt*);bool findPropSpotNear_71c3c0(UfPoint&,UfPoint&,struct UfFaction*);void unknown464e60(UfHP);void unknown464f60(UfHI);UfHE getEntity_45d250();void unknown74d560(int,int,int,UfColor);void unknown6c65a0(UfHE,const string&,int);bool unknown716940(const UfPoint&,const UfPoint&,int,int);UfHI unknown6c51d0(struct UfItemDef*,UfHE,int,int);UfHI giveItem_6c52b0(const string&,UfHE,bool,int);void unknown714000(struct UfVPt*);bool unknown465200(UfPoint&,UfPoint&);bool isReachable_465230(int,UfPoint&,UfPoint&);int unknown715b10();UfHRec addRecord_777a20(UfHRec);};
+struct UfMap{void unknown74cb00();void addListB24_465540(UfHI);UfHE unknown71e7c0(const UfPoint&,int,int);void unknown7456a0();struct UfVMsg*unknown464570();UfPoint&unknown7141a0();UfVHI*getItems_4655e0();UfVPt*getItemPositions_465600();void unknown728fa0(UfHI);void unknown465030(UfHI);bool unknown7178d0(UfHE,const UfPoint&,const UfPoint*,const UfPoint&,const UfPoint*,int);void unknown731960();void unknown748a00(int,int);void unknown749240();bool unknown6f0f80(UfHE*,UfHE*,UfHE*);struct UfArr2*unknown4638c0();struct UfVVPt*unknown459070m();void unknown464710(int);void unknown747860(int,int);void unknown7457f0();bool unknown72a850(int,UfHE,UfHE);void unknown6c6600(UfHE,const string&);int spawnSquads_73e5c0(const UfPoint&,struct UfVStr2*);void unknown74bb90(UfHP,UfHE*,UfPoint*,bool*);UfBox&unknown464670();void escort_743350(int,int,int);void unknown742c80();void unknown7430a0(int,int);void unknown7243c0(int,int,int);void announceMachine_71dd30(UfHL);UfPoint&unknown464610();void unknown747060(const UfPoint&,int,int);void unknown7480e0(int);void unknown7409f0(int);void unknown740300(int);struct UfVRoute*unknown4645f0();string unknown463060(const UfPoint&);bool unknown7170a0(UfHE,const UfPoint&,UfVPt&,UfVecU&,UfVecU&,UfPoint&,int,int,int,int);void unknown73a490();void unknown73c750();bool unknown464450();void unknown465890(UfHP);void unknown7149a0(UfHE);void zionAttacked_731b10(int);int unknown4642b0();UfPoint unknown714120(int);void unknown465950(int,int,int);void unknown736510(int,const UfPoint&,struct UfRect&,int,int);bool isVisible_463190(int,int);void unknown72ffe0(int);void removeEntity_465750(UfHE);UfHI placeItem_6c5480(const string&,const UfPoint&);UfHE unknown715230(int,int);UfItemDef*selectRandomItemOfRating_6c40e0(int,int,int,int,int,int,int);void unknown6c3a50(struct UfWL&,int,int);int countPassableAdjacent_71c850(const UfPoint&);UfPoint unknown71d000(int);int unknown4642f0();void unknown738310();bool unknown6c6700(UfHP,const string&,int);UfHE getEntity671_463110();UfHI unknown6c5400(void*,const UfPoint&);UfPoint&unknown4184d0()throw();UfHE unknown6c5e20(struct UfBP*,const UfPoint&,int,int,int,int);UfPoint*unknown6f0ca0();void setUnknownA18_4653e0(bool);void unknown6c6b90(const UfPoint&,const string&,int,int);UfHE unknown6c5dc0(const string&,const UfPoint&,int,int,int,int,int);UfHE getPlayer_4630f0();bool isVisible_4631c0(const UfPoint&);bool unknown4631f0(UfHE);bool unknown4633c0(const UfPoint&);bool unknown463400(UfHE);int unknown463710();UfHG group_463890(int);void*unknown4638e0(int,int);UfVHG*groups_463950();int getTurn_464270()throw();int unknown4642d0()throw();void unknown4647a0(const UfPoint&,int);struct UfEntityDef*selectRobotOfClass(int,int,bool,int);UfHE placeEntity_6c58c0(struct UfEntityDef*,const UfPoint&,int,int,int,int,int);bool unknown71bc10(const UfPoint&,UfPoint*);UfItemDef*selectRandomItem_6c3bc0(int,int,int);struct UfVZone*zones_462e10();bool findPlaceableNear_71c150(UfPoint&,UfPoint&,int);bool unknown7168e0(const UfPoint&,const UfPoint&,UfEntity*,struct UfVPt*);bool findPropSpotNear_71c3c0(UfPoint&,UfPoint&,struct UfFaction*);void unknown464e60(UfHP);void unknown464f60(UfHI);UfHE getEntity_45d250();void unknown74d560(int,int,int,UfColor);void unknown6c65a0(UfHE,const string&,int);bool unknown716940(const UfPoint&,const UfPoint&,int,int);UfHI unknown6c51d0(struct UfItemDef*,UfHE,int,int);UfHI giveItem_6c52b0(const string&,UfHE,bool,int);void unknown714000(struct UfVPt*);bool unknown465200(UfPoint&,UfPoint&);bool isReachable_465230(int,UfPoint&,UfPoint&);int unknown715b10();UfHRec addRecord_777a20(UfHRec);};
 struct UfParty{int x0;UfHE leader;int x8;};
-struct UfOvermind{void spawnWarlordRaid_68e1f0(int);void resetField_9b7270();void spawnResponseParty_68c2f0(int,UfHE,const UfPoint&,int);bool unknown68d980(int,int,int);void wake_68d480();void unknown68c6d0(UfHE);void unknown6901e0(UfHE,int,int,int,const UfPoint&,int,int);void unknown68b9a0(UfVPt&,bool);int unknown45edd0(int);UfParty*unknown68cf70(UfVecU2,const UfPoint&);bool redirectParty_68d1f0(UfParty*,const UfPoint&,UfHE);bool dispatch_689100(const UfPoint&);void*unknown6892c0(int,UfPoint*,int);void*spawnPatrolParty_6896d0(UfHE,int,int,struct UfVPt*,int,int,int,int,int);void*unknown68a500(int,UfPoint*,bool);void*unknown684250(const UfPoint&,int);void*unknown685a10(UfHE,UfPoint*);void*unknown686c60(const UfPoint&,int,int,int);bool spawnAntiInfestationCarrier_688e80(const UfPoint&,const string&);void*unknown687520(UfHE,UfPoint*,int);UfParty*unknown45ed10();};
+struct UfOvermind{void spawnWarlordRaid_68e1f0(int);void resetField_9b7270();void spawnResponseParty_68c2f0(int,UfHE,const UfPoint&,int);bool unknown68d980(int,int,int);void wake_68d480();void unknown68c6d0(UfHE);void unknown6901e0(UfHE,int,int,int,const UfPoint&,int,int);void unknown68b9a0(UfVPt&,bool);int countParties(int);UfParty*unknown68cf70(UfVecU2,const UfPoint&);bool redirectParty_68d1f0(UfParty*,const UfPoint&,UfHE);bool dispatch_689100(const UfPoint&);void*unknown6892c0(int,UfPoint*,int);void*spawnPatrolParty_6896d0(UfHE,int,int,struct UfVPt*,int,int,int,int,int);void*unknown68a500(int,UfPoint*,bool);void*unknown684250(const UfPoint&,int);void*spawnSurgicalParty(UfHE,UfPoint*);void*unknown686c60(const UfPoint&,int,int,int);bool spawnAntiInfestationCarrier_688e80(const UfPoint&,const string&);void*spawnHunterParty(UfHE,UfPoint*,int);UfParty*lastParty();};
 struct UfEntry{string key;string value;};struct UfEntryIt{UfEntry*p;UfEntry&deref_9b8da0()throw();};
-struct UfGameData{int unknown789250(int);bool unknown46f4b0(int);int unknown46f530();int unknown46f4e0();bool hasObjectID_46fa40(int);void setEntryText_46f700(const string&,const string&);void addExit_7892d0(UfHE,const UfPoint&,const string&);UfEntryIt getEntryIterator_46f5b0(const string&);const string&getEntryText_46f6d0(const string&);};
+struct UfGameData{int unknown789250(int);bool unknown46f4b0(int);int unknown46f530();int getDepthIndex();bool hasObjectID_46fa40(int);void setEntryText_46f700(const string&,const string&);void addExit_7892d0(UfHE,const UfPoint&,const string&);UfEntryIt getEntryIterator_46f5b0(const string&);const string&getEntryText_46f6d0(const string&);};
 struct UfXom{void pokeWall_6bdf10();void showXomAct_6bdb50(int,UfHE,int);bool b0;void unknown69e700(int,int,float);};extern UfXom uf_d25450;
 struct UfPlayerData{void unknown46df70();void unknown77ffb0(int,int);void unknown783020();void unknown783060();void unlock_77fbc0(int);};extern UfPlayerData uf_cf45d8;
 struct UfRng{float rangeFloat_406e20(float,float);bool chance_406c90(int);int rangeInt_406d70(float,float);};
@@ -68,7 +68,7 @@ struct UfMapView{void unknown8195a0(const UfPoint&,int,int);void labelAccess_80e
 
 extern UfMap*uf_cefc4c;extern UfGrid uf_cfd44c;extern UfOvermind uf_cf6428;extern UfGameData uf_d1e860;extern UfHL uf_d1e888;
 extern string uf_cfe140[];extern int uf_b90000[];extern string uf_d312f0[];extern string uf_d25664;
-extern string uf_cfd458[];extern string uf_d2f798[];extern bool uf_caf1f8[];extern string uf_d01860[];extern string uf_d31db8[];
+extern string uf_cfd458[];extern string uf_robotClassNames_d2f798[];extern bool uf_caf1f8[];extern string uf_d01860[];extern string uf_d31db8[];
 extern UfVecU uf_d2ac98;extern bool uf_cebc50;extern bool uf_ba634c[];extern UfVVI uf_d1e8f0;extern int uf_ba5f40[];extern bool uf_ba6288[];
 extern UfMapView*uf_cec054;extern UfFactory*uf_cefaa8;struct UfWL{UfWL(UfVecU&);void reset_9c07a0();UfVecU*keys_9c0790();int d0,d1,d2,d3,d4,d5,d6,d7,d8;UfWL();~UfWL();void add_9ba310(int,int);int&pick_9ba470();};
 struct UfWLI{int d0,d1,d2,d3,d4,d5,d6,d7,d8;bool empty_9b81b0();void add_9ba310(struct UfItemDef*,int);struct UfItemDef*&pick_9ba470();};extern UfWLI uf_d29d44;extern int uf_ba3acc[];extern struct UfItemDef*uf_cefbec;extern bool uf_d257e4;extern int uf_d25740;extern int uf_cf645c,uf_cf6474;struct UfVParty{int p0,p1,p2,p3;unsigned size_9b9260()const throw();struct UfParty*&at_9b81f0(unsigned)throw();struct UfParty*&back_9b6540()throw();};extern UfVParty uf_cf6478;struct UfFlags{int push_5121f0(struct UfPhrase2*);void set_451400(int);};extern UfFlags uf_cf1080;extern bool uf_d28fb0;extern int uf_d1eab0,uf_d1eab4;struct UfFov{bool findPath_40c9a0(const UfPoint&,const UfPoint&,void*,void*,struct UfVPt&);void unknown40ca20(const UfPoint&,int,void*,int);};extern UfFov uf_cfe568;extern void*uf_cefc30;extern UfVPt uf_d15e58;extern int uf_d25624;extern int uf_d1e884;extern const char uf_b91cab[];struct UfFxObj{void init_503b20(int,const UfPoint&,const UfPoint*,int,int,int,int,int);};struct UfFxPool{UfFxObj*new_508610(UfFxPool*);};extern UfFxPool*uf_cefc50;extern UfPoint uf_d2e20c;
@@ -205,7 +205,7 @@ struct UfVVPt2{int p0,p1,p2,p3;void push_back_9b5610(UfVPt&&);UfVPt&back_9b5ac0(
 extern UfWLI uf_d2ae08;extern UfRange uf_d2f130;extern int uf_cf4718;extern float uf_ba65d8[];
 struct UfVHL{int p0,p1,p2,p3;unsigned size_9b9260()const throw();UfHL&at_9b81f0(unsigned)throw();};extern UfVHL uf_d1e88c;
 int uf_indexOfName4_9d7b80(UfVTerr&,const string&);
-extern string uf_cfaca0[];
+extern string uf_mapNames_cfaca0[];
 struct UfQS{int turn;UfPoint p;int xc;int x10;};extern UfQS uf_cf65a8;
 struct UfMsg{UfHE e;int x4;string s8;};struct UfVMsg{int p0,p1,p2,p3;unsigned size_9b9260()const throw();UfMsg*&at_9b81f0(unsigned)throw();};
 void uf_deleteObjectAndStep_9d7fb0(UfVMsg&,unsigned&);
@@ -433,7 +433,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 						break;
 					}
 					case 9:
-						if (conds.at_9b7040(j).compareInt_455e00(uf_cf6428.unknown45edd0(uf_stringToInt_405610(conds.at_9b7040(j).key)))) goto pass;
+						if (conds.at_9b7040(j).compareInt_455e00(uf_cf6428.countParties(uf_stringToInt_405610(conds.at_9b7040(j).key)))) goto pass;
 						break;
 					case 10:
 						if (conds.at_9b7040(j).compareInt_455e00(uf_cefc4c->unknown715b10())) goto pass;
@@ -490,7 +490,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 							UfHE ent = ENTX;
 							if (!ent.get_9b6570())
 								break;
-							if (conds.at_9b7040(j).compareString_455f40(uf_d2f798[ent.get_9b6570()->def_9b4350()->x28])) goto pass;
+							if (conds.at_9b7040(j).compareString_455f40(uf_robotClassNames_d2f798[ent.get_9b6570()->def_9b4350()->x28])) goto pass;
 							break;
 						}
 					case 30:
@@ -1412,7 +1412,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 						UfHE gN = ENTX;
 						if (!gN.get_9b6570())
 							goto nextEff;
-						UfEntityDef *def2 = eff->x7c != uf_caf160 ? uf_d25de0.at_9b81f0(eff->x7c) : uf_cefc4c->unknown6c5600(eff->x80,eff->x84,eff->xa0 != 0,0);
+						UfEntityDef *def2 = eff->x7c != uf_caf160 ? uf_d25de0.at_9b81f0(eff->x7c) : uf_cefc4c->selectRobotOfClass(eff->x80,eff->x84,eff->xa0 != 0,0);
 						if (gN.get_9b6570()->def_9b4350() == def2 || gN.get_9b6570()->isPlayer_5c7600() || eff->xc0 == 1 && !records->at_9b81f0(i)->e.get_9b6570())
 							goto nextEff;
 						else
@@ -1736,12 +1736,12 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 										break;
 									case 5:
 										if (eff->xa0)
-											ok = uf_cf6428.unknown685a10(UfHE(),&p);
+											ok = uf_cf6428.spawnSurgicalParty(UfHE(),&p);
 										else
 										{
 											if (!tgt.get_9b6570())
 												goto nextEff;
-											ok = uf_cf6428.unknown685a10(tgt,0);
+											ok = uf_cf6428.spawnSurgicalParty(tgt,0);
 										}
 										break;
 									case 6:
@@ -1757,15 +1757,15 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 												uf_d25450.unknown69e700(0x46,uf_cefc4c->getPlayer_4630f0().get_9b6570()->unknown45a880() <= 0x32,0);
 										}
 										else if (eff->xa0 == 0 && tgt.get_9b6570())
-											ok = uf_cf6428.unknown687520(tgt,0,0);
+											ok = uf_cf6428.spawnHunterParty(tgt,0,0);
 										else
-											ok = uf_cf6428.unknown687520(UfHE(),&p,0);
+											ok = uf_cf6428.spawnHunterParty(UfHE(),&p,0);
 										break;
 								}
 							}
 							if (ok)
 							{
-								UfParty *pp = eff->type == 0x12 ? uf_cf6428.unknown45ed10() : party;
+								UfParty *pp = eff->type == 0x12 ? uf_cf6428.lastParty() : party;
 								if (eff->x78)
 									pp->x8 = uf_cefc4c->getTurn_464270() + eff->x78;
 								if (eff->x118 != -1 && !pp->leader.get_9b6570()->unknown45ac40(eff->x118))
@@ -1787,7 +1787,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 					case 20:
 					{
 						int nG = eff->range44.randomInRange_40c130();
-						UfEntityDef *nW = eff->x7c != uf_caf160 ? uf_d25de0.at_9b81f0(eff->x7c) : uf_cefc4c->unknown6c5600(eff->x80,eff->x84,eff->xa0 != 0,0);
+						UfEntityDef *nW = eff->x7c != uf_caf160 ? uf_d25de0.at_9b81f0(eff->x7c) : uf_cefc4c->selectRobotOfClass(eff->x80,eff->x84,eff->xa0 != 0,0);
 						if (!nW)
 							break;
 						UfPoint p(PTX);
@@ -3119,7 +3119,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 								rescue14:
 									UfVecU dists4;
 									UfVBool aJ;
-									UfParty *party = uf_cf6428.unknown45ed10();
+									UfParty *party = uf_cf6428.lastParty();
 									UfVZone zones(*uf_cefc4c->zones_462e10());
 									for (unsigned m = 0; m < zones.size_9b9260(); m++)
 									{
@@ -4704,7 +4704,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 								UfHE t = k50.get_9b6570()->unknown5d2a90(7);
 								if (t.isValid_9b7230())
 								{
-									int oldD = uf_d1e860.unknown46f4e0() + 1;
+									int oldD = uf_d1e860.getDepthIndex() + 1;
 									UfPoint r(oldD,oldD + 2);
 									if (r.y > 9)
 										r.shift_40bf50(9 - r.y);
@@ -4731,7 +4731,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 										esc = uf_cefc4c->placeEntity_6c58c0(d,p,3,0,0x22,0xe,0);
 										esc.get_9b6570()->ai_45b590()->setFollowEntity_5b2f80(f,0);
 										esc.get_9b6570()->ai_45b590()->setField_4505b0(4);
-										d = uf_cefc4c->unknown6c5600(1,0x13,0,1);
+										d = uf_cefc4c->selectRobotOfClass(1,0x13,0,1);
 										if (d)
 										{
 											esc = uf_cefc4c->placeEntity_6c58c0(d,p,3,0,0x22,0xe,0);
@@ -5049,7 +5049,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 											UfEntityDef *d;
 											for (int k = 0; k < 4; k++)
 											{
-												d = uf_cefc4c->unknown6c5600(3,wl.pick_9ba470(),0,1);
+												d = uf_cefc4c->selectRobotOfClass(3,wl.pick_9ba470(),0,1);
 												if (d)
 												{
 													UfHE ne = uf_cefc4c->placeEntity_6c58c0(d,uf_cefc4c->zones_462e10()->at_9b81f0(0)->pt,5,0,0x22,0xe,0);
@@ -5089,7 +5089,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 											n += (t - 10) / 0x28 * 2;
 										if (n)
 										{
-											UfEntityDef *d = uf_cefc4c->unknown6c5600(3,0x3c,0,1);
+											UfEntityDef *d = uf_cefc4c->selectRobotOfClass(3,0x3c,0,1);
 											if (d)
 											{
 												int fac = uf_stringToInt_405610(uf_d1e860.getEntryText_46f6d0("usedCoreResetMatrix_g")) ? 2 : 5;
@@ -5288,7 +5288,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 							case 77:
 								if (uf_cf462c == 8 || rng.chance_406c90(0x32))
 								{
-									int idx = uf_d1dd58.at_9b81f0(uf_d1e888.get_9b7910()->unknown46ed20());
+									int idx = uf_d1dd58.at_9b81f0(uf_d1e888.get_9b7910()->getDepthIndex());
 									if (idx == uf_caf160 && uf_cf462c == 8)
 									{
 										for (unsigned m = 0; m < uf_d1dd58.size_9b9260(); m++)
@@ -6050,7 +6050,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 								UfEntityDef *d;
 								for (int k = 0; k < n; k++)
 								{
-									d = uf_cefc4c->unknown6c5600(1,cX.pick_9ba470(),0,1);
+									d = uf_cefc4c->selectRobotOfClass(1,cX.pick_9ba470(),0,1);
 									if (!d)
 										continue;
 									UfHE hd = uf_cefc4c->placeEntity_6c58c0(d,eA,3,0,3,0xe,0);
@@ -6065,8 +6065,8 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 								break;
 							}
 							case 106:
-								uf_cf6428.unknown687520(UfHE(),&uf_cefc4c->getPlayer_4630f0().get_9b6570()->getPosition_45a4a0(),0);
-								uf_cf6428.unknown687520(UfHE(),&uf_cefc4c->getPlayer_4630f0().get_9b6570()->getPosition_45a4a0(),0);
+								uf_cf6428.spawnHunterParty(UfHE(),&uf_cefc4c->getPlayer_4630f0().get_9b6570()->getPosition_45a4a0(),0);
+								uf_cf6428.spawnHunterParty(UfHE(),&uf_cefc4c->getPlayer_4630f0().get_9b6570()->getPosition_45a4a0(),0);
 								UF_ALERT("ALERT: Weapon containment breached. Dispatching heavy reinforcements to area.")
 								do
 								{
@@ -9020,7 +9020,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 									w3->getProp_45d550().get_9b64f0()->unknown45ce10(0,0,1,UfHE());
 								else
 								{
-									UfEntityDef *d = uf_cefc4c->unknown6c5600(1,0x19,1,0);
+									UfEntityDef *d = uf_cefc4c->selectRobotOfClass(1,0x19,1,0);
 									UfPoint p(uf_cefc4c->zones_462e10()->at_9b81f0(rng.rangeInt_406d70(0,uf_minInt_9cdb30(2,uf_cefc4c->zones_462e10()->size_9b9260()) - 1))->pt);
 									UfHE aPct = uf_cefc4c->placeEntity_6c58c0(d,p,3,0,2,0xe,0);
 									if (aPct.isValid_9b7230())
@@ -9099,7 +9099,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 									w3->getProp_45d550().get_9b64f0()->unknown45ce10(0,0,1,UfHE());
 								else
 								{
-									UfEntityDef *d = uf_cefc4c->unknown6c5600(1,0x1a,0,1);
+									UfEntityDef *d = uf_cefc4c->selectRobotOfClass(1,0x1a,0,1);
 									if (d)
 									{
 										UfPoint p;
@@ -9120,7 +9120,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 													msg = as.get_9b64f0()->getName_45c5b0() + " finishes assembling " + e.get_9b6570()->getName_416f40() + ".";
 													uf_message_49c610(0x320,UfHE(),&msg,0);
 												}
-												const string *far_ = &uf_cfaca0[z2->loc.get_9b7910()->type];
+												const string *far_ = &uf_mapNames_cfaca0[z2->loc.get_9b7910()->type];
 												msg = "ALERT: Dispatching Heavy support to " + *far_ + ".";
 												UF_ALERTP(&msg)
 												do
@@ -9154,7 +9154,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 									{
 										uf_cf65a8.turn = uf_cefc4c->getTurn_464270() + rng.rangeInt_406d70(100,150);
 										uf_cf65a8.p = w3->pos_45d1a0();
-										const string *gTmp = &uf_cfaca0[uf_cefc4c->zones_462e10()->at_9b81f0(0)->loc.get_9b7910()->type];
+										const string *gTmp = &uf_mapNames_cfaca0[uf_cefc4c->zones_462e10()->at_9b81f0(0)->loc.get_9b7910()->type];
 										string msg = "ALERT: Unique threat detected in " + *gTmp + ", assembling Q-Series response.";
 										UF_ALERTP(&msg)
 										do
@@ -9184,7 +9184,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 										squad.at_9b81f0(k2).get_9b6570()->setAI_64ecf0(new UfEntityAI(squad.at_9b81f0(k2),0x19,0xe));
 										squad.at_9b81f0(k2).get_9b6570()->ai_45b590()->unknown459540(z->pt);
 									}
-									string msg = "ALERT: Dispatching investigation squad to " + uf_cfaca0[z->loc.get_9b7910()->type] + ".";
+									string msg = "ALERT: Dispatching investigation squad to " + uf_mapNames_cfaca0[z->loc.get_9b7910()->type] + ".";
 									UF_ALERTP(&msg)
 								}
 								w3->getProp_45d550().get_9b64f0()->unknown45ce10(0,0,1,UfHE());
@@ -9216,12 +9216,12 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 								UfHE fr = uf_cefc4c->unknown6c5dc0("A-27 Freighter",p,3,0,0x14,0xe,0);
 								if (fr.isValid_9b7230())
 								{
-									int hVal = uf_d1e860.unknown46f4e0() + 1;
+									int hVal = uf_d1e860.getDepthIndex() + 1;
 									UfPoint hC(hVal,hVal + 2);
 									if (hC.y > 9)
 										hC.shift_40bf50(9 - hC.y);
 									uf_cf6428.unknown6901e0(fr,1,uf_d30348.randomInRange_40c130(),uf_d21760.randomInRange_40c130(),hC,1,0x2a);
-									if (uf_b939c0[uf_d1e860.unknown46f4e0()].a && rng.chance_406c90(uf_b939c0[uf_d1e860.unknown46f4e0()].a))
+									if (uf_b939c0[uf_d1e860.getDepthIndex()].a && rng.chance_406c90(uf_b939c0[uf_d1e860.getDepthIndex()].a))
 									{
 										UfVStr2 specials;
 										specials.push_back_9b06f0("Active Cooling Armor");
@@ -9257,7 +9257,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 									done194:
 										;
 									}
-									if (uf_b939c0[uf_d1e860.unknown46f4e0()].b && rng.chance_406c90(uf_b939c0[uf_d1e860.unknown46f4e0()].b))
+									if (uf_b939c0[uf_d1e860.getDepthIndex()].b && rng.chance_406c90(uf_b939c0[uf_d1e860.getDepthIndex()].b))
 									{
 										int n = fr.get_9b6570()->unknown45a810();
 										while (n)
@@ -9279,7 +9279,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 										else
 											uf_logWarning_404e50("GAR_Cargo_Convoy","Carrier spawn failed");
 									}
-									ed = uf_cefc4c->unknown6c5600(1,0x13,0,1);
+									ed = uf_cefc4c->selectRobotOfClass(1,0x13,0,1);
 									if (ed)
 									{
 										esc = uf_cefc4c->placeEntity_6c58c0(ed,fr.get_9b6570()->getPosition_45a4a0(),3,0,0x22,0xe,0);
@@ -9413,7 +9413,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 										}
 										while (0);
 										UfRange cnt(0xf,0x19);
-										UfEntityDef *ad = uf_cefc4c->unknown6c5600(3,0x3c,0,1);
+										UfEntityDef *ad = uf_cefc4c->selectRobotOfClass(3,0x3c,0,1);
 										if (!ad)
 										{
 											uf_logError_404f10("BS::turnUpdate()","no Assembled data found");
@@ -9441,7 +9441,7 @@ bool UfBS::turnUpdate_51da30(UfVRec *records, int type, UfHE entity, UfHP prop, 
 								break;
 							}
 							case 198:
-								if (uf_d1eb9c.at_9b81f0(uf_d1e860.unknown46f4e0()) != 1)
+								if (uf_d1eb9c.at_9b81f0(uf_d1e860.getDepthIndex()) != 1)
 									w3->getProp_45d550().get_9b64f0()->unknown45ce10(0,0,1,UfHE());
 								else if (uf_cefc4c->unknown4642b0() >= w3->pos_45d1a0().distanceTo_409fb0(uf_cefc4c->unknown4184d0()) + 10)
 								{

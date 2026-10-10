@@ -219,12 +219,12 @@ struct D2xRecord170 { char pad[0x170]; string name; };	// NOTE: placeholder layo
 extern vector<D2xRecord170*> d2x_d25de0;
 struct D2xRecord54 { char pad[0x54]; int unknown54; char pad58[0xf0 - 0x58]; int unknownf0; };	// NOTE: placeholder layout
 extern vector<D2xRecord54*> d2x_d2d1c4;
-extern vector<int> d2x_cf4910, d2x_cf4830, d2x_cf4a04, d2x_cf4a14, d2x_cf47cc;
+extern vector<int> d2x_cf4910, d2x_cf4830, d2x_rifLevels_cf4a04, d2x_cf4a14, d2x_cf47cc;
 extern vector<D2xGrid*> d2x_cf7550;
 extern vector<void*> d2x_cfd2cc;
 struct D2xT3 { char a; bool b; char c; };
 extern D2xT3 d2x_b90708[];
-extern int d2x_b90000[], d2x_b98958[], d2x_b98900[], d2x_b988a8[];
+extern int d2x_b90000[], d2x_rifMaxLevels_b98958[], d2x_b98900[], d2x_b988a8[];
 
 class D2xPlayerData
 {
@@ -653,7 +653,7 @@ void D2Effects::update()
 				OpR5h_WL<int> types;
 				for (int i = 3; i < 0x13; i++)
 				{
-					if ((d2x_cf4a04[i] == 0 || d2x_cf4a04[i] < d2x_b98958[i]) && max >= d2x_b98900[i])
+					if ((d2x_rifLevels_cf4a04[i] == 0 || d2x_rifLevels_cf4a04[i] < d2x_rifMaxLevels_b98958[i]) && max >= d2x_b98900[i])
 						types.add(i, d2x_b988a8[i]);
 				}
 				if (!types.size())

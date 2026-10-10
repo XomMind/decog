@@ -73,9 +73,9 @@ struct SiUI{void bubble8758d0(bool);};extern SiUI*si_cec058;struct SiLog{void en
 struct SiAlly{int f0;int f4;int f8;SiVPf v0c;void checkCapable57f1b0(SiHE);};
 bool si_contains9d31e0(SiVInt&,SiHE);
 struct SiSquad{int f0;SiHE f4;};
-struct SiOvermind{bool u683500(SiP&,int,int,int,const SiP&,int&,int,int);bool findCargoDispatchTarget68a8b0(const SiP&,SiP&);SiSquad*u683310(SiHE);void u68cd80(SiSquad*);void wake68d480();int u684250(const SiP&,int);void u68d6d0(bool);void u682420(int,int);void u68d920(int);void u6823f0(int);void u682220(const SiP&);int u686c60(const SiP&,int,int,int);SiSquad*u45ed10();};extern SiOvermind si_cf6428;
-struct SiGameData{void setEntryText46f700(const string&,const string&);int u46f4e0();bool u46f4b0(int);const string&getEntryText46f6d0(const string&);};extern SiGameData si_d1e860;extern int si_b92f64[];
-struct SiState{int f0;int type;int f8;int u46ed20();};struct SiHS{int id;SiState*operator->()const;};extern SiHS si_d1e888;
+struct SiOvermind{bool findDispatchExit(SiP&,int,int,int,const SiP&,int&,int,int);bool findCargoDispatchTarget68a8b0(const SiP&,SiP&);SiSquad*u683310(SiHE);void u68cd80(SiSquad*);void wake68d480();int u684250(const SiP&,int);void u68d6d0(bool);void u682420(int,int);void u68d920(int);void u6823f0(int);void u682220(const SiP&);int u686c60(const SiP&,int,int,int);SiSquad*lastParty();};extern SiOvermind si_cf6428;
+struct SiGameData{void setEntryText46f700(const string&,const string&);int getDepthIndex();bool u46f4b0(int);const string&getEntryText46f6d0(const string&);};extern SiGameData si_d1e860;extern int si_b92f64[];
+struct SiState{int f0;int type;int f8;int getDepthIndex();};struct SiHS{int id;SiState*operator->()const;};extern SiHS si_d1e888;
 struct SiB6{bool b0;char pad[5];};extern SiB6 si_b90184[];
 struct SiVIs{int&operator[](unsigned);};struct SiStats{SiVIs*v;bool add4729d0(unsigned,int,string,int);};extern SiStats si_d2c658;extern const char si_empty_b91d71[];
 struct SiNotice{void u451400(int);};extern SiNotice si_cf1080;extern bool si_d28fb0;int si_sound4541b0(unsigned,int,int);
@@ -306,7 +306,7 @@ int SiAI::takeTurn(){
   if(!vdc.empty9b86e0()){
    for(unsigned i=0;i<vdc.size9b9260();i++){
     if(vdc[i].operator->()&&vdc[i]->getGroup45a3f0()->height9b8f00()<=2){
-     if(u5813a0()&&rng.chance(si_b92f64[si_d1e860.u46f4e0()])&&si_d1e888->type!=10){
+     if(u5813a0()&&rng.chance(si_b92f64[si_d1e860.getDepthIndex()])&&si_d1e888->type!=10){
       if(u581140())do{if(si_msg5111e0(((0x236)),((0)),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
       else si_cf6428.u682220(ent->getPosition45a4a0());
      }
@@ -339,7 +339,7 @@ int SiAI::takeTurn(){
     do{if(si_msg5111e0(((0x236)),((0)),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
     si_d2c658.add4729d0(0x241,1,si_empty_b91d71,-1);
    }else if(ent->def9b4350()->f48==0x2f?si_cf6428.u686c60(ent->getPosition45a4a0(),3,0x17,0x7a):si_cf6428.u686c60(ent->getPosition45a4a0(),-1,0x61,0x7a)){
-    si_cf6428.u45ed10()->f4->ai45b590()->setFollowEntity5b2f80(ent,0);
+    si_cf6428.lastParty()->f4->ai45b590()->setFollowEntity5b2f80(ent,0);
     do{if(si_msg5111e0(((0x23d)),((0)),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
     do{si_cf1080.u451400(1);if(((0x127))!=-1&&!(si_d28fb0&&1&&1))si_sound4541b0((0x127),0,0);do{if(si_msg5111e0(((0x324)),((&string(("ALERT: Hostile activity reported, dispatching reinforcements to area.")))),(0),(0),((SiHE())),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);si_cec0b4->end7b4f10();}while(false);
     f34=0;
@@ -1062,7 +1062,7 @@ int SiAI::takeTurn(){
      }
      break;
     case 4:
-     if(f34&&ent->g28->type9b4350()==4&&si_d1e860.u46f4e0()>=4){
+     if(f34&&ent->g28->type9b4350()==4&&si_d1e860.getDepthIndex()>=4){
       SiHI c5=ent->u5d2380(0x16);
       SiHI b=si_cefc4c->getPlayer4630f0()->u5d2380(0x16);
       if(b.isNull9b65d0())b=si_cefc4c->getPlayer4630f0()->u5d2380(0x17);
@@ -1082,7 +1082,7 @@ int SiAI::takeTurn(){
        do{if(si_msg5111e0(((0x23d)),((0)),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
        do{si_cf1080.u451400(1);if(((0x127))!=-1&&!(si_d28fb0&&1&&1))si_sound4541b0((0x127),0,0);do{if(si_msg5111e0(((0x324)),((&string(("ALERT: Hostile activity reported, dispatching reinforcements to area.")))),(0),(0),((SiHE())),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);si_cec0b4->end7b4f10();}while(false);
        f34=0;
-       f40=si_cf6428.u45ed10()->f4;
+       f40=si_cf6428.lastParty()->f4;
       }
      }
      break;
@@ -2372,7 +2372,7 @@ int SiAI::takeTurn(){
         if(si_cefc4c->findPlaceableNear71c150(ent->getPosition45a4a0(),q,1)){(*si_cfd44c.at9ceda0(x,y))->getEntity45d250()->changePos5dccb0(q,true);goto L5b;}
        }
        {
-        if((*si_cfd44c.at9ceda0(x,y))->getEntity45d250()->getGroup45a3f0()->type9b4350()<=1&&rng.chance(si_b92f64[si_d1e860.u46f4e0()]/2)){
+        if((*si_cfd44c.at9ceda0(x,y))->getEntity45d250()->getGroup45a3f0()->type9b4350()<=1&&rng.chance(si_b92f64[si_d1e860.getDepthIndex()]/2)){
          if(u581140())do{if(si_msg5111e0(((0x236)),((0)),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
          else si_cf6428.u682220(ent->getPosition45a4a0());
         }
@@ -3339,7 +3339,7 @@ int SiAI::takeTurn(){
   }
   if(!si_cf6514&&!fa0&&!path24.empty9b86e0()&&path24.back9e8c10().eq409b90(goal)&&path24.size9b9a50()<=20&&si_cefc4c->getZone462e30(v6c[0])->h14.isValid()&&si_d1e888->type!=0xd&&(si_cf462c!=10||ent->getName45a280()!="Sauler")){
    fa0=1;
-   if(rng.chance(si_b939b4[si_d1e860.u46f4e0()].f0)&&!si_cefc4c->u464450()){
+   if(rng.chance(si_b939b4[si_d1e860.getDepthIndex()].f0)&&!si_cefc4c->u464450()){
     int trapId;
     int m27;
     if(si_findByName9d7710(si_cf35b0,"Dirty Bomb Trap",trapId)&&si_findByName9d7de0(si_d2c408,"FAC_RES_Cargo_Ambush",m27)){
@@ -3524,7 +3524,7 @@ int SiAI::takeTurn(){
     si_cfd44c.getRect9b4430(goal,0xf,a);
     SiQ g_;
     int out;
-    if(si_cf6428.u683500(g_,0,10,1,k==0?ent->getPosition45a4a0():si_cefc4c->getPlayer4630f0()->getPosition45a4a0(),out,0,0)){
+    if(si_cf6428.findDispatchExit(g_,0,10,1,k==0?ent->getPosition45a4a0():si_cefc4c->getPlayer4630f0()->getPosition45a4a0(),out,0,0)){
      for(unsigned j=0;j<ids.size9b9260();j++){
       SiHE e=si_cefc4c->placeEntity6c58c0(ids[j],g_,0xb,0,k?0x22:0x17,0xe,0);
       if(e.isValid()){
@@ -3924,7 +3924,7 @@ int SiAI::takeTurn(){
        do{if(si_msg5111e0(((0x2fe)),((&fd4->getName571db0(0,0))),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
        if(fd4->name457860()=="L-Cannon"){
         if(si_cefb48)si_cefb48->say49e250(0x73,0,"");
-        else if(fd4->u457920()>si_d1e888->u46ed20()&&si_cefb48)si_cefb48->say49e250(0x16,0,fd4->getName571db0(0,0));
+        else if(fd4->u457920()>si_d1e888->getDepthIndex()&&si_cefb48)si_cefb48->say49e250(0x16,0,fd4->getName571db0(0,0));
        }
        fd4->u57a190(ent,4,0,0);
        fd4.reset9b7270();
@@ -3935,7 +3935,7 @@ int SiAI::takeTurn(){
       fd4->u57a190(ent,fd4->u4578a0(),0,0);
       if(si_cf462c==7)si_d2c658.add4729d0(0x44b,1,si_empty_b91de7,-1);
       do{if(si_msg5111e0(((0x302)),((&fd4->getName571db0(0,0))),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
-      if(fd4->u457920()>si_d1e888->u46ed20()){
+      if(fd4->u457920()>si_d1e888->getDepthIndex()){
        if(si_cefb48)si_cefb48->say49e250(0x16,0,fd4->getName571db0(0,0));
        if((fd4->u457880()==0x15&&fd4->def9b4350()->f128!=3||fd4->u457880()==0x17)&&si_cefb48)si_cefb48->say49e250(0x17,0,fd4->getName571db0(0,0));
        if(fd4->u457880()==0x18&&si_cefb48)si_cefb48->say49e250(0x18,0,fd4->getName571db0(0,0));
@@ -3949,7 +3949,7 @@ int SiAI::takeTurn(){
      }else goto L32b;
     }else if(ent->u45a810()>=fd4->u4578c0()){
      do{if(si_msg5111e0(((0x2fe)),((&fd4->getName571db0(0,0))),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
-     if(fd4->u457920()>si_d1e888->u46ed20()&&si_cefb48)si_cefb48->say49e250(0x16,0,fd4->getName571db0(0,0));
+     if(fd4->u457920()>si_d1e888->getDepthIndex()&&si_cefb48)si_cefb48->say49e250(0x16,0,fd4->getName571db0(0,0));
      fd4->u57a190(ent,4,0,0);
      fd4.reset9b7270();
      do{ent->f40++;ent->clr45b0b0();return (si_b95fac);}while(false);
@@ -3965,7 +3965,7 @@ int SiAI::takeTurn(){
        do{if(si_msg5111e0(((0x301)),((&up->getName571db0(0,0))),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
       }
       do{if(si_msg5111e0(((0x2fe)),((&fd4->getName571db0(0,0))),(0),(0),((ent)),((SiHE())),0,false))si_cec058->bubble8758d0(true);si_cec0b4->end7b4f10();}while(false);
-      if(fd4->u457920()>si_d1e888->u46ed20()&&si_cefb48)si_cefb48->say49e250(0x16,0,fd4->getName571db0(0,0));
+      if(fd4->u457920()>si_d1e888->getDepthIndex()&&si_cefb48)si_cefb48->say49e250(0x16,0,fd4->getName571db0(0,0));
       fd4.reset9b7270();
       do{ent->f40++;ent->clr45b0b0();return (si_b95fbc);}while(false);
      }

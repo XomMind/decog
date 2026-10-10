@@ -53,7 +53,7 @@ public:
 	vector<int> &unknown463b30();				// NOTE: placeholder name
 	bool unknown463b50(Point p);				// NOTE: placeholder name
 	void unknown463b80(Point p);				// NOTE: placeholder name
-	int unknown463ba0();						// NOTE: placeholder name
+	int getDisabledGarrisonAccesses();						// NOTE: placeholder name
 	vector<int> &unknown463bc0();				// NOTE: placeholder name
 	vector<vector<HProp> > &unknown463be0();	// NOTE: placeholder name
 	vector<HProp> &unknown463c00(int index);	// NOTE: placeholder name
@@ -84,7 +84,7 @@ public:
 	vector<int> list208;				// NOTE: placeholder name
 	char pad218[0x220 - 0x218];
 	vector<Point> points220;			// NOTE: placeholder name
-	int value230;						// NOTE: placeholder name
+	int disabledGarrisonAccesses;						// NOTE: placeholder name
 	char pad234[0x258 - 0x234];
 	vector<int> list258;				// NOTE: placeholder name
 	vector<vector<HProp> > zoneProps;	// NOTE: placeholder name
@@ -148,9 +148,9 @@ void BS::unknown463b80(Point p)
 	points220.push_back(p);
 }
 
-int BS::unknown463ba0()
+int BS::getDisabledGarrisonAccesses()
 {
-	return value230;
+	return disabledGarrisonAccesses;
 }
 
 vector<int> &BS::unknown463bc0()

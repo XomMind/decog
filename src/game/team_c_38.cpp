@@ -20,7 +20,7 @@ class HEntity { public: int ID; bool operator==(HEntity other) const; struct C38
 template <class T> void OpQ5_eraseStep(vector<T> &v, unsigned int &index);
 bool OpU8a_containsEntity(vector<HEntity> &v, HEntity e);	// NOTE: placeholder name
 template <class T> void OpX5_insertAt(vector<T> &v, int index, T value);
-extern string gameStrings_d2f508[], gameStrings_cf6f30[], gameStrings_cfaca0[], gameStrings_d37ec0[], gameStrings_cfb0c8[], gameStrings_d20b98[], gameStrings_d307d0[];	// global_string_arrays.cpp
+extern string gameStrings_d2f508[], gameStrings_cf6f30[], mapNames_cfaca0[], gameStrings_d37ec0[], gameStrings_cfb0c8[], gameStrings_d20b98[], gameStrings_d307d0[];	// global_string_arrays.cpp
 
 struct C38_Exit { int map; bool known; bool reached; int count; };	// NOTE: placeholder layout
 struct C38_Location { char pad0[4]; int f4; int f8; char padc[0x25 - 0xc]; bool f25; char pad26[0x40 - 0x26]; vector<HEntity> exits; vector<HEntity> visited; };	// NOTE: placeholder layout
@@ -342,7 +342,7 @@ void C38_Sheet::snapshot_4852a0(bool isDump)
 	for (unsigned int cols = 0; cols < adj.size(); cols++)
 	{
 		string distanceSq;
-		distanceSq += "-" + intToString(c38_d1e88c[cols].get23c()->f8) + "/" + gameStrings_cfaca0[c38_d1e88c[cols].get23c()->f4];
+		distanceSq += "-" + intToString(c38_d1e88c[cols].get23c()->f8) + "/" + mapNames_cfaca0[c38_d1e88c[cols].get23c()->f4];
 		f2b4.push_back(vector<C38_Exit>());
 		if (adj[cols].size() > (cols == adj.size() - 1 && c38_cf4b38 > 9 ? 0 : 1))
 		{

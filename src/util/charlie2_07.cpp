@@ -29,7 +29,7 @@ extern C2PHandle c2p_d1e884, c2p_d1e888;
 extern C2PBS *c2p_cefc4c;
 extern C2PGrid c2p_d1e970;
 extern C2PStats c2p_d2c658;
-extern string c2p_d32170[], c2p_cfe140[], c2p_cfaca0[], c2p_cf3fb0[];
+extern string c2p_d32170[], c2p_cfe140[], c2p_mapNames_cfaca0[], c2p_cf3fb0[];
 
 void opU5_logWithShell(bool flag, const string &text);
 string intToString(int v);
@@ -87,13 +87,13 @@ bool prelearnData(string &text, bool flag)
 			for (unsigned j = 0; j < found.size(); j++)
 			{
 				string message = seen[j] ? c2p_bf83bc : c2p_bf83d4;
-				message += intToString(-found[j]->depth) + c2p_bf83ec + c2p_cfaca0[found[j]->location] + c2p_bf83e8;
+				message += intToString(-found[j]->depth) + c2p_bf83ec + c2p_mapNames_cfaca0[found[j]->location] + c2p_bf83e8;
 				opU5_logWithShell(flag, message);
 				if (!seen[j] && found[j]->depth <= c2p_d1e888->depth && !found[j]->inRange46ecb0())
 				{
 					do
 					{
-						c2p_logPhrase5141b0(0x1a, &c2p_cfaca0[found[j]->location], &intToString(-found[j]->depth), 0, C2PHandle(), 0);
+						c2p_logPhrase5141b0(0x1a, &c2p_mapNames_cfaca0[found[j]->location], &intToString(-found[j]->depth), 0, C2PHandle(), 0);
 					} while (0);
 				}
 			}
@@ -128,7 +128,7 @@ bool prelearnData(string &text, bool flag)
 			if (count != 0)
 			{
 				*c2p_d1e970.at(2, index) += count;
-				string message = prefix + c2p_cfaca0[index] + c2p_bf8444 + intToString(count) + c2p_bf8440;
+				string message = prefix + c2p_mapNames_cfaca0[index] + c2p_bf8444 + intToString(count) + c2p_bf8440;
 				opU5_logWithShell(flag, message);
 			}
 		}
@@ -152,11 +152,11 @@ bool prelearnData(string &text, bool flag)
 			if (count != 0)
 			{
 				*c2p_d1e970.at(3, index) += count;
-				string message = prefix + c2p_cfaca0[index] + c2p_bf848c + intToString(count) + c2p_bf8488;
+				string message = prefix + c2p_mapNames_cfaca0[index] + c2p_bf848c + intToString(count) + c2p_bf8488;
 				opU5_logWithShell(flag, message);
 				do
 				{
-					c2p_logPhrase5141b0(0x1b, &c2p_cfaca0[index], &c2p_countString407a80(count, c2p_bf8498), 0, C2PHandle(), 0);
+					c2p_logPhrase5141b0(0x1b, &c2p_mapNames_cfaca0[index], &c2p_countString407a80(count, c2p_bf8498), 0, C2PHandle(), 0);
 				} while (0);
 			}
 		}
@@ -178,11 +178,11 @@ bool prelearnData(string &text, bool flag)
 		else
 		{
 			*c2p_d1e970.at(4, index) += count;
-			string message = prefix + c2p_cfaca0[index] + c2p_bf84d8 + intToString(count) + c2p_bf84d4;
+			string message = prefix + c2p_mapNames_cfaca0[index] + c2p_bf84d8 + intToString(count) + c2p_bf84d4;
 			opU5_logWithShell(flag, message);
 			do
 			{
-				c2p_logPhrase5141b0(0x1c, &c2p_cfaca0[index], &intToString(count), 0, C2PHandle(), 0);
+				c2p_logPhrase5141b0(0x1c, &c2p_mapNames_cfaca0[index], &intToString(count), 0, C2PHandle(), 0);
 			} while (0);
 		}
 	}
@@ -197,11 +197,11 @@ bool prelearnData(string &text, bool flag)
 		else
 		{
 			(*c2p_d1e970.at(5, index))++;
-			string text5 = prefix + c2p_cfaca0[index] + c2p_bf84f0;
+			string text5 = prefix + c2p_mapNames_cfaca0[index] + c2p_bf84f0;
 			opU5_logWithShell(flag, text5);
 			do
 			{
-				c2p_logPhrase5141b0(0x1d, &c2p_cfaca0[index], 0, 0, C2PHandle(), 0);
+				c2p_logPhrase5141b0(0x1d, &c2p_mapNames_cfaca0[index], 0, 0, C2PHandle(), 0);
 			} while (0);
 		}
 	}
@@ -216,11 +216,11 @@ bool prelearnData(string &text, bool flag)
 		else
 		{
 			(*c2p_d1e970.at(6, index))++;
-			string text6 = prefix + c2p_cfaca0[index] + c2p_bf8504;
+			string text6 = prefix + c2p_mapNames_cfaca0[index] + c2p_bf8504;
 			opU5_logWithShell(flag, text6);
 			do
 			{
-				c2p_logPhrase5141b0(0x1e, &c2p_cfaca0[index], 0, 0, C2PHandle(), 0);
+				c2p_logPhrase5141b0(0x1e, &c2p_mapNames_cfaca0[index], 0, 0, C2PHandle(), 0);
 			} while (0);
 		}
 	}
@@ -235,11 +235,11 @@ bool prelearnData(string &text, bool flag)
 		else
 		{
 			(*c2p_d1e970.at(7, index))++;
-			string text7 = prefix + c2p_cfaca0[index] + c2p_bf8524;
+			string text7 = prefix + c2p_mapNames_cfaca0[index] + c2p_bf8524;
 			opU5_logWithShell(flag, text7);
 			do
 			{
-				c2p_logPhrase5141b0(0x1f, &c2p_cfaca0[index], 0, 0, C2PHandle(), 0);
+				c2p_logPhrase5141b0(0x1f, &c2p_mapNames_cfaca0[index], 0, 0, C2PHandle(), 0);
 			} while (0);
 		}
 	}
@@ -254,11 +254,11 @@ bool prelearnData(string &text, bool flag)
 		else
 		{
 			(*c2p_d1e970.at(8, index))++;
-			string text8 = prefix + c2p_cfaca0[index] + c2p_bf853c;
+			string text8 = prefix + c2p_mapNames_cfaca0[index] + c2p_bf853c;
 			opU5_logWithShell(flag, text8);
 			do
 			{
-				c2p_logPhrase5141b0(0x20, &c2p_cfaca0[index], 0, 0, C2PHandle(), 0);
+				c2p_logPhrase5141b0(0x20, &c2p_mapNames_cfaca0[index], 0, 0, C2PHandle(), 0);
 			} while (0);
 		}
 	}
@@ -293,11 +293,11 @@ bool prelearnData(string &text, bool flag)
 				default:
 					kind = c2p_cf3fb0[type - 12];
 				}
-				string message = prefix + c2p_cfaca0[index] + c2p_bf85a4 + kind + c2p_bf859c;
+				string message = prefix + c2p_mapNames_cfaca0[index] + c2p_bf85a4 + kind + c2p_bf859c;
 				opU5_logWithShell(flag, message);
 				do
 				{
-					c2p_logPhrase5141b0(0x21, &c2p_cfaca0[index], &kind, 0, C2PHandle(), 0);
+					c2p_logPhrase5141b0(0x21, &c2p_mapNames_cfaca0[index], &kind, 0, C2PHandle(), 0);
 				} while (0);
 			}
 		}

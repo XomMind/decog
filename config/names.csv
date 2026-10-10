@@ -92,7 +92,7 @@
 0x65f320,Prop::setSoundMute,0xb6,string
 0x66c020,Cell::removeItem,0xd4,string
 0x684de0,Overmind::loadZWeaponList,0x5b4,string
-0x6854e0,Overmind::spawnSurgicalParty,0xfa1,string
+0x685a10,Overmind::spawnSurgicalParty,0xa71,string
 0x687ef0,Overmind::deployAssaultParty,0xf88,string
 0x688e80,Overmind::spawnAntiInfestationCarrier,0x276,string
 0x6896d0,Overmind::spawnPatrolParty,0x11d3,string

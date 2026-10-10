@@ -1,4 +1,4 @@
-// op_overmind_hunt: Overmind::unknown687520 (0x687520), sends a hunter squad (leader plus rolled escorts) after
+// op_overmind_hunt: Overmind::spawnHunterParty (0x687520), sends a hunter squad (leader plus rolled escorts) after
 // a target entity or area and returns the number of robots spawned (COGMIND.exe Beta 17.1).
 // NOTE: placeholder names and partial layouts.
 #include <string>
@@ -73,7 +73,7 @@ public:
 	int unknown4638e0(int a, int b);	// NOTE: placeholder name
 	int getTurn();	// 0x464270
 	int unknown715730(int a);	// NOTE: placeholder name
-	EntityRecord *unknown6c5600(int a, int b, bool c, bool d);	// NOTE: placeholder name
+	EntityRecord *selectRobotOfClass(int a, int b, bool c, bool d);	// NOTE: placeholder name
 	HEntity placeEntity(EntityRecord *record, const Point &position, int groupIndex, bool unknown18, int aiMode1, int aiMode2, bool forced);
 };
 extern OpOH_World *opOH_world;	// NOTE: placeholder name
@@ -93,7 +93,7 @@ extern OpOH_Handle opOH_d1ebd8;	// NOTE: placeholder name
 class OpOH_GameData	// NOTE: placeholder name (GameData at 0xd1e860)
 {
 public:
-	int unknown46f4e0();	// NOTE: placeholder name (difficulty)
+	int getDepthIndex();	// NOTE: placeholder name (difficulty)
 	const string &getEntryText(const string &key);	// NOTE: placeholder name (0x46f6d0)
 };
 extern OpOH_GameData opOH_gameData;	// NOTE: placeholder name
@@ -145,10 +145,10 @@ void opOH_eraseAt_9da940(vector<HEntity> &v, int index);	// NOTE: placeholder na
 class Overmind	// NOTE: placeholder layout
 {
 public:
-	int unknown687520(HEntity target, Point *area, bool alone);	// NOTE: placeholder name
-	bool unknown683500(Point *out, bool allowVisible, int minDistance, bool ignoreProps, const OpOH_Pos &from, Point **access, bool preferProps, bool ignoreUsed);	// NOTE: placeholder name
+	int spawnHunterParty(HEntity target, Point *area, bool alone);	// NOTE: placeholder name
+	bool findDispatchExit(Point *out, bool allowVisible, int minDistance, bool ignoreProps, const OpOH_Pos &from, Point **access, bool preferProps, bool ignoreUsed);	// NOTE: placeholder name
 	void unknown683e60(const Point &p, vector<vector<HEntity> > &out);	// NOTE: placeholder name
-	bool unknown6827d0(Party *party, Point *access);	// NOTE: placeholder name
+	bool addParty(Party *party, Point *access);	// NOTE: placeholder name
 
 	char pad00[0x4c];
 	int unknown4c;	// NOTE: placeholder name
@@ -156,7 +156,7 @@ public:
 	int failedDispatches;	// +0x128, NOTE: placeholder name
 };
 
-int Overmind::unknown687520(HEntity target, Point *area, bool alone)
+int Overmind::spawnHunterParty(HEntity target, Point *area, bool alone)
 {
 	if (stringToInt(opOH_gameData.getEntryText("comConduitDisabled_g")) || unknown4c || opOH_world->unknown4638e0(0,3) == 2)
 		return 0;
@@ -170,7 +170,7 @@ int Overmind::unknown687520(HEntity target, Point *area, bool alone)
 	EntityRecord *element = opOH_hunter_cefc08;
 	Point cx;
 	Point *to = NULL;
-	if (!changed && !unknown683500(&cx,true,0,ok,OpOH_Pos(-1),&to,false,false))
+	if (!changed && !findDispatchExit(&cx,true,0,ok,OpOH_Pos(-1),&to,false,false))
 	{
 		failedDispatches++;
 		return 0;
@@ -205,16 +205,16 @@ int Overmind::unknown687520(HEntity target, Point *area, bool alone)
 	if (multiplier && !alone)
 	{
 		int num = 0;
-		if (rng.chance(multiplier * opOH_escortChance_b93f20[opOH_gameData.unknown46f4e0()].first))
+		if (rng.chance(multiplier * opOH_escortChance_b93f20[opOH_gameData.getDepthIndex()].first))
 			num++;
-		if (num && rng.chance(multiplier * opOH_escortChance_b93f20[opOH_gameData.unknown46f4e0()].second))
+		if (num && rng.chance(multiplier * opOH_escortChance_b93f20[opOH_gameData.getDepthIndex()].second))
 			num++;
 		if (num)
 		{
 			OpR5h_WL<int> ranks;
 			int v;
 			for (v = 0; v < 3; v++)
-				ranks.add(v,opOH_escortWeights_b93e88[opOH_gameData.unknown46f4e0()][v]);
+				ranks.add(v,opOH_escortWeights_b93e88[opOH_gameData.getDepthIndex()][v]);
 			if (!ranks.getTotal_9b81d0())
 				goto done;
 			int pick;
@@ -227,13 +227,13 @@ int Overmind::unknown687520(HEntity target, Point *area, bool alone)
 				switch (pick)
 				{
 					case 0:
-						r1 = opOH_world->unknown6c5600(1,0x16,false,false);
+						r1 = opOH_world->selectRobotOfClass(1,0x16,false,false);
 						break;
 					case 1:
-						r1 = opOH_world->unknown6c5600(1,0x17,false,false);
+						r1 = opOH_world->selectRobotOfClass(1,0x17,false,false);
 						break;
 					case 2:
-						r1 = opOH_world->unknown6c5600(1,0x19,false,false);
+						r1 = opOH_world->selectRobotOfClass(1,0x19,false,false);
 						break;
 				}
 				if (!r1)
@@ -260,7 +260,7 @@ done:
 		}
 	}
 spawned:
-	unknown6827d0(new Party(7,first,-1,target.isValid() && target->isPlayer(),opOH_world->getTurn() + opOH_partyDuration_b91e18),to);
+	addParty(new Party(7,first,-1,target.isValid() && target->isPlayer(),opOH_world->getTurn() + opOH_partyDuration_b91e18),to);
 	if (opOH_current_d1e888 != opOH_d1ebe0 && opOH_current_d1e888 != opOH_d1ebd8 && !(opOH_current_d1e888.get23c()->type == 0x21 && stringToInt(opOH_gameData.getEntryText("frgUfdAttacked_g"))))
 	{
 		opOH_stats.add4729d0(0x231,1,empty_b9573b,-1);
