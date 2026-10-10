@@ -1,0 +1,442 @@
+{
+  "description": "Selected defined-but-unmatched /Od aliases must invoke their proven retail bodies before optimization can erase or inline unproved source semantics. Targets are resolved from the strict symbol table, never placeholder class suffixes. Substitutions only affect generated build copies. This manifest is not complete proof of all optimized aliases.",
+  "bindings": [
+    {
+      "name": "?resize@OpT8a_IntGrid@@QAEXHHPAV?$basic_istream@DU?$char_traits@D@std@@@std@@@Z",
+      "va": "0x9d4090",
+      "kind": "code",
+      "abi": "thiscall; ecx=12-byte integer grid, width/height/istream* on stack; ret12.",
+      "evidence": "Retail ctor0x9cfc50+0x86 calls this body with this+8 and width/height/null stream. Retail0x9d4090 stores dimensions at+0/+4, cells at+8, allocates four bytes per element and returns ret0xc. Private optimized startup executed its unbound alias trap0x2394."
+    },
+    {
+      "name": "?OnArenaAllocation@Arena@protobuf@google@@ABEXPBVtype_info@@I@Z",
+      "va": "0xa59f60",
+      "kind": "code",
+      "abi": "const thiscall; ecx=Arena*, type_info* and 32-bit size_t on stack; ret8. Not the 0x432460 AllocHook wrapper.",
+      "evidence": "protobuf arena.cc:377-381 and actual retail0xa59f60 callback/null/cookie sequence; retail0x432460 calls this body with the matching two arguments."
+    },
+    {
+      "name": "??1Closure@protobuf@google@@UAE@XZ",
+      "va": "0xa43de0",
+      "kind": "code",
+      "abi": "thiscall base destructor; ecx=this; ret0. Not scalar deleting wrapper0x432360/ret4.",
+      "evidence": "callback.h virtual base destructor and stubs/common.cc:310; retail0xa43de0 writes Closure vtable0xb62ad0; deleting wrapper0x432360 calls it before optional delete."
+    },
+    {
+      "name": "?opY3_moveCost_cefc48@@3PAVCartographer2DMoveCost@@A",
+      "va": "0xcefc48",
+      "kind": "data",
+      "evidence": "Matched positional-audio function0x500500+0xa7 loads pointer slot0xcefc48 before findPath; strict alias ?lb2s_cost_cefc48@@3PAULB2SCost@@A."
+    },
+    {
+      "name": "?opr1c_color_d29804@@3UXColor@@A",
+      "va": "0xd29804",
+      "kind": "data",
+      "evidence": "Matched setColor0x4347a0+0x12 sets ecx=0xd29804 for XColor::operator=; strict alias ?color_d29804@@3UXColor@@A; 3-byte RGB object."
+    },
+    {
+      "name": "?opr1c_colorIsBlack_cefb3c@@3_NA",
+      "va": "0xcefb3c",
+      "kind": "data",
+      "evidence": "Matched setColor0x4347a0+0x35 stores AL to byte0xcefb3c; strict alias ?colorIsSet_cefb3c@@3_NA. Actual semantics !=black: unproved setColor body is separately forwarded."
+    },
+    {
+      "name": "?opE_unknown_d2981c@@3PAUXColor@@A",
+      "va": "0xd2981c",
+      "kind": "data",
+      "evidence": "Matched button-highlight0x7c2cd0+0x4a loads enabled-color pointer slot0xd2981c; equivalent src/op/op_u5_s4.cpp:362-371."
+    },
+    {
+      "name": "?opE_unknown_d29758@@3PAUXColor@@A",
+      "va": "0xd29758",
+      "kind": "data",
+      "evidence": "Matched button-highlight0x7c2cd0+0x55 loads disabled-color pointer slot0xd29758; equivalent src/op/op_u5_s4.cpp:362-371."
+    },
+    {
+      "name": "?opr3_statTypes@@3V?$vector@PAUOpR3_StatType@@V?$allocator@PAUOpR3_StatType@@@std@@@std@@A",
+      "va": "0xd2f0f8",
+      "kind": "data",
+      "evidence": "Matched stat/effect allocator0x665a70+0x53 sets ecx=0xd2f0f8 before vector operator[]; strict vec_d2f0f8 aliases. Vector container object, not pointer slot."
+    },
+    {
+      "name": "?opS4_messages@@3PAVOpS4_Messages@@A",
+      "va": "0xcec058",
+      "kind": "data",
+      "evidence": "Matched Xom handler0x69e700+0x147 loads pointer slot0xcec058 before bubble; equivalent src/util/loop_bravo_02_xom.cpp:242-244."
+    },
+    {
+      "name": "?opS4_logMsgs@@3PAVOpS4_LogMsgs@@A",
+      "va": "0xcec0b4",
+      "kind": "data",
+      "evidence": "Matched Xom handler0x69e700+0x152 loads pointer slot0xcec0b4 before scrollToEnd; equivalent src/util/loop_bravo_02_xom.cpp:246."
+    },
+    {
+      "name": "?opS4_rolledValues@@3PAVOpS4_RolledValues@@A",
+      "va": "0xcefb48",
+      "kind": "data",
+      "evidence": "Matched Xom handler0x69e700+0x161 null-tests slot0xcefb48 and+0x183 loads it before say; strict ?lb2x_opS4_rolledValues@@3PAVlb2x_OpS4_RolledValues@@A alias."
+    }
+  ],
+  "forwarding": [
+    {
+      "source": "src/op/op_r1c.cpp",
+      "symbols": [
+        "?opr1c_setColor_4347a0@@YAXUXColor@@@Z"
+      ],
+      "before": "void opr1c_setColor_4347a0(XColor color)\t// NOTE: placeholder name\n{\n\topr1c_color_d29804 = color;\n\topr1c_colorIsBlack_cefb3c = opr1c_color_d29804 == COLOR_BLACK;\n}",
+      "after": "void opr1c_setColor_4347a0(XColor color)\n{\n\treinterpret_cast<void (__cdecl *)(XColor)>({target})(color);\n}"
+    },
+    {
+      "source": "src/op/op_r1d_xpload.cpp",
+      "symbols": [
+        "??0OpR1dX_CellGrid@@QAE@XZ"
+      ],
+      "before": "inline OpR1dX_CellGrid::OpR1dX_CellGrid() {}",
+      "external": true
+    },
+    {
+      "source": "src/util/sierra_01.cpp",
+      "symbols": [
+        "??0SiShot46@@QAE@USiP@@HH@Z"
+      ],
+      "before": "SiShot46(SiP,int,int)throw(){}",
+      "external": true
+    },
+    {
+      "source": "src/game/cc_r2_12.cpp",
+      "symbols": [
+        "??0EntityPart4588f0@@QAE@XZ"
+      ],
+      "before": "EntityPart4588f0::EntityPart4588f0()\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/game/team_a_19.cpp",
+      "symbols": [
+        "??0JLogNew_4225c0@@QAE@XZ"
+      ],
+      "before": "JLogNew_4225c0::JLogNew_4225c0()\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/game/team_c_54.cpp",
+      "symbols": [
+        "??0C54_Section@@QAE@XZ"
+      ],
+      "before": "C54_Section::C54_Section()\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/game/team_d_04.cpp",
+      "symbols": [
+        "??0Owned_45f830@@QAE@XZ"
+      ],
+      "before": "Owned_45f830::Owned_45f830()\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_a_jlog.cpp",
+      "symbols": [
+        "??0LogMsgNew_410d90@@QAE@XZ"
+      ],
+      "before": "LogMsgNew_410d90::LogMsgNew_410d90()\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_cmap_squad.cpp",
+      "symbols": [
+        "??0OpCM_Timer@@QAE@HPAVXConsole@@_NHABUPosB@@HHH2@Z"
+      ],
+      "before": "OpCM_Timer(int type_, XConsole *console_, bool c_, int d_, const PosB &e_, int f_, int g_, int h_, const PosB &i_) {}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_cmap_update.cpp",
+      "symbols": [
+        "??0CmuTrackedNew@@QAE@VCmuHEntity@@@Z"
+      ],
+      "before": "CmuTrackedNew::CmuTrackedNew(CmuHEntity e)\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_q5_stl.cpp",
+      "symbols": [
+        "??0OpQ5s_T9f0a40@@QAE@XZ"
+      ],
+      "before": "OpQ5s_T9f0a40() {}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_r1g.cpp",
+      "symbols": [
+        "??0Unknown46f1e0@@QAE@XZ"
+      ],
+      "before": "Unknown46f1e0::Unknown46f1e0()\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_rex_fonts.cpp",
+      "symbols": [
+        "??0XFontSet@@QAE@XZ"
+      ],
+      "before": "XFontSet() {}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_s1c.cpp",
+      "symbols": [
+        "??0OpS1c_RecNew456130@@QAE@PAUOpS1c_Data@@@Z"
+      ],
+      "before": "OpS1c_RecNew456130::OpS1c_RecNew456130(OpS1c_Data *data_)\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_s8e_str.cpp",
+      "symbols": [
+        "??0OpY1_CharEqualNoCase@@QAE@XZ"
+      ],
+      "before": "OpY1_CharEqualNoCase() {}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_t8a.cpp",
+      "symbols": [
+        "??0OpY1_CharEqualNoCase@@QAE@XZ"
+      ],
+      "before": "OpY1_CharEqualNoCase() {}",
+      "external": true
+    },
+    {
+      "source": "src/op/op_y1.cpp",
+      "symbols": [
+        "??0OpY1_CharEqualNoCase@@QAE@XZ"
+      ],
+      "before": "OpY1_CharEqualNoCase() {}",
+      "external": true
+    },
+    {
+      "source": "src/util/alpha2_10.cpp",
+      "symbols": [
+        "??0A2ITunneler@@QAE@HHABUA2IPos@@HHHHHHHHH_N@Z"
+      ],
+      "before": "A2ITunneler::A2ITunneler(int delay, int dir, const A2IPos &pos, int param1C, int width, int param24, int param28, int param2C, int param30, int param34, int param38, int param3C, bool param40)\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/util/alpha2_11.cpp",
+      "symbols": [
+        "??0A2CSettings@@QAE@XZ"
+      ],
+      "before": "A2CSettings::A2CSettings()\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/util/alpha2_15.cpp",
+      "symbols": [
+        "??0A2HPicker@@QAE@XZ"
+      ],
+      "before": "A2HPicker::A2HPicker()\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/util/alpha2_16.cpp",
+      "symbols": [
+        "??0A2QMatch@@QAE@PAUA2QDef@@UA2QHE@@H1@Z"
+      ],
+      "before": "A2QMatch::A2QMatch(A2QDef *def, A2QHE entity, int a, A2QHE other)\n{\n}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_02.cpp",
+      "symbols": [
+        "??0F7Cfg@@QAE@XZ"
+      ],
+      "before": "F7Cfg() {}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_03.cpp",
+      "symbols": [
+        "??0G8Point@@QAE@XZ"
+      ],
+      "before": "G8Point() {}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_03.cpp",
+      "symbols": [
+        "??0G8HE@@QAE@XZ"
+      ],
+      "before": "G8HE() {}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_03.cpp",
+      "symbols": [
+        "??0G8HLocation@@QAE@XZ"
+      ],
+      "before": "G8HLocation() {}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_03.cpp",
+      "symbols": [
+        "??0G8Marker@@QAE@ABUG8Point@@UG8HLocation@@_NUG8HE@@3@Z"
+      ],
+      "before": "G8Marker(const G8Point &p, G8HLocation l, bool b, G8HE e1, G8HE e2) {}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_03.cpp",
+      "symbols": [
+        "??0G8Branch@@QAE@HUG8HLocation@@@Z"
+      ],
+      "before": "G8Branch(int k, G8HLocation l) {}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_03.cpp",
+      "symbols": [
+        "??0G8Actor@@QAE@XZ"
+      ],
+      "before": "G8Actor() {}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_03.cpp",
+      "symbols": [
+        "??0G8Actor2@@QAE@UG8HE@@@Z",
+        "??0G8Actor2@@QAE@UG8HItem@@@Z"
+      ],
+      "before": "G8Actor2(G8HE e) {}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_03.cpp",
+      "symbols": [
+        "??0G8Actor2@@QAE@UG8HE@@@Z",
+        "??0G8Actor2@@QAE@UG8HItem@@@Z"
+      ],
+      "before": "G8Actor2(G8HItem i) {}",
+      "external": true
+    },
+    {
+      "source": "src/util/echo_03.cpp",
+      "symbols": [
+        "??0G8Option@@QAE@HPAXH@Z"
+      ],
+      "before": "G8Option(int a, void *def, int b) {}",
+      "external": true
+    },
+    {
+      "source": "src/util/golf_02.cpp",
+      "symbols": [
+        "??0GqPair@@QAE@PAHH@Z"
+      ],
+      "before": "GqPair::GqPair(int*,int){}",
+      "external": true
+    },
+    {
+      "source": "src/util/golf_02.cpp",
+      "symbols": [
+        "??0GqHack@@QAE@HH@Z"
+      ],
+      "before": "GqHack::GqHack(int,int){}",
+      "external": true
+    },
+    {
+      "source": "src/util/golf_02.cpp",
+      "symbols": [
+        "??0GqShot@@QAE@UGqPoint@@HH@Z"
+      ],
+      "before": "GqShot::GqShot(GqPoint,int,int){}",
+      "external": true
+    },
+    {
+      "source": "src/util/golf_03.cpp",
+      "symbols": [
+        "??0GrRoomRec@@QAE@ABUGrE24@@H@Z"
+      ],
+      "before": "GrRoomRec::GrRoomRec(const GrE24&,int){}",
+      "external": true
+    },
+    {
+      "source": "src/util/golf_03.cpp",
+      "symbols": [
+        "??0GrLists@@QAE@XZ"
+      ],
+      "before": "GrLists::GrLists(){}",
+      "external": true
+    },
+    {
+      "source": "src/util/golf_03.cpp",
+      "symbols": [
+        "??0GrPair@@QAE@PAHH@Z"
+      ],
+      "before": "GrPair::GrPair(int*,int){}",
+      "external": true
+    },
+    {
+      "source": "src/util/lima_01.cpp",
+      "symbols": [
+        "??0GxXGroup@@QAE@H@Z"
+      ],
+      "before": "GxXGroup::GxXGroup(int){}",
+      "external": true
+    },
+    {
+      "source": "src/util/sierra_01.cpp",
+      "symbols": [
+        "??0SiRect@@QAE@PAUSiSecDef@@USiHE@@H1@Z"
+      ],
+      "before": "SiRect(SiSecDef*,SiHE,int,SiHE){}",
+      "external": true
+    },
+    {
+      "source": "src/util/sierra_01.cpp",
+      "symbols": [
+        "??0SiVHE3@@QAE@XZ"
+      ],
+      "before": "SiVHE3(){}",
+      "external": true
+    },
+    {
+      "source": "src/util/sierra_01.cpp",
+      "symbols": [
+        "??0SiObj45b9e0@@QAE@XZ"
+      ],
+      "before": "SiObj45b9e0(){}",
+      "external": true
+    },
+    {
+      "source": "src/util/sierra_01.cpp",
+      "symbols": [
+        "??0SiRec118@@QAE@HHUSiHE@@0ABUSiP@@@Z"
+      ],
+      "before": "SiRec118(int,int,SiHE,SiHE,const SiP&){}",
+      "external": true
+    },
+    {
+      "source": "src/util/uniform_01.cpp",
+      "symbols": [
+        "??0UfZone@@QAE@ABUUfPoint@@UUfHL@@HUUfHE@@2@Z"
+      ],
+      "before": "UfZone(const UfPoint&,UfHL,int,UfHE,UfHE){}",
+      "external": true
+    },
+    {
+      "source": "src/util/uniform_01.cpp",
+      "symbols": [
+        "??0UfJob@@QAE@HHUUfHE@@UUfHI@@ABUUfPoint@@@Z"
+      ],
+      "before": "UfJob(int,int,UfHE,UfHI,const UfPoint&){}",
+      "external": true
+    },
+    {
+      "source": "src/util/zulu_01.cpp",
+      "symbols": ["??0ZuStatus@@QAE@H@Z"],
+      "before": "ZuStatus::ZuStatus(int t){f0=t;}",
+      "external": true
+    }
+  ]
+}
