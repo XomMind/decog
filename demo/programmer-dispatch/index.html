@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cogmind: how 0b10 dispatches Programmer squads</title>
+<style>
+@font-face { font-family: smallcaps-mono; size-adjust: 80%; src: url("../../assets/fonts/Cogmind-Smallcaps-mono.woff2") format("woff2"); }
+@font-face { font-family: cog-mono; src: url("../../assets/fonts/Cogmind-Cog.woff2") format("woff2"); }
+:root {
+	--bg: #080808; --line: #006200; --label: #162416; --title: #00cc00; --text: #9da9af; --dim: #747e83;
+	--p: #c45cff; --q: #ff9a2e; --warn: #ff8a3a; --bad: #ff4646; --ok: #00cc00; --gold: #f0c850;
+	--mono: smallcaps-mono, "Courier New", monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--text); font: 14px/1.35 var(--mono); }
+a { color: var(--title); }
+header { display: flex; align-items: baseline; gap: 18px; padding: 10px 16px 6px; border-bottom: 1px solid var(--line); }
+header h1 { margin: 0; font: 22px cog-mono, var(--mono); color: var(--title); letter-spacing: 1px; }
+header .sub { color: var(--dim); }
+.layout { display: grid; grid-template-columns: minmax(640px, 1fr) 430px; gap: 12px; padding: 12px 16px; align-items: start; }
+.left { min-width: 0; }
+.panel { border: 1px solid var(--line); margin-bottom: 10px; position: relative; }
+.panel > h2 { margin: 0; padding: 2px 8px; background: var(--label); color: var(--title); font: 14px var(--mono); letter-spacing: 1px; display: flex; justify-content: space-between; }
+.panel > h2 small { color: var(--dim); letter-spacing: 0; }
+.panel .body { padding: 6px 8px; }
+.toolbar { display: flex; flex-wrap: wrap; gap: 6px 12px; align-items: center; padding: 6px 8px; }
+.toolbar .grp { display: flex; gap: 4px; align-items: center; }
+button, select, input[type=number] {
+	font: 13px var(--mono); color: var(--title); background: #0c140c; border: 1px solid var(--line); padding: 2px 8px; border-radius: 0;
+}
+button:hover, select:hover { background: #142414; cursor: pointer; }
+button.on { background: var(--line); color: #000; }
+input[type=number] { width: 90px; }
+label { cursor: pointer; }
+input[type=checkbox] { accent-color: var(--line); }
+.mapwrap { position: relative; line-height: 0; background: #000; }
+#map { width: 100%; image-rendering: pixelated; cursor: crosshair; }
+#chart { width: 100%; height: 120px; display: block; image-rendering: pixelated; }
+#tip { position: absolute; pointer-events: none; display: none; background: rgba(8, 12, 8, 0.95); border: 1px solid var(--line);
+	color: var(--text); padding: 4px 8px; font: 12px/1.35 var(--mono); max-width: 340px; z-index: 5; white-space: pre-line; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 6px 8px; color: var(--dim); font-size: 13px; }
+.legend b { font: 14px cog-mono, monospace; font-weight: normal; }
+.row { display: flex; justify-content: space-between; gap: 8px; }
+.row + .row { margin-top: 2px; }
+.k { color: var(--dim); }
+.v { color: var(--text); text-align: right; }
+.big { font: 30px cog-mono, var(--mono); color: var(--title); }
+.bar { height: 8px; background: #0f1a0f; border: 1px solid var(--line); margin: 4px 0 6px; }
+.bar > div { height: 100%; background: var(--title); width: 0; transition: width 0.1s linear; }
+table { border-collapse: collapse; width: 100%; font-size: 13px; }
+td, th { padding: 1px 6px; text-align: right; border-bottom: 1px solid #0f1f0f; white-space: nowrap; }
+th { color: var(--title); font-weight: normal; text-align: right; }
+td:first-child, th:first-child { text-align: left; }
+tr.cur td { background: #10240f; color: #d8ffd8; }
+tr.off td { color: #4a5250; }
+.calc { table-layout: fixed; }
+.calc td { border: none; padding: 0 2px; white-space: normal; }
+.calc td.n { text-align: right; color: var(--text); width: 70px; white-space: nowrap; }
+.calc tr.sum td { border-top: 1px solid var(--line); color: var(--title); }
+.gate { display: flex; gap: 6px; }
+.gate .m { width: 14px; text-align: center; }
+.gate.ok .m { color: var(--ok); }
+.gate.no .m { color: var(--bad); }
+.gate.info .m { color: var(--dim); }
+#squads .sq { border-left: 3px solid var(--p); padding: 2px 6px; margin-bottom: 4px; display: flex; justify-content: space-between; gap: 6px; }
+#squads .sq.Q { border-color: var(--q); }
+#squads .sq button { padding: 0 6px; font-size: 12px; }
+#squads .ph0 { color: #ffd84a; } #squads .ph1 { color: #ff8a3a; } #squads .ph2 { color: #ff4646; }
+#log { height: 190px; overflow-y: auto; font-size: 13px; }
+#log div { padding: 1px 0; }
+#log .t { color: #3f5a3f; margin-right: 6px; }
+#log .alert { color: #ffd84a; }
+#log .warn { color: var(--warn); }
+#log .dim { color: var(--dim); }
+#log .info { color: var(--text); }
+.below { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: 12px; padding: 0 16px 12px; }
+pre#src { margin: 0; padding: 6px 0; font: 12.5px/1.45 "Courier New", monospace; overflow-x: auto; color: #8a968f; }
+pre#src .ln { display: block; padding: 0 10px; border-left: 3px solid transparent; }
+pre#src .c { color: #4f6a55; }
+pre#src .ln.hot { animation: hot 1.6s ease-out; }
+@keyframes hot { 0% { background: #2d5a14; border-left-color: #8cff4a; color: #e8ffe0; } 100% { background: transparent; border-left-color: transparent; } }
+ul.facts { margin: 0; padding: 4px 10px 6px 26px; }
+ul.facts li { margin: 4px 0; }
+ul.facts b { color: var(--title); font-weight: normal; }
+.note { color: var(--dim); font-size: 12.5px; }
+footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-top: 1px solid var(--line); }
+@media (max-width: 1150px) { .layout, .below { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+	<h1>0b10 EXTERMINATION DISPATCH</h1>
+	<span class="sub">how the Complex sends Programmer squads after you &mdash; Cogmind Beta 17.1, from byte-matched decompiled code</span>
+</header>
+
+<div class="layout">
+<section class="left">
+	<div class="panel">
+		<div class="toolbar">
+			<div class="grp">
+				<button id="play" title="Space">Pause</button>
+				<button id="step" title="N">Step 1 turn</button>
+				<button id="skip" title="Run until the next squad is sent">Skip to next dispatch</button>
+			</div>
+			<div class="grp"><span class="k">speed</span>
+				<select id="speed">
+					<option value="2">2 turns/s</option>
+					<option value="5">5 turns/s</option>
+					<option value="15" selected>15 turns/s</option>
+					<option value="40">40 turns/s</option>
+					<option value="120">120 turns/s</option>
+					<option value="400">400 turns/s</option>
+				</select>
+			</div>
+			<div class="grp">
+				<button id="vTiles" title="Tiles use robot sprites from noemica/cog-minder">Tiles</button>
+				<button id="vObserver" class="on" title="Show the whole map and every robot, not only what Cogmind can see">Observer</button>
+				<button id="vZones" class="on" title="Exploration zones (the surgical blocks)">Zones</button>
+				<button id="vAreas" class="on" title="Squad search areas">Search areas</button>
+				<label><input type="checkbox" id="pauseOnDispatch"> pause on dispatch</label>
+			</div>
+		</div>
+		<div class="mapwrap"><canvas id="map"></canvas><div id="tip"></div></div>
+	</div>
+	<div class="panel">
+		<h2>TURNS UNTIL THE DISPATCH TIMER IS DUE <small>green: timer &middot; violet: squad sent &middot; grey: due but nobody sent &middot; red dots: spotted</small></h2>
+		<canvas id="chart" width="1200" height="120"></canvas>
+	</div>
+	<div class="legend">
+		<span><b style="color:#d8ffd8">@</b> Cogmind</span>
+		<span><b style="color:var(--p)">p</b> Programmer</span>
+		<span><b style="color:var(--q)">Q</b> Q-Series</span>
+		<span><b style="color:var(--gold)">&gt;</b> 0b10 exit out of your view (squads can enter)</span>
+		<span><b style="color:#7d6a2c">&gt;</b> 0b10 exit in view (skipped while another qualifies)</span>
+		<span><b style="color:#8a6a44">&gt;</b> cave exit (never used)</span>
+		<span><b style="color:#e2e24c">G</b> Garrison Access (used even in view)</span>
+		<span><span style="color:#ffd84a">&#9643;</span><span style="color:#ff8a3a">&#9643;</span><span style="color:#ff4646">&#9643;</span> search area &plusmn;15 / &plusmn;30 / &plusmn;45</span>
+		<span><span style="color:var(--title)">-20t</span> zone not entered since the last roll</span>
+	</div>
+	<p class="note">Click a robot to destroy its squad, click a <span style="color:#e2e24c">G</span> to disable that Garrison Access, click any floor to send Cogmind there.
+	Manual mode: arrows / numpad / hjklyubn to move, <span style="color:var(--title)">.</span> or space to wait.</p>
+</section>
+
+<aside>
+	<div class="panel">
+		<h2>LOCATION</h2>
+		<div class="body">
+			<div class="row"><span class="k">map</span><select id="mapType"></select></div>
+			<div class="row"><span class="k">depth</span><select id="depth"></select></div>
+			<div class="row"><span class="k">layout seed</span><span><input type="number" id="seed" min="1"> <button id="newMap">new layout</button></span></div>
+		</div>
+	</div>
+	<div class="panel">
+		<h2>COGMIND</h2>
+		<div class="body">
+			<div class="row"><span class="k">behaviour</span>
+				<select id="mode">
+					<option value="frontier">explore what it hasn't seen</option>
+					<option value="zones">beeline into new zones (worst case)</option>
+					<option value="wander">wander</option>
+					<option value="hold">hold position (wait)</option>
+					<option value="manual">manual (keyboard)</option>
+				</select>
+			</div>
+			<div class="row"><span class="k">move speed (time per move)</span>
+				<select id="pcost">
+					<option value="25">25</option>
+					<option value="50">50</option>
+					<option value="75" selected>75</option>
+					<option value="100">100</option>
+					<option value="150">150</option>
+				</select>
+			</div>
+			<div class="row"><span class="k">RIF Zone Cloak</span>
+				<select id="cloak"><option value="0">none</option><option value="1">level 1 (+75)</option><option value="2">level 2 (+150)</option></select>
+			</div>
+			<div class="row"><label class="k" title="Overmind+0x90: written by 0x68fc40 from combat events. Without it the Q-Series roll repeats until it lands on Programmers."><input type="checkbox" id="analysis" checked> 0b10 has analysed your build</label></div>
+			<div class="row" style="margin-top:6px"><button id="garrison">Disable a Garrison Access</button><button id="other" title="Intercept, search-patrol and assault dispatches write the same lastDispatchTurn">Other dispatch now</button><button id="kill">Destroy all squads</button></div>
+		</div>
+	</div>
+	<div class="panel">
+		<h2>DISPATCH TIMER <small id="turnLabel"></small></h2>
+		<div class="body">
+			<div class="row"><span class="big" id="remaining">0</span><span class="k" id="dueAt" style="align-self:flex-end"></span></div>
+			<div class="bar"><div id="bar"></div></div>
+			<table class="calc" id="calc"></table>
+		</div>
+	</div>
+	<div class="panel">
+		<h2>ZONES &amp; EXPLORATION</h2>
+		<div class="body" id="zones"></div>
+	</div>
+	<div class="panel">
+		<h2>CONDITIONS</h2>
+		<div class="body" id="gates"></div>
+	</div>
+	<div class="panel">
+		<h2>EXTERMINATION SQUADS <small id="squadCount"></small></h2>
+		<div class="body" id="squads"></div>
+	</div>
+	<div class="panel">
+		<h2>MESSAGE LOG</h2>
+		<div class="body" id="log"></div>
+	</div>
+</aside>
+</div>
+
+<div class="below">
+	<div class="panel">
+		<h2>THE CODE, LIVE <small>condensed from the matched functions; lines light up when they run</small></h2>
+		<pre id="src"></pre>
+	</div>
+	<div>
+		<div class="panel">
+			<h2>WHAT IT MEANS IN A RUN</h2>
+			<ul class="facts">
+				<li><b>A timer starts when you arrive.</b> It rolls a random number of turns from the depth's range (300&ndash;1000 at -7..-5, 300&ndash;850 at -4..-3, 300&ndash;700 at -2..-1), plus 75/150 with RIF Zone Cloak, plus 75 for every Garrison Access you have disabled on this map. Nothing is sent at -8 or deeper.</li>
+				<li><b>Stepping into a new zone pulls it closer.</b> The map is cut into squares (20&times;20 in Factory, Research, Access; 15&times;15 in Storage, Armory, Hub_04(d)...). The first time you stand in a square since the last roll, the timer drops by 15&ndash;25 turns. Seeing an area does not count: only where you stand does.</li>
+				<li><b>When it comes due it re-rolls at once.</b> A squad goes out unless 0b10 sent a timed squad (extermination, intercept, search patrol, assault) in the last 25 turns, or 10 extermination squads are already on the map. Then the cycle is lost, not delayed.</li>
+				<li><b>They come from an exit you can't see.</b> Squads enter at a random 0b10 exit out of your view, or at a working Garrison Access even if you are looking at it. Cave exits are never used.</li>
+				<li><b>They search a box around where you stood.</b> &plusmn;15 cells around your position at dispatch. After 150 turns the box grows to &plusmn;30, 200 turns later to &plusmn;45. Every 100 turns on the map the box snaps to your current position, even if they never saw you. While the leader knows where you are, every 10 turns the box re-centres at &plusmn;15 and the 150-turn clock restarts.</li>
+				<li><b>They don't time out.</b> A squad can carry an expiry turn at which the Overmind breaks it up; extermination squads are created with -1, so theirs never comes. They pile up until the timer stops adding more at 10.</li>
+				<li><b>"Zone 7F" is noise.</b> The ID in the alert is a random digit + letter that doesn't repeat the last ten; it says nothing about where they are going.</li>
+				<li><b>Q-Series replace Programmers only at -3..-1</b> (20%, 30%, 50%), and only once 0b10 has analysed your build. They then get weapons picked against it.</li>
+			</ul>
+		</div>
+		<div class="panel">
+			<h2>TABLES FROM THE EXE <small>current row highlighted</small></h2>
+			<div class="body"><table id="depthTable"></table></div>
+			<div class="body"><table id="mapTable"></table></div>
+			<div class="body note" id="quirk"></div>
+		</div>
+	</div>
+</div>
+
+<footer>
+	Logic and numbers: functions matched byte-for-byte in the <a href="https://github.com/XomMind/decog">XomMind/decog</a> decompilation (names and addresses in the code panel and <a href="sim.js">sim.js</a>).
+	Not from the game: the map layout, robot movement, pathing, line of sight and spotting are simple stand-ins.
+	Robot stats and the three robot tiles: <a href="https://github.com/noemica/cog-minder">noemica/cog-minder</a>.
+	Fonts: PlasticHeart's <a href="https://github.com/plhx/cogfont">cogfont</a> (MIT).
+	Cogmind is &copy; Grid Sage Games; none of the game's files are included here. <a href="https://www.gridsagegames.com/cogmind/">Play Cogmind.</a>
+</footer>
+
+<script src="sim.js"></script>
+<script src="render.js"></script>
+<script src="ui.js"></script>
+</body>
+</html>
