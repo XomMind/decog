@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="420" height="250" font-family="-apple-system,Segoe UI,Helvetica,Arial,sans-serif">
+<style>.fg{fill:#1f2328}.mut{fill:#59636e}.trk{fill:#d1d9e0}.bar{fill:#1a7f37}@media (prefers-color-scheme: dark){.fg{fill:#f0f6fc}.mut{fill:#9198a1}.trk{fill:#3d444d}.bar{fill:#3fb950}}</style>
+<text x="20" y="38" font-size="24" font-weight="700" class="fg">COGMIND.EXE</text>
+<text x="20" y="60" font-size="13" class="mut">Beta 17.1 (260906) · 2026-10-10</text>
+<text x="400" y="44" font-size="34" font-weight="700" text-anchor="end" class="fg">100.00%</text>
+<text x="400" y="62" font-size="12" text-anchor="end" class="mut">matched code</text>
+<text x="20" y="96" font-size="13" font-weight="600" class="fg">Code</text>
+<text x="400" y="96" font-size="12" text-anchor="end" class="mut">100.000% · 6,566,496 / 6,566,496 bytes</text>
+<rect x="20" y="104" width="380" height="12" rx="6" class="trk"/>
+<rect x="20" y="104" width="380.0" height="12" rx="6" class="bar"/>
+<text x="20" y="142" font-size="13" font-weight="600" class="fg">Functions</text>
+<text x="400" y="142" font-size="12" text-anchor="end" class="mut">100.000% · 13013 / 13013</text>
+<rect x="20" y="150" width="380" height="12" rx="6" class="trk"/>
+<rect x="20" y="150" width="380.0" height="12" rx="6" class="bar"/>
+<text x="20" y="188" font-size="13" font-weight="600" class="fg">Data</text>
+<text x="400" y="188" font-size="12" text-anchor="end" class="mut">29.293% · 471,633 / 1,610,052 bytes</text>
+<rect x="20" y="196" width="380" height="12" rx="6" class="trk"/>
+<rect x="20" y="196" width="111.3" height="12" rx="6" class="bar"/>
+</svg>
