@@ -34,9 +34,13 @@ button.on { background: var(--line); color: #000; }
 input[type=number] { width: 90px; }
 label { cursor: pointer; }
 input[type=checkbox] { accent-color: var(--line); }
-.mapwrap { position: relative; line-height: 0; background: #000; }
-#map { width: 100%; image-rendering: pixelated; cursor: crosshair; }
-#chart { width: 100%; height: 120px; display: block; image-rendering: pixelated; }
+.mapwrap { position: relative; line-height: 0; background: #000; height: max(420px, calc(100vh - 250px)); overflow: hidden; }
+#map { width: 100%; height: 100%; display: block; cursor: crosshair; touch-action: none; }
+#map.dragging { cursor: grabbing; }
+.zoombar { position: absolute; right: 8px; top: 8px; display: flex; flex-direction: column; gap: 4px; z-index: 4; line-height: 1.2; }
+.zoombar button { min-width: 34px; padding: 4px 6px; background: rgba(12, 20, 12, 0.9); }
+.mapinfo { position: absolute; left: 8px; bottom: 6px; line-height: 1.2; font-size: 12px; color: var(--dim); background: rgba(0, 0, 0, 0.6); padding: 2px 6px; pointer-events: none; z-index: 3; }
+#chart { width: 100%; height: 120px; display: block; }
 #tip { position: absolute; pointer-events: none; display: none; background: rgba(8, 12, 8, 0.95); border: 1px solid var(--line);
 	color: var(--text); padding: 4px 8px; font: 12px/1.35 var(--mono); max-width: 340px; z-index: 5; white-space: pre-line; }
 .legend { display: flex; flex-wrap: wrap; gap: 4px 16px; padding: 6px 8px; color: var(--dim); font-size: 13px; }
@@ -85,13 +89,37 @@ ul.facts li { margin: 4px 0; }
 ul.facts b { color: var(--title); font-weight: normal; }
 .note { color: var(--dim); font-size: 12.5px; }
 footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-top: 1px solid var(--line); }
+.mobile-only { display: none; }
+.settings-head { display: none; }
 @media (max-width: 1150px) { .layout, .below { grid-template-columns: 1fr; } }
+@media (max-width: 760px) {
+	header { flex-wrap: wrap; gap: 4px 12px; padding: 8px 10px 6px; }
+	header h1 { font-size: 18px; }
+	header .sub { font-size: 12px; }
+	.mobile-only { display: inline-block; }
+	.layout { padding: 8px; gap: 8px; }
+	.below { padding: 0 8px 8px; }
+	.toolbar { gap: 6px; padding: 6px; }
+	.toolbar .grp.views { width: 100%; flex-wrap: wrap; }
+	.mapwrap { height: 62vh; }
+	.zoombar button { min-width: 40px; padding: 8px; font-size: 15px; }
+	/* settings move into a bottom sheet */
+	.settings { position: fixed; left: 0; right: 0; bottom: 0; max-height: 78vh; overflow-y: auto; z-index: 20; background: var(--bg);
+		border-top: 2px solid var(--title); padding: 0 8px 8px; transform: translateY(105%); transition: transform 0.2s ease-out; }
+	body.settings-open .settings { transform: none; }
+	.settings-head { display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--bg); padding: 8px 0; }
+	button, select, input[type=number] { font-size: 15px; padding: 6px 10px; }
+	#log { height: 160px; }
+	.row { flex-wrap: wrap; }
+	.row select { max-width: 100%; min-width: 0; }
+}
 </style>
 </head>
 <body>
 <header>
 	<h1>0b10 EXTERMINATION DISPATCH</h1>
 	<span class="sub">how the Complex sends Programmer squads after you &mdash; Cogmind Beta 17.1, from byte-matched decompiled code</span>
+	<button id="settingsBtn" class="mobile-only">Settings</button>
 </header>
 
 <div class="layout">
@@ -113,15 +141,25 @@ footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-to
 					<option value="400">400 turns/s</option>
 				</select>
 			</div>
-			<div class="grp">
-				<button id="vTiles" title="Tiles use robot sprites from noemica/cog-minder">Tiles</button>
-				<button id="vObserver" class="on" title="Show the whole map and every robot, not only what Cogmind can see">Observer</button>
+			<div class="grp views">
+				<button id="vObserver" title="Off: only what Cogmind sees, like the game. On: the whole map and every robot">Observer</button>
 				<button id="vZones" class="on" title="Exploration zones (the surgical blocks)">Zones</button>
-				<button id="vAreas" class="on" title="Squad search areas">Search areas</button>
+				<button id="vAreas" title="Squad search areas (information Cogmind does not have)">Search areas</button>
+				<button id="vTiles" title="Tiles use robot sprites from noemica/cog-minder">Tiles</button>
 				<label><input type="checkbox" id="pauseOnDispatch"> pause on dispatch</label>
 			</div>
 		</div>
-		<div class="mapwrap"><canvas id="map"></canvas><div id="tip"></div></div>
+		<div class="mapwrap">
+			<canvas id="map"></canvas>
+			<div class="zoombar">
+				<button id="zoomIn" title="Zoom in (wheel / pinch)">+</button>
+				<button id="zoomOut" title="Zoom out">&minus;</button>
+				<button id="zoomFit" title="Whole map">fit</button>
+				<button id="zoomFollow" class="on" title="Follow Cogmind">@</button>
+			</div>
+			<div class="mapinfo" id="mapinfo"></div>
+			<div id="tip"></div>
+		</div>
 	</div>
 	<div class="panel">
 		<h2>TURNS UNTIL THE DISPATCH TIMER IS DUE <small>green: timer &middot; violet: squad sent &middot; grey: due but nobody sent &middot; red dots: spotted</small></h2>
@@ -135,14 +173,18 @@ footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-to
 		<span><b style="color:#7d6a2c">&gt;</b> 0b10 exit in view (skipped while another qualifies)</span>
 		<span><b style="color:#8a6a44">&gt;</b> cave exit (never used)</span>
 		<span><b style="color:#e2e24c">G</b> Garrison Access (used even in view)</span>
+		<span><b style="color:#7fd0ff">D</b> DSF Access (an exit record, but never a dispatch point)</span>
+		<span><b style="color:#7fd0ff">T F R Y S</b> Terminal, Fabricator, Repair Station, Recycling Unit, Scanalyzer</span>
 		<span><span style="color:#ffd84a">&#9643;</span><span style="color:#ff8a3a">&#9643;</span><span style="color:#ff4646">&#9643;</span> search area &plusmn;15 / &plusmn;30 / &plusmn;45</span>
 		<span><span style="color:var(--title)">-20t</span> zone not entered since the last roll</span>
 	</div>
-	<p class="note">Click a robot to destroy its squad, click a <span style="color:#e2e24c">G</span> to seal that Garrison Access, click any floor to send Cogmind there.
-	Manual mode: arrows / numpad / hjklyubn to move, <span style="color:var(--title)">.</span> or space to wait.</p>
+	<p class="note">Drag to pan, wheel or pinch to zoom. Click/tap a robot to destroy its squad, a <span style="color:#e2e24c">G</span> to seal that Garrison Access, any floor to send Cogmind there.
+	Manual mode: arrows / numpad / hjklyubn to move, <span style="color:var(--title)">.</span> or space to wait; on touch, tap next to Cogmind to step.</p>
 </section>
 
 <aside>
+	<div class="settings" id="settings">
+	<div class="settings-head"><span style="color:var(--title)">SETTINGS</span><button id="settingsClose">close</button></div>
 	<div class="panel">
 		<h2>LOCATION</h2>
 		<div class="body">
@@ -165,11 +207,12 @@ footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-to
 			</div>
 			<div class="row"><span class="k">move speed (time per move)</span>
 				<select id="pcost">
-					<option value="25">25</option>
 					<option value="50">50</option>
-					<option value="75" selected>75</option>
+					<option value="75">75</option>
 					<option value="100">100</option>
+					<option value="125" selected>125</option>
 					<option value="150">150</option>
+					<option value="200">200</option>
 				</select>
 			</div>
 			<div class="row"><span class="k">RIF Zone Cloak</span>
@@ -180,6 +223,7 @@ footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-to
 			<div class="row"><label class="k" title="comConduitDisabled_g, set when COM_0b10_Conduit is destroyed in Command: spawnSurgicalParty returns without sending anyone, as do the intercept, coupling, hunter, response and 0x686c60 spawners."><input type="checkbox" id="conduit"> COM_0b10_Conduit destroyed (Command)</label></div>
 			<div class="row" style="margin-top:6px"><button id="garrison" title="Sealing (hack) or destroying an access calls BS::onGarrisonAccessDisabled and deletes it from the dispatch list">Seal a Garrison Access</button><button id="other" title="Intercept, search-patrol and assault dispatches write the same lastDispatchTurn">Other dispatch now</button><button id="kill">Destroy all squads</button></div>
 		</div>
+	</div>
 	</div>
 	<div class="panel">
 		<h2>DISPATCH TIMER <small id="turnLabel"></small></h2>
@@ -239,12 +283,16 @@ footer { padding: 4px 16px 24px; color: var(--dim); font-size: 12.5px; border-to
 
 <footer>
 	Logic and numbers: functions matched byte-for-byte in the <a href="https://github.com/XomMind/decog">XomMind/decog</a> decompilation (names and addresses in the code panel and <a href="sim.js">sim.js</a>).
-	Not from the game: the map layout, robot movement, pathing, line of sight and spotting are simple stand-ins.
+	Maps: a port of the game's matched map generator (<a href="mapgen.js">mapgen.js</a>) run with each map's generator parameters, populated by the matched placement rules (<a href="props.js">props.js</a>); prefab pieces and machine shapes are plain stand-ins.
+	Not from the game: robot movement, pathing, line of sight and spotting are simple stand-ins.
 	Robot stats and the three robot tiles: <a href="https://github.com/noemica/cog-minder">noemica/cog-minder</a>.
 	Fonts: PlasticHeart's <a href="https://github.com/plhx/cogfont">cogfont</a> (MIT).
 	Cogmind is &copy; Grid Sage Games; none of the game's files are included here. <a href="https://www.gridsagegames.com/cogmind/">Play Cogmind.</a>
 </footer>
 
+<script src="mapgen-params.js"></script>
+<script src="mapgen.js"></script>
+<script src="props.js"></script>
 <script src="sim.js"></script>
 <script src="render.js"></script>
 <script src="ui.js"></script>
